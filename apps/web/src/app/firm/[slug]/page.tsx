@@ -3,42 +3,38 @@ import { getFirmBySlug, isOfficialFirmSlug } from '@ith/domain';
 import { FirmReport } from '@/components/firm-report';
 import { FirmTrustReport } from '@/components/firm-trust-report';
 import { DatabaseUnavailableError, hasDatabaseUrl } from '@/lib/db';
-import { getOfficialFirmBySlug } from '@/lib/firms/repository';
+import { getCachedOfficialFirmBySlug } from '@/lib/firms/cached';
 import { pageMetadata } from '@/lib/seo';
-import { readRequestHost } from '@/lib/request-host';
 
 export const revalidate = 21_600;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const host = await readRequestHost();
   if (isOfficialFirmSlug(slug) && hasDatabaseUrl()) {
     try {
-      const report = await getOfficialFirmBySlug(slug);
+      const report = await getCachedOfficialFirmBySlug(slug);
       if (!report) {
-        return pageMetadata({ title: 'Firm not found', path: `/firm/${slug}`, indexable: false, host });
+        return pageMetadata({ title: 'Firm not found', path: `/firm/${slug}`, indexable: false });
       }
       return pageMetadata({
         title: `${report.displayName} — SEC/IARD Firm Research`,
         description: `Research ${report.displayName}, CRD ${report.crd}, using SEC/IARD regulatory data, firm identifiers, registration information, source dates, and public evidence.`,
         path: `/firm/${report.slug}`,
         indexable: report.currentlyIndexable,
-        host,
       });
     } catch {
-      return pageMetadata({ title: 'Firm research unavailable', path: `/firm/${slug}`, indexable: false, host });
+      return pageMetadata({ title: 'Firm research unavailable', path: `/firm/${slug}`, indexable: false });
     }
   }
   const firm = getFirmBySlug(slug);
   if (!firm) {
-    return pageMetadata({ title: 'Firm not found', path: `/firm/${slug}`, indexable: false, host });
+    return pageMetadata({ title: 'Firm not found', path: `/firm/${slug}`, indexable: false });
   }
   return pageMetadata({
     title: `${firm.displayName} (synthetic)`,
     description: 'Synthetic development Trust Report — not a real firm.',
     path: `/firm/${slug}`,
     indexable: false,
-    host,
   });
 }
 
@@ -50,7 +46,7 @@ export default async function FirmPage({ params }: { params: Promise<{ slug: str
       return <DatabaseNotice slug={slug} />;
     }
     try {
-      const report = await getOfficialFirmBySlug(slug);
+      const report = await getCachedOfficialFirmBySlug(slug);
       if (!report) notFound();
       return <FirmTrustReport report={report} />;
     } catch (error) {

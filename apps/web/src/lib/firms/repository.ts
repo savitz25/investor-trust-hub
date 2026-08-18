@@ -123,10 +123,8 @@ export async function searchOfficialFirms(
       f.display_name ASC
     LIMIT ${pageSize} OFFSET ${offset}
   `;
-  const [countResult, listResult] = await Promise.all([
-    query<{ n: number }>(countSql, params),
-    query<FirmRecordRow>(listSql, params),
-  ]);
+  const countResult = await query<{ n: number }>(countSql, params);
+  const listResult = await query<FirmRecordRow>(listSql, params);
   const hits = listResult.rows
     .map((row) => mapSearchHit(row))
     .filter((hit): hit is FirmSearchHit => hit !== null);

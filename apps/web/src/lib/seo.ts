@@ -8,8 +8,8 @@ import { SITE_DESCRIPTION, SITE_NAME, getSiteEnv } from './site';
  * Gate B — request host is an approved production hostname
  * Gate C — firm/page content gate (when provided)
  *
- * If host is omitted, Gate B fails closed (noindex). Middleware also emits
- * x-robots-tag so a cached HTML copy cannot make .vercel.app indexable.
+ * If host is omitted, Gate B uses env (INDEXABLE_HOSTS configured, not Preview).
+ * Middleware still emits x-robots-tag so an unapproved host cannot be indexed.
  */
 export function pageMayBeIndexed(path: string, firmOrPageIndexable?: boolean, host?: string | null): boolean {
   if (!isHostLaunchIndexable(host)) {

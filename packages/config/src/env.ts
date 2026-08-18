@@ -148,7 +148,21 @@ export function isApprovedIndexableHost(host: string | null | undefined, input: 
   return parseIndexableHosts(input).includes(normalized);
 }
 
-/** Gates A + B. Firm content (Gate C) is applied separately. */
-export function isHostLaunchIndexable(host: string | null | undefined, input: NodeJS.ProcessEnv = process.env): boolean {
-  return isSiteIndexingEnabled(input) && isApprovedIndexableHost(host, input);
+/**
+ * Gates A + B for HTML metadata.
+ * If host is omitted (ISR / static generation), Gate B passes only when
+ * INDEXABLE_HOSTS is configured and this is not a Preview deploy.
+ * Middleware still noindexes unapproved request hosts.
+ */
+export function isHostLaunchIndexable(host?: string | null, input: NodeJS.ProcessEnv = process.env): boolean {
+  if (!isSiteIndexingEnabled(input) || isVercelPreview(input)) {
+    return false;
+  }
+  if (parseIndexableHosts(input).length === 0) {
+    return false;
+  }
+  if (host == null || host === '') {
+    return true;
+  }
+  return isApprovedIndexableHost(host, input);
 }

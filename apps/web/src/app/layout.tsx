@@ -5,7 +5,6 @@ import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 import { isHostLaunchIndexable } from '@ith/config';
 import { SITE_DESCRIPTION, SITE_NAME, getSiteEnv } from '@/lib/site';
-import { readRequestHost } from '@/lib/request-host';
 import './globals.css';
 
 const sans = Source_Sans_3({
@@ -22,24 +21,21 @@ const serif = Source_Serif_4({
 
 const { NEXT_PUBLIC_SITE_URL } = getSiteEnv();
 
-export async function generateMetadata(): Promise<Metadata> {
-  const host = await readRequestHost();
-  return {
-    metadataBase: new URL(NEXT_PUBLIC_SITE_URL),
-    title: {
-      default: `${SITE_NAME} — Research before you invest.`,
-      template: `%s · ${SITE_NAME}`,
-    },
-    description: SITE_DESCRIPTION,
-    applicationName: SITE_NAME,
-    robots: isHostLaunchIndexable(host)
-      ? { index: true, follow: true }
-      : { index: false, follow: true },
-    icons: {
-      icon: '/brand/mark.svg',
-    },
-  };
-}
+export const metadata: Metadata = {
+  metadataBase: new URL(NEXT_PUBLIC_SITE_URL),
+  title: {
+    default: `${SITE_NAME} — Research before you invest.`,
+    template: `%s · ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  robots: isHostLaunchIndexable()
+    ? { index: true, follow: true }
+    : { index: false, follow: true },
+  icons: {
+    icon: '/brand/mark.svg',
+  },
+};
 
 export const viewport: Viewport = {
   themeColor: '#0F766E',

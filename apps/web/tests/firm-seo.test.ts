@@ -48,6 +48,7 @@ describe('firm SEO contracts', () => {
     process.env.SITE_INDEXING_ENABLED = 'true';
     expect(pageMayBeIndexed('/firm/sec-crd-105958', true, 'www.example.test')).toBe(false);
     process.env.INDEXABLE_HOSTS = 'www.example.test';
+    expect(pageMayBeIndexed('/firm/sec-crd-105958', true)).toBe(true);
     expect(pageMayBeIndexed('/firm/sec-crd-105958', true, 'www.example.test')).toBe(true);
     expect(pageMayBeIndexed('/firm/sec-crd-105958', false, 'www.example.test')).toBe(false);
     expect(pageMayBeIndexed('/firm/sec-crd-105958', true, 'investor-trust-hub-web.vercel.app')).toBe(false);
