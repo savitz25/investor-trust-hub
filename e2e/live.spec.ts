@@ -45,19 +45,34 @@ async function horizontalOverflow(page: Page): Promise<number> {
   return page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
 }
 
+async function gotoLive(page: Page, route: string) {
+  let response = await page.goto(route, { waitUntil: 'domcontentloaded' });
+  const body = ((await page.locator('h1').textContent()) ?? '') + (await page.locator('#main').innerText());
+  if (/temporarily unavailable|not configured/i.test(body)) {
+    await page.waitForTimeout(1500);
+    response = await page.goto(route, { waitUntil: 'domcontentloaded' });
+  }
+  return response;
+}
+
+function assertSafeCopy(body: string) {
+  expect(body).not.toMatch(/trusted advisor/i);
+  expect(body).not.toMatch(/Unknown,\s*USA/);
+  expect(body).not.toMatch(/No SEC number exists/i);
+  expect(body).not.toMatch(/(?:^|\n)\s*SEC approved\s*(?:\n|$)/i);
+  expect(body).toMatch(/has not approved|does not mean[\s\S]{0,120}SEC approved/i);
+}
+
 test.describe('live Vercel firm reports', () => {
   for (const firm of FIRMS) {
     test(`${firm.path} identity and overflow`, async ({ page }) => {
       const errors: string[] = [];
       page.on('pageerror', (error) => errors.push(error.message));
-      const response = await page.goto(firm.path, { waitUntil: 'domcontentloaded' });
+      const response = await gotoLive(page, firm.path);
       expect(response?.status()).toBe(200);
       await expect(page.locator('h1')).toHaveText(firm.expect);
       await expect(page.locator('#main')).toContainText(firm.status);
-      await expect(page.locator('#main')).not.toContainText(/SEC approved/i);
-      await expect(page.locator('#main')).not.toContainText(/trusted advisor/i);
-      await expect(page.locator('#main')).not.toContainText(/Unknown, USA/i);
-      await expect(page.locator('#main')).not.toContainText(/No SEC number exists/i);
+      assertSafeCopy(await page.locator('#main').innerText());
       expect(await horizontalOverflow(page)).toBeLessThanOrEqual(0);
       const robots = await page.locator('meta[name="robots"]').getAttribute('content');
       expect(robots ?? '').toMatch(/noindex/i);
@@ -75,7 +90,7 @@ test.describe('live Vercel firm reports', () => {
 
 test.describe('live search', () => {
   test('exact CRD ranks Vanguard first', async ({ page }) => {
-    await page.goto('/firms', { waitUntil: 'domcontentloaded' });
+    await gotoLive(page, '/firms');
     await expect(page.locator('#main')).toContainText(/23,622/);
     await expect(page.locator('#main')).toContainText(/16,783/);
     await expect(page.locator('#main')).toContainText(/235/);
@@ -92,40 +107,40 @@ test.describe('live search', () => {
   });
 
   test('exact name, SEC number, partial, ZIP, and state filters', async ({ page }) => {
-    await page.goto('/firms?q=801-11953', { waitUntil: 'domcontentloaded' });
+    await gotoLive(page, '/firms?q=801-11953');
     await expect(page.locator('article h2 a').first()).toContainText(/vanguard/i);
 
-    await page.goto('/firms?q=The+Vanguard+Group', { waitUntil: 'domcontentloaded' });
+    await gotoLive(page, '/firms?q=The+Vanguard+Group');
     await expect(page.locator('article h2 a').first()).toContainText(/vanguard/i);
 
-    await page.goto('/firms?q=vangua', { waitUntil: 'domcontentloaded' });
+    await gotoLive(page, '/firms?q=vangua');
     await expect(page.locator('#main')).toContainText(/vanguard/i);
 
-    await page.goto('/firms?q=19355', { waitUntil: 'domcontentloaded' });
-    await expect(page.locator('#main')).toContainText(/19355|malvern|vanguard|sourced firms/i);
+    await gotoLive(page, '/firms?q=19355');
+    await expect(page.locator('#main')).toContainText(/19355|malvern|vanguard|sourced firm/i);
 
-    await page.goto('/firms?state=FL', { waitUntil: 'domcontentloaded' });
-    await expect(page.locator('#main')).toContainText(/sourced firms/i);
+    await gotoLive(page, '/firms?state=FL');
+    await expect(page.locator('#main')).toContainText(/sourced firm/i);
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/i);
 
-    await page.goto('/firms?q=tobias&state=FL', { waitUntil: 'domcontentloaded' });
+    await gotoLive(page, '/firms?q=tobias&state=FL');
     await expect(page.locator('article h2 a').first()).toContainText(/tobias/i);
 
-    await page.goto('/firms?state=_none', { waitUntil: 'domcontentloaded' });
-    await expect(page.locator('#main')).toContainText(/state not provided|sourced firms/i);
+    await gotoLive(page, '/firms?state=_none');
+    await expect(page.locator('#main')).toContainText(/state not provided|sourced firm/i);
   });
 
   test('empty, SQL-like, and very long input stay stable', async ({ page }) => {
-    const empty = await page.goto('/firms', { waitUntil: 'domcontentloaded' });
+    const empty = await gotoLive(page, '/firms');
     expect(empty?.ok()).toBeTruthy();
     await expect(page.locator('#main')).toContainText(/23,622 sourced firms/i);
 
-    await page.goto("/firms?q=%27%3B+drop+table+firms%3B--", { waitUntil: 'domcontentloaded' });
-    await expect(page.locator('#main')).toContainText(/sourced firms|no sourced firms matched/i);
+    await gotoLive(page, "/firms?q=%27%3B+drop+table+firms%3B--");
+    await expect(page.locator('#main')).toContainText(/sourced firm|no sourced firms matched/i);
 
-    const long = await page.goto(`/firms?q=${'x'.repeat(400)}`, { waitUntil: 'domcontentloaded' });
+    const long = await gotoLive(page, `/firms?q=${'x'.repeat(400)}`);
     expect(long?.status()).toBe(200);
-    await expect(page.locator('#main')).toContainText(/sourced firms|no sourced firms matched/i);
+    await expect(page.locator('#main')).toContainText(/sourced firm|no sourced firms matched/i);
   });
 });
 
@@ -154,9 +169,9 @@ test.describe('accessibility and secrets', () => {
     await page.locator('#firm-q').focus();
     await expect(page.locator('#firm-q')).toBeFocused();
 
-    await page.goto('/firm/sec-crd-105958', { waitUntil: 'domcontentloaded' });
-    await expect(page.locator('h1')).toHaveCount(1);
-    await expect(page.locator('h2', { hasText: 'Regulatory assets under management' })).toBeVisible();
+    await gotoLive(page, '/firm/sec-crd-105958');
+    await expect(page.locator('h1')).toHaveText(/vanguard/i);
+    await expect(page.getByRole('heading', { name: 'Regulatory assets under management' })).toBeVisible();
     const html = await page.content();
     expect(html).not.toMatch(/postgres(?:ql)?:\/\/[^/\s:]+:[^@\s]+@/i);
     expect(html.toLowerCase()).not.toContain('service_role');

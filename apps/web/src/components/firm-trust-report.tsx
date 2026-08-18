@@ -140,7 +140,7 @@ export function FirmTrustReport({ report }: { report: FirmTrustReportModel }) {
 
       <section className="mt-8">
         <h2 className="font-serif text-2xl text-[var(--ith-navy)]">Firm / ADV facts</h2>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+        <div className="mt-4 grid min-w-0 gap-4 sm:grid-cols-2">
           <Fact label="Legal structure" value={report.organizationForm} missing="Not present in this source record" />
           <Fact
             label="Website as reported"
@@ -254,9 +254,9 @@ export function FirmTrustReport({ report }: { report: FirmTrustReportModel }) {
 function PrincipalOffice({ report }: { report: FirmTrustReportModel }) {
   const office = report.office;
   return (
-    <address className="not-italic">
-      {office.line1 ? <div>{office.line1}</div> : null}
-      {office.line2 ? <div>{office.line2}</div> : null}
+    <address className="not-italic [overflow-wrap:anywhere]">
+      {office.line1 ? <div className="break-words">{office.line1}</div> : null}
+      {office.line2 ? <div className="break-words">{office.line2}</div> : null}
       <div>
         {[office.city, office.region && isUsStateCode(office.region) ? office.region : null, office.postalCode]
           .filter(Boolean)
@@ -284,9 +284,9 @@ function Fact({
   missing: string;
 }) {
   return (
-    <div className="rounded-xl border border-[var(--ith-border)] bg-white p-4">
+    <div className="min-w-0 rounded-xl border border-[var(--ith-border)] bg-white p-4">
       <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-600">{label}</p>
-      <p className="mt-2 break-words text-sm">{value || missing}</p>
+      <p className="mt-2 min-w-0 break-words text-sm [overflow-wrap:anywhere]">{value || missing}</p>
     </div>
   );
 }

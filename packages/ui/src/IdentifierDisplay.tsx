@@ -16,7 +16,9 @@ export function IdentifierDisplay({ identifiers }: { identifiers: CanonicalIdent
           <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-600">
             {formatIdentifierLabel(id.type)}
           </p>
-          <p className="font-mono text-sm text-[var(--ith-navy)]">{id.value}</p>
+          <p className="min-w-0 break-words font-mono text-sm text-[var(--ith-navy)] [overflow-wrap:anywhere]">
+            {id.value}
+          </p>
           {isSyntheticIdentifierValue(id.value) ? (
             <p className="mt-1 text-[11px] text-amber-900">Synthetic identifier</p>
           ) : null}

@@ -13,7 +13,10 @@ export function Breadcrumb({
           return (
             <li key={item.href} className="flex items-center gap-2">
               {last ? (
-                <span aria-current="page" className="font-medium text-[var(--ith-navy)]">
+                <span
+                  aria-current="page"
+                  className="min-w-0 break-words font-medium text-[var(--ith-navy)] [overflow-wrap:anywhere]"
+                >
                   {item.label}
                 </span>
               ) : (
