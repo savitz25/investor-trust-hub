@@ -1,5 +1,11 @@
 import Link from 'next/link';
-import { LEGAL_ROUTES, NETWORK_LINKS, PRIMARY_ROUTES } from '@ith/config';
+import {
+  ASK_NETWORK_OWNERSHIP_SHORT,
+  ASK_NETWORK_STANDARD_URL,
+  LEGAL_ROUTES,
+  NETWORK_LINKS,
+  PRIMARY_ROUTES,
+} from '@ith/config';
 import { INDEPENDENCE_LINE, NOT_ADVICE_LINE } from '@ith/domain';
 import { BrandMark, BrandWordmark } from '@ith/ui';
 
@@ -22,6 +28,7 @@ export function SiteFooter() {
             decisions. We organize official and public-source evidence. You decide.
           </p>
           <p className="mt-3 text-xs leading-relaxed text-slate-300">{INDEPENDENCE_LINE}</p>
+          <p className="mt-2 text-xs leading-relaxed text-slate-300">{ASK_NETWORK_OWNERSHIP_SHORT}</p>
         </div>
 
         <div className="lg:col-span-2">
@@ -59,7 +66,7 @@ export function SiteFooter() {
             AskTrustHub network
           </h2>
           <ul className="mt-3 space-y-2 text-sm">
-            {NETWORK_LINKS.map((hub) => (
+            {NETWORK_LINKS.filter((hub) => hub.id !== 'investor').map((hub) => (
               <li key={hub.id}>
                 <a
                   href={hub.href}
@@ -70,6 +77,15 @@ export function SiteFooter() {
                 </a>
               </li>
             ))}
+            <li>
+              <a
+                href={ASK_NETWORK_STANDARD_URL}
+                className="text-white no-underline hover:text-teal-200"
+                rel="noopener noreferrer"
+              >
+                Ask Trust Hub Standard
+              </a>
+            </li>
           </ul>
         </div>
       </div>

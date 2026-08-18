@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useId, useState } from 'react';
-import { PRIMARY_ROUTES } from '@ith/config';
+import { NETWORK_LINKS, PRIMARY_ROUTES } from '@ith/config';
 import { BrandMark, BrandWordmark } from '@ith/ui';
 
 export function SiteHeader() {
@@ -56,6 +56,50 @@ export function SiteHeader() {
           })}
         </nav>
 
+        <div className="hidden lg:block">
+          <details className="relative">
+            <summary className="inline-flex min-h-11 cursor-pointer list-none items-center rounded-lg border border-[var(--ith-border)] bg-white px-3 text-sm font-semibold text-[var(--ith-navy)]">
+              Switch Hub
+            </summary>
+            <div
+              role="menu"
+              aria-label="Ask Trust Hub Network"
+              className="absolute right-0 z-50 mt-2 w-72 rounded-2xl border border-[var(--ith-border)] bg-white p-2 shadow-lg"
+            >
+              <p className="px-2 pb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-teal-800">
+                Ask Trust Hub Network
+              </p>
+              <ul className="space-y-0.5">
+                {NETWORK_LINKS.map((hub) => {
+                  const current = hub.id === 'investor';
+                  return (
+                    <li key={hub.id}>
+                      <a
+                        href={current ? '/' : hub.href}
+                        aria-current={current ? 'page' : undefined}
+                        rel={current ? undefined : 'noopener noreferrer'}
+                        className={`block min-h-11 rounded-xl px-2.5 py-2 no-underline ${
+                          current ? 'bg-[var(--ith-teal-mist)]' : 'hover:bg-[var(--ith-teal-mist)]'
+                        }`}
+                      >
+                        <span className="block text-sm font-semibold text-[var(--ith-navy)]">
+                          {hub.label}
+                          {current ? (
+                            <span className="ml-2 text-[11px] uppercase tracking-wide text-teal-800">
+                              Current
+                            </span>
+                          ) : null}
+                        </span>
+                        <span className="block text-xs text-slate-600">{hub.blurb}</span>
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </details>
+        </div>
+
         <button
           type="button"
           className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-[var(--ith-border)] bg-white lg:hidden"
@@ -88,6 +132,29 @@ export function SiteHeader() {
               </li>
             ))}
           </ul>
+          <div className="mt-3 border-t border-[var(--ith-border)] pt-3">
+            <p className="mb-2 px-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-teal-800">
+              Switch Hub
+            </p>
+            <ul className="space-y-1">
+              {NETWORK_LINKS.map((hub) => {
+                const current = hub.id === 'investor';
+                return (
+                  <li key={hub.id}>
+                    <a
+                      href={current ? '/' : hub.href}
+                      aria-current={current ? 'page' : undefined}
+                      rel={current ? undefined : 'noopener noreferrer'}
+                      className="block rounded-lg px-3 py-3 text-[var(--ith-navy)] no-underline hover:bg-[var(--ith-teal-mist)]"
+                    >
+                      {hub.label}
+                      {current ? ' (current)' : ''}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </nav>
       ) : null}
     </header>

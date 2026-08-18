@@ -68,6 +68,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       <body
         className={`${sans.variable} ${serif.variable} font-sans antialiased text-[var(--ith-ink)]`}
         data-hub="investor"
+        data-network-standard="2026.08.18-network-v2"
       >
         <a
           href="#main"
@@ -75,6 +76,24 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         >
           Skip to content
         </a>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              '@id': `${NEXT_PUBLIC_SITE_URL}/#organization`,
+              name: SITE_NAME,
+              url: NEXT_PUBLIC_SITE_URL,
+              parentOrganization: {
+                '@type': 'Organization',
+                '@id': 'https://www.asktrusthub.com/#organization',
+                name: 'Ask Trust Hub',
+                url: 'https://www.asktrusthub.com',
+              },
+            }).replace(/</g, '\\u003c'),
+          }}
+        />
         <SiteHeader />
         <main id="main" className="min-h-[calc(100vh-8rem)]">
           {children}

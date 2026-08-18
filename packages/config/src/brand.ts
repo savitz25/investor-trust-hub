@@ -39,9 +39,17 @@ export const BRAND = {
   nodePurple: '#641FFB',
 } as const;
 
+export const ASK_NETWORK_STANDARD_VERSION = '2026.08.18-network-v2';
+export const ASK_NETWORK_STANDARD_URL = 'https://www.asktrusthub.com/methodology';
+export const ASK_NETWORK_OWNERSHIP_SHORT =
+  'Common ownership · Separated research and listing order · No paid placements';
+
 export const NETWORK_LINKS = [
-  { id: 'ask', label: 'AskTrustHub', href: 'https://www.asktrusthub.com' },
-  { id: 'insurance', label: 'InsuranceTrustHub', href: 'https://www.insurancetrusthub.com' },
-  { id: 'contractor', label: 'ContractorTrustHub', href: 'https://www.contractortrusthub.com' },
-  { id: 'lender', label: 'LenderTrustHub', href: 'https://www.lendertrusthub.com' },
+  { id: 'ask', label: 'Ask Trust Hub', href: 'https://www.asktrusthub.com', blurb: 'Parent research & standards layer' },
+  { id: 'move', label: 'Move Trust Hub', href: 'https://www.movetrusthub.com', blurb: 'FMCSA / SAFER mover research' },
+  { id: 'lender', label: 'Lender Trust Hub', href: 'https://www.lendertrusthub.com', blurb: 'NMLS / CFPB / FDIC financing research' },
+  { id: 'insurance', label: 'Insurance Trust Hub', href: 'https://www.insurancetrusthub.com', blurb: 'State DOI / NAIC coverage research' },
+  { id: 'contractor', label: 'Contractor Trust Hub', href: 'https://www.contractortrusthub.com', blurb: 'State licensing-board contractor research' },
+  { id: 'senior', label: 'SeniorTrustHub', href: 'https://www.seniortrusthub.com', blurb: 'CMS / supported state senior-care research' },
+  { id: 'investor', label: 'InvestorTrustHub', href: 'https://www.investortrusthub.com', blurb: 'SEC / IARD investment-firm research' },
 ] as const;
