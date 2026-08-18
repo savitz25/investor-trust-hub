@@ -1,71 +1,68 @@
-# Task 003.4 — Gate A + Wave 1
+# Task 003.4 — Wave 1 live
 
 ## Status
 
 ```text
-BLOCKED — GATE A
+COMPLETE — WAVE 1 LIVE
 ```
 
-Wave 1 was **not** applied. Database `indexable` remains 0.
+## Gate A proof (before apply)
 
-## What production actually reports
+On `https://www.investortrusthub.com` with DB indexable still 0:
 
-Secret-free probe `GET /internal/seo-gates` on www:
+| Surface | Result |
+| --- | --- |
+| `/` `/firms` `/research` `/methodology` `/sources` `/about` | `index, follow` |
+| `/firm/sec-crd-105958` `109691` `106676` `2288` | `noindex, follow` |
+| `/firms?q=` `/firms?state=` | `noindex, follow` |
+| Database indexable | 0 |
 
-```json
-{
-  "siteIndexingEnabled": false,
-  "preview": false,
-  "approvedHostCount": 2,
-  "requestHostApproved": true,
-  "requestHostKind": "permanent"
-}
-```
+That is Gate A ∧ Gate B ∧ ¬Gate C.
 
-Gate B is healthy (www is an approved permanent host). Gate A is **not** on in the Production runtime.
-
-Rendered confirmation:
-
-- `/`, `/firms`, `/research`, `/methodology`, `/sources`, `/about` → `noindex, follow`
-- Firm pages → `noindex, follow`
-- `robots.txt` does not advertise a sitemap
-- `/sitemap.xml` is an empty urlset
-- `X-Robots-Tag: noindex, follow` on every checked URL
-
-## Operator fix (Production only)
-
-Vercel → project **investor-trust-hub-web** → Settings → Environment Variables:
-
-1. Environment: **Production** (not Preview-only).
-2. Key exactly: `SITE_INDEXING_ENABLED`
-3. Value exactly: `true`  
-   No quotes, no spaces, not `True`, not `enabled`.
-4. Save, then **Redeploy** the current Production deployment (env changes are not live until rebuild).
-5. Confirm:
-
-```text
-curl -s https://www.investortrusthub.com/internal/seo-gates
-```
-
-Expected:
-
-```json
-{ "siteIndexingEnabled": true, "requestHostApproved": true, "preview": false }
-```
-
-Then homepage/`/firms` should become indexable while **firm pages stay noindex** until Wave 1 apply.
-
-## After Gate A is confirmed
+## Wave 1 apply
 
 ```text
 python services/ingestion/scripts/firm_indexability_report.py --wave-size 1000 --apply
 ```
 
-Do not use `--all-eligible`.
+`--all-eligible` was not used. Algorithm `crd-sha256-v1` unchanged.
 
-## Not done in this task
+```text
+official           23,622
+indexable           1,000
+held               22,622
+synthetic indexed       0
+duplicates              0
+ineligible indexed      0
+RIA / ERA / pending  703 / 283 / 14
+```
 
-- Wave 1 apply
-- Search Console submit
-- Wave 2
-- Task 004
+Idempotent re-apply kept `currently_indexable = 1,000` and the same CRD sample.
+
+Manifest: `data/reports/waves/wave-1.json` (gitignored).
+
+## Sitemap / robots
+
+```text
+https://www.investortrusthub.com/sitemap.xml
+static 11 + firms 1,000 = 1,011
+held/synthetic/query/vercel/apex excluded
+```
+
+`robots.txt` advertises `https://www.investortrusthub.com/sitemap.xml`.
+
+## Holdouts
+
+- 10 Wave 1 firms: `index, follow`, www canonical, in sitemap
+- 10 held firms (including Vanguard 105958): `noindex, follow`, www canonical, not in sitemap, still searchable
+
+## Caching note
+
+Firm HTML had cached `currentlyIndexable` after apply. Metadata now reads `search_documents.indexable` live (`getOfficialFirmIndexable`). Firm-page `revalidate` is 300 seconds.
+
+## Rollback
+
+```text
+SITE_INDEXING_ENABLED=false
+python services/ingestion/scripts/firm_indexability_report.py --rollback --wave-id wave-1 --apply
+```

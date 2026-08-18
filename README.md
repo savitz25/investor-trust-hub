@@ -12,9 +12,9 @@ This repository is an independent research platform. It does not give financial 
 
 ## Current milestone
 
-**Task 003.4 — Gate A not live in Production runtime**
+**Task 003.4 — Wave 1 live**
 
-Canonical origin: `https://www.investortrusthub.com`. Host gate is healthy. Production runtime still reports `siteIndexingEnabled: false` at `/internal/seo-gates`. Wave 1 is not applied. BrokerCheck and individual professionals are not included yet.
+Canonical origin: `https://www.investortrusthub.com`. Public shell pages are indexable. Exactly 1,000 official Firm Trust Reports are indexable (`crd-sha256-v1`). The other 22,622 remain available to search on `/firms` but stay noindex. BrokerCheck and individual professionals are not included yet.
 
 - Monorepo with Next.js App Router, TypeScript strict mode, Tailwind CSS
 - Domain models for people, firms, products, issuers, registrations, evidence
@@ -177,4 +177,4 @@ These pages are `noindex`. They are not official evidence.
 
 See [`docs/product-roadmap.md`](docs/product-roadmap.md). Do not start the next milestone from this README automatically.
 
-Recommended next milestone: **confirm Production `SITE_INDEXING_ENABLED=true` via `/internal/seo-gates`, then apply Wave 1**. Do not start it from this README.
+Recommended next milestone: **Task 003.5 — Wave 1 observation / SEO health**. Do not start Wave 2 or Task 004 from this README.

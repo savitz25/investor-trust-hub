@@ -37,7 +37,9 @@ remaining noindex: 22,622
 consumer search: still all 23,622
 ```
 
-Do not start Wave 2 from this document.
+Wave 1 is **applied** on production (`wave-1`, `crd-sha256-v1`). Do not start Wave 2 from this document.
+
+After any later `--apply`, firm robots read `search_documents.indexable` live. A Production redeploy (or waiting `revalidate = 300`) refreshes cached HTML.
 
 ## Suggested later waves
 

@@ -63,4 +63,4 @@ Attach domain on Vercel project investor-trust-hub-web
 
 The permanent origin is `https://www.investortrusthub.com`. Apex and `.vercel.app` 308 to www.
 
-Do not set `SITE_INDEXING_ENABLED=true` until HTTPS, redirects, concurrency (0 temporary-unavailable), and permanent-domain Playwright pass. After Gate A, confirm firm pages stay noindex until Wave 1 `--apply`.
+Gate A is on in Production. Wave 1 (1,000 firms) is applied. Remaining official firms stay noindex until a later wave. Parameterized `/firms` queries stay noindex.

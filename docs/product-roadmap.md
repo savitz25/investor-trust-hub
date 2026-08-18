@@ -24,13 +24,13 @@ Host-aware Gate B. Deterministic Wave 1 tooling.
 
 `https://www.investortrusthub.com` is live. Concurrency gate passed.
 
-## Task 003.4 — Gate A + Wave 1 (blocked)
+## Task 003.4 — Gate A + Wave 1 (current)
 
-Production runtime still has `SITE_INDEXING_ENABLED` effectively false. Wave 1 not applied. Probe: `/internal/seo-gates`.
+Wave 1 is live: 1,000 indexable official firms, 22,622 held. Shell pages indexable on www.
 
-## Recommended next
+## Recommended Task 003.5
 
-Operator sets Production `SITE_INDEXING_ENABLED=true` (exact key/value, Production env, redeploy) → prove shells indexable / firms noindex → `--wave-size 1000 --apply`. Do not start automatically.
+Wave 1 observation / SEO health. Do not start Wave 2 or Task 004 automatically.
 
 ## Recommended Task 004
 
