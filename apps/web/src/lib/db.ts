@@ -15,11 +15,22 @@ export function hasDatabaseUrl(): boolean {
   return Boolean(process.env.DATABASE_URL);
 }
 
+function runtimeConnectionString(raw: string): string {
+  // Session-mode pooler (port 5432) allows ~15 clients and is exhausted by
+  // Vercel isolates. Transaction mode (6543) is the serverless-safe endpoint.
+  // Operator/ingest jobs keep using the configured session URL.
+  if (process.env.VERCEL === '1' && raw.includes('pooler.supabase.com')) {
+    return raw.replace('pooler.supabase.com:5432', 'pooler.supabase.com:6543');
+  }
+  return raw;
+}
+
 function createPool(): Pool {
-  const connectionString = process.env.DATABASE_URL;
-  if (!connectionString) {
+  const configured = process.env.DATABASE_URL;
+  if (!configured) {
     throw new DatabaseUnavailableError('DATABASE_URL is not configured.');
   }
+  const connectionString = runtimeConnectionString(configured);
   const supabase = connectionString.includes('supabase.co') || connectionString.includes('pooler.supabase.com');
   // pg v8 treats sslmode=require as verify-full. The Supabase pooler chain is
   // not verifiable here, so keep TLS but skip CA verification.
