@@ -37,7 +37,7 @@ SOURCE EVIDENCE
 | `regulatory_filings` | ADV, BD, EDGAR, N-CEN, … |
 | `disclosure_events` | Source-reported events |
 | `products` / `issuers` + identifier tables | Future fund/company research |
-| `search_documents` | Search foundation |
+| `search_documents` | Search foundation. Official firms stay `indexable=false` until the Task 003 gate is applied. |
 | `user_profiles` and saved-* tables | Future My InvestorTrustHub (RLS on) |
 | `form_adv_firm_facts` | Isolated Form ADV snapshot facts (not flattened onto `firms`) |
 | `firm_source_observations` | Observed / not-observed in a release |

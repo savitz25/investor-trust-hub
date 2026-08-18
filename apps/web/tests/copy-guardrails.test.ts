@@ -28,6 +28,8 @@ describe('site copy does not endorse or rank', () => {
       read('src/components/home-principles.tsx'),
       read('src/app/about/page.tsx'),
       read('src/app/methodology/page.tsx'),
+      read('src/components/firm-trust-report.tsx'),
+      read('src/components/firm-search.tsx'),
     ].join('\n');
     expect(findForbiddenGuidance(corpus)).toEqual([]);
     expect(corpus.toLowerCase()).not.toContain('verified advisor');

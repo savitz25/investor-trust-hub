@@ -1,6 +1,6 @@
 export function OfficialRecordLink({
   href,
-  label = 'Open official record',
+  label = 'View official record',
 }: {
   href: string;
   label?: string;

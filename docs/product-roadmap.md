@@ -4,21 +4,21 @@
 
 Durable architecture, schema, provenance model, product shell, design system, synthetic fixtures, tests, CI, documentation.
 
-## Task 002 — SEC adviser firm ingestion (current)
+## Task 002 — SEC adviser firm ingestion
 
 Official SEC IARD RIA + ERA monthly firm rosters. CRD identity, provenance, quarantine, dry-run, idempotent publish. No BrokerCheck. No person ingest. No mass SEO.
 
-## Recommended Task 003
+## Task 003 — Firm Trust Reports (current)
 
-**Firm Trust Reports for sourced SEC adviser firms.**
+CRD-stable `/firm/sec-crd-{CRD}` reports, `/firms` national search, deterministic indexability and geo-discovery gates. Official pages stay noindex until the gate is applied.
 
-- Download, checksum, archive a public ADV-related dataset
-- Parse, validate, normalize, conservative entity resolution
-- Transactional publish into `firms`, `firm_identifiers`, `registrations`, `evidence_records`
-- Idempotent re-run of the same release
-- Thin firm research pages that become indexable only with sufficient sourced content
-- Still no BrokerCheck prospecting use
-- Still no fabricated AUM or performance
+## Recommended Task 004
+
+**Associated professionals and BrokerCheck as a research citation.**
+
+- IAR / professional records from official sources
+- FINRA BrokerCheck as a cited research source, isolated from any sales console
+- Still no rankings, Trust Scores, or lead marketplace
 
 ## Later research milestones
 

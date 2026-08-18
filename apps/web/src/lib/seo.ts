@@ -6,21 +6,23 @@ export function pageMetadata({
   title,
   description = SITE_DESCRIPTION,
   path,
+  indexable,
 }: {
   title: string;
   description?: string;
   path: string;
+  indexable?: boolean;
 }): Metadata {
   const { NEXT_PUBLIC_SITE_URL } = getSiteEnv();
   const url = new URL(path, NEXT_PUBLIC_SITE_URL).toString();
-  const noindex = shouldNoIndex(path);
+  const noindex = indexable === undefined ? shouldNoIndex(path) : !indexable;
 
   return {
     title,
     description,
     alternates: { canonical: url },
     robots: noindex
-      ? { index: false, follow: false }
+      ? { index: false, follow: true }
       : { index: true, follow: true },
     openGraph: {
       title,

@@ -28,7 +28,7 @@ The schema and indexes anticipate:
 - millions of evidence / filing / disclosure rows
 - recurring source refreshes and historical snapshots
 
-Search is a `search_documents` table plus trigram / GIN indexes. Task 002 writes firm search documents with `indexable = false`.
+Search is a `search_documents` table plus trigram / GIN indexes. Task 003 reads official firms through a server-only PostgreSQL repository (`apps/web/src/lib/firms`). `indexable` remains false until the content gate is applied.
 
 ## Web
 
@@ -37,6 +37,7 @@ Search is a `search_documents` table plus trigram / GIN indexes. Task 002 writes
 - Client components only for header menu, directory filter, and compare toggle
 - Security headers from `packages/config`
 - Synthetic and reserved routes are `noindex`
+- Official `/firm/sec-crd-*` pages are dynamically rendered and noindex until `search_documents.indexable = true`
 
 ## Data path
 

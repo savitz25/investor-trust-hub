@@ -41,6 +41,7 @@ def validate_migration_set(root: Path) -> list[str]:
         "0005_canonical_entities.sql": "CREATE TABLE people",
         "0008_search.sql": "search_documents",
         "0010_sec_adv_ingestion.sql": "form_adv_firm_facts",
+        "0011_firm_research_search.sql": "search_documents_slug_idx",
     }
     for name, token in required_tokens.items():
         text = (root / "database" / "migrations" / name).read_text(encoding="utf-8")

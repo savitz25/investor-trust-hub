@@ -11,3 +11,8 @@ export * from './evidence';
 export * from './provenance';
 export * from './search';
 export * from './fixtures';
+export * from './firm-slug';
+export * from './raum';
+export * from './firm-classification';
+export * from './firm-indexability';
+export * from './firm-search-query';

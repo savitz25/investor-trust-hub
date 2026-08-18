@@ -64,6 +64,7 @@ postgres-data/
 
 # Uploads (future user documents — never commit)
 var/uploads/
+var/
 tmp/
 
 # Official regulatory releases — never commit

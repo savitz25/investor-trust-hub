@@ -12,9 +12,9 @@ This repository is an independent research platform. It does not give financial 
 
 ## Current milestone
 
-**Task 002.1 — Production database + official SEC August 2026 publish**
+**Task 003 — Production Firm Trust Reports and national firm search**
 
-Task 001 and Task 002 remain in place. Task 002.1 connects the existing pipeline to the production PostgreSQL/Supabase database and publishes the already-validated official SEC adviser files. Official firm search documents stay `indexable = false`.
+Official SEC adviser firms are searchable at `/firms` and readable at `/firm/sec-crd-{CRD}`. Pages become indexable only after a deterministic content gate. BrokerCheck and individual professionals are not included yet.
 
 - Monorepo with Next.js App Router, TypeScript strict mode, Tailwind CSS
 - Domain models for people, firms, products, issuers, registrations, evidence
@@ -161,9 +161,12 @@ These pages are `noindex`. They are not official evidence.
 - [`docs/versions.md`](docs/versions.md)
 - [`docs/task-002-sec-adviser-ingestion.md`](docs/task-002-sec-adviser-ingestion.md)
 - [`docs/task-002-1-production-publish.md`](docs/task-002-1-production-publish.md)
+- [`docs/task-003-firm-trust-reports.md`](docs/task-003-firm-trust-reports.md)
+- [`docs/firm-indexability-gate.md`](docs/firm-indexability-gate.md)
+- [`docs/firm-search.md`](docs/firm-search.md)
 
 ## Future milestones
 
 See [`docs/product-roadmap.md`](docs/product-roadmap.md). Do not start the next milestone from this README automatically.
 
-Recommended next milestone: **Task 003 — Firm Trust Report content and indexability gate.** Do not make official SEC firms indexable until that gate exists.
+Recommended next milestone: **Task 004 — associated professionals and BrokerCheck as a research citation**, still isolated from prospecting. Do not start it from this README.

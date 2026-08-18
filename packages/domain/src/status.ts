@@ -99,10 +99,11 @@ export const REGISTRATION_STATUS_COPY: Record<RegistrationStatusValue, StatusCop
     tone: 'reported',
   },
   pending: {
-    label: 'Reported as pending',
+    label: 'Pending / 120-Day Approval',
     shortLabel: 'Pending',
-    explanation: 'The cited source reports a pending registration status.',
-    tone: 'reported',
+    explanation:
+      'The cited SEC/IARD source reports a 120-Day Approval or other pending status. That is not the same as a current registered status, and it is not SEC endorsement.',
+    tone: 'caution',
   },
   terminated: {
     label: 'Reported as terminated',
