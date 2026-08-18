@@ -22,13 +22,21 @@ Or run `python services/ingestion/scripts/apply_migrations.py` after the ingesti
 
 ## Seed
 
+Production-safe (source registry + SEC dataset rows only):
+
+```bash
+python services/ingestion/scripts/apply_and_seed.py
+```
+
+CI / local development may also apply synthetic fixtures:
+
 ```bash
 psql "$DATABASE_URL" -f database/seed/0001_source_registry.sql
 psql "$DATABASE_URL" -f database/seed/0002_synthetic_fixtures.sql
 psql "$DATABASE_URL" -f database/seed/0003_sec_adv_datasets.sql
 ```
 
-Synthetic seed data is **not** real regulatory evidence. Every seeded person, firm, registration, and disclosure is marked `is_synthetic = true`.
+Synthetic seed data is **not** real regulatory evidence. Every seeded person, firm, registration, and disclosure is marked `is_synthetic = true`. Do not apply `0002_synthetic_fixtures.sql` to production unless intentionally requested.
 
 ## Types
 

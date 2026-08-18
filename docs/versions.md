@@ -10,6 +10,7 @@ Recorded after the Task 001 install (2026-08-18). If you change lockfiles, updat
 | npm | 10.9.8 |
 | Python | 3.12.10 |
 | PostgreSQL (CI) | 16 |
+| PostgreSQL (production / Supabase) | 17.6 |
 
 ## JavaScript (resolved)
 

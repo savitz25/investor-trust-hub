@@ -6,6 +6,11 @@ import os
 import sys
 from pathlib import Path
 
+SCRIPTS = Path(__file__).resolve().parent
+if str(SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS))
+from load_env import find_repo_root, load_local_env  # noqa: E402
+
 
 def migration_files(root: Path) -> list[Path]:
     return sorted((root / "database" / "migrations").glob("*.sql"))
@@ -96,14 +101,53 @@ def _split_sql(script: str) -> list[str]:
     return statements
 
 
-def apply_with_psycopg(root: Path, database_url: str) -> None:
+def _applied_filenames(conn) -> list[str]:
+    try:
+        rows = conn.execute("SELECT filename FROM schema_migrations ORDER BY filename").fetchall()
+        return [row[0] for row in rows]
+    except Exception:
+        conn.rollback()
+        return []
+
+
+def apply_with_psycopg(root: Path, database_url: str) -> list[str]:
     import psycopg
 
-    with psycopg.connect(database_url, connect_timeout=20) as conn:
+    applied_now: list[str] = []
+    with psycopg.connect(database_url, connect_timeout=30, keepalives=1, keepalives_idle=30) as conn:
+        conn.execute("SET statement_timeout = 0")
+        already = set(_applied_filenames(conn))
         for path in migration_files(root):
+            if path.name in already:
+                print(f"skip {path.name} (already in schema_migrations)", flush=True)
+                continue
+            print(f"apply {path.name}", flush=True)
             for statement in _split_sql(path.read_text(encoding="utf-8")):
                 conn.execute(statement)
+            applied_now.append(path.name)
         conn.commit()
+    return applied_now
+
+
+def migration_status(root: Path, database_url: str) -> dict[str, list[str]]:
+    import psycopg
+
+    expected = [path.name for path in migration_files(root)]
+    with psycopg.connect(database_url, connect_timeout=30) as conn:
+        applied = _applied_filenames(conn)
+        counts: dict[str, int] = {}
+        for name in applied:
+            counts[name] = counts.get(name, 0) + 1
+        duplicates = [name for name, count in counts.items() if count > 1]
+        missing = [name for name in expected if name not in set(applied)]
+        extra = [name for name in applied if name not in set(expected)]
+    return {
+        "expected": expected,
+        "applied": applied,
+        "missing": missing,
+        "duplicate": duplicates,
+        "extra": extra,
+    }
 
 
 def apply_with_psql(root: Path, database_url: str) -> None:
@@ -123,14 +167,33 @@ def apply_with_psql(root: Path, database_url: str) -> None:
 
 
 def main() -> int:
-    root = Path(__file__).resolve().parents[3]
+    root = find_repo_root(Path(__file__).resolve())
+    load_local_env(root)
     names = validate_migration_set(root)
     database_url = os.environ.get("DATABASE_URL")
-    if not database_url or "--check-only" in sys.argv:
+    if "--check-only" in sys.argv or not database_url:
         print("migrations ok:", ", ".join(names))
         return 0
-    apply_with_psql(root, database_url)
-    print("applied", ", ".join(names))
+    if "--status" in sys.argv:
+        status = migration_status(root, database_url)
+        print("expected migrations:", ", ".join(status["expected"]) or "(none)")
+        print("applied migrations:", ", ".join(status["applied"]) or "(none)")
+        print("missing migrations:", ", ".join(status["missing"]) or "0")
+        print("duplicate migration rows:", ", ".join(status["duplicate"]) or "0")
+        return 1 if status["missing"] or status["duplicate"] else 0
+    try:
+        applied_now = apply_with_psycopg(root, database_url)
+    except ImportError:
+        apply_with_psql(root, database_url)
+        applied_now = names
+    print("applied", ", ".join(applied_now) if applied_now else "(none; already current)")
+    status = migration_status(root, database_url)
+    print("expected migrations:", ", ".join(status["expected"]))
+    print("applied migrations:", ", ".join(status["applied"]))
+    print("missing migrations:", ", ".join(status["missing"]) or "0")
+    print("duplicate migration rows:", ", ".join(status["duplicate"]) or "0")
+    if status["missing"] or status["duplicate"]:
+        return 1
     return 0
 
 

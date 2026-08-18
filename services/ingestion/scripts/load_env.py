@@ -1,24 +1,24 @@
-"""Load env.local.txt / env.local without printing values."""
+"""Compatibility wrapper so operator scripts can import load_local_env."""
 
 from __future__ import annotations
 
-import os
+import sys
 from pathlib import Path
 
+SRC = Path(__file__).resolve().parents[1] / "src"
+if str(SRC) not in sys.path:
+    sys.path.insert(0, str(SRC))
 
-def load_local_env(root: Path | None = None) -> None:
-    root = root or Path.cwd()
-    for name in ("env.local", "env.local.txt", ".env.local", ".env"):
-        path = root / name
-        if not path.exists():
-            continue
-        for line in path.read_text(encoding="utf-8").splitlines():
-            text = line.strip()
-            if not text or text.startswith("#") or "=" not in text:
-                continue
-            key, value = text.split("=", 1)
-            value = value.strip().strip('"').strip("'")
-            os.environ.setdefault(key.strip(), value)
-        break
-    if not os.environ.get("INGESTION_DATABASE_URL") and os.environ.get("DATABASE_URL"):
-        os.environ["INGESTION_DATABASE_URL"] = os.environ["DATABASE_URL"]
+from ith_ingestion.env import (  # noqa: E402
+    find_repo_root,
+    load_local_env,
+    redact_database_url,
+    resolve_database_url,
+)
+
+__all__ = [
+    "find_repo_root",
+    "load_local_env",
+    "redact_database_url",
+    "resolve_database_url",
+]

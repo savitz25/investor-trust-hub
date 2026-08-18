@@ -12,9 +12,9 @@ This repository is an independent research platform. It does not give financial 
 
 ## Current milestone
 
-**Task 002 — SEC Form ADV / IARD registered and exempt reporting adviser firm ingestion**
+**Task 002.1 — Production database + official SEC August 2026 publish**
 
-Task 001 foundation remains in place. Task 002 adds the first official, repeatable firm-data pipeline.
+Task 001 and Task 002 remain in place. Task 002.1 connects the existing pipeline to the production PostgreSQL/Supabase database and publishes the already-validated official SEC adviser files. Official firm search documents stay `indexable = false`.
 
 - Monorepo with Next.js App Router, TypeScript strict mode, Tailwind CSS
 - Domain models for people, firms, products, issuers, registrations, evidence
@@ -88,7 +88,18 @@ python -m ith_ingestion sec-adv ingest --latest --dry-run
 python -m ith_ingestion sec-adv ingest --latest --publish
 ```
 
-Raw zips stay in `data/raw/` (gitignored). See [`docs/task-002-sec-adviser-ingestion.md`](docs/task-002-sec-adviser-ingestion.md).
+Production publish is an operator action. It must not run in CI. Prefer archived official CSVs if the SEC catalog HTML returns 403.
+
+```bash
+python services/ingestion/scripts/check_database.py
+python services/ingestion/scripts/apply_and_seed.py
+python -m ith_ingestion sec-adv ingest --ria-csv <ria.csv> --era-csv <era.csv> --release-label 2026-08-03 --dry-run
+python -m ith_ingestion sec-adv ingest --ria-csv <ria.csv> --era-csv <era.csv> --release-label 2026-08-03 --publish
+python services/ingestion/scripts/production_integrity.py
+python services/ingestion/scripts/qa_sec_sample.py
+```
+
+Raw zips stay in `data/raw/` (gitignored). See [`docs/task-002-sec-adviser-ingestion.md`](docs/task-002-sec-adviser-ingestion.md) and [`docs/task-002-1-production-publish.md`](docs/task-002-1-production-publish.md).
 
 ### Python ingestion
 
@@ -106,9 +117,10 @@ pytest
 ```bash
 createdb investor_trust_hub
 python services/ingestion/scripts/apply_migrations.py
-psql "$DATABASE_URL" -f database/seed/0001_source_registry.sql
-psql "$DATABASE_URL" -f database/seed/0002_synthetic_fixtures.sql
+python services/ingestion/scripts/apply_and_seed.py
 ```
+
+CI may also apply `database/seed/0002_synthetic_fixtures.sql`. Production publish omits synthetic fixtures unless `--include-synthetic` is requested.
 
 See [`database/README.md`](database/README.md).
 
@@ -147,9 +159,11 @@ These pages are `noindex`. They are not official evidence.
 - [`docs/product-roadmap.md`](docs/product-roadmap.md)
 - [`docs/compliance-boundaries.md`](docs/compliance-boundaries.md)
 - [`docs/versions.md`](docs/versions.md)
+- [`docs/task-002-sec-adviser-ingestion.md`](docs/task-002-sec-adviser-ingestion.md)
+- [`docs/task-002-1-production-publish.md`](docs/task-002-1-production-publish.md)
 
 ## Future milestones
 
 See [`docs/product-roadmap.md`](docs/product-roadmap.md). Do not start the next milestone from this README automatically.
 
-Recommended next milestone: **Task 002 — first official source ingestion (Form ADV / IAPD firm foundation)** with provenance, idempotent publish, and no BrokerCheck prospecting use.
+Recommended next milestone: **Task 003 — Firm Trust Report content and indexability gate.** Do not make official SEC firms indexable until that gate exists.

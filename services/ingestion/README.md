@@ -34,6 +34,8 @@ python -m ith_ingestion sec-adv discover
 python -m ith_ingestion sec-adv ingest --latest --dry-run
 ```
 
+Production publish is an operator action. See [`docs/task-002-1-production-publish.md`](../../docs/task-002-1-production-publish.md). CI uses fixture CSVs only and must not receive a production `DATABASE_URL`.
+
 ## Design rules
 
 - Prefer no match to the wrong match.

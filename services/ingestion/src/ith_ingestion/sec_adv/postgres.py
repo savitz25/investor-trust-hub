@@ -32,7 +32,30 @@ def _connect(dsn: str):
         import psycopg
     except ImportError as exc:  # pragma: no cover
         raise PublishError("psycopg is required for --publish against PostgreSQL") from exc
-    return psycopg.connect(dsn, connect_timeout=20)
+    conn = psycopg.connect(
+        dsn,
+        connect_timeout=30,
+        keepalives=1,
+        keepalives_idle=30,
+        keepalives_interval=10,
+        keepalives_count=5,
+    )
+    conn.execute("SET statement_timeout = 0")
+    conn.execute("SET idle_in_transaction_session_timeout = 0")
+    return conn
+
+
+def _executemany(conn: Any, sql: str, rows: list[tuple[Any, ...]], chunk_size: int = 500) -> None:
+    if not rows:
+        return
+    total = len(rows)
+    with conn.cursor() as cur:
+        for start in range(0, total, chunk_size):
+            batch = rows[start : start + chunk_size]
+            cur.executemany(sql, batch)
+            done = min(start + chunk_size, total)
+            if done == total or done % 5000 == 0:
+                print(f"  wrote {done}/{total}", flush=True)
 
 
 class PostgresCanonicalStore:
@@ -91,54 +114,363 @@ class PostgresCanonicalStore:
                     self._ensure_run(conn, run_id, release_label)
                     release_ids = self._ensure_releases(conn, release_label, firms, now)
                     existing = {
-                        row[0]: row[1]
+                        row[0]: str(row[1])
                         for row in conn.execute(
                             "SELECT fi.identifier_value, fi.firm_id FROM firm_identifiers fi WHERE fi.identifier_type = 'crd'"
                         )
                     }
+                    existing_idents = {
+                        (row[0], row[1])
+                        for row in conn.execute(
+                            "SELECT identifier_type, identifier_value FROM firm_identifiers"
+                        )
+                    }
                     previous = set(existing)
+                    new_firms: list[tuple[Any, ...]] = []
+                    update_firms: list[tuple[Any, ...]] = []
+                    identifiers: list[tuple[Any, ...]] = []
+                    registrations: list[tuple[Any, ...]] = []
+                    locations: list[tuple[Any, ...]] = []
+                    facts: list[tuple[Any, ...]] = []
+                    evidence: list[tuple[Any, ...]] = []
+                    snapshots: list[tuple[Any, ...]] = []
+                    observations: list[tuple[Any, ...]] = []
+                    search_rows: list[tuple[Any, ...]] = []
                     observed: set[str] = set()
                     for firm in firms:
                         observed.add(firm.crd)
-                        firm_id, inserted = self._upsert_firm(conn, firm, existing, synthetic, now)
-                        if inserted:
-                            counts.firms_inserted += 1
-                        else:
+                        release_id = release_ids[firm.dataset_kind]
+                        if firm.crd in existing:
+                            firm_id = existing[firm.crd]
+                            update_firms.append(
+                                (
+                                    firm.legal_name,
+                                    firm.display_name,
+                                    [firm.registration_type],
+                                    now,
+                                    firm_id,
+                                )
+                            )
                             counts.firms_updated += 1
-                        counts.identifiers_created += self._upsert_identifiers(conn, firm_id, firm)
-                        counts.registrations_upserted += self._upsert_registration(conn, firm_id, firm)
-                        counts.locations_upserted += self._upsert_location(conn, firm_id, firm)
-                        counts.facts_upserted += self._upsert_facts(
-                            conn, firm_id, firm, release_ids[firm.dataset_kind], synthetic
+                        else:
+                            firm_id = str(uuid4())
+                            existing[firm.crd] = firm_id
+                            new_firms.append(
+                                (
+                                    firm_id,
+                                    firm_slug_for_crd(firm.crd),
+                                    firm.legal_name,
+                                    firm.display_name,
+                                    [firm.registration_type],
+                                    synthetic,
+                                    now,
+                                )
+                            )
+                            counts.firms_inserted += 1
+                        for ident_type, value in (("crd", firm.crd), ("sec_file_number", firm.sec_file_number)):
+                            if not value:
+                                continue
+                            identifiers.append((firm_id, ident_type, value, ident_type == "crd"))
+                            if (ident_type, value) not in existing_idents:
+                                counts.identifiers_created += 1
+                                existing_idents.add((ident_type, value))
+                        registrations.append(
+                            (
+                                firm_id,
+                                firm.registration_type,
+                                firm.registration_status,
+                                firm.sec_status_effective_date,
+                                firm.sec_current_status_text,
+                            )
                         )
-                        created_ev = self._upsert_evidence(
-                            conn, run_id, firm_id, firm, release_ids[firm.dataset_kind], now
+                        counts.registrations_upserted += 1
+                        office = firm.main_office
+                        locations.append(
+                            (
+                                firm_id,
+                                office.get("line1"),
+                                office.get("line2"),
+                                office.get("city"),
+                                office.get("region"),
+                                office.get("postal_code"),
+                                _country_code(office.get("country")),
+                            )
                         )
-                        counts.evidence_created += created_ev
-                        counts.snapshots_created += self._upsert_snapshot(
-                            conn, firm_id, firm, release_ids[firm.dataset_kind], now
+                        counts.locations_upserted += 1
+                        facts.append(
+                            (
+                                firm_id,
+                                DATASET_IDS[firm.dataset_kind],
+                                release_id,
+                                firm.dataset_kind,
+                                firm.organization_form,
+                                firm.fiscal_year_end,
+                                firm.sec_current_status_text,
+                                firm.sec_status_effective_date,
+                                firm.latest_adv_filing_date,
+                                firm.form_version,
+                                firm.website,
+                                firm.raum_amount,
+                                firm.raum_discretionary_amount,
+                                firm.raum_nondiscretionary_amount,
+                                "5F(2)(c)" if firm.dataset_kind == "ria" else None,
+                                firm.disclosure_indicator,
+                                json.dumps({"cik": firm.cik, "firm_type_source": firm.firm_type_source}),
+                                synthetic,
+                            )
                         )
-                        counts.observations_created += self._observe(
-                            conn, firm_id, firm, release_ids[firm.dataset_kind], True
+                        counts.facts_upserted += 1
+                        evidence.extend(self._evidence_rows(run_id, firm_id, firm, release_id, now))
+                        counts.evidence_created += 7
+                        snapshots.append(
+                            (firm_id, SOURCE_SYSTEM_ID, release_id, now, json.dumps(firm.raw))
                         )
-                        counts.search_documents_upserted += self._upsert_search(conn, firm_id, firm, synthetic)
+                        counts.snapshots_created += 1
+                        observations.append(
+                            (
+                                firm_id,
+                                DATASET_IDS[firm.dataset_kind],
+                                release_id,
+                                True,
+                                "observed in official SEC roster",
+                            )
+                        )
+                        counts.observations_created += 1
+                        search_ids = [firm.crd]
+                        if firm.sec_file_number:
+                            search_ids.append(firm.sec_file_number)
+                        search_rows.append(
+                            (
+                                firm_id,
+                                firm_slug_for_crd(firm.crd),
+                                firm.display_name,
+                                search_ids,
+                                firm.main_office.get("city"),
+                                firm.main_office.get("region"),
+                                firm.main_office.get("postal_code"),
+                                [firm.registration_type],
+                                synthetic,
+                            )
+                        )
+                        counts.search_documents_upserted += 1
                     missing_release = next(iter(release_ids.values()))
                     for crd in previous - observed:
                         firm_id = existing.get(crd)
                         if not firm_id:
                             continue
                         counts.not_observed += 1
-                        counts.observations_created += self._observe_missing(
-                            conn, firm_id, missing_release
+                        observations.append(
+                            (
+                                firm_id,
+                                "sec_ia_ria",
+                                missing_release,
+                                False,
+                                "Not observed in this release. Absence is not a finding of termination.",
+                            )
                         )
+                        counts.observations_created += 1
+                    print(f"publish_batch firms_new={len(new_firms)} firms_update={len(update_firms)}", flush=True)
+                    _executemany(
+                        conn,
+                        """
+                        INSERT INTO firms (id, slug, legal_name, display_name, firm_kinds, is_synthetic, current_as_of)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s)
+                        """,
+                        new_firms,
+                    )
+                    _executemany(
+                        conn,
+                        """
+                        UPDATE firms
+                        SET legal_name = %s,
+                            display_name = %s,
+                            firm_kinds = (
+                                SELECT ARRAY(SELECT DISTINCT unnest(firm_kinds || %s::text[]))
+                            ),
+                            current_as_of = %s,
+                            updated_at = now()
+                        WHERE id = %s
+                        """,
+                        update_firms,
+                    )
+                    _executemany(
+                        conn,
+                        """
+                        INSERT INTO firm_identifiers (firm_id, identifier_type, identifier_value, issuing_authority_id, is_primary)
+                        VALUES (%s, %s, %s, 'sec', %s)
+                        ON CONFLICT (identifier_type, identifier_value) DO NOTHING
+                        """,
+                        identifiers,
+                    )
+                    _executemany(
+                        conn,
+                        """
+                        INSERT INTO registrations (
+                            subject_kind, firm_id, regulator_authority_id, registration_type, status,
+                            commenced_on, is_current, is_synthetic, source_status_text
+                        ) VALUES ('firm', %s, 'sec', %s, %s, %s, TRUE, FALSE, %s)
+                        ON CONFLICT (firm_id, registration_type, regulator_authority_id)
+                        WHERE subject_kind = 'firm'
+                        DO UPDATE SET
+                            status = EXCLUDED.status,
+                            source_status_text = EXCLUDED.source_status_text,
+                            updated_at = now()
+                        """,
+                        registrations,
+                    )
+                    _executemany(
+                        conn,
+                        """
+                        INSERT INTO branches (
+                            firm_id, source_location_key, name, address_line_1, address_line_2,
+                            city, region, postal_code, country, is_main_office, is_synthetic
+                        ) VALUES (%s, 'sec-adv-main-office', 'Principal office (as reported)', %s, %s, %s, %s, %s, %s, TRUE, FALSE)
+                        ON CONFLICT (firm_id, source_location_key) WHERE source_location_key IS NOT NULL
+                        DO UPDATE SET
+                            address_line_1 = EXCLUDED.address_line_1,
+                            address_line_2 = EXCLUDED.address_line_2,
+                            city = EXCLUDED.city,
+                            region = EXCLUDED.region,
+                            postal_code = EXCLUDED.postal_code,
+                            country = EXCLUDED.country,
+                            updated_at = now()
+                        """,
+                        locations,
+                    )
+                    _executemany(
+                        conn,
+                        """
+                        INSERT INTO form_adv_firm_facts (
+                            firm_id, source_dataset_id, source_release_id, dataset_kind,
+                            organization_form, fiscal_year_end, sec_current_status_text,
+                            sec_status_effective_date, latest_adv_filing_date, form_version, website,
+                            raum_amount, raum_discretionary_amount, raum_nondiscretionary_amount,
+                            raum_source_field, disclosure_indicator, facts, is_synthetic
+                        ) VALUES (
+                            %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                        )
+                        ON CONFLICT (firm_id, source_release_id, dataset_kind) DO UPDATE SET
+                            organization_form = EXCLUDED.organization_form,
+                            sec_current_status_text = EXCLUDED.sec_current_status_text,
+                            raum_amount = EXCLUDED.raum_amount,
+                            facts = EXCLUDED.facts,
+                            updated_at = now()
+                        """,
+                        facts,
+                    )
+                    print(f"publish_batch evidence={len(evidence)}", flush=True)
+                    _executemany(
+                        conn,
+                        """
+                        INSERT INTO evidence_records (
+                            ingestion_run_id, source_authority_id, source_system_id, source_dataset_id,
+                            source_release_id, source_document_name, source_record_identifier,
+                            retrieved_at, raw_value, normalized_value, transform_version,
+                            subject_kind, subject_id, field_name, evidence_status, is_current, is_synthetic
+                        ) VALUES (
+                            %s, %s, %s, %s, %s, 'SEC IARD firm roster', %s, %s, %s, %s, %s,
+                            'firm', %s, %s, 'reported_by_source', TRUE, FALSE
+                        )
+                        ON CONFLICT DO NOTHING
+                        """,
+                        evidence,
+                    )
+                    _executemany(
+                        conn,
+                        """
+                        INSERT INTO source_snapshots (subject_kind, subject_id, source_system_id, source_release_id, snapshot_at, payload)
+                        VALUES ('firm', %s, %s, %s, %s, %s)
+                        ON CONFLICT DO NOTHING
+                        """,
+                        snapshots,
+                    )
+                    _executemany(
+                        conn,
+                        """
+                        INSERT INTO firm_source_observations (firm_id, source_dataset_id, source_release_id, observed, note)
+                        VALUES (%s, %s, %s, %s, %s)
+                        ON CONFLICT (firm_id, source_dataset_id, source_release_id) DO NOTHING
+                        """,
+                        observations,
+                    )
+                    _executemany(
+                        conn,
+                        """
+                        INSERT INTO search_documents (
+                            entity_kind, entity_id, slug, display_name, identifiers, city, region, postal_code,
+                            registration_types, is_synthetic, indexable
+                        ) VALUES (
+                            'firm', %s, %s, %s, %s, %s, %s, %s, %s, %s, FALSE
+                        )
+                        ON CONFLICT (entity_kind, entity_id) DO UPDATE SET
+                            display_name = EXCLUDED.display_name,
+                            identifiers = EXCLUDED.identifiers,
+                            city = EXCLUDED.city,
+                            region = EXCLUDED.region,
+                            postal_code = EXCLUDED.postal_code,
+                            is_synthetic = EXCLUDED.is_synthetic,
+                            indexable = FALSE
+                        """,
+                        search_rows,
+                    )
                     self._write_quarantine(conn, run_id, quarantine)
                     conn.execute(
-                        "UPDATE ingestion_runs SET status = 'published', finished_at = now(), metrics = %s WHERE id = %s",
+                        "UPDATE ingestion_runs SET status = 'published', finished_at = clock_timestamp(), metrics = %s WHERE id = %s",
                         (json.dumps(counts.as_dict()), run_id),
                     )
+                    print("publish_batch committed", flush=True)
             except Exception as exc:
                 raise PublishError(str(exc)) from exc
         return counts
+
+    def _evidence_rows(
+        self,
+        run_id: str,
+        firm_id: str,
+        firm: NormalizedFirm,
+        release_id: str,
+        now: datetime,
+    ) -> list[tuple[Any, ...]]:
+        fields = {
+            "identity": {"crd": firm.crd, "legal_name": firm.legal_name},
+            "legal_name": firm.legal_name,
+            "crd": firm.crd,
+            "sec_file_number": firm.sec_file_number,
+            "classification": firm.registration_type,
+            "registration_status": {
+                "normalized": firm.registration_status,
+                "source_text": firm.sec_current_status_text,
+            },
+            "main_office": firm.main_office,
+        }
+        raw_keys = {
+            "legal_name": "Legal Name",
+            "crd": "Organization CRD#",
+            "sec_file_number": "SEC#",
+            "classification": "Firm Type",
+            "registration_status": "SEC Current Status",
+            "main_office": "Main Office Street Address 1",
+            "identity": "Organization CRD#",
+        }
+        rows: list[tuple[Any, ...]] = []
+        for field_name, value in fields.items():
+            rows.append(
+                (
+                    run_id,
+                    SOURCE_AUTHORITY_ID,
+                    SOURCE_SYSTEM_ID,
+                    DATASET_IDS[firm.dataset_kind],
+                    release_id,
+                    firm.crd,
+                    now,
+                    json.dumps(firm.raw.get(raw_keys[field_name])),
+                    json.dumps(value),
+                    TRANSFORM_VERSION,
+                    firm_id,
+                    field_name,
+                )
+            )
+        return rows
 
     def _ensure_run(self, conn: Any, run_id: str, release_label: str) -> None:
         conn.execute(
@@ -472,19 +804,23 @@ class PostgresCanonicalStore:
         return 1
 
     def _write_quarantine(self, conn: Any, run_id: str, quarantine: list[QuarantineItem]) -> None:
-        for item in quarantine:
-            conn.execute(
-                """
-                INSERT INTO ingestion_quarantine (
-                    ingestion_run_id, source_dataset_id, source_record_identifier, reason_code, detail, raw_payload
-                ) VALUES (%s, %s, %s, %s, %s, %s)
-                """,
-                (
-                    run_id,
-                    DATASET_IDS[item.dataset_kind],
-                    item.source_record_identifier,
-                    item.reason_code,
-                    item.detail,
-                    json.dumps(item.raw),
-                ),
+        rows = [
+            (
+                run_id,
+                DATASET_IDS[item.dataset_kind],
+                item.source_record_identifier,
+                item.reason_code,
+                item.detail,
+                json.dumps(item.raw),
             )
+            for item in quarantine
+        ]
+        _executemany(
+            conn,
+            """
+            INSERT INTO ingestion_quarantine (
+                ingestion_run_id, source_dataset_id, source_record_identifier, reason_code, detail, raw_payload
+            ) VALUES (%s, %s, %s, %s, %s, %s)
+            """,
+            rows,
+        )

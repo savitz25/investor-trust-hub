@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 
 from ith_ingestion.archive import utc_now
+from ith_ingestion.env import load_local_env
 from ith_ingestion.memory import (
     ConservativeResolver,
     FileChecksummer,
@@ -58,6 +59,7 @@ def _store(publish: bool):
 
 
 def main(argv: list[str] | None = None) -> int:
+    load_local_env()
     parser = argparse.ArgumentParser(description="InvestorTrustHub ingestion CLI")
     sub = parser.add_subparsers(dest="command")
 

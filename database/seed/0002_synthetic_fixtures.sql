@@ -1,5 +1,7 @@
 -- Synthetic development data — not a real person or firm.
 -- Do not expose these rows as official evidence.
+-- Production publish (Task 002.1) omits this file unless --include-synthetic is requested.
+-- If applied, every row must remain is_synthetic = true and not indexable.
 
 INSERT INTO people (
     id, slug, display_name, given_name, family_name, middle_name,
