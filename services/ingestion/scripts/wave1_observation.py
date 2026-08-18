@@ -138,7 +138,8 @@ def main() -> int:
         for future in as_completed(futures):
             item = future.result()
             body = item.get("body") or ""
-            titles = re.findall(r"<title>([^<]*)</title>", body, flags=re.I)
+            head = re.search(r"<head[^>]*>(.*?)</head>", body, flags=re.I | re.S)
+            titles = re.findall(r"<title>([^<]*)</title>", head.group(1) if head else body, flags=re.I)
             robots = re.search(r'name="robots" content="([^"]+)"', body)
             canon = re.search(r'rel="canonical" href="([^"]+)"', body)
             crd = re.search(r"sec-crd-(\d+)", item["url"])

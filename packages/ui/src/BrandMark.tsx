@@ -14,7 +14,6 @@ export function BrandMark({
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <title>{title}</title>
       <path
         d="M18 6H10C7.8 6 6 7.8 6 10v8M46 6h8c2.2 0 4 1.8 4 4v8M18 58H10c-2.2 0-4-1.8-4-4v-8M46 58h8c2.2 0 4-1.8 4-4v-8"
         stroke="#0F766E"
