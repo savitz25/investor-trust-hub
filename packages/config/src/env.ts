@@ -97,16 +97,46 @@ export const SERVER_ONLY_ENV_KEYS = [
 
 /** Gate A: the deployment may be indexed only when explicitly opted in. Missing = false. */
 export function isSiteIndexingEnabled(input: NodeJS.ProcessEnv = process.env): boolean {
-  const raw = (input.SITE_INDEXING_ENABLED ?? '').trim().toLowerCase();
+  const raw = (input.SITE_INDEXING_ENABLED ?? '').trim().toLowerCase().replace(/^['"]|['"]$/g, '');
   return raw === 'true' || raw === '1' || raw === 'yes';
+}
+
+function hostFromUrlOrName(value: string): string {
+  const trimmed = value.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/\/$/, '');
+  return trimmed.split('/')[0]?.split(':')[0] ?? '';
 }
 
 export function parseIndexableHosts(input: NodeJS.ProcessEnv = process.env): string[] {
   const raw = input.INDEXABLE_HOSTS ?? '';
-  return raw
+  const listed = raw
     .split(',')
-    .map((part) => part.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/\/$/, '').split(':')[0] ?? '')
+    .map((part) => hostFromUrlOrName(part))
     .filter((host) => host.length > 0 && !isBlockedStagingHost(host));
+  if (listed.length > 0) {
+    return [...new Set(listed)];
+  }
+  // If INDEXABLE_HOSTS is unset, use the already-configured public origin.
+  const derived: string[] = [];
+  const canonical = hostFromUrlOrName(input.CANONICAL_HOST ?? '');
+  if (canonical && !isBlockedStagingHost(canonical)) {
+    derived.push(canonical);
+  }
+  try {
+    const fromSite = hostFromUrlOrName(resolvePublicSiteUrl(input));
+    if (fromSite && !isBlockedStagingHost(fromSite) && fromSite !== 'localhost' && fromSite !== '127.0.0.1') {
+      derived.push(fromSite);
+    }
+  } catch {
+    // ignore invalid site URL
+  }
+  const unique = [...new Set(derived)];
+  const withApex = [...unique];
+  for (const host of unique) {
+    if (host.startsWith('www.') && !withApex.includes(host.slice(4))) {
+      withApex.push(host.slice(4));
+    }
+  }
+  return withApex;
 }
 
 export function parseCanonicalHost(input: NodeJS.ProcessEnv = process.env): string | null {

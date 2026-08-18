@@ -60,6 +60,20 @@ describe('environment validation', () => {
     ).toBe('https://www.investortrusthub.example');
   });
 
+  it('derives approved hosts from the public site URL when INDEXABLE_HOSTS is empty', () => {
+    expect(
+      parseIndexableHosts({
+        NEXT_PUBLIC_SITE_URL: 'https://www.investortrusthub.com',
+      }),
+    ).toEqual(['www.investortrusthub.com', 'investortrusthub.com']);
+    expect(
+      isHostLaunchIndexable('www.investortrusthub.com', {
+        SITE_INDEXING_ENABLED: 'true',
+        NEXT_PUBLIC_SITE_URL: 'https://www.investortrusthub.com',
+      }),
+    ).toBe(true);
+  });
+
   it('never treats Vercel staging hosts as indexable even when listing is wrong', () => {
     const env = {
       SITE_INDEXING_ENABLED: 'true',
