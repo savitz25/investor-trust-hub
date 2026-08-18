@@ -32,9 +32,9 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--ith-border)] bg-[color:rgb(246_244_239_/_0.92)] backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <Link href="/" className="flex items-center gap-2 no-underline">
-          <BrandMark className="h-9 w-9" />
-          <BrandWordmark className="text-lg text-[var(--ith-navy)]" />
+        <Link href="/" className="flex items-center gap-2.5 no-underline">
+          <BrandMark className="h-10 w-10 shrink-0" />
+          <BrandWordmark className="text-[13px] sm:text-sm" />
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">

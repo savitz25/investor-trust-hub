@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2172 724" width="2172" height="724" role="img" aria-label="Investor Trust Hub">
+
+  <defs>
+    <linearGradient id="ithInvestor" x1="0" y1="124.0" x2="0" y2="318.0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#12D63A"/>
+      <stop offset="100%" stop-color="#006C14"/>
+    </linearGradient>
+    <linearGradient id="ithGreen" x1="0" y1="82.0" x2="0" y2="571.0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#12D63A"/>
+      <stop offset="100%" stop-color="#006C14"/>
+    </linearGradient>
+  </defs>
+  
+  <g fill="none" stroke="url(#ithGreen)" stroke-width="50.0" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 247.0 107.0 H 168.0 A 55.0 55.0 0 0 0 113.0 162.0 V 491.0 A 55.0 55.0 0 0 0 168.0 546.0 H 247.0"/>
+    <path d="M 515.0 107.0 H 591.5 A 55.0 55.0 0 0 1 646.5 162.0 V 491.0 A 55.0 55.0 0 0 1 591.5 546.0 H 515.0"/>
+  </g>
+  <g stroke="#001F52" stroke-width="19.0" stroke-linecap="round">
+    <line x1="379.0" y1="189.0" x2="379.0" y2="468.0"/>
+    <line x1="225.0" y1="325.0" x2="531.0" y2="325.0"/>
+  </g>
+  <circle cx="379.0" cy="326.0" r="46.0" fill="#001F52"/>
+  <circle cx="379.0" cy="189.0" r="47.0" fill="#FB7307"/>
+  <circle cx="225.0" cy="325.0" r="47.0" fill="#0083FC"/>
+  <circle cx="531.0" cy="325.0" r="47.0" fill="#01A199"/>
+  <circle cx="379.0" cy="468.0" r="47.0" fill="#641FFB"/>
+  <text x="750.0" y="282.0" fill="url(#ithInvestor)"
+        font-family="Franklin Gothic Heavy, Arial Black, Arial, sans-serif"
+        font-size="200" font-weight="800" letter-spacing="-2">INVESTOR</text>
+  <text x="750.0" y="506.0" fill="#001F52"
+        font-family="Franklin Gothic Heavy, Arial Black, Arial, sans-serif"
+        font-size="200" font-weight="800" letter-spacing="-2">TRUST HUB</text>
+  <text x="750.0" y="572.0" fill="#0A8A18"
+        font-family="Franklin Gothic Demi, Arial, sans-serif"
+        font-size="42" font-weight="600" letter-spacing="4.2">RESEARCH SMARTER. INVEST BETTER.</text>
+</svg>

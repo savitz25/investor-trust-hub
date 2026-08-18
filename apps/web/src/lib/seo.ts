@@ -53,6 +53,17 @@ export function pageMetadata({
       url,
       siteName: SITE_NAME,
       type: 'website',
+      images: [
+        {
+          url: '/opengraph-image',
+          width: 1200,
+          height: 630,
+          alt: 'Investor Trust Hub — Research smarter. Invest better.',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
     },
   };
 }

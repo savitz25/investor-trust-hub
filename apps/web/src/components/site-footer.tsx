@@ -10,9 +10,9 @@ export function SiteFooter() {
     <footer className="border-t border-white/10 bg-[var(--ith-navy)] text-white">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 sm:py-14 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <Link href="/" className="inline-flex items-center gap-2 text-white no-underline">
-            <BrandMark className="h-8 w-8" />
-            <BrandWordmark className="text-lg" />
+          <Link href="/" className="inline-flex items-center gap-2.5 text-white no-underline">
+            <BrandMark className="h-9 w-9 shrink-0" />
+            <BrandWordmark tone="onDark" className="text-sm" />
           </Link>
           <p className="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-teal-200">
             Investing &amp; retirement research

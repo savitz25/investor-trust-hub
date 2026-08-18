@@ -33,12 +33,31 @@ export const metadata: Metadata = {
     ? { index: true, follow: true }
     : { index: false, follow: true },
   icons: {
-    icon: '/brand/mark.svg',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/apple-icon.png',
+  },
+  openGraph: {
+    siteName: SITE_NAME,
+    type: 'website',
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'Investor Trust Hub — Research smarter. Invest better.',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: '#0F766E',
+  themeColor: '#001F52',
   width: 'device-width',
   initialScale: 1,
 };

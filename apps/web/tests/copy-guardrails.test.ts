@@ -35,4 +35,14 @@ describe('site copy does not endorse or rank', () => {
     expect(corpus.toLowerCase()).not.toContain('verified advisor');
     expect(corpus.toLowerCase()).not.toContain('★★★★★');
   });
+
+  it('keeps the official brand mark free of SVG title tags', () => {
+    const mark = read('../../packages/ui/src/BrandMark.tsx');
+    const icon = read('src/app/icon.svg');
+    const publicMark = read('public/brand/mark.svg');
+    expect(mark).not.toMatch(/<title[\s>]/i);
+    expect(icon).not.toMatch(/<title[\s>]/i);
+    expect(publicMark).not.toMatch(/<title[\s>]/i);
+    expect(mark).toContain('aria-label');
+  });
 });
