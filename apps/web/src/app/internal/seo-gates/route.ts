@@ -12,6 +12,7 @@ export async function GET() {
   const host = await readRequestHost();
   return NextResponse.json({
     siteIndexingEnabled: isSiteIndexingEnabled(),
+    siteIndexingEnvPresent: Boolean((process.env.SITE_INDEXING_ENABLED ?? '').trim()),
     preview: isVercelPreview(),
     approvedHostCount: parseIndexableHosts().length,
     requestHostApproved: isApprovedIndexableHost(host),

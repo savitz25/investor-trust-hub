@@ -20,13 +20,17 @@ Prove the live Vercel consumer experience against production Supabase. Two SEO g
 
 Host-aware Gate B. Deterministic Wave 1 tooling.
 
-## Task 003.3 — Permanent domain certification (current)
+## Task 003.3 — Permanent domain certification
 
-`https://www.investortrusthub.com` is live with HTTPS and apex redirects. Concurrency gate passed after switching Vercel to the transaction pooler. `SITE_INDEXING_ENABLED` is still false. Wave 1 is not applied.
+`https://www.investortrusthub.com` is live. Concurrency gate passed.
 
-## Recommended Task 003.4
+## Task 003.4 — Gate A + Wave 1 (blocked)
 
-Operator sets Production `SITE_INDEXING_ENABLED=true` → prove shell indexable / firms still noindex → `--wave-size 1000 --apply` → observe. Do not start automatically.
+Production runtime still has `SITE_INDEXING_ENABLED` effectively false. Wave 1 not applied. Probe: `/internal/seo-gates`.
+
+## Recommended next
+
+Operator sets Production `SITE_INDEXING_ENABLED=true` (exact key/value, Production env, redeploy) → prove shells indexable / firms noindex → `--wave-size 1000 --apply`. Do not start automatically.
 
 ## Recommended Task 004
 
