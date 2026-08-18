@@ -61,6 +61,20 @@ const FIRM_SELECT = `
     ON sd.entity_id = f.id AND sd.entity_kind = 'firm'
 `;
 
+export async function getOfficialFirmIndexable(slug: string): Promise<boolean> {
+  const result = await query<{ indexable: boolean }>(
+    `
+    SELECT sd.indexable
+    FROM firms f
+    JOIN search_documents sd ON sd.entity_id = f.id AND sd.entity_kind = 'firm'
+    WHERE f.slug = $1 AND f.is_synthetic = false
+    LIMIT 1
+    `,
+    [slug],
+  );
+  return result.rows[0]?.indexable === true;
+}
+
 export async function getOfficialFirmBySlug(slug: string): Promise<FirmTrustReportModel | null> {
   const result = await query<FirmRecordRow>(`${FIRM_SELECT} WHERE f.slug = $1 AND f.is_synthetic = false LIMIT 1`, [
     slug,

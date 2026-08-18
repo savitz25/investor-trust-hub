@@ -4,15 +4,19 @@ import { FirmReport } from '@/components/firm-report';
 import { FirmTrustReport } from '@/components/firm-trust-report';
 import { DatabaseUnavailableError, hasDatabaseUrl } from '@/lib/db';
 import { getCachedOfficialFirmBySlug } from '@/lib/firms/cached';
+import { getOfficialFirmIndexable } from '@/lib/firms/repository';
 import { pageMetadata } from '@/lib/seo';
 
-export const revalidate = 21_600;
+export const revalidate = 300;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   if (isOfficialFirmSlug(slug) && hasDatabaseUrl()) {
     try {
-      const report = await getCachedOfficialFirmBySlug(slug);
+      const [report, indexable] = await Promise.all([
+        getCachedOfficialFirmBySlug(slug),
+        getOfficialFirmIndexable(slug),
+      ]);
       if (!report) {
         return pageMetadata({ title: 'Firm not found', path: `/firm/${slug}`, indexable: false });
       }
@@ -20,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         title: `${report.displayName} — SEC/IARD Firm Research`,
         description: `Research ${report.displayName}, CRD ${report.crd}, using SEC/IARD regulatory data, firm identifiers, registration information, source dates, and public evidence.`,
         path: `/firm/${report.slug}`,
-        indexable: report.currentlyIndexable,
+        indexable,
       });
     } catch {
       return pageMetadata({ title: 'Firm research unavailable', path: `/firm/${slug}`, indexable: false });
