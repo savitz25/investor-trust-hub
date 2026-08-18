@@ -1,10 +1,14 @@
 import { PageShell } from '@/components/page-shell';
 import { pageMetadata } from '@/lib/seo';
+import { readRequestHost } from '@/lib/request-host';
 
-export const metadata = pageMetadata({
-  title: 'Terms',
-  path: '/terms',
-});
+export async function generateMetadata() {
+  return pageMetadata({
+    title: 'Terms',
+    path: '/terms',
+    host: await readRequestHost(),
+  });
+}
 
 export default function TermsPage() {
   return (

@@ -1,11 +1,15 @@
 import { NOT_ADVICE_LINE } from '@ith/domain';
 import { PageShell } from '@/components/page-shell';
 import { pageMetadata } from '@/lib/seo';
+import { readRequestHost } from '@/lib/request-host';
 
-export const metadata = pageMetadata({
-  title: 'Disclaimer',
-  path: '/disclaimer',
-});
+export async function generateMetadata() {
+  return pageMetadata({
+    title: 'Disclaimer',
+    path: '/disclaimer',
+    host: await readRequestHost(),
+  });
+}
 
 export default function DisclaimerPage() {
   return (

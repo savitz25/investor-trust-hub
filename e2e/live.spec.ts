@@ -75,7 +75,10 @@ test.describe('live Vercel firm reports', () => {
       assertSafeCopy(await page.locator('#main').innerText());
       expect(await horizontalOverflow(page)).toBeLessThanOrEqual(0);
       const robots = await page.locator('meta[name="robots"]').getAttribute('content');
-      expect(robots ?? '').toMatch(/noindex/i);
+      const host = new URL(page.url()).hostname;
+      if (host.endsWith('.vercel.app') || !process.env.EXPECT_PRODUCTION_INDEX) {
+        expect(robots ?? '').toMatch(/noindex/i);
+      }
       expect(errors).toEqual([]);
     });
   }

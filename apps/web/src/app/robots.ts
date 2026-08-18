@@ -1,9 +1,12 @@
 import type { MetadataRoute } from 'next';
-import { isSiteIndexingEnabled } from '@ith/config';
+import { isHostLaunchIndexable } from '@ith/config';
 import { getSiteEnv } from '@/lib/site';
+import { readRequestHost } from '@/lib/request-host';
 
-export default function robots(): MetadataRoute.Robots {
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const host = await readRequestHost();
   const { NEXT_PUBLIC_SITE_URL } = getSiteEnv();
+  const launch = isHostLaunchIndexable(host);
   return {
     rules: [
       {
@@ -19,7 +22,6 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
     ],
-    // Staging must not advertise a sitemap. Pages stay crawlable so noindex is visible.
-    ...(isSiteIndexingEnabled() ? { sitemap: `${NEXT_PUBLIC_SITE_URL}/sitemap.xml` } : {}),
+    ...(launch ? { sitemap: `${NEXT_PUBLIC_SITE_URL}/sitemap.xml` } : {}),
   };
 }

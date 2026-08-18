@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
   SERVER_ONLY_ENV_KEYS,
+  isApprovedIndexableHost,
+  isHostLaunchIndexable,
   isSiteIndexingEnabled,
+  parseIndexableHosts,
   parsePublicEnv,
   parseServerEnv,
   resolvePublicSiteUrl,
@@ -55,5 +58,18 @@ describe('environment validation', () => {
         VERCEL_PROJECT_PRODUCTION_URL: 'qa.example.app',
       }),
     ).toBe('https://www.investortrusthub.example');
+  });
+
+  it('never treats Vercel staging hosts as indexable even when listing is wrong', () => {
+    const env = {
+      SITE_INDEXING_ENABLED: 'true',
+      INDEXABLE_HOSTS: 'www.example.test,investor-trust-hub-web.vercel.app',
+    };
+    expect(parseIndexableHosts(env)).toEqual(['www.example.test']);
+    expect(isApprovedIndexableHost('investor-trust-hub-web.vercel.app', env)).toBe(false);
+    expect(isHostLaunchIndexable('investor-trust-hub-web.vercel.app', env)).toBe(false);
+    expect(isHostLaunchIndexable('www.example.test', env)).toBe(true);
+    expect(isHostLaunchIndexable('www.example.test', { ...env, VERCEL_ENV: 'preview' })).toBe(false);
+    expect(isHostLaunchIndexable('www.example.test', { SITE_INDEXING_ENABLED: 'false', INDEXABLE_HOSTS: 'www.example.test' })).toBe(false);
   });
 });

@@ -15,7 +15,12 @@ test.describe('shell routes', () => {
       );
       expect(overflow, `${path} horizontal overflow`).toBeLessThanOrEqual(0);
       const robots = await page.locator('meta[name="robots"]').getAttribute('content');
-      if (!process.env.SITE_INDEXING_ENABLED || process.env.SITE_INDEXING_ENABLED === 'false') {
+      const host = new URL(page.url()).hostname;
+      if (
+        host.endsWith('.vercel.app') ||
+        !process.env.SITE_INDEXING_ENABLED ||
+        process.env.SITE_INDEXING_ENABLED === 'false'
+      ) {
         expect(robots ?? '').toMatch(/noindex/i);
       }
       expect(errors, `${path} page errors`).toEqual([]);

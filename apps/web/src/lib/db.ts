@@ -26,7 +26,7 @@ function createPool(): Pool {
   const nodeUrl = connectionString.replace(/([?&])sslmode=[^&]*/g, '$1').replace(/\?&/, '?').replace(/[?&]$/, '');
   return new Pool({
     connectionString: nodeUrl,
-    max: 5,
+    max: 2,
     idleTimeoutMillis: 10_000,
     connectionTimeoutMillis: 8_000,
     ssl: supabase ? { rejectUnauthorized: false } : undefined,
@@ -50,9 +50,16 @@ export async function query<T extends QueryResultRow = QueryResultRow>(
     if (error instanceof DatabaseUnavailableError) {
       throw error;
     }
-    const message = error instanceof Error ? error.message : 'Database query failed.';
-    console.error('database_query_failed', message.replace(/postgresql:\/\/[^@]+@/g, 'postgresql://[redacted]@'));
-    throw new DatabaseUnavailableError(message);
+    try {
+      return await getPool().query<T>(text, params);
+    } catch (retryError) {
+      const message = retryError instanceof Error ? retryError.message : 'Database query failed.';
+      console.error(
+        'database_query_failed',
+        message.replace(/postgresql:\/\/[^@]+@/g, 'postgresql://[redacted]@'),
+      );
+      throw new DatabaseUnavailableError(message);
+    }
   }
 }
 

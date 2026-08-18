@@ -3,11 +3,15 @@ import { SEC_ADV_SOURCE_NOTE } from '@ith/domain';
 import { MethodologyNote } from '@ith/ui';
 import { PageShell } from '@/components/page-shell';
 import { pageMetadata } from '@/lib/seo';
+import { readRequestHost } from '@/lib/request-host';
 
-export const metadata = pageMetadata({
-  title: 'Sources',
-  path: '/sources',
-});
+export async function generateMetadata() {
+  return pageMetadata({
+    title: 'Sources',
+    path: '/sources',
+    host: await readRequestHost(),
+  });
+}
 
 export default function SourcesPage() {
   return (

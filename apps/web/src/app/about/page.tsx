@@ -2,11 +2,15 @@ import { INDEPENDENCE_LINE, MISSION_LINE, NOT_ADVICE_LINE, PHILOSOPHY_LINE } fro
 import { WHAT_WE_ARE_NOT } from '@ith/config';
 import { PageShell } from '@/components/page-shell';
 import { pageMetadata } from '@/lib/seo';
+import { readRequestHost } from '@/lib/request-host';
 
-export const metadata = pageMetadata({
-  title: 'About',
-  path: '/about',
-});
+export async function generateMetadata() {
+  return pageMetadata({
+    title: 'About',
+    path: '/about',
+    host: await readRequestHost(),
+  });
+}
 
 export default function AboutPage() {
   return (

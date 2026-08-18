@@ -12,13 +12,17 @@ Official SEC IARD RIA + ERA monthly firm rosters. CRD identity, provenance, quar
 
 CRD-stable `/firm/sec-crd-{CRD}` reports, `/firms` national search, deterministic indexability and geo-discovery gates.
 
-## Task 003.1 — Vercel browser QA and SEO launch safety (current)
+## Task 003.1 — Vercel browser QA and SEO launch safety
 
-Prove the live Vercel consumer experience against production Supabase. Two SEO gates: `SITE_INDEXING_ENABLED` (site/domain) and `search_documents.indexable` (firm content). `.vercel.app` stays noindex. Playwright local + live QA. No Wave 1 indexing.
+Prove the live Vercel consumer experience against production Supabase. Two SEO gates at the time: `SITE_INDEXING_ENABLED` and `search_documents.indexable`.
 
-## Recommended Task 003.2
+## Task 003.2 — Permanent domain + Wave 1 SEO (current)
 
-Permanent domain + production SEO cutover + Wave 1 indexing. Do not start automatically.
+Host-aware Gate B (`INDEXABLE_HOSTS`). Deterministic Wave 1 tooling (`crd-sha256-v1`, `--wave-size 1000`). Permanent domain is registered on Vercel DNS but not assigned to `investor-trust-hub-web` (`DEPLOYMENT_NOT_FOUND`). Indexing held.
+
+## Recommended Task 003.3
+
+Attach `www.investortrusthub.com` (or the operator-confirmed host) → HTTPS/canonical QA → Gate A → Wave 1 apply → observe. Do not start automatically.
 
 ## Recommended Task 004
 

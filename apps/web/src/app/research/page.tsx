@@ -2,11 +2,15 @@ import { RESEARCH_QUESTIONS } from '@ith/domain';
 import { MethodologyNote } from '@ith/ui';
 import { PageShell } from '@/components/page-shell';
 import { pageMetadata } from '@/lib/seo';
+import { readRequestHost } from '@/lib/request-host';
 
-export const metadata = pageMetadata({
-  title: 'Research questions',
-  path: '/research',
-});
+export async function generateMetadata() {
+  return pageMetadata({
+    title: 'Research questions',
+    path: '/research',
+    host: await readRequestHost(),
+  });
+}
 
 const GUIDES = [
   {

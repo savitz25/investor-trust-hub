@@ -12,9 +12,9 @@ This repository is an independent research platform. It does not give financial 
 
 ## Current milestone
 
-**Task 003.1 — Vercel browser QA and SEO launch safety**
+**Task 003.2 — Permanent domain + Wave 1 SEO (indexing held)**
 
-The consumer site is deployed on Vercel against the production Supabase database. Sitewide indexing stays off (`SITE_INDEXING_ENABLED=false`) until a later permanent-domain launch. Official firm `indexable` flags remain false. BrokerCheck and individual professionals are not included yet.
+Host-aware indexing is implemented (`SITE_INDEXING_ENABLED` + `INDEXABLE_HOSTS` + firm `indexable`). The permanent domain is not yet assigned to the Vercel project, so Gate A stays false and Wave 1 is not applied. BrokerCheck and individual professionals are not included yet.
 
 - Monorepo with Next.js App Router, TypeScript strict mode, Tailwind CSS
 - Domain models for people, firms, products, issuers, registrations, evidence
@@ -165,6 +165,8 @@ These pages are `noindex`. They are not official evidence.
 - [`docs/task-002-1-production-publish.md`](docs/task-002-1-production-publish.md)
 - [`docs/task-003-firm-trust-reports.md`](docs/task-003-firm-trust-reports.md)
 - [`docs/task-003-1-vercel-browser-qa.md`](docs/task-003-1-vercel-browser-qa.md)
+- [`docs/task-003-2-domain-seo-wave1.md`](docs/task-003-2-domain-seo-wave1.md)
+- [`docs/indexing-wave-operations.md`](docs/indexing-wave-operations.md)
 - [`docs/seo-launch-gates.md`](docs/seo-launch-gates.md)
 - [`docs/firm-indexability-gate.md`](docs/firm-indexability-gate.md)
 - [`docs/firm-search.md`](docs/firm-search.md)
@@ -173,4 +175,4 @@ These pages are `noindex`. They are not official evidence.
 
 See [`docs/product-roadmap.md`](docs/product-roadmap.md). Do not start the next milestone from this README automatically.
 
-Recommended next milestone: **Task 004 — associated professionals and BrokerCheck as a research citation**, still isolated from prospecting. Do not start it from this README.
+Recommended next milestone: **Task 003.3 — attach the permanent domain, enable Gate A, apply Wave 1**. Do not start it from this README.

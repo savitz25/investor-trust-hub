@@ -4,6 +4,7 @@ import { PageShell } from '@/components/page-shell';
 import { DatabaseUnavailableError, hasDatabaseUrl } from '@/lib/db';
 import { getFirmDirectoryMetrics, searchOfficialFirms } from '@/lib/firms/repository';
 import { pageMetadata } from '@/lib/seo';
+import { readRequestHost } from '@/lib/request-host';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 300;
@@ -22,6 +23,7 @@ export async function generateMetadata({
       'Search SEC/IARD adviser-firm records by firm name, CRD, SEC number, or location. InvestorTrustHub organizes official evidence. It does not rank or recommend firms.',
     path: '/firms',
     indexable: !hasQuery,
+    host: await readRequestHost(),
   });
 }
 

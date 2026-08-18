@@ -37,9 +37,10 @@ Search is a `search_documents` table plus trigram / GIN indexes. Task 003 reads 
 - Client components only for header menu, directory filter, and compare toggle
 - Security headers from `packages/config`
 - Synthetic and reserved routes are `noindex`
-- Official `/firm/sec-crd-*` pages are dynamically rendered and noindex unless `SITE_INDEXING_ENABLED=true` **and** `search_documents.indexable = true`
+- Official `/firm/sec-crd-*` pages are noindex unless `SITE_INDEXING_ENABLED=true`, the request host is in `INDEXABLE_HOSTS`, and `search_documents.indexable = true`
 - Vercel hosts the Next.js app from `apps/web`. Ingestion is not a public Vercel service.
-- `NEXT_PUBLIC_SITE_URL` controls canonical URLs. On Vercel, a missing or localhost value falls back to `VERCEL_PROJECT_PRODUCTION_URL` / `VERCEL_URL`.
+- `NEXT_PUBLIC_SITE_URL` controls canonical URLs. `.vercel.app` and Preview stay noindex via middleware `X-Robots-Tag` even if Gate A is on.
+- `/sitemap.xml` is a single urlset of shell paths plus currently indexable firm URLs.
 
 ## Data path
 

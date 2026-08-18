@@ -2,11 +2,15 @@ import { DECISION_LAB_TOOLS } from '@ith/config';
 import { ComingSoon } from '@ith/ui';
 import { PageShell } from '@/components/page-shell';
 import { pageMetadata } from '@/lib/seo';
+import { readRequestHost } from '@/lib/request-host';
 
-export const metadata = pageMetadata({
-  title: 'Decision Lab',
-  path: '/tools',
-});
+export async function generateMetadata() {
+  return pageMetadata({
+    title: 'Decision Lab',
+    path: '/tools',
+    host: await readRequestHost(),
+  });
+}
 
 export default function ToolsPage() {
   return (

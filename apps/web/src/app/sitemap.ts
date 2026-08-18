@@ -1,10 +1,9 @@
 import type { MetadataRoute } from 'next';
-import { INDEXABLE_PATHS, isSiteIndexingEnabled } from '@ith/config';
-import { countIndexableFirms, listIndexableFirmSlugs } from '@/lib/firms/repository';
+import { INDEXABLE_PATHS, isHostLaunchIndexable } from '@ith/config';
+import { listIndexableFirmSlugs } from '@/lib/firms/repository';
 import { hasDatabaseUrl } from '@/lib/db';
 import { getSiteEnv } from '@/lib/site';
-
-const FIRM_SITEMAP_PAGE_SIZE = 5000;
+import { readRequestHost } from '@/lib/request-host';
 
 function staticEntries(base: string): MetadataRoute.Sitemap {
   return INDEXABLE_PATHS.map((path) => ({
@@ -14,30 +13,19 @@ function staticEntries(base: string): MetadataRoute.Sitemap {
   }));
 }
 
-export async function generateSitemaps() {
-  if (!isSiteIndexingEnabled() || !hasDatabaseUrl()) {
-    return [{ id: 0 }];
-  }
-  try {
-    const count = await countIndexableFirms();
-    const pages = Math.max(1, Math.ceil(count / FIRM_SITEMAP_PAGE_SIZE));
-    return Array.from({ length: pages }, (_, index) => ({ id: index }));
-  } catch {
-    return [{ id: 0 }];
-  }
-}
-
-export default async function sitemap({ id }: { id: number }): Promise<MetadataRoute.Sitemap> {
-  if (!isSiteIndexingEnabled()) {
+/** Single /sitemap.xml urlset. Wave 1 (~1,000 firms + shell) fits one file. */
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const host = await readRequestHost();
+  if (!isHostLaunchIndexable(host)) {
     return [];
   }
   const { NEXT_PUBLIC_SITE_URL } = getSiteEnv();
-  const entries = id === 0 ? staticEntries(NEXT_PUBLIC_SITE_URL) : [];
+  const entries = staticEntries(NEXT_PUBLIC_SITE_URL);
   if (!hasDatabaseUrl()) {
     return entries;
   }
   try {
-    const slugs = await listIndexableFirmSlugs(FIRM_SITEMAP_PAGE_SIZE, id * FIRM_SITEMAP_PAGE_SIZE);
+    const slugs = await listIndexableFirmSlugs(5_000, 0);
     return [
       ...entries,
       ...slugs.map((slug) => ({

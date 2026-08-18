@@ -3,13 +3,17 @@ import { DirectorySearch } from '@/components/directory-search';
 import { PageShell } from '@/components/page-shell';
 import { associationsForPerson, firmById } from '@ith/domain';
 import { pageMetadata } from '@/lib/seo';
+import { readRequestHost } from '@/lib/request-host';
 
-export const metadata = pageMetadata({
-  title: 'Investment professionals',
-  description:
-    'Research registration, firm relationships, and official disclosures. This foundation directory currently shows labeled synthetic fixtures only.',
-  path: '/professionals',
-});
+export async function generateMetadata() {
+  return pageMetadata({
+    title: 'Investment professionals',
+    description:
+      'Research registration, firm relationships, and official disclosures. This foundation directory currently shows labeled synthetic fixtures only.',
+    path: '/professionals',
+    host: await readRequestHost(),
+  });
+}
 
 export default function ProfessionalsPage() {
   const items = SYNTHETIC_PEOPLE.map((person) => {

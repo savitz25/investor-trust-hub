@@ -25,7 +25,7 @@ This is not a marketing site, a brokerage, or an advice engine. If a change woul
 11. **BrokerCheck is not a prospecting database.** Research evidence and any future Business Console prospecting system must stay separable.
 12. **Synthetic data stays labeled.** Exact phrase: `Synthetic development data — not a real person or firm.`
 13. **Do not request financial credentials.** No account aggregation in this product’s current scope.
-14. **Do not index empty shells.** Professional/firm/fund/company pages become indexable only when they contain sufficient real sourced content. Firm indexability is a content gate, not a quality ranking. Staging/Vercel hostnames stay noindex unless `SITE_INDEXING_ENABLED` is explicitly true.
+14. **Do not index empty shells.** Professional/firm/fund/company pages become indexable only when they contain sufficient real sourced content. Firm indexability is a content gate, not a quality ranking. A page is indexable only when `SITE_INDEXING_ENABLED` is true, the request host is in `INDEXABLE_HOSTS`, and (for firms) `search_documents.indexable` is true. `*.vercel.app` and Preview stay noindex.
 15. **ERA is not an RIA.** Exempt reporting advisers must never be presented as SEC-registered investment advisers.
 16. **Do not say the SEC approved a firm.** Form ADV / IARD data is filer-supplied. Preserve source text; do not convert `Approved` into endorsement.
 

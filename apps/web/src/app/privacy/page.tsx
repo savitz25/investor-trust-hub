@@ -1,10 +1,14 @@
 import { PageShell } from '@/components/page-shell';
 import { pageMetadata } from '@/lib/seo';
+import { readRequestHost } from '@/lib/request-host';
 
-export const metadata = pageMetadata({
-  title: 'Privacy',
-  path: '/privacy',
-});
+export async function generateMetadata() {
+  return pageMetadata({
+    title: 'Privacy',
+    path: '/privacy',
+    host: await readRequestHost(),
+  });
+}
 
 export default function PrivacyPage() {
   return (

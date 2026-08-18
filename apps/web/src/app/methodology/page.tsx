@@ -2,11 +2,15 @@ import { ALLOWED_RESEARCH_FRAMES } from '@ith/domain';
 import { StatusLegend } from '@ith/ui';
 import { PageShell } from '@/components/page-shell';
 import { pageMetadata } from '@/lib/seo';
+import { readRequestHost } from '@/lib/request-host';
 
-export const metadata = pageMetadata({
-  title: 'Methodology',
-  path: '/methodology',
-});
+export async function generateMetadata() {
+  return pageMetadata({
+    title: 'Methodology',
+    path: '/methodology',
+    host: await readRequestHost(),
+  });
+}
 
 export default function MethodologyPage() {
   return (

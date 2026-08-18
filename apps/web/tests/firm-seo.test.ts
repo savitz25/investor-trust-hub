@@ -38,14 +38,20 @@ describe('firm SEO contracts', () => {
     expect(JSON.stringify(result).toLowerCase()).not.toContain('recommended');
   });
 
-  it('requires both the site launch gate and the firm content gate', () => {
+  it('requires site launch, approved host, and firm content gates', () => {
     expect(isSiteIndexingEnabled({ SITE_INDEXING_ENABLED: undefined })).toBe(false);
-    const previous = process.env.SITE_INDEXING_ENABLED;
+    const previousEnabled = process.env.SITE_INDEXING_ENABLED;
+    const previousHosts = process.env.INDEXABLE_HOSTS;
     delete process.env.SITE_INDEXING_ENABLED;
-    expect(pageMayBeIndexed('/firm/sec-crd-105958', true)).toBe(false);
+    delete process.env.INDEXABLE_HOSTS;
+    expect(pageMayBeIndexed('/firm/sec-crd-105958', true, 'www.example.test')).toBe(false);
     process.env.SITE_INDEXING_ENABLED = 'true';
-    expect(pageMayBeIndexed('/firm/sec-crd-105958', true)).toBe(true);
-    expect(pageMayBeIndexed('/firm/sec-crd-105958', false)).toBe(false);
-    process.env.SITE_INDEXING_ENABLED = previous;
+    expect(pageMayBeIndexed('/firm/sec-crd-105958', true, 'www.example.test')).toBe(false);
+    process.env.INDEXABLE_HOSTS = 'www.example.test';
+    expect(pageMayBeIndexed('/firm/sec-crd-105958', true, 'www.example.test')).toBe(true);
+    expect(pageMayBeIndexed('/firm/sec-crd-105958', false, 'www.example.test')).toBe(false);
+    expect(pageMayBeIndexed('/firm/sec-crd-105958', true, 'investor-trust-hub-web.vercel.app')).toBe(false);
+    process.env.SITE_INDEXING_ENABLED = previousEnabled;
+    process.env.INDEXABLE_HOSTS = previousHosts;
   });
 });
