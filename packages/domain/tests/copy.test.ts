@@ -6,6 +6,7 @@ import {
   MISSION_LINE,
   NOT_ADVICE_LINE,
   PHILOSOPHY_LINE,
+  SEC_ADV_SOURCE_NOTE,
   assertNoForbiddenGuidance,
   findForbiddenGuidance,
 } from '../src/copy';
@@ -17,6 +18,7 @@ describe('financial guidance guardrails', () => {
       PHILOSOPHY_LINE,
       INDEPENDENCE_LINE,
       NOT_ADVICE_LINE,
+      SEC_ADV_SOURCE_NOTE,
       ...ALLOWED_RESEARCH_FRAMES,
     ].join('\n');
     expect(findForbiddenGuidance(corpus)).toEqual([]);

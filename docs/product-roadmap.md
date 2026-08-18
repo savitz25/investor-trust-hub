@@ -1,12 +1,16 @@
 # Product roadmap
 
-## Task 001 — Foundation (this repository)
+## Task 001 — Foundation
 
-Durable architecture, schema, provenance model, product shell, design system, synthetic fixtures, tests, CI, documentation. No production regulatory ingest. No Decision Lab calculators.
+Durable architecture, schema, provenance model, product shell, design system, synthetic fixtures, tests, CI, documentation.
 
-## Recommended Task 002
+## Task 002 — SEC adviser firm ingestion (current)
 
-**First official source ingestion: SEC IAPD / Form ADV firm foundation.**
+Official SEC IARD RIA + ERA monthly firm rosters. CRD identity, provenance, quarantine, dry-run, idempotent publish. No BrokerCheck. No person ingest. No mass SEO.
+
+## Recommended Task 003
+
+**Firm Trust Reports for sourced SEC adviser firms.**
 
 - Download, checksum, archive a public ADV-related dataset
 - Parse, validate, normalize, conservative entity resolution

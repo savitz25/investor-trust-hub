@@ -1,4 +1,6 @@
 import { SOURCE_AUTHORITIES, SOURCE_SYSTEMS } from '@ith/config';
+import { SEC_ADV_SOURCE_NOTE } from '@ith/domain';
+import { MethodologyNote } from '@ith/ui';
 import { PageShell } from '@/components/page-shell';
 import { pageMetadata } from '@/lib/seo';
 
@@ -12,9 +14,10 @@ export default function SourcesPage() {
     <PageShell
       eyebrow="Sources"
       title="Official sources we will organize"
-      lead="These authorities are registered in configuration. Task 001 does not ingest their production datasets. BrokerCheck remains logically separated from any future prospecting system."
+      lead="These authorities are registered in configuration. Task 002 adds the official SEC IARD registered-adviser and exempt-reporting-adviser firm rosters. BrokerCheck is not ingested."
     >
       <div className="space-y-8">
+        <MethodologyNote>{SEC_ADV_SOURCE_NOTE}</MethodologyNote>
         <section>
           <h2 className="font-serif text-2xl text-[var(--ith-navy)]">Authorities</h2>
           <ul className="mt-4 grid gap-4 md:grid-cols-2">

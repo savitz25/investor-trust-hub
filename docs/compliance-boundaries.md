@@ -39,6 +39,8 @@ May have special permitted-use, attribution, freshness, correction, and marketin
 
 Public records still require accurate provenance. Amendments and accessions are history, not overwrites. Do not invent identifiers.
 
+The monthly IARD firm roster is **filer-supplied Form ADV**. Do not say the SEC approved, endorsed, or certified the firm. Preserve source status text such as `Approved` without using it as a consumer endorsement. RAUM is a reported figure, not a quality score. A disclosure indicator is not an accusation. A firm missing from a later roster is not automatically terminated.
+
 ### NFA / CFTC
 
 Disciplinary and registration records are not a complete character judgment. Preserve source wording.

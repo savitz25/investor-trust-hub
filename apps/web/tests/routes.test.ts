@@ -22,6 +22,7 @@ describe('route architecture', () => {
     expect(shouldNoIndex('/firm/northbridge-ledger-advisors')).toBe(true);
     expect(shouldNoIndex('/compare')).toBe(true);
     expect(shouldNoIndex('/my-investor-trust-hub')).toBe(true);
+    expect(shouldNoIndex('/internal/sec-adv')).toBe(true);
     expect(shouldNoIndex('/')).toBe(false);
   });
 });

@@ -1,6 +1,6 @@
 # Source registry
 
-Official sources are configuration and documentation in Task 001. They are not ingested yet.
+Official sources are registered in configuration. Task 002 ingests the SEC IARD monthly **firm** rosters only.
 
 Implementation: `packages/config/src/sources.ts`, `database/seed/0001_source_registry.sql`, `services/ingestion/src/ith_ingestion/registry.py`.
 
@@ -11,6 +11,17 @@ Implementation: `packages/config/src/sources.ts`, `database/seed/0001_source_reg
 **Entities.** Firm, person, registration, filing, disclosure.
 
 **Notes.** ADV amendments replace the current snapshot but must not erase prior filings.
+
+**Task 002 datasets**
+
+- `sec_ia_ria` — Registered Investment Advisers bulk CSV
+- `sec_ia_era` — Exempt Reporting Advisers bulk CSV
+
+Catalog: https://www.sec.gov/data-research/sec-markets-data/information-about-registered-investment-advisers-exempt-reporting-advisers
+
+An ERA is not an SEC-registered investment adviser. Filer-supplied Form ADV data is not SEC approval.
+
+**Not ingested yet:** IAPD individuals, Form ADV Part 2 brochures, BrokerCheck, EDGAR.
 
 ## FINRA BrokerCheck
 

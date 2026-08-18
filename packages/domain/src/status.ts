@@ -19,6 +19,7 @@ export type EvidenceStatus = (typeof EVIDENCE_STATUSES)[number];
 
 export const REGISTRATION_STATUSES = [
   'registered',
+  'reporting',
   'pending',
   'terminated',
   'withdrawn',
@@ -87,8 +88,15 @@ export const REGISTRATION_STATUS_COPY: Record<RegistrationStatusValue, StatusCop
     label: 'Reported as registered',
     shortLabel: 'Registered',
     explanation:
-      'The cited source reports this registration as current. Re-check the official source before relying on it.',
+      'The cited source reports this registration as current. That is not SEC approval, endorsement, or a finding that the firm is trustworthy. Re-check the official source before relying on it.',
     tone: 'official',
+  },
+  reporting: {
+    label: 'Reported as an exempt reporting adviser',
+    shortLabel: 'ERA reporting',
+    explanation:
+      'The cited source reports this firm as an Exempt Reporting Adviser. That is not the same as being an SEC-registered investment adviser, and it is not an endorsement.',
+    tone: 'reported',
   },
   pending: {
     label: 'Reported as pending',

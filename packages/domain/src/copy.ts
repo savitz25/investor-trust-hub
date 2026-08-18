@@ -46,6 +46,8 @@ export const FORBIDDEN_GUIDANCE_PHRASES = [
   'number one advisor',
   'top ranked advisor',
   'pay-to-play',
+  'sec approved',
+  'sec verified advisor',
 ] as const;
 
 export const ENDORSEMENT_FALSE_FRIENDS = [
@@ -85,6 +87,9 @@ export function assertNoForbiddenGuidance(text: string, context: string): void {
     throw new Error(`Forbidden guidance language in ${context}: ${hits.join(', ')}`);
   }
 }
+
+export const SEC_ADV_SOURCE_NOTE =
+  'InvestorTrustHub reports information from official SEC/IARD investment-adviser datasets. The underlying information is filed by regulated entities on Form ADV. The SEC has not approved these firms, endorsed them, validated performance, or certified every filer-supplied field. We organize the evidence. The consumer decides.';
 
 export const RESEARCH_QUESTIONS = [
   'Who am I trusting?',

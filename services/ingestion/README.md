@@ -1,8 +1,8 @@
 # InvestorTrustHub ingestion service
 
-Python foundation for future scheduled regulatory-data pipelines.
+Python foundation for scheduled regulatory-data pipelines.
 
-Task 001 establishes interfaces only. It does **not** ingest SEC, FINRA, IARD, NFA, or EDGAR production datasets.
+Task 002 implements SEC IARD registered-adviser and exempt-reporting-adviser **firm** ingest. It does **not** ingest BrokerCheck or individual professionals.
 
 ## Pipeline stages
 
@@ -30,6 +30,8 @@ pip install -e ".[dev]"
 ruff check src tests scripts
 pytest
 python scripts/apply_migrations.py
+python -m ith_ingestion sec-adv discover
+python -m ith_ingestion sec-adv ingest --latest --dry-run
 ```
 
 ## Design rules

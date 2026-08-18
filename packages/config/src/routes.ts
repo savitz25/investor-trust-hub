@@ -46,6 +46,7 @@ export const NOINDEX_ROUTE_PREFIXES = [
   '/company/',
   '/compare',
   '/my-investor-trust-hub',
+  '/internal/',
 ] as const;
 
 export function shouldNoIndex(pathname: string): boolean {

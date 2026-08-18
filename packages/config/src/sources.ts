@@ -56,7 +56,8 @@ export const SOURCE_SYSTEMS = [
     id: 'form_adv',
     authorityId: 'sec',
     name: 'Form ADV / IARD adviser filings',
-    officialUrl: 'https://www.sec.gov/information-for/investment-advisers',
+    officialUrl:
+      'https://www.sec.gov/data-research/sec-markets-data/information-about-registered-investment-advisers-exempt-reporting-advisers',
     datasetKind: 'adviser_filing',
     attributionRequired: true,
     marketingRestricted: false,

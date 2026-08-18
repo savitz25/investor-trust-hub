@@ -8,11 +8,13 @@ It will sit in the [AskTrustHub](https://www.asktrusthub.com) network.
 
 > We organize the evidence. The consumer decides.
 
-This repository is **Task 001: foundation only**. It does not ingest production SEC, FINRA, IARD, NFA, or EDGAR datasets. It does not give financial advice, rank advisors, or pick investments.
+This repository is an independent research platform. It does not give financial advice, rank advisors, or pick investments.
 
 ## Current milestone
 
-**Task 001 — durable technical and product foundation**
+**Task 002 — SEC Form ADV / IARD registered and exempt reporting adviser firm ingestion**
+
+Task 001 foundation remains in place. Task 002 adds the first official, repeatable firm-data pipeline.
 
 - Monorepo with Next.js App Router, TypeScript strict mode, Tailwind CSS
 - Domain models for people, firms, products, issuers, registrations, evidence
@@ -21,6 +23,7 @@ This repository is **Task 001: foundation only**. It does not ingest production 
 - Product shell and Trust Report design system
 - Labeled synthetic development fixtures
 - Tests and GitHub Actions CI
+- Official SEC RIA + ERA firm ingest (discover → dry-run → publish), CRD identity, provenance, quarantine
 
 ## What this is not
 
@@ -76,6 +79,16 @@ Open [http://localhost:3000](http://localhost:3000).
 | `npm run lint` | ESLint for the web app |
 | `npm test` | Vitest (domain, config, web) |
 | `npm run ci` | typecheck + lint + test + build |
+
+### SEC ADV ingest
+
+```bash
+python -m ith_ingestion sec-adv discover
+python -m ith_ingestion sec-adv ingest --latest --dry-run
+python -m ith_ingestion sec-adv ingest --latest --publish
+```
+
+Raw zips stay in `data/raw/` (gitignored). See [`docs/task-002-sec-adviser-ingestion.md`](docs/task-002-sec-adviser-ingestion.md).
 
 ### Python ingestion
 

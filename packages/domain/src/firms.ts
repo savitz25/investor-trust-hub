@@ -3,6 +3,7 @@ import { canonicalIdentifierSchema, type CanonicalIdentifier } from './identifie
 
 export const FIRM_KINDS = [
   'registered_investment_adviser',
+  'exempt_reporting_adviser',
   'broker_dealer',
   'dual_ria_broker_dealer',
   'commodity_trading_adviser',
@@ -15,6 +16,7 @@ export type FirmKind = (typeof FIRM_KINDS)[number];
 
 export const FIRM_KIND_LABELS: Record<FirmKind, string> = {
   registered_investment_adviser: 'Registered investment adviser',
+  exempt_reporting_adviser: 'Exempt reporting adviser',
   broker_dealer: 'Broker-dealer',
   dual_ria_broker_dealer: 'Dual RIA / broker-dealer',
   commodity_trading_adviser: 'Commodity trading adviser',

@@ -15,6 +15,7 @@ psql "$DATABASE_URL" -f database/migrations/0006_registrations_relationships.sql
 psql "$DATABASE_URL" -f database/migrations/0007_filings_disclosures.sql
 psql "$DATABASE_URL" -f database/migrations/0008_search.sql
 psql "$DATABASE_URL" -f database/migrations/0009_future_user_rls.sql
+psql "$DATABASE_URL" -f database/migrations/0010_sec_adv_ingestion.sql
 ```
 
 Or run `python services/ingestion/scripts/apply_migrations.py` after the ingestion service is installed.
@@ -24,6 +25,7 @@ Or run `python services/ingestion/scripts/apply_migrations.py` after the ingesti
 ```bash
 psql "$DATABASE_URL" -f database/seed/0001_source_registry.sql
 psql "$DATABASE_URL" -f database/seed/0002_synthetic_fixtures.sql
+psql "$DATABASE_URL" -f database/seed/0003_sec_adv_datasets.sql
 ```
 
 Synthetic seed data is **not** real regulatory evidence. Every seeded person, firm, registration, and disclosure is marked `is_synthetic = true`.

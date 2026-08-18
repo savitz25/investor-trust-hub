@@ -27,6 +27,10 @@ describe('status terminology', () => {
       expect(copy.label.toLowerCase()).not.toContain('best');
     }
     expect(REGISTRATION_STATUS_COPY.registered.label).toBe('Reported as registered');
+    expect(REGISTRATION_STATUS_COPY.reporting.label).toContain('exempt reporting adviser');
+    expect(REGISTRATION_STATUS_COPY.registered.explanation.toLowerCase()).toContain(
+      'not sec approval',
+    );
   });
 
   it('narrows unknown strings safely', () => {

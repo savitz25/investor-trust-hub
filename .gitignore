@@ -18,6 +18,8 @@ build/
 .env
 .env.local
 .env.*.local
+env.local
+env.local.txt
 !.env.example
 
 # Python
@@ -63,3 +65,7 @@ postgres-data/
 # Uploads (future user documents — never commit)
 var/uploads/
 tmp/
+
+# Official regulatory releases — never commit
+data/raw/
+data/reports/

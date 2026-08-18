@@ -16,6 +16,12 @@ dev = [
   "pytest>=8.3.0",
   "ruff>=0.11.0",
 ]
+db = [
+  "psycopg[binary]>=3.2.0",
+]
+
+[tool.setuptools.package-data]
+"ith_ingestion.sec_adv" = ["*.json"]
 
 [project.scripts]
 ith-ingest = "ith_ingestion.cli:main"
@@ -28,7 +34,7 @@ testpaths = ["tests"]
 pythonpath = ["src"]
 
 [tool.ruff]
-line-length = 100
+line-length = 160
 target-version = "py311"
 src = ["src", "tests", "scripts"]
 

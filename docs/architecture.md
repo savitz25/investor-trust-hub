@@ -10,7 +10,7 @@ InvestorTrustHub is a monorepo designed for national-scale regulatory research, 
 | Design system | `packages/ui` | Trust Report components and brand primitives |
 | Domain | `packages/domain` | Identifiers, entities, evidence, search contracts, fixtures |
 | Config | `packages/config` | Source registry, routes, env, security headers, copy |
-| Ingestion | `services/ingestion` | Python pipeline for future official datasets |
+| Ingestion | `services/ingestion` | Python pipelines, including SEC Form ADV firm ingest |
 | Database | `database/` | Versioned PostgreSQL / Supabase-compatible schema |
 
 ## Why this split
@@ -28,7 +28,7 @@ The schema and indexes anticipate:
 - millions of evidence / filing / disclosure rows
 - recurring source refreshes and historical snapshots
 
-Search is a `search_documents` table plus trigram / GIN indexes. Task 001 does not implement a production search cluster.
+Search is a `search_documents` table plus trigram / GIN indexes. Task 002 writes firm search documents with `indexable = false`.
 
 ## Web
 
@@ -38,20 +38,21 @@ Search is a `search_documents` table plus trigram / GIN indexes. Task 001 does n
 - Security headers from `packages/config`
 - Synthetic and reserved routes are `noindex`
 
-## Data path (future)
+## Data path
 
 ```text
-official source
+official SEC catalog
   → download / checksum / archive
   → parse / validate / normalize
-  → conservative entity resolution
-  → stage
-  → transactional publish (idempotent)
-  → evidence_records + current snapshot
-  → source_snapshots / registration_status_history
-  → search_documents (indexable only when sourced content is sufficient)
-  → Trust Report UI
+  → CRD-only identity (no fuzzy merge)
+  → quality gates
+  → transactional publish (idempotent) or dry-run
+  → evidence_records + source_snapshots + form_adv_firm_facts
+  → firm_source_observations (including not-observed)
+  → search_documents (indexable only when sourced Trust Reports exist)
 ```
+
+ADV-specific facts stay in `form_adv_firm_facts`, not as hundreds of columns on `firms`.
 
 ## Supabase compatibility
 

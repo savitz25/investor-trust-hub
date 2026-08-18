@@ -15,6 +15,8 @@ class RegisteredSource:
 REGISTERED_SOURCES: tuple[RegisteredSource, ...] = (
     RegisteredSource("sec", "iapd", "iapd_individuals", "IAPD individuals"),
     RegisteredSource("sec", "form_adv", "form_adv", "Form ADV"),
+    RegisteredSource("sec", "form_adv", "sec_ia_ria", "SEC registered investment advisers"),
+    RegisteredSource("sec", "form_adv", "sec_ia_era", "SEC exempt reporting advisers"),
     RegisteredSource(
         "finra",
         "brokercheck",

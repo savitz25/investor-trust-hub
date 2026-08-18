@@ -76,9 +76,22 @@ jobs:
         run: |
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f database/seed/0001_source_registry.sql
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f database/seed/0002_synthetic_fixtures.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f database/seed/0003_sec_adv_datasets.sql
+      - name: Fixture publish is idempotent
+        working-directory: services/ingestion
+        run: |
+          pip install -e ".[dev,db]"
+          python -m ith_ingestion sec-adv ingest --fixture-dir fixtures/sec_adv --publish --archive-dir /tmp/ith-adv --report /tmp/ith-adv-1.json
+          python -m ith_ingestion sec-adv ingest --fixture-dir fixtures/sec_adv --publish --archive-dir /tmp/ith-adv --report /tmp/ith-adv-2.json
+          python - <<'PY'
+          import json
+          second = json.loads(open("/tmp/ith-adv-2.json", encoding="utf-8").read())
+          assert second["already_published"] is True
+          PY
       - name: Sanity queries
         run: |
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -c "SELECT count(*) FROM people WHERE is_synthetic;"
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -c "SELECT count(*) FROM firms WHERE is_synthetic;"
-          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -c "SELECT count(*) FROM evidence_records;"
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -c "SELECT count(*) FROM form_adv_firm_facts;"
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -c "SELECT prospecting_prohibited FROM source_systems WHERE id = 'brokercheck';"
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -c "SELECT count(*) FROM firms WHERE slug LIKE 'sec-crd-90000000%';"

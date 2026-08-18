@@ -39,6 +39,9 @@ SOURCE EVIDENCE
 | `products` / `issuers` + identifier tables | Future fund/company research |
 | `search_documents` | Search foundation |
 | `user_profiles` and saved-* tables | Future My InvestorTrustHub (RLS on) |
+| `form_adv_firm_facts` | Isolated Form ADV snapshot facts (not flattened onto `firms`) |
+| `firm_source_observations` | Observed / not-observed in a release |
+| `ingestion_quarantine` | Rows that must not become canonical firms |
 
 ## Identifiers
 
@@ -59,6 +62,8 @@ Task 001 does not run historical ingestion. The schema is ready:
 - `evidence_records.superseded_by`
 
 Do not overwrite important regulatory fields in place without writing history.
+
+Task 002: a CRD missing from a later SEC roster is recorded as `observed = false`. That does not terminate the registration.
 
 ## Evidence statuses
 
