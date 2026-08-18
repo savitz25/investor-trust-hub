@@ -1,0 +1,38 @@
+{
+  "name": "investor-trust-hub",
+  "version": "0.1.0",
+  "private": true,
+  "description": "InvestorTrustHub — Research before you invest. Independent consumer research for investment professionals, firms, fees, and financial decisions.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/savitz25/investor-trust-hub.git"
+  },
+  "homepage": "https://github.com/savitz25/investor-trust-hub#readme",
+  "bugs": {
+    "url": "https://github.com/savitz25/investor-trust-hub/issues"
+  },
+  "workspaces": [
+    "apps/web",
+    "packages/domain",
+    "packages/config",
+    "packages/ui"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w @ith/web",
+    "build": "npm run build -w @ith/web",
+    "start": "npm run start -w @ith/web",
+    "lint": "npm run lint -w @ith/web",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "ci": "npm run typecheck && npm run lint && npm run test && npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.9",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

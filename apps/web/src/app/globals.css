@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+:root,
+[data-hub="investor"] {
+  --ith-navy: #0a2540;
+  --ith-ink: #1e293b;
+  --ith-canvas: #f6f4ef;
+  --ith-paper: #fffcf7;
+  --ith-teal: #0f766e;
+  --ith-teal-deep: #115e59;
+  --ith-teal-soft: #ccfbf1;
+  --ith-teal-mist: #f0fdfa;
+  --ith-border: #e2e8f0;
+  --ith-bronze: #92400e;
+  --background: #f6f4ef;
+  --foreground: #1e293b;
+  --shadow-card: 0 1px 2px rgb(10 37 64 / 0.05), 0 8px 24px rgb(10 37 64 / 0.06);
+  --shadow-soft: 0 1px 2px rgb(10 37 64 / 0.04), 0 4px 16px rgb(10 37 64 / 0.05);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-navy: var(--ith-navy);
+  --color-ink: var(--ith-ink);
+  --color-teal: var(--ith-teal);
+  --color-canvas: var(--ith-canvas);
+  --color-border: var(--ith-border);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background:
+    radial-gradient(900px 420px at 6% -10%, rgb(15 118 110 / 0.08), transparent 55%),
+    radial-gradient(800px 360px at 100% 0%, rgb(10 37 64 / 0.05), transparent 50%),
+    var(--ith-canvas);
+  color: var(--ith-ink);
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+::selection {
+  background: rgb(15 118 110 / 0.18);
+  color: var(--ith-navy);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--ith-teal);
+  outline-offset: 3px;
+}

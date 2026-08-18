@@ -1,0 +1,3 @@
+# Harmless development proof fixture — not regulatory data.
+SYN-PROOF-LINE-1
+SYN-PROOF-LINE-2
