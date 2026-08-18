@@ -12,9 +12,9 @@ This repository is an independent research platform. It does not give financial 
 
 ## Current milestone
 
-**Task 003.4 — Wave 1 live**
+**Task 003.5 — Wave 1 observation**
 
-Canonical origin: `https://www.investortrusthub.com`. Public shell pages are indexable. Exactly 1,000 official Firm Trust Reports are indexable (`crd-sha256-v1`). The other 22,622 remain available to search on `/firms` but stay noindex. BrokerCheck and individual professionals are not included yet.
+Canonical origin: `https://www.investortrusthub.com`. Wave 1 remains exactly 1,000 indexable firms. Sitemap and database match. Title metadata is a single server-rendered document title. Wave 2 is not applied. BrokerCheck and individual professionals are not included yet.
 
 - Monorepo with Next.js App Router, TypeScript strict mode, Tailwind CSS
 - Domain models for people, firms, products, issuers, registrations, evidence
@@ -168,6 +168,7 @@ These pages are `noindex`. They are not official evidence.
 - [`docs/task-003-2-domain-seo-wave1.md`](docs/task-003-2-domain-seo-wave1.md)
 - [`docs/task-003-3-domain-wave1-launch.md`](docs/task-003-3-domain-wave1-launch.md)
 - [`docs/task-003-4-wave1-live.md`](docs/task-003-4-wave1-live.md)
+- [`docs/task-003-5-wave1-observation.md`](docs/task-003-5-wave1-observation.md)
 - [`docs/indexing-wave-operations.md`](docs/indexing-wave-operations.md)
 - [`docs/seo-launch-gates.md`](docs/seo-launch-gates.md)
 - [`docs/firm-indexability-gate.md`](docs/firm-indexability-gate.md)
@@ -177,4 +178,4 @@ These pages are `noindex`. They are not official evidence.
 
 See [`docs/product-roadmap.md`](docs/product-roadmap.md). Do not start the next milestone from this README automatically.
 
-Recommended next milestone: **Task 003.5 — Wave 1 observation / SEO health**. Do not start Wave 2 or Task 004 from this README.
+Recommended next milestone: **hold Wave 2 until Search Console observation exists**. Do not start Task 004 from this README.

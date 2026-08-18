@@ -24,13 +24,17 @@ Host-aware Gate B. Deterministic Wave 1 tooling.
 
 `https://www.investortrusthub.com` is live. Concurrency gate passed.
 
-## Task 003.4 — Gate A + Wave 1 (current)
+## Task 003.4 — Gate A + Wave 1
 
-Wave 1 is live: 1,000 indexable official firms, 22,622 held. Shell pages indexable on www.
+Wave 1 live: 1,000 indexable official firms, 22,622 held.
 
-## Recommended Task 003.5
+## Task 003.5 — Wave 1 observation (current)
 
-Wave 1 observation / SEO health. Do not start Wave 2 or Task 004 automatically.
+Membership stable. Sitemap ↔ DB exact. HTTP 1,000/1,000. Title defect fixed. External Google indexation not measured (no Search Console). Hold Wave 2.
+
+## Recommended next
+
+Task 003.6 — Wave 2 review after GSC observation, or remain on Wave 1. Do not apply Wave 2 automatically. Do not start Task 004 automatically.
 
 ## Recommended Task 004
 
