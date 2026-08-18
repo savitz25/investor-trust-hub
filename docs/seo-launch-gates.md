@@ -61,4 +61,6 @@ Attach domain on Vercel project investor-trust-hub-web
 → monitor
 ```
 
-Do not enable Gate A while the host still returns `DEPLOYMENT_NOT_FOUND`.
+The permanent origin is `https://www.investortrusthub.com`. Apex and `.vercel.app` 308 to www.
+
+Do not set `SITE_INDEXING_ENABLED=true` until HTTPS, redirects, concurrency (0 temporary-unavailable), and permanent-domain Playwright pass. After Gate A, confirm firm pages stay noindex until Wave 1 `--apply`.

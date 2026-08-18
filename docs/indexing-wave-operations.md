@@ -62,7 +62,13 @@ Re-test with `python services/ingestion/scripts/check_pooler_tls.py` after the p
 ## Concurrency
 
 ```text
-python services/ingestion/scripts/concurrency_smoke.py --base https://investor-trust-hub-web.vercel.app
+python services/ingestion/scripts/concurrency_smoke.py --base https://www.investortrusthub.com
 ```
 
-Modest 32-request burst. Not a stress test.
+Modest ~40-request burst. Required before Wave 1: HTTP failures = 0 and temporary-unavailable bodies = 0.
+
+Vercel serverless must use the Supabase **transaction** pooler (`pooler.supabase.com:6543`). Session mode (`:5432`) is capped at 15 clients and will  fail under isolate bursts. The web app rewrites `:5432` → `:6543` only when `VERCEL=1`.
+
+## Permanent domain
+
+Canonical: `https://www.investortrusthub.com`. Apex and production `.vercel.app` permanently redirect there.

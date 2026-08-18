@@ -16,13 +16,17 @@ CRD-stable `/firm/sec-crd-{CRD}` reports, `/firms` national search, deterministi
 
 Prove the live Vercel consumer experience against production Supabase. Two SEO gates at the time: `SITE_INDEXING_ENABLED` and `search_documents.indexable`.
 
-## Task 003.2 — Permanent domain + Wave 1 SEO (current)
+## Task 003.2 — Host-aware SEO + Wave 1 tooling
 
-Host-aware Gate B (`INDEXABLE_HOSTS`). Deterministic Wave 1 tooling (`crd-sha256-v1`, `--wave-size 1000`). Permanent domain is registered on Vercel DNS but not assigned to `investor-trust-hub-web` (`DEPLOYMENT_NOT_FOUND`). Indexing held.
+Host-aware Gate B. Deterministic Wave 1 tooling.
 
-## Recommended Task 003.3
+## Task 003.3 — Permanent domain certification (current)
 
-Attach `www.investortrusthub.com` (or the operator-confirmed host) → HTTPS/canonical QA → Gate A → Wave 1 apply → observe. Do not start automatically.
+`https://www.investortrusthub.com` is live with HTTPS and apex redirects. Concurrency gate passed after switching Vercel to the transaction pooler. `SITE_INDEXING_ENABLED` is still false. Wave 1 is not applied.
+
+## Recommended Task 003.4
+
+Operator sets Production `SITE_INDEXING_ENABLED=true` → prove shell indexable / firms still noindex → `--wave-size 1000 --apply` → observe. Do not start automatically.
 
 ## Recommended Task 004
 

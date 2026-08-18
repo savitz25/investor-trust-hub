@@ -12,9 +12,9 @@ This repository is an independent research platform. It does not give financial 
 
 ## Current milestone
 
-**Task 003.2 — Permanent domain + Wave 1 SEO (indexing held)**
+**Task 003.3 — Permanent domain live, Wave 1 not applied**
 
-Host-aware indexing is implemented (`SITE_INDEXING_ENABLED` + `INDEXABLE_HOSTS` + firm `indexable`). The permanent domain is not yet assigned to the Vercel project, so Gate A stays false and Wave 1 is not applied. BrokerCheck and individual professionals are not included yet.
+Canonical origin: `https://www.investortrusthub.com`. Apex and `.vercel.app` redirect there. `SITE_INDEXING_ENABLED` remains false until the operator sets it on Production. Wave 1 (1,000 firms) is dry-run only. BrokerCheck and individual professionals are not included yet.
 
 - Monorepo with Next.js App Router, TypeScript strict mode, Tailwind CSS
 - Domain models for people, firms, products, issuers, registrations, evidence
@@ -166,6 +166,7 @@ These pages are `noindex`. They are not official evidence.
 - [`docs/task-003-firm-trust-reports.md`](docs/task-003-firm-trust-reports.md)
 - [`docs/task-003-1-vercel-browser-qa.md`](docs/task-003-1-vercel-browser-qa.md)
 - [`docs/task-003-2-domain-seo-wave1.md`](docs/task-003-2-domain-seo-wave1.md)
+- [`docs/task-003-3-domain-wave1-launch.md`](docs/task-003-3-domain-wave1-launch.md)
 - [`docs/indexing-wave-operations.md`](docs/indexing-wave-operations.md)
 - [`docs/seo-launch-gates.md`](docs/seo-launch-gates.md)
 - [`docs/firm-indexability-gate.md`](docs/firm-indexability-gate.md)
@@ -175,4 +176,4 @@ These pages are `noindex`. They are not official evidence.
 
 See [`docs/product-roadmap.md`](docs/product-roadmap.md). Do not start the next milestone from this README automatically.
 
-Recommended next milestone: **Task 003.3 — attach the permanent domain, enable Gate A, apply Wave 1**. Do not start it from this README.
+Recommended next milestone: **Task 003.4 — set `SITE_INDEXING_ENABLED=true` and apply Wave 1**. Do not start it from this README.
