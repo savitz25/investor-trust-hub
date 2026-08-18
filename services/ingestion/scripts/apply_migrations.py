@@ -129,18 +129,14 @@ def apply_with_psycopg(root: Path, database_url: str) -> list[str]:
     return applied_now
 
 
-def migration_status(root: Path, database_url: str) -> dict[str, list[str]]:
-    import psycopg
-
+def _status_from_names(root: Path, applied: list[str]) -> dict[str, list[str]]:
     expected = [path.name for path in migration_files(root)]
-    with psycopg.connect(database_url, connect_timeout=30) as conn:
-        applied = _applied_filenames(conn)
-        counts: dict[str, int] = {}
-        for name in applied:
-            counts[name] = counts.get(name, 0) + 1
-        duplicates = [name for name, count in counts.items() if count > 1]
-        missing = [name for name in expected if name not in set(applied)]
-        extra = [name for name in applied if name not in set(expected)]
+    counts: dict[str, int] = {}
+    for name in applied:
+        counts[name] = counts.get(name, 0) + 1
+    duplicates = [name for name, count in counts.items() if count > 1]
+    missing = [name for name in expected if name not in set(applied)]
+    extra = [name for name in applied if name not in set(expected)]
     return {
         "expected": expected,
         "applied": applied,
@@ -148,6 +144,43 @@ def migration_status(root: Path, database_url: str) -> dict[str, list[str]]:
         "duplicate": duplicates,
         "extra": extra,
     }
+
+
+def migration_status(root: Path, database_url: str) -> dict[str, list[str]]:
+    try:
+        import psycopg
+    except ImportError:
+        return _migration_status_psql(root, database_url)
+    with psycopg.connect(database_url, connect_timeout=30) as conn:
+        applied = _applied_filenames(conn)
+    return _status_from_names(root, applied)
+
+
+def _migration_status_psql(root: Path, database_url: str) -> dict[str, list[str]]:
+    import shutil
+    import subprocess
+
+    if shutil.which("psql") is None:
+        raise ImportError("psycopg and psql are both unavailable")
+    completed = subprocess.run(
+        [
+            "psql",
+            database_url,
+            "-v",
+            "ON_ERROR_STOP=1",
+            "-t",
+            "-A",
+            "-c",
+            "SELECT filename FROM schema_migrations ORDER BY filename",
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if completed.returncode != 0:
+        raise SystemExit(completed.stderr or "schema_migrations query failed")
+    applied = [line.strip() for line in completed.stdout.splitlines() if line.strip()]
+    return _status_from_names(root, applied)
 
 
 def apply_with_psql(root: Path, database_url: str) -> None:
