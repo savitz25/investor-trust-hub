@@ -38,15 +38,17 @@ export function pageMetadata({
   const url = new URL(path, NEXT_PUBLIC_SITE_URL).toString();
   const noindex = !pageMayBeIndexed(path, indexable, host);
 
+  const documentTitle = title.includes(SITE_NAME) ? title : `${title} · ${SITE_NAME}`;
+
   return {
-    title,
+    title: { absolute: documentTitle },
     description,
     alternates: { canonical: url },
     robots: noindex
       ? { index: false, follow: true }
       : { index: true, follow: true },
     openGraph: {
-      title,
+      title: documentTitle,
       description,
       url,
       siteName: SITE_NAME,

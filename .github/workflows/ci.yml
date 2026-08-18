@@ -13,6 +13,7 @@ jobs:
   node:
     name: Typecheck, lint, test, build
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5

@@ -35,6 +35,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--base", default="https://www.investortrusthub.com")
     parser.add_argument("--workers", type=int, default=10)
+    parser.add_argument("--rounds", type=int, default=1, help="Repeat the mixed URL set this many times")
     args = parser.parse_args()
     base = args.base.rstrip("/")
     urls = [
@@ -68,6 +69,8 @@ def main() -> int:
         f"{base}/firms?q=105958",
         f"{base}/firms?state=FL",
     ] + urls
+    if args.rounds > 1:
+        urls = urls * args.rounds
     results = []
     with ThreadPoolExecutor(max_workers=args.workers) as pool:
         futures = [pool.submit(fetch, url) for url in urls]

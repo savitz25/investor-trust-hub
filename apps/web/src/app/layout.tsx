@@ -26,9 +26,9 @@ export const metadata: Metadata = {
   title: {
     default: `${SITE_NAME} — Research before you invest.`,
     template: `%s · ${SITE_NAME}`,
+    absolute: `${SITE_NAME} — Research before you invest.`,
   },
   description: SITE_DESCRIPTION,
-  applicationName: SITE_NAME,
   robots: isHostLaunchIndexable()
     ? { index: true, follow: true }
     : { index: false, follow: true },

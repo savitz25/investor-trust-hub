@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { isSiteIndexingEnabled, shouldNoIndex } from '@ith/config';
 import { evaluateFirmIndexability, firmSlugForCrd, parseFirmCrdFromSlug } from '@ith/domain';
-import { pageMayBeIndexed } from '../src/lib/seo';
+import { pageMayBeIndexed, pageMetadata } from '../src/lib/seo';
 
 describe('firm SEO contracts', () => {
   it('keeps synthetic firm routes noindex by prefix', () => {
@@ -54,5 +54,18 @@ describe('firm SEO contracts', () => {
     expect(pageMayBeIndexed('/firm/sec-crd-105958', true, 'investor-trust-hub-web.vercel.app')).toBe(false);
     process.env.SITE_INDEXING_ENABLED = previousEnabled;
     process.env.INDEXABLE_HOSTS = previousHosts;
+  });
+
+  it('emits one absolute document title including the firm name and site name', () => {
+    const metadata = pageMetadata({
+      title: 'Example Advisers — SEC/IARD Firm Research',
+      path: '/firm/sec-crd-1',
+      indexable: false,
+    });
+    expect(metadata.title).toEqual({
+      absolute: 'Example Advisers — SEC/IARD Firm Research · InvestorTrustHub',
+    });
+    expect(JSON.stringify(metadata).toLowerCase()).not.toContain('trusted advisor');
+    expect(JSON.stringify(metadata).toLowerCase()).not.toContain('recommended firm');
   });
 });

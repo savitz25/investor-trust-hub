@@ -21,6 +21,9 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   serverExternalPackages: ['pg'],
   transpilePackages: ['@ith/domain', '@ith/config', '@ith/ui'],
+  // Block HTML until generateMetadata resolves so crawlers and QA see one
+  // document title instead of streamed layout fallbacks.
+  htmlLimitedBots: /./,
   async headers() {
     return [
       {
