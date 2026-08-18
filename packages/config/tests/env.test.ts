@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { SERVER_ONLY_ENV_KEYS, isSiteIndexingEnabled, parsePublicEnv, parseServerEnv } from '../src/env';
+import {
+  SERVER_ONLY_ENV_KEYS,
+  isSiteIndexingEnabled,
+  parsePublicEnv,
+  parseServerEnv,
+  resolvePublicSiteUrl,
+} from '../src/env';
 
 describe('environment validation', () => {
   it('applies safe public defaults', () => {
@@ -30,5 +36,24 @@ describe('environment validation', () => {
     expect(isSiteIndexingEnabled({})).toBe(false);
     expect(isSiteIndexingEnabled({ SITE_INDEXING_ENABLED: 'false' })).toBe(false);
     expect(isSiteIndexingEnabled({ SITE_INDEXING_ENABLED: 'true' })).toBe(true);
+  });
+
+  it('resolves canonical origin from env without hard-coding a Vercel host', () => {
+    expect(resolvePublicSiteUrl({})).toBe('http://localhost:3000');
+    expect(resolvePublicSiteUrl({ NEXT_PUBLIC_SITE_URL: 'https://example.test' })).toBe('https://example.test');
+    expect(
+      resolvePublicSiteUrl({
+        VERCEL: '1',
+        NEXT_PUBLIC_SITE_URL: 'http://localhost:3000',
+        VERCEL_PROJECT_PRODUCTION_URL: 'qa.example.app',
+      }),
+    ).toBe('https://qa.example.app');
+    expect(
+      resolvePublicSiteUrl({
+        VERCEL: '1',
+        NEXT_PUBLIC_SITE_URL: 'https://www.investortrusthub.example',
+        VERCEL_PROJECT_PRODUCTION_URL: 'qa.example.app',
+      }),
+    ).toBe('https://www.investortrusthub.example');
   });
 });

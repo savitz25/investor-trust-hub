@@ -12,9 +12,9 @@ This repository is an independent research platform. It does not give financial 
 
 ## Current milestone
 
-**Task 003 — Production Firm Trust Reports and national firm search**
+**Task 003.1 — Vercel browser QA and SEO launch safety**
 
-Official SEC adviser firms are searchable at `/firms` and readable at `/firm/sec-crd-{CRD}`. Pages become indexable only after a deterministic content gate. BrokerCheck and individual professionals are not included yet.
+The consumer site is deployed on Vercel against the production Supabase database. Sitewide indexing stays off (`SITE_INDEXING_ENABLED=false`) until a later permanent-domain launch. Official firm `indexable` flags remain false. BrokerCheck and individual professionals are not included yet.
 
 - Monorepo with Next.js App Router, TypeScript strict mode, Tailwind CSS
 - Domain models for people, firms, products, issuers, registrations, evidence

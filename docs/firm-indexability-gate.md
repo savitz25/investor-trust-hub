@@ -45,11 +45,14 @@ Firms with blank state, `ZZ` country, or non-U.S. regions are not geo-discovery 
 
 Site indexing is a separate switch (`SITE_INDEXING_ENABLED`, default false). A firm URL may enter search engines only when **both** that switch and `search_documents.indexable` are true.
 
-`search_documents.indexable` stays `false` until the operator runs:
+`search_documents.indexable` stays `false` until the operator runs a later launch wave. Dry-run is always safe:
 
 ```text
 python services/ingestion/scripts/firm_indexability_report.py
-python services/ingestion/scripts/firm_indexability_report.py --apply
+python services/ingestion/scripts/firm_indexability_report.py --wave --limit 1000
+python services/ingestion/scripts/firm_indexability_report.py --wave --crds=105958,2288
 ```
 
-`--apply` sets `indexable = true` only for official firms that pass the Trust Report gate. Synthetic rows remain false.
+`--apply` sets `indexable = true` only for official firms that pass the Trust Report gate. `--wave` is additive and does not change eligibility rules. Selection is slug order or an explicit CRD list — not RAUM, fame, or paid status. Synthetic rows remain false.
+
+Do not run `--apply` while `SITE_INDEXING_ENABLED` is false or while the hostname is still `.vercel.app`.

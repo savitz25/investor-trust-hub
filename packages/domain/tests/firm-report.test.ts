@@ -160,4 +160,11 @@ describe('search query parsing', () => {
     expect(parseFirmSearchInput({ state: '_none' }).stateNone).toBe(true);
     expect(parseFirmSearchInput({ state: 'ZZ' }).state).toBeNull();
   });
+
+  it('clamps very long or malformed query input instead of throwing', () => {
+    const long = parseFirmSearchInput({ q: 'vanguard'.repeat(80), page: 'not-a-page' });
+    expect(long.q.length).toBeLessThanOrEqual(200);
+    expect(long.page).toBe(1);
+    expect(() => parseFirmSearchInput({ q: 'x'.repeat(500), page: '9999' })).not.toThrow();
+  });
 });

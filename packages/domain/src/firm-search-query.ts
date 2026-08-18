@@ -23,20 +23,26 @@ export interface ParsedFirmSearch {
 
 const SEC_FILE_LOOSE = /^(801|802|803|8)-?\d{1,8}$/i;
 
+function firstString(value?: string | string[]): string {
+  return (Array.isArray(value) ? value[0] : value) ?? '';
+}
+
 export function parseFirmSearchInput(input: {
   q?: string | string[];
   state?: string | string[];
   page?: string | string[];
 }): ParsedFirmSearch {
-  const rawQ = Array.isArray(input.q) ? input.q[0] : input.q;
-  const rawState = Array.isArray(input.state) ? input.state[0] : input.state;
-  const rawPage = Array.isArray(input.page) ? input.page[0] : input.page;
-  const parsed = firmSearchParamsSchema.parse({
-    q: rawQ ?? '',
-    state: rawState ?? '',
-    page: rawPage ?? '1',
+  const rawQ = firstString(input.q).slice(0, 200);
+  const rawState = firstString(input.state).slice(0, 16);
+  const parsed = firmSearchParamsSchema.safeParse({
+    q: rawQ,
+    state: rawState,
+    page: firstString(input.page) || '1',
   });
-  const q = normalizeSearchText(parsed.q);
+  const values = parsed.success
+    ? parsed.data
+    : { q: rawQ, state: rawState, page: 1 };
+  const q = normalizeSearchText(values.q);
   const compact = q.replace(/\s+/g, '');
   let exactCrd: string | null = null;
   let exactSecFile: string | null = null;
@@ -46,14 +52,14 @@ export function parseFirmSearchInput(input: {
   if (SEC_FILE_LOOSE.test(compact) && isValidIdentifierValue('sec_file_number', compact.toUpperCase())) {
     exactSecFile = normalizeIdentifierValue('sec_file_number', compact);
   }
-  const stateRaw = parsed.state.trim().toUpperCase();
+  const stateRaw = values.state.trim().toUpperCase();
   const stateNone = stateRaw === SEARCH_STATE_NONE.toUpperCase() || stateRaw === SEARCH_STATE_NONE;
   const state = !stateNone && isUsStateCode(stateRaw) ? stateRaw : null;
   return {
     q,
     state,
     stateNone,
-    page: parsed.page,
+    page: values.page,
     exactCrd,
     exactSecFile,
     looksLikeIdentifier: Boolean(exactCrd || exactSecFile),

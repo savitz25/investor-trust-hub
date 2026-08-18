@@ -28,6 +28,11 @@ jobs:
           NEXT_PUBLIC_SITE_URL: http://localhost:3000
           NEXT_PUBLIC_SITE_NAME: InvestorTrustHub
           SITE_INDEXING_ENABLED: false
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+        env:
+          NEXT_PUBLIC_SITE_URL: http://localhost:3000
+          SITE_INDEXING_ENABLED: false
 
   python:
     name: Ingestion lint and tests

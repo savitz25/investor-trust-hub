@@ -67,7 +67,7 @@ function DatabaseNotice({ slug }: { slug: string }) {
   return (
     <article className="mx-auto max-w-3xl px-4 py-16">
       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-800">Service interruption</p>
-      <h1 className="mt-3 font-serif text-3xl text-[var(--ith-navy)]">Firm research is temporarily unavailable</h1>
+      <h1 className="mt-3 font-serif text-3xl text-[var(--ith-navy)]">Research data temporarily unavailable</h1>
       <p className="mt-4 text-sm leading-relaxed">
         InvestorTrustHub could not read the official firm record for <span className="font-mono">{slug}</span>{' '}
         from the research database. This is a service error, not a finding about the firm.

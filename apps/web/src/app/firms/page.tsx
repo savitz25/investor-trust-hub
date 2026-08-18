@@ -76,7 +76,7 @@ export default async function FirmsPage({
         <PageShell
           eyebrow="Firms"
           title="Research an investment firm"
-          lead="The official firm directory is temporarily unavailable. This is a service error, not a finding about any firm."
+          lead="Research data temporarily unavailable. This is a service error, not a finding about any firm."
         >
           <FirmSearchForm q={parsed.q} state={stateValue} />
         </PageShell>

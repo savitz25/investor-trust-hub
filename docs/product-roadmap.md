@@ -8,9 +8,17 @@ Durable architecture, schema, provenance model, product shell, design system, sy
 
 Official SEC IARD RIA + ERA monthly firm rosters. CRD identity, provenance, quarantine, dry-run, idempotent publish. No BrokerCheck. No person ingest. No mass SEO.
 
-## Task 003 — Firm Trust Reports (current)
+## Task 003 — Firm Trust Reports
 
-CRD-stable `/firm/sec-crd-{CRD}` reports, `/firms` national search, deterministic indexability and geo-discovery gates. Official pages stay noindex until the site launch switch and the firm content gate are both enabled. `.vercel.app` remains staging.
+CRD-stable `/firm/sec-crd-{CRD}` reports, `/firms` national search, deterministic indexability and geo-discovery gates.
+
+## Task 003.1 — Vercel browser QA and SEO launch safety (current)
+
+Prove the live Vercel consumer experience against production Supabase. Two SEO gates: `SITE_INDEXING_ENABLED` (site/domain) and `search_documents.indexable` (firm content). `.vercel.app` stays noindex. Playwright local + live QA. No Wave 1 indexing.
+
+## Recommended Task 003.2
+
+Permanent domain + production SEO cutover + Wave 1 indexing. Do not start automatically.
 
 ## Recommended Task 004
 
