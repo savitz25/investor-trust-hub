@@ -64,7 +64,7 @@ export function FirmTrustReport({ report }: { report: FirmTrustReportModel }) {
 
       <header className="mt-6 max-w-3xl">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal-800">Firm Trust Report</p>
-        <h1 className="mt-3 break-words font-serif text-3xl leading-tight text-[var(--ith-navy)] sm:text-4xl">
+        <h1 className="mt-3 min-w-0 break-words font-serif text-3xl leading-tight text-[var(--ith-navy)] [overflow-wrap:anywhere] sm:text-4xl">
           {report.displayName}
         </h1>
         {report.legalName !== report.displayName ? (

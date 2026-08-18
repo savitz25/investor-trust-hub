@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { SERVER_ONLY_ENV_KEYS, parsePublicEnv, parseServerEnv } from '../src/env';
+import { SERVER_ONLY_ENV_KEYS, isSiteIndexingEnabled, parsePublicEnv, parseServerEnv } from '../src/env';
 
 describe('environment validation', () => {
   it('applies safe public defaults', () => {
@@ -23,5 +23,12 @@ describe('environment validation', () => {
   it('keeps credentials in the server-only key list', () => {
     expect(SERVER_ONLY_ENV_KEYS).toContain('DATABASE_URL');
     expect(SERVER_ONLY_ENV_KEYS).toContain('SUPABASE_SERVICE_ROLE_KEY');
+    expect(SERVER_ONLY_ENV_KEYS).toContain('SITE_INDEXING_ENABLED');
+  });
+
+  it('defaults site indexing to off unless explicitly enabled', () => {
+    expect(isSiteIndexingEnabled({})).toBe(false);
+    expect(isSiteIndexingEnabled({ SITE_INDEXING_ENABLED: 'false' })).toBe(false);
+    expect(isSiteIndexingEnabled({ SITE_INDEXING_ENABLED: 'true' })).toBe(true);
   });
 });

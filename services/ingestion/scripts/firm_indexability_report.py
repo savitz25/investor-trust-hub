@@ -72,6 +72,21 @@ def main() -> int:
     import psycopg
 
     apply = "--apply" in sys.argv
+    wave = "--wave" in sys.argv
+    limit = None
+    crd_allowlist: set[str] | None = None
+    args = sys.argv[1:]
+    i = 0
+    while i < len(args):
+        if args[i] == "--limit" and i + 1 < len(args):
+            limit = int(args[i + 1])
+            i += 2
+            continue
+        if args[i].startswith("--crds="):
+            crd_allowlist = {part.strip() for part in args[i].split("=", 1)[1].split(",") if part.strip()}
+            i += 1
+            continue
+        i += 1
     dsn = os.environ.get("DATABASE_URL")
     if not dsn:
         print("DATABASE_URL missing")
@@ -115,6 +130,7 @@ def main() -> int:
         WHERE f.is_synthetic = false
     """
     eligible_ids: list[str] = []
+    eligible_meta: list[dict[str, str]] = []
     reasons: dict[str, int] = {}
     classes = {"reported_as_registered": 0, "pending_120_day": 0, "exempt_reporting_adviser": 0}
     geo = 0
@@ -189,6 +205,9 @@ def main() -> int:
             if not codes:
                 trust += 1
                 eligible_ids.append(str(row["id"]))
+                eligible_meta.append(
+                    {"id": str(row["id"]), "crd": str(row["crd"] or ""), "slug": row["slug"] or ""}
+                )
                 if classification:
                     classes[classification] += 1
                 if (row["region"] or "") in US_STATES:
@@ -200,20 +219,38 @@ def main() -> int:
                     reasons[code] = reasons.get(code, 0) + 1
             if row["indexable"]:
                 currently_indexable += 1
+        wave_ids = list(eligible_ids)
+        if crd_allowlist is not None:
+            wave_ids = [item["id"] for item in eligible_meta if item["crd"] in crd_allowlist]
+        if limit is not None:
+            ordered = sorted(eligible_meta, key=lambda item: item["slug"])
+            if crd_allowlist is not None:
+                ordered = [item for item in ordered if item["crd"] in crd_allowlist]
+            wave_ids = [item["id"] for item in ordered[:limit]]
         if apply:
-            conn.execute(
-                """
-                UPDATE search_documents sd
-                SET indexable = (sd.entity_id = ANY(%s::uuid[])),
-                    updated_at = now()
-                WHERE sd.entity_kind = 'firm'
-                  AND EXISTS (
-                    SELECT 1 FROM firms f
-                    WHERE f.id = sd.entity_id AND f.is_synthetic = false
-                  )
-                """,
-                (eligible_ids,),
-            )
+            if wave or crd_allowlist is not None or limit is not None:
+                conn.execute(
+                    """
+                    UPDATE search_documents
+                    SET indexable = true, updated_at = now()
+                    WHERE entity_kind = 'firm' AND entity_id = ANY(%s::uuid[])
+                    """,
+                    (wave_ids,),
+                )
+            else:
+                conn.execute(
+                    """
+                    UPDATE search_documents sd
+                    SET indexable = (sd.entity_id = ANY(%s::uuid[])),
+                        updated_at = now()
+                    WHERE sd.entity_kind = 'firm'
+                      AND EXISTS (
+                        SELECT 1 FROM firms f
+                        WHERE f.id = sd.entity_id AND f.is_synthetic = false
+                      )
+                    """,
+                    (eligible_ids,),
+                )
             conn.commit()
 
     report = {
@@ -224,6 +261,8 @@ def main() -> int:
         "geo_discovery_eligible": geo,
         "currently_indexable": currently_indexable,
         "applied": apply,
+        "wave": wave,
+        "wave_size": len(wave_ids) if apply or wave or limit or crd_allowlist else 0,
         "classes": classes,
         "reasons": dict(sorted(reasons.items())),
     }

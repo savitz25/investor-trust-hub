@@ -32,10 +32,12 @@ export function formatRaum(value: string | number | null | undefined): Formatted
     maximumFractionDigits: 2,
   });
   let display: string;
-  if (amount >= 1_000_000_000) {
-    display = `$${(amount / 1_000_000_000).toFixed(amount >= 10_000_000_000 ? 1 : 1)} billion`;
+  if (amount >= 1_000_000_000_000) {
+    display = `$${(amount / 1_000_000_000_000).toFixed(1)} trillion`;
+  } else if (amount >= 1_000_000_000) {
+    display = `$${(amount / 1_000_000_000).toFixed(1)} billion`;
   } else if (amount >= 1_000_000) {
-    display = `$${(amount / 1_000_000).toFixed(amount >= 100_000_000 ? 1 : 1)} million`;
+    display = `$${(amount / 1_000_000).toFixed(1)} million`;
   } else if (amount >= 1_000) {
     display = `$${Math.round(amount / 1000)} thousand`;
   } else {

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { INDEXABLE_PATHS } from '@ith/config';
+import { INDEXABLE_PATHS, isSiteIndexingEnabled } from '@ith/config';
 import { countIndexableFirms, listIndexableFirmSlugs } from '@/lib/firms/repository';
 import { hasDatabaseUrl } from '@/lib/db';
 import { getSiteEnv } from '@/lib/site';
@@ -15,7 +15,7 @@ function staticEntries(base: string): MetadataRoute.Sitemap {
 }
 
 export async function generateSitemaps() {
-  if (!hasDatabaseUrl()) {
+  if (!isSiteIndexingEnabled() || !hasDatabaseUrl()) {
     return [{ id: 0 }];
   }
   try {
@@ -28,6 +28,9 @@ export async function generateSitemaps() {
 }
 
 export default async function sitemap({ id }: { id: number }): Promise<MetadataRoute.Sitemap> {
+  if (!isSiteIndexingEnabled()) {
+    return [];
+  }
   const { NEXT_PUBLIC_SITE_URL } = getSiteEnv();
   const entries = id === 0 ? staticEntries(NEXT_PUBLIC_SITE_URL) : [];
   if (!hasDatabaseUrl()) {

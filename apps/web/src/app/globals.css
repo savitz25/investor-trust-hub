@@ -32,6 +32,13 @@
 
 html {
   color-scheme: light;
+  overflow-x: clip;
+}
+
+#main,
+article,
+section {
+  min-width: 0;
 }
 
 body {

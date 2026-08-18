@@ -37,7 +37,7 @@ Search is a `search_documents` table plus trigram / GIN indexes. Task 003 reads 
 - Client components only for header menu, directory filter, and compare toggle
 - Security headers from `packages/config`
 - Synthetic and reserved routes are `noindex`
-- Official `/firm/sec-crd-*` pages are dynamically rendered and noindex until `search_documents.indexable = true`
+- Official `/firm/sec-crd-*` pages are dynamically rendered and noindex unless `SITE_INDEXING_ENABLED=true` **and** `search_documents.indexable = true`
 
 ## Data path
 

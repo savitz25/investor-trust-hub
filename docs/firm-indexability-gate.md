@@ -43,6 +43,8 @@ Firms with blank state, `ZZ` country, or non-U.S. regions are not geo-discovery 
 
 ## Activation
 
+Site indexing is a separate switch (`SITE_INDEXING_ENABLED`, default false). A firm URL may enter search engines only when **both** that switch and `search_documents.indexable` are true.
+
 `search_documents.indexable` stays `false` until the operator runs:
 
 ```text

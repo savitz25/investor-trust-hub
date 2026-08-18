@@ -79,6 +79,9 @@ describe('RAUM formatting', () => {
     expect(millions?.exact).toContain('742,600,000.00');
     const billions = formatRaum('3200000000');
     expect(billions?.display).toContain('billion');
+    const trillions = formatRaum('11092665107962');
+    expect(trillions?.display).toContain('trillion');
+    expect(trillions?.display).not.toContain('11092.7 billion');
   });
 
   it('returns null for missing RAUM', () => {

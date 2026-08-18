@@ -1,6 +1,16 @@
 import type { Metadata } from 'next';
-import { shouldNoIndex } from '@ith/config';
+import { isSiteIndexingEnabled, shouldNoIndex } from '@ith/config';
 import { SITE_DESCRIPTION, SITE_NAME, getSiteEnv } from './site';
+
+export function pageMayBeIndexed(path: string, firmOrPageIndexable?: boolean): boolean {
+  if (!isSiteIndexingEnabled()) {
+    return false;
+  }
+  if (firmOrPageIndexable === undefined) {
+    return !shouldNoIndex(path);
+  }
+  return firmOrPageIndexable;
+}
 
 export function pageMetadata({
   title,
@@ -15,7 +25,7 @@ export function pageMetadata({
 }): Metadata {
   const { NEXT_PUBLIC_SITE_URL } = getSiteEnv();
   const url = new URL(path, NEXT_PUBLIC_SITE_URL).toString();
-  const noindex = indexable === undefined ? shouldNoIndex(path) : !indexable;
+  const noindex = !pageMayBeIndexed(path, indexable);
 
   return {
     title,

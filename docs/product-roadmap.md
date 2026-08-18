@@ -10,7 +10,7 @@ Official SEC IARD RIA + ERA monthly firm rosters. CRD identity, provenance, quar
 
 ## Task 003 — Firm Trust Reports (current)
 
-CRD-stable `/firm/sec-crd-{CRD}` reports, `/firms` national search, deterministic indexability and geo-discovery gates. Official pages stay noindex until the gate is applied.
+CRD-stable `/firm/sec-crd-{CRD}` reports, `/firms` national search, deterministic indexability and geo-discovery gates. Official pages stay noindex until the site launch switch and the firm content gate are both enabled. `.vercel.app` remains staging.
 
 ## Recommended Task 004
 

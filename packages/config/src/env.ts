@@ -22,6 +22,7 @@ export const serverEnvSchema = publicEnvSchema.extend({
   INGESTION_DATABASE_URL: optionalUrl,
   INGESTION_ARCHIVE_DIR: z.string().optional(),
   INGESTION_STAGING_DIR: z.string().optional(),
+  SITE_INDEXING_ENABLED: z.string().optional(),
   LOG_LEVEL: z.enum(['debug', 'info', 'warn', 'error']).default('info'),
 });
 
@@ -53,4 +54,11 @@ export const SERVER_ONLY_ENV_KEYS = [
   'SUPABASE_SERVICE_ROLE_KEY',
   'SUPABASE_URL',
   'INGESTION_DATABASE_URL',
+  'SITE_INDEXING_ENABLED',
 ] as const;
+
+/** Gate A: the deployment/domain may be indexed only when explicitly opted in. Missing = false. */
+export function isSiteIndexingEnabled(input: NodeJS.ProcessEnv = process.env): boolean {
+  const raw = (input.SITE_INDEXING_ENABLED ?? '').trim().toLowerCase();
+  return raw === 'true' || raw === '1' || raw === 'yes';
+}

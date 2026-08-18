@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { shouldNoIndex } from '@ith/config';
+import { isSiteIndexingEnabled, shouldNoIndex } from '@ith/config';
 import { evaluateFirmIndexability, firmSlugForCrd, parseFirmCrdFromSlug } from '@ith/domain';
+import { pageMayBeIndexed } from '../src/lib/seo';
 
 describe('firm SEO contracts', () => {
   it('keeps synthetic firm routes noindex by prefix', () => {
@@ -35,5 +36,16 @@ describe('firm SEO contracts', () => {
     expect(result.trustReportEligible).toBe(true);
     expect(JSON.stringify(result).toLowerCase()).not.toContain('trusted');
     expect(JSON.stringify(result).toLowerCase()).not.toContain('recommended');
+  });
+
+  it('requires both the site launch gate and the firm content gate', () => {
+    expect(isSiteIndexingEnabled({ SITE_INDEXING_ENABLED: undefined })).toBe(false);
+    const previous = process.env.SITE_INDEXING_ENABLED;
+    delete process.env.SITE_INDEXING_ENABLED;
+    expect(pageMayBeIndexed('/firm/sec-crd-105958', true)).toBe(false);
+    process.env.SITE_INDEXING_ENABLED = 'true';
+    expect(pageMayBeIndexed('/firm/sec-crd-105958', true)).toBe(true);
+    expect(pageMayBeIndexed('/firm/sec-crd-105958', false)).toBe(false);
+    process.env.SITE_INDEXING_ENABLED = previous;
   });
 });

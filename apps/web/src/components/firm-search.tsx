@@ -91,7 +91,7 @@ export function FirmSearchResults({
               <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-800">
                 {hit.classification.headline}
               </p>
-              <h2 className="mt-2 break-words font-serif text-2xl text-[var(--ith-navy)]">
+              <h2 className="mt-2 min-w-0 break-words font-serif text-2xl text-[var(--ith-navy)] [overflow-wrap:anywhere]">
                 <Link href={`/firm/${hit.slug}`} className="underline-offset-2 hover:underline">
                   {hit.displayName}
                 </Link>

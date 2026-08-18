@@ -78,6 +78,8 @@ Open [http://localhost:3000](http://localhost:3000).
 | `npm run typecheck` | TypeScript across workspaces |
 | `npm run lint` | ESLint for the web app |
 | `npm test` | Vitest (domain, config, web) |
+| `npm run test:e2e` | Playwright shell smoke (local) |
+| `PLAYWRIGHT_BASE_URL=… npm run test:e2e:live` | Playwright against a deployed URL |
 | `npm run ci` | typecheck + lint + test + build |
 
 ### SEC ADV ingest
@@ -162,6 +164,8 @@ These pages are `noindex`. They are not official evidence.
 - [`docs/task-002-sec-adviser-ingestion.md`](docs/task-002-sec-adviser-ingestion.md)
 - [`docs/task-002-1-production-publish.md`](docs/task-002-1-production-publish.md)
 - [`docs/task-003-firm-trust-reports.md`](docs/task-003-firm-trust-reports.md)
+- [`docs/task-003-1-vercel-browser-qa.md`](docs/task-003-1-vercel-browser-qa.md)
+- [`docs/seo-launch-gates.md`](docs/seo-launch-gates.md)
 - [`docs/firm-indexability-gate.md`](docs/firm-indexability-gate.md)
 - [`docs/firm-search.md`](docs/firm-search.md)
 

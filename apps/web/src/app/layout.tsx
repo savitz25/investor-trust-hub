@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from 'next';
 import { Source_Sans_3, Source_Serif_4 } from 'next/font/google';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
+import { isSiteIndexingEnabled } from '@ith/config';
 import { SITE_DESCRIPTION, SITE_NAME, getSiteEnv } from '@/lib/site';
 import './globals.css';
 
@@ -28,7 +29,9 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
-  robots: { index: true, follow: true },
+  robots: isSiteIndexingEnabled()
+    ? { index: true, follow: true }
+    : { index: false, follow: true },
   icons: {
     icon: '/brand/mark.svg',
   },
