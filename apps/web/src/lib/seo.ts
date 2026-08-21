@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { isHostLaunchIndexable, shouldNoIndex } from '@ith/config';
-import { SITE_DESCRIPTION, SITE_NAME, getSiteEnv } from './site';
+import { SITE_DESCRIPTION, SITE_NAME } from './site';
+import { SHARE_HUB, resolveShareOrigin, shareOgImageAbsoluteUrl } from './share-hub';
 
 /**
  * Firm/page HTML may be indexed only when:
@@ -34,8 +35,7 @@ export function pageMetadata({
   indexable?: boolean;
   host?: string | null;
 }): Metadata {
-  const { NEXT_PUBLIC_SITE_URL } = getSiteEnv();
-  const url = new URL(path, NEXT_PUBLIC_SITE_URL).toString();
+  const url = new URL(path, resolveShareOrigin()).toString();
   const noindex = !pageMayBeIndexed(path, indexable, host);
 
   const documentTitle = title.includes(SITE_NAME) ? title : `${title} · ${SITE_NAME}`;
@@ -55,21 +55,24 @@ export function pageMetadata({
       type: 'website',
       images: [
         {
-          url: '/opengraph-image',
-          width: 1200,
-          height: 630,
-          alt: 'Investor Trust Hub — Research smarter. Invest better.',
+          url: shareOgImageAbsoluteUrl(),
+          width: SHARE_HUB.ogWidth,
+          height: SHARE_HUB.ogHeight,
+          alt: SHARE_HUB.ogAlt,
         },
       ],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: SHARE_HUB.twitterCard,
+      title: documentTitle,
+      description,
+      images: [{ url: shareOgImageAbsoluteUrl(), alt: SHARE_HUB.ogAlt }],
     },
   };
 }
 
 export function breadcrumbJsonLd(items: Array<{ name: string; path: string }>) {
-  const { NEXT_PUBLIC_SITE_URL } = getSiteEnv();
+  const origin = resolveShareOrigin();
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -77,7 +80,7 @@ export function breadcrumbJsonLd(items: Array<{ name: string; path: string }>) {
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: new URL(item.path, NEXT_PUBLIC_SITE_URL).toString(),
+      item: new URL(item.path, origin).toString(),
     })),
   };
 }

@@ -4,7 +4,8 @@ import { Source_Sans_3, Source_Serif_4 } from 'next/font/google';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 import { isHostLaunchIndexable } from '@ith/config';
-import { SITE_DESCRIPTION, SITE_NAME, getSiteEnv } from '@/lib/site';
+import { SITE_DESCRIPTION, SITE_NAME } from '@/lib/site';
+import { SHARE_HUB, resolveShareOrigin, shareOgImageAbsoluteUrl } from '@/lib/share-hub';
 import './globals.css';
 
 const sans = Source_Sans_3({
@@ -19,10 +20,9 @@ const serif = Source_Serif_4({
   display: 'swap',
 });
 
-const { NEXT_PUBLIC_SITE_URL } = getSiteEnv();
-
 export const metadata: Metadata = {
-  metadataBase: new URL(NEXT_PUBLIC_SITE_URL),
+  metadataBase: new URL(resolveShareOrigin()),
+  alternates: { canonical: `${resolveShareOrigin()}/` },
   title: {
     default: `${SITE_NAME} — Research before you invest.`,
     template: `%s · ${SITE_NAME}`,
@@ -42,17 +42,23 @@ export const metadata: Metadata = {
   openGraph: {
     siteName: SITE_NAME,
     type: 'website',
+    url: resolveShareOrigin(),
+    title: `${SITE_NAME} — Research before you invest.`,
+    description: SITE_DESCRIPTION,
     images: [
       {
-        url: '/opengraph-image',
-        width: 1200,
-        height: 630,
-        alt: 'Investor Trust Hub — Research smarter. Invest better.',
+        url: shareOgImageAbsoluteUrl(),
+        width: SHARE_HUB.ogWidth,
+        height: SHARE_HUB.ogHeight,
+        alt: SHARE_HUB.ogAlt,
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: SHARE_HUB.twitterCard,
+    title: `${SITE_NAME} — Research before you invest.`,
+    description: SITE_DESCRIPTION,
+    images: [{ url: shareOgImageAbsoluteUrl(), alt: SHARE_HUB.ogAlt }],
   },
 };
 
@@ -82,9 +88,9 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'Organization',
-              '@id': `${NEXT_PUBLIC_SITE_URL}/#organization`,
+              '@id': `${resolveShareOrigin()}/#organization`,
               name: SITE_NAME,
-              url: NEXT_PUBLIC_SITE_URL,
+              url: resolveShareOrigin(),
               parentOrganization: {
                 '@type': 'Organization',
                 '@id': 'https://www.asktrusthub.com/#organization',
