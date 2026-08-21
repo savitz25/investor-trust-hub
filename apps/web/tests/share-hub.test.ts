@@ -6,7 +6,7 @@ import { pageMetadata } from '../src/lib/seo';
 import { isForbiddenShareHost, resolveShareOrigin, SHARE_HUB } from '../src/lib/share-hub';
 
 const png = readFileSync(
-  join(dirname(fileURLToPath(import.meta.url)), '../src/app/opengraph-image.png'),
+  join(dirname(fileURLToPath(import.meta.url)), '../public/opengraph-image.png'),
 );
 
 function pngSize(buf: Buffer) {
@@ -34,7 +34,7 @@ describe('SHARE-002 InvestorTrustHub social baseline', () => {
     expect(blob).not.toContain('localhost');
     expect(blob).not.toContain('127.0.0.1');
     expect(blob).toContain('https://www.investortrusthub.com/research');
-    expect(blob).toContain('https://www.investortrusthub.com/opengraph-image');
+    expect(blob).toContain('https://www.investortrusthub.com/opengraph-image.png');
     expect(meta.twitter?.card).toBe('summary_large_image');
     expect(meta.openGraph?.images).toBeTruthy();
   });
