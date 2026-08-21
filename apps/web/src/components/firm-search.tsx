@@ -22,7 +22,7 @@ export function FirmSearchForm({
             name="q"
             defaultValue={q}
             placeholder="Example: Vanguard, 105958, or 801-11953"
-            className="mt-2 w-full rounded-xl border border-[var(--ith-border)] bg-white px-4 py-3 text-[var(--ith-ink)]"
+            className="th-input mt-2"
           />
         </div>
         <div>
@@ -33,7 +33,7 @@ export function FirmSearchForm({
             id="firm-state"
             name="state"
             defaultValue={state}
-            className="mt-2 w-full rounded-xl border border-[var(--ith-border)] bg-white px-3 py-3"
+            className="th-select mt-2"
           >
             <option value="">Any sourced state</option>
             {US_STATE_CODES.map((code) => (
@@ -47,7 +47,7 @@ export function FirmSearchForm({
         <div className="flex items-end">
           <button
             type="submit"
-            className="min-h-12 w-full rounded-xl bg-[var(--ith-navy)] px-5 py-3 text-sm font-semibold text-white sm:w-auto"
+            className="th-btn-primary w-full sm:w-auto"
           >
             Search
           </button>
@@ -87,7 +87,7 @@ export function FirmSearchResults({
       <ul className="mt-4 space-y-4">
         {hits.map((hit) => (
           <li key={hit.slug}>
-            <article className="rounded-2xl border border-[var(--ith-border)] bg-white p-5 shadow-[var(--shadow-soft)]">
+            <article className="th-card">
               <p className="text-xs font-semibold uppercase tracking-[0.12em] text-teal-800">
                 {hit.classification.headline}
               </p>

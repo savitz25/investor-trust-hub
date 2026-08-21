@@ -19,7 +19,7 @@ export default function HomePage() {
       <HomeHero />
       <HomePaths />
       <HomePrinciples />
-      <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+      <section className="th-shell py-14">
         <StatusLegend />
       </section>
     </>

@@ -5,7 +5,7 @@ import { RESEARCH_QUESTIONS } from '@ith/domain';
 export function HomePrinciples() {
   return (
     <section className="border-b border-[var(--ith-border)]">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-2">
+      <div className="th-shell grid gap-10 py-14 lg:grid-cols-2">
         <div>
           <h2 className="font-serif text-3xl text-[var(--ith-navy)]">
             Questions this platform is built to help you ask
@@ -24,7 +24,7 @@ export function HomePrinciples() {
             </Link>
           </p>
         </div>
-        <div className="rounded-2xl border border-[var(--ith-border)] bg-white p-6">
+        <div className="th-card">
           <h2 className="font-serif text-2xl text-[var(--ith-navy)]">What this is not</h2>
           <ul className="mt-4 space-y-2 text-sm leading-relaxed">
             {WHAT_WE_ARE_NOT.map((item) => (

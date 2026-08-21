@@ -7,19 +7,16 @@ import {
   PRIMARY_ROUTES,
 } from '@ith/config';
 import { INDEPENDENCE_LINE, NOT_ADVICE_LINE } from '@ith/domain';
-import { BrandMark, BrandWordmark } from '@ith/ui';
+import { BrandLogo } from '@/components/brand-logo';
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
     <footer className="border-t border-white/10 bg-[var(--ith-navy)] text-white">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 sm:py-14 lg:grid-cols-12">
+      <div className="th-shell grid gap-10 py-12 sm:py-14 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <Link href="/" className="inline-flex items-center gap-2.5 text-white no-underline">
-            <BrandMark className="h-9 w-9 shrink-0" />
-            <BrandWordmark tone="onDark" className="text-sm" />
-          </Link>
+          <BrandLogo inverted />
           <p className="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-teal-200">
             Investing &amp; retirement research
           </p>
@@ -90,7 +87,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-white/10">
-        <div className="mx-auto max-w-6xl px-4 py-5 text-xs leading-relaxed text-slate-300 sm:px-6">
+        <div className="th-shell py-5 text-xs leading-relaxed text-slate-300">
           <p>
             © {year} InvestorTrustHub. {NOT_ADVICE_LINE}
           </p>

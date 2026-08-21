@@ -28,7 +28,7 @@ export function ProfessionalReport({ person }: { person: Person }) {
   const disclosures = disclosuresForPerson(person.id);
 
   return (
-    <article className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6">
+    <article className="th-shell py-10">
       <Breadcrumb
         items={[
           { href: '/', label: 'Home' },

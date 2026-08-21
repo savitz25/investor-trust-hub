@@ -1,23 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Investor Trust Hub mark">
-
-  <defs>
-    <linearGradient id="ithGreen" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#12D63A"/>
-      <stop offset="100%" stop-color="#006C14"/>
-    </linearGradient>
-  </defs>
-  
-  <g fill="none" stroke="url(#ithGreen)" stroke-width="40.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M 147.60 77.09 H 83.21 A 44.83 44.83 0 0 0 38.38 121.92 V 390.08 A 44.83 44.83 0 0 0 83.21 434.91 H 147.60"/>
-    <path d="M 366.03 77.09 H 428.39 A 44.83 44.83 0 0 1 473.22 121.92 V 390.08 A 44.83 44.83 0 0 1 428.39 434.91 H 366.03"/>
-  </g>
-  <g stroke="#001F52" stroke-width="15.49" stroke-linecap="round">
-    <line x1="255.18" y1="143.93" x2="255.18" y2="371.33"/>
-    <line x1="129.66" y1="254.78" x2="379.08" y2="254.78"/>
-  </g>
-  <circle cx="255.18" cy="255.59" r="37.49" fill="#001F52"/>
-  <circle cx="255.18" cy="143.93" r="38.31" fill="#FB7307"/>
-  <circle cx="129.66" cy="254.78" r="38.31" fill="#0083FC"/>
-  <circle cx="379.08" cy="254.78" r="38.31" fill="#01A199"/>
-  <circle cx="255.18" cy="371.33" r="38.31" fill="#641FFB"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36" role="img" aria-label="Investor Trust Hub mark">
+  <path d="M9 5H5v26h4" fill="none" stroke="#0F766E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M27 5h4v26h-4" fill="none" stroke="#0F766E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="18" y1="11.2" x2="18" y2="18" stroke="#0A2540" stroke-width="1.2"/>
+  <line x1="12.2" y1="18" x2="18" y2="18" stroke="#0A2540" stroke-width="1.2"/>
+  <line x1="23.8" y1="18" x2="18" y2="18" stroke="#0A2540" stroke-width="1.2"/>
+  <line x1="18" y1="24.8" x2="18" y2="18" stroke="#0A2540" stroke-width="1.2"/>
+  <circle cx="18" cy="18" r="2.1" fill="#0A2540"/>
+  <circle cx="18" cy="10.2" r="2.5" fill="#F86008"/>
+  <circle cx="11.2" cy="18" r="2.5" fill="#3B82F6"/>
+  <circle cx="24.8" cy="18" r="2.5" fill="#14B8A6"/>
+  <circle cx="18" cy="25.8" r="2.5" fill="#8B5CF6"/>
 </svg>

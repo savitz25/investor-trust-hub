@@ -42,7 +42,7 @@ export function DirectorySearch({
           value={q}
           onChange={(event) => setQ(event.target.value)}
           placeholder={placeholder}
-          className="mt-2 w-full rounded-xl border border-[var(--ith-border)] bg-white px-4 py-3 text-[var(--ith-ink)]"
+          className="th-input mt-2"
         />
         <p className="mt-2 text-xs text-slate-700">
           Filters synthetic fixtures only. Production search across official records is not live.
@@ -51,7 +51,7 @@ export function DirectorySearch({
       <ul className="mt-8 space-y-4">
         {filtered.map((item) => (
           <li key={item.slug}>
-            <article className="rounded-2xl border border-[var(--ith-border)] bg-white p-5 shadow-[var(--shadow-soft)]">
+            <article className="th-card">
               <p className="text-xs font-semibold uppercase tracking-[0.12em] text-amber-800">
                 Synthetic development data — not a real person or firm.
               </p>
