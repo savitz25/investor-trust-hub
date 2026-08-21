@@ -3,12 +3,16 @@ import { MethodologyNote } from '@ith/ui';
 import { PageShell } from '@/components/page-shell';
 import { pageMetadata } from '@/lib/seo';
 import { readRequestHost } from '@/lib/request-host';
+import { shareRouteOgImage } from '@/lib/share-hub';
 
 export async function generateMetadata() {
+  const og = shareRouteOgImage('/research', 'Research questions — InvestorTrustHub');
   return pageMetadata({
     title: 'Research questions',
     path: '/research',
     host: await readRequestHost(),
+    imageUrl: og.url,
+    imageAlt: og.alt,
   });
 }
 

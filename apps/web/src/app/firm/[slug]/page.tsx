@@ -6,6 +6,7 @@ import { DatabaseUnavailableError, hasDatabaseUrl } from '@/lib/db';
 import { getCachedOfficialFirmBySlug } from '@/lib/firms/cached';
 import { getOfficialFirmIndexable } from '@/lib/firms/repository';
 import { pageMetadata } from '@/lib/seo';
+import { shareRouteOgImage } from '@/lib/share-hub';
 
 export const revalidate = 300;
 
@@ -20,11 +21,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       if (!report) {
         return pageMetadata({ title: 'Firm not found', path: `/firm/${slug}`, indexable: false });
       }
+      const og = shareRouteOgImage(
+        `/firm/${report.slug}`,
+        `${report.displayName} — firm research on InvestorTrustHub`,
+      );
       return pageMetadata({
         title: `${report.displayName} — SEC/IARD Firm Research`,
         description: `Research ${report.displayName}, CRD ${report.crd}, using SEC/IARD regulatory data, firm identifiers, registration information, source dates, and public evidence.`,
         path: `/firm/${report.slug}`,
         indexable,
+        imageUrl: og.url,
+        imageAlt: og.alt,
       });
     } catch {
       return pageMetadata({ title: 'Firm research unavailable', path: `/firm/${slug}`, indexable: false });
@@ -34,11 +41,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!firm) {
     return pageMetadata({ title: 'Firm not found', path: `/firm/${slug}`, indexable: false });
   }
+  const og = shareRouteOgImage(
+    `/firm/${slug}`,
+    `${firm.displayName} — synthetic firm research on InvestorTrustHub`,
+  );
   return pageMetadata({
     title: `${firm.displayName} (synthetic)`,
     description: 'Synthetic development Trust Report — not a real firm.',
     path: `/firm/${slug}`,
     indexable: false,
+    imageUrl: og.url,
+    imageAlt: og.alt,
   });
 }
 

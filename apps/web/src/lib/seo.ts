@@ -28,17 +28,23 @@ export function pageMetadata({
   path,
   indexable,
   host,
+  imageUrl,
+  imageAlt,
 }: {
   title: string;
   description?: string;
   path: string;
   indexable?: boolean;
   host?: string | null;
+  imageUrl?: string;
+  imageAlt?: string;
 }): Metadata {
   const url = new URL(path, resolveShareOrigin()).toString();
   const noindex = !pageMayBeIndexed(path, indexable, host);
 
   const documentTitle = title.includes(SITE_NAME) ? title : `${title} · ${SITE_NAME}`;
+  const ogImage = imageUrl || shareOgImageAbsoluteUrl();
+  const ogAlt = imageAlt || SHARE_HUB.ogAlt;
 
   return {
     title: { absolute: documentTitle },
@@ -55,10 +61,10 @@ export function pageMetadata({
       type: 'website',
       images: [
         {
-          url: shareOgImageAbsoluteUrl(),
+          url: ogImage,
           width: SHARE_HUB.ogWidth,
           height: SHARE_HUB.ogHeight,
-          alt: SHARE_HUB.ogAlt,
+          alt: ogAlt,
         },
       ],
     },
@@ -66,7 +72,7 @@ export function pageMetadata({
       card: SHARE_HUB.twitterCard,
       title: documentTitle,
       description,
-      images: [{ url: shareOgImageAbsoluteUrl(), alt: SHARE_HUB.ogAlt }],
+      images: [{ url: ogImage, alt: ogAlt }],
     },
   };
 }

@@ -29,11 +29,11 @@ describe('SHARE-002 InvestorTrustHub social baseline', () => {
   });
 
   it('emits absolute Investor Open Graph and Twitter image URLs', () => {
-    const meta = pageMetadata({ title: 'Research questions', path: '/research' });
+    const meta = pageMetadata({ title: 'Methodology', path: '/methodology' });
     const blob = JSON.stringify(meta);
     expect(blob).not.toContain('localhost');
     expect(blob).not.toContain('127.0.0.1');
-    expect(blob).toContain('https://www.investortrusthub.com/research');
+    expect(blob).toContain('https://www.investortrusthub.com/methodology');
     expect(blob).toContain('https://www.investortrusthub.com/opengraph-image.png');
     expect(meta.twitter?.card).toBe('summary_large_image');
     expect(meta.openGraph?.images).toBeTruthy();
