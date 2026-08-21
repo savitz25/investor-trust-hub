@@ -1,0 +1,67 @@
+{
+  "origin": "https://www.investortrusthub.com",
+  "report": {
+    "desktop1440": {
+      "viewport": {
+        "w": 1440,
+        "h": 900
+      },
+      "overflowX": false,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 69
+      },
+      "logo": {
+        "x": 168,
+        "y": 14,
+        "w": 115,
+        "h": 40
+      },
+      "mark": {
+        "x": 168,
+        "y": 14,
+        "w": 40,
+        "h": 40
+      },
+      "switchHub": {
+        "x": 1177,
+        "y": 12,
+        "w": 95,
+        "h": 44
+      }
+    },
+    "mobile390": {
+      "viewport": {
+        "w": 390,
+        "h": 844
+      },
+      "overflowX": false,
+      "header": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 69
+      },
+      "logo": {
+        "x": 16,
+        "y": 14,
+        "w": 110,
+        "h": 40
+      },
+      "mark": {
+        "x": 16,
+        "y": 14,
+        "w": 40,
+        "h": 40
+      },
+      "switchHub": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      }
+    }
+  }
+}

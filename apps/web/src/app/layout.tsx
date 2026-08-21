@@ -1,17 +1,20 @@
 import type { ReactNode } from 'react';
 import type { Metadata, Viewport } from 'next';
-import { Source_Sans_3, Source_Serif_4 } from 'next/font/google';
+import { Inter, Source_Serif_4 } from 'next/font/google';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 import { isHostLaunchIndexable } from '@ith/config';
+import { TH_CHASSIS_VERSION } from '@/lib/design/trusthub-visual-standard';
+import { ASK_NETWORK_CONTRACT_VERSION } from '@/lib/network/registry';
 import { SITE_DESCRIPTION, SITE_NAME } from '@/lib/site';
 import { SHARE_HUB, resolveShareOrigin, shareOgImageAbsoluteUrl } from '@/lib/share-hub';
 import './globals.css';
 
-const sans = Source_Sans_3({
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-sans',
+  variable: '--font-inter',
   display: 'swap',
+  adjustFontFallback: true,
 });
 
 const serif = Source_Serif_4({
@@ -63,7 +66,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#001F52',
+  themeColor: '#0F766E',
   width: 'device-width',
   initialScale: 1,
 };
@@ -72,16 +75,11 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   return (
     <html lang="en">
       <body
-        className={`${sans.variable} ${serif.variable} font-sans antialiased text-[var(--ith-ink)]`}
+        className={`${inter.variable} ${serif.variable} antialiased text-[var(--ith-ink)]`}
         data-hub="investor"
-        data-network-standard="2026.08.18-network-v2"
+        data-network-standard={ASK_NETWORK_CONTRACT_VERSION}
+        data-th-chassis={TH_CHASSIS_VERSION}
       >
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:px-3 focus:py-2"
-        >
-          Skip to content
-        </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

@@ -58,7 +58,7 @@ export function FirmTrustReport({ report }: { report: FirmTrustReportModel }) {
   };
 
   return (
-    <article className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
+    <article className="th-shell py-8 sm:py-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Breadcrumb items={crumbs} />
 
