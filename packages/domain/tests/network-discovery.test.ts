@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest';
 import {
   buildCanonicalFirmProfileUrl,
   buildInvestorNetworkId,
-  contentFingerprint,
   evaluateDiscoveryEligibility,
   investmentProductQueryMatchesFirm,
   mapEntityType,
@@ -15,6 +14,7 @@ import {
   UNSUPPORTED_INVESTMENT_PRODUCT_QUERIES,
   validateCanonicalFirmUrl,
 } from '../src/network-discovery';
+import { contentFingerprint } from '../src/network-discovery-hash';
 
 describe('ASK-SEARCH-INVESTOR-001 network discovery', () => {
   it('builds CRD network ids', () => {
