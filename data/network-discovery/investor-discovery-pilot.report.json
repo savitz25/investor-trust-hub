@@ -1,0 +1,132 @@
+{
+  "banner": "PILOT / NOT YET CONSUMED BY ASK PRODUCTION",
+  "feed_path": "data/network-discovery/investor-discovery-pilot.v1.json",
+  "source_mode": "production_sitemap_pages",
+  "source_version": "wave1-sitemap+firm-pages#n=1000;origin=https://www.investortrusthub.com",
+  "counts": {
+    "considered": 1000,
+    "eligible": 771,
+    "ineligible": 229,
+    "ineligible_reasons": {
+      "missing_usable_us_state": 229
+    },
+    "pilot_selected": 200
+  },
+  "entity_type_breakdown": {
+    "ria": 199,
+    "era": 1
+  },
+  "geography": {
+    "physical_states": {
+      "NY": 24,
+      "TX": 18,
+      "MA": 7,
+      "UT": 5,
+      "CA": 30,
+      "OH": 9,
+      "MO": 6,
+      "RI": 2,
+      "AK": 1,
+      "PA": 8,
+      "CT": 4,
+      "TN": 3,
+      "NJ": 4,
+      "IA": 2,
+      "MI": 3,
+      "OR": 1,
+      "NE": 2,
+      "NC": 6,
+      "HI": 2,
+      "DC": 1,
+      "WI": 2,
+      "SC": 2,
+      "WY": 1,
+      "VT": 1,
+      "AR": 2,
+      "GA": 5,
+      "MT": 1,
+      "VA": 1,
+      "FL": 15,
+      "IL": 7,
+      "CO": 5,
+      "ID": 2,
+      "NH": 1,
+      "KY": 2,
+      "ND": 1,
+      "KS": 1,
+      "OK": 1,
+      "MD": 2,
+      "AL": 1,
+      "WA": 3,
+      "AZ": 2,
+      "MN": 3,
+      "IN": 1
+    },
+    "with_city": 200,
+    "with_zip": 200
+  },
+  "query_readiness": {
+    "pilot": {
+      "RIA Boca Raton": {
+        "exact_physical": 2
+      },
+      "registered investment advisers Florida": {
+        "physical_state_ria": 14
+      },
+      "investment advisory firms Miami FL": {
+        "physical_city": 1
+      },
+      "RIA Austin TX": {
+        "exact_physical": 1
+      },
+      "investment advisers New Jersey": {
+        "physical_state": 4
+      },
+      "ERA New York": {
+        "era_physical_ny": 0
+      }
+    },
+    "full_eligible": {
+      "RIA Boca Raton": {
+        "exact_physical": 4
+      },
+      "registered investment advisers Florida": {
+        "physical_state_ria": 38
+      },
+      "investment advisory firms Miami FL": {
+        "physical_city": 10
+      },
+      "RIA Austin TX": {
+        "exact_physical": 5
+      },
+      "investment advisers New Jersey": {
+        "physical_state": 15
+      },
+      "ERA New York": {
+        "era_physical_ny": 17
+      }
+    }
+  },
+  "fingerprint": "8f16793a6bbaeb630f5f643c00f0ca8f06539b0bb3cf73a26d6160908467f52a",
+  "stability": {
+    "membership_drift": 0,
+    "identity_drift": 0,
+    "content_fingerprint_drift": 0,
+    "fingerprint": "8f16793a6bbaeb630f5f643c00f0ca8f06539b0bb3cf73a26d6160908467f52a"
+  },
+  "timings": {
+    "load_ms": 372.236,
+    "eligibility_ms": 24096.503,
+    "normalize_ms": 24096.503,
+    "validation_ms": 0.238,
+    "export_ms": 2.523,
+    "total_ms": 24500.092
+  },
+  "external_calls": {
+    "google_places": 0,
+    "llm": 0,
+    "external_geocoding": 0,
+    "new_enrichment_apis": 0,
+    "note": "Read-only HTTPS GETs to www.investortrusthub.com sitemap + firm pages (own Hub published research)."
+  }
+}

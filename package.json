@@ -28,8 +28,11 @@
     "test:e2e": "playwright test e2e/shell.spec.ts",
     "test:e2e:live": "playwright test",
     "assert:visual": "node scripts/assert-visual-003.mjs",
+    "discovery:export-pilot": "node scripts/export-investor-discovery-pilot.mjs",
+    "assert:investor-discovery": "vitest run packages/domain/tests/network-discovery.test.ts",
     "ci": "npm run typecheck && npm run lint && npm run test && npm run assert:visual && npm run build"
   },
+
   "devDependencies": {
     "@playwright/test": "^1.55.0",
     "@types/node": "^20.19.9",
