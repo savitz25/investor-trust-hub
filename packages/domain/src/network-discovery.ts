@@ -3,7 +3,6 @@
  * Pure functions (no DB / network). Used by export script + vitest.
  */
 
-import { createHash } from 'node:crypto';
 import { isUsStateCode, type ConsumerFirmClass } from './firm-classification';
 import { firmSlugForCrd, isOfficialFirmSlug, parseFirmCrdFromSlug } from './firm-slug';
 import { isValidIdentifierValue, normalizeIdentifierValue } from './identifiers';
@@ -208,14 +207,6 @@ export function selectPilotCohort(
     a.network_entity_id.localeCompare(b.network_entity_id)
   );
   return sorted.slice(0, Math.min(target, sorted.length));
-}
-
-export function contentFingerprint(entities: InvestorDiscoveryEntity[]): string {
-  const normalized = entities.map((e) => {
-    const { updated_at: _u, ...rest } = e;
-    return rest;
-  });
-  return createHash('sha256').update(JSON.stringify(normalized)).digest('hex');
 }
 
 export function rejectDuplicateCrds(entities: InvestorDiscoveryEntity[]): {

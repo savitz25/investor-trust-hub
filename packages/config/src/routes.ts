@@ -47,10 +47,13 @@ export const NOINDEX_ROUTE_PREFIXES = [
   '/compare',
   '/my-investor-trust-hub',
   '/internal/',
+  '/from-ask',
 ] as const;
 
 export function shouldNoIndex(pathname: string): boolean {
   return NOINDEX_ROUTE_PREFIXES.some((prefix) =>
-    prefix.endsWith('/') ? pathname.startsWith(prefix) : pathname === prefix,
+    prefix.endsWith('/')
+      ? pathname.startsWith(prefix)
+      : pathname === prefix || pathname.startsWith(`${prefix}/`),
   );
 }

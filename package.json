@@ -30,6 +30,7 @@
     "assert:visual": "node scripts/assert-visual-003.mjs",
     "discovery:export-pilot": "node scripts/export-investor-discovery-pilot.mjs",
     "assert:investor-discovery": "vitest run packages/domain/tests/network-discovery.test.ts",
+    "assert:ask-handoff": "vitest run packages/domain/tests/ask-handoff.test.ts",
     "ci": "npm run typecheck && npm run lint && npm run test && npm run assert:visual && npm run build"
   },
 

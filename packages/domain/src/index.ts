@@ -17,3 +17,4 @@ export * from './firm-classification';
 export * from './firm-indexability';
 export * from './firm-search-query';
 export * from './network-discovery';
+export * from './ask-handoff';

@@ -92,7 +92,24 @@ export async function searchOfficialFirms(
   const q = parsed.q;
   const like = q ? `%${q.replace(/[%_]/g, '\\$&')}%` : '%';
   const prefix = q ? `${q.replace(/[%_]/g, '\\$&')}%` : '%';
-  const params: unknown[] = [q, like, prefix, parsed.exactCrd, parsed.exactSecFile, parsed.state, parsed.stateNone];
+  const citySlug = parsed.city?.trim().toLowerCase() || null;
+  const zip5 = parsed.zip?.replace(/\D/g, '').slice(0, 5) || null;
+  const entityType = parsed.entityType;
+  const indexableOnly = parsed.indexableOnly === true;
+  const fromAsk = parsed.fromAsk === true;
+  const params: unknown[] = [
+    q,
+    like,
+    prefix,
+    parsed.exactCrd,
+    parsed.exactSecFile,
+    parsed.state,
+    parsed.stateNone,
+    citySlug,
+    zip5,
+    entityType,
+    indexableOnly,
+  ];
   const where = `
     f.is_synthetic = false
     AND (
@@ -110,6 +127,24 @@ export async function searchOfficialFirms(
       OR ($7::boolean = true AND (b.region IS NULL OR btrim(b.region) = ''))
       OR ($6::text IS NOT NULL AND b.region = $6::text)
     )
+    AND (
+      $8::text IS NULL
+      OR regexp_replace(lower(btrim(coalesce(b.city, ''))), '[^a-z0-9]+', '-', 'g')
+         = $8::text
+    )
+    AND (
+      $9::text IS NULL
+      OR left(regexp_replace(coalesce(b.postal_code, ''), '\\D', '', 'g'), 5) = $9::text
+    )
+    AND (
+      $10::text IS NULL
+      OR ($10::text = 'ria' AND r.registration_type = 'registered_investment_adviser')
+      OR ($10::text = 'era' AND r.registration_type = 'exempt_reporting_adviser')
+    )
+    AND (
+      $11::boolean = false
+      OR sd.indexable = true
+    )
     AND length($3::text) >= 0
   `;
   const countSql = `
@@ -117,24 +152,31 @@ export async function searchOfficialFirms(
     FROM firms f
     LEFT JOIN firm_identifiers crd ON crd.firm_id = f.id AND crd.identifier_type = 'crd'
     LEFT JOIN firm_identifiers sec ON sec.firm_id = f.id AND sec.identifier_type = 'sec_file_number'
+    LEFT JOIN registrations r ON r.firm_id = f.id AND r.subject_kind = 'firm'
     LEFT JOIN branches b ON b.firm_id = f.id AND b.is_main_office
+    LEFT JOIN search_documents sd ON sd.entity_id = f.id AND sd.entity_kind = 'firm'
     WHERE ${where}
+  `;
+  // Ask path: name ASC only — never RAUM / size / premium / popularity.
+  const orderBy = fromAsk
+    ? `f.display_name ASC`
+    : `
+    CASE
+      WHEN $4::text IS NOT NULL AND crd.identifier_value = $4::text THEN 0
+      WHEN $5::text IS NOT NULL AND sec.identifier_value = $5::text THEN 1
+      WHEN $1::text <> '' AND lower(f.display_name) = lower($1::text) THEN 2
+      WHEN $1::text <> '' AND lower(f.legal_name) = lower($1::text) THEN 2
+      WHEN $1::text <> '' AND lower(f.display_name) LIKE lower($3::text) THEN 3
+      WHEN $1::text <> '' AND lower(f.legal_name) LIKE lower($3::text) THEN 3
+      ELSE 4
+    END,
+    CASE WHEN $1::text <> '' THEN similarity(f.display_name, $1::text) ELSE 0 END DESC,
+    f.display_name ASC
   `;
   const listSql = `
     ${FIRM_SELECT}
     WHERE ${where}
-    ORDER BY
-      CASE
-        WHEN $4::text IS NOT NULL AND crd.identifier_value = $4::text THEN 0
-        WHEN $5::text IS NOT NULL AND sec.identifier_value = $5::text THEN 1
-        WHEN $1::text <> '' AND lower(f.display_name) = lower($1::text) THEN 2
-        WHEN $1::text <> '' AND lower(f.legal_name) = lower($1::text) THEN 2
-        WHEN $1::text <> '' AND lower(f.display_name) LIKE lower($3::text) THEN 3
-        WHEN $1::text <> '' AND lower(f.legal_name) LIKE lower($3::text) THEN 3
-        ELSE 4
-      END,
-      CASE WHEN $1::text <> '' THEN similarity(f.display_name, $1::text) ELSE 0 END DESC,
-      f.display_name ASC
+    ORDER BY ${orderBy}
     LIMIT ${pageSize} OFFSET ${offset}
   `;
   const countResult = await query<{ n: number }>(countSql, params);

@@ -17,6 +17,7 @@ import {
   SourceCitation,
 } from '@ith/ui';
 import type { CanonicalIdentifier } from '@ith/domain';
+import Link from 'next/link';
 import { Breadcrumb } from './breadcrumb';
 import type { FirmTrustReportModel } from '@/lib/firms/types';
 import { formatDisplayDate, formatReleaseLabel } from '@/lib/dates';
@@ -35,7 +36,13 @@ function datasetLabel(report: FirmTrustReportModel): string {
     : 'Registered Investment Advisers (IARD firm roster)';
 }
 
-export function FirmTrustReport({ report }: { report: FirmTrustReportModel }) {
+export function FirmTrustReport({
+  report,
+  askBack,
+}: {
+  report: FirmTrustReportModel;
+  askBack?: { href: string; label: string } | null;
+}) {
   const crumbs = [
     { href: '/', label: 'Home' },
     { href: '/firms', label: 'Firms' },
@@ -61,6 +68,16 @@ export function FirmTrustReport({ report }: { report: FirmTrustReportModel }) {
     <article className="th-shell py-8 sm:py-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Breadcrumb items={crumbs} />
+      {askBack ? (
+        <p className="mt-4" data-ask-handoff-back="1">
+          <Link
+            href={askBack.href}
+            className="text-sm font-medium text-teal-800 underline-offset-2 hover:underline"
+          >
+            {askBack.label}
+          </Link>
+        </p>
+      ) : null}
 
       <header className="mt-6 max-w-3xl">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal-800">Firm Trust Report</p>

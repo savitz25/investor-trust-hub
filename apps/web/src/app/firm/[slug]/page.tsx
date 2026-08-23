@@ -1,5 +1,11 @@
 import { notFound } from 'next/navigation';
-import { getFirmBySlug, isOfficialFirmSlug } from '@ith/domain';
+import {
+  buildAskBackLabel,
+  buildAskFirmsHref,
+  getFirmBySlug,
+  isOfficialFirmSlug,
+  parseInvestorAskSearchContext,
+} from '@ith/domain';
 import { FirmReport } from '@/components/firm-report';
 import { FirmTrustReport } from '@/components/firm-trust-report';
 import { DatabaseUnavailableError, hasDatabaseUrl } from '@/lib/db';
@@ -10,8 +16,16 @@ import { shareRouteOgImage } from '@/lib/share-hub';
 
 export const revalidate = 300;
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ slug: string }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+}) {
   const { slug } = await params;
+  // Ask context may accompany the request; canonical metadata stays the clean firm URL.
+  void searchParams;
   if (isOfficialFirmSlug(slug) && hasDatabaseUrl()) {
     try {
       const [report, indexable] = await Promise.all([
@@ -55,20 +69,32 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   });
 }
 
-export default async function FirmPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function FirmPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ slug: string }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+}) {
   const { slug } = await params;
+  const sp = searchParams ? await searchParams : {};
+  const askCtx = parseInvestorAskSearchContext(sp);
+  const askBack =
+    askCtx && !askCtx.unsupported
+      ? { href: buildAskFirmsHref(askCtx), label: buildAskBackLabel(askCtx) }
+      : null;
 
   if (isOfficialFirmSlug(slug)) {
     if (!hasDatabaseUrl()) {
-      return <DatabaseNotice slug={slug} />;
+      return <DatabaseNotice slug={slug} askBack={askBack} />;
     }
     try {
       const report = await getCachedOfficialFirmBySlug(slug);
       if (!report) notFound();
-      return <FirmTrustReport report={report} />;
+      return <FirmTrustReport report={report} askBack={askBack} />;
     } catch (error) {
       if (error instanceof DatabaseUnavailableError) {
-        return <DatabaseNotice slug={slug} />;
+        return <DatabaseNotice slug={slug} askBack={askBack} />;
       }
       throw error;
     }
@@ -79,9 +105,22 @@ export default async function FirmPage({ params }: { params: Promise<{ slug: str
   return <FirmReport firm={firm} />;
 }
 
-function DatabaseNotice({ slug }: { slug: string }) {
+function DatabaseNotice({
+  slug,
+  askBack,
+}: {
+  slug: string;
+  askBack?: { href: string; label: string } | null;
+}) {
   return (
     <article className="mx-auto max-w-3xl px-4 py-16">
+      {askBack ? (
+        <p className="mb-6" data-ask-handoff-back="1">
+          <a href={askBack.href} className="text-sm font-medium text-teal-800 underline-offset-2 hover:underline">
+            {askBack.label}
+          </a>
+        </p>
+      ) : null}
       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-800">Service interruption</p>
       <h1 className="mt-3 font-serif text-3xl text-[var(--ith-navy)]">Research data temporarily unavailable</h1>
       <p className="mt-4 text-sm leading-relaxed">
