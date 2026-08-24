@@ -2,6 +2,7 @@ import Link from 'next/link';
 import {
   ASK_NETWORK_OWNERSHIP_SHORT,
   ASK_NETWORK_STANDARD_URL,
+  BRAND,
   LEGAL_ROUTES,
   NETWORK_LINKS,
   PRIMARY_ROUTES,
@@ -26,6 +27,11 @@ export function SiteFooter() {
           </p>
           <p className="mt-3 text-xs leading-relaxed text-slate-300">{INDEPENDENCE_LINE}</p>
           <p className="mt-2 text-xs leading-relaxed text-slate-300">{ASK_NETWORK_OWNERSHIP_SHORT}</p>
+          <p className="mt-3 text-sm">
+            <a className="text-white no-underline hover:text-teal-200" href={`mailto:${BRAND.publicContactEmail}`}>
+              {BRAND.publicContactEmail}
+            </a>
+          </p>
         </div>
 
         <div className="lg:col-span-2">

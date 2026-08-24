@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter, Source_Serif_4 } from 'next/font/google';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
-import { isHostLaunchIndexable } from '@ith/config';
+import { BRAND, isHostLaunchIndexable } from '@ith/config';
 import { TH_CHASSIS_VERSION } from '@/lib/design/trusthub-visual-standard';
 import { ASK_NETWORK_CONTRACT_VERSION } from '@/lib/network/registry';
 import { SITE_DESCRIPTION, SITE_NAME } from '@/lib/site';
@@ -89,6 +89,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
               '@id': `${resolveShareOrigin()}/#organization`,
               name: SITE_NAME,
               url: resolveShareOrigin(),
+              email: BRAND.publicContactEmail,
               parentOrganization: {
                 '@type': 'Organization',
                 '@id': 'https://www.asktrusthub.com/#organization',

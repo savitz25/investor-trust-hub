@@ -13,6 +13,7 @@ export const BRAND = {
   tagline: 'Research before you invest.',
   lockupTagline: 'Research smarter. Invest better.',
   philosophy: 'We organize the evidence. The consumer decides.',
+  publicContactEmail: 'hello@asktrusthub.com',
   layerLabel: 'Investing & retirement research',
   navy: '#0A2540',
   ink: '#1E293B',
