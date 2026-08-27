@@ -111,6 +111,12 @@ def _applied_filenames(conn) -> list[str]:
         return []
 
 
+HOLD_UNTIL_EXPLICIT = {
+    # INV-NAT-002A prepares 0013 but must not apply it.
+    "0013_adv_relational_graph.sql": "APPLY_MIGRATION_0013",
+}
+
+
 def apply_with_psycopg(root: Path, database_url: str) -> list[str]:
     import psycopg
 
@@ -119,6 +125,10 @@ def apply_with_psycopg(root: Path, database_url: str) -> list[str]:
         conn.execute("SET statement_timeout = 0")
         already = set(_applied_filenames(conn))
         for path in migration_files(root):
+            hold_env = HOLD_UNTIL_EXPLICIT.get(path.name)
+            if hold_env and os.environ.get(hold_env) != "1":
+                print(f"skip {path.name} (held until {hold_env}=1)", flush=True)
+                continue
             if path.name in already:
                 print(f"skip {path.name} (already in schema_migrations)", flush=True)
                 continue
