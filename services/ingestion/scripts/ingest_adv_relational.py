@@ -47,10 +47,54 @@ BATCH = 25000
 def connect(dsn: str):
     import psycopg
 
-    conn = psycopg.connect(dsn, connect_timeout=30, keepalives=1, keepalives_idle=30)
+    conn = psycopg.connect(
+        dsn,
+        connect_timeout=30,
+        keepalives=1,
+        keepalives_idle=30,
+        keepalives_interval=10,
+        keepalives_count=5,
+        autocommit=False,
+    )
     conn.execute("SET statement_timeout = 0")
     conn.execute("SET idle_in_transaction_session_timeout = 0")
+    conn.execute("SET default_transaction_read_only = off")
     return conn
+
+
+def reconnect(dsn: str, conn=None):
+    if conn is not None:
+        try:
+            conn.rollback()
+        except Exception:
+            pass
+        try:
+            conn.close()
+        except Exception:
+            pass
+    return connect(dsn)
+
+
+class Db:
+    def __init__(self, dsn: str):
+        self.dsn = dsn
+        self.conn = connect(dsn)
+
+    def reset(self) -> None:
+        print("  reconnecting database session", flush=True)
+        self.conn = reconnect(self.dsn, self.conn)
+
+    def execute(self, *args, **kwargs):
+        return self.conn.execute(*args, **kwargs)
+
+    def commit(self) -> None:
+        self.conn.commit()
+
+    def cursor(self):
+        return self.conn.cursor()
+
+    def close(self) -> None:
+        self.conn.close()
 
 
 def colmap(header: list[str]) -> dict[str, int]:
@@ -105,18 +149,28 @@ def iter_csv(zf: zipfile.ZipFile, token: str) -> Iterator[tuple[list[str], dict[
         fh.close()
 
 
-def copy_insert(conn, stg: str, columns: list[str], dest_sql: str, rows: list[tuple], label: str) -> int:
+def copy_insert(db: Db, stg: str, columns: list[str], dest_sql: str, rows: list[tuple], label: str) -> int:
     if not rows:
         return 0
     cols = ", ".join(columns)
-    with conn.cursor() as cur:
-        cur.execute(f"TRUNCATE {stg}")
-        with cur.copy(f"COPY {stg} ({cols}) FROM STDIN") as copy:
-            for row in rows:
-                copy.write_row(row)
-        cur.execute(dest_sql)
-        n = cur.rowcount if cur.rowcount and cur.rowcount > 0 else len(rows)
-    conn.commit()
+
+    def _once():
+        with db.cursor() as cur:
+            cur.execute(f"TRUNCATE {stg}")
+            with cur.copy(f"COPY {stg} ({cols}) FROM STDIN") as copy:
+                for row in rows:
+                    copy.write_row(row)
+            cur.execute(dest_sql)
+            n = cur.rowcount if cur.rowcount and cur.rowcount > 0 else len(rows)
+        db.commit()
+        return n
+
+    try:
+        n = _once()
+    except Exception as exc:
+        print(f"    {label} batch retry after {type(exc).__name__}: {exc}", flush=True)
+        db.reset()
+        n = _once()
     print(f"    {label}: {len(rows):,} staged / {n:,} upserted", flush=True)
     return len(rows)
 
@@ -1267,7 +1321,8 @@ def main() -> int:
     if not publish:
         print("dry-run: parser/identity only; pass --publish to write")
         return 0
-    conn = connect(dsn)
+    db = Db(dsn)
+    conn = db
     ensure_staging(conn)
     man = json.loads((root / "data" / "reports" / "inv-nat-002-source-manifest.json").read_text(encoding="utf-8"))
     manifest_fp = source_row_digest(*(f["sha256"] for f in man["files"]))
@@ -1334,10 +1389,17 @@ def main() -> int:
         print("reconcile", json.dumps(metrics["reconcile"], indent=2))
         return 0
     except Exception as exc:
-        finish_run(conn, run_id, {"error": str(exc), "ingest_counts": counts}, "failed")
+        try:
+            db.reset()
+            finish_run(db, run_id, {"error": str(exc), "ingest_counts": counts}, "failed")
+        except Exception as finish_exc:
+            print("finish_run failed", finish_exc, flush=True)
         raise
     finally:
-        conn.close()
+        try:
+            db.close()
+        except Exception:
+            pass
 
 
 if __name__ == "__main__":
