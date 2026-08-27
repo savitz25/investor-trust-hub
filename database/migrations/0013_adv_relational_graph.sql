@@ -1,8 +1,10 @@
--- INV-NAT-002A additive Form ADV relational graph tables.
--- DO NOT APPLY in INV-NAT-002A. Prepared only.
+-- INV-NAT-002B additive Form ADV relational graph tables.
+-- INV-NAT-002A: DO NOT APPLY. Prepared only in 002A.
+-- INV-NAT-002B applies it exactly once.
 -- Does not alter firms identity, slugs, people, products, disclosure_events,
 -- or search_documents.indexable.
 -- Historical edges default is_current = FALSE (fail-closed).
+-- Filing uniqueness includes dataset_kind so IA/ERA FilingID overlaps stay separate.
 
 INSERT INTO source_datasets (id, source_system_id, name, description, expected_entity_kinds, official_url)
 VALUES
@@ -80,7 +82,7 @@ CREATE TABLE IF NOT EXISTS form_adv_filings (
     evidence_id UUID REFERENCES evidence_records (id),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-    UNIQUE (source_dataset_id, filing_id)
+    UNIQUE (source_dataset_id, dataset_kind, filing_id)
 );
 
 CREATE INDEX IF NOT EXISTS form_adv_filings_crd_idx
@@ -90,7 +92,31 @@ CREATE INDEX IF NOT EXISTS form_adv_filings_firm_idx
     ON form_adv_filings (firm_id, is_current);
 
 COMMENT ON TABLE form_adv_filings IS
-    'Official IARD FilingID is the filing version key. Do not invent an accession number. is_current defaults false.';
+    'Official IARD FilingID is the filing version key. Do not invent an accession number. is_current defaults false. dataset_kind keeps IA/ERA FilingID overlaps distinct.';
+
+CREATE TABLE IF NOT EXISTS form_adv_owner_entities (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    owner_kind TEXT NOT NULL CHECK (owner_kind IN ('PERSON', 'ORGANIZATION')),
+    owner_id TEXT NOT NULL,
+    display_name TEXT NOT NULL,
+    identity_confidence TEXT NOT NULL CHECK (identity_confidence IN (
+        'CONFIRMED',
+        'HIGH_CONFIDENCE',
+        'REVIEW_REQUIRED',
+        'UNRESOLVED'
+    )),
+    person_id UUID REFERENCES people (id) ON DELETE SET NULL,
+    publication_allowed BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    UNIQUE (owner_kind, owner_id)
+);
+
+CREATE INDEX IF NOT EXISTS form_adv_owner_entities_person_idx
+    ON form_adv_owner_entities (person_id);
+
+COMMENT ON TABLE form_adv_owner_entities IS
+    'OwnerID-scoped internal identities. Not public. PERSON may link people; ORGANIZATION is not a firms row unless the owner has its own adviser CRD.';
 
 CREATE TABLE IF NOT EXISTS form_adv_schedule_ab_rows (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -114,6 +140,7 @@ CREATE TABLE IF NOT EXISTS form_adv_schedule_ab_rows (
         'REVIEW_REQUIRED',
         'UNRESOLVED'
     )),
+    owner_entity_id UUID REFERENCES form_adv_owner_entities (id) ON DELETE SET NULL,
     person_id UUID REFERENCES people (id) ON DELETE SET NULL,
     organization_firm_id UUID REFERENCES firms (id) ON DELETE SET NULL,
     is_current BOOLEAN NOT NULL DEFAULT FALSE,
@@ -381,16 +408,16 @@ CREATE TABLE IF NOT EXISTS form_adv_documents (
     is_current BOOLEAN NOT NULL DEFAULT FALSE,
     transform_version TEXT NOT NULL,
     evidence_id UUID REFERENCES evidence_records (id),
-    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    idemp_key TEXT GENERATED ALWAYS AS (
+        source_dataset_id || '|' || document_kind || '|' ||
+        COALESCE(official_document_id, official_file_name, '_none') || '|' ||
+        COALESCE(crd, '')
+    ) STORED
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS form_adv_documents_idemp_idx
-    ON form_adv_documents (
-        source_dataset_id,
-        document_kind,
-        COALESCE(official_document_id, official_file_name, '_none'),
-        COALESCE(crd, '')
-    );
+    ON form_adv_documents (idemp_key);
 
 CREATE INDEX IF NOT EXISTS form_adv_documents_crd_idx
     ON form_adv_documents (crd, document_kind);
@@ -401,10 +428,15 @@ COMMENT ON TABLE form_adv_documents IS
 CREATE TABLE IF NOT EXISTS form_adv_historical_firm_candidates (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     crd TEXT NOT NULL UNIQUE,
+    legal_name TEXT,
+    sec_file_number TEXT,
+    first_seen_filing_id TEXT,
+    first_seen_on DATE,
     last_seen_filing_id TEXT,
     last_seen_on DATE,
     advw_filing_id TEXT,
     advw_filed_on DATE,
+    advw_filing_type TEXT,
     on_current_roster BOOLEAN NOT NULL DEFAULT FALSE,
     publication_allowed BOOLEAN NOT NULL DEFAULT FALSE,
     status TEXT NOT NULL DEFAULT 'HISTORICAL_ENTITY_CANDIDATE',

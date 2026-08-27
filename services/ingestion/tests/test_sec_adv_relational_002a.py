@@ -18,10 +18,17 @@ from ith_ingestion.sec_adv.relational_identity import (
     owner_identity_confidence,
 )
 
+import pytest
+
 ROOT = Path(__file__).resolve().parents[3]
 REPORTS = ROOT / "data" / "reports"
 MIGRATION = ROOT / "database" / "migrations" / "0013_adv_relational_graph.sql"
 SQL_EDITOR = ROOT / "docs" / "INV-NAT-002-SQL-EDITOR.md"
+
+pytestmark = pytest.mark.skipif(
+    not (REPORTS / "inv-nat-002-dry-run.json").exists(),
+    reason="INV-NAT-002A local reports are not present in CI",
+)
 
 
 def _load(name: str) -> dict:

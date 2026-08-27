@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import re
+from datetime import datetime
 from typing import Literal
 
 IdentityConfidence = Literal[
@@ -129,3 +130,45 @@ def edge_is_current(
 
 def historical_firm_publication_allowed(crd_on_current_roster: bool) -> bool:
     return bool(crd_on_current_roster)
+
+
+def normalize_crd(value: str | None) -> str:
+    digits = "".join(ch for ch in (value or "") if ch.isdigit())
+    return str(int(digits)) if digits else ""
+
+
+def normalize_fund_id(value: str | None) -> str:
+    token = (value or "").strip().replace(" ", "").upper()
+    if not token:
+        return ""
+    if token.startswith("805") and not token.startswith("805-"):
+        token = "805-" + token[3:]
+    return token
+
+
+def parse_submitted(value: str | None) -> datetime | None:
+    text = (value or "").strip()
+    if not text:
+        return None
+    for fmt in (
+        "%m/%d/%Y %I:%M:%S %p",
+        "%m/%d/%Y %H:%M:%S",
+        "%m/%d/%Y",
+        "%Y-%m-%d %H:%M:%S",
+        "%Y-%m-%d",
+        "%m/%d/%y",
+    ):
+        try:
+            return datetime.strptime(text, fmt)
+        except ValueError:
+            continue
+    return None
+
+
+def source_is_monthly_current_vintage(source_file_name: str | None, date_submitted: datetime | None) -> bool:
+    name = (source_file_name or "").replace("\\", "/")
+    if "iapd-part1-monthly" not in name and "ADV_Filing_Data_202" not in name:
+        return False
+    if date_submitted is None:
+        return False
+    return date_submitted.date().isoformat() >= "2025-01-01"

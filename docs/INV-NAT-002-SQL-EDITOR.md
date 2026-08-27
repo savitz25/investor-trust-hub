@@ -1,8 +1,8 @@
 # INV-NAT-002A — Migration 0013 (DO NOT APPLY)
 
-**Production status:** NOT applied. `schema_migrations` must remain through `0012_form_adv_enrichment.sql` only.
+**Production status:** INV-NAT-002A did **not** apply this. INV-NAT-002B applies it once with `APPLY_MIGRATION_0013=1`.
 
-`apply_migrations.py` skips this file unless `APPLY_MIGRATION_0013=1`.
+`apply_migrations.py` still skips this file unless that env var is set.
 
 Canonical source: `database/migrations/0013_adv_relational_graph.sql`.
 

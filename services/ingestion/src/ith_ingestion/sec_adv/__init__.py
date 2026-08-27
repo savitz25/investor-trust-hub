@@ -1,6 +1,7 @@
 """SEC Form ADV / IARD investment-adviser firm ingestion."""
 
 TRANSFORM_VERSION = "task-002-sec-adv-v1"
+RELATIONAL_TRANSFORM_VERSION = "inv-nat-002b-relational-v1"
 PARSER_VERSION = "task-002-sec-adv-v1"
 PIPELINE_VERSION = "0.2.0"
 
