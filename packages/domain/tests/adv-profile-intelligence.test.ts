@@ -374,6 +374,8 @@ describe('copy contract and routes', () => {
       JSON.stringify(snapshot({ disclosureIndicator: 'Y' })),
     ].join('\n');
     expect(findForbiddenAdvPublicCopy(corpus)).toEqual([]);
+    expect(findForbiddenAdvPublicCopy('This is not a misconduct finding')).toEqual([]);
+    expect(findForbiddenAdvPublicCopy('This was misconduct')).toContain('misconduct');
     expect(ADV_FORBIDDEN_PUBLIC_PHRASES.length).toBeGreaterThan(8);
   });
 

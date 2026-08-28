@@ -132,9 +132,25 @@ export const ADV_FORBIDDEN_PUBLIC_PHRASES = [
   'trust score',
 ] as const;
 
+const NEGATION_RE = /\b(no|not|never|without|avoid|forbidden|isn't|is not)\b/;
+
 export function findForbiddenAdvPublicCopy(text: string): string[] {
   const haystack = text.toLowerCase();
-  return ADV_FORBIDDEN_PUBLIC_PHRASES.filter((phrase) => haystack.includes(phrase));
+  const hits: string[] = [];
+  for (const phrase of ADV_FORBIDDEN_PUBLIC_PHRASES) {
+    let from = 0;
+    while (from < haystack.length) {
+      const index = haystack.indexOf(phrase, from);
+      if (index === -1) break;
+      const window = haystack.slice(Math.max(0, index - 48), index);
+      if (!NEGATION_RE.test(window)) {
+        hits.push(phrase);
+        break;
+      }
+      from = index + phrase.length;
+    }
+  }
+  return hits;
 }
 
 export const COMPENSATION_METHOD_LABELS: Record<string, string> = {
