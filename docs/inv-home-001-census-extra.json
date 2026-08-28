@@ -1,0 +1,227 @@
+{
+  "extra_firms": {
+    "firms_without_adv_facts": 2155,
+    "firms_without_kinds": 2155
+  },
+  "search_docs": [
+    {
+      "entity_kind": "firm",
+      "indexable": false,
+      "n": 24777
+    },
+    {
+      "entity_kind": "firm",
+      "indexable": true,
+      "n": 1000
+    }
+  ],
+  "roster_geo": {
+    "null_region": 5625,
+    "with_region": 17997
+  },
+  "raum_bands": [
+    {
+      "band": "<25m",
+      "n": 371
+    },
+    {
+      "band": ">=10b",
+      "n": 1365
+    },
+    {
+      "band": "0",
+      "n": 613
+    },
+    {
+      "band": "100m-<1b",
+      "n": 9887
+    },
+    {
+      "band": "1b-<10b",
+      "n": 4023
+    },
+    {
+      "band": "25m-<100m",
+      "n": 759
+    }
+  ],
+  "selected_fields": [
+    {
+      "field_name": "11",
+      "presence_status": "NOT_PRESENT_IN_SOURCE",
+      "n": 1
+    },
+    {
+      "field_name": "11",
+      "presence_status": "REPORTED_NO",
+      "n": 22665
+    },
+    {
+      "field_name": "11",
+      "presence_status": "REPORTED_YES",
+      "n": 956
+    },
+    {
+      "field_name": "5D(1)(a)",
+      "presence_status": "NOT_FILED_BY_FORM_TYPE",
+      "n": 6604
+    },
+    {
+      "field_name": "5D(1)(a)",
+      "presence_status": "NOT_PRESENT_IN_SOURCE",
+      "n": 17017
+    },
+    {
+      "field_name": "5D(1)(a)",
+      "presence_status": "UNKNOWN",
+      "n": 1
+    },
+    {
+      "field_name": "5D(1)(b)",
+      "presence_status": "NOT_FILED_BY_FORM_TYPE",
+      "n": 6604
+    },
+    {
+      "field_name": "5D(1)(b)",
+      "presence_status": "NOT_PRESENT_IN_SOURCE",
+      "n": 17017
+    },
+    {
+      "field_name": "5D(1)(b)",
+      "presence_status": "UNKNOWN",
+      "n": 1
+    },
+    {
+      "field_name": "5E(1)",
+      "presence_status": "NOT_FILED_BY_FORM_TYPE",
+      "n": 6604
+    },
+    {
+      "field_name": "5E(1)",
+      "presence_status": "REPORTED_NO",
+      "n": 772
+    },
+    {
+      "field_name": "5E(1)",
+      "presence_status": "REPORTED_YES",
+      "n": 16246
+    },
+    {
+      "field_name": "5E(2)",
+      "presence_status": "NOT_FILED_BY_FORM_TYPE",
+      "n": 6604
+    },
+    {
+      "field_name": "5E(2)",
+      "presence_status": "REPORTED_NO",
+      "n": 12093
+    },
+    {
+      "field_name": "5E(2)",
+      "presence_status": "REPORTED_YES",
+      "n": 4925
+    },
+    {
+      "field_name": "5E(3)",
+      "presence_status": "NOT_FILED_BY_FORM_TYPE",
+      "n": 6604
+    },
+    {
+      "field_name": "5E(3)",
+      "presence_status": "REPORTED_NO",
+      "n": 16837
+    },
+    {
+      "field_name": "5E(3)",
+      "presence_status": "REPORTED_YES",
+      "n": 181
+    },
+    {
+      "field_name": "5E(4)",
+      "presence_status": "NOT_FILED_BY_FORM_TYPE",
+      "n": 6604
+    },
+    {
+      "field_name": "5E(4)",
+      "presence_status": "REPORTED_NO",
+      "n": 9311
+    },
+    {
+      "field_name": "5E(4)",
+      "presence_status": "REPORTED_YES",
+      "n": 7707
+    },
+    {
+      "field_name": "5E(5)",
+      "presence_status": "NOT_FILED_BY_FORM_TYPE",
+      "n": 6604
+    },
+    {
+      "field_name": "5E(5)",
+      "presence_status": "REPORTED_NO",
+      "n": 16694
+    },
+    {
+      "field_name": "5E(5)",
+      "presence_status": "REPORTED_YES",
+      "n": 324
+    },
+    {
+      "field_name": "5E(6)",
+      "presence_status": "NOT_FILED_BY_FORM_TYPE",
+      "n": 6604
+    },
+    {
+      "field_name": "5E(6)",
+      "presence_status": "REPORTED_NO",
+      "n": 10940
+    },
+    {
+      "field_name": "5E(6)",
+      "presence_status": "REPORTED_YES",
+      "n": 6078
+    },
+    {
+      "field_name": "5E(7)",
+      "presence_status": "NOT_FILED_BY_FORM_TYPE",
+      "n": 6604
+    },
+    {
+      "field_name": "5E(7)",
+      "presence_status": "REPORTED_NO",
+      "n": 14638
+    },
+    {
+      "field_name": "5E(7)",
+      "presence_status": "REPORTED_YES",
+      "n": 2380
+    },
+    {
+      "field_name": "6A(1)",
+      "presence_status": "REPORTED_NO",
+      "n": 23171
+    },
+    {
+      "field_name": "6A(1)",
+      "presence_status": "REPORTED_YES",
+      "n": 451
+    },
+    {
+      "field_name": "7A(1)",
+      "presence_status": "REPORTED_NO",
+      "n": 20722
+    },
+    {
+      "field_name": "7A(1)",
+      "presence_status": "REPORTED_YES",
+      "n": 2900
+    }
+  ],
+  "person_identifiers": 50749,
+  "person_id_types": [
+    {
+      "identifier_type": "individual_crd",
+      "n": 50749
+    }
+  ]
+}

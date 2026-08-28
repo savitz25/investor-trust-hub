@@ -1,0 +1,1664 @@
+{
+  "env": {
+    "SITE_INDEXING_ENABLED": "true",
+    "INDEXABLE_HOSTS": "www.investortrusthub.com,investortrusthub.com",
+    "CANONICAL_HOST": "www.investortrusthub.com",
+    "NEXT_PUBLIC_SITE_URL": "https://www.investortrusthub.com",
+    "VERCEL_GIT_COMMIT_SHA": "",
+    "VERCEL_GIT_COMMIT_REF": "",
+    "db_host": "aws-0-us-east-2.pooler.supabase.com",
+    "db_port": 5432,
+    "db_user": "postgres.ghjhcxfirxnszfnymdxb",
+    "db_name": "postgres"
+  },
+  "counts": {
+    "firms_all": 25777,
+    "firms_official": 25777,
+    "firms_synthetic": 0,
+    "people_all": 207384,
+    "people_official": 207384,
+    "person_firm_associations": 51389,
+    "person_firm_associations_official": 51389,
+    "branches": 23622,
+    "branches_main": 23622,
+    "registrations_firm": 23622,
+    "registrations_person": 0,
+    "search_documents_firm": 25777,
+    "search_indexable_firm": 1000,
+    "form_adv_firm_facts": 23622,
+    "form_adv_reported_attributes": 5149596,
+    "form_adv_filings": 635269,
+    "disclosure_events": 0,
+    "products": 197588,
+    "issuers": 0,
+    "evidence_records": 165354,
+    "source_snapshots": 23622,
+    "source_releases": 48,
+    "form_adv_owner_entities": 158560,
+    "form_adv_schedule_ab_rows": 4158438,
+    "form_adv_schedule_d_related": null,
+    "form_adv_offices": null,
+    "form_adv_funds": null,
+    "form_adv_crs_documents": null,
+    "form_adv_withdrawals": 22592,
+    "form_adv_successor_links": 16
+  },
+  "groups": {
+    "firm_kinds": [
+      {
+        "kind": "registered_investment_adviser",
+        "n": 17018
+      },
+      {
+        "kind": "exempt_reporting_adviser",
+        "n": 6604
+      }
+    ],
+    "registration_type_status": [
+      {
+        "registration_type": "registered_investment_adviser",
+        "status": "registered",
+        "n": 16783
+      },
+      {
+        "registration_type": "exempt_reporting_adviser",
+        "status": "reporting",
+        "n": 6604
+      },
+      {
+        "registration_type": "registered_investment_adviser",
+        "status": "pending",
+        "n": 235
+      }
+    ],
+    "adv_dataset_kind": [
+      {
+        "dataset_kind": "ria",
+        "n": 17018
+      },
+      {
+        "dataset_kind": "era",
+        "n": 6604
+      }
+    ],
+    "identifier_types": [
+      {
+        "identifier_type": "crd",
+        "n": 25777,
+        "firms": 25777
+      },
+      {
+        "identifier_type": "sec_file_number",
+        "n": 23621,
+        "firms": 23621
+      },
+      {
+        "identifier_type": "cik",
+        "n": 4884,
+        "firms": 4884
+      }
+    ],
+    "releases": [
+      {
+        "id": "311d13e0-384a-4bb7-9dc6-5146fa455be3",
+        "source_dataset_id": "iapd_iar_compilation",
+        "release_label": "IA_INDVL_Feed_08_27_2026",
+        "retrieved_at": "2026-08-28 17:27:51.635960+00:00",
+        "published_at": "2026-08-27 00:00:00+00:00",
+        "checksum_sha256": "e95b08effcd787ca9f7f452076ada4ca137fe57ee1f54c35fdefbb377b2dbd6b"
+      },
+      {
+        "id": "6acd1a81-c17a-46ee-bcca-edda45f0c137",
+        "source_dataset_id": "iapd_state_compilation",
+        "release_label": "IA_FIRM_STATE_Feed_08_27_2026",
+        "retrieved_at": "2026-08-28 16:36:30.264282+00:00",
+        "published_at": "2026-08-27 00:00:00+00:00",
+        "checksum_sha256": "4dc5ec13827c2546213fba16d3397448ba5c08cb8c092f1135c405a7f8472eda"
+      },
+      {
+        "id": "2cc7ba3e-25d6-415d-90ce-1467ae9134e1",
+        "source_dataset_id": "iapd_sec_compilation",
+        "release_label": "IA_FIRM_SEC_Feed_08_27_2026",
+        "retrieved_at": "2026-08-28 16:36:30.264282+00:00",
+        "published_at": "2026-08-27 00:00:00+00:00",
+        "checksum_sha256": "967217b0cdb4548f496407f7232eff30deba12217c36447fad0cee757473b65c"
+      },
+      {
+        "id": "f5303a44-648f-459c-a375-a5f2b1550bbb",
+        "source_dataset_id": "sec_ia_adv_part2a",
+        "release_label": "part2a-iapd-metadata-2025-2026",
+        "retrieved_at": "2026-08-27 19:17:31.561396+00:00",
+        "published_at": null,
+        "checksum_sha256": ""
+      },
+      {
+        "id": "1e33a76b-7ba4-441f-943a-eddc7dfbba58",
+        "source_dataset_id": "sec_ia_form_crs",
+        "release_label": "crs-mapping-2025-2026",
+        "retrieved_at": "2026-08-27 19:17:23.574075+00:00",
+        "published_at": null,
+        "checksum_sha256": ""
+      },
+      {
+        "id": "9ddf6921-11c8-4c83-8b9c-3018e1293a26",
+        "source_dataset_id": "sec_ia_adv_w",
+        "release_label": "ADVW_20260701_20260731",
+        "retrieved_at": "2026-08-27 16:21:28.822905+00:00",
+        "published_at": null,
+        "checksum_sha256": ""
+      },
+      {
+        "id": "aa931e05-692f-4687-8333-cb5b15e56280",
+        "source_dataset_id": "sec_ia_adv_w",
+        "release_label": "ADVW_20260601_20260630",
+        "retrieved_at": "2026-08-27 16:21:28.423721+00:00",
+        "published_at": null,
+        "checksum_sha256": ""
+      },
+      {
+        "id": "e42bda0f-2f6a-4ada-aee6-18fb5a605311",
+        "source_dataset_id": "sec_ia_adv_w",
+        "release_label": "ADVW_20260501_20260531",
+        "retrieved_at": "2026-08-27 16:21:28.032888+00:00",
+        "published_at": null,
+        "checksum_sha256": ""
+      },
+      {
+        "id": "1c749668-2ad9-4d12-9e43-29ac7fc57d59",
+        "source_dataset_id": "sec_ia_adv_w",
+        "release_label": "ADVW_20260401_20260430",
+        "retrieved_at": "2026-08-27 16:21:27.647586+00:00",
+        "published_at": null,
+        "checksum_sha256": ""
+      },
+      {
+        "id": "318608f8-73a2-4864-88ed-38da7503433e",
+        "source_dataset_id": "sec_ia_adv_w",
+        "release_label": "ADVW_20260301_20260331",
+        "retrieved_at": "2026-08-27 16:21:27.241264+00:00",
+        "published_at": null,
+        "checksum_sha256": ""
+      },
+      {
+        "id": "4564531a-34a4-41ec-b8d3-198d4692ef31",
+        "source_dataset_id": "sec_ia_adv_w",
+        "release_label": "ADVW_20260201_20260228",
+        "retrieved_at": "2026-08-27 16:21:26.843082+00:00",
+        "published_at": null,
+        "checksum_sha256": ""
+      },
+      {
+        "id": "32a7c8bd-a53e-4a63-aa2d-50647ab861bf",
+        "source_dataset_id": "sec_ia_adv_w",
+        "release_label": "ADVW_20260101_20260131",
+        "retrieved_at": "2026-08-27 16:21:26.439399+00:00",
+        "published_at": null,
+        "checksum_sha256": ""
+      }
+    ],
+    "raum": [
+      {
+        "raum_nn": 17018,
+        "raum_null": 0,
+        "raum_zero": 613,
+        "raum_positive": 16405,
+        "raum_min": "0.00",
+        "raum_max": "11092665107962.00"
+      }
+    ],
+    "disclosure_indicator": [
+      {
+        "indicator": "N",
+        "dataset_kind": "ria",
+        "n": 16141
+      },
+      {
+        "indicator": "N",
+        "dataset_kind": "era",
+        "n": 6524
+      },
+      {
+        "indicator": "Y",
+        "dataset_kind": "ria",
+        "n": 876
+      },
+      {
+        "indicator": "Y",
+        "dataset_kind": "era",
+        "n": 80
+      },
+      {
+        "indicator": "(null)",
+        "dataset_kind": "ria",
+        "n": 1
+      }
+    ],
+    "principal_office_states": [
+      {
+        "state": "(null)",
+        "n": 7780
+      },
+      {
+        "state": "NY",
+        "n": 3152
+      },
+      {
+        "state": "CA",
+        "n": 2699
+      },
+      {
+        "state": "TX",
+        "n": 1302
+      },
+      {
+        "state": "FL",
+        "n": 1284
+      },
+      {
+        "state": "MA",
+        "n": 803
+      },
+      {
+        "state": "IL",
+        "n": 793
+      },
+      {
+        "state": "PA",
+        "n": 623
+      },
+      {
+        "state": "CO",
+        "n": 589
+      },
+      {
+        "state": "CT",
+        "n": 584
+      },
+      {
+        "state": "NJ",
+        "n": 438
+      },
+      {
+        "state": "OH",
+        "n": 426
+      },
+      {
+        "state": "GA",
+        "n": 364
+      },
+      {
+        "state": "VA",
+        "n": 339
+      },
+      {
+        "state": "MI",
+        "n": 327
+      },
+      {
+        "state": "NC",
+        "n": 325
+      },
+      {
+        "state": "WA",
+        "n": 306
+      },
+      {
+        "state": "MN",
+        "n": 293
+      },
+      {
+        "state": "TN",
+        "n": 264
+      },
+      {
+        "state": "MD",
+        "n": 263
+      },
+      {
+        "state": "MO",
+        "n": 217
+      },
+      {
+        "state": "AZ",
+        "n": 213
+      },
+      {
+        "state": "WI",
+        "n": 211
+      },
+      {
+        "state": "UT",
+        "n": 192
+      },
+      {
+        "state": "OR",
+        "n": 167
+      },
+      {
+        "state": "IN",
+        "n": 161
+      },
+      {
+        "state": "KS",
+        "n": 139
+      },
+      {
+        "state": "SC",
+        "n": 122
+      },
+      {
+        "state": "NV",
+        "n": 99
+      },
+      {
+        "state": "AL",
+        "n": 98
+      },
+      {
+        "state": "IA",
+        "n": 95
+      },
+      {
+        "state": "OK",
+        "n": 91
+      },
+      {
+        "state": "DC",
+        "n": 91
+      },
+      {
+        "state": "KY",
+        "n": 89
+      },
+      {
+        "state": "NH",
+        "n": 86
+      },
+      {
+        "state": "LA",
+        "n": 84
+      },
+      {
+        "state": "PR",
+        "n": 83
+      },
+      {
+        "state": "NE",
+        "n": 71
+      },
+      {
+        "state": "DE",
+        "n": 70
+      },
+      {
+        "state": "AR",
+        "n": 61
+      },
+      {
+        "state": "ID",
+        "n": 56
+      },
+      {
+        "state": "RI",
+        "n": 51
+      },
+      {
+        "state": "WY",
+        "n": 45
+      },
+      {
+        "state": "VT",
+        "n": 37
+      },
+      {
+        "state": "MS",
+        "n": 35
+      },
+      {
+        "state": "ME",
+        "n": 33
+      },
+      {
+        "state": "NM",
+        "n": 27
+      },
+      {
+        "state": "MT",
+        "n": 27
+      },
+      {
+        "state": "HI",
+        "n": 22
+      },
+      {
+        "state": "SD",
+        "n": 17
+      },
+      {
+        "state": "WV",
+        "n": 12
+      },
+      {
+        "state": "ND",
+        "n": 9
+      },
+      {
+        "state": "AK",
+        "n": 9
+      },
+      {
+        "state": "VI",
+        "n": 3
+      }
+    ],
+    "tier1_field_coverage": [
+      {
+        "field_name": "10A",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 23010
+      },
+      {
+        "field_name": "10A",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 612
+      },
+      {
+        "field_name": "11",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 22665
+      },
+      {
+        "field_name": "11",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 956
+      },
+      {
+        "field_name": "11",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 1
+      },
+      {
+        "field_name": "11A(1)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 23536
+      },
+      {
+        "field_name": "11A(1)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 86
+      },
+      {
+        "field_name": "11A(2)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 23479
+      },
+      {
+        "field_name": "11A(2)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 143
+      },
+      {
+        "field_name": "11B(1)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 23590
+      },
+      {
+        "field_name": "11B(1)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 32
+      },
+      {
+        "field_name": "11B(2)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 23589
+      },
+      {
+        "field_name": "11B(2)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 33
+      },
+      {
+        "field_name": "11C(1)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 23386
+      },
+      {
+        "field_name": "11C(1)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 236
+      },
+      {
+        "field_name": "11C(2)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 22771
+      },
+      {
+        "field_name": "11C(2)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 851
+      },
+      {
+        "field_name": "11C(3)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 23601
+      },
+      {
+        "field_name": "11C(3)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 21
+      },
+      {
+        "field_name": "11C(4)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 22873
+      },
+      {
+        "field_name": "11C(4)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 749
+      },
+      {
+        "field_name": "11C(5)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 22779
+      },
+      {
+        "field_name": "11C(5)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 843
+      },
+      {
+        "field_name": "11D(1)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 23360
+      },
+      {
+        "field_name": "11D(1)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 262
+      },
+      {
+        "field_name": "11D(2)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 22511
+      },
+      {
+        "field_name": "11D(2)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 1111
+      },
+      {
+        "field_name": "11D(3)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 23561
+      },
+      {
+        "field_name": "11D(3)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 61
+      },
+      {
+        "field_name": "11D(4)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 22814
+      },
+      {
+        "field_name": "11D(4)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 808
+      },
+      {
+        "field_name": "11D(5)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 23344
+      },
+      {
+        "field_name": "11D(5)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 278
+      },
+      {
+        "field_name": "11E(1)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 23532
+      },
+      {
+        "field_name": "11E(1)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 90
+      },
+      {
+        "field_name": "11E(2)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 22982
+      },
+      {
+        "field_name": "11E(2)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 640
+      },
+      {
+        "field_name": "11E(3)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 23599
+      },
+      {
+        "field_name": "11E(3)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 23
+      },
+      {
+        "field_name": "11E(4)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 23316
+      },
+      {
+        "field_name": "11E(4)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 306
+      },
+      {
+        "field_name": "11F",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 23585
+      },
+      {
+        "field_name": "11F",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 37
+      },
+      {
+        "field_name": "11G",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 23482
+      },
+      {
+        "field_name": "11G",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 140
+      },
+      {
+        "field_name": "11H(1)(a)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 23557
+      },
+      {
+        "field_name": "11H(1)(a)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 65
+      },
+      {
+        "field_name": "11H(1)(b)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 23539
+      },
+      {
+        "field_name": "11H(1)(b)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 83
+      },
+      {
+        "field_name": "11H(1)(c)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 23527
+      },
+      {
+        "field_name": "11H(1)(c)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 95
+      },
+      {
+        "field_name": "11H(2)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 23430
+      },
+      {
+        "field_name": "11H(2)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 192
+      },
+      {
+        "field_name": "1I",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 20834
+      },
+      {
+        "field_name": "1I",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 2788
+      },
+      {
+        "field_name": "1L",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 8956
+      },
+      {
+        "field_name": "1L",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 8062
+      },
+      {
+        "field_name": "1L",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 6604
+      },
+      {
+        "field_name": "1M",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 20591
+      },
+      {
+        "field_name": "1M",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 3031
+      },
+      {
+        "field_name": "1N",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 23597
+      },
+      {
+        "field_name": "1N",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 24
+      },
+      {
+        "field_name": "1N",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 1
+      },
+      {
+        "field_name": "1O",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 22889
+      },
+      {
+        "field_name": "1O",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 732
+      },
+      {
+        "field_name": "1O",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 1
+      },
+      {
+        "field_name": "1O - If yes, approx. amount of assets",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 22890
+      },
+      {
+        "field_name": "1O - If yes, approx. amount of assets",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 732
+      },
+      {
+        "field_name": "1P",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 19029
+      },
+      {
+        "field_name": "1P",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 4593
+      },
+      {
+        "field_name": "4A",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 17002
+      },
+      {
+        "field_name": "4A",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 6604
+      },
+      {
+        "field_name": "4A",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 16
+      },
+      {
+        "field_name": "4B",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 17002
+      },
+      {
+        "field_name": "4B",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 6604
+      },
+      {
+        "field_name": "4B",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 16
+      },
+      {
+        "field_name": "5A",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 16968
+      },
+      {
+        "field_name": "5A",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5A",
+        "presence_status": "REPORTED_ZERO",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 49
+      },
+      {
+        "field_name": "5A",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 1
+      },
+      {
+        "field_name": "5B(1)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 16885
+      },
+      {
+        "field_name": "5B(1)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5B(1)",
+        "presence_status": "REPORTED_ZERO",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 132
+      },
+      {
+        "field_name": "5B(1)",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 1
+      },
+      {
+        "field_name": "5B(2)",
+        "presence_status": "REPORTED_ZERO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 13316
+      },
+      {
+        "field_name": "5B(2)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 6604
+      },
+      {
+        "field_name": "5B(2)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 3701
+      },
+      {
+        "field_name": "5B(2)",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 1
+      },
+      {
+        "field_name": "5B(3)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 10539
+      },
+      {
+        "field_name": "5B(3)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 6604
+      },
+      {
+        "field_name": "5B(3)",
+        "presence_status": "REPORTED_ZERO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 6478
+      },
+      {
+        "field_name": "5B(3)",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 1
+      },
+      {
+        "field_name": "5C(1)",
+        "presence_status": "REPORTED_ZERO",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 12711
+      },
+      {
+        "field_name": "5C(1)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5C(1)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 4305
+      },
+      {
+        "field_name": "5C(1)",
+        "presence_status": "UNKNOWN",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 2
+      },
+      {
+        "field_name": "5C(1)-If more than 100, how many",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 17016
+      },
+      {
+        "field_name": "5C(1)-If more than 100, how many",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5C(1)-If more than 100, how many",
+        "presence_status": "REPORTED_ZERO",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 2
+      },
+      {
+        "field_name": "5C(2)",
+        "presence_status": "REPORTED_ZERO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 11609
+      },
+      {
+        "field_name": "5C(2)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 6604
+      },
+      {
+        "field_name": "5C(2)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 5408
+      },
+      {
+        "field_name": "5C(2)",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 1
+      },
+      {
+        "field_name": "5D(1)(a)",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 17017
+      },
+      {
+        "field_name": "5D(1)(a)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5D(1)(a)",
+        "presence_status": "UNKNOWN",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 1
+      },
+      {
+        "field_name": "5D(1)(b)",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 17017
+      },
+      {
+        "field_name": "5D(1)(b)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5D(1)(b)",
+        "presence_status": "UNKNOWN",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 1
+      },
+      {
+        "field_name": "5D(1)(c)",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 17017
+      },
+      {
+        "field_name": "5D(1)(c)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5D(1)(c)",
+        "presence_status": "UNKNOWN",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 1
+      },
+      {
+        "field_name": "5D(1)(d)",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 17017
+      },
+      {
+        "field_name": "5D(1)(d)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5D(1)(d)",
+        "presence_status": "UNKNOWN",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 1
+      },
+      {
+        "field_name": "5D(1)(e)",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 17017
+      },
+      {
+        "field_name": "5D(1)(e)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5D(1)(e)",
+        "presence_status": "UNKNOWN",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 1
+      },
+      {
+        "field_name": "5D(1)(f)",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 17017
+      },
+      {
+        "field_name": "5D(1)(f)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5D(1)(f)",
+        "presence_status": "UNKNOWN",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 1
+      },
+      {
+        "field_name": "5D(1)(g)",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 17017
+      },
+      {
+        "field_name": "5D(1)(g)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5D(1)(g)",
+        "presence_status": "UNKNOWN",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 1
+      },
+      {
+        "field_name": "5D(1)(h)",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 17017
+      },
+      {
+        "field_name": "5D(1)(h)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5D(1)(h)",
+        "presence_status": "UNKNOWN",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 1
+      },
+      {
+        "field_name": "5D(1)(i)",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 17017
+      },
+      {
+        "field_name": "5D(1)(i)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5D(1)(i)",
+        "presence_status": "UNKNOWN",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 1
+      },
+      {
+        "field_name": "5D(1)(j)",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 17017
+      },
+      {
+        "field_name": "5D(1)(j)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5D(1)(j)",
+        "presence_status": "UNKNOWN",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 1
+      },
+      {
+        "field_name": "5D(1)(k)",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 17017
+      },
+      {
+        "field_name": "5D(1)(k)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5D(1)(k)",
+        "presence_status": "UNKNOWN",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 1
+      },
+      {
+        "field_name": "5D(1)(l)",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 17017
+      },
+      {
+        "field_name": "5D(1)(l)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5D(1)(l)",
+        "presence_status": "UNKNOWN",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 1
+      },
+      {
+        "field_name": "5D(1)(m)",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 17017
+      },
+      {
+        "field_name": "5D(1)(m)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5D(1)(m)",
+        "presence_status": "UNKNOWN",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 1
+      },
+      {
+        "field_name": "5E(1)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 16246
+      },
+      {
+        "field_name": "5E(1)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5E(1)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 772
+      },
+      {
+        "field_name": "5E(2)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 12093
+      },
+      {
+        "field_name": "5E(2)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5E(2)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 4925
+      },
+      {
+        "field_name": "5E(3)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 16837
+      },
+      {
+        "field_name": "5E(3)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5E(3)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 181
+      },
+      {
+        "field_name": "5E(4)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 9311
+      },
+      {
+        "field_name": "5E(4)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 7707
+      },
+      {
+        "field_name": "5E(4)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5E(5)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 16694
+      },
+      {
+        "field_name": "5E(5)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5E(5)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 324
+      },
+      {
+        "field_name": "5E(6)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 10940
+      },
+      {
+        "field_name": "5E(6)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5E(6)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6078
+      },
+      {
+        "field_name": "5E(7)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 14638
+      },
+      {
+        "field_name": "5E(7)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5E(7)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 2380
+      },
+      {
+        "field_name": "5E(7)-Other",
+        "presence_status": "NOT_PRESENT_IN_SOURCE",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 14638
+      },
+      {
+        "field_name": "5E(7)-Other",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 6604
+      },
+      {
+        "field_name": "5E(7)-Other",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 2380
+      },
+      {
+        "field_name": "5F(1)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 16667
+      },
+      {
+        "field_name": "5F(1)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5F(1)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 351
+      },
+      {
+        "field_name": "5F(2)(a)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 15857
+      },
+      {
+        "field_name": "5F(2)(a)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5F(2)(a)",
+        "presence_status": "REPORTED_ZERO",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 1161
+      },
+      {
+        "field_name": "5F(2)(b)",
+        "presence_status": "REPORTED_ZERO",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 10499
+      },
+      {
+        "field_name": "5F(2)(b)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5F(2)(b)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6519
+      },
+      {
+        "field_name": "5F(2)(c)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 16405
+      },
+      {
+        "field_name": "5F(2)(c)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5F(2)(c)",
+        "presence_status": "REPORTED_ZERO",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 613
+      },
+      {
+        "field_name": "5G(1)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 9112
+      },
+      {
+        "field_name": "5G(1)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 7906
+      },
+      {
+        "field_name": "5G(1)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5G(10)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 16977
+      },
+      {
+        "field_name": "5G(10)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 6604
+      },
+      {
+        "field_name": "5G(10)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 41
+      },
+      {
+        "field_name": "5G(11)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 15316
+      },
+      {
+        "field_name": "5G(11)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 6604
+      },
+      {
+        "field_name": "5G(11)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 1702
+      },
+      {
+        "field_name": "5G(12)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 14471
+      },
+      {
+        "field_name": "5G(12)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 6604
+      },
+      {
+        "field_name": "5G(12)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "INTERNAL_ONLY",
+        "n": 2547
+      },
+      {
+        "field_name": "5G(2)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 11094
+      },
+      {
+        "field_name": "5G(2)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5G(2)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 5924
+      },
+      {
+        "field_name": "5G(3)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 15395
+      },
+      {
+        "field_name": "5G(3)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5G(3)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 1623
+      },
+      {
+        "field_name": "5G(4)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 10459
+      },
+      {
+        "field_name": "5G(4)",
+        "presence_status": "NOT_FILED_BY_FORM_TYPE",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6604
+      },
+      {
+        "field_name": "5G(4)",
+        "presence_status": "REPORTED_YES",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 6559
+      },
+      {
+        "field_name": "5G(5)",
+        "presence_status": "REPORTED_NO",
+        "public_readiness": "READY_FOR_PUBLIC_PROFILE",
+        "n": 10740
+      }
+    ],
+    "people_kinds": [
+      {
+        "kind": "investment_adviser_representative",
+        "is_synthetic": false,
+        "n": 50749
+      }
+    ]
+  }
+}
