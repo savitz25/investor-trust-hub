@@ -8,7 +8,7 @@ const METRICS_REVALIDATE_SECONDS = 300;
 
 export const getCachedOfficialFirmBySlug = unstable_cache(
   async (slug: string) => getOfficialFirmBySlug(slug),
-  ['official-firm-by-slug-v2'],
+  ['official-firm-by-slug-v3'],
   { revalidate: FIRM_REVALIDATE_SECONDS, tags: ['official-firms'] },
 );
 
