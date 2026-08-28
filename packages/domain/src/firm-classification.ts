@@ -98,9 +98,10 @@ export const REGISTRATION_EXPLAINERS = [
 export const NOT_YET_RESEARCHED_ITEMS = [
   'Individual professionals associated with this firm',
   'FINRA BrokerCheck research',
-  'Detailed disciplinary history',
+  'Detailed disciplinary history (DRP events)',
   'State-specific enforcement records',
-  'Fund and product relationships',
+  'Form ADV Part 2 brochure narrative',
+  'Standalone public fund or owner profiles',
   'Investment performance',
   'Portfolio holdings',
   'Consumer reviews',

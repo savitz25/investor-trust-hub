@@ -1,4 +1,4 @@
-import type { ConsumerClassification, FirmIndexabilityResult } from '@ith/domain';
+import type { ConsumerClassification, FirmIndexabilityResult, TrustReportV2Snapshot } from '@ith/domain';
 
 export interface FirmRecordRow {
   id: string;
@@ -87,4 +87,5 @@ export interface FirmTrustReportModel {
   observed: boolean;
   indexability: FirmIndexabilityResult;
   currentlyIndexable: boolean;
+  intelligence: TrustReportV2Snapshot | null;
 }

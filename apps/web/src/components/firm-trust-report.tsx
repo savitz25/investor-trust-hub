@@ -18,6 +18,7 @@ import {
 } from '@ith/ui';
 import type { CanonicalIdentifier } from '@ith/domain';
 import { Breadcrumb } from './breadcrumb';
+import { FirmProfileIntelligence } from './firm-profile-intelligence';
 import type { FirmTrustReportModel } from '@/lib/firms/types';
 import { formatDisplayDate, formatReleaseLabel } from '@/lib/dates';
 
@@ -171,12 +172,24 @@ export function FirmTrustReport({ report }: { report: FirmTrustReportModel }) {
       <section className="mt-8">
         <h2 className="font-serif text-2xl text-[var(--ith-navy)]">Regulatory disclosures</h2>
         <div className="mt-3">
-          <EvidenceUnavailable
-            status="not_yet_researched"
-            detail="Form ADV disclosure checkboxes are stored as source evidence but are not interpreted as a disciplinary history. This is not a finding of “no disclosures” or a clean record."
-          />
+          {report.intelligence ? (
+            <div className="rounded-xl border border-[var(--ith-border)] bg-white px-4 py-3 text-sm leading-relaxed">
+              <p>{report.intelligence.item11.copy}</p>
+              <p className="mt-2 text-slate-700">
+                This is the Form ADV Item 11 checkbox as filed. It is not a disciplinary-event list and not a
+                finding of a clean record.
+              </p>
+            </div>
+          ) : (
+            <EvidenceUnavailable
+              status="not_yet_researched"
+              detail="Form ADV disclosure checkboxes are stored as source evidence but are not interpreted as a disciplinary history. This is not a finding of “no disclosures” or a clean record."
+            />
+          )}
         </div>
       </section>
+
+      {report.intelligence ? <FirmProfileIntelligence snapshot={report.intelligence} /> : null}
 
       <section className="mt-8">
         <h2 className="font-serif text-2xl text-[var(--ith-navy)]">Evidence and source details</h2>

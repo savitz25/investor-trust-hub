@@ -3,6 +3,7 @@ import 'server-only';
 import type { ParsedFirmSearch } from '@ith/domain';
 import { query } from '../db';
 import { mapFirmReport, mapSearchHit } from './map-report';
+import { loadFirmProfileIntelligence } from './profile-intelligence';
 import type { FirmDirectoryMetrics, FirmRecordRow, FirmSearchHit, FirmTrustReportModel } from './types';
 
 const FIRM_SELECT = `
@@ -80,7 +81,20 @@ export async function getOfficialFirmBySlug(slug: string): Promise<FirmTrustRepo
     slug,
   ]);
   const row = result.rows[0];
-  return row ? mapFirmReport(row) : null;
+  const report = row ? mapFirmReport(row) : null;
+  if (!report || !row) return report;
+  if (!report.currentlyIndexable) return report;
+  try {
+    report.intelligence = await loadFirmProfileIntelligence({
+      firmId: row.id,
+      crd: report.crd,
+      slug: report.slug,
+      disclosureIndicator: row.disclosure_indicator,
+    });
+  } catch (error) {
+    console.error('profile_intelligence_failed', report.slug, error instanceof Error ? error.message : error);
+  }
+  return report;
 }
 
 export async function searchOfficialFirms(

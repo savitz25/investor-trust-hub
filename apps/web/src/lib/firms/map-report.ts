@@ -88,6 +88,7 @@ export function mapFirmReport(row: FirmRecordRow): FirmTrustReportModel | null {
     observed: row.observed === true,
     indexability,
     currentlyIndexable: row.search_indexable === true && indexability.trustReportEligible,
+    intelligence: null,
   };
 }
 
