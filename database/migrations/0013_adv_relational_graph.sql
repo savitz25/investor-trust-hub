@@ -193,6 +193,9 @@ CREATE TABLE IF NOT EXISTS form_adv_related_person_rows (
 CREATE INDEX IF NOT EXISTS form_adv_related_person_crd_idx
     ON form_adv_related_person_rows (related_crd);
 
+CREATE INDEX IF NOT EXISTS form_adv_related_person_filing_idx
+    ON form_adv_related_person_rows (filing_id);
+
 COMMENT ON TABLE form_adv_related_person_rows IS
     'Schedule D 7.A named related persons only. A related-person CRD is CONFIRMED when present. Name-only is REVIEW_REQUIRED. Not a conflict score.';
 
@@ -281,6 +284,9 @@ CREATE TABLE IF NOT EXISTS form_adv_fund_service_provider_rows (
 CREATE INDEX IF NOT EXISTS form_adv_fund_sp_role_idx
     ON form_adv_fund_service_provider_rows (provider_role, filing_id);
 
+CREATE INDEX IF NOT EXISTS form_adv_fund_sp_filing_idx
+    ON form_adv_fund_service_provider_rows (filing_id);
+
 COMMENT ON TABLE form_adv_fund_service_provider_rows IS
     'Named official Schedule D 7.B.(1) service-provider rows only. No inferred vendors.';
 
@@ -348,6 +354,9 @@ CREATE TABLE IF NOT EXISTS form_adv_relying_adviser_rows (
 
 CREATE INDEX IF NOT EXISTS form_adv_relying_crd_idx
     ON form_adv_relying_adviser_rows (relying_crd);
+
+CREATE INDEX IF NOT EXISTS form_adv_relying_filing_idx
+    ON form_adv_relying_adviser_rows (filing_id);
 
 COMMENT ON TABLE form_adv_relying_adviser_rows IS
     'Schedule R named relying advisers. CRD = CONFIRMED. Name-only = REVIEW_REQUIRED. Not a separate public firm unless CRD is independently on the official roster.';

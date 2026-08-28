@@ -1192,6 +1192,7 @@ def materialize_funds(conn) -> dict:
     )
     conn.commit()
     n = conn.execute("SELECT count(*) FROM products WHERE product_kind='private_fund'").fetchone()[0]
+    print(f"  canonical funds {n:,}", flush=True)
     return {"canonical_funds": int(n)}
 
 
@@ -1247,6 +1248,16 @@ def materialize_historical_candidates(conn) -> dict:
 
 
 def stamp_child_currentness(conn) -> None:
+    # Fail-closed default is FALSE. Stamp TRUE only for children of current filings.
+    # Join indexed filing_id plus filing_uuid so IA/ERA FilingID overlaps stay distinct.
+    for name, table, col in (
+        ("form_adv_related_person_filing_idx", "form_adv_related_person_rows", "filing_id"),
+        ("form_adv_fund_sp_filing_idx", "form_adv_fund_service_provider_rows", "filing_id"),
+        ("form_adv_relying_filing_idx", "form_adv_relying_adviser_rows", "filing_id"),
+    ):
+        conn.execute(f"CREATE INDEX IF NOT EXISTS {name} ON {table} ({col})")
+        print(f"  index {name}", flush=True)
+    conn.commit()
     for table in (
         "form_adv_schedule_ab_rows",
         "form_adv_related_person_rows",
@@ -1258,10 +1269,12 @@ def stamp_child_currentness(conn) -> None:
         conn.execute(
             f"""
             UPDATE {table} r
-            SET is_current = f.is_current
+            SET is_current = TRUE
             FROM form_adv_filings f
-            WHERE r.filing_uuid = f.id
-              AND r.is_current IS DISTINCT FROM f.is_current
+            WHERE f.is_current = TRUE
+              AND r.filing_id = f.filing_id
+              AND r.filing_uuid = f.id
+              AND r.is_current IS DISTINCT FROM TRUE
             """
         )
         print(f"  stamped currentness {table}", flush=True)
