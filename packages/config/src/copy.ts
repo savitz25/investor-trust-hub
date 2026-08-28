@@ -1,9 +1,9 @@
 export const HOME_PATHS = [
   {
     href: '/professionals',
-    title: 'Verify an investment professional',
-    body: 'Research registration, firm relationships, and official disclosures.',
-    status: 'foundation' as const,
+    title: 'Investment professional research',
+    body: 'Individual professional / IAR public research is not yet published. This route is not a live national directory.',
+    status: 'coming_soon' as const,
   },
   {
     href: '/firms',

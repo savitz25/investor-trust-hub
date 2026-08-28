@@ -1,0 +1,305 @@
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.ith-intel {
+  min-width: 0;
+}
+
+.ith-intel-section {
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--ith-border);
+}
+
+.ith-intel-section .th-shell {
+  padding-block: 2.5rem;
+}
+
+.ith-eyebrow {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ith-teal-deep);
+}
+
+.ith-intel h1,
+.ith-intel h2,
+.ith-intel h3 {
+  color: var(--ith-navy);
+}
+
+.ith-lede {
+  margin: 1rem 0 0;
+  max-width: 42rem;
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+
+.ith-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.ith-lookup {
+  margin-top: 2rem;
+  padding: 1.25rem;
+  border: 1px solid var(--ith-border);
+  border-radius: var(--th-radius-card);
+  background: #fff;
+  box-shadow: var(--th-shadow-soft);
+}
+
+.ith-metric-rail {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .ith-metric-rail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .ith-metric-rail {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.ith-metric {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--ith-border);
+  border-radius: var(--th-radius-card);
+  background: #fff;
+}
+
+.ith-metric__value {
+  margin: 0;
+  font-family: var(--th-font-display);
+  font-size: 1.75rem;
+  line-height: 1.15;
+  color: var(--ith-navy);
+}
+
+.ith-metric h3 {
+  margin: 0.4rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 650;
+}
+
+.ith-kicker {
+  margin: 0.4rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: #475569;
+}
+
+.ith-disclose {
+  margin-top: 0.75rem;
+}
+
+.ith-disclose > summary {
+  cursor: pointer;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 650;
+  color: var(--ith-teal-deep);
+}
+
+.ith-disclose > summary:focus-visible {
+  outline: var(--th-focus);
+  outline-offset: 2px;
+}
+
+.ith-findings {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.ith-finding {
+  min-width: 0;
+  padding: 1.25rem;
+  border: 1px solid var(--ith-border);
+  border-radius: var(--th-radius-card);
+  background: #fff;
+}
+
+.ith-bar {
+  min-width: 0;
+  margin-top: 0.65rem;
+}
+
+.ith-bar__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+}
+
+.ith-bar__track {
+  height: 10px;
+  margin-top: 0.35rem;
+  border-radius: 999px;
+  background: var(--ith-teal-mist);
+  overflow: hidden;
+}
+
+.ith-bar__fill {
+  display: block;
+  height: 100%;
+  background: var(--ith-teal);
+}
+
+.ith-table-scroll {
+  margin-top: 0.85rem;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ith-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.ith-table th,
+.ith-table td {
+  padding: 0.5rem 0.65rem;
+  border-bottom: 1px solid var(--ith-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.ith-table caption {
+  caption-side: bottom;
+  padding-top: 0.5rem;
+  text-align: left;
+  color: #475569;
+  font-size: 0.8rem;
+}
+
+.ith-plain {
+  margin: 1rem 0 0;
+  padding-left: 1.2rem;
+}
+
+.ith-plain li + li {
+  margin-top: 0.45rem;
+}
+
+.ith-geo {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(4.6rem, 1fr));
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+
+.ith-geo-cell {
+  min-width: 0;
+  min-height: 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.4rem 0.35rem;
+  border: 1px solid var(--ith-border);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--ith-teal) calc(var(--ith-vol, 0) * 55%), #fff);
+  color: var(--ith-navy);
+  text-decoration: none;
+  font-size: 0.78rem;
+}
+
+.ith-geo-cell[data-unresolved='true'] {
+  background: #fff7ed;
+  border-color: #fdba74;
+}
+
+.ith-ask {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.ith-cta-grid {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .ith-cta-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.ith-cta {
+  display: block;
+  min-height: 44px;
+  padding: 1rem;
+  border: 1px solid var(--ith-border);
+  border-radius: var(--th-radius-card);
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+}
+
+.ith-cta strong {
+  display: block;
+  color: var(--ith-navy);
+}
+
+.ith-axis {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .ith-axis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.ith-journey {
+  margin: 1rem 0 0;
+  padding-left: 1.2rem;
+}
+
+.ith-check {
+  display: grid;
+  gap: 0.4rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ith-check label {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  min-height: 44px;
+}
+
+.ith-check input {
+  margin-top: 0.35rem;
+  width: 1.1rem;
+  height: 1.1rem;
+}

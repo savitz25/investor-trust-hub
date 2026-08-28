@@ -24,8 +24,10 @@ describe('site copy does not endorse or rank', () => {
   it('keeps homepage and about pages free of ranking language', () => {
     const corpus = [
       read('src/components/home-hero.tsx'),
+      read('src/components/home-intel.tsx'),
       read('src/components/home-paths.tsx'),
       read('src/components/home-principles.tsx'),
+      read('src/app/page.tsx'),
       read('src/app/about/page.tsx'),
       read('src/app/methodology/page.tsx'),
       read('src/components/firm-trust-report.tsx'),
@@ -35,6 +37,8 @@ describe('site copy does not endorse or rank', () => {
     expect(findForbiddenGuidance(corpus)).toEqual([]);
     expect(corpus.toLowerCase()).not.toContain('verified advisor');
     expect(corpus.toLowerCase()).not.toContain('★★★★★');
+    expect(corpus.toLowerCase()).not.toContain('research a professional');
+    expect(corpus.toLowerCase()).not.toContain('aggregateRating'.toLowerCase());
   });
 
   it('keeps the official brand mark free of SVG title tags', () => {
