@@ -8,7 +8,7 @@ import { getOfficialFirmIndexable } from '@/lib/firms/repository';
 import { pageMetadata } from '@/lib/seo';
 import { shareRouteOgImage } from '@/lib/share-hub';
 
-export const revalidate = 300;
+export const revalidate = 60;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
