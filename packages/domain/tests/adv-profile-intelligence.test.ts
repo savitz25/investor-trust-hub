@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
@@ -348,7 +348,7 @@ describe('item 11, custody, compensation, ADV-W, related orgs', () => {
     );
     expect(result.historical.withdrawals[0]?.filingType).toBe('PARTIAL');
     expect(ADV_PUBLIC_COPY.advwNote.toLowerCase()).toContain('withdrawal filing');
-    expect(ADV_PUBLIC_COPY.advwNote.toLowerCase()).not.toContain('misconduct');
+    expect(findForbiddenAdvPublicCopy(ADV_PUBLIC_COPY.advwNote)).toEqual([]);
     expect(result.version).toBe(TRUST_REPORT_SNAPSHOT_VERSION);
     expect(JSON.stringify(result)).not.toContain('/historical');
   });
@@ -389,11 +389,21 @@ describe('copy contract and routes', () => {
   });
 
   it('does not add people, fund, or historical-firm app routes', () => {
-    const appDir = join(here, '../../../apps/web/src/app');
-    expect(readFileSync(join(appDir, 'robots.ts'), 'utf8')).toContain("'/professional/'");
-    expect(readFileSync(join(appDir, 'robots.ts'), 'utf8')).toContain("'/fund/'");
-    expect(readFileSync(join(appDir, 'sitemap.ts'), 'utf8')).toContain('/firm/${slug}');
-    expect(readFileSync(join(appDir, 'sitemap.ts'), 'utf8')).not.toContain('/fund/');
-    expect(readFileSync(join(appDir, 'sitemap.ts'), 'utf8')).not.toContain('/person/');
+    let root = here;
+    for (let i = 0; i < 6; i += 1) {
+      if (existsSync(join(root, 'apps', 'web', 'src', 'app', 'robots.ts'))) break;
+      root = join(root, '..');
+    }
+    const appDir = join(root, 'apps', 'web', 'src', 'app');
+    const robots = readFileSync(join(appDir, 'robots.ts'), 'utf8');
+    const sitemap = readFileSync(join(appDir, 'sitemap.ts'), 'utf8');
+    expect(robots).toContain("'/professional/'");
+    expect(robots).toContain("'/fund/'");
+    expect(sitemap).toContain('/firm/${slug}');
+    expect(sitemap).not.toContain('/fund/');
+    expect(sitemap).not.toContain('/person/');
+    expect(existsSync(join(appDir, 'person'))).toBe(false);
+    expect(existsSync(join(appDir, 'owner'))).toBe(false);
+    expect(existsSync(join(appDir, 'historical'))).toBe(false);
   });
 });
