@@ -285,9 +285,17 @@ describe('item 11, custody, compensation, ADV-W, related orgs', () => {
           asOfDate: '2026-08-03',
         },
         {
-          fieldName: 'percentage_of_assets',
+          fieldName: '5E(1)',
           reportedYn: 'Y',
           numericValue: null,
+          textValue: null,
+          presenceStatus: 'REPORTED_YES',
+          asOfDate: '2026-08-03',
+        },
+        {
+          fieldName: '5A',
+          reportedYn: null,
+          numericValue: '120',
           textValue: null,
           presenceStatus: 'REPORTED_YES',
           asOfDate: '2026-08-03',
@@ -330,6 +338,7 @@ describe('item 11, custody, compensation, ADV-W, related orgs', () => {
     });
     expect(result.custody.cash).toBe('Yes as reported');
     expect(JSON.stringify(result.custody).toLowerCase()).not.toContain('risk');
+    expect(result.scale.employeeCount).toBe('120');
     expect(result.compensation.methods).toEqual(['Percentage of assets under management']);
     expect(JSON.stringify(result.compensation).toLowerCase()).not.toContain('fee-only');
     expect(result.affiliationTypes).toEqual(['Broker-dealer']);

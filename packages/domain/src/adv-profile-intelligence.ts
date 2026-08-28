@@ -153,6 +153,68 @@ export function findForbiddenAdvPublicCopy(text: string): string[] {
   return hits;
 }
 
+/** Official IARD FOIA column names stored on form_adv_reported_attributes.field_name. */
+export const TIER1_PUBLIC_FIELDS: Record<string, string> = {
+  '5A': 'employee_count',
+  '5B(1)': 'advisory_personnel_count',
+  '5C(1)': 'client_count',
+  '5E(1)': 'percentage_of_assets',
+  '5E(2)': 'hourly_charges',
+  '5E(3)': 'subscription_fees',
+  '5E(4)': 'fixed_fees',
+  '5E(5)': 'commissions',
+  '5E(6)': 'performance_based_fees',
+  '5E(7)': 'other_compensation',
+  '9A(1)(a)': 'custody_cash',
+  '9A(1)(b)': 'custody_securities',
+  '9B(1)(a)': 'related_person_custody_cash',
+  '9B(1)(b)': 'related_person_custody_securities',
+  '7B': 'reports_private_funds',
+  'Count of Private Funds - 7B(1)': 'private_fund_count_7b1',
+  'Total Gross Assets of Private Funds': 'private_fund_gross_assets',
+  '5D(1)(a)': 'clients_individuals',
+  '5D(1)(b)': 'clients_high_net_worth_individuals',
+  '5D(1)(c)': 'clients_banking_or_thrift',
+  '5D(1)(d)': 'clients_investment_companies',
+  '5D(1)(e)': 'clients_business_development_companies',
+  '5D(1)(f)': 'clients_pooled_investment_vehicles',
+  '5D(1)(g)': 'clients_pension_profit_sharing',
+  '5D(1)(h)': 'clients_charities',
+  '5D(1)(i)': 'clients_state_or_municipal',
+  '5D(1)(j)': 'clients_other_investment_advisers',
+  '5D(1)(k)': 'clients_insurance_companies',
+  '5D(1)(l)': 'clients_sovereigns',
+  '5D(1)(m)': 'clients_other',
+  '6A(1)': 'other_business_broker_dealer',
+  '6A(2)': 'other_business_registered_representative',
+  '6A(3)': 'other_business_cpo_or_cta',
+  '6A(4)': 'other_business_futures_commission_merchant',
+  '6A(5)': 'other_business_real_estate',
+  '6A(6)': 'other_business_insurance',
+  '6A(7)': 'other_business_bank',
+  '6A(8)': 'other_business_trust_company',
+  '6A(9)': 'other_business_accountant',
+  '6A(10)': 'other_business_lawyer',
+  '6A(11)': 'other_business_other_financial_salesperson',
+  '6A(14)': 'other_business_other',
+  '7A(1)': 'affiliation_broker_dealer',
+  '7A(2)': 'affiliation_other_investment_adviser',
+  '7A(3)': 'affiliation_municipal_advisor',
+  '7A(4)': 'affiliation_security_based_swap_dealer',
+  '7A(5)': 'affiliation_major_security_based_swap_participant',
+  '7A(6)': 'affiliation_cpo_or_cta',
+  '7A(7)': 'affiliation_futures_commission_merchant',
+  '7A(8)': 'affiliation_banking_or_thrift',
+  '7A(9)': 'affiliation_trust_company',
+  '7A(10)': 'affiliation_accountant',
+  '7A(11)': 'affiliation_lawyer',
+  '7A(12)': 'affiliation_insurance',
+  '7A(13)': 'affiliation_pension_consultant',
+  '7A(14)': 'affiliation_real_estate_broker',
+  '7A(15)': 'affiliation_limited_partnership_sponsor',
+  '7A(16)': 'affiliation_other',
+};
+
 export const COMPENSATION_METHOD_LABELS: Record<string, string> = {
   percentage_of_assets: 'Percentage of assets under management',
   hourly_charges: 'Hourly charges',
@@ -487,17 +549,26 @@ function numericLabel(value: string | number | null | undefined): string | null 
 }
 
 function attrMap(rows: AdvAttributeRowInput[]): Map<string, AdvAttributeRowInput> {
-  return new Map(rows.map((row) => [row.fieldName, row]));
+  const map = new Map<string, AdvAttributeRowInput>();
+  for (const row of rows) {
+    map.set(row.fieldName, row);
+    const alias = TIER1_PUBLIC_FIELDS[row.fieldName];
+    if (alias) map.set(alias, row);
+  }
+  return map;
 }
 
 function notFiled(rows: AdvAttributeRowInput[], field: string): boolean {
-  return rows.some((row) => row.fieldName === field && row.presenceStatus === 'NOT_FILED_BY_FORM_TYPE');
+  const mapped = attrMap(rows);
+  const row = mapped.get(field);
+  return row?.presenceStatus === 'NOT_FILED_BY_FORM_TYPE';
 }
 
 function listedYes(rows: AdvAttributeRowInput[], labels: Record<string, string>): string[] {
+  const mapped = attrMap(rows);
   return Object.entries(labels)
     .filter(([field]) => {
-      const row = rows.find((item) => item.fieldName === field);
+      const row = mapped.get(field);
       return row && (row.reportedYn ?? '').toUpperCase() === 'Y' && row.presenceStatus === 'REPORTED_YES';
     })
     .map(([, label]) => label)
