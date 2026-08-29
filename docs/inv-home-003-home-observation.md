@@ -18,12 +18,12 @@ Live INV-HOME-002 homepage verified. Residual public-nav honesty fix applied: sy
 | --- | --- |
 | Repo | `https://github.com/savitz25/investor-trust-hub.git` |
 | Starting `origin/main` | `9da25e7a0483145d31f4ba38d7de5805cb2594cd` |
-| Commits since 9da25e7 | none |
+| Honesty fix SHA | `0ea14a690d5151d6f596bd93d60cc2b273220afd` (`#6`) |
 | Branch / worktree | `inv-home-003-home-observation` / `C:\Users\makei\investor-trust-hub-inv-home-003` |
 | Canonical | `https://www.investortrusthub.com` |
 | Vercel project | `investor-trust-hub-web` (`prj_Qu2DT0AIy8R7XYTQiHgNcDYjE9i8`) |
-| Production deployment (pre-change) | `dpl_DF9Ytvhb8fwfKa5noCDZQEmctiW1` |
-| Production SHA (pre-change) | `9da25e7` |
+| Production deployment (pre-change) | `dpl_DF9Ytvhb8fwfKa5noCDZQEmctiW1` / SHA `9da25e7` |
+| Production deployment (post-change) | GitHub deployment `6158385760` / SHA `0ea14a6` |
 
 ---
 
@@ -141,11 +141,9 @@ No homepage intelligence, census, or Wave-1 firm gate changes.
 
 # L. HOMEPAGE CLOSURE
 
-Recommendation after Production promotion of this honesty fix:
-
 **INVESTORTRUSTHUB NATIONAL HOMEPAGE: OPERATIONALLY CLOSED**
 
-This is a chrome-honesty close of INV-HOME-002, not a new data product. Remaining gaps in K are future InvestorTrustHub opportunities and are out of homepage scope.
+This is a chrome-honesty close of INV-HOME-002, not a new data product. Remaining gaps in K are future InvestorTrustHub opportunities and are out of homepage scope. No homepage follow-up is required.
 
 ---
 
@@ -182,9 +180,29 @@ That nav/indexability of synthetic professionals is the residual honesty defect.
 | RIA/ERA semantics remain correct | YES — ERA is not an RIA; extra 2,155 excluded |
 | RAUM and compensation stories remain correctly interpreted | YES — RIA-only 5F(2)(c) bands; 5.E independent Y/N |
 | Every major number remains traceable | YES — Trace this number on census metrics |
-| Synthetic professionals not advertised as a real research product | YES after this fix ships — removed from nav, sitemap, robots |
+| Synthetic professionals not advertised as a real research product | YES — Production nav has no Professionals; no `href="/professionals"`; listing `noindex` |
 | No unsupported feature promoted | YES — Decision Lab / compare / What Changed not homepage CTAs |
 | Mobile / accessibility / SEO remain healthy | YES — visual-003 assert, skip link, one H1, canonical, JSON-LD `/firms` |
-| Wave-1 indexability remains unchanged | YES — 1,000 firm URLs; sitemap not expanded |
+| Wave-1 indexability remains unchanged | YES — Production sitemap 1,010 locs = 1,000 firms + 10 static; `/professionals` removed not expanded |
 | No new ingestion / publication | YES — `db_writes = 0` |
-| Operational closure decision | **CLOSED** once Production HTML no longer lists Professionals in header/footer |
+| Operational closure decision | **INVESTORTRUSTHUB NATIONAL HOMEPAGE: OPERATIONALLY CLOSED** |
+
+---
+
+# O. POST-CHANGE PRODUCTION PROOF
+
+Captured 2026-08-29 after SHA `0ea14a6` reached `https://www.investortrusthub.com`:
+
+| Check | Result |
+| --- | --- |
+| GET `/` | 200 |
+| H1 | Understand investment advisers before you choose one. |
+| Census | 23,622 / 17,018 / 6,604 / 1,000 / 16,783 / 235 / 17,997 / 5,625 |
+| ERA / RAUM / 5.E / Trace | present |
+| Header nav | Firms, Research, Tools, Methodology, Sources, About |
+| `href="/professionals"` | absent |
+| Remaining “Professionals / IARs” copy | labeled **Not yet researched** / public research is not published |
+| Trust Score | negation only |
+| GET `/professionals` robots | `noindex, follow`; synthetic phrase present |
+| `robots.txt` | `Disallow: /professionals` |
+| Sitemap | 1,010 locs; 1,000 `/firm/` URLs; `/professionals` absent |
