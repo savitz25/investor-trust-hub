@@ -1,8 +1,19 @@
 # INV-HOME-001 — National Homepage Intelligence Baseline Audit
 
-Locked: 2026-08-28. Audit-only. No production homepage change. No ingestion. No indexing change. No Wave 2. No BrokerCheck scrape.
+Original lock: 2026-08-28 (commit `2865320`). Audit-only at lock time. No ingestion. No indexing change. No Wave 2. No BrokerCheck scrape.
 
-Code + production database + live production behavior are authoritative over stale milestone text (for example `docs/source-registry.md` still says IAPD individuals are not ingested; the production database now contains an `iapd_iar_compilation` release retrieved 2026-08-28 17:27Z).
+**Reverification: 2026-08-29.** This session re-fetched GitHub and live Production. `origin/main` has moved **forward** with legitimate project work. That work was **not** reset.
+
+| SHA | Role |
+| --- | --- |
+| `ec6ee5b81015024be2a74a3b9f5ab9d0fa3fc5e8` | Task-brief reference SHA |
+| `2865320` | Original INV-HOME-001 audit lock |
+| `9da25e7a0483145d31f4ba38d7de5805cb2594cd` | Current `origin/main` — **INV-HOME-002 already shipped** (`feat(home): ship InvestorTrustHub national Intelligence OS homepage`) |
+| Production deployment | `dpl_DF9Ytvhb8fwfKa5noCDZQEmctiW1` (`investor-trust-hub-web`, aliased to www + git-main) |
+
+Code + production database + live production behavior remain authoritative over stale milestone text.
+
+This reverification **did not** promote, ingest, expand sitemap, or mutate identities.
 
 ---
 
@@ -10,9 +21,13 @@ Code + production database + live production behavior are authoritative over sta
 
 **COMPLETE**
 
-The production/repository/data baseline is locked. `investor-home-intel-v1` can be produced from existing data without new ingestion. INV-HOME-002 can implement the national homepage from this contract without guessing.
+The production/repository/data baseline is locked. `investor-home-intel-v1` is produced from existing data without new ingestion.
 
-No HARD STOP discrepancy: canonical domain, Vercel project, GitHub `main`, and production deployment SHA all agree.
+INV-HOME-002 has **already been implemented and is live** on `https://www.investortrusthub.com` (`origin/main` = `9da25e7`). This INV-HOME-001 pass is a forensic re-lock against that current Production, not a license to rebuild the homepage again.
+
+No HARD STOP discrepancy: canonical domain, Vercel project `investor-trust-hub-web`, GitHub `main`, and the git-main Production alias agree. Production homepage HTML matches the locked census (23,622 roster; 17,018 RIA; 6,604 ERA; 1,000 Wave-1 Trust Reports; ERA is not an RIA; Trace this number; no “Research a professional” hero CTA).
+
+Do not silently overwrite `9da25e7`.
 
 ---
 
@@ -22,11 +37,12 @@ No HARD STOP discrepancy: canonical domain, Vercel project, GitHub `main`, and p
 | --- | --- |
 | Repo | `https://github.com/savitz25/investor-trust-hub.git` |
 | Reference SHA (task brief) | `ec6ee5b81015024be2a74a3b9f5ab9d0fa3fc5e8` |
-| Actual starting `origin/main` SHA | `ec6ee5b81015024be2a74a3b9f5ab9d0fa3fc5e8` |
-| SHA comparison | Exact match. `main` has not moved forward. |
-| Isolated worktree | `C:\Users\makei\investor-trust-hub-inv-home-001` |
-| Branch | `inv-home-001-national-home-audit` |
-| Shared checkout | `C:\Users\makei\investor-trust-hub` was **not** used (it was behind at an older SHA). |
+| Original INV-HOME-001 lock SHA | `2865320` (docs lock on `ec6ee5b`) |
+| Actual current `origin/main` SHA | `9da25e7a0483145d31f4ba38d7de5805cb2594cd` |
+| SHA comparison | **Main moved forward legitimately.** `2865320` locked the audit; `9da25e7` shipped INV-HOME-002. Neither was reset. |
+| Isolated worktree (this pass) | `C:\Users\makei\investor-trust-hub-inv-home-002` at `9da25e7`, branch `inv-home-001-verify-current` |
+| Original 001 worktree | `C:\Users\makei\investor-trust-hub-inv-home-001` remains at `2865320` |
+| Shared checkout | `C:\Users\makei\investor-trust-hub` is behind; not used. |
 | Canonical domain | `https://www.investortrusthub.com` |
 | Apex | `https://investortrusthub.com` serves the same Vercel project (host is in `INDEXABLE_HOSTS`) |
 | Vercel team | `savitz25-s-projects` (`team_1vxGqSSLGF4xmg7XRqpkLSKi`) |
@@ -34,9 +50,9 @@ No HARD STOP discrepancy: canonical domain, Vercel project, GitHub `main`, and p
 | Project ID | `prj_Qu2DT0AIy8R7XYTQiHgNcDYjE9i8` |
 | Root directory | `apps/web` |
 | Framework | Next.js (Node 24 on Vercel) |
-| Production deployment | `dpl_CFnzBFkrwm769ApyjLDhEWj4WzNE` (Ready, ~2026-08-28 09:08 EDT) |
-| Production SHA | `ec6ee5b81015024be2a74a3b9f5ab9d0fa3fc5e8` |
-| Main / production match | **YES** |
+| Production deployment (2026-08-29 re-verify) | `dpl_DF9Ytvhb8fwfKa5noCDZQEmctiW1` (Ready; aliases include www, apex, git-main) |
+| Production SHA | **`9da25e7`** (git-main alias on the same deployment as www) |
+| Main / production match | **YES** (current) |
 | Production environment | Production; `SITE_INDEXING_ENABLED=true`; `INDEXABLE_HOSTS=www.investortrusthub.com,investortrusthub.com`; `CANONICAL_HOST=www.investortrusthub.com` |
 | Preview / `*.vercel.app` | Remain noindex via `isHostLaunchIndexable` + middleware `X-Robots-Tag` |
 | Production database | Supabase project `ghjhcxfirxnszfnymdxb`, pooler `aws-0-us-east-2.pooler.supabase.com`, database `postgres`. Read-only census only. |
@@ -54,10 +70,32 @@ AGENTS.md was read before changes. ERA is not an RIA. No Trust Score. Missing �
 
 # C. CURRENT HOMEPAGE
 
-## Route and implementation
+## Live Production (2026-08-29)
+
+INV-HOME-002 is already live. Server HTML for `https://www.investortrusthub.com/`:
+
+- Title: `Investment adviser intelligence · InvestorTrustHub`
+- Description: Independent SEC/IARD and Form ADV research for investment adviser firms…
+- Canonical: `https://www.investortrusthub.com`
+- Robots: `index, follow`
+- H1 count: **1** — **Understand investment advisers before you choose one.**
+- JSON-LD: WebPage + WebSite SearchAction targeting `/firms`
+- Census in HTML: 23,622 roster; 17,018 RIA; 6,604 ERA; 1,000 Wave-1 Trust Reports; 5,149,596 ADV attributes
+- Trace this number: present
+- State of the record: present
+- ERA is not an RIA: present
+- Trust Score appears **only in negation** (“not a Trust Score, Adviser Score, or Risk Score”)
+- Hero CTA **“Research a professional” is absent**
+- Nav still includes Professionals (placeholder route; not a homepage promise)
+- Cache-Control: `private, no-cache, no-store` (dynamic/RSC payload, not a 24h pin of empty HTML in this fetch)
+- Implementation: `apps/web/src/app/page.tsx` awaits `buildInvestorHomeIntelV1()` and renders `InvestorHomeIntelligence`
+
+Original 2026-08-28 homepage description (pre-002 catalog hero) is retained below as historical KEEP/MODIFY context. **Do not rebuild it.**
+
+## Route and implementation (as of original 001 lock, pre-002)
 
 - Route: `/`
-- Page: `apps/web/src/app/page.tsx` — **server component**, no database fetch, no `revalidate` export (static RSC).
+- Page (then): `apps/web/src/app/page.tsx` — **server component**, no database fetch, no `revalidate` export (static RSC).
 - Layout: `apps/web/src/app/layout.tsx` — `SiteHeader` (skip link `#main`), `main#main`, `SiteFooter`. Chassis `TH_CHASSIS_VERSION = 2026.08.21-visual-v1` (`data-th-chassis`). Network `data-hub="investor"`.
 - Header nav (`PRIMARY_ROUTES`): Home, Professionals, Firms, Research, Tools, Methodology, Sources, About. Sticky header, mobile drawer, Switch Hub menu, skip-to-content.
 - Footer: brand line plus legal (`/disclaimer`, `/privacy`, `/terms`) and methodology/sources.
@@ -882,11 +920,24 @@ No canonical-domain / SHA / database-binding HARD STOP.
 
 ---
 
-# Z. RECOMMENDED INV-HOME-002 SCOPE
+# Z. RECOMMENDED NEXT SCOPE
 
-**INV-HOME-002 — National Intelligence Homepage Implementation**
+**INV-HOME-002 is already shipped** at `9da25e7` and is live on Production.
 
-Build the production homepage from this locked contract. Do not redesign identity, ADV parsing, Wave-1 indexability, or professional publication.
+Do **not** re-implement the national homepage.
+
+Recommended next task (do not start here):
+
+**INV-HOME-003 — Homepage observation + residual copy/nav honesty**
+
+Bounded, no ingestion, no Wave 2, no professional publication:
+
+1. Confirm live payload remains census-locked (no drift to 25,777 or people totals).
+2. Keep Professionals in the chrome only if the listing page remains explicitly synthetic; do not promote it from the homepage.
+3. Optional: skip/coach chrome that fights the intelligence H1.
+4. Do not change Wave-1 indexability, ERA≠RIA, or snapshot data.
+
+If a later data-support task is needed, it is **not** a homepage redesign: e.g. Item 5.D client types remain omitted until a dedicated extract exists.
 
 ### In scope
 
