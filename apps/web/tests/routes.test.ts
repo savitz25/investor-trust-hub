@@ -6,7 +6,6 @@ describe('route architecture', () => {
     const hrefs = PRIMARY_ROUTES.map((route) => route.href);
     expect(hrefs).toEqual([
       '/',
-      '/professionals',
       '/firms',
       '/research',
       '/tools',
@@ -14,10 +13,13 @@ describe('route architecture', () => {
       '/sources',
       '/about',
     ]);
+    expect(hrefs).not.toContain('/professionals');
   });
 
   it('keeps synthetic and reserved routes out of the sitemap contract', () => {
+    expect(INDEXABLE_PATHS).not.toContain('/professionals');
     expect(INDEXABLE_PATHS).not.toContain('/professional/jordan-p-elmwood');
+    expect(shouldNoIndex('/professionals')).toBe(true);
     expect(shouldNoIndex('/professional/jordan-p-elmwood')).toBe(true);
     expect(shouldNoIndex('/firm/northbridge-ledger-advisors')).toBe(true);
     expect(shouldNoIndex('/compare')).toBe(true);

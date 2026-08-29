@@ -11,6 +11,7 @@ export async function generateMetadata() {
     description:
       'Research registration, firm relationships, and official disclosures. This foundation directory currently shows labeled synthetic fixtures only.',
     path: '/professionals',
+    indexable: false,
     host: await readRequestHost(),
   });
 }
