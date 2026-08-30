@@ -194,30 +194,40 @@ function filtersSql(q: InvestorResearchQuery, params: unknown[]): { where: strin
     clauses.push(`adv.dataset_kind = 'ria'`);
   }
   const methods = q.compensationMethods ?? [];
-  const match = q.compensationMatch === 'all' ? 'AND' : 'OR';
   if (methods.length) {
-    const exists = methods.map((key) => {
-      params.push(COMPENSATION_FIELD_NAMES[key]);
-      return `EXISTS (
+    params.push(methods.map((key) => COMPENSATION_FIELD_NAMES[key]));
+    clauses.push(`a0.field_name = ANY($${params.length}::text[])`);
+    clauses.push(`a0.presence_status = 'REPORTED_YES'`);
+    clauses.push(`a0.is_current = true`);
+    if (q.compensationMatch === 'all' && methods.length > 1) {
+      for (const key of methods.slice(1)) {
+        params.push(COMPENSATION_FIELD_NAMES[key]);
+        clauses.push(`EXISTS (
+          SELECT 1 FROM form_adv_reported_attributes a
+          WHERE a.firm_id = f.id
+            AND a.field_name = $${params.length}
+            AND a.presence_status = 'REPORTED_YES'
+            AND a.is_current = true
+        )`);
+      }
+    }
+    clauses.push(`adv.dataset_kind = 'ria'`);
+  }
+  if (q.affiliationField) {
+    params.push(AFFILIATION_FIELDS[q.affiliationField].field);
+    if (!methods.length) {
+      clauses.push(`a0.field_name = $${params.length}`);
+      clauses.push(`a0.presence_status = 'REPORTED_YES'`);
+      clauses.push(`a0.is_current = true`);
+    } else {
+      clauses.push(`EXISTS (
         SELECT 1 FROM form_adv_reported_attributes a
         WHERE a.firm_id = f.id
           AND a.field_name = $${params.length}
           AND a.presence_status = 'REPORTED_YES'
           AND a.is_current = true
-      )`;
-    });
-    clauses.push(`(${exists.join(` ${match} `)})`);
-    clauses.push(`adv.dataset_kind = 'ria'`);
-  }
-  if (q.affiliationField) {
-    params.push(AFFILIATION_FIELDS[q.affiliationField].field);
-    clauses.push(`EXISTS (
-      SELECT 1 FROM form_adv_reported_attributes a
-      WHERE a.firm_id = f.id
-        AND a.field_name = $${params.length}
-        AND a.presence_status = 'REPORTED_YES'
-        AND a.is_current = true
-    )`);
+      )`);
+    }
   }
   return { where: clauses.join('\n      AND ') };
 }
@@ -231,6 +241,22 @@ const FROM_SQL = `
   LEFT JOIN search_documents sd ON sd.entity_id = f.id AND sd.entity_kind = 'firm'
   LEFT JOIN source_releases rel ON rel.id = adv.source_release_id
 `;
+
+const FROM_ATTR_SQL = `
+  FROM form_adv_reported_attributes a0
+  JOIN firms f ON f.id = a0.firm_id
+  JOIN form_adv_firm_facts adv ON adv.firm_id = f.id
+  JOIN firm_identifiers crd ON crd.firm_id = f.id AND crd.identifier_type = 'crd'
+  LEFT JOIN registrations r ON r.firm_id = f.id AND r.subject_kind = 'firm'
+  LEFT JOIN branches b ON b.firm_id = f.id AND b.is_main_office
+  LEFT JOIN search_documents sd ON sd.entity_id = f.id AND sd.entity_kind = 'firm'
+  LEFT JOIN source_releases rel ON rel.id = adv.source_release_id
+`;
+
+function fromSql(q: InvestorResearchQuery): string {
+  if (q.compensationMethods?.length || q.affiliationField) return FROM_ATTR_SQL;
+  return FROM_SQL;
+}
 
 const SELECT_SQL = `
   SELECT
@@ -318,15 +344,20 @@ async function listFirms(parsed: ParsedInvestorAsk): Promise<{ rows: FirmRow[]; 
   const { where } = filtersSql(parsed.query, params);
   const page = parsed.query.page;
   const offset = (page - 1) * INVESTOR_ASK_PAGE_SIZE;
+  const from = fromSql(parsed.query);
+  const countExpr = from.includes('a0') ? 'count(DISTINCT f.id)::int' : 'count(*)::int';
   const count = await query<{ n: number }>(
-    `SELECT count(*)::int AS n ${FROM_SQL} WHERE ${where}`,
+    `SELECT ${countExpr} AS n ${from} WHERE ${where}`,
     params,
   );
   const listParams = [...params, INVESTOR_ASK_PAGE_SIZE, offset];
+  const needsDistinct =
+    (parsed.query.compensationMethods?.length ?? 0) > 1 && parsed.query.compensationMatch !== 'all';
+  const distinct = needsDistinct ? 'DISTINCT ON (crd.identifier_value)' : '';
   const list = await query<FirmRow>(
-    `${SELECT_SQL} ${FROM_SQL}
+    `${SELECT_SQL.replace('SELECT', `SELECT ${distinct}`)} ${from}
      WHERE ${where}
-     ORDER BY ${orderSql(parsed.query.sort)}
+     ORDER BY ${needsDistinct ? `crd.identifier_value ASC, ${orderSql(parsed.query.sort)}` : orderSql(parsed.query.sort)}
      LIMIT $${listParams.length - 1} OFFSET $${listParams.length}`,
     listParams,
   );
@@ -349,7 +380,7 @@ async function countRoster(parsed: ParsedInvestorAsk): Promise<AskCountRow[]> {
     const params: unknown[] = [];
     const filtered = { ...parsed.query, firmType: parsed.query.firmType ?? 'ria' };
     const { where } = filtersSql(filtered, params);
-    const result = await query<{ n: number }>(`SELECT count(*)::int AS n ${FROM_SQL} WHERE ${where}`, params);
+    const result = await query<{ n: number }>(`SELECT count(*)::int AS n ${fromSql(filtered)} WHERE ${where}`, params);
     return [
       {
         label: 'Matching firm facts',
