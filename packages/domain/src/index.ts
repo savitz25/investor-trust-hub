@@ -18,3 +18,4 @@ export * from './firm-indexability';
 export * from './firm-search-query';
 export * from './adv-profile-intelligence';
 export * from './investor-home-intel';
+export * from './investor-ask';

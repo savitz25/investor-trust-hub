@@ -174,6 +174,9 @@ export function InvestorHomeIntelligence({ intel }: { intel: InvestorHomeIntelV1
             <Link className="th-btn-secondary th-btn-hero" href="/firms">
               Research an investment firm
             </Link>
+            <Link className="th-btn-secondary th-btn-hero" href="/ask">
+              Ask InvestorTrustHub
+            </Link>
           </div>
           <div className="ith-lookup" id="lookup">
             <p className="ith-eyebrow">Firm lookup</p>
@@ -360,6 +363,28 @@ export function InvestorHomeIntelligence({ intel }: { intel: InvestorHomeIntelV1
         <div className="th-shell">
           <p className="ith-eyebrow">Ask the market</p>
           <h2 id="ask-title">Structured questions, not a chatbot</h2>
+          <form action="/ask" method="get" className="mb-6 max-w-2xl" role="search" aria-label="Ask InvestorTrustHub">
+            <label htmlFor="home-ask-q" className="sr-only">
+              Ask InvestorTrustHub
+            </label>
+            <div className="flex flex-col gap-2 sm:flex-row">
+              <input
+                id="home-ask-q"
+                name="q"
+                placeholder="Show SEC-registered RIAs in Florida."
+                className="min-h-12 flex-1 rounded-xl border border-[var(--ith-border)] px-4"
+              />
+              <button type="submit" className="th-btn-primary min-h-12 px-5">
+                Ask
+              </button>
+            </div>
+            <p className="mt-2 text-xs text-[var(--ith-ink)]">
+              Structured SEC/IARD research. Not a recommendation engine.{' '}
+              <Link href="/ask" className="font-semibold text-teal-800">
+                Open Ask InvestorTrustHub
+              </Link>
+            </p>
+          </form>
           <div className="ith-ask">
             {intel.ask.map((item) => (
               <details key={item.id} className="ith-disclose">
