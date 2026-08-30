@@ -1,5 +1,6 @@
 export const PRIMARY_ROUTES = [
   { href: '/', label: 'Home' },
+  { href: '/ask', label: 'Ask' },
   { href: '/firms', label: 'Firms' },
   { href: '/research', label: 'Research' },
   { href: '/tools', label: 'Tools' },
@@ -38,6 +39,8 @@ export const INDEXABLE_PATHS = [
 
 /** Synthetic fixture pages must stay noindex until replaced by sourced records. */
 export const NOINDEX_ROUTE_PREFIXES = [
+  '/ask',
+  '/api/ask',
   '/professionals',
   '/professional/',
   '/firm/',

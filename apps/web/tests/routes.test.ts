@@ -6,6 +6,7 @@ describe('route architecture', () => {
     const hrefs = PRIMARY_ROUTES.map((route) => route.href);
     expect(hrefs).toEqual([
       '/',
+      '/ask',
       '/firms',
       '/research',
       '/tools',
@@ -25,6 +26,7 @@ describe('route architecture', () => {
     expect(shouldNoIndex('/compare')).toBe(true);
     expect(shouldNoIndex('/my-investor-trust-hub')).toBe(true);
     expect(shouldNoIndex('/internal/sec-adv')).toBe(true);
+    expect(shouldNoIndex('/ask')).toBe(true);
     expect(shouldNoIndex('/')).toBe(false);
   });
 });
