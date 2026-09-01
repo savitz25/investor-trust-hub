@@ -104,6 +104,8 @@ describe('investor-ask-v1 interpreter', () => {
       'Which adviser should I hire?',
       'What stocks should I buy?',
       'Which adviser will give me the best returns?',
+      'Who is the highest-performing adviser?',
+      'Which RIA is most profitable?',
     ];
     for (const q of questions) {
       const parsed = interpretInvestorAskQuery(q);
