@@ -339,20 +339,19 @@ function toCard(row: FirmRow, parsed: ParsedInvestorAsk, compensation: string[])
   };
 }
 
-async function listFirms(parsed: ParsedInvestorAsk): Promise<{ rows: FirmRow[]; total: number }> {
+async function listFirms(parsed: ParsedInvestorAsk, pageSize = INVESTOR_ASK_PAGE_SIZE): Promise<{ rows: FirmRow[]; total: number }> {
   const params: unknown[] = [];
   const { where } = filtersSql(parsed.query, params);
   const page = parsed.query.page;
-  const offset = (page - 1) * INVESTOR_ASK_PAGE_SIZE;
+  const offset = (page - 1) * pageSize;
   const from = fromSql(parsed.query);
   const countExpr = from.includes('a0') ? 'count(DISTINCT f.id)::int' : 'count(*)::int';
   const count = await query<{ n: number }>(
     `SELECT ${countExpr} AS n ${from} WHERE ${where}`,
     params,
   );
-  const listParams = [...params, INVESTOR_ASK_PAGE_SIZE, offset];
-  const needsDistinct =
-    (parsed.query.compensationMethods?.length ?? 0) > 1 && parsed.query.compensationMatch !== 'all';
+  const listParams = [...params, pageSize, offset];
+  const needsDistinct = (parsed.query.compensationMethods?.length ?? 0) > 1;
   const distinct = needsDistinct ? 'DISTINCT ON (crd.identifier_value)' : '';
   const list = await query<FirmRow>(
     `${SELECT_SQL.replace('SELECT', `SELECT ${distinct}`)} ${from}
@@ -510,12 +509,12 @@ async function compare(parsed: ParsedInvestorAsk): Promise<AskCountRow[]> {
   ];
 }
 
-export async function executeInvestorAsk(raw: string, overrides: InvestorAskOverrides = {}): Promise<InvestorAskResult> {
+export async function executeParsedInvestorAsk(parsed: ParsedInvestorAsk, pageSize = INVESTOR_ASK_PAGE_SIZE): Promise<InvestorAskResult> {
   const started = Date.now();
-  const parsed = interpretInvestorAskQuery(raw, overrides);
   const q = parsed.query;
   const emptyCards: AskFirmCard[] = [];
-  const pagination = { page: q.page, pageSize: INVESTOR_ASK_PAGE_SIZE, total: 0, hasMore: false };
+  const boundedPageSize = Math.max(1, Math.min(INVESTOR_ASK_PAGE_SIZE, pageSize));
+  const pagination = { page: q.page, pageSize: boundedPageSize, total: 0, hasMore: false };
 
   if (q.mode === 'fail_closed' || q.mode === 'definition') {
     return {
@@ -580,7 +579,7 @@ export async function executeInvestorAsk(raw: string, overrides: InvestorAskOver
     };
   }
 
-  const { rows, total } = await listFirms(parsed);
+  const { rows, total } = await listFirms(parsed, boundedPageSize);
   const compensation = await loadCompensation(rows.map((r) => r.id));
   const results = rows.map((row) => toCard(row, parsed, compensation.get(row.id) ?? []));
   return {
@@ -592,14 +591,18 @@ export async function executeInvestorAsk(raw: string, overrides: InvestorAskOver
     counts: [{ label: 'Matching firm facts', value: total, grain: 'form_adv_firm_facts rows matching filters' }],
     pagination: {
       page: q.page,
-      pageSize: INVESTOR_ASK_PAGE_SIZE,
+      pageSize: boundedPageSize,
       total,
-      hasMore: q.page * INVESTOR_ASK_PAGE_SIZE < total,
+      hasMore: q.page * boundedPageSize < total,
     },
     provenance: provenance(parsed, q.mode === 'identifier' ? 'CRD identity' : 'entity list'),
     limitations: LIMITATIONS,
     elapsedMs: Date.now() - started,
   };
+}
+
+export async function executeInvestorAsk(raw: string, overrides: InvestorAskOverrides = {}): Promise<InvestorAskResult> {
+  return executeParsedInvestorAsk(interpretInvestorAskQuery(raw, overrides));
 }
 
 export function publicAskPayload(result: InvestorAskResult) {

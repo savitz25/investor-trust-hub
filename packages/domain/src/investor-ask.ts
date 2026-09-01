@@ -297,7 +297,7 @@ function failClosed(reason: string, alternatives: string[]): InvestorResearchQue
 
 function isRecommendationQuery(q: string): boolean {
   return (
-    /\b(best|safest|most trustworthy|trustworthiest|lowest fees?|cheapest|who should i hire|should i (hire|use)|best returns?|highest (returns?|performance)|make me the most money|most money|top[- ]rated|most trusted)\b/i.test(
+    /\b(best|safest|most trustworthy|trustworthiest|lowest fees?|cheapest|who should i hire|should i (hire|use)|best returns?|highest[- ]performing|highest (returns?|performance)|most profitable|make me the most money|most money|top[- ]rated|most trusted)\b/i.test(
       q,
     ) || /\b(what stocks? should i buy|should i buy|move my ira|portfolio recommendation|pick (an? )?investments?)\b/i.test(q)
   );
