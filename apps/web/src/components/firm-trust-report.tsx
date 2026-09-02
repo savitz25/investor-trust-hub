@@ -19,6 +19,7 @@ import {
 import type { CanonicalIdentifier } from '@ith/domain';
 import { Breadcrumb } from './breadcrumb';
 import { FirmProfileIntelligence } from './firm-profile-intelligence';
+import { NjFirmEvidenceModule } from './nj-firm-evidence';
 import type { FirmTrustReportModel } from '@/lib/firms/types';
 import { formatDisplayDate, formatReleaseLabel } from '@/lib/dates';
 
@@ -190,6 +191,7 @@ export function FirmTrustReport({ report }: { report: FirmTrustReportModel }) {
       </section>
 
       {report.intelligence ? <FirmProfileIntelligence snapshot={report.intelligence} /> : null}
+      <NjFirmEvidenceModule crd={report.crd} isSynthetic={report.isSynthetic} />
 
       <section className="mt-8">
         <h2 className="font-serif text-2xl text-[var(--ith-navy)]">Evidence and source details</h2>

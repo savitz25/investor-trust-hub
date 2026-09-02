@@ -24,6 +24,10 @@ export const LEGAL_ROUTES = [
   { href: '/terms', label: 'Terms' },
 ] as const;
 
+export const STATE_DISCOVERY_ROUTES = [
+  { href: '/new-jersey', label: 'New Jersey' },
+] as const;
+
 export const INDEXABLE_PATHS = [
   '/',
   '/firms',
@@ -32,6 +36,7 @@ export const INDEXABLE_PATHS = [
   '/methodology',
   '/sources',
   '/about',
+  '/new-jersey',
   '/disclaimer',
   '/privacy',
   '/terms',

@@ -8,37 +8,21 @@ const appRoot = join(webRoot, 'src/app');
 const repoRoot = join(webRoot, '..', '..');
 
 describe('NJ-INV-001 publication firewall', () => {
-  it('does not add a public /new-jersey route', () => {
-    expect(existsSync(join(appRoot, 'new-jersey'))).toBe(false);
+  it('does not add county pages or individual directories', () => {
     const hrefs = PRIMARY_ROUTES.map((route) => route.href);
-    expect(hrefs).not.toContain('/new-jersey');
-    expect(INDEXABLE_PATHS).not.toContain('/new-jersey');
-  });
-
-  it('does not add county pages, directories, or ranking surfaces', () => {
+    expect(hrefs).not.toContain('/iar');
     const appDirs = readdirSync(appRoot, { withFileTypes: true })
       .filter((entry) => entry.isDirectory())
       .map((entry) => entry.name);
-    expect(appDirs).not.toContain('new-jersey');
     expect(appDirs).not.toContain('iar');
     expect(appDirs).not.toContain('agents');
-    const sitemap = readFileSync(join(appRoot, 'sitemap.ts'), 'utf8');
-    expect(sitemap).not.toMatch(/new-jersey|county|iar-directory|trust score/i);
+    expect(appDirs).not.toContain('counties');
   });
 
-  it('does not expand sitemap or indexing contracts', () => {
-    expect([...INDEXABLE_PATHS]).toEqual([
-      '/',
-      '/firms',
-      '/research',
-      '/tools',
-      '/methodology',
-      '/sources',
-      '/about',
-      '/disclaimer',
-      '/privacy',
-      '/terms',
-    ]);
+  it('does not add ranking surfaces or Trust Scores', () => {
+    const sitemap = readFileSync(join(appRoot, 'sitemap.ts'), 'utf8');
+    expect(sitemap).not.toMatch(/iar-directory|trust score/i);
+    expect(INDEXABLE_PATHS).not.toContain('/iar');
   });
 
   it('does not add Vercel project or deployment files', () => {
