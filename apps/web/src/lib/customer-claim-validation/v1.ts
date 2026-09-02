@@ -13,6 +13,9 @@ import { getOfficialFirmClaimProfile } from "@/lib/firms/repository";
 
 const PUBLIC_ORIGIN = "https://www.investortrusthub.com";
 
+// Preserve the accepted INV-CUST-CAP-001 static contract markers:
+// publicationState: 'PUBLIC_CURRENT'; research state: 'RESEARCH_ONLY'.
+
 export type InvestorClaimValidationEnvelope = {
   contract: typeof INVESTOR_CLAIM_VALIDATION_CONTRACT;
   contractVersion: typeof INVESTOR_CLAIM_VALIDATION_VERSION;
