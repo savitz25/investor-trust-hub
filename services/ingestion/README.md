@@ -32,7 +32,11 @@ pytest
 python scripts/apply_migrations.py
 python -m ith_ingestion sec-adv discover
 python -m ith_ingestion sec-adv ingest --latest --dry-run
+python -m ith_ingestion nj-bos discover
+python -m ith_ingestion nj-bos dry-run
 ```
+
+NJ-INV-001 (`nj-bos`) is internal-only Bureau of Securities enforcement ingest. See [`docs/nj-inv-001-production-runbook.md`](../../docs/nj-inv-001-production-runbook.md). Raw PDFs are gitignored. First corpus is baseline-only and must not emit historical alerts.
 
 Production publish is an operator action. See [`docs/task-002-1-production-publish.md`](../../docs/task-002-1-production-publish.md). CI uses fixture CSVs only and must not receive a production `DATABASE_URL`.
 

@@ -71,3 +71,4 @@ tmp/
 # Official regulatory releases — never commit
 data/raw/
 data/reports/
+data/generated/

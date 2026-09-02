@@ -89,6 +89,15 @@ def main(argv: list[str] | None = None) -> int:
     write_fix = sec_sub.add_parser("write-fixtures", help="Regenerate committed parser fixtures")
     write_fix.add_argument("--dir", type=Path, default=Path("services/ingestion/fixtures/sec_adv"))
 
+    nj = sub.add_parser("nj-bos", help="NJ-INV-001 Bureau of Securities enforcement ingest (internal-only)")
+    nj_sub = nj.add_subparsers(dest="nj_command", required=True)
+    nj_sub.add_parser("discover", help="Record official HTML index coverage (WAF-safe)")
+    acquire = nj_sub.add_parser("acquire", help="Download seeded official /Actions/ PDFs")
+    acquire.add_argument("--skip-pdfs", action="store_true")
+    nj_sub.add_parser("inspect", help="Parse local PDFs / fixtures without publishing")
+    dry = nj_sub.add_parser("dry-run", help="Idempotent baseline dry-run against local corpus")
+    dry.add_argument("--download", action="store_true")
+
     args = parser.parse_args(argv)
     if args.command in {None, "proof"}:
         fixture = getattr(args, "fixture", str(Path(__file__).resolve().parents[2] / "fixtures" / "proof.txt"))
@@ -106,6 +115,20 @@ def main(argv: list[str] | None = None) -> int:
         )
         print(result.status.value, result.idempotency_key, result.metrics.as_dict())
         return 0 if result.status.value == "published" else 1
+
+    if args.command == "nj-bos":
+        from ith_ingestion.nj_bos.pipeline import run_nj_bos
+
+        download = args.nj_command == "acquire" or getattr(args, "download", False)
+        skip = getattr(args, "skip_pdfs", False) or args.nj_command in {"discover"}
+        report = run_nj_bos(
+            dry_run=True,
+            fetch_live=args.nj_command == "discover",
+            download=download and not skip,
+            skip_pdfs=skip,
+        )
+        print(json.dumps(report.as_dict(), indent=2))
+        return 0
 
     if args.sec_command == "discover":
         latest = discover_latest()
