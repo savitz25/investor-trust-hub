@@ -89,3 +89,8 @@ export interface FirmTrustReportModel {
   currentlyIndexable: boolean;
   intelligence: TrustReportV2Snapshot | null;
 }
+
+export interface ClaimValidationFirm {
+  nativeProfileId: string;
+  report: FirmTrustReportModel;
+}

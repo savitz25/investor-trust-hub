@@ -20,3 +20,4 @@ export * from './adv-profile-intelligence';
 export * from './investor-home-intel';
 export * from './investor-ask';
 export * from './investor-specialist-execution-v2';
+export * from './investor-customer-claim-validation-v1';
