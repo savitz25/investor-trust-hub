@@ -4,7 +4,7 @@ import type { ParsedFirmSearch } from '@ith/domain';
 import { query } from '../db';
 import { mapFirmReport, mapSearchHit } from './map-report';
 import { loadFirmProfileIntelligence } from './profile-intelligence';
-import type { FirmDirectoryMetrics, FirmRecordRow, FirmSearchHit, FirmTrustReportModel } from './types';
+import type { ClaimValidationFirm, FirmDirectoryMetrics, FirmRecordRow, FirmSearchHit, FirmTrustReportModel } from './types';
 
 const FIRM_SELECT = `
   SELECT
@@ -95,6 +95,24 @@ export async function getOfficialFirmBySlug(slug: string): Promise<FirmTrustRepo
     console.error('profile_intelligence_failed', report.slug, error instanceof Error ? error.message : error);
   }
   return report;
+}
+
+export async function getFirmForClaimValidation(
+  nativeProfileId: string,
+  firmCrd: string,
+): Promise<ClaimValidationFirm | null> {
+  const result = await query<FirmRecordRow>(
+    `${FIRM_SELECT}
+     WHERE f.id = $1::uuid
+       AND crd.identifier_value = $2
+       AND f.is_synthetic = false
+     LIMIT 1`,
+    [nativeProfileId, firmCrd],
+  );
+  const row = result.rows[0];
+  if (!row) return null;
+  const report = mapFirmReport(row);
+  return report ? { nativeProfileId: row.id, report } : null;
 }
 
 export async function searchOfficialFirms(

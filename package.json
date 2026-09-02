@@ -25,6 +25,7 @@
     "typecheck": "npm run typecheck --workspaces --if-present",
     "test": "vitest run",
     "check:inv-cap-001": "vitest run packages/domain/tests/investor-specialist-execution-v2.test.ts apps/web/tests/inv-cap-001-static.test.ts packages/domain/tests/investor-ask.test.ts",
+    "check:inv-cust-cap-001": "vitest run packages/domain/tests/investor-customer-claim-validation-v1.test.ts apps/web/tests/inv-cust-cap-001-static.test.ts",
     "test:watch": "vitest",
     "test:e2e": "playwright test e2e/shell.spec.ts",
     "test:e2e:live": "playwright test",
