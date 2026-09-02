@@ -1,0 +1,23 @@
+.nj-timeline {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 900px) {
+  .nj-timeline {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.nj-coverage-banner {
+  margin: 0 0 1rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--ith-border);
+  border-radius: var(--th-radius-card);
+  background: #f8fafc;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}

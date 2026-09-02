@@ -6,6 +6,7 @@ import {
   LEGAL_ROUTES,
   NETWORK_LINKS,
   PRIMARY_ROUTES,
+  STATE_DISCOVERY_ROUTES,
 } from '@ith/config';
 import { INDEPENDENCE_LINE, NOT_ADVICE_LINE } from '@ith/domain';
 import { BrandLogo } from '@/components/brand-logo';
@@ -40,6 +41,13 @@ export function SiteFooter() {
           </h2>
           <ul className="mt-3 space-y-2 text-sm">
             {PRIMARY_ROUTES.filter((route) => route.href !== '/').map((route) => (
+              <li key={route.href}>
+                <Link href={route.href} className="text-white no-underline hover:text-teal-200">
+                  {route.label}
+                </Link>
+              </li>
+            ))}
+            {STATE_DISCOVERY_ROUTES.map((route) => (
               <li key={route.href}>
                 <Link href={route.href} className="text-white no-underline hover:text-teal-200">
                   {route.label}
