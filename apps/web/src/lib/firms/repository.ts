@@ -1,10 +1,16 @@
-import 'server-only';
+import "server-only";
 
-import type { ParsedFirmSearch } from '@ith/domain';
-import { query } from '../db';
-import { mapFirmReport, mapSearchHit } from './map-report';
-import { loadFirmProfileIntelligence } from './profile-intelligence';
-import type { ClaimValidationFirm, FirmDirectoryMetrics, FirmRecordRow, FirmSearchHit, FirmTrustReportModel } from './types';
+import type { ParsedFirmSearch } from "@ith/domain";
+import { query } from "../db";
+import { mapFirmReport, mapSearchHit } from "./map-report";
+import { loadFirmProfileIntelligence } from "./profile-intelligence";
+import type {
+  ClaimValidationFirm,
+  FirmDirectoryMetrics,
+  FirmRecordRow,
+  FirmSearchHit,
+  FirmTrustReportModel,
+} from "./types";
 
 const FIRM_SELECT = `
   SELECT
@@ -76,10 +82,13 @@ export async function getOfficialFirmIndexable(slug: string): Promise<boolean> {
   return result.rows[0]?.indexable === true;
 }
 
-export async function getOfficialFirmBySlug(slug: string): Promise<FirmTrustReportModel | null> {
-  const result = await query<FirmRecordRow>(`${FIRM_SELECT} WHERE f.slug = $1 AND f.is_synthetic = false LIMIT 1`, [
-    slug,
-  ]);
+export async function getOfficialFirmBySlug(
+  slug: string,
+): Promise<FirmTrustReportModel | null> {
+  const result = await query<FirmRecordRow>(
+    `${FIRM_SELECT} WHERE f.slug = $1 AND f.is_synthetic = false LIMIT 1`,
+    [slug],
+  );
   const row = result.rows[0];
   const report = row ? mapFirmReport(row) : null;
   if (!report || !row) return report;
@@ -92,7 +101,11 @@ export async function getOfficialFirmBySlug(slug: string): Promise<FirmTrustRepo
       disclosureIndicator: row.disclosure_indicator,
     });
   } catch (error) {
-    console.error('profile_intelligence_failed', report.slug, error instanceof Error ? error.message : error);
+    console.error(
+      "profile_intelligence_failed",
+      report.slug,
+      error instanceof Error ? error.message : error,
+    );
   }
   return report;
 }
@@ -115,6 +128,19 @@ export async function getFirmForClaimValidation(
   return report ? { nativeProfileId: row.id, report } : null;
 }
 
+export async function getOfficialFirmClaimProfile(
+  slug: string,
+): Promise<ClaimValidationFirm | null> {
+  const result = await query<FirmRecordRow>(
+    `${FIRM_SELECT} WHERE f.slug = $1 AND f.is_synthetic = false LIMIT 1`,
+    [slug],
+  );
+  const row = result.rows[0];
+  if (!row) return null;
+  const report = mapFirmReport(row);
+  return report ? { nativeProfileId: row.id, report } : null;
+}
+
 export async function searchOfficialFirms(
   parsed: ParsedFirmSearch,
   pageSize = 20,
@@ -122,9 +148,17 @@ export async function searchOfficialFirms(
   const started = performance.now();
   const offset = (parsed.page - 1) * pageSize;
   const q = parsed.q;
-  const like = q ? `%${q.replace(/[%_]/g, '\\$&')}%` : '%';
-  const prefix = q ? `${q.replace(/[%_]/g, '\\$&')}%` : '%';
-  const params: unknown[] = [q, like, prefix, parsed.exactCrd, parsed.exactSecFile, parsed.state, parsed.stateNone];
+  const like = q ? `%${q.replace(/[%_]/g, "\\$&")}%` : "%";
+  const prefix = q ? `${q.replace(/[%_]/g, "\\$&")}%` : "%";
+  const params: unknown[] = [
+    q,
+    like,
+    prefix,
+    parsed.exactCrd,
+    parsed.exactSecFile,
+    parsed.state,
+    parsed.stateNone,
+  ];
   const where = `
     f.is_synthetic = false
     AND (
@@ -212,11 +246,19 @@ export async function getFirmDirectoryMetrics(): Promise<FirmDirectoryMetrics> {
     riaPending: row?.ria_pending ?? 0,
     eraReporting: row?.era_reporting ?? 0,
     latestReleaseLabel: row?.latest_release_label ?? null,
-    latestRetrievedAt: retrieved instanceof Date ? retrieved.toISOString() : retrieved ? String(retrieved) : null,
+    latestRetrievedAt:
+      retrieved instanceof Date
+        ? retrieved.toISOString()
+        : retrieved
+          ? String(retrieved)
+          : null,
   };
 }
 
-export async function listIndexableFirmSlugs(limit = 10_000, offset = 0): Promise<string[]> {
+export async function listIndexableFirmSlugs(
+  limit = 10_000,
+  offset = 0,
+): Promise<string[]> {
   const result = await query<{ slug: string }>(
     `
     SELECT f.slug

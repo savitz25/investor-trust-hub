@@ -1,16 +1,23 @@
-import { notFound } from 'next/navigation';
-import { getFirmBySlug, isOfficialFirmSlug } from '@ith/domain';
-import { FirmReport } from '@/components/firm-report';
-import { FirmTrustReport } from '@/components/firm-trust-report';
-import { DatabaseUnavailableError, hasDatabaseUrl } from '@/lib/db';
-import { getCachedOfficialFirmBySlug } from '@/lib/firms/cached';
-import { getOfficialFirmIndexable } from '@/lib/firms/repository';
-import { pageMetadata } from '@/lib/seo';
-import { shareRouteOgImage } from '@/lib/share-hub';
+import { notFound } from "next/navigation";
+import { getFirmBySlug, isOfficialFirmSlug } from "@ith/domain";
+import { FirmReport } from "@/components/firm-report";
+import { FirmTrustReport } from "@/components/firm-trust-report";
+import { DatabaseUnavailableError, hasDatabaseUrl } from "@/lib/db";
+import { getCachedOfficialFirmBySlug } from "@/lib/firms/cached";
+import { getOfficialFirmIndexable } from "@/lib/firms/repository";
+import { pageMetadata } from "@/lib/seo";
+import { shareRouteOgImage } from "@/lib/share-hub";
+import { InvestorCustomerLayer } from "@/components/investor-customer-layer";
+import { claimEnabled, claimProfile } from "@/lib/customer-integration/core";
+import { customerLayer } from "@/lib/customer-integration/public";
 
 export const revalidate = 60;
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   if (isOfficialFirmSlug(slug) && hasDatabaseUrl()) {
     try {
@@ -19,7 +26,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         getOfficialFirmIndexable(slug),
       ]);
       if (!report) {
-        return pageMetadata({ title: 'Firm not found', path: `/firm/${slug}`, indexable: false });
+        return pageMetadata({
+          title: "Firm not found",
+          path: `/firm/${slug}`,
+          indexable: false,
+        });
       }
       const og = shareRouteOgImage(
         `/firm/${report.slug}`,
@@ -34,12 +45,20 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         imageAlt: og.alt,
       });
     } catch {
-      return pageMetadata({ title: 'Firm research unavailable', path: `/firm/${slug}`, indexable: false });
+      return pageMetadata({
+        title: "Firm research unavailable",
+        path: `/firm/${slug}`,
+        indexable: false,
+      });
     }
   }
   const firm = getFirmBySlug(slug);
   if (!firm) {
-    return pageMetadata({ title: 'Firm not found', path: `/firm/${slug}`, indexable: false });
+    return pageMetadata({
+      title: "Firm not found",
+      path: `/firm/${slug}`,
+      indexable: false,
+    });
   }
   const og = shareRouteOgImage(
     `/firm/${slug}`,
@@ -47,7 +66,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   );
   return pageMetadata({
     title: `${firm.displayName} (synthetic)`,
-    description: 'Synthetic development Trust Report — not a real firm.',
+    description: "Synthetic development Trust Report — not a real firm.",
     path: `/firm/${slug}`,
     indexable: false,
     imageUrl: og.url,
@@ -55,7 +74,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   });
 }
 
-export default async function FirmPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function FirmPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
 
   if (isOfficialFirmSlug(slug)) {
@@ -65,7 +88,17 @@ export default async function FirmPage({ params }: { params: Promise<{ slug: str
     try {
       const report = await getCachedOfficialFirmBySlug(slug);
       if (!report) notFound();
-      return <FirmTrustReport report={report} />;
+      const claim = await claimProfile(slug).catch(() => null);
+      const enabled = !!claim && claimEnabled(claim.nativeProfileId!);
+      const customer = enabled
+        ? await customerLayer(claim.nativeProfileId!)
+        : { profile: null, replies: null };
+      return (
+        <>
+          <FirmTrustReport report={report} />
+          <InvestorCustomerLayer slug={slug} enabled={enabled} {...customer} />
+        </>
+      );
     } catch (error) {
       if (error instanceof DatabaseUnavailableError) {
         return <DatabaseNotice slug={slug} />;
@@ -82,11 +115,16 @@ export default async function FirmPage({ params }: { params: Promise<{ slug: str
 function DatabaseNotice({ slug }: { slug: string }) {
   return (
     <article className="mx-auto max-w-3xl px-4 py-16">
-      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-800">Service interruption</p>
-      <h1 className="mt-3 font-serif text-3xl text-[var(--ith-navy)]">Research data temporarily unavailable</h1>
+      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-800">
+        Service interruption
+      </p>
+      <h1 className="mt-3 font-serif text-3xl text-[var(--ith-navy)]">
+        Research data temporarily unavailable
+      </h1>
       <p className="mt-4 text-sm leading-relaxed">
-        InvestorTrustHub could not read the official firm record for <span className="font-mono">{slug}</span>{' '}
-        from the research database. This is a service error, not a finding about the firm.
+        InvestorTrustHub could not read the official firm record for{" "}
+        <span className="font-mono">{slug}</span> from the research database.
+        This is a service error, not a finding about the firm.
       </p>
     </article>
   );
