@@ -8,7 +8,11 @@ import { getOfficialFirmIndexable } from "@/lib/firms/repository";
 import { pageMetadata } from "@/lib/seo";
 import { shareRouteOgImage } from "@/lib/share-hub";
 import { InvestorCustomerLayer } from "@/components/investor-customer-layer";
-import { claimEnabled, claimProfile } from "@/lib/customer-integration/core";
+import {
+  claimEnabled,
+  claimProfile,
+  claimRolloutActive,
+} from "@/lib/customer-integration/core";
 import { customerLayer } from "@/lib/customer-integration/public";
 
 export const revalidate = 60;
@@ -88,7 +92,9 @@ export default async function FirmPage({
     try {
       const report = await getCachedOfficialFirmBySlug(slug);
       if (!report) notFound();
-      const claim = await claimProfile(slug).catch(() => null);
+      const claim = claimRolloutActive()
+        ? await claimProfile(slug).catch(() => null)
+        : null;
       const enabled = !!claim && claimEnabled(claim.nativeProfileId!);
       const customer = enabled
         ? await customerLayer(claim.nativeProfileId!)

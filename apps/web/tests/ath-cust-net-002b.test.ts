@@ -6,6 +6,7 @@ vi.mock("../src/lib/customer-claim-validation/v1", () => ({
 }));
 import {
   claimEnabled,
+  claimRolloutActive,
   handoffRedirect,
   mintInvestorHandoff,
   safeWebsite,
@@ -34,6 +35,13 @@ describe("ATH-CUST-NET-002B", () => {
     expect(createHmac("sha256", S).update(b!).digest("base64url")).toBe(s);
   });
   it("gates exact canary", () => {
+    expect(claimRolloutActive({})).toBe(false);
+    expect(
+      claimRolloutActive({
+        ATH_HANDOFF_SECRET: S,
+        ATH_CLAIM_CTA_MODE: "canary",
+      }),
+    ).toBe(true);
     expect(claimEnabled(ID, { ATH_HANDOFF_SECRET: S })).toBe(false);
     expect(
       claimEnabled(ID, {

@@ -2,11 +2,19 @@ import "server-only";
 import { createHmac, randomBytes } from "node:crypto";
 import { getClaimableInvestorFirm } from "../customer-claim-validation/v1";
 
+export function claimRolloutActive(
+  env: Record<string, string | undefined> = process.env,
+) {
+  const mode = (env.ATH_CLAIM_CTA_MODE || "off").toLowerCase();
+  return (mode === "canary" || mode === "all") &&
+    (env.ATH_HANDOFF_SECRET || "").length >= 32;
+}
+
 export function claimEnabled(
   id: string,
   env: Record<string, string | undefined> = process.env,
 ) {
-  if ((env.ATH_HANDOFF_SECRET || "").length < 32) return false;
+  if (!claimRolloutActive(env)) return false;
   const m = (env.ATH_CLAIM_CTA_MODE || "off").toLowerCase();
   if (m === "all") return true;
   if (m !== "canary") return false;
