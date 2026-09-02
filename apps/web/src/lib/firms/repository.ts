@@ -106,10 +106,9 @@ export async function getFirmForClaimValidation(
      WHERE f.id = $1::uuid
        AND crd.identifier_value = $2
        AND f.is_synthetic = false
-     LIMIT 2`,
+     LIMIT 1`,
     [nativeProfileId, firmCrd],
   );
-  if (result.rows.length !== 1) return null;
   const row = result.rows[0];
   if (!row) return null;
   const report = mapFirmReport(row);
