@@ -43,6 +43,7 @@ def validate_migration_set(root: Path) -> list[str]:
         "0010_sec_adv_ingestion.sql": "form_adv_firm_facts",
         "0011_firm_research_search.sql": "search_documents_slug_idx",
         "0014_regulatory_document_ledger.sql": "regulatory_events",
+        "0015_state_regulatory_intelligence.sql": "state_exam_packages",
     }
     for name, token in required_tokens.items():
         text = (root / "database" / "migrations" / name).read_text(encoding="utf-8")

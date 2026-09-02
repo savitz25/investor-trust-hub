@@ -1,0 +1,57 @@
+2026 Investment Adviser Written Examination
+Each registered investment adviser is required to complete the examination in the electronic format provided no later than June 30, 2026.
+
+1. Does your advisory firm engage in the solicitation of business for other investment advisers, whether or not compensation is received?
+If Yes, provide the name(s) and CRD/IARD number(s), if applicable.
+
+2. Describe the organization of the advisory firm, including ownership and control persons.
+
+3. How many clients did the firm have as of December 31, 2025?
+
+4. Does your advisory firm offer financial planning services?
+
+5. Does your firm or any affiliated person, including any investment adviser representative, principal or other entity under common control, sell life insurance or any type of annuity product?
+
+6. Does your advisory firm offer asset management services?
+If Yes, provide the following:
+a. Total value of "assets under management" as of December 31, 2025 in USD:
+b. % of your advisory firm’s 2025 revenues from asset management services:
+
+7. Does the firm have investment concentration in any single issuer or strategy?
+
+8. Does your advisory firm charge clients fees of more than $500 per client and six or more months in advance?
+
+9. Does the firm have custody of client funds or securities?
+
+10. Does the firm have discretionary authority over client accounts?
+
+11. Does the firm have a code of ethics addressing conflicts of interest?
+
+12. Does the firm monitor outside business activities of its investment adviser representatives?
+
+13. Does the firm advertise or market through seminars?
+
+14. Does the firm use social media to solicit clients?
+
+15. Does the firm recommend digital assets?
+
+16. Does the firm recommend cryptocurrency or related products?
+
+17. Does the firm recommend non-fungible tokens (NFTs)?
+
+18. Does the firm use artificial intelligence technologies for data gathering, research, advertising, or other purposes?
+
+19. Does the firm maintain cybersecurity policies and procedures?
+
+20. Does the firm use unregistered third-party platforms to access held-away accounts using client credentials?
+
+21. Does the firm maintain a business continuity plan?
+
+22. Did the firm receive any client complaints during the examination year?
+
+23. Does the firm have policies regarding senior investors or vulnerable adults?
+
+24. Is the advisory firm solvent as defined in the glossary?
+
+25. Does the firm maintain written compliance policies and procedures designed to prevent and detect violations, including representative oversight?
+Upload a copy of the table of contents of the compliance manual if Yes.

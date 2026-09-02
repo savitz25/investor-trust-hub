@@ -98,6 +98,11 @@ def main(argv: list[str] | None = None) -> int:
     dry = nj_sub.add_parser("dry-run", help="Idempotent baseline dry-run against local corpus")
     dry.add_argument("--download", action="store_true")
 
+    intel = sub.add_parser("nj-intel", help="NJ-INV-002 state regulatory intelligence (internal-only)")
+    intel_sub = intel.add_subparsers(dest="intel_command", required=True)
+    intel_sub.add_parser("inspect", help="Coverage, exam, filings, snapshot dry-run")
+    intel_sub.add_parser("dry-run", help="Idempotent baseline dry-run")
+
     args = parser.parse_args(argv)
     if args.command in {None, "proof"}:
         fixture = getattr(args, "fixture", str(Path(__file__).resolve().parents[2] / "fixtures" / "proof.txt"))
@@ -115,6 +120,13 @@ def main(argv: list[str] | None = None) -> int:
         )
         print(result.status.value, result.idempotency_key, result.metrics.as_dict())
         return 0 if result.status.value == "published" else 1
+
+    if args.command == "nj-intel":
+        from ith_ingestion.nj_state_intel.pipeline import run_nj_intel
+
+        report = run_nj_intel(dry_run=True)
+        print(json.dumps(report.as_dict(), indent=2))
+        return 0
 
     if args.command == "nj-bos":
         from ith_ingestion.nj_bos.pipeline import run_nj_bos

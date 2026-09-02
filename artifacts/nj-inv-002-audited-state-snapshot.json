@@ -1,0 +1,302 @@
+{
+  "ticket": "NJ-INV-002",
+  "as_of": "2026-09-02",
+  "public_eligibility": "internal_only",
+  "publication_gate": "OFF",
+  "baseline_only": true,
+  "historical_alerts": 0,
+  "identity": {
+    "current_nj_state_ria_firms": null,
+    "denominator_status": "BLOCKED_NO_AUTHORITATIVE_ROSTER",
+    "rounded_press_context_only": [
+      "nearly 900",
+      "nearly 800"
+    ],
+    "state_vs_sec": "STATE_REGISTERED_RIA != SEC_REGISTERED_RIA",
+    "transition_model": "same CRD remains one firm"
+  },
+  "enforcement": {
+    "acquired_documents": 48,
+    "unique_hashes": 48,
+    "coverage": "ACQUIRED_PARTIAL_HISTORY",
+    "complete_years": [],
+    "earliest": "2002-08-22",
+    "latest": "2026-01-01",
+    "enforcement_rate": "BLOCKED_NO_DENOMINATOR"
+  },
+  "annual_exam": {
+    "years": [
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ],
+    "current_year": 2026,
+    "deadline": "2026-06-30",
+    "question_count_2026": 68,
+    "topic_timeline": [
+      {
+        "topic": "ADVERTISING_MARKETING",
+        "first_year": 2024,
+        "years_present": [
+          2024,
+          2026
+        ],
+        "added_in_year": 2024,
+        "removed_after_year": null,
+        "source_support": "official_sample_or_announcement"
+      },
+      {
+        "topic": "ARTIFICIAL_INTELLIGENCE",
+        "first_year": 2024,
+        "years_present": [
+          2024
+        ],
+        "added_in_year": 2024,
+        "removed_after_year": 2024,
+        "source_support": "official_sample_or_announcement"
+      },
+      {
+        "topic": "AUM_OR_ASSETS",
+        "first_year": 2026,
+        "years_present": [
+          2026
+        ],
+        "added_in_year": 2026,
+        "removed_after_year": null,
+        "source_support": "official_sample_or_announcement"
+      },
+      {
+        "topic": "COMPLAINTS",
+        "first_year": 2026,
+        "years_present": [
+          2026
+        ],
+        "added_in_year": 2026,
+        "removed_after_year": null,
+        "source_support": "official_sample_or_announcement"
+      },
+      {
+        "topic": "COMPLIANCE_POLICIES",
+        "first_year": 2022,
+        "years_present": [
+          2022,
+          2026
+        ],
+        "added_in_year": 2022,
+        "removed_after_year": null,
+        "source_support": "official_sample_or_announcement"
+      },
+      {
+        "topic": "CONFLICTS_OF_INTEREST",
+        "first_year": 2025,
+        "years_present": [
+          2025
+        ],
+        "added_in_year": 2025,
+        "removed_after_year": 2025,
+        "source_support": "official_sample_or_announcement"
+      },
+      {
+        "topic": "CRYPTOCURRENCY",
+        "first_year": 2022,
+        "years_present": [
+          2022
+        ],
+        "added_in_year": 2022,
+        "removed_after_year": 2022,
+        "source_support": "official_sample_or_announcement"
+      },
+      {
+        "topic": "CUSTODY",
+        "first_year": 2026,
+        "years_present": [
+          2026
+        ],
+        "added_in_year": 2026,
+        "removed_after_year": null,
+        "source_support": "official_sample_or_announcement"
+      },
+      {
+        "topic": "CYBERSECURITY",
+        "first_year": 2026,
+        "years_present": [
+          2026
+        ],
+        "added_in_year": 2026,
+        "removed_after_year": null,
+        "source_support": "official_sample_or_announcement"
+      },
+      {
+        "topic": "DIGITAL_ASSETS",
+        "first_year": 2022,
+        "years_present": [
+          2022
+        ],
+        "added_in_year": 2022,
+        "removed_after_year": 2022,
+        "source_support": "official_sample_or_announcement"
+      },
+      {
+        "topic": "DISCRETION",
+        "first_year": 2026,
+        "years_present": [
+          2026
+        ],
+        "added_in_year": 2026,
+        "removed_after_year": null,
+        "source_support": "official_sample_or_announcement"
+      },
+      {
+        "topic": "FINANCIAL_CONDITION",
+        "first_year": 2026,
+        "years_present": [
+          2026
+        ],
+        "added_in_year": 2026,
+        "removed_after_year": null,
+        "source_support": "official_sample_or_announcement"
+      },
+      {
+        "topic": "FIRM_ORGANIZATION",
+        "first_year": 2023,
+        "years_present": [
+          2023,
+          2024,
+          2025,
+          2026
+        ],
+        "added_in_year": 2023,
+        "removed_after_year": null,
+        "source_support": "official_sample_or_announcement"
+      },
+      {
+        "topic": "INVESTMENT_CONCENTRATION",
+        "first_year": 2024,
+        "years_present": [
+          2024
+        ],
+        "added_in_year": 2024,
+        "removed_after_year": 2024,
+        "source_support": "official_sample_or_announcement"
+      },
+      {
+        "topic": "NFT",
+        "first_year": 2022,
+        "years_present": [
+          2022
+        ],
+        "added_in_year": 2022,
+        "removed_after_year": 2022,
+        "source_support": "official_sample_or_announcement"
+      },
+      {
+        "topic": "OTHER",
+        "first_year": 2026,
+        "years_present": [
+          2026
+        ],
+        "added_in_year": 2026,
+        "removed_after_year": null,
+        "source_support": "official_sample_or_announcement"
+      },
+      {
+        "topic": "OUTSIDE_BUSINESS_ACTIVITIES",
+        "first_year": 2025,
+        "years_present": [
+          2025,
+          2026
+        ],
+        "added_in_year": 2025,
+        "removed_after_year": null,
+        "source_support": "official_sample_or_announcement"
+      },
+      {
+        "topic": "REPRESENTATIVE_OVERSIGHT",
+        "first_year": 2025,
+        "years_present": [
+          2025,
+          2026
+        ],
+        "added_in_year": 2025,
+        "removed_after_year": null,
+        "source_support": "official_sample_or_announcement"
+      },
+      {
+        "topic": "VENDOR_DUE_DILIGENCE",
+        "first_year": 2026,
+        "years_present": [
+          2026
+        ],
+        "added_in_year": 2026,
+        "removed_after_year": null,
+        "source_support": "official_sample_or_announcement"
+      },
+      {
+        "topic": "VULNERABLE_ADULTS",
+        "first_year": 2026,
+        "years_present": [
+          2026
+        ],
+        "added_in_year": 2026,
+        "removed_after_year": null,
+        "source_support": "official_sample_or_announcement"
+      }
+    ],
+    "pass_fail_metric": false,
+    "firm_results": "SOURCE_NOT_PUBLIC_AT_FIRM_GRAIN"
+  },
+  "general_orders": {
+    "modeled_current": 2,
+    "library_coverage": "SOURCE_ACCESS_BLOCKED",
+    "is_firm_enforcement": false
+  },
+  "issuer_exemption": {
+    "filing_classes": [
+      "PRIVATE_PLACEMENT_REPORT",
+      "SCOR_REGISTRATION",
+      "INVESTMENT_COMPANY_NOTICE",
+      "FORM_D_NOTICE",
+      "CROWDFUNDING_EXEMPTION",
+      "CROWDFUNDING_INVESTOR_CERTIFICATION",
+      "CROWDFUNDING_INVESTOR_LEGEND",
+      "INTERNET_SITE_OPERATOR",
+      "ISO_AMENDMENT",
+      "ISSUER_AGENT_REGISTRATION",
+      "RESCISSION_OFFER",
+      "SECURITIES_REGISTRATION_U1"
+    ],
+    "public_index": false,
+    "exemption_is_endorsement": false,
+    "form_d_join": "EXACT_SEC_IDENTIFIER_ONLY"
+  },
+  "iar_ce_policy": {
+    "policy_key": "nj-iar-ce-2025",
+    "observation_class": "REGULATORY_POLICY_OBSERVATION",
+    "effective_year": 2025,
+    "required_credits": 12,
+    "ethics_professional_responsibility_credits": 6,
+    "ethics_hours_minimum": 3,
+    "products_practice_credits": 6,
+    "inactive_term": "CE Inactive",
+    "deficient_term": "CE deficient for two consecutive years will fail to renew on January 1st",
+    "source_url": "https://www.njconsumeraffairs.gov/bos/Pages/Webinar-FAQ.aspx",
+    "person_evidence": false,
+    "public_directory": false
+  },
+  "blocked_metrics": [
+    "enforcement_rate_per_state_ria",
+    "exam_pass_rate",
+    "trust_score",
+    "adviser_ranking",
+    "crowdfunding_performance"
+  ],
+  "approved_internal_metrics": [
+    "acquired_enforcement_document_count",
+    "exam_years_with_public_package_or_announcement",
+    "exam_topic_families_by_year",
+    "issuer_filing_class_inventory",
+    "coverage_state_by_source_family"
+  ]
+}
