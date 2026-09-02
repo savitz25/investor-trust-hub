@@ -21,7 +21,7 @@ const ID = "048f5130-ec2e-49f5-b064-a7012d195ebf",
     resultState: "EXACT_IDENTITY",
     nativeProfileId: ID,
     firmCrd: "312385",
-    canonicalProfileUrl: "https://www.investortrusthub.com/firm/ahara-advisors",
+    canonicalProfileUrl: "https://www.investortrusthub.com/firm/sec-crd-312385",
     displayName: "AHARA ADVISORS",
   } as const;
 describe("ATH-CUST-NET-002B", () => {
