@@ -1,0 +1,173 @@
+/**
+ * CA-INV-001 — deterministic public snapshot from committed SEC/IARD roster geography.
+ * Do not invent a California state-RIA denominator.
+ */
+import { createHash } from 'node:crypto';
+import { writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+
+const CA_PRINCIPAL_OFFICE = 2699;
+const ROSTER_WITH_REGION = 17997;
+const ROSTER_NULL_REGION = 5625;
+const RIA = 17018;
+const ERA = 6604;
+const TOTAL = 23622;
+
+const snapshot = {
+  version: 'investor-ca-state-intel-v1',
+  generatedFrom: {
+    nationalRoster: 'packages/domain/src/investor-home-intel.ts V1_ROSTER_PRINCIPAL_OFFICE_STATES + V1_SEC_ROSTER',
+    census: 'docs/inv-home-001-census.json principal_office_states CA',
+  },
+  asOf: '2026-09-03',
+  publicationGate: 'ON',
+  publicEligibility: 'state_page',
+  route: '/california',
+  nationalOverlay: {
+    caPrincipalOfficeSecIardFirms: CA_PRINCIPAL_OFFICE,
+    grain: 'SEC IARD roster firm with principal-office region = CA',
+    source: 'IA_FIRM_SEC_Feed_08_27_2026',
+    sourceDate: '2026-08-27',
+    retrievedAt: '2026-08-28',
+    universe: TOTAL,
+    resolvedPrincipalOfficeRegions: ROSTER_WITH_REGION,
+    unresolvedPrincipalOfficeRegions: ROSTER_NULL_REGION,
+    shareOfResolvedRegionsPct: Number(((100 * CA_PRINCIPAL_OFFICE) / ROSTER_WITH_REGION).toFixed(2)),
+    searchHref: '/firms?state=CA',
+    caveat:
+      'This is the national SEC/IARD roster overlay for firms that report a California principal office. It is not the California state-registered adviser universe, not a complete California adviser count, and not proof of current DFPI authority.',
+  },
+  riaEra: {
+    nationalRiaFacts: RIA,
+    nationalEraFacts: ERA,
+    nationalTotalFacts: TOTAL,
+    caPrincipalOfficeSplit: 'SOURCE_NOT_SPLIT',
+    caveat:
+      'National roster keeps RIA (17,018) and ERA (6,604) separate. Committed geography is on the combined roster. California principal-office counts are not an RIA-only or ERA-only state denominator. ERA is not an RIA.',
+  },
+  stateRia: {
+    STATE_RIA_BULK_ROSTER: 'SOURCE_NOT_ACQUIRED',
+    access: 'OPEN_SEARCH_ONLY',
+    completeStateRiaCount: 'UNKNOWN',
+    verifyUrl: 'https://dfpi.ca.gov/licensee-and-financial-service-provider-search/',
+    dfpiIaUrl: 'https://dfpi.ca.gov/regulated-industries/broker-dealers-and-investment-advisers/',
+    iapdUrl: 'https://adviserinfo.sec.gov/',
+    brokercheckUrl: 'https://brokercheck.finra.org/',
+    caveat:
+      'No official California state-RIA bulk CSV/XLSX/API was acquired. Do not estimate the missing state roster from SEC principal-office geography.',
+  },
+  enforcement: {
+    pass: 'bounded_easy_win',
+    result: 'NO_BULK_ACQUIRED',
+    officialIndex: 'https://dfpi.ca.gov/rules-enforcement/actions_and_orders/',
+    monthlySummaries: 'DFPI publishes monthly PDF summaries of enforcement actions. Those are not a structured bulk extract and were not PDF-harvested.',
+    coverage: 'SEARCH_AND_MONTHLY_PDF_ONLY',
+    doNotCalculateEnforcementRate: true,
+    profileAttachments: [],
+    caveat:
+      'Actions and Orders is a search index. Accusation is not a final finding. Occurrence is not a unique firm. Name-only attachment is unsafe. Missing is unknown, not zero.',
+  },
+  issuer: {
+    framework: 'Corporate Securities Law of 1968 — qualification, notice filings, and exemptions administered by DFPI',
+    documentSearch: 'https://docqnet.dfpi.ca.gov/',
+    documentSearchGuide: 'https://dfpi.ca.gov/wp-content/uploads/sites/337/2019/02/Securities__Franchise_Search.pdf',
+    bulkIssuerDataset: 'SOURCE_NOT_ACQUIRED',
+    coverage: 'OPEN_SEARCH_ONLY',
+    note: 'Federal Form D is not California qualification or approval. No committed Form D California overlay exists in this product (issuers=0 in INV-HOME-001 census).',
+  },
+  formD: {
+    overlay: 'SOURCE_NOT_ACQUIRED',
+    caveat: 'FORM D FILING != CALIFORNIA STATE APPROVAL. FORM D FILING != INVESTMENT QUALITY.',
+  },
+  exam: {
+    programPage:
+      'https://dfpi.ca.gov/regulated-industries/broker-dealers-and-investment-advisers/investment-advisers-annual-written-examination-questionnaire-online/',
+    currentPublicSampleLikeNj2026: false,
+    firmResults: 'SOURCE_NOT_PUBLIC_AT_FIRM_GRAIN',
+    passFailMetric: false,
+    note: 'DFPI describes an annual written examination questionnaire for certain DFPI-registered investment advisers. The public program page still carries 2018 email-designation instructions. No 2026 public sample questionnaire comparable to New Jersey was acquired. Guidance is not a score.',
+  },
+  investorEducation: {
+    url: 'https://dfpi.ca.gov/news/insights/investor-information/',
+    use: 'consumer education / source coverage',
+    notFirmAdverseEvidence: true,
+  },
+  regulatorMatrix: [
+    {
+      credential: 'SEC-registered investment adviser',
+      regulator: 'U.S. Securities and Exchange Commission / IARD',
+      proves: 'Federal registration category as reported on Form ADV in the cited extract',
+      doesNotProve: 'California DFPI state-RIA certificate or current California notice-filing status',
+    },
+    {
+      credential: 'Exempt reporting adviser (ERA)',
+      regulator: 'SEC / IARD',
+      proves: 'ERA reporting status in the cited extract',
+      doesNotProve: 'SEC RIA registration or California state-RIA registration',
+    },
+    {
+      credential: 'California state-registered investment adviser',
+      regulator: 'DFPI under the Corporate Securities Law of 1968',
+      proves: 'DFPI investment-adviser certificate when the official state record says so',
+      doesNotProve: 'SEC registration. Principal-office geography is not this credential.',
+    },
+    {
+      credential: 'Investment adviser representative',
+      regulator: 'DFPI / CRD',
+      proves: 'Individual representative reporting when official CRD/DFPI evidence exists',
+      doesNotProve: 'Firm certificate. Person CRD is not firm CRD.',
+    },
+    {
+      credential: 'Broker-dealer / agent',
+      regulator: 'DFPI / FINRA / CRD',
+      proves: 'Broker-dealer or agent registration when official evidence exists',
+      doesNotProve: 'Investment-adviser registration',
+    },
+    {
+      credential: 'CRD / IARD identifier',
+      regulator: 'FINRA CRD / IARD infrastructure',
+      proves: 'A stable identity key when source-native',
+      doesNotProve: 'Current California authority by itself',
+    },
+  ],
+  identityRules: {
+    EXACT: ['CRD', 'SEC file number', 'DFPI license/certificate ID', 'official docket/respondent ID'],
+    HIGH_CONFIDENCE: 'exact legal name + exact official address for non-adverse descriptive data only',
+    REVIEW_REQUIRED: 'name + city, DBA, name variants',
+    UNSAFE: 'name alone — not used for adverse attachment',
+  },
+  profileAttachments: [],
+  gaps: [
+    'Complete California state-RIA denominator is UNKNOWN.',
+    'Complete California IAR universe is UNKNOWN.',
+    'Complete California broker-dealer state roster is UNKNOWN.',
+    'Exact DFPI registration status is not known for every SEC/IARD firm with a CA principal office.',
+    'Committed geography is not split into CA RIA vs CA ERA.',
+    'No structured DFPI enforcement bulk extract was acquired.',
+    'No Form D California overlay is in the committed product.',
+    'No statewide issuer bulk denominator was acquired.',
+  ],
+};
+
+const canonical = JSON.stringify(snapshot, Object.keys(snapshot).sort());
+snapshot.fingerprint = createHash('sha256').update(canonical).digest('hex');
+
+const ts = `/** Generated by scripts/build-ca-public-snapshot.mjs. Do not edit by hand. */\nexport const CA_PUBLIC_SNAPSHOT = ${JSON.stringify(snapshot, null, 2)} as const;\nexport type CaPublicSnapshot = typeof CA_PUBLIC_SNAPSHOT;\n`;
+writeFileSync(join(root, 'packages/domain/src/ca-public-snapshot.ts'), ts, 'utf8');
+writeFileSync(join(root, 'artifacts/ca-inv-001-public-snapshot.json'), `${JSON.stringify(snapshot, null, 2)}\n`, 'utf8');
+console.log(
+  JSON.stringify(
+    {
+      fingerprint: snapshot.fingerprint,
+      caPrincipalOffice: CA_PRINCIPAL_OFFICE,
+      ria: RIA,
+      era: ERA,
+      stateRia: snapshot.stateRia.STATE_RIA_BULK_ROSTER,
+    },
+    null,
+    2,
+  ),
+);

@@ -26,6 +26,7 @@ export const LEGAL_ROUTES = [
 
 export const STATE_DISCOVERY_ROUTES = [
   { href: '/new-jersey', label: 'New Jersey' },
+  { href: '/california', label: 'California' },
 ] as const;
 
 export const INDEXABLE_PATHS = [
@@ -37,6 +38,7 @@ export const INDEXABLE_PATHS = [
   '/sources',
   '/about',
   '/new-jersey',
+  '/california',
   '/disclaimer',
   '/privacy',
   '/terms',

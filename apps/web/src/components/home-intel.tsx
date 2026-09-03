@@ -288,8 +288,10 @@ export function InvestorHomeIntelligence({ intel }: { intel: InvestorHomeIntelV1
           </div>
           <p className="ith-lede" style={{ marginTop: '1.25rem' }}>
             <Link href="/new-jersey">New Jersey securities intelligence</Link> organizes Bureau of Securities
-            documents, annual IA examination themes, and issuer-filing frameworks. It is not a complete
-            state-registered adviser directory.
+            documents, annual IA examination themes, and issuer-filing frameworks.{' '}
+            <Link href="/california">California securities intelligence</Link> organizes the SEC/IARD California
+            principal-office overlay and DFPI verification paths. Neither page is a complete state-registered adviser
+            directory.
           </p>
           <div className="ith-geo" aria-label="Principal-office firm counts by reported region">
             {intel.geography.cells

@@ -22,3 +22,4 @@ export * from './investor-ask';
 export * from './investor-specialist-execution-v2';
 export * from './investor-customer-claim-validation-v1';
 export * from './nj-public-intel';
+export * from './ca-public-intel';
