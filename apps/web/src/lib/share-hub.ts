@@ -10,7 +10,7 @@ export const SHARE_HUB = {
   host: 'www.investortrusthub.com',
   apexHost: 'investortrusthub.com',
   origin: 'https://www.investortrusthub.com',
-  ogImagePath: '/opengraph-image',
+  ogImagePath: '/opengraph-image?v=20260903share004b-final',
   ogWidth: 1200,
   ogHeight: 630,
   ogAlt: 'InvestorTrustHub — independent investor research from the Ask Trust Hub Network',
