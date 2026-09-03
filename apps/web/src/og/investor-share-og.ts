@@ -1,5 +1,3 @@
-import { existsSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
 import { NextResponse } from 'next/server';
 import {
   branchesForFirm,
@@ -9,7 +7,7 @@ import {
 } from '@ith/domain';
 import { hasDatabaseUrl } from '@/lib/db';
 import { getCachedOfficialFirmBySlug } from '@/lib/firms/cached';
-import { renderInvestorShareImage } from '@/og/investor-share-card';
+import { renderInvestorFallbackImage, renderInvestorShareImage } from '@/og/investor-share-card';
 import {
   investorOfficialFirmShareModel,
   investorResearchShareModel,
@@ -17,23 +15,7 @@ import {
   type InvestorShareCardModel,
 } from '@/lib/share-card-model';
 
-const PNG_HEADERS = {
-  'Content-Type': 'image/png',
-  'Cache-Control': 'public, max-age=3600, s-maxage=3600',
-};
-
-function fallbackPngPath(): string {
-  const local = join(process.cwd(), 'public/opengraph-image.png');
-  const monorepo = join(process.cwd(), 'apps/web/public/opengraph-image.png');
-  if (existsSync(local)) return local;
-  if (existsSync(monorepo)) return monorepo;
-  return local;
-}
-
-export function investorFallbackPng(): NextResponse {
-  const buf = readFileSync(fallbackPngPath());
-  return new NextResponse(buf, { status: 200, headers: PNG_HEADERS });
-}
+export function investorFallbackPng() { return renderInvestorFallbackImage(); }
 
 export function shareOgHead(): NextResponse {
   return new NextResponse(null, { status: 200, headers: { 'Content-Type': 'image/png' } });

@@ -88,7 +88,7 @@ describe('SHARE-003 InvestorTrustHub contextual cards', () => {
     const route = read('src/app/firm/[slug]/share-og/route.tsx');
     const helper = read('src/og/investor-share-og.ts');
     expect(route).toContain('investorFallbackPng');
-    expect(helper).toContain('opengraph-image.png');
+    expect(helper).toContain('renderInvestorFallbackImage');
     expect(helper).not.toMatch(/google|places\.googleapis|raum|website/i);
     expect(helper).not.toMatch(/disclosure_indicator|matchConfidence/);
   });
