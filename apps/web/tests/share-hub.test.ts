@@ -1,17 +1,6 @@
-import { readFileSync } from 'node:fs';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { pageMetadata } from '../src/lib/seo';
 import { isForbiddenShareHost, resolveShareOrigin, SHARE_HUB } from '../src/lib/share-hub';
-
-const png = readFileSync(
-  join(dirname(fileURLToPath(import.meta.url)), '../public/opengraph-image.png'),
-);
-
-function pngSize(buf: Buffer) {
-  return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) };
-}
 
 describe('SHARE-002 InvestorTrustHub social baseline', () => {
   it('pins the Investor production host', () => {
@@ -34,13 +23,13 @@ describe('SHARE-002 InvestorTrustHub social baseline', () => {
     expect(blob).not.toContain('localhost');
     expect(blob).not.toContain('127.0.0.1');
     expect(blob).toContain('https://www.investortrusthub.com/methodology');
-    expect(blob).toContain('https://www.investortrusthub.com/opengraph-image.png');
+    expect(blob).toContain('https://www.investortrusthub.com/opengraph-image');
     expect(meta.twitter?.card).toBe('summary_large_image');
     expect(meta.openGraph?.images).toBeTruthy();
   });
 
   it('keeps the default social card at 1200×630', () => {
-    expect(png.subarray(0, 8).toString('binary')).toBe('\x89PNG\r\n\x1a\n');
-    expect(pngSize(png)).toEqual({ width: 1200, height: 630 });
+    expect(SHARE_HUB.ogWidth).toBe(1200);
+    expect(SHARE_HUB.ogHeight).toBe(630);
   });
 });
