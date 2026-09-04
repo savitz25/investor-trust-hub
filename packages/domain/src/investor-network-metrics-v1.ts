@@ -32,6 +32,7 @@ export type MetricGrain =
   | 'ca_state_ria_roster'
   | 'tx_state_ria_roster'
   | 'wa_state_ria_roster'
+  | 'az_state_ria_roster'
   | 'form_adv_withdrawal'
   | 'form_adv_successor_link';
 
@@ -144,6 +145,12 @@ export type InvestorNetworkMetricsV1 = {
     principalOfficeRosterFirms: number;
     stateRiaRosterCoverage: 'SOURCE_NOT_ACQUIRED';
     statewideStateRiaUniverse: null;
+  };
+  arizona: {
+    principalOfficeRosterFirms: number;
+    stateRiaRosterCoverage: 'SOURCE_AVAILABLE_BY_REQUEST';
+    statewideStateRiaUniverse: null;
+    enforcementIndexRowsProfiled: number;
   };
   network: {
     publishedStateIntelligencePages: number;

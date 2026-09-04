@@ -40,6 +40,8 @@ export type InvestorNetworkMetricsInput = {
   caPrincipalOfficeFirms: number;
   txPrincipalOfficeFirms: number;
   waPrincipalOfficeFirms: number;
+  azPrincipalOfficeFirms: number;
+  azEnforcementIndexRowsProfiled: number;
 };
 
 function metric(partial: Omit<InvestorNetworkMetric, 'unit'>): InvestorNetworkMetric {
@@ -102,7 +104,7 @@ export function assertGrainSafety(input: InvestorNetworkMetricsInput): void {
   if (input.disclosureEvents === input.item11YesRia + input.item11YesEra && input.disclosureEvents > 0) {
     throw new Error('disclosure events must not be equated to Item 11 yes indicators');
   }
-  for (const path of ['/new-jersey', '/california', '/texas', '/washington']) {
+  for (const path of ['/new-jersey', '/california', '/texas', '/washington', '/arizona']) {
     if (!input.publishedStateIntelligencePaths.includes(path)) {
       throw new Error(`state intelligence path missing: ${path}`);
     }
@@ -124,6 +126,9 @@ export function assertGrainSafety(input: InvestorNetworkMetricsInput): void {
   }
   if (input.waPrincipalOfficeFirms === input.rosterFirms) {
     throw new Error('WA principal-office overlay must not equal the national roster');
+  }
+  if (input.azPrincipalOfficeFirms === input.rosterFirms) {
+    throw new Error('AZ principal-office overlay must not equal the national roster');
   }
 }
 
@@ -469,20 +474,46 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       ),
     }),
     metric({
+      key: 'az_state_ria_roster',
+      label: 'Arizona state-licensed investment adviser roster',
+      value: null,
+      valueState: 'REQUEST_ONLY',
+      grain: 'az_state_ria_roster',
+      denominator: 'ACC Securities state-IA bulk roster — SOURCE_AVAILABLE_BY_REQUEST',
+      description:
+        'Complete Arizona state-licensed adviser count is UNKNOWN, not zero, and not the 213 SEC principal-office overlay.',
+      coverage: 'Arizona',
+      contributingSourceSystems: ['az_acc'],
+      sourceAsOf: '2026-09-04',
+      generatedAt,
+      publicationStatus: 'PUBLIC_UNKNOWN',
+      trace: commonTrace(
+        'Nothing numeric is published for the complete AZ state-IA universe.',
+        'Not SEC AZ principal-office firms. Not ACC enforcement HTML index rows.',
+        ['az_acc'],
+        'Arizona',
+        'AZ-INV snapshot as_of 2026-09-04',
+        {
+          whyUnknown:
+            'ACC can provide a CSV by public-records request. The request was not filed. Do not estimate the missing state roster from SEC principal-office geography. UNKNOWN must never render as zero.',
+        },
+      ),
+    }),
+    metric({
       key: 'published_state_intelligence_pages',
       label: 'Published state investment-intelligence pages',
       value: input.publishedStateIntelligencePaths.length,
       valueState: 'KNOWN',
       grain: 'published_state_intelligence_page',
       denominator: 'Indexable specialist state intelligence routes currently published',
-      description: 'New Jersey, California, Texas, and Washington state intelligence pages. Not a count of advisers.',
+      description: 'New Jersey, California, Texas, Washington, and Arizona state intelligence pages. Not a count of advisers.',
       coverage: input.publishedStateIntelligencePaths.join(', '),
       contributingSourceSystems: ['investor-state-intel'],
       sourceAsOf: newestDocumentedSourceAsOf,
       generatedAt,
       publicationStatus: 'PUBLIC',
       trace: commonTrace(
-        'Published /new-jersey, /california, /texas, and /washington intelligence routes.',
+        'Published /new-jersey, /california, /texas, /washington, and /arizona intelligence routes.',
         'Not county pages. Not national roster rows. Florida is not published on this hub.',
         ['investor-state-intel'],
         input.publishedStateIntelligencePaths.join(', '),
@@ -511,6 +542,8 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
     caHq: input.caPrincipalOfficeFirms,
     txHq: input.txPrincipalOfficeFirms,
     waHq: input.waPrincipalOfficeFirms,
+    azHq: input.azPrincipalOfficeFirms,
+    azEnf: input.azEnforcementIndexRowsProfiled,
     njEnf: input.njEnforcementDocumentsAcquired,
     publishedAt: input.publishedAt,
   };
@@ -592,6 +625,12 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       stateRiaRosterCoverage: 'SOURCE_NOT_ACQUIRED',
       statewideStateRiaUniverse: null,
     },
+    arizona: {
+      principalOfficeRosterFirms: input.azPrincipalOfficeFirms,
+      stateRiaRosterCoverage: 'SOURCE_AVAILABLE_BY_REQUEST',
+      statewideStateRiaUniverse: null,
+      enforcementIndexRowsProfiled: input.azEnforcementIndexRowsProfiled,
+    },
     network: {
       publishedStateIntelligencePages: input.publishedStateIntelligencePaths.length,
       publishedStateIntelligencePaths: input.publishedStateIntelligencePaths,
@@ -614,8 +653,8 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
         reason: 'Duplicated filing vintages and ERA non-filing make an aggregate dollar headline unsafe.',
       },
       {
-        total: 'NJ, CA, or TX state-RIA universe = 0',
-        reason: 'Missing bulk state rosters are UNKNOWN, not zero.',
+        total: 'NJ, CA, TX, WA, or AZ state-RIA universe = 0',
+        reason: 'Missing bulk state rosters are UNKNOWN, not zero. Available-by-request is not acquired.',
       },
       {
         total: `${input.disclosureEvents} disclosure events as no-wrongdoing`,

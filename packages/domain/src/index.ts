@@ -26,3 +26,4 @@ export * from './nj-public-intel';
 export * from './ca-public-intel';
 export * from './tx-public-intel';
 export * from './wa-public-intel';
+export * from './az-public-intel';

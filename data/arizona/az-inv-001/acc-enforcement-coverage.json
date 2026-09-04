@@ -1,0 +1,25 @@
+{
+  "ticket": "AZ-INV-001",
+  "checked": "2026-09-04",
+  "url": "https://www.azcc.gov/securities/enforcements/actions",
+  "http_status": 200,
+  "bytes": 116808,
+  "sha256": "d618b8a327763780ea5d4eb169e5b4af64ab3fb8c8717e89ac165e05a1aadace",
+  "tables": 10,
+  "index_columns": ["Date Filed", "Company/Individual"],
+  "data_rows": 205,
+  "rows_with_crd_in_respondent_text": 87,
+  "rows_name_only": 118,
+  "pdf_linked_rows": 205,
+  "pdfs_downloaded": 0,
+  "edockets_crawled": 0,
+  "native_action_class_column": false,
+  "profile_attachments": 0,
+  "identity": {
+    "EXACT_CRD": "CRD number present in the respondent cell",
+    "UNSAFE_NAME_ONLY": "respondent name without CRD / docket / file / order id",
+    "name_plus_city": "REVIEW_REQUIRED",
+    "auto_attach": false
+  },
+  "note": "Bounded HTML index profile only. Do not treat 205 rows as a quality ranking. Do not publish a person directory from this index. Name-only adverse attach is UNSAFE."
+}
