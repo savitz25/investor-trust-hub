@@ -167,6 +167,13 @@ export function InvestorHomeIntelligence({ intel }: { intel: InvestorHomeIntelV1
             <strong>Research the firm. Trace the evidence. You decide.</strong>
           </p>
           <p className="ith-kicker">We organize the evidence. You decide.</p>
+          {intel.freshnessClocks ? (
+            <p className="ith-kicker">
+              Network rollup generated {intel.freshnessClocks.generatedAt.slice(0, 10)}. Newest documented source{' '}
+              {intel.freshnessClocks.newestDocumentedSourceAsOf ?? 'varies by family'}. These are not Git or deploy
+              dates.
+            </p>
+          ) : null}
           <div className="ith-actions">
             <a className="th-btn-primary th-btn-hero" href="#record">
               Explore Investor Intelligence
