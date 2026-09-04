@@ -39,6 +39,7 @@ export type InvestorNetworkMetricsInput = {
   njEnforcementDocumentsAcquired: number;
   caPrincipalOfficeFirms: number;
   txPrincipalOfficeFirms: number;
+  waPrincipalOfficeFirms: number;
 };
 
 function metric(partial: Omit<InvestorNetworkMetric, 'unit'>): InvestorNetworkMetric {
@@ -101,7 +102,7 @@ export function assertGrainSafety(input: InvestorNetworkMetricsInput): void {
   if (input.disclosureEvents === input.item11YesRia + input.item11YesEra && input.disclosureEvents > 0) {
     throw new Error('disclosure events must not be equated to Item 11 yes indicators');
   }
-  for (const path of ['/new-jersey', '/california', '/texas']) {
+  for (const path of ['/new-jersey', '/california', '/texas', '/washington']) {
     if (!input.publishedStateIntelligencePaths.includes(path)) {
       throw new Error(`state intelligence path missing: ${path}`);
     }
@@ -120,6 +121,9 @@ export function assertGrainSafety(input: InvestorNetworkMetricsInput): void {
   }
   if (input.txPrincipalOfficeFirms === input.rosterFirms) {
     throw new Error('TX principal-office overlay must not equal the national roster');
+  }
+  if (input.waPrincipalOfficeFirms === input.rosterFirms) {
+    throw new Error('WA principal-office overlay must not equal the national roster');
   }
 }
 
@@ -440,20 +444,45 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       ),
     }),
     metric({
+      key: 'wa_state_ria_roster',
+      label: 'Washington state-RIA license roster',
+      value: null,
+      valueState: 'NOT_ACQUIRED',
+      grain: 'wa_state_ria_roster',
+      denominator: 'Washington DFI state-RIA bulk roster — SOURCE_NOT_ACQUIRED',
+      description: 'No bulk Washington state-RIA roster was acquired. Complete licensed-adviser count is UNKNOWN, not zero.',
+      coverage: 'Washington',
+      contributingSourceSystems: ['wa_dfi'],
+      sourceAsOf: '2026-09-04',
+      generatedAt,
+      publicationStatus: 'PUBLIC_UNKNOWN',
+      trace: commonTrace(
+        'Nothing numeric is published for the complete WA state-RIA universe.',
+        'Not SEC WA principal-office firms. Not DFI year-end aggregates. Not DFI enforcement search hits.',
+        ['wa_dfi'],
+        'Washington',
+        'WA-INV snapshot as_of 2026-09-04',
+        {
+          whyUnknown:
+            'Public DFI verification is search-only. Do not estimate the missing state roster from SEC principal-office geography or from the 2024 year-end aggregate. Missing is not zero.',
+        },
+      ),
+    }),
+    metric({
       key: 'published_state_intelligence_pages',
       label: 'Published state investment-intelligence pages',
       value: input.publishedStateIntelligencePaths.length,
       valueState: 'KNOWN',
       grain: 'published_state_intelligence_page',
       denominator: 'Indexable specialist state intelligence routes currently published',
-      description: 'New Jersey, California, and Texas state intelligence pages. Not a count of advisers.',
+      description: 'New Jersey, California, Texas, and Washington state intelligence pages. Not a count of advisers.',
       coverage: input.publishedStateIntelligencePaths.join(', '),
       contributingSourceSystems: ['investor-state-intel'],
       sourceAsOf: newestDocumentedSourceAsOf,
       generatedAt,
       publicationStatus: 'PUBLIC',
       trace: commonTrace(
-        'Published /new-jersey, /california, and /texas intelligence routes.',
+        'Published /new-jersey, /california, /texas, and /washington intelligence routes.',
         'Not county pages. Not national roster rows. Florida is not published on this hub.',
         ['investor-state-intel'],
         input.publishedStateIntelligencePaths.join(', '),
@@ -481,6 +510,7 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
     njHq: input.njPrincipalOfficeFirms,
     caHq: input.caPrincipalOfficeFirms,
     txHq: input.txPrincipalOfficeFirms,
+    waHq: input.waPrincipalOfficeFirms,
     njEnf: input.njEnforcementDocumentsAcquired,
     publishedAt: input.publishedAt,
   };
@@ -554,6 +584,11 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
     },
     texas: {
       principalOfficeRosterFirms: input.txPrincipalOfficeFirms,
+      stateRiaRosterCoverage: 'SOURCE_NOT_ACQUIRED',
+      statewideStateRiaUniverse: null,
+    },
+    washington: {
+      principalOfficeRosterFirms: input.waPrincipalOfficeFirms,
       stateRiaRosterCoverage: 'SOURCE_NOT_ACQUIRED',
       statewideStateRiaUniverse: null,
     },

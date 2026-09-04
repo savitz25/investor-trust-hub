@@ -1,9 +1,9 @@
 {
   "schemaVersion": "investor-network-metrics-v1",
-  "generatedAt": "2026-09-04T13:46:38.441Z",
+  "generatedAt": "2026-09-04T17:41:41.054Z",
   "newestDocumentedSourceAsOf": "2026-09-03",
   "newestDocumentedSourceAsOfNote": "Newest documented official source-effective date among metrics that carry a calendar sourceAsOf. Not the as-of date of every filing, not Git time, and not deploy time.",
-  "sourceFingerprint": "482e95149d29b520cf11eda8556d8f748582a46fabc3f6fb66cbb77ba6328bad",
+  "sourceFingerprint": "65d70011a597f973305b7b9e93684822628fe1032ab023d139013934632463ad",
   "source": {
     "dataset": "iapd_sec_compilation",
     "releaseLabel": "IA_FIRM_SEC_Feed_08_27_2026",
@@ -70,12 +70,18 @@
     "stateRiaRosterCoverage": "SOURCE_NOT_ACQUIRED",
     "statewideStateRiaUniverse": null
   },
+  "washington": {
+    "principalOfficeRosterFirms": 306,
+    "stateRiaRosterCoverage": "SOURCE_NOT_ACQUIRED",
+    "statewideStateRiaUniverse": null
+  },
   "network": {
-    "publishedStateIntelligencePages": 3,
+    "publishedStateIntelligencePages": 4,
     "publishedStateIntelligencePaths": [
       "/new-jersey",
       "/california",
-      "/texas"
+      "/texas",
+      "/washington"
     ]
   },
   "rejectedTotals": [
@@ -120,7 +126,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-04T13:46:38.441Z",
+      "generatedAt": "2026-09-04T17:41:41.054Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One current form_adv_firm_facts row per CRD in the monthly RIA+ERA pair.",
@@ -150,7 +156,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-04T13:46:38.441Z",
+      "generatedAt": "2026-09-04T17:41:41.054Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "RIA facts (registered + pending).",
@@ -178,7 +184,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-04T13:46:38.441Z",
+      "generatedAt": "2026-09-04T17:41:41.054Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "ERA facts with reporting status.",
@@ -205,7 +211,7 @@
         "search_documents"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-04T13:46:38.441Z",
+      "generatedAt": "2026-09-04T17:41:41.054Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Indexable firm search documents on official firms.",
@@ -232,7 +238,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-04T13:46:38.441Z",
+      "generatedAt": "2026-09-04T17:41:41.054Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One form_adv_filings row.",
@@ -259,7 +265,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-04T13:46:38.441Z",
+      "generatedAt": "2026-09-04T17:41:41.054Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One normalized Item observation row.",
@@ -286,7 +292,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-04T13:46:38.441Z",
+      "generatedAt": "2026-09-04T17:41:41.054Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "RIA facts with a non-null RAUM amount. Zero is a reported value.",
@@ -313,7 +319,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-04T13:46:38.441Z",
+      "generatedAt": "2026-09-04T17:41:41.054Z",
       "publicationStatus": "PUBLIC_PARTIAL",
       "trace": {
         "counts": "Facts with disclosure_indicator Y (RIA and ERA kept visible in Trace).",
@@ -340,7 +346,7 @@
         "disclosure_events"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-04T13:46:38.441Z",
+      "generatedAt": "2026-09-04T17:41:41.054Z",
       "publicationStatus": "INTERNAL",
       "trace": {
         "counts": "disclosure_events rows.",
@@ -367,7 +373,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-04T13:46:38.441Z",
+      "generatedAt": "2026-09-04T17:41:41.054Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One owner/control entity observation.",
@@ -394,7 +400,7 @@
         "nj_bos"
       ],
       "sourceAsOf": "2026-09-02",
-      "generatedAt": "2026-09-04T13:46:38.441Z",
+      "generatedAt": "2026-09-04T17:41:41.054Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "Nothing numeric is published for the complete NJ state-RIA universe.",
@@ -422,7 +428,7 @@
         "ca_dfpi"
       ],
       "sourceAsOf": "2026-09-03",
-      "generatedAt": "2026-09-04T13:46:38.441Z",
+      "generatedAt": "2026-09-04T17:41:41.054Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "Nothing numeric is published for the complete CA state-RIA universe.",
@@ -450,7 +456,7 @@
         "tx_ssb"
       ],
       "sourceAsOf": "2026-09-04",
-      "generatedAt": "2026-09-04T13:46:38.441Z",
+      "generatedAt": "2026-09-04T17:41:41.054Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "Nothing numeric is published for the complete TX state-RIA universe.",
@@ -466,27 +472,55 @@
     },
     {
       "unit": "count",
+      "key": "wa_state_ria_roster",
+      "label": "Washington state-RIA license roster",
+      "value": null,
+      "valueState": "NOT_ACQUIRED",
+      "grain": "wa_state_ria_roster",
+      "denominator": "Washington DFI state-RIA bulk roster — SOURCE_NOT_ACQUIRED",
+      "description": "No bulk Washington state-RIA roster was acquired. Complete licensed-adviser count is UNKNOWN, not zero.",
+      "coverage": "Washington",
+      "contributingSourceSystems": [
+        "wa_dfi"
+      ],
+      "sourceAsOf": "2026-09-04",
+      "generatedAt": "2026-09-04T17:41:41.054Z",
+      "publicationStatus": "PUBLIC_UNKNOWN",
+      "trace": {
+        "counts": "Nothing numeric is published for the complete WA state-RIA universe.",
+        "doesNotCount": "Not SEC WA principal-office firms. Not DFI year-end aggregates. Not DFI enforcement search hits.",
+        "contributingSourceSystems": [
+          "wa_dfi"
+        ],
+        "geographicCoverage": "Washington",
+        "sourceDates": "WA-INV snapshot as_of 2026-09-04",
+        "generationDate": "2026-09-04",
+        "whyUnknown": "Public DFI verification is search-only. Do not estimate the missing state roster from SEC principal-office geography or from the 2024 year-end aggregate. Missing is not zero."
+      }
+    },
+    {
+      "unit": "count",
       "key": "published_state_intelligence_pages",
       "label": "Published state investment-intelligence pages",
-      "value": 3,
+      "value": 4,
       "valueState": "KNOWN",
       "grain": "published_state_intelligence_page",
       "denominator": "Indexable specialist state intelligence routes currently published",
-      "description": "New Jersey, California, and Texas state intelligence pages. Not a count of advisers.",
-      "coverage": "/new-jersey, /california, /texas",
+      "description": "New Jersey, California, Texas, and Washington state intelligence pages. Not a count of advisers.",
+      "coverage": "/new-jersey, /california, /texas, /washington",
       "contributingSourceSystems": [
         "investor-state-intel"
       ],
       "sourceAsOf": "2026-09-03",
-      "generatedAt": "2026-09-04T13:46:38.441Z",
+      "generatedAt": "2026-09-04T17:41:41.054Z",
       "publicationStatus": "PUBLIC",
       "trace": {
-        "counts": "Published /new-jersey, /california, and /texas intelligence routes.",
+        "counts": "Published /new-jersey, /california, /texas, and /washington intelligence routes.",
         "doesNotCount": "Not county pages. Not national roster rows. Florida is not published on this hub.",
         "contributingSourceSystems": [
           "investor-state-intel"
         ],
-        "geographicCoverage": "/new-jersey, /california, /texas",
+        "geographicCoverage": "/new-jersey, /california, /texas, /washington",
         "sourceDates": "Publication gates in specialist catalogs",
         "generationDate": "2026-09-04"
       }
