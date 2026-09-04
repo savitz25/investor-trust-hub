@@ -31,6 +31,7 @@ export type MetricGrain =
   | 'nj_state_ria_roster'
   | 'ca_state_ria_roster'
   | 'tx_state_ria_roster'
+  | 'wa_state_ria_roster'
   | 'form_adv_withdrawal'
   | 'form_adv_successor_link';
 
@@ -135,6 +136,11 @@ export type InvestorNetworkMetricsV1 = {
     statewideStateRiaUniverse: null;
   };
   texas: {
+    principalOfficeRosterFirms: number;
+    stateRiaRosterCoverage: 'SOURCE_NOT_ACQUIRED';
+    statewideStateRiaUniverse: null;
+  };
+  washington: {
     principalOfficeRosterFirms: number;
     stateRiaRosterCoverage: 'SOURCE_NOT_ACQUIRED';
     statewideStateRiaUniverse: null;

@@ -1,0 +1,275 @@
+/**
+ * WA-INV-001 — deterministic public snapshot from committed SEC/IARD roster geography.
+ * Do not invent a Washington state-RIA denominator. Do not scrape DFI/IAPD/BrokerCheck.
+ */
+import { createHash } from 'node:crypto';
+import { writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+
+const WA_PRINCIPAL_OFFICE = 306;
+const ROSTER_WITH_REGION = 17997;
+const ROSTER_NULL_REGION = 5625;
+const RIA = 17018;
+const ERA = 6604;
+const TOTAL = 23622;
+
+const snapshot = {
+  version: 'investor-wa-state-intel-v1',
+  generatedFrom: {
+    nationalRoster: 'packages/domain/src/investor-home-intel.ts V1_ROSTER_PRINCIPAL_OFFICE_STATES + V1_SEC_ROSTER',
+    census: 'docs/inv-home-001-census.json principal_office_states WA',
+    dfiProbe: 'data/washington/wa-inv-001/dfi-bounded-probe.json',
+  },
+  asOf: '2026-09-04',
+  publicationGate: 'ON',
+  publicEligibility: 'state_page',
+  route: '/washington',
+  nationalOverlay: {
+    waPrincipalOfficeSecIardFirms: WA_PRINCIPAL_OFFICE,
+    grain: 'SEC IARD roster firm with principal-office region = WA',
+    source: 'IA_FIRM_SEC_Feed_08_27_2026',
+    sourceDate: '2026-08-27',
+    retrievedAt: '2026-08-28',
+    universe: TOTAL,
+    resolvedPrincipalOfficeRegions: ROSTER_WITH_REGION,
+    unresolvedPrincipalOfficeRegions: ROSTER_NULL_REGION,
+    shareOfResolvedRegionsPct: Number(((100 * WA_PRINCIPAL_OFFICE) / ROSTER_WITH_REGION).toFixed(2)),
+    searchHref: '/firms?state=WA',
+    label: 'SEC/IARD roster firms with a Washington principal office',
+    caveat:
+      'This is the national SEC/IARD roster overlay for firms that report a Washington principal office. It is not the Washington state-registered adviser universe, not a complete Washington adviser count, and not proof of current Washington DFI authority. WASHINGTON PRINCIPAL OFFICE != WASHINGTON STATE REGISTRATION.',
+  },
+  riaEra: {
+    nationalRiaFacts: RIA,
+    nationalEraFacts: ERA,
+    nationalTotalFacts: TOTAL,
+    waPrincipalOfficeSplit: 'SOURCE_NOT_SPLIT',
+    caveat:
+      'National roster keeps RIA (17,018) and ERA (6,604) separate. Committed geography is on the combined roster. Washington principal-office counts are not an RIA-only or ERA-only state denominator. ERA is not an RIA. SEC RIA is not a Washington state RIA.',
+  },
+  firmMarket: {
+    raumBandsByWashingtonPrincipalOffice: 'SOURCE_NOT_SPLIT',
+    employeeCountsByWashingtonPrincipalOffice: 'SOURCE_NOT_SPLIT',
+    clientMixByWashingtonPrincipalOffice: 'SOURCE_NOT_SPLIT',
+    note: 'National RIA RAUM bands and Form ADV attributes exist on the federal spine. This snapshot does not invent a Washington-only size ranking from those national tables.',
+  },
+  stateRia: {
+    STATE_RIA_BULK_ROSTER: 'SOURCE_NOT_ACQUIRED',
+    access: 'OPEN_SEARCH_ONLY',
+    completeStateRiaCount: 'UNKNOWN',
+    verifyUrl: 'https://dfi.wa.gov/consumers/verify-license',
+    securitiesVerifyUrl: 'https://dfi.wa.gov/section-main-pages/verify-securities-licenses-and-registration',
+    dfiHomeUrl: 'https://dfi.wa.gov/',
+    securitiesHomeUrl: 'https://dfi.wa.gov/investment-advisers',
+    iaRegistrationUrl: 'https://dfi.wa.gov/investment-advisers/registration',
+    iarRegistrationUrl: 'https://dfi.wa.gov/investment-advisers/investment-adviser-representative',
+    federalNoticeUrl: 'https://dfi.wa.gov/investment-advisers/federally-covered-advisers',
+    iapdUrl: 'https://adviserinfo.sec.gov/',
+    brokercheckUrl: 'https://brokercheck.finra.org/',
+    helpline: '1-877-RING-DFI (746-4334)',
+    searchFields: 'Firm or individual name, CRD/IARD number, or DFI file number when returned',
+    caveat:
+      'No official Washington state-RIA bulk CSV/XLSX/API was acquired. DFI Licensee Database is official and search-only. Do not estimate the missing state roster from SEC principal-office geography or from the 2024 year-end aggregate. Do not scrape the search.',
+  },
+  dfiYearEndAggregates: {
+    source: 'Washington DFI Division of Securities 2024 Year In Review PDF',
+    sourceUrl: 'https://dfi.wa.gov/sites/default/files/2026-01/securities-2024-year-review.pdf',
+    asOf: '2024-12',
+    grain: 'DFI year-end licensee/offering aggregate — not a live roster',
+    brokerDealers: 1697,
+    investmentAdvisers: 645,
+    investmentAdviserRepresentatives: 14753,
+    securitiesSalespersons: 227450,
+    registeredSecuritiesOfferings: 91,
+    registeredFranchiseOfferings: 1023,
+    registeredBusinessOpportunities: 3,
+    complaintsReceived: 335,
+    enforcementActionsIssued: 92,
+    peopleCountsAreNotPublicDirectories: true,
+    notALiveRoster: true,
+    caveat:
+      'These are official year-end 2024 aggregates. DFI YEAR-END AGGREGATE != LIVE ROSTER. The 645 investment-adviser figure is not a current state-RIA denominator and is not the 306 SEC/IARD Washington principal-office overlay. IAR (14,753) and salesperson (227,450) counts are people totals and are not published here as person directories.',
+  },
+  enforcement: {
+    pass: 'bounded_easy_win',
+    result: 'NO_BULK_ACQUIRED',
+    officialIndex: 'https://dfi.wa.gov/securities-enforcement-actions',
+    archiveIndex: 'https://dfi.wa.gov/securities-enforcement-actions/securities2024',
+    coverage: 'OPEN_HTML_TABLE / YEAR_ARCHIVES / PDF_ORDERS',
+    nativeClassesObservedOnIndex: [
+      'Final Order',
+      'Consent Order',
+      'Statement of Charges',
+      'Summary Order',
+    ],
+    actsObservedOnIndex: ['Securities Act', 'Franchise Investment Protection Act'],
+    indexColumns: ['Order Number', 'Respondents', 'Type', 'Act', 'Date Entered', 'Summary'],
+    doNotCalculateEnforcementRate: true,
+    profileAttachments: [],
+    identityBar: 'EXACT_CRD, EXACT_DFI_FILE_NUMBER, or EXACT_DOCKET_OR_ORDER_IDENTITY',
+    nameOnly: 'UNSAFE',
+    namePlusCity: 'REVIEW_REQUIRED',
+    yearEndActionsIssued2024: 92,
+    yearEndActionsAreNotALiveCaseRoster: true,
+    caveat:
+      'DFI publishes a current HTML enforcement-action table plus yearly archives and PDF orders. That is not a structured bulk CSV/JSON extract and was not harvested page-by-page. Statement of Charges is not a final finding. Notice/summary process is not a final order. Order count is not quality. Penalty is not investor loss. Name-only attachment is unsafe. Missing is unknown, not zero.',
+  },
+  issuer: {
+    framework:
+      'Securities Act of Washington (RCW 21.20) administered by the DFI Division of Securities — investment-adviser and IAR registration, broker-dealer and salesperson registration, securities registration/exemptions/notice filings, and related franchise/business-opportunity filing systems.',
+    professionalsUrl: 'https://dfi.wa.gov/investment-advisers',
+    rulesUrl: 'https://dfi.wa.gov/investment-advisers',
+    statute: 'RCW 21.20',
+    iaRules: 'WAC 460-24A',
+    bdRules: 'WAC 460-20C (broker-dealers and salespersons; effective 2024-10-13)',
+    bulkIssuerDataset: 'SOURCE_NOT_ACQUIRED',
+    coverage: 'OPEN_SEARCH_AND_RULE_TEXT',
+    note: 'Federal Form D is not Washington qualification or approval. Notice filings and exemptions are not a quality ranking. No statewide issuer bulk denominator was acquired.',
+  },
+  formD: {
+    overlay: 'SOURCE_NOT_ACQUIRED',
+    caveat: 'FORM D FILING != WASHINGTON STATE APPROVAL. FORM D FILING != INVESTMENT QUALITY.',
+  },
+  exam: {
+    programPage: 'https://dfi.wa.gov/investment-advisers/investment-adviser-representative',
+    firmPage: 'https://dfi.wa.gov/investment-advisers/registration',
+    finraExamPage: 'https://dfi.wa.gov/securities-broker-dealers/how-apply-finra-examination',
+    rule: 'WAC 460-24A-050',
+    qualifyingExams: ['Series 65', 'SIE + Series 7 + Series 66 (applications on or after 2018-10-01)'],
+    designationWaivers: ['CFP', 'ChFC', 'PFS', 'CFA', 'CIC'],
+    currentPublicSampleLikeNj2026: false,
+    firmResults: 'SOURCE_NOT_PUBLIC_AT_FIRM_GRAIN',
+    passFailMetric: false,
+    note: 'Washington DFI publishes IAR/IA examination and designation-waiver rules. That is individual qualification guidance, not a public firm-level examination scorecard and not a person exam directory. Exam requirement is not a quality score.',
+  },
+  investorEducation: {
+    url: 'https://dfi.wa.gov/consumers',
+    registrationChecksUrl: 'https://dfi.wa.gov/section-main-pages/verify-securities-licenses-and-registration',
+    use: 'consumer education / source coverage',
+    notFirmAdverseEvidence: true,
+  },
+  contacts: {
+    policy:
+      'Official/public business sources only. No internet enrichment. No DFI/IAPD/BrokerCheck search scrape. No person contact publication from this ticket.',
+    dfiSearchScrape: false,
+    federalPrincipalOfficeAddress:
+      'Used only as geography for the SEC/IARD overlay; not republished here as a harvested directory.',
+    phoneEmailWebsiteFromDfiSearch: 'NOT_SCRAPED',
+  },
+  regulatorMatrix: [
+    {
+      credential: 'SEC-registered investment adviser',
+      regulator: 'U.S. Securities and Exchange Commission / IARD',
+      identity: 'CRD / IARD firm ID; SEC file number',
+      verification: 'IAPD and InvestorTrustHub firm research',
+      proves: 'Federal registration category as reported on Form ADV in the cited extract',
+      doesNotProve: 'Washington DFI state-RIA registration or current Washington notice-filing status',
+    },
+    {
+      credential: 'Exempt reporting adviser (ERA)',
+      regulator: 'SEC / IARD (and Washington notice when applicable)',
+      identity: 'CRD / IARD firm ID',
+      verification: 'IAPD Form ADV reporting status',
+      proves: 'ERA reporting status in the cited extract',
+      doesNotProve: 'SEC RIA registration or Washington state-RIA registration',
+    },
+    {
+      credential: 'Washington state-registered investment adviser',
+      regulator: 'Washington DFI Division of Securities',
+      identity: 'CRD/IARD and/or DFI file number when shown',
+      verification: 'DFI Licensee Database; IARD filings for state applicants',
+      proves: 'Washington investment-adviser registration when the official DFI/IARD record says so',
+      doesNotProve: 'SEC registration. Principal-office geography is not this credential.',
+    },
+    {
+      credential: 'Investment adviser representative',
+      regulator: 'Washington DFI / CRD',
+      identity: 'Person CRD (not firm CRD)',
+      verification: 'DFI Licensee Database and IAPD individual search — not scraped here',
+      proves: 'Individual representative reporting when official CRD/DFI evidence exists',
+      doesNotProve: 'Firm registration. IAR is not the firm.',
+    },
+    {
+      credential: 'Broker-dealer / securities salesperson',
+      regulator: 'Washington DFI / FINRA / CRD',
+      identity: 'Firm or person CRD',
+      verification: 'FINRA BrokerCheck and DFI Licensee Database — not scraped here',
+      proves: 'Broker-dealer or salesperson registration when official evidence exists',
+      doesNotProve: 'Investment-adviser registration',
+    },
+    {
+      credential: 'Issuer / securities filing',
+      regulator: 'Washington DFI Division of Securities',
+      identity: 'Official filing/order number when present',
+      verification: 'DFI securities registration/exemption/notice paths',
+      proves: 'A registration, exemption, or notice-filing posture when the official filing record says so',
+      doesNotProve: 'Investment quality or Form D approval',
+    },
+    {
+      credential: 'CRD / IARD identifier',
+      regulator: 'FINRA CRD / IARD infrastructure',
+      identity: 'CRD number',
+      verification: 'IAPD / BrokerCheck / DFI when returned',
+      proves: 'A stable identity key when source-native',
+      doesNotProve: 'Current Washington authority by itself',
+    },
+  ],
+  identityRules: {
+    EXACT: ['CRD', 'SEC file number', 'DFI file number', 'official docket/order ID'],
+    HIGH_CONFIDENCE: 'exact legal name + exact official address for non-adverse descriptive data only',
+    REVIEW_REQUIRED: 'name + city, DBA, name variants',
+    UNSAFE: 'name alone — not used for adverse attachment',
+  },
+  profileAttachments: [],
+  gaps: [
+    'Complete current Washington state-RIA denominator is UNKNOWN.',
+    'Complete Washington IAR universe is UNKNOWN and is not published as a person directory.',
+    'Complete Washington broker-dealer state roster is UNKNOWN.',
+    'Exact DFI registration status is not known for every SEC/IARD firm with a WA principal office.',
+    'Committed geography is not split into WA RIA vs WA ERA.',
+    'No structured DFI enforcement bulk extract was acquired.',
+    'No Form D Washington overlay is in the committed product.',
+    'No statewide issuer bulk denominator was acquired.',
+  ],
+  semanticGuardrails: [
+    'WASHINGTON OFFICE != STATE REGISTRATION',
+    'SEC RIA != WASHINGTON STATE RIA',
+    'ERA != RIA',
+    'IAR != FIRM',
+    'BROKER-DEALER != IA',
+    'CRD != CURRENT STATE AUTHORITY BY ITSELF',
+    'DFI YEAR-END AGGREGATE != LIVE ROSTER',
+    'FORM D != WASHINGTON APPROVAL',
+    'ORDER != COMPLAINT',
+    'CHARGES != FINAL FINDING',
+    'NOTICE != FINAL ORDER',
+    'NAME-ONLY ADVERSE MATCH = UNSAFE',
+    'MISSING != ZERO',
+    'NO TRUST SCORE',
+    'NO PAID RANKING',
+  ],
+};
+
+const canonical = JSON.stringify(snapshot, Object.keys(snapshot).sort());
+snapshot.fingerprint = createHash('sha256').update(canonical).digest('hex');
+
+const ts = `/** Generated by scripts/build-wa-public-snapshot.mjs. Do not edit by hand. */\nexport const WA_PUBLIC_SNAPSHOT = ${JSON.stringify(snapshot, null, 2)} as const;\nexport type WaPublicSnapshot = typeof WA_PUBLIC_SNAPSHOT;\n`;
+writeFileSync(join(root, 'packages/domain/src/wa-public-snapshot.ts'), ts, 'utf8');
+writeFileSync(join(root, 'artifacts/wa-inv-001-public-snapshot.json'), `${JSON.stringify(snapshot, null, 2)}\n`, 'utf8');
+console.log(
+  JSON.stringify(
+    {
+      fingerprint: snapshot.fingerprint,
+      waPrincipalOffice: WA_PRINCIPAL_OFFICE,
+      share: snapshot.nationalOverlay.shareOfResolvedRegionsPct,
+      ria: RIA,
+      era: ERA,
+      stateRia: snapshot.stateRia.STATE_RIA_BULK_ROSTER,
+    },
+    null,
+    2,
+  ),
+);

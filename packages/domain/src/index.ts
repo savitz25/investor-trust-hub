@@ -25,3 +25,4 @@ export * from './investor-customer-claim-validation-v1';
 export * from './nj-public-intel';
 export * from './ca-public-intel';
 export * from './tx-public-intel';
+export * from './wa-public-intel';

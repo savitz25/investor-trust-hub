@@ -1,0 +1,100 @@
+{
+  "ticket": "WA-INV-001",
+  "retrieved_at": "2026-09-04T17:40:21.555871+00:00",
+  "no_search_crawl": true,
+  "no_iapd_scrape": true,
+  "no_brokercheck_scrape": true,
+  "no_pdf_harvest": true,
+  "pages": {
+    "verify_license": {
+      "csv_or_xlsx_links": [],
+      "api_like_links": [],
+      "has_csv_export": false,
+      "has_html_table": false,
+      "requested_url": "https://dfi.wa.gov/consumers/verify-license",
+      "final_url": "https://dfi.wa.gov/consumers/verify-license",
+      "bytes": 28195,
+      "content_type": "text/html; charset=UTF-8",
+      "title": "Verify a Financial License in Washington State"
+    },
+    "verify_securities": {
+      "csv_or_xlsx_links": [],
+      "api_like_links": [],
+      "has_csv_export": false,
+      "has_html_table": false,
+      "requested_url": "https://dfi.wa.gov/section-main-pages/verify-securities-licenses-and-registration",
+      "final_url": "https://dfi.wa.gov/section-main-pages/verify-securities-licenses-and-registration",
+      "bytes": 26369,
+      "content_type": "text/html; charset=UTF-8",
+      "title": "Verify Securities Licenses and Registration"
+    },
+    "enforcement": {
+      "csv_or_xlsx_links": [],
+      "api_like_links": [],
+      "has_csv_export": false,
+      "has_html_table": true,
+      "requested_url": "https://dfi.wa.gov/securities-enforcement-actions",
+      "final_url": "https://dfi.wa.gov/securities-enforcement-actions",
+      "bytes": 47335,
+      "content_type": "text/html; charset=UTF-8",
+      "title": "Division of Securities Enforcement Actions",
+      "native_type_mentions": [
+        "Consent Order",
+        "Final Order",
+        "Statement of Charges",
+        "Summary Order"
+      ],
+      "tr_tags_on_first_page": 21,
+      "has_year_archive_link": true
+    },
+    "ia_home": {
+      "csv_or_xlsx_links": [],
+      "api_like_links": [],
+      "has_csv_export": false,
+      "has_html_table": false,
+      "requested_url": "https://dfi.wa.gov/investment-advisers",
+      "final_url": "https://dfi.wa.gov/investment-advisers",
+      "bytes": 31436,
+      "content_type": "text/html; charset=UTF-8",
+      "title": "Investment Advisers and Investment Adviser Representatives"
+    },
+    "ia_registration": {
+      "csv_or_xlsx_links": [],
+      "api_like_links": [],
+      "has_csv_export": false,
+      "has_html_table": false,
+      "requested_url": "https://dfi.wa.gov/investment-advisers/registration",
+      "final_url": "https://dfi.wa.gov/investment-advisers/registration",
+      "bytes": 27472,
+      "content_type": "text/html; charset=UTF-8",
+      "title": "Investment Adviser Registration"
+    },
+    "ia_iar": {
+      "csv_or_xlsx_links": [],
+      "api_like_links": [],
+      "has_csv_export": false,
+      "has_html_table": false,
+      "requested_url": "https://dfi.wa.gov/investment-advisers/investment-adviser-representative",
+      "final_url": "https://dfi.wa.gov/investment-advisers/investment-adviser-representative",
+      "bytes": 27310,
+      "content_type": "text/html; charset=UTF-8",
+      "title": "Investment Adviser Representative Registration"
+    },
+    "federal_notice": {
+      "csv_or_xlsx_links": [],
+      "api_like_links": [],
+      "has_csv_export": false,
+      "has_html_table": false,
+      "requested_url": "https://dfi.wa.gov/investment-advisers/federally-covered-advisers",
+      "final_url": "https://dfi.wa.gov/investment-advisers/federally-covered-advisers",
+      "bytes": 27175,
+      "content_type": "text/html; charset=UTF-8",
+      "title": "Filing Requirements for Federally Covered Investment Advisers"
+    }
+  },
+  "data_wa_hits": [],
+  "WASHINGTON_STATE_RIA_BULK_ROSTER": "SOURCE_NOT_ACQUIRED / OPEN_SEARCH_ONLY",
+  "enforcement_bulk": "NO_BULK_ACQUIRED",
+  "complete_state_ria_count": "UNKNOWN",
+  "csv_found_on_bounded_pages": false
+}
