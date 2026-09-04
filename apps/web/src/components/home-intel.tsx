@@ -297,8 +297,10 @@ export function InvestorHomeIntelligence({ intel }: { intel: InvestorHomeIntelV1
             <Link href="/new-jersey">New Jersey securities intelligence</Link> organizes Bureau of Securities
             documents, annual IA examination themes, and issuer-filing frameworks.{' '}
             <Link href="/california">California securities intelligence</Link> organizes the SEC/IARD California
-            principal-office overlay and DFPI verification paths. Neither page is a complete state-registered adviser
-            directory.
+            principal-office overlay and DFPI verification paths.{' '}
+            <Link href="/texas">Texas securities intelligence</Link> organizes the SEC/IARD Texas principal-office
+            overlay and Texas State Securities Board verification paths. These pages are not complete state-registered
+            adviser directories.
           </p>
           <div className="ith-geo" aria-label="Principal-office firm counts by reported region">
             {intel.geography.cells

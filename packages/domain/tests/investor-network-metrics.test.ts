@@ -38,10 +38,11 @@ function baseInput(over: Partial<InvestorNetworkMetricsInput> = {}): InvestorNet
     evidenceRecords: 165354,
     indexableTrustReports: 1000,
     searchableRosterFirms: 23622,
-    publishedStateIntelligencePaths: ['/new-jersey', '/california'],
+    publishedStateIntelligencePaths: ['/new-jersey', '/california', '/texas'],
     njPrincipalOfficeFirms: 438,
     njEnforcementDocumentsAcquired: 48,
     caPrincipalOfficeFirms: 2699,
+    txPrincipalOfficeFirms: 1302,
     ...over,
   };
 }
@@ -90,13 +91,16 @@ describe('investor-network-metrics-v1 grain safety', () => {
     );
   });
 
-  it('does not coerce missing NJ/CA state-RIA universes to zero', () => {
+  it('does not coerce missing NJ/CA/TX state-RIA universes to zero', () => {
     const m = computeInvestorNetworkMetrics(baseInput());
     expect(metricByKey(m, 'nj_state_ria_roster').value).toBeNull();
     expect(metricByKey(m, 'nj_state_ria_roster').valueState).toBe('REQUEST_ONLY');
     expect(metricByKey(m, 'ca_state_ria_roster').value).toBeNull();
     expect(metricByKey(m, 'ca_state_ria_roster').valueState).toBe('NOT_ACQUIRED');
+    expect(metricByKey(m, 'tx_state_ria_roster').value).toBeNull();
+    expect(metricByKey(m, 'tx_state_ria_roster').valueState).toBe('NOT_ACQUIRED');
     expect(metricByKey(m, 'nj_state_ria_roster').trace.whyUnknown ?? '').toMatch(/never render as zero/i);
+    expect(metricByKey(m, 'tx_state_ria_roster').trace.whyUnknown ?? '').toMatch(/not zero/i);
     expect(() => computeInvestorNetworkMetrics(baseInput({ publishedStateIntelligencePaths: ['/florida'] }))).toThrow(
       /missing/,
     );

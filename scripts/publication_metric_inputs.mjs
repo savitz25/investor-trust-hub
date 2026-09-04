@@ -23,6 +23,11 @@ export function publicationMetricInputs() {
       .replace(/^[\s\S]*export const CA_PUBLIC_SNAPSHOT = /, "")
       .replace(/\s+as const;[\s\S]*$/, ""),
   );
+  const tx = JSON.parse(
+    read("packages/domain/src/tx-public-snapshot.ts")
+      .replace(/^[\s\S]*export const TX_PUBLIC_SNAPSHOT = /, "")
+      .replace(/\s+as const;[\s\S]*$/, ""),
+  );
 
   const stateBlock = routes.match(/export const STATE_DISCOVERY_ROUTES = \[([\s\S]*?)\] as const/)[1];
   const publishedStateIntelligencePaths = [...stateBlock.matchAll(/href: '(\/[^']+)'/g)].map((m) => m[1]);
@@ -55,5 +60,8 @@ export function publicationMetricInputs() {
     caPrincipalOfficeFirms: ca.nationalOverlay.caPrincipalOfficeSecIardFirms,
     caStateRiaRoster: ca.stateRia.STATE_RIA_BULK_ROSTER,
     caRoute: ca.route,
+    txPrincipalOfficeFirms: tx.nationalOverlay.txPrincipalOfficeSecIardFirms,
+    txStateRiaRoster: tx.stateRia.STATE_RIA_BULK_ROSTER,
+    txRoute: tx.route,
   };
 }

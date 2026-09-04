@@ -38,6 +38,7 @@ export type InvestorNetworkMetricsInput = {
   njPrincipalOfficeFirms: number;
   njEnforcementDocumentsAcquired: number;
   caPrincipalOfficeFirms: number;
+  txPrincipalOfficeFirms: number;
 };
 
 function metric(partial: Omit<InvestorNetworkMetric, 'unit'>): InvestorNetworkMetric {
@@ -100,7 +101,7 @@ export function assertGrainSafety(input: InvestorNetworkMetricsInput): void {
   if (input.disclosureEvents === input.item11YesRia + input.item11YesEra && input.disclosureEvents > 0) {
     throw new Error('disclosure events must not be equated to Item 11 yes indicators');
   }
-  for (const path of ['/new-jersey', '/california']) {
+  for (const path of ['/new-jersey', '/california', '/texas']) {
     if (!input.publishedStateIntelligencePaths.includes(path)) {
       throw new Error(`state intelligence path missing: ${path}`);
     }
@@ -108,11 +109,17 @@ export function assertGrainSafety(input: InvestorNetworkMetricsInput): void {
   if (input.publishedStateIntelligencePaths.includes('/florida')) {
     throw new Error('do not invent a Florida Investor state intelligence page');
   }
+  if (input.publishedStateIntelligencePaths.some((p) => p.includes('-county'))) {
+    throw new Error('county routes must not be counted as state intelligence pages');
+  }
   if (input.njPrincipalOfficeFirms === input.rosterFirms) {
     throw new Error('NJ principal-office overlay must not equal the national roster');
   }
   if (input.caPrincipalOfficeFirms === input.rosterFirms) {
     throw new Error('CA principal-office overlay must not equal the national roster');
+  }
+  if (input.txPrincipalOfficeFirms === input.rosterFirms) {
+    throw new Error('TX principal-office overlay must not equal the national roster');
   }
 }
 
@@ -408,20 +415,45 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       ),
     }),
     metric({
+      key: 'tx_state_ria_roster',
+      label: 'Texas state-RIA license roster',
+      value: null,
+      valueState: 'NOT_ACQUIRED',
+      grain: 'tx_state_ria_roster',
+      denominator: 'Texas State Securities Board state-RIA bulk roster — SOURCE_NOT_ACQUIRED',
+      description: 'No bulk Texas state-RIA roster was acquired. Complete licensed-adviser count is UNKNOWN, not zero.',
+      coverage: 'Texas',
+      contributingSourceSystems: ['tx_ssb'],
+      sourceAsOf: '2026-09-04',
+      generatedAt,
+      publicationStatus: 'PUBLIC_UNKNOWN',
+      trace: commonTrace(
+        'Nothing numeric is published for the complete TX state-RIA universe.',
+        'Not SEC TX principal-office firms. Not SSB enforcement search hits.',
+        ['tx_ssb'],
+        'Texas',
+        'TX-INV snapshot as_of 2026-09-04',
+        {
+          whyUnknown:
+            'Public SSB verification is search-only. Do not estimate the missing state roster from SEC principal-office geography. Missing is not zero.',
+        },
+      ),
+    }),
+    metric({
       key: 'published_state_intelligence_pages',
       label: 'Published state investment-intelligence pages',
       value: input.publishedStateIntelligencePaths.length,
       valueState: 'KNOWN',
       grain: 'published_state_intelligence_page',
       denominator: 'Indexable specialist state intelligence routes currently published',
-      description: 'New Jersey and California state intelligence pages. Not a count of advisers.',
+      description: 'New Jersey, California, and Texas state intelligence pages. Not a count of advisers.',
       coverage: input.publishedStateIntelligencePaths.join(', '),
       contributingSourceSystems: ['investor-state-intel'],
       sourceAsOf: newestDocumentedSourceAsOf,
       generatedAt,
       publicationStatus: 'PUBLIC',
       trace: commonTrace(
-        'Published /new-jersey and /california intelligence routes.',
+        'Published /new-jersey, /california, and /texas intelligence routes.',
         'Not county pages. Not national roster rows. Florida is not published on this hub.',
         ['investor-state-intel'],
         input.publishedStateIntelligencePaths.join(', '),
@@ -448,6 +480,7 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
     paths: input.publishedStateIntelligencePaths,
     njHq: input.njPrincipalOfficeFirms,
     caHq: input.caPrincipalOfficeFirms,
+    txHq: input.txPrincipalOfficeFirms,
     njEnf: input.njEnforcementDocumentsAcquired,
     publishedAt: input.publishedAt,
   };
@@ -519,6 +552,11 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       stateRiaRosterCoverage: 'SOURCE_NOT_ACQUIRED',
       statewideStateRiaUniverse: null,
     },
+    texas: {
+      principalOfficeRosterFirms: input.txPrincipalOfficeFirms,
+      stateRiaRosterCoverage: 'SOURCE_NOT_ACQUIRED',
+      statewideStateRiaUniverse: null,
+    },
     network: {
       publishedStateIntelligencePages: input.publishedStateIntelligencePaths.length,
       publishedStateIntelligencePaths: input.publishedStateIntelligencePaths,
@@ -541,7 +579,7 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
         reason: 'Duplicated filing vintages and ERA non-filing make an aggregate dollar headline unsafe.',
       },
       {
-        total: 'NJ or CA state-RIA universe = 0',
+        total: 'NJ, CA, or TX state-RIA universe = 0',
         reason: 'Missing bulk state rosters are UNKNOWN, not zero.',
       },
       {

@@ -50,6 +50,10 @@ assert(byKey.nj_state_ria_roster.valueState === "REQUEST_ONLY", "NJ request-only
 assert(byKey.ca_state_ria_roster.value === null, "CA roster not a number");
 assert(byKey.ca_state_ria_roster.valueState === "NOT_ACQUIRED", "CA not acquired");
 assert(v1.california.stateRiaRosterCoverage === pub.caStateRiaRoster, "CA catalog coverage");
+assert(byKey.tx_state_ria_roster.value === null, "TX roster not a number");
+assert(byKey.tx_state_ria_roster.valueState === "NOT_ACQUIRED", "TX not acquired");
+assert(v1.texas.stateRiaRosterCoverage === pub.txStateRiaRoster, "TX catalog coverage");
+assert(v1.texas.principalOfficeRosterFirms === pub.txPrincipalOfficeFirms, "TX principal-office overlay");
 assert(v1.florida.stateIntelligencePage === false, "no invented Florida page");
 assert(!pub.publishedStateIntelligencePaths.includes("/florida"), "no Florida route");
 assert(byKey.investment_advisory_firms.label === "Investment advisory firms", "consumer firm label");
