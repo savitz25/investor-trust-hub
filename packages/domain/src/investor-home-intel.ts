@@ -4,6 +4,7 @@
  */
 
 import { COMPENSATION_METHOD_LABELS } from './adv-profile-intelligence';
+import { loadInvestorNetworkMetrics } from './load-network-metrics';
 
 export const INVESTOR_HOME_INTEL_VERSION = 'investor-home-intel-v1' as const;
 export const INVESTOR_HOME_PUBLICATION_VERSION = 'inv-home-002-v1' as const;
@@ -383,6 +384,11 @@ export type InvestorHomeIntelV1 = {
   generatedAt: string;
   payloadFingerprint: string;
   homepagePublicationVersion: typeof INVESTOR_HOME_PUBLICATION_VERSION;
+  freshnessClocks?: {
+    generatedAt: string;
+    newestDocumentedSourceAsOf: string | null;
+    note: string;
+  };
   score: null;
   ranking: null;
   changeCapability: { status: 'UNSUPPORTED'; reason: string };
@@ -570,9 +576,10 @@ async function sha256Hex(input: string): Promise<string> {
 }
 
 export async function fingerprintInvestorHomeIntel(payload: InvestorHomeIntelV1): Promise<string> {
-  const { generatedAt: _generatedAt, payloadFingerprint: _fp, ...rest } = payload;
+  const { generatedAt: _generatedAt, payloadFingerprint: _fp, freshnessClocks: _clocks, ...rest } = payload;
   void _generatedAt;
   void _fp;
+  void _clocks;
   return sha256Hex(stableSerialize(rest));
 }
 
@@ -581,7 +588,7 @@ function buildSnapshot() {
   return {
     rosterUniverse: metric({
       metricId: 'sec-iard-roster',
-      label: 'SEC/IARD roster firms',
+      label: 'Investment advisory firms',
       value: roster,
       display: fmt(roster),
       cohortDefinition:
@@ -599,7 +606,7 @@ function buildSnapshot() {
     }),
     ria: metric({
       metricId: 'ria-facts',
-      label: 'Registered investment adviser (RIA) filers',
+      label: 'Registered investment adviser records',
       value: V1_SEC_ROSTER.riaFacts,
       display: fmt(V1_SEC_ROSTER.riaFacts),
       cohortDefinition: 'form_adv_firm_facts where dataset_kind = ria (16,783 registered + 235 pending).',
@@ -613,7 +620,7 @@ function buildSnapshot() {
     }),
     era: metric({
       metricId: 'era-facts',
-      label: 'Exempt reporting advisers (ERA)',
+      label: 'Exempt reporting adviser records',
       value: V1_SEC_ROSTER.eraFacts,
       display: fmt(V1_SEC_ROSTER.eraFacts),
       cohortDefinition: 'form_adv_firm_facts where dataset_kind = era; status = reporting.',
@@ -626,7 +633,7 @@ function buildSnapshot() {
     }),
     advObservations: metric({
       metricId: 'adv-reported-attributes',
-      label: 'Normalized Form ADV observations',
+      label: 'Form ADV attribute observations',
       value: V1_SEC_ROSTER.advReportedAttributes,
       display: fmt(V1_SEC_ROSTER.advReportedAttributes),
       cohortDefinition: 'Normalized Item-level reported_attributes supporting firm research.',
@@ -822,6 +829,16 @@ function buildAsk(): AskItem[] {
 export async function buildInvestorHomeIntelV1(
   generatedAt = new Date().toISOString(),
 ): Promise<InvestorHomeIntelV1> {
+  const network = loadInvestorNetworkMetrics();
+  if (
+    network.identity.rosterFirms !== V1_SEC_ROSTER.totalFacts ||
+    network.identity.riaFacts !== V1_SEC_ROSTER.riaFacts ||
+    network.identity.eraFacts !== V1_SEC_ROSTER.eraFacts ||
+    network.formAdv.attributeObservations !== V1_SEC_ROSTER.advReportedAttributes ||
+    network.publication.indexableTrustReports !== V1_SEC_ROSTER.indexableTrustReports
+  ) {
+    throw new Error('homepage census diverged from investor-network-metrics-v1');
+  }
   const snapshot = buildSnapshot();
   const findings = buildFindings();
   const geoResolved = metric({
@@ -1113,7 +1130,15 @@ export async function buildInvestorHomeIntelV1(
     limitations: [...V1_LOCKED_LIMITATIONS],
   };
 
-  return { ...draft, payloadFingerprint: await fingerprintInvestorHomeIntel(draft) };
+  const intel = { ...draft, payloadFingerprint: await fingerprintInvestorHomeIntel(draft) };
+  return {
+    ...intel,
+    freshnessClocks: {
+      generatedAt: network.generatedAt,
+      newestDocumentedSourceAsOf: network.newestDocumentedSourceAsOf,
+      note: network.newestDocumentedSourceAsOfNote,
+    },
+  };
 }
 
 export function compensationYesShare(field: CompensationMethodMetric['field']): number {

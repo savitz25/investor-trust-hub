@@ -1,0 +1,21 @@
+name: Investor network metrics
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  stale-manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - name: Fail if publication catalogs diverge from the checked-in manifest
+        run: node scripts/assert_network_metrics_v1.mjs
+      - name: Grain-safety unit tests
+        run: npx vitest run packages/domain/tests/investor-network-metrics.test.ts packages/domain/tests/investor-home-intel.test.ts

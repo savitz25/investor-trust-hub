@@ -31,7 +31,9 @@
     "test:e2e": "playwright test e2e/shell.spec.ts",
     "test:e2e:live": "playwright test",
     "assert:visual": "node scripts/assert-visual-003.mjs",
-    "ci": "npm run typecheck && npm run lint && npm run test && npm run assert:visual && npm run build"
+    "ci": "npm run typecheck && npm run lint && npm run test && npm run assert:visual && npm run build",
+    "assert:network-metrics": "node scripts/assert_network_metrics_v1.mjs && vitest run packages/domain/tests/investor-network-metrics.test.ts",
+    "build:network-metrics": "npx tsx scripts/build_network_metrics_v1.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.0",
