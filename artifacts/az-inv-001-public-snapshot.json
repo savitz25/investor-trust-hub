@@ -1,0 +1,268 @@
+{
+  "version": "investor-az-state-intel-v1",
+  "generatedFrom": {
+    "nationalRoster": "packages/domain/src/investor-home-intel.ts V1_ROSTER_PRINCIPAL_OFFICE_STATES + V1_SEC_ROSTER",
+    "census": "docs/inv-home-001-census.json principal_office_states AZ",
+    "accEnforcementCoverage": "data/arizona/az-inv-001/acc-enforcement-coverage.json"
+  },
+  "asOf": "2026-09-04",
+  "publicationGate": "ON",
+  "publicEligibility": "state_page",
+  "route": "/arizona",
+  "growthClassification": "INTELLIGENCE_GROWTH_HEAVY",
+  "nationalOverlay": {
+    "azPrincipalOfficeSecIardFirms": 213,
+    "grain": "SEC IARD roster firm with principal-office region = AZ",
+    "source": "IA_FIRM_SEC_Feed_08_27_2026",
+    "sourceDate": "2026-08-27",
+    "retrievedAt": "2026-08-28",
+    "universe": 23622,
+    "resolvedPrincipalOfficeRegions": 17997,
+    "unresolvedPrincipalOfficeRegions": 5625,
+    "shareOfResolvedRegionsPct": 1.18,
+    "searchHref": "/firms?state=AZ",
+    "label": "SEC/IARD roster firms with an Arizona principal office",
+    "caveat": "This is the national SEC/IARD roster overlay for firms that report an Arizona principal office. It is not the Arizona state-registered adviser universe, not a complete Arizona adviser count, and not proof of current Arizona Corporation Commission authority. ARIZONA PRINCIPAL OFFICE != ARIZONA STATE REGISTRATION. These 213 firms already exist in the federal graph and are not net-new organizations."
+  },
+  "riaEra": {
+    "nationalRiaFacts": 17018,
+    "nationalEraFacts": 6604,
+    "nationalTotalFacts": 23622,
+    "azPrincipalOfficeSplit": "SOURCE_NOT_SPLIT",
+    "caveat": "National roster keeps RIA (17,018) and ERA (6,604) separate. Committed geography is on the combined roster. Arizona principal-office counts are not an RIA-only or ERA-only state denominator. ERA is not an RIA. SEC RIA is not an Arizona state RIA."
+  },
+  "firmMarket": {
+    "raumBandsByArizonaPrincipalOffice": "SOURCE_NOT_SPLIT",
+    "employeeCountsByArizonaPrincipalOffice": "SOURCE_NOT_SPLIT",
+    "clientMixByArizonaPrincipalOffice": "SOURCE_NOT_SPLIT",
+    "note": "National RIA RAUM bands and Form ADV attributes exist on the federal spine. This snapshot does not invent an Arizona-only size ranking from those national tables."
+  },
+  "stateRia": {
+    "AZ_STATE_IA_BUSINESS_ROSTER": "SOURCE_AVAILABLE_BY_REQUEST",
+    "AZ_DEALER_BUSINESS_ROSTER": "SOURCE_AVAILABLE_BY_REQUEST",
+    "AZ_NOTICE_FILED_IA_ROSTER": "SOURCE_AVAILABLE_BY_REQUEST",
+    "access": "SOURCE_AVAILABLE_BY_REQUEST",
+    "completeStateRiaCount": "UNKNOWN",
+    "completeDealerCount": "UNKNOWN",
+    "completeNoticeFiledIaCount": "UNKNOWN",
+    "requestFiled": false,
+    "requestFormUrl": "https://www.azcc.gov/docs/default-source/securities-files/pubreq2.pdf",
+    "statute": "A.R.S. § 39-121.03",
+    "commercialPurposeRequiresNotary": true,
+    "verifyUrl": "https://www.azcc.gov/securities/research",
+    "securitiesHomeUrl": "https://www.azcc.gov/securities",
+    "iaRegistrationUrl": "https://www.azcc.gov/securities/licensing-and-registration/investment-adviser-representative",
+    "examUrl": "https://www.azcc.gov/securities/licensing-and-registration/examination-requirement",
+    "licensingHomeUrl": "https://www.azcc.gov/securities/licensing-and-registration/home",
+    "formsUrl": "https://www.azcc.gov/securities/forms",
+    "iapdUrl": "https://adviserinfo.sec.gov/",
+    "brokercheckUrl": "https://brokercheck.finra.org/",
+    "investigatorPhone": "(602) 542-0662",
+    "tollFree": "1-866-837-4399",
+    "mainPhone": "(602) 542-4242",
+    "enforcementEmail": "SecuritiesDiv@azcc.gov",
+    "registrationEmail": "SEC-AOD@azcc.gov",
+    "searchFields": "Firm or individual name on IAPD / BrokerCheck; Investigator on Duty for ACC license/registration status",
+    "caveat": "ACC can provide CSV lists by public-records request for Arizona-registered dealer firms, IA firms licensed in Arizona, and IA firms notice-filed in Arizona. That request was not filed. Available-by-request is not acquired. Do not estimate the missing state roster from SEC principal-office geography. Do not scrape BrokerCheck, IAPD, or ACC search."
+  },
+  "enforcement": {
+    "pass": "bounded_html_index",
+    "result": "INDEX_PROFILED_NOT_ATTACHED",
+    "officialIndex": "https://www.azcc.gov/securities/enforcements/actions",
+    "coverage": "OPEN_HTML_TABLE / YEAR_GROUPED / PDF_ORDERS_NOT_DOWNLOADED",
+    "indexColumns": [
+      "Date Filed",
+      "Company/Individual"
+    ],
+    "indexRows": 205,
+    "rowsWithCrdInRespondentText": 87,
+    "rowsNameOnly": 118,
+    "pdfsDownloaded": 0,
+    "edocketsCrawled": 0,
+    "nativeActionClassColumn": false,
+    "nativeClassesObservedOnIndex": [],
+    "doNotCalculateEnforcementRate": true,
+    "profileAttachments": [],
+    "identityBar": "EXACT_CRD, EXACT_ACC_DOCKET, EXACT_ACC_FILE_NUMBER, or EXACT_ORDER_IDENTITY",
+    "nameOnly": "UNSAFE",
+    "namePlusCity": "REVIEW_REQUIRED",
+    "peopleDirectoryPublished": false,
+    "caveat": "ACC publishes year-grouped HTML tables of Date Filed and Company/Individual, with PDF order links. 205 index rows were profiled on 2026-09-04. 87 mention a CRD in the respondent cell; 118 are name-only. Native action class (consent, cease and desist, etc.) is not a column on the index and was not inferred from PDFs. PDFs and eDockets were not crawled. Name-only attachment is unsafe. Action count is not quality. No action found is not a clean record. Index rows are not a person directory."
+  },
+  "issuer": {
+    "framework": "Securities Act of Arizona (A.R.S. Title 44, Chapter 12) and the Arizona Investment Management Act (A.R.S. Title 44, Chapter 13) administered by the Arizona Corporation Commission Securities Division — investment-adviser and IAR licensure, federally covered adviser notice filing, broker-dealer and salesperson registration, and securities registration/exemptions/notice filings.",
+    "professionalsUrl": "https://www.azcc.gov/securities/licensing-and-registration/investment-adviser-representative",
+    "securitiesRegistrationUrl": "https://www.azcc.gov/securities/licensing-and-registration/registration-of-securities",
+    "exemptionsUrl": "https://www.azcc.gov/securities/licensing-and-registration/registration-exemptions",
+    "rulesUrl": "https://www.azcc.gov/securities",
+    "statuteSecurities": "A.R.S. Title 44, Chapter 12",
+    "statuteIa": "A.R.S. Title 44, Chapter 13",
+    "iaRules": "A.A.C. Title 14, Chapter 6",
+    "securitiesRules": "A.A.C. Title 14, Chapter 4",
+    "bulkIssuerDataset": "SOURCE_NOT_ACQUIRED",
+    "coverage": "OPEN_SEARCH_AND_RULE_TEXT",
+    "note": "Federal Form D is not Arizona qualification or approval. Notice filings and exemptions are not a quality ranking. No statewide issuer bulk denominator was acquired. ACC eDocket was not crawled."
+  },
+  "formD": {
+    "overlay": "SOURCE_NOT_ACQUIRED",
+    "caveat": "FORM D FILING != ARIZONA STATE APPROVAL. FORM D FILING != INVESTMENT QUALITY."
+  },
+  "exam": {
+    "programPage": "https://www.azcc.gov/securities/licensing-and-registration/examination-requirement",
+    "firmPage": "https://www.azcc.gov/securities/licensing-and-registration/investment-adviser-representative",
+    "rule": "A.A.C. R14-6-204",
+    "statute": "A.R.S. §§ 44-3153(C)(2), 44-3156(C)(2)",
+    "accDoesNotWaiveExamExceptByListedDesignation": true,
+    "qualifyingExamsAfter1999": [
+      "Series 65",
+      "Series 66 and Series 7 or Series 2"
+    ],
+    "designationWaivers": [
+      "CFP",
+      "CFA",
+      "ChFC",
+      "CIC",
+      "PFS"
+    ],
+    "currentPublicSampleLikeNj2026": false,
+    "firmResults": "SOURCE_NOT_PUBLIC_AT_FIRM_GRAIN",
+    "passFailMetric": false,
+    "note": "ACC publishes IAR/IA examination and designation-waiver rules. That is individual qualification guidance, not a public firm-level examination scorecard and not a person exam directory. Exam requirement is not a quality score. The Division does not waive examination requirements except through the listed designations in good standing."
+  },
+  "investorEducation": {
+    "url": "https://www.azcc.gov/az-investor/azinvestor",
+    "registrationChecksUrl": "https://www.azcc.gov/securities/research",
+    "use": "consumer education / source coverage",
+    "notFirmAdverseEvidence": true
+  },
+  "contacts": {
+    "policy": "Official/public business sources only. No internet enrichment. No ACC/IAPD/BrokerCheck search scrape. No ACC requested contact lists. No person contact publication from this ticket.",
+    "accSearchScrape": false,
+    "federalPrincipalOfficeAddress": "Used only as geography for the SEC/IARD overlay; not republished here as a harvested directory.",
+    "phoneEmailWebsiteFromAccRequest": "NOT_REQUESTED"
+  },
+  "regulatorMatrix": [
+    {
+      "credential": "SEC-registered investment adviser",
+      "regulator": "U.S. Securities and Exchange Commission / IARD",
+      "identity": "CRD / IARD firm ID; SEC file number",
+      "verification": "IAPD and InvestorTrustHub firm research",
+      "proves": "Federal registration category as reported on Form ADV in the cited extract",
+      "doesNotProve": "Arizona state-RIA licensure or current Arizona notice-filing status"
+    },
+    {
+      "credential": "Exempt reporting adviser (ERA)",
+      "regulator": "SEC / IARD (and Arizona notice when applicable)",
+      "identity": "CRD / IARD firm ID",
+      "verification": "IAPD Form ADV reporting status",
+      "proves": "ERA reporting status in the cited extract",
+      "doesNotProve": "SEC RIA registration or Arizona state-RIA licensure"
+    },
+    {
+      "credential": "Arizona state-licensed investment adviser",
+      "regulator": "Arizona Corporation Commission Securities Division",
+      "identity": "CRD/IARD and/or ACC file number when shown",
+      "verification": "ACC Investigator on Duty; IARD filings for state applicants — not scraped; bulk CSV by request only",
+      "proves": "Arizona investment-adviser licensure when the official ACC/IARD record says so",
+      "doesNotProve": "SEC registration. Principal-office geography is not this credential."
+    },
+    {
+      "credential": "Federally covered / notice-filed investment adviser",
+      "regulator": "ACC Securities Division (notice) / SEC (federal registration)",
+      "identity": "CRD / IARD firm ID",
+      "verification": "IAPD jurisdictions; ACC notice-filed firm list by request (not filed)",
+      "proves": "Notice-filing posture when the official IARD/ACC record says so",
+      "doesNotProve": "Arizona state-RIA licensure. Notice-filed is not the state-licensed universe."
+    },
+    {
+      "credential": "Investment adviser representative",
+      "regulator": "ACC Securities Division / CRD",
+      "identity": "Person CRD (not firm CRD)",
+      "verification": "IAPD individual search and ACC Investigator on Duty — not scraped here",
+      "proves": "Individual representative reporting when official CRD/ACC evidence exists",
+      "doesNotProve": "Firm registration. IAR is not the firm."
+    },
+    {
+      "credential": "Broker-dealer / securities salesperson",
+      "regulator": "ACC Securities Division / FINRA / CRD",
+      "identity": "Firm or person CRD",
+      "verification": "FINRA BrokerCheck and ACC Investigator on Duty — not scraped here",
+      "proves": "Broker-dealer or salesperson registration when official evidence exists",
+      "doesNotProve": "Investment-adviser registration"
+    },
+    {
+      "credential": "Issuer / securities filing",
+      "regulator": "Arizona Corporation Commission Securities Division",
+      "identity": "Official filing/order number when present",
+      "verification": "ACC securities registration/exemption/notice paths",
+      "proves": "A registration, exemption, or notice-filing posture when the official filing record says so",
+      "doesNotProve": "Investment quality or Form D approval"
+    },
+    {
+      "credential": "CRD / IARD identifier",
+      "regulator": "FINRA CRD / IARD infrastructure",
+      "identity": "CRD number",
+      "verification": "IAPD / BrokerCheck / ACC when returned",
+      "proves": "A stable identity key when source-native",
+      "doesNotProve": "Current Arizona authority by itself"
+    }
+  ],
+  "identityRules": {
+    "EXACT": [
+      "CRD",
+      "SEC file number",
+      "ACC file number",
+      "official docket/order ID"
+    ],
+    "HIGH_CONFIDENCE": "exact legal name + exact official address for non-adverse descriptive data only",
+    "REVIEW_REQUIRED": "name + city, DBA, name variants",
+    "UNSAFE": "name alone — not used for adverse attachment"
+  },
+  "profileAttachments": [],
+  "expansionLedger": {
+    "NET_NEW_CANONICAL_ORGANIZATIONS": 0,
+    "NET_NEW_STATE_IDENTITIES": 0,
+    "EXISTING_ORGANIZATIONS_ENRICHED": 0,
+    "NEW_EVIDENCE_ROWS": 205,
+    "notes": {
+      "overlay": "213 Arizona principal-office firms already existed on the federal SEC/IARD spine. Not new organizations.",
+      "stateRoster": "ACC business lists were not requested. State identities remain unacquired.",
+      "enforcement": "205 ACC HTML index rows were profiled. None were attached to firm profiles. 118 name-only rows are UNSAFE."
+    }
+  },
+  "preIngestBaseline": {
+    "arizonaPrincipalOfficeFirmsAlreadyInFederalGraph": 213,
+    "arizonaStateIdentitiesAlreadyPresent": 0,
+    "arizonaStateEvidenceAlreadyAttached": 0,
+    "note": "Recomputed from V1_ROSTER_PRINCIPAL_OFFICE_STATES AZ = 213 on IA_FIRM_SEC_Feed_08_27_2026. Do not call these firms new."
+  },
+  "gaps": [
+    "Complete current Arizona state-IA roster is UNKNOWN (SOURCE_AVAILABLE_BY_REQUEST, not filed).",
+    "Complete Arizona dealer firm roster is UNKNOWN (SOURCE_AVAILABLE_BY_REQUEST, not filed).",
+    "Complete Arizona notice-filed IA roster is UNKNOWN (SOURCE_AVAILABLE_BY_REQUEST, not filed).",
+    "Complete Arizona IAR universe is UNKNOWN and is not published as a person directory.",
+    "Exact ACC registration status is not known for every SEC/IARD firm with an AZ principal office.",
+    "Committed geography is not split into AZ RIA vs AZ ERA.",
+    "ACC enforcement PDFs and eDockets were not crawled. Native action class is not on the HTML index.",
+    "No Form D Arizona overlay is in the committed product.",
+    "No statewide issuer bulk denominator was acquired."
+  ],
+  "semanticGuardrails": [
+    "ARIZONA PRINCIPAL OFFICE != STATE REGISTRATION",
+    "SEC RIA != ARIZONA STATE RIA",
+    "ERA != RIA",
+    "IAR != FIRM",
+    "BROKER-DEALER != IA",
+    "CRD != CURRENT ARIZONA AUTHORITY BY ITSELF",
+    "REQUESTABLE LIST != ACQUIRED ROSTER",
+    "FORM D != ARIZONA APPROVAL",
+    "ORDER != COMPLAINT",
+    "NOTICE != FINAL ORDER",
+    "NAME-ONLY ADVERSE MATCH = UNSAFE",
+    "FEDERAL OVERLAY != ENTITY GROWTH",
+    "MISSING != ZERO",
+    "NO TRUST SCORE",
+    "NO PAID RANKING"
+  ],
+  "fingerprint": "683c862012698a9f0e5ed0453bf5da5e15561d7c4f5a9ee40788fd7a1b61b03b"
+}

@@ -301,8 +301,10 @@ export function InvestorHomeIntelligence({ intel }: { intel: InvestorHomeIntelV1
             <Link href="/texas">Texas securities intelligence</Link> organizes the SEC/IARD Texas principal-office
             overlay and Texas State Securities Board verification paths.{' '}
             <Link href="/washington">Washington securities intelligence</Link> organizes the SEC/IARD Washington
-            principal-office overlay and Washington DFI verification paths. These pages are not complete state-registered
-            adviser directories.
+            principal-office overlay and Washington DFI verification paths.{' '}
+            <Link href="/arizona">Arizona securities intelligence</Link> organizes the SEC/IARD Arizona
+            principal-office overlay and Arizona Corporation Commission Securities Division verification paths. These
+            pages are not complete state-registered adviser directories.
           </p>
           <div className="ith-geo" aria-label="Principal-office firm counts by reported region">
             {intel.geography.cells

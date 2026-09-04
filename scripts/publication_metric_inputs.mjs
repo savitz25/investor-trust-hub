@@ -33,6 +33,11 @@ export function publicationMetricInputs() {
       .replace(/^[\s\S]*export const WA_PUBLIC_SNAPSHOT = /, "")
       .replace(/\s+as const;[\s\S]*$/, ""),
   );
+  const az = JSON.parse(
+    read("packages/domain/src/az-public-snapshot.ts")
+      .replace(/^[\s\S]*export const AZ_PUBLIC_SNAPSHOT = /, "")
+      .replace(/\s+as const;[\s\S]*$/, ""),
+  );
 
   const stateBlock = routes.match(/export const STATE_DISCOVERY_ROUTES = \[([\s\S]*?)\] as const/)[1];
   const publishedStateIntelligencePaths = [...stateBlock.matchAll(/href: '(\/[^']+)'/g)].map((m) => m[1]);
@@ -71,5 +76,9 @@ export function publicationMetricInputs() {
     waPrincipalOfficeFirms: wa.nationalOverlay.waPrincipalOfficeSecIardFirms,
     waStateRiaRoster: wa.stateRia.STATE_RIA_BULK_ROSTER,
     waRoute: wa.route,
+    azPrincipalOfficeFirms: az.nationalOverlay.azPrincipalOfficeSecIardFirms,
+    azStateRiaRoster: az.stateRia.AZ_STATE_IA_BUSINESS_ROSTER,
+    azEnforcementIndexRows: az.enforcement.indexRows,
+    azRoute: az.route,
   };
 }

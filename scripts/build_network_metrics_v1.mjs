@@ -52,6 +52,8 @@ async function main() {
     caPrincipalOfficeFirms: pub.caPrincipalOfficeFirms,
     txPrincipalOfficeFirms: pub.txPrincipalOfficeFirms,
     waPrincipalOfficeFirms: pub.waPrincipalOfficeFirms,
+    azPrincipalOfficeFirms: pub.azPrincipalOfficeFirms,
+    azEnforcementIndexRowsProfiled: pub.azEnforcementIndexRows,
   };
 
   if (input.riaFacts !== pub.riaFacts || input.eraFacts !== pub.eraFacts || input.rosterFirms !== pub.rosterFirms) {

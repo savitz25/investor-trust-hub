@@ -38,12 +38,14 @@ function baseInput(over: Partial<InvestorNetworkMetricsInput> = {}): InvestorNet
     evidenceRecords: 165354,
     indexableTrustReports: 1000,
     searchableRosterFirms: 23622,
-    publishedStateIntelligencePaths: ['/new-jersey', '/california', '/texas', '/washington'],
+    publishedStateIntelligencePaths: ['/new-jersey', '/california', '/texas', '/washington', '/arizona'],
     njPrincipalOfficeFirms: 438,
     njEnforcementDocumentsAcquired: 48,
     caPrincipalOfficeFirms: 2699,
     txPrincipalOfficeFirms: 1302,
     waPrincipalOfficeFirms: 306,
+    azPrincipalOfficeFirms: 213,
+    azEnforcementIndexRowsProfiled: 205,
     ...over,
   };
 }
@@ -92,7 +94,7 @@ describe('investor-network-metrics-v1 grain safety', () => {
     );
   });
 
-  it('does not coerce missing NJ/CA/TX/WA state-RIA universes to zero', () => {
+  it('does not coerce missing NJ/CA/TX/WA/AZ state-RIA universes to zero', () => {
     const m = computeInvestorNetworkMetrics(baseInput());
     expect(metricByKey(m, 'nj_state_ria_roster').value).toBeNull();
     expect(metricByKey(m, 'nj_state_ria_roster').valueState).toBe('REQUEST_ONLY');
@@ -102,6 +104,10 @@ describe('investor-network-metrics-v1 grain safety', () => {
     expect(metricByKey(m, 'tx_state_ria_roster').valueState).toBe('NOT_ACQUIRED');
     expect(metricByKey(m, 'wa_state_ria_roster').value).toBeNull();
     expect(metricByKey(m, 'wa_state_ria_roster').valueState).toBe('NOT_ACQUIRED');
+    expect(metricByKey(m, 'az_state_ria_roster').value).toBeNull();
+    expect(metricByKey(m, 'az_state_ria_roster').valueState).toBe('REQUEST_ONLY');
+    expect(m.arizona.principalOfficeRosterFirms).toBe(213);
+    expect(m.arizona.enforcementIndexRowsProfiled).toBe(205);
     expect(metricByKey(m, 'nj_state_ria_roster').trace.whyUnknown ?? '').toMatch(/never render as zero/i);
     expect(metricByKey(m, 'tx_state_ria_roster').trace.whyUnknown ?? '').toMatch(/not zero/i);
     expect(metricByKey(m, 'wa_state_ria_roster').trace.whyUnknown ?? '').toMatch(/not zero/i);
