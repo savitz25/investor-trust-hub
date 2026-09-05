@@ -4,6 +4,7 @@ import {
   INVESTOR_HOMEPAGE_STATE_CARDS,
   assertInvestorHomepageEvidenceInventory,
   buildInvestorHomepageEvidenceInventory,
+  projectNationalPublicationStatus,
 } from '../src/investor-home-evidence-inventory';
 
 const inventory = buildInvestorHomepageEvidenceInventory();
@@ -44,6 +45,19 @@ describe('INV-HOME-003 public evidence inventory', () => {
         },
       ]),
     ).toThrow(/non-public publication status/);
+    expect(() => projectNationalPublicationStatus('INTERNAL')).toThrow(
+      /cannot publish upstream status INTERNAL/,
+    );
+    expect(() => projectNationalPublicationStatus('REJECTED')).toThrow(
+      /cannot publish upstream status REJECTED/,
+    );
+    expect(projectNationalPublicationStatus('PUBLIC')).toBe('PUBLIC');
+    expect(projectNationalPublicationStatus('PUBLIC_PARTIAL')).toBe(
+      'PUBLIC_PARTIAL',
+    );
+    expect(projectNationalPublicationStatus('PUBLIC_UNKNOWN')).toBe(
+      'PUBLIC_UNKNOWN',
+    );
   });
 
   it('preserves the RIA and ERA roster partition without inventing a cross-grain total', () => {
@@ -72,6 +86,25 @@ describe('INV-HOME-003 public evidence inventory', () => {
     expect(get('item11_yes').doesNotCount).toMatch(/risk score/);
   });
 
+  it('labels the compensation umbrella as an eligible firm denominator', () => {
+    const umbrella = get('compensation_methods');
+    expect(umbrella.label).toMatch(/firms evaluated/i);
+    expect(umbrella.label).not.toMatch(/observations/i);
+    expect(umbrella.grain).toMatch(/RIA firm fact eligible/i);
+    const methods = inventory.filter(
+      (item) =>
+        item.key.startsWith('compensation_') &&
+        item.key !== 'compensation_methods',
+    );
+    expect(methods).toHaveLength(7);
+    expect(methods.every((item) => item.grain.endsWith('YES response'))).toBe(
+      true,
+    );
+    expect(
+      methods.every((item) => item.identityRule?.includes('independent')),
+    ).toBe(true);
+  });
+
   it('derives exactly five state surfaces and never invents Florida', () => {
     expect(INVESTOR_HOMEPAGE_STATE_CARDS.map((state) => state.href)).toEqual([
       '/new-jersey',
@@ -84,6 +117,8 @@ describe('INV-HOME-003 public evidence inventory', () => {
       INVESTOR_HOMEPAGE_STATE_CARDS.length,
     );
     expect(get('fl_state_page_limitation').value).toBeNull();
+    expect(get('fl_state_page_limitation').valueState).toBe('NOT_PUBLISHED');
+    expect(get('fl_state_page_limitation').display).toBe('Not published');
     expect(get('fl_state_page_limitation').researchDestination).toBe(
       '/firms?state=FL',
     );
@@ -121,6 +156,19 @@ describe('INV-HOME-003 public evidence inventory', () => {
       expect(state.sourceClocks.every((clock) => clock.label.length > 0)).toBe(
         true,
       );
+      expect(
+        state.sourceClocks.every((clock) => clock.generatedAt === null),
+      ).toBe(true);
+      expect(
+        state.sourceClocks.some((clock) => clock.snapshotAsOf !== null),
+      ).toBe(true);
     }
+    const stateMeasures = inventory.filter((item) =>
+      ['New Jersey', 'California', 'Texas', 'Washington', 'Arizona'].includes(
+        item.geography,
+      ),
+    );
+    expect(stateMeasures.every((item) => item.generatedAt === null)).toBe(true);
+    expect(stateMeasures.some((item) => item.snapshotAsOf !== null)).toBe(true);
   });
 });

@@ -24,9 +24,16 @@ function MeasureCard({
     ? 'Source as of'
     : measure.retrievedAt
       ? 'Retrieved'
-      : 'Snapshot generated';
+      : measure.snapshotAsOf
+        ? 'Accepted snapshot as of'
+        : measure.generatedAt
+          ? 'Network generated'
+          : 'Source clock';
   const clock =
-    measure.sourceAsOf ?? measure.retrievedAt ?? measure.generatedAt;
+    measure.sourceAsOf ??
+    measure.retrievedAt ??
+    measure.snapshotAsOf ??
+    measure.generatedAt;
   return (
     <article
       className={`ith-inventory-card ith-inventory-card--${measure.valueState.toLowerCase()}`}
@@ -86,6 +93,11 @@ function MeasureCard({
             <strong>Retrieved:</strong> {measure.retrievedAt}
           </p>
         ) : null}
+        {measure.snapshotAsOf ? (
+          <p>
+            <strong>Accepted snapshot as of:</strong> {measure.snapshotAsOf}
+          </p>
+        ) : null}
         {measure.generatedAt ? (
           <p>
             <strong>Snapshot generated:</strong> {measure.generatedAt}
@@ -140,6 +152,9 @@ function StateCard({
               <>Source date not reported</>
             )}
             {clock.retrievedAt ? <> · Retrieved {clock.retrievedAt}</> : null}
+            {clock.snapshotAsOf ? (
+              <> · Accepted snapshot as of {clock.snapshotAsOf}</>
+            ) : null}
             {clock.generatedAt ? (
               <> · Snapshot generated {clock.generatedAt}</>
             ) : null}
@@ -212,8 +227,15 @@ export function InvestorHomeIntelligence({
                 <dd>{metric('sec_iard_roster').retrievedAt}</dd>
               </div>
               <div>
-                <dt>Inventory generated</dt>
-                <dd>{metric('sec_iard_roster').generatedAt?.slice(0, 10)}</dd>
+                <dt>Network rollup generated</dt>
+                <dd>{intel.freshnessClocks?.generatedAt.slice(0, 10)}</dd>
+              </div>
+              <div>
+                <dt>Newest documented source as of</dt>
+                <dd>
+                  {intel.freshnessClocks?.newestDocumentedSourceAsOf ??
+                    'Not reported'}
+                </dd>
               </div>
             </dl>
             <p>

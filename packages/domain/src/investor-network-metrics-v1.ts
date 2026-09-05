@@ -4,7 +4,8 @@
  * Missing / unacquired universes stay UNKNOWN — never numeric zero.
  */
 
-export const INVESTOR_NETWORK_METRICS_VERSION = 'investor-network-metrics-v1' as const;
+export const INVESTOR_NETWORK_METRICS_VERSION =
+  'investor-network-metrics-v1' as const;
 
 export type MetricValueState =
   | 'KNOWN'
@@ -42,6 +43,53 @@ export type PublicationStatus =
   | 'PUBLIC_UNKNOWN'
   | 'INTERNAL'
   | 'REJECTED';
+
+/**
+ * Specialist-owned approvals for national homepage measures that are not yet
+ * first-class rows in `investor-network-metrics-v1.metrics`. The homepage may
+ * consume these fields, but cannot assign their publication status itself.
+ */
+export const INVESTOR_HOMEPAGE_SUPPLEMENTAL_PUBLICATION = {
+  ria_registered: ['ria_firm_fact', 'KNOWN'],
+  ria_pending: ['ria_firm_fact', 'KNOWN'],
+  canonical_firms: ['canonical_firm_identity', 'KNOWN'],
+  extra_without_adv: ['canonical_firm_identity', 'KNOWN'],
+  crd_linked_firms: ['crd_identifier', 'KNOWN'],
+  sec_file_linked_firms: ['sec_file_identifier', 'KNOWN'],
+  form_adv_withdrawals: ['form_adv_withdrawal', 'KNOWN'],
+  successor_links: ['form_adv_successor_link', 'KNOWN'],
+  ria_zero_raum: ['raum_observation', 'KNOWN'],
+  ria_positive_raum: ['raum_observation', 'KNOWN'],
+  compensation_methods: ['ria_firm_fact', 'KNOWN'],
+  compensation_percentage_of_assets: ['ria_firm_fact', 'KNOWN'],
+  compensation_hourly_charges: ['ria_firm_fact', 'KNOWN'],
+  compensation_subscription_fees: ['ria_firm_fact', 'KNOWN'],
+  compensation_fixed_fees: ['ria_firm_fact', 'KNOWN'],
+  compensation_commissions: ['ria_firm_fact', 'KNOWN'],
+  compensation_performance_based_fees: ['ria_firm_fact', 'KNOWN'],
+  compensation_other_compensation: ['ria_firm_fact', 'KNOWN'],
+  searchable_firms: ['sec_iard_roster_firm', 'KNOWN'],
+} as const satisfies Record<string, readonly [MetricGrain, MetricValueState]>;
+
+export type InvestorHomepageSupplementalKey =
+  keyof typeof INVESTOR_HOMEPAGE_SUPPLEMENTAL_PUBLICATION;
+
+export function supplementalHomepagePublication(
+  key: InvestorHomepageSupplementalKey,
+) {
+  const [grain, valueState] = INVESTOR_HOMEPAGE_SUPPLEMENTAL_PUBLICATION[key];
+  return {
+    key,
+    grain,
+    valueState,
+    publicationStatus: 'PUBLIC' as const,
+    source: 'specialist-owned investor network contract',
+    trace: {
+      doesNotCount:
+        'The approved source-native grain must not be reinterpreted as an additional firm or combined cross-grain total.',
+    },
+  };
+}
 
 export type MetricTrace = {
   counts: string;
@@ -160,7 +208,10 @@ export type InvestorNetworkMetricsV1 = {
   metrics: InvestorNetworkMetric[];
 };
 
-export function metricByKey(m: InvestorNetworkMetricsV1, key: string): InvestorNetworkMetric {
+export function metricByKey(
+  m: InvestorNetworkMetricsV1,
+  key: string,
+): InvestorNetworkMetric {
   const found = m.metrics.find((row) => row.key === key);
   if (!found) throw new Error(`metric missing: ${key}`);
   return found;

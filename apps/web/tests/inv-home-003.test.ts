@@ -54,4 +54,14 @@ describe('INV-HOME-003 chrome honesty', () => {
       /AggregateRating|Trust Score|best adviser|top adviser/i,
     );
   });
+
+  it('labels state snapshot and Florida publication coverage precisely', () => {
+    const component = read('src/components/home-intel.tsx');
+    expect(component).toContain('Accepted snapshot as of');
+    expect(component).not.toMatch(
+      /Snapshot generated[^\n]*clock\.snapshotAsOf/,
+    );
+    expect(component).toContain('Florida firm research is national');
+    expect(component).not.toMatch(/href=["']\/florida["']/);
+  });
 });

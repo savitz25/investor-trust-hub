@@ -5,6 +5,12 @@ import { NJ_PUBLIC_SNAPSHOT } from './nj-public-snapshot';
 import { TX_PUBLIC_SNAPSHOT } from './tx-public-snapshot';
 import { WA_PUBLIC_SNAPSHOT } from './wa-public-snapshot';
 import { V1_RIA_COMPENSATION_METHODS } from './investor-home-intel';
+import {
+  metricByKey,
+  supplementalHomepagePublication,
+  type InvestorHomepageSupplementalKey,
+  type PublicationStatus,
+} from './investor-network-metrics-v1';
 
 export const INVESTOR_EVIDENCE_FAMILY_LABELS = {
   FIRM_IDENTITY_REGISTRATION: 'Firm identity & registration',
@@ -27,6 +33,7 @@ export type InvestorHomepageValueState =
   | 'KNOWN'
   | 'PARTIAL'
   | 'NOT_ACQUIRED'
+  | 'NOT_PUBLISHED'
   | 'REQUEST_ONLY';
 
 export type InvestorHomepageEvidenceMeasure = {
@@ -43,6 +50,7 @@ export type InvestorHomepageEvidenceMeasure = {
   acceptedArtifact: string;
   sourceAsOf: string | null;
   retrievedAt: string | null;
+  snapshotAsOf: string | null;
   generatedAt: string | null;
   definition: string;
   counts: string;
@@ -67,6 +75,7 @@ export type InvestorHomepageStateCard = {
     label: string;
     sourceAsOf: string | null;
     retrievedAt: string | null;
+    snapshotAsOf: string | null;
     generatedAt: string | null;
   }>;
 };
@@ -75,7 +84,9 @@ const fmt = (value: number | null, state: InvestorHomepageValueState) =>
   value === null
     ? state === 'REQUEST_ONLY'
       ? 'Available by request'
-      : 'Not acquired'
+      : state === 'NOT_PUBLISHED'
+        ? 'Not published'
+        : 'Not acquired'
     : value.toLocaleString('en-US');
 
 type MeasureInput = Omit<InvestorHomepageEvidenceMeasure, 'display'>;
@@ -89,8 +100,48 @@ const nationalArtifact = 'data/home/investor-network-metrics-v1.json';
 const nationalClock = {
   sourceAsOf: metrics.source.publishedAt,
   retrievedAt: metrics.source.retrievedAt,
+  snapshotAsOf: null,
   generatedAt: metrics.generatedAt,
 };
+
+const upstreamMetricKeys: Partial<Record<string, string>> = {
+  sec_iard_roster: 'investment_advisory_firms',
+  ria_facts: 'ria_records',
+  era_facts: 'era_records',
+  form_adv_filings: 'form_adv_filings',
+  form_adv_attributes: 'form_adv_attribute_observations',
+  ria_raum_observations: 'ria_raum_observations',
+  ownership_control: 'ownership_control_observations',
+  item11_yes: 'form_adv_item11_yes_indicators',
+  indexable_profiles: 'indexable_firm_profiles',
+};
+
+export function projectNationalPublicationStatus(
+  upstreamStatus: PublicationStatus,
+): InvestorHomepagePublicationStatus {
+  if (
+    !['PUBLIC', 'PUBLIC_PARTIAL', 'PUBLIC_UNKNOWN'].includes(upstreamStatus)
+  ) {
+    throw new Error(
+      `National homepage metric cannot publish upstream status ${upstreamStatus}`,
+    );
+  }
+  return upstreamStatus as InvestorHomepagePublicationStatus;
+}
+
+function upstreamNationalApproval(key: string, value: number) {
+  const upstreamKey = upstreamMetricKeys[key];
+  if (upstreamKey) {
+    const upstream = metricByKey(metrics, upstreamKey);
+    if (upstream.value !== value)
+      throw new Error(`Homepage value drift for ${key}`);
+    return projectNationalPublicationStatus(upstream.publicationStatus);
+  }
+  const approval = supplementalHomepagePublication(
+    key as InvestorHomepageSupplementalKey,
+  );
+  return projectNationalPublicationStatus(approval.publicationStatus);
+}
 
 const national = (
   key: string,
@@ -118,7 +169,7 @@ const national = (
     definition: counts,
     counts,
     doesNotCount,
-    publicationStatus: 'PUBLIC',
+    publicationStatus: upstreamNationalApproval(key, value),
     researchDestination: destination,
     identityRule:
       'Firm facts attach through accepted firm identity, CRD, SEC file, and filing relationships only.',
@@ -149,13 +200,15 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
         label: 'SEC/IARD feed',
         sourceAsOf: NJ_PUBLIC_SNAPSHOT.nationalOverlay.sourceDate,
         retrievedAt: NJ_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+        snapshotAsOf: null,
         generatedAt: null,
       },
       {
         label: 'Bureau enforcement corpus',
         sourceAsOf: NJ_PUBLIC_SNAPSHOT.enforcement.latest,
         retrievedAt: null,
-        generatedAt: NJ_PUBLIC_SNAPSHOT.asOf,
+        snapshotAsOf: NJ_PUBLIC_SNAPSHOT.asOf,
+        generatedAt: null,
       },
     ],
   },
@@ -182,13 +235,15 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
         label: 'SEC/IARD feed',
         sourceAsOf: CA_PUBLIC_SNAPSHOT.nationalOverlay.sourceDate,
         retrievedAt: CA_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+        snapshotAsOf: null,
         generatedAt: null,
       },
       {
         label: 'Accepted state snapshot',
         sourceAsOf: null,
         retrievedAt: null,
-        generatedAt: CA_PUBLIC_SNAPSHOT.asOf,
+        snapshotAsOf: CA_PUBLIC_SNAPSHOT.asOf,
+        generatedAt: null,
       },
     ],
   },
@@ -215,13 +270,15 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
         label: 'SEC/IARD feed',
         sourceAsOf: TX_PUBLIC_SNAPSHOT.nationalOverlay.sourceDate,
         retrievedAt: TX_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+        snapshotAsOf: null,
         generatedAt: null,
       },
       {
         label: 'TSSB rulebook',
         sourceAsOf: TX_PUBLIC_SNAPSHOT.issuer.rulebookDate,
         retrievedAt: null,
-        generatedAt: TX_PUBLIC_SNAPSHOT.asOf,
+        snapshotAsOf: TX_PUBLIC_SNAPSHOT.asOf,
+        generatedAt: null,
       },
     ],
   },
@@ -248,13 +305,15 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
         label: 'SEC/IARD feed',
         sourceAsOf: WA_PUBLIC_SNAPSHOT.nationalOverlay.sourceDate,
         retrievedAt: WA_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+        snapshotAsOf: null,
         generatedAt: null,
       },
       {
         label: 'DFI year-end aggregate',
         sourceAsOf: WA_PUBLIC_SNAPSHOT.dfiYearEndAggregates.asOf,
         retrievedAt: null,
-        generatedAt: WA_PUBLIC_SNAPSHOT.asOf,
+        snapshotAsOf: WA_PUBLIC_SNAPSHOT.asOf,
+        generatedAt: null,
       },
     ],
   },
@@ -281,13 +340,15 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
         label: 'SEC/IARD feed',
         sourceAsOf: AZ_PUBLIC_SNAPSHOT.nationalOverlay.sourceDate,
         retrievedAt: AZ_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+        snapshotAsOf: null,
         generatedAt: null,
       },
       {
         label: 'ACC enforcement index profile',
         sourceAsOf: null,
-        retrievedAt: AZ_PUBLIC_SNAPSHOT.asOf,
-        generatedAt: AZ_PUBLIC_SNAPSHOT.asOf,
+        retrievedAt: null,
+        snapshotAsOf: AZ_PUBLIC_SNAPSHOT.asOf,
+        generatedAt: null,
       },
     ],
   },
@@ -303,7 +364,7 @@ const stateMeasure = (
   geography: string,
   sourceSystem: string,
   artifact: string,
-  generatedAt: string,
+  snapshotAsOf: string | null,
   counts: string,
   doesNotCount: string,
   destination: string,
@@ -326,7 +387,8 @@ const stateMeasure = (
     acceptedArtifact: artifact,
     sourceAsOf,
     retrievedAt,
-    generatedAt,
+    snapshotAsOf,
+    generatedAt: null,
     definition: counts,
     counts,
     doesNotCount,
@@ -491,10 +553,10 @@ export function buildInvestorHomepageEvidenceInventory(): InvestorHomepageEviden
     ),
     national(
       'compensation_methods',
-      'RIA compensation-method observations',
+      'RIA firms evaluated for compensation methods',
       metrics.identity.riaFacts,
       'COMPENSATION_METHODS',
-      'RIA Form ADV Item 5.E response set',
+      'RIA firm fact eligible for Form ADV Item 5.E analysis',
       'RIA facts evaluated across independent Item 5.E yes/no methods.',
       'Fee amounts, fee-only classification, ERA responses, or methods that sum to 100%.',
       'RIA',
@@ -852,7 +914,7 @@ export function buildInvestorHomepageEvidenceInventory(): InvestorHomepageEviden
       'NJ, CA, TX, WA, AZ',
       'Accepted state publication models',
       'INVESTOR_HOMEPAGE_STATE_CARDS',
-      metrics.generatedAt,
+      null,
       'Live state research destinations derived from the rendered state-card model.',
       'Advisers, rankings, Florida state intelligence, or research-depth ratings.',
       '#states',
@@ -863,13 +925,13 @@ export function buildInvestorHomepageEvidenceInventory(): InvestorHomepageEviden
       'fl_state_page_limitation',
       'Florida state securities intelligence',
       null,
-      'NOT_ACQUIRED',
+      'NOT_PUBLISHED',
       'PUBLIC_RESEARCH',
       'published state intelligence page',
       'Florida',
       'InvestorTrustHub publication model',
       'INVESTOR_HOMEPAGE_STATE_CARDS',
-      metrics.generatedAt,
+      null,
       'No InvestorTrustHub Florida state intelligence page is published.',
       'Zero Florida firms or absence from national SEC/IARD firm search.',
       '/firms?state=FL',
