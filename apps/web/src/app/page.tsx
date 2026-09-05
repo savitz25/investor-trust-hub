@@ -6,7 +6,7 @@ import { resolveShareOrigin } from '@/lib/share-hub';
 import './home-intel.css';
 
 const HOME_DESCRIPTION =
-  'Independent SEC/IARD and Form ADV research for investment adviser firms. Understand RIA and ERA registration, reported regulatory assets, and compensation methods. We organize the evidence. You decide.';
+  'Independent investment adviser research across SEC/IARD identity, Form ADV filings, regulatory assets under management, compensation, ownership, disclosures, and state securities evidence.';
 
 export async function generateMetadata() {
   return pageMetadata({
@@ -49,7 +49,9 @@ export default async function HomePage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+        }}
       />
       <InvestorHomeIntelligence intel={intel} />
     </>
