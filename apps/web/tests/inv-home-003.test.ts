@@ -58,6 +58,7 @@ describe('INV-HOME-003 chrome honesty', () => {
   it('labels state snapshot and Florida publication coverage precisely', () => {
     const component = read('src/components/home-intel.tsx');
     expect(component).toContain('Accepted snapshot as of');
+    expect(component).toContain('Network generated:');
     expect(component).not.toMatch(
       /Snapshot generated[^\n]*clock\.snapshotAsOf/,
     );
