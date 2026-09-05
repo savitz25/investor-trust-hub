@@ -100,7 +100,7 @@ function MeasureCard({
         ) : null}
         {measure.generatedAt ? (
           <p>
-            <strong>Snapshot generated:</strong> {measure.generatedAt}
+            <strong>Network generated:</strong> {measure.generatedAt}
           </p>
         ) : null}
         {measure.identityRule ? (
@@ -156,7 +156,7 @@ function StateCard({
               <> · Accepted snapshot as of {clock.snapshotAsOf}</>
             ) : null}
             {clock.generatedAt ? (
-              <> · Snapshot generated {clock.generatedAt}</>
+              <> · Artifact generated {clock.generatedAt}</>
             ) : null}
           </p>
         ))}
