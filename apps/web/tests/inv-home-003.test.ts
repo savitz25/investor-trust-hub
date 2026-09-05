@@ -10,7 +10,9 @@ const read = (rel: string) => readFileSync(join(here, '..', rel), 'utf8');
 
 describe('INV-HOME-003 chrome honesty', () => {
   it('does not put synthetic professionals in public nav or sitemap', () => {
-    expect(PRIMARY_ROUTES.some((route) => route.href === '/professionals')).toBe(false);
+    expect(
+      PRIMARY_ROUTES.some((route) => route.href === '/professionals'),
+    ).toBe(false);
     expect(INDEXABLE_PATHS).not.toContain('/professionals');
     expect(shouldNoIndex('/professionals')).toBe(true);
     const header = read('src/components/site-header.tsx');
@@ -36,8 +38,20 @@ describe('INV-HOME-003 chrome honesty', () => {
   });
 
   it('does not advertise professional research from the homepage surface', () => {
-    const page = [read('src/app/page.tsx'), read('src/components/home-intel.tsx')].join('\n');
+    const page = [
+      read('src/app/page.tsx'),
+      read('src/components/home-intel.tsx'),
+    ].join('\n');
     expect(page.toLowerCase()).not.toContain('research a professional');
-    expect(page).toContain('Understand investment advisers before you choose one.');
+    expect(page).toMatch(
+      /Research the firm\.\s+Trace the Form ADV evidence\.\s+Understand the\s+regulatory context\./,
+    );
+    expect(page).toMatch(
+      /Florida firm research is national[^\n]*not a published state surface/,
+    );
+    expect(page).not.toMatch(/href=["']\/florida["']/);
+    expect(page).not.toMatch(
+      /AggregateRating|Trust Score|best adviser|top adviser/i,
+    );
   });
 });

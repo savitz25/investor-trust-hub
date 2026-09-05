@@ -10,6 +10,558 @@
   border: 0;
 }
 
+/* INV-HOME-003 evidence-inventory homepage */
+.ith-home {
+  min-width: 0;
+  overflow: clip;
+  color: #183044;
+}
+.ith-section {
+  border-bottom: 1px solid var(--ith-border);
+  padding: clamp(3rem, 7vw, 6.5rem) 0;
+}
+.ith-shell {
+  width: min(1180px, calc(100% - 2rem));
+  margin-inline: auto;
+}
+.ith-home h1,
+.ith-home h2,
+.ith-home h3 {
+  color: var(--ith-navy);
+  text-wrap: balance;
+}
+.ith-home h1 {
+  max-width: 14ch;
+  margin: 0.6rem 0 1.25rem;
+  font-size: clamp(2.7rem, 6vw, 5.7rem);
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+}
+.ith-home h2 {
+  margin: 0.45rem 0 1rem;
+  font-size: clamp(2rem, 4vw, 3.7rem);
+  line-height: 1.03;
+  letter-spacing: -0.035em;
+}
+.ith-home h3 {
+  margin: 0.35rem 0 0.7rem;
+  font-size: 1.25rem;
+}
+.ith-home p {
+  line-height: 1.65;
+}
+.ith-tint {
+  background: #f4f8f7;
+}
+.ith-dark {
+  color: #dcebe9;
+  background: #102c3b;
+}
+.ith-dark h2,
+.ith-dark h3,
+.ith-dark .ith-eyebrow {
+  color: #fff;
+}
+.ith-hero {
+  background:
+    radial-gradient(
+      circle at 87% 12%,
+      rgba(29, 142, 130, 0.17),
+      transparent 34%
+    ),
+    linear-gradient(145deg, #f8fbfa, #edf6f3);
+}
+.ith-hero-grid,
+.ith-search-layout,
+.ith-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(300px, 0.6fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: center;
+}
+.ith-lede,
+.ith-section-lede {
+  max-width: 760px;
+  font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+  color: #445f70;
+}
+.ith-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+.ith-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0.7rem 1.1rem;
+  border: 1px solid #086c69;
+  border-radius: 999px;
+  background: #086c69;
+  color: white;
+  font-weight: 750;
+  text-decoration: none;
+}
+.ith-button--secondary {
+  background: transparent;
+  color: #086c69;
+}
+.ith-dark .ith-button--secondary {
+  border-color: #83d5ca;
+  color: #d8fffa;
+}
+.ith-independent {
+  margin-top: 1rem;
+  font-size: 0.88rem;
+  color: #526b78;
+}
+.ith-hero-signal {
+  padding: 1.5rem;
+  border: 1px solid rgba(8, 108, 105, 0.24);
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 24px 70px rgba(20, 53, 68, 0.12);
+}
+.ith-hero-signal > strong {
+  display: block;
+  margin: 0.6rem 0 1rem;
+  font-size: 1.4rem;
+  color: var(--ith-navy);
+}
+.ith-hero-signal dl,
+.ith-mini-facts {
+  margin: 0;
+}
+.ith-hero-signal dl div,
+.ith-mini-facts div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-top: 1px solid #dbe6e3;
+}
+.ith-hero-signal dt,
+.ith-mini-facts dt {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.ith-hero-signal dd,
+.ith-mini-facts dd {
+  margin: 0;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+.ith-layer-index {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 2rem;
+  background: #cbdad8;
+  border: 1px solid #cbdad8;
+}
+.ith-layer-index a {
+  min-height: 120px;
+  padding: 1.2rem;
+  background: white;
+  color: var(--ith-navy);
+  font-weight: 750;
+  text-decoration: none;
+}
+.ith-layer-index span {
+  display: block;
+  margin-bottom: 1.8rem;
+  color: #16877e;
+  font-family: monospace;
+  font-size: 0.75rem;
+}
+.ith-scale-band {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.ith-scale-band > div {
+  min-width: 0;
+  padding-top: 1rem;
+  border-top: 2px solid #55c7b8;
+}
+.ith-scale-band strong {
+  display: block;
+  color: white;
+  font-size: clamp(1.8rem, 3.5vw, 3.4rem);
+  letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
+}
+.ith-scale-band span,
+.ith-scale-band small {
+  display: block;
+}
+.ith-scale-band small {
+  margin-top: 0.5rem;
+  color: #9fc0bf;
+}
+.ith-roster-partition {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding: 1.5rem;
+  border: 1px solid #42616c;
+  border-radius: 1rem;
+}
+.ith-roster-partition span {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.ith-roster-partition strong {
+  color: #fff;
+  font-size: 1.6rem;
+}
+.ith-dark-note {
+  max-width: 800px;
+  margin: 1rem auto 0;
+  text-align: center;
+  color: #bcd1d0;
+}
+.ith-adv-flow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+.ith-adv-flow div {
+  padding: 1.25rem;
+  border-top: 3px solid #16877e;
+  background: #f1f7f5;
+}
+.ith-adv-flow span,
+.ith-adv-flow strong {
+  display: block;
+}
+.ith-adv-flow span {
+  font: 0.75rem monospace;
+  color: #16877e;
+}
+.ith-adv-flow strong {
+  margin-top: 1.5rem;
+  color: var(--ith-navy);
+}
+.ith-semantic-note {
+  margin-top: 1.5rem;
+  padding: 1rem 1.2rem;
+  border-left: 4px solid #d59c38;
+  background: #fff8e9;
+}
+.ith-family-nav {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+  scrollbar-width: thin;
+}
+.ith-family-nav a {
+  flex: 0 0 auto;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid #bfd0cd;
+  border-radius: 999px;
+  color: #315263;
+  text-decoration: none;
+  font-size: 0.82rem;
+}
+.ith-family {
+  scroll-margin-top: 2rem;
+  margin-top: 3.5rem;
+}
+.ith-family > header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #173e50;
+}
+.ith-family > header .ith-eyebrow {
+  grid-column: 1 / -1;
+}
+.ith-family > header h3 {
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+}
+.ith-family > header > span {
+  color: #58717e;
+  font-size: 0.85rem;
+}
+.ith-family-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.ith-inventory-card {
+  min-width: 0;
+  padding: 1.15rem;
+  border: 1px solid #d4dfdd;
+  border-radius: 0.8rem;
+  background: white;
+}
+.ith-inventory-card--not_acquired,
+.ith-inventory-card--request_only {
+  border-style: dashed;
+  background: #fafaf8;
+}
+.ith-inventory-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.ith-metric-value {
+  margin: 0;
+  color: #086c69;
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
+}
+.ith-status-chip {
+  padding: 0.25rem 0.45rem;
+  border-radius: 0.35rem;
+  background: #e5f1ef;
+  color: #315d5b;
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.ith-mini-facts {
+  margin-top: 1rem;
+  font-size: 0.78rem;
+}
+.ith-does-not,
+.ith-limitation {
+  padding: 0.65rem;
+  background: #f5f7f7;
+  font-size: 0.82rem;
+}
+.ith-limitation {
+  border-left: 3px solid #d59c38;
+  background: #fff8e9;
+}
+.ith-trace {
+  margin-top: 0.75rem;
+  font-size: 0.78rem;
+}
+.ith-trace summary {
+  cursor: pointer;
+  color: #086c69;
+  font-weight: 750;
+}
+.ith-trace code {
+  overflow-wrap: anywhere;
+}
+.ith-identity-map {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.ith-identity-map > div {
+  display: grid;
+  place-items: center;
+  min-height: 110px;
+  padding: 1rem;
+  border: 1px solid #bdd0cd;
+  border-radius: 50%;
+  text-align: center;
+}
+.ith-identity-map .ith-identity-hub {
+  background: #10384b;
+  color: white;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+.ith-contrast {
+  padding: 1.5rem;
+  border: 1px solid #42616c;
+  border-radius: 1rem;
+}
+.ith-contrast p {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid #42616c;
+}
+.ith-contrast strong {
+  color: white;
+  font-size: 1.35rem;
+}
+.ith-contrast--light {
+  border-color: #cbdad8;
+  background: #f4f8f7;
+}
+.ith-contrast--light p {
+  border-color: #cbdad8;
+}
+.ith-contrast--light strong {
+  color: var(--ith-navy);
+}
+.ith-state-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.ith-state-card {
+  min-width: 0;
+  padding: clamp(1.2rem, 3vw, 2rem);
+  border: 1px solid #cbdad8;
+  border-radius: 1rem;
+  background: white;
+}
+.ith-state-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+.ith-state-pair > div {
+  padding: 0.8rem;
+  background: #edf5f3;
+}
+.ith-state-pair strong,
+.ith-state-pair span {
+  display: block;
+}
+.ith-state-pair strong {
+  color: #086c69;
+  font-size: 1.25rem;
+  overflow-wrap: anywhere;
+}
+.ith-state-pair span {
+  margin-top: 0.3rem;
+  font-size: 0.75rem;
+}
+.ith-identity-note {
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+.ith-state-clocks {
+  margin: 1rem 0;
+  padding-top: 0.5rem;
+  border-top: 1px solid #d4dfdd;
+  color: #526b78;
+  font-size: 0.78rem;
+}
+.ith-florida-limit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 1rem;
+  padding: 1.5rem;
+  border: 1px dashed #8ca8a3;
+  border-radius: 1rem;
+  background: #fdfdfb;
+}
+.ith-ask-form {
+  display: grid;
+  gap: 0.75rem;
+}
+.ith-ask-form label {
+  font-weight: 750;
+}
+.ith-ask-form input {
+  min-width: 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid #7e9b9a;
+  border-radius: 0.5rem;
+  color: #172f40;
+  background: white;
+}
+.ith-geography-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+.ith-geography-grid a {
+  min-width: 0;
+  padding: 0.75rem;
+  border: 1px solid #d4dfdd;
+  border-radius: 0.5rem;
+  color: var(--ith-navy);
+  text-decoration: none;
+}
+.ith-geography-grid strong,
+.ith-geography-grid span {
+  display: block;
+  overflow-wrap: anywhere;
+}
+.ith-geography-grid strong {
+  color: #086c69;
+  font-size: 1.1rem;
+}
+.ith-geography-grid span {
+  font-size: 0.75rem;
+}
+
+@media (max-width: 900px) {
+  .ith-layer-index,
+  .ith-scale-band {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ith-adv-flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ith-family-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .ith-section {
+    padding: 3rem 0;
+  }
+  .ith-shell {
+    width: min(100% - 1.25rem, 1180px);
+  }
+  .ith-hero-grid,
+  .ith-search-layout,
+  .ith-split,
+  .ith-state-grid,
+  .ith-family-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ith-layer-index,
+  .ith-scale-band,
+  .ith-adv-flow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ith-family > header {
+    grid-template-columns: 1fr;
+  }
+  .ith-identity-map {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ith-identity-map .ith-identity-hub {
+    grid-column: 1 / -1;
+    border-radius: 1rem;
+  }
+  .ith-geography-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .ith-florida-limit {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .ith-state-pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .ith-intel {
   min-width: 0;
 }
@@ -221,13 +773,17 @@
   padding: 0.4rem 0.35rem;
   border: 1px solid var(--ith-border);
   border-radius: 10px;
-  background: color-mix(in srgb, var(--ith-teal) calc(var(--ith-vol, 0) * 55%), #fff);
+  background: color-mix(
+    in srgb,
+    var(--ith-teal) calc(var(--ith-vol, 0) * 55%),
+    #fff
+  );
   color: var(--ith-navy);
   text-decoration: none;
   font-size: 0.78rem;
 }
 
-.ith-geo-cell[data-unresolved='true'] {
+.ith-geo-cell[data-unresolved="true"] {
   background: #fff7ed;
   border-color: #fdba74;
 }

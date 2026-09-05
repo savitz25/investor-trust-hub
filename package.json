@@ -33,6 +33,7 @@
     "assert:visual": "node scripts/assert-visual-003.mjs",
     "ci": "npm run typecheck && npm run lint && npm run test && npm run assert:visual && npm run build",
     "assert:network-metrics": "node scripts/assert_network_metrics_v1.mjs && vitest run packages/domain/tests/investor-network-metrics.test.ts",
+    "assert:inv-home-003": "vitest run packages/domain/tests/investor-home-evidence-inventory.test.ts apps/web/tests/inv-home-003.test.ts",
     "build:network-metrics": "npx tsx scripts/build_network_metrics_v1.mjs"
   },
   "devDependencies": {

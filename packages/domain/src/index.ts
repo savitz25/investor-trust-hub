@@ -18,6 +18,7 @@ export * from './firm-indexability';
 export * from './firm-search-query';
 export * from './adv-profile-intelligence';
 export * from './investor-home-intel';
+export * from './investor-home-evidence-inventory';
 export * from './investor-network-metrics-v1';
 export * from './investor-ask';
 export * from './investor-specialist-execution-v2';
