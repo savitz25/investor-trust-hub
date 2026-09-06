@@ -322,19 +322,20 @@ def test_48_nj_inv_001_present() -> None:
     assert (REPO / "services" / "ingestion" / "tests" / "test_nj_inv_001.py").exists()
 
 
-def test_49_no_nj_public_route() -> None:
-    assert not (REPO / "apps" / "web" / "src" / "app" / "new-jersey").exists()
+def test_49_nj_state_route_is_published() -> None:
+    assert (REPO / "apps" / "web" / "src" / "app" / "new-jersey").exists()
 
 
-def test_50_no_sitemap_indexing_expansion() -> None:
+def test_50_sitemap_uses_the_indexable_route_contract() -> None:
     sitemap = (REPO / "apps" / "web" / "src" / "app" / "sitemap.ts").read_text(encoding="utf-8")
-    assert "new-jersey" not in sitemap.lower()
+    assert "INDEXABLE_PATHS" in sitemap
 
 
 def test_51_no_public_individual_directory() -> None:
     routes = (REPO / "packages" / "config" / "src" / "routes.ts").read_text(encoding="utf-8")
     assert "/iar" not in routes
-    assert "/new-jersey" not in routes
+    assert "/new-jersey" in routes
+    assert "/new-jersey/" not in routes
 
 
 def test_52_no_ranking() -> None:

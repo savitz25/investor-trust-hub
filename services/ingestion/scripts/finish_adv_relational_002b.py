@@ -8,7 +8,7 @@ from __future__ import annotations
 import json
 import os
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from load_env import find_repo_root, load_local_env
@@ -55,7 +55,7 @@ def main() -> int:
             "run_id": "e083373e-3d99-487b-8a3d-179ab6a3ccf8",
             "transform_version": TRANSFORM,
             "finished_via": "finish_adv_relational_002b",
-            "finished_at": datetime.now(timezone.utc).isoformat(),
+            "finished_at": datetime.now(UTC).isoformat(),
             "funds": metrics_funds,
             "historical_candidates": metrics_hist,
             "reconcile": reconcile(conn),

@@ -3,8 +3,8 @@ from __future__ import annotations
 
 from ith_ingestion.sec_adv.enrichment import extract_enrichment
 from ith_ingestion.sec_adv.identifiers import normalize_crd
-from ith_ingestion.sec_adv.normalize import classify, normalize_row
 from ith_ingestion.sec_adv.models import ParsedRow
+from ith_ingestion.sec_adv.normalize import classify, normalize_row
 
 
 def row(values: dict, kind: str = "ria", n: int = 1) -> ParsedRow:

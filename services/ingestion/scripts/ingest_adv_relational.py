@@ -8,9 +8,9 @@ import os
 import sys
 import uuid
 import zipfile
-from datetime import date, datetime, timezone
+from collections.abc import Iterable, Iterator
 from pathlib import Path
-from typing import Any, Iterable, Iterator
+from typing import Any
 
 SCRIPTS = Path(__file__).resolve().parent
 SRC = SCRIPTS.parent / "src"
@@ -19,7 +19,6 @@ if str(SRC) not in sys.path:
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
-from load_env import find_repo_root, load_local_env  # noqa: E402
 from ith_ingestion.sec_adv import RELATIONAL_TRANSFORM_VERSION  # noqa: E402
 from ith_ingestion.sec_adv.relational_identity import (  # noqa: E402
     classify_de_fe_i,
@@ -29,12 +28,12 @@ from ith_ingestion.sec_adv.relational_identity import (  # noqa: E402
     named_party_identity_confidence,
     normalize_crd,
     normalize_fund_id,
-    normalize_name,
     office_source_key,
     owner_identity_confidence,
     parse_submitted,
     source_row_digest,
 )
+from load_env import find_repo_root, load_local_env  # noqa: E402
 
 TRANSFORM = RELATIONAL_TRANSFORM_VERSION
 DS_PART1 = "sec_ia_adv_part1_relational"
@@ -339,7 +338,7 @@ def ingest_filings_from_zip(conn, zpath: Path, release_id: str, firm_crds: dict[
             i_bus = idx(cmap, "1B1")
             batch: list[tuple] = []
             n = 0
-            for row, cm in it:
+            for row, _cm in it:
                 if row is header:
                     continue
                 fid = get(row, i_fid)
@@ -383,7 +382,7 @@ def ingest_filings_from_zip(conn, zpath: Path, release_id: str, firm_crds: dict[
 
 
 def _flush_filings(conn, batch: list[tuple], firm_crds: dict[str, str]) -> None:
-    sql = f"""
+    sql = """
         INSERT INTO form_adv_filings (
             filing_id, crd, sec_file_number, dataset_kind, form_version, date_submitted,
             filing_types, legal_name, business_name, source_dataset_id, source_release_id,
@@ -513,7 +512,7 @@ def _ingest_ab(conn, zf, counts):
         i_pr = idx(cmap, "PR")
         i_s3 = idx(cmap, "SchA-3")
         batch = []
-        for row, cm in it:
+        for row, _cm in it:
             if row is header:
                 continue
             sch = classify_schedule(get(row, i_sch))
@@ -594,7 +593,7 @@ def _ingest_related(conn, zf, counts):
         i_type = idx(cmap, "Type")
         batch = []
         n = 0
-        for row, cm in it:
+        for row, _cm in it:
             if row is header:
                 continue
             fid = get(row, i_fid)
@@ -666,7 +665,7 @@ def _ingest_funds(conn, zf, counts):
         i_mi = idx(cmap, "Master Fund ID")
         batch = []
         n = 0
-        for row, cm in it:
+        for row, _cm in it:
             if row is header:
                 continue
             fid = get(row, i_fid)
@@ -758,7 +757,7 @@ def _ingest_sp(conn, zf, counts):
         i_rel = idx(cmap, "Related Person")
         batch = []
         n = 0
-        for row, cm in it:
+        for row, _cm in it:
             if row is header:
                 continue
             fid = get(row, i_fid)
@@ -831,7 +830,7 @@ def _ingest_offices(conn, zf, counts):
         i_emp = idx(cmap, "Employees")
         batch = []
         n = 0
-        for row, cm in it:
+        for row, _cm in it:
             if row is header:
                 continue
             fid = get(row, i_fid)
@@ -895,7 +894,7 @@ def _ingest_relying(conn, zf, counts):
     i_ref = idx(cmap, "Reference ID", "ReferenceID")
     batch = []
     n = 0
-    for row, cm in it:
+    for row, _cm in it:
         if row is header:
             continue
         fid = get(row, i_fid)
@@ -991,7 +990,7 @@ def ingest_advw(conn, zpath: Path, release_id: str, counts: dict) -> None:
 
 
 def _flush_advw(conn, batch):
-    sql = f"""
+    sql = """
         INSERT INTO form_adv_withdrawals (
             filing_id, crd, sec_file_number, form_type, filing_type, filing_date,
             legal_name, business_name, source_dataset_id, source_release_id,
@@ -1056,7 +1055,7 @@ def ingest_crs(conn, zpath: Path, release_id: str, counts: dict) -> None:
 
 
 def _flush_docs(conn, batch):
-    sql = f"""
+    sql = """
         INSERT INTO form_adv_documents (
             document_kind, official_document_id, official_file_name, filing_id, crd,
             submitted_on, source_url, source_dataset_id, source_release_id,

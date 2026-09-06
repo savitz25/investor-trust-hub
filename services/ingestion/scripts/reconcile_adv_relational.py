@@ -3,8 +3,7 @@ from __future__ import annotations
 
 import json
 import os
-import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from load_env import find_repo_root, load_local_env
@@ -34,7 +33,7 @@ def main() -> int:
     conn.execute("SET statement_timeout = 0")
 
     report: dict = {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": datetime.now(UTC).isoformat(),
         "transform": "inv-nat-002b-relational-v1",
     }
 
@@ -647,7 +646,11 @@ def main() -> int:
             "organization": report["owner_entities"]["ownerid_name_collisions_organization"],
             "count": report["owner_entities"]["ownerid_name_collisions_person"]
             + report["owner_entities"]["ownerid_name_collisions_organization"],
-            "handling": "HOLD. Same OwnerID keeps multiple historical names on schedule_ab_rows (distinct source_row_digest). Canonical owner_entities display_name is min(name); rows are not overwritten.",
+            "handling": (
+                "HOLD. Same OwnerID keeps multiple historical names on schedule_ab_rows "
+                "(distinct source_row_digest). Canonical owner_entities display_name is "
+                "min(name); rows are not overwritten."
+            ),
         },
         "fund_id_name_collisions": {
             "count": report["private_funds"]["fund_id_name_collisions"],

@@ -1,6 +1,5 @@
-from ith_ingestion.sec_adv.tier1_catalog import FIELDS
+from ith_ingestion.sec_adv.tier1_catalog import FIELDS, FieldSpec
 from ith_ingestion.sec_adv.tier1_observe import observe_field, observe_payload, successor_resolution
-from ith_ingestion.sec_adv.tier1_catalog import FieldSpec
 
 
 def spec(name: str) -> FieldSpec:

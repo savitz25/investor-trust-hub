@@ -6,6 +6,50 @@
 -- Historical edges default is_current = FALSE (fail-closed).
 -- Filing uniqueness includes dataset_kind so IA/ERA FilingID overlaps stay separate.
 
+-- 0013 is the first migration that inserts Form ADV dataset rows. Fresh
+-- databases have not run the source-registry seed yet, so establish the exact
+-- canonical prerequisite here. Existing databases remain unchanged apart from
+-- converging this registry metadata to the checked-in canonical values.
+INSERT INTO source_authorities (id, name, official_url, notes)
+VALUES (
+    'sec',
+    'U.S. Securities and Exchange Commission',
+    'https://www.sec.gov',
+    'Federal securities regulator for advisers, funds, issuers, and EDGAR filings.'
+)
+ON CONFLICT (id) DO UPDATE SET
+    name = EXCLUDED.name,
+    official_url = EXCLUDED.official_url,
+    notes = EXCLUDED.notes;
+
+INSERT INTO source_systems (
+    id, authority_id, name, official_url, dataset_kind,
+    attribution_required, marketing_restricted, prospecting_prohibited,
+    freshness_requirement_notes, correction_notes
+)
+VALUES (
+    'form_adv',
+    'sec',
+    'Form ADV / IARD adviser filings',
+    'https://www.sec.gov/information-for/investment-advisers',
+    'adviser_filing',
+    TRUE,
+    FALSE,
+    FALSE,
+    'Annual and other-than-annual amendments.',
+    'Preserve raw filing values when later amendments supersede them.'
+)
+ON CONFLICT (id) DO UPDATE SET
+    authority_id = EXCLUDED.authority_id,
+    name = EXCLUDED.name,
+    official_url = EXCLUDED.official_url,
+    dataset_kind = EXCLUDED.dataset_kind,
+    attribution_required = EXCLUDED.attribution_required,
+    marketing_restricted = EXCLUDED.marketing_restricted,
+    prospecting_prohibited = EXCLUDED.prospecting_prohibited,
+    freshness_requirement_notes = EXCLUDED.freshness_requirement_notes,
+    correction_notes = EXCLUDED.correction_notes;
+
 INSERT INTO source_datasets (id, source_system_id, name, description, expected_entity_kinds, official_url)
 VALUES
     (

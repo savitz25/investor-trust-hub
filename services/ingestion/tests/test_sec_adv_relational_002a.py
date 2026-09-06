@@ -5,6 +5,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
+
 from ith_ingestion.sec_adv.relational_identity import (
     classify_de_fe_i,
     classify_schedule,
@@ -17,8 +19,6 @@ from ith_ingestion.sec_adv.relational_identity import (
     office_source_key,
     owner_identity_confidence,
 )
-
-import pytest
 
 ROOT = Path(__file__).resolve().parents[3]
 REPORTS = ROOT / "data" / "reports"
@@ -61,9 +61,6 @@ def test_02_filing_identity_is_official_filing_id():
 
 
 def test_03_no_invented_accession():
-    text = (ROOT / "services" / "ingestion" / "src" / "ith_ingestion" / "sec_adv" / "relational_identity.py").read_text(
-        encoding="utf-8"
-    )
     assert "Do not invent" in Path(
         ROOT / "database" / "migrations" / "0013_adv_relational_graph.sql"
     ).read_text(encoding="utf-8") or "Do not invent an accession" in Path(
@@ -158,6 +155,12 @@ def test_12_migration_0013_prepared_not_applied():
     text = MIGRATION.read_text(encoding="utf-8")
     assert "DO NOT APPLY" in text
     assert "form_adv_filings" in text
+    authority_insert = text.index("INSERT INTO source_authorities")
+    system_insert = text.index("INSERT INTO source_systems")
+    dataset_insert = text.index("INSERT INTO source_datasets")
+    assert authority_insert < system_insert < dataset_insert
+    assert "'form_adv'" in text[system_insert:dataset_insert]
+    assert "ON CONFLICT (id) DO UPDATE" in text[system_insert:dataset_insert]
     assert "is_current BOOLEAN NOT NULL DEFAULT FALSE" in text
     dry = _load("inv-nat-002-dry-run.json")
     assert "0013_adv_relational_graph.sql" not in dry["production_baseline"]["schema_migrations"]
