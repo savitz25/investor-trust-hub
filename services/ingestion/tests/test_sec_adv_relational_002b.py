@@ -6,7 +6,6 @@ available and Migration 0013 tables are populated.
 from __future__ import annotations
 
 import os
-from datetime import datetime
 from pathlib import Path
 
 import pytest
