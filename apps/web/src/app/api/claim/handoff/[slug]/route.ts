@@ -26,6 +26,7 @@ export async function GET(
         },
         { status: 404, headers: H },
       );
+    console.info(JSON.stringify({ event: "claim_cta_clicked", hub: "investor", profile_class: "firm", state: "unknown", acquisition_source: "organic" }));
     return handoffRedirect(
       mintInvestorHandoff(process.env.ATH_HANDOFF_SECRET || "", p).token,
     );
