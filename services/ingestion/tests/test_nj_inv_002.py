@@ -352,3 +352,17 @@ def test_53_no_trust_score() -> None:
 def test_54_no_vercel_configuration_change() -> None:
     assert not (REPO / ".vercel" / "project.json").exists()
     assert not (REPO / "vercel.json").exists()
+
+
+def test_55_nullable_identity_keys_use_postgres_expression_indexes() -> None:
+    migration = (REPO / "database" / "migrations" / "0015_state_regulatory_intelligence.sql").read_text(
+        encoding="utf-8"
+    )
+    assert "UNIQUE (source_dataset_id, crd, from_status, to_status, (COALESCE" not in migration
+    for index_name in (
+        "registration_transitions_identity_idx",
+        "regulatory_policy_observations_identity_idx",
+        "state_market_metrics_identity_idx",
+        "issuer_filing_classes_identity_idx",
+    ):
+        assert f"CREATE UNIQUE INDEX IF NOT EXISTS {index_name}" in migration
