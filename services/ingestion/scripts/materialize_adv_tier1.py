@@ -6,7 +6,7 @@ import json
 import os
 import sys
 from collections import Counter, defaultdict
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from uuid import uuid4
 
@@ -144,7 +144,7 @@ def load_firms(conn) -> list[dict]:
         cur.execute(FIRM_SQL)
         cols = [d[0] for d in cur.description]
         for rec in cur:
-            rows.append(dict(zip(cols, rec)))
+            rows.append(dict(zip(cols, rec, strict=False)))
     return rows
 
 
@@ -339,7 +339,7 @@ def main() -> int:
         confirmed = extra["counters"].get("successor_CONFIRMED", 0)
         review = extra["counters"].get("successor_REVIEW_REQUIRED", 0)
         manifest = {
-            "generated_at": datetime.now(timezone.utc).isoformat(),
+            "generated_at": datetime.now(UTC).isoformat(),
             "transform_version": TRANSFORM_VERSION,
             "locked_fingerprint": LOCKED_FINGERPRINT,
             "source_rows": 23622,

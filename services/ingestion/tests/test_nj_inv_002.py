@@ -322,19 +322,20 @@ def test_48_nj_inv_001_present() -> None:
     assert (REPO / "services" / "ingestion" / "tests" / "test_nj_inv_001.py").exists()
 
 
-def test_49_no_nj_public_route() -> None:
-    assert not (REPO / "apps" / "web" / "src" / "app" / "new-jersey").exists()
+def test_49_nj_state_route_is_published() -> None:
+    assert (REPO / "apps" / "web" / "src" / "app" / "new-jersey").exists()
 
 
-def test_50_no_sitemap_indexing_expansion() -> None:
+def test_50_sitemap_uses_the_indexable_route_contract() -> None:
     sitemap = (REPO / "apps" / "web" / "src" / "app" / "sitemap.ts").read_text(encoding="utf-8")
-    assert "new-jersey" not in sitemap.lower()
+    assert "INDEXABLE_PATHS" in sitemap
 
 
 def test_51_no_public_individual_directory() -> None:
     routes = (REPO / "packages" / "config" / "src" / "routes.ts").read_text(encoding="utf-8")
     assert "/iar" not in routes
-    assert "/new-jersey" not in routes
+    assert "/new-jersey" in routes
+    assert "/new-jersey/" not in routes
 
 
 def test_52_no_ranking() -> None:
@@ -351,3 +352,17 @@ def test_53_no_trust_score() -> None:
 def test_54_no_vercel_configuration_change() -> None:
     assert not (REPO / ".vercel" / "project.json").exists()
     assert not (REPO / "vercel.json").exists()
+
+
+def test_55_nullable_identity_keys_use_postgres_expression_indexes() -> None:
+    migration = (REPO / "database" / "migrations" / "0015_state_regulatory_intelligence.sql").read_text(
+        encoding="utf-8"
+    )
+    assert "UNIQUE (source_dataset_id, crd, from_status, to_status, (COALESCE" not in migration
+    for index_name in (
+        "registration_transitions_identity_idx",
+        "regulatory_policy_observations_identity_idx",
+        "state_market_metrics_identity_idx",
+        "issuer_filing_classes_identity_idx",
+    ):
+        assert f"CREATE UNIQUE INDEX IF NOT EXISTS {index_name}" in migration

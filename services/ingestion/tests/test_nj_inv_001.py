@@ -455,20 +455,20 @@ def test_30_idempotent_second_run() -> None:
     assert ledger.counts()["monitoring"] == 0
 
 
-def test_31_no_public_nj_route() -> None:
+def test_31_nj_state_route_is_published_without_county_routes() -> None:
     app = REPO / "apps" / "web" / "src" / "app"
-    assert not (app / "new-jersey").exists()
+    assert (app / "new-jersey").exists()
     routes = (REPO / "packages" / "config" / "src" / "routes.ts").read_text(encoding="utf-8")
-    assert "/new-jersey" not in routes
-    assert "county" not in routes.lower()
+    assert "/new-jersey" in routes
+    assert "/new-jersey/" not in routes
 
 
-def test_32_no_sitemap_indexing_expansion() -> None:
+def test_32_sitemap_uses_the_published_state_route_contract() -> None:
     sitemap = (REPO / "apps" / "web" / "src" / "app" / "sitemap.ts").read_text(encoding="utf-8")
     routes = (REPO / "packages" / "config" / "src" / "routes.ts").read_text(encoding="utf-8")
-    assert "new-jersey" not in sitemap.lower()
+    assert "INDEXABLE_PATHS" in sitemap
     assert "INDEXABLE_PATHS" in routes
-    assert "/new-jersey" not in routes
+    assert "/new-jersey" in routes
 
 
 def test_33_existing_sec_ria_era_regression() -> None:

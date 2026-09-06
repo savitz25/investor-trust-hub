@@ -79,9 +79,13 @@ CREATE TABLE IF NOT EXISTS registration_transitions (
         'STATE_TO_SEC', 'SEC_TO_STATE', 'WITHDRAWAL', 'TERMINATION', 'OTHER'
     )),
     public_eligibility TEXT NOT NULL DEFAULT 'internal_only',
-    raw_value JSONB NOT NULL DEFAULT '{}'::jsonb,
-    UNIQUE (source_dataset_id, crd, from_status, to_status, (COALESCE(effective_on::text, '')))
+    raw_value JSONB NOT NULL DEFAULT '{}'::jsonb
 );
+
+CREATE UNIQUE INDEX IF NOT EXISTS registration_transitions_identity_idx
+    ON registration_transitions (
+        source_dataset_id, crd, from_status, to_status, (COALESCE(effective_on, DATE '0001-01-01'))
+    );
 
 CREATE TABLE IF NOT EXISTS regulatory_policy_documents (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -110,9 +114,13 @@ CREATE TABLE IF NOT EXISTS regulatory_policy_observations (
     raw_text TEXT,
     source_url TEXT,
     public_eligibility TEXT NOT NULL DEFAULT 'internal_only',
-    raw_value JSONB NOT NULL DEFAULT '{}'::jsonb,
-    UNIQUE (source_dataset_id, policy_key, observation_class, (COALESCE(effective_year, 0)))
+    raw_value JSONB NOT NULL DEFAULT '{}'::jsonb
 );
+
+CREATE UNIQUE INDEX IF NOT EXISTS regulatory_policy_observations_identity_idx
+    ON regulatory_policy_observations (
+        source_dataset_id, policy_key, observation_class, (COALESCE(effective_year, 0))
+    );
 
 CREATE TABLE IF NOT EXISTS state_exam_packages (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -173,9 +181,13 @@ CREATE TABLE IF NOT EXISTS state_market_metrics (
     coverage_state TEXT NOT NULL,
     as_of DATE,
     public_eligibility TEXT NOT NULL DEFAULT 'internal_only',
-    raw_value JSONB NOT NULL DEFAULT '{}'::jsonb,
-    UNIQUE (source_dataset_id, metric_key, grain, (COALESCE(as_of::text, '')))
+    raw_value JSONB NOT NULL DEFAULT '{}'::jsonb
 );
+
+CREATE UNIQUE INDEX IF NOT EXISTS state_market_metrics_identity_idx
+    ON state_market_metrics (
+        source_dataset_id, metric_key, grain, (COALESCE(as_of, DATE '0001-01-01'))
+    );
 
 CREATE TABLE IF NOT EXISTS issuer_filing_classes (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -187,9 +199,13 @@ CREATE TABLE IF NOT EXISTS issuer_filing_classes (
     statutory_basis TEXT,
     source_url TEXT,
     public_eligibility TEXT NOT NULL DEFAULT 'internal_only',
-    raw_value JSONB NOT NULL DEFAULT '{}'::jsonb,
-    UNIQUE (source_dataset_id, filing_class, (COALESCE(form_code, '')))
+    raw_value JSONB NOT NULL DEFAULT '{}'::jsonb
 );
+
+CREATE UNIQUE INDEX IF NOT EXISTS issuer_filing_classes_identity_idx
+    ON issuer_filing_classes (
+        source_dataset_id, filing_class, (COALESCE(form_code, ''))
+    );
 
 CREATE TABLE IF NOT EXISTS issuer_filing_observations (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
