@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS registration_transitions (
 
 CREATE UNIQUE INDEX IF NOT EXISTS registration_transitions_identity_idx
     ON registration_transitions (
-        source_dataset_id, crd, from_status, to_status, (COALESCE(effective_on::text, ''))
+        source_dataset_id, crd, from_status, to_status, (COALESCE(effective_on, DATE '0001-01-01'))
     );
 
 CREATE TABLE IF NOT EXISTS regulatory_policy_documents (
@@ -186,7 +186,7 @@ CREATE TABLE IF NOT EXISTS state_market_metrics (
 
 CREATE UNIQUE INDEX IF NOT EXISTS state_market_metrics_identity_idx
     ON state_market_metrics (
-        source_dataset_id, metric_key, grain, (COALESCE(as_of::text, ''))
+        source_dataset_id, metric_key, grain, (COALESCE(as_of, DATE '0001-01-01'))
     );
 
 CREATE TABLE IF NOT EXISTS issuer_filing_classes (
