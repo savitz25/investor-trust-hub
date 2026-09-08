@@ -615,7 +615,7 @@ export function interpretInvestorAskQuery(raw: string, overrides: InvestorAskOve
   }
 
   let affiliation: keyof typeof AFFILIATION_FIELDS | undefined;
-  if (/\baffiliated broker-dealers?\b|\bbroker-dealer affiliat/i.test(q)) affiliation = 'affiliation_broker_dealer';
+  if (/\baffiliated(?: with)? broker-dealers?\b|\bbroker-dealer affiliat/i.test(q)) affiliation = 'affiliation_broker_dealer';
   if (/\bbanking affiliat/i.test(q)) affiliation = 'affiliation_banking';
 
   if (/\bwho owns\b|\bownership organization\b/i.test(q) && !crdMatch) {
