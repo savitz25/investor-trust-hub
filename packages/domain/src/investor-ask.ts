@@ -368,6 +368,36 @@ export function interpretInvestorAskQuery(raw: string, overrides: InvestorAskOve
     return { raw: q, query, interpretation: lines };
   }
 
+  if (/\b(no disclosures?|clean disciplinary history|no enforcement|clean history)\b/i.test(q)) {
+    const query = failClosed(
+      'Missing or unlinked disclosure and enforcement evidence cannot establish a clean history. Research an exact firm and review the coverage and source limitations.',
+      ['Find CRD 105958.', 'Ownership evidence for CRD 105958.'],
+    );
+    push('Mode', 'fail_closed');
+    push('Coverage', 'UNKNOWN / PARTIAL — absence is not established');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  if (/\b(?:check|verify|research) the adviser (?:who|that)\b|\bdoes this adviser have (?:disciplinary|disclosure) history\b/i.test(q)) {
+    const query = failClosed(
+      'A firm name, labeled firm CRD, or SEC file number is required to research a specific adviser without returning unrelated firms.',
+      ['Find CRD 105958.', 'Find SEC 801-11953.', 'Search a firm name in the firm directory.'],
+    );
+    push('Mode', 'fail_closed');
+    push('Identity', 'Specific firm not supplied');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  if (/\bownership (?:evidence|control) for (?:an?|this) adviser\b|\bwho owns this adviser firm\b/i.test(q)) {
+    const query = failClosed(
+      'Ownership/control research is firm-specific and partial. Supply a labeled firm CRD so source observations can be attributed without guessing identity.',
+      ['Ownership evidence for CRD 105958.', 'Find CRD 105958.'],
+    );
+    push('Mode', 'fail_closed');
+    push('Coverage', 'PARTIAL — exact firm identity required');
+    return { raw: q, query, interpretation: lines };
+  }
+
   if (/\bwhat is an? ria\b|\bwhat is a registered investment adviser\b/i.test(q)) {
     return definitionResult(q, 'ria', page);
   }
