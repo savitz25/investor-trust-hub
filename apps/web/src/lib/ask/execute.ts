@@ -97,7 +97,7 @@ function provenance(parsed: ParsedInvestorAsk, metric: string): InvestorAskResul
       'Do not treat principal office as service territory.',
       '2,155 canonical firms without ADV facts are outside the roster universe.',
     ],
-    identifierMethod: q.identifier ? `Labeled CRD ${q.identifier.value}` : 'Not an identifier query',
+    identifierMethod: q.identifier ? `Exact labeled ${q.identifier.type === 'crd' ? 'firm CRD' : 'SEC file number'} ${q.identifier.value}` : 'Not an identifier query',
   };
 }
 
@@ -175,6 +175,10 @@ function filtersSql(q: InvestorResearchQuery, params: unknown[]): { where: strin
   if (q.identifier?.type === 'crd') {
     params.push(q.identifier.value);
     clauses.push(`crd.identifier_value = $${params.length}`);
+  }
+  if (q.identifier?.type === 'sec_file_number') {
+    params.push(q.identifier.value);
+    clauses.push(`EXISTS (SELECT 1 FROM firm_identifiers sec WHERE sec.firm_id = f.id AND sec.identifier_type = 'sec_file_number' AND upper(sec.identifier_value) = upper($${params.length}))`);
   }
   if (q.nameQuery) {
     params.push(`%${q.nameQuery.replace(/[%_]/g, '\\$&')}%`);

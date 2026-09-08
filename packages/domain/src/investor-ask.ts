@@ -25,7 +25,7 @@ export const INVESTOR_ASK_CAPABILITY = {
     'definition',
     'fail_closed',
   ] as const,
-  identifier: 'labeled_crd',
+  identifier: 'labeled_firm_crd_or_sec_file_number',
   geographyMeaning: 'Principal-office state/city/ZIP on the SEC/IARD roster — not client geography, service area, or notice-filing footprint.',
   limitations: [
     'RIA and ERA stay separate classes unless the interpretation explicitly shows both.',
@@ -111,7 +111,7 @@ export type InvestorResearchQuery = {
     value: string;
     meaning: string;
   };
-  identifier?: { type: 'crd'; value: string };
+  identifier?: { type: 'crd' | 'sec_file_number'; value: string };
   raum?: { min?: number; maxExclusive?: number; equalsZero?: boolean; bandId?: RaumBandId };
   compensationMethods?: CompensationMethodKey[];
   compensationMatch?: 'all' | 'any';
@@ -152,6 +152,7 @@ const STATE_NAME_TO_CODE: Record<string, string> = Object.fromEntries(
 );
 
 const LABELED_CRD = /\bcrd\s*#?\s*(\d{1,10})\b/i;
+const LABELED_SEC_FILE = /\b(?:sec(?:\s+file)?(?:\s+number)?|file)\s*#?\s*(801-\d{1,8})\b/i;
 const BARE_DIGITS = /^\d{4,10}$/;
 
 function parseMoneyToken(raw: string): number | undefined {
@@ -284,6 +285,10 @@ export const ASK_DEFINITIONS: Record<string, { title: string; body: string }> = 
     title: 'Principal office',
     body: 'Principal office is the main-office address stored on the SEC/IARD roster record. It is not client geography, service territory, or the set of states where the adviser notice-files or serves clients.',
   },
+  sec_file: {
+    title: 'SEC file number',
+    body: 'An SEC file number is a sourced regulatory filing identifier for an adviser firm. It is not a CRD, a Form ADV filing ID, an individual identifier, or SEC approval.',
+  },
 };
 
 function failClosed(reason: string, alternatives: string[]): InvestorResearchQuery {
@@ -378,12 +383,31 @@ export function interpretInvestorAskQuery(raw: string, overrides: InvestorAskOve
   if (/\bwhat is form adv\b/i.test(q)) {
     return definitionResult(q, 'form_adv', page);
   }
+  if (/\bwhat (?:is|does) (?:an? )?sec file(?: number)?(?: mean| identify)?\b/i.test(q)) {
+    return definitionResult(q, 'sec_file', page);
+  }
   if (/\bwhat does asset-based compensation mean\b|\basset-based (compensation|fees?) mean\b/i.test(q)) {
     return definitionResult(q, 'asset_based', page);
   }
 
+  const secMatch = q.match(LABELED_SEC_FILE);
+  if (secMatch?.[1]) {
+    const value = secMatch[1].toUpperCase();
+    const query: InvestorResearchQuery = { mode: 'identifier', identifier: { type: 'sec_file_number', value }, evidenceFamilies: ['identity'], page, sort: 'crd' };
+    push('Mode', 'identifier');
+    push('Identifier', `SEC file ${value} (labeled)`);
+    push('Source', 'SEC/IARD Form ADV roster');
+    return { raw: q, query, interpretation: lines };
+  }
+
   const crdMatch = q.match(LABELED_CRD);
   if (crdMatch?.[1]) {
+    if (/\b(?:iar|individual adviser|person)\s+crd\b/i.test(q)) {
+      const query = failClosed('InvestorTrustHub Specialist Search is firm-focused. A person or IAR CRD must not be resolved as a firm CRD.', ['Find firm CRD 105958.', 'What is a CRD number?']);
+      push('Mode', 'fail_closed');
+      push('Identity class', 'Individual/IAR — outside the public firm search');
+      return { raw: q, query, interpretation: lines };
+    }
     const value = crdMatch[1];
     const evidence =
       /\b(compensation|raum|filing|owner|ownership|affiliat|evidence|what compensation)\b/i.test(q) ||
@@ -408,6 +432,24 @@ export function interpretInvestorAskQuery(raw: string, overrides: InvestorAskOve
     );
     push('Mode', 'fail_closed');
     push('Identifier', 'Unlabeled digits');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  if (/\b(?:iar|individual adviser|person)\s+crd\b/i.test(q)) {
+    const query = failClosed('InvestorTrustHub Specialist Search is firm-focused. A person or IAR CRD must not be resolved as a firm CRD.', ['Find firm CRD 105958.', 'What is a CRD number?']);
+    push('Mode', 'fail_closed');
+    push('Identity class', 'Individual/IAR — outside the public firm search');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  if (/\b(?:new jersey state rias?|advisers? registered in new jersey)\b/i.test(q)) {
+    const query = failClosed('New Jersey’s complete state-RIA roster is request-only and is not the SEC/IARD principal-office universe. Missing coverage is not zero.', ['SEC/IARD firms reporting a principal office in New Jersey.']);
+    push('Coverage', 'REQUEST_ONLY');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:california state rias?|advisers? registered in california)\b/i.test(q)) {
+    const query = failClosed('California’s complete current state-RIA roster is not acquired. Missing coverage is not zero.', ['SEC/IARD firms reporting a principal office in California.']);
+    push('Coverage', 'NOT_ACQUIRED');
     return { raw: q, query, interpretation: lines };
   }
 
@@ -557,7 +599,8 @@ export function interpretInvestorAskQuery(raw: string, overrides: InvestorAskOve
 
   const nameQuoted = q.match(/[“"]([^”"]{2,80})[”"]/);
   const named = q.match(/\b(?:named|called|firm name)\s+([A-Za-z0-9&.,' -]{2,80})/i);
-  const nameQuery = nameQuoted?.[1]?.trim() || named?.[1]?.trim();
+  const simpleFirmName = !firmType && !states.length && !raum && !compensation.length && !affiliation && /^[A-Za-z][A-Za-z0-9&.,' -]{1,79}$/.test(q) && !/\b(what|how|who|does|is|show|find|adviser|firm|fees?|ownership|disclosure)\b/i.test(q) ? q : undefined;
+  const nameQuery = nameQuoted?.[1]?.trim() || named?.[1]?.trim() || simpleFirmName;
 
   const effectiveType: InvestorFirmType | undefined =
     raum || compensation.length ? 'ria' : firmType ?? (states.length ? 'all' : undefined);
@@ -677,12 +720,13 @@ export function whyThisMatched(input: {
   geography?: InvestorResearchQuery['geography'];
   raum?: InvestorResearchQuery['raum'];
   compensationMethods?: CompensationMethodKey[];
-  identifier?: { type: 'crd'; value: string };
+  identifier?: { type: 'crd' | 'sec_file_number'; value: string };
   nameQuery?: string;
   affiliationField?: keyof typeof AFFILIATION_FIELDS;
 }): string {
   const bits: string[] = [];
-  if (input.identifier) bits.push(`its organization CRD is ${input.identifier.value}`);
+  if (input.identifier?.type === 'crd') bits.push(`its organization CRD is ${input.identifier.value}`);
+  if (input.identifier?.type === 'sec_file_number') bits.push(`its sourced SEC file number is ${input.identifier.value}`);
   if (input.firmType === 'ria') bits.push('it is classified as an RIA in the current SEC/IARD roster');
   if (input.firmType === 'era') bits.push('it is classified as an ERA in the current SEC/IARD roster');
   if (input.geography?.type === 'principal_office_state') {
