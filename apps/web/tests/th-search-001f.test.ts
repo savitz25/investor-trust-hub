@@ -26,5 +26,6 @@ describe('TH-SEARCH-001F', () => {
     expect(interpretInvestorAskQuery('adviser with no disclosures').query.failReason).toMatch(/cannot establish a clean history/i);
     expect(interpretInvestorAskQuery('I want to check the adviser who wants to manage my money').query.failReason).toMatch(/specific adviser/i);
     expect(interpretInvestorAskQuery('ownership evidence for an adviser').query.failReason).toMatch(/firm-specific/i);
+    expect(interpretInvestorAskQuery('firms affiliated with broker-dealers').query.affiliationField).toBe('affiliation_broker_dealer');
   });
 });
