@@ -8,7 +8,7 @@ import {
   type InvestorHomeIntelV1,
   type InvestorHomepageEvidenceMeasure,
 } from '@ith/domain';
-import { FirmSearchForm } from '@/components/firm-search';
+import { InvestorSpecialistSearchShell } from '@/components/specialist-search/investor-specialist-search-shell';
 import { HomeIntelChecklist } from '@/components/home-intel-checklist';
 
 const FAMILY_ORDER = Object.keys(
@@ -253,14 +253,15 @@ export function InvestorHomeIntelligence({
       >
         <div className="ith-shell ith-search-layout">
           <div>
-            <p className="ith-eyebrow">Start with identity</p>
-            <h2 id="research-title">Research an adviser firm</h2>
+            <p className="ith-eyebrow">Source-backed specialist research</p>
+            <h2 id="research-title">One question. Structured adviser evidence.</h2>
             <p>
-              Search by firm name, CRD number, or SEC file number. Firm research
-              is separate from individual/IAR identity.
+              Ask about a firm, CRD, SEC file number, principal-office geography,
+              RAUM or Form ADV fields. Firm research stays separate from individual/IAR identity.
             </p>
+            <p className="mt-4"><Link href="/firms">Advanced firm lookup by name, CRD or SEC file number →</Link></p>
           </div>
-          <FirmSearchForm q="" state="" />
+          <InvestorSpecialistSearchShell compact />
         </div>
       </section>
 

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ASK_DEFINITIONS, INVESTOR_ASK_PAGE_SIZE } from '@ith/domain';
 import type { InvestorAskResult } from '@/lib/ask/execute';
+import { SearchAnalytics } from '@/components/specialist-search/search-analytics';
 
 function askHref(q: string, page?: number) {
   const params = new URLSearchParams({ q });
@@ -13,16 +14,17 @@ export function AskInvestorResultView({ result }: { result: InvestorAskResult })
   const def = q.definitionId ? ASK_DEFINITIONS[q.definitionId] : undefined;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8" data-specialist-results>
+      <SearchAnalytics resultCount={result.results.length} dimensions={{ hub: 'investor', intent: q.mode, firmClass: q.firmType ?? 'unspecified', state: q.geography?.type === 'principal_office_state' ? q.geography.value : 'none', hasIdentifier: Boolean(q.identifier), identifierType: q.identifier?.type === 'crd' ? 'firm_crd' : q.identifier?.type ?? 'none', raumBand: q.raum?.bandId ?? (q.raum ? 'custom' : 'none'), compensationMethod: q.compensationMethods?.join('+') ?? 'none', affiliation: q.affiliationField ?? 'none', evidenceFamily: q.evidenceFamilies?.join('+') ?? 'none', coverageState: q.mode === 'fail_closed' ? 'UNSUPPORTED' : 'KNOWN' }} />
       <section className="rounded-2xl border border-[var(--ith-border)] bg-white p-5 sm:p-6">
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-teal-800">
           We interpreted your question as
         </p>
         <dl className="mt-4 grid gap-3 sm:grid-cols-2">
           {result.parsed.interpretation.map((row) => (
-            <div key={`${row.label}-${row.value}`}>
+            <div key={`${row.label}-${row.value}`} className="rounded-xl bg-[var(--ith-canvas)] p-3">
               <dt className="text-xs uppercase text-[var(--ith-ink)]">{row.label}</dt>
-              <dd className="text-base font-semibold text-[var(--ith-navy)]">{row.value}</dd>
+              <dd className="break-words text-base font-semibold text-[var(--ith-navy)]">{row.value}</dd>
             </div>
           ))}
         </dl>
@@ -42,7 +44,7 @@ export function AskInvestorResultView({ result }: { result: InvestorAskResult })
             defaultValue={result.queryText}
             className="min-h-11 flex-1 rounded-xl border border-[var(--ith-border)] px-3 text-sm text-[var(--ith-navy)]"
           />
-          <button type="submit" className="th-btn-primary min-h-11 px-4 text-sm">
+          <button type="submit" data-specialist-event="refine" className="th-btn-primary min-h-11 px-4 text-sm">
             Change interpretation
           </button>
         </form>
@@ -139,10 +141,24 @@ export function AskInvestorResultView({ result }: { result: InvestorAskResult })
                 <span className="font-semibold">Why this matched. </span>
                 {firm.whyMatched}
               </p>
+              <div className="mt-3">
+                <p className="text-xs font-semibold uppercase tracking-[.12em] text-[var(--ith-ink)]">Evidence available</p>
+                <p className="mt-1 text-sm text-[var(--ith-ink)]">SEC/IARD firm identity, current Form ADV facts, reported RAUM, compensation methods, affiliations and filing date where present.</p>
+              </div>
               {firm.publicationNote ? <p className="mt-2 text-xs text-[var(--ith-ink)]">{firm.publicationNote}</p> : null}
+              <details data-specialist-event="trace_open" className="mt-3 rounded-xl border border-[var(--ith-border)] p-3">
+                <summary className="min-h-11 cursor-pointer py-2 font-semibold text-[var(--ith-navy)]">Trace this result</summary>
+                <dl className="grid gap-2 text-sm sm:grid-cols-2">
+                  <div><dt className="text-xs uppercase">Identity</dt><dd>Firm CRD {firm.crd}; {firm.firmTypeLabel}</dd></div>
+                  <div><dt className="text-xs uppercase">Source as of</dt><dd>{firm.officialAsOf ?? result.provenance.officialAsOf}</dd></div>
+                  <div><dt className="text-xs uppercase">Geography meaning</dt><dd>{result.provenance.geographyMeaning}</dd></div>
+                  <div><dt className="text-xs uppercase">Publication</dt><dd>{firm.currentlyIndexable ? 'Public research profile published' : 'No public research profile is currently published for this identity'}</dd></div>
+                </dl>
+                <p className="mt-2 text-xs text-[var(--ith-ink)]">RAUM is reported size, not performance. Compensation fields are methods, not fee amounts. Registration is not endorsement.</p>
+              </details>
               {firm.href ? (
-                <Link href={firm.href} className="th-btn-secondary mt-4 inline-flex min-h-11 items-center px-4 text-sm">
-                  View firm research report
+                <Link data-specialist-event="profile_open" href={firm.href} className="th-btn-secondary mt-4 inline-flex min-h-11 items-center px-4 text-sm">
+                  Research this adviser
                 </Link>
               ) : (
                 <Link href={`/firms?q=${encodeURIComponent(firm.crd)}`} className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-teal-800">
@@ -156,10 +172,11 @@ export function AskInvestorResultView({ result }: { result: InvestorAskResult })
 
       {result.resultType === 'identifier' && !result.results.length && q.mode !== 'fail_closed' ? (
         <p className="rounded-2xl border border-[var(--ith-border)] p-5 text-sm">
-          No current SEC/IARD roster firm matched labeled CRD {q.identifier?.value}. That is not a finding that the
-          number is invalid in another system.
+          We did not find this {q.identifier?.type === 'sec_file_number' ? 'SEC file number' : 'firm CRD'} in the current published SEC/IARD research corpus. That is not proof the identifier is invalid in another regulatory or person context.
         </p>
       ) : null}
+
+      {!result.results.length && !result.counts.length && result.resultType === 'entity' ? <p className="rounded-2xl border border-[var(--ith-border)] p-5 text-sm">No matching published firm record for these criteria. Missing evidence is not zero or a clean history.</p> : null}
 
       {result.results.length && result.pagination.total > INVESTOR_ASK_PAGE_SIZE ? (
         <nav className="flex gap-3" aria-label="Pagination">

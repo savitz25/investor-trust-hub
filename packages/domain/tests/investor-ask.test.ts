@@ -10,7 +10,7 @@ describe('investor-ask-v1 interpreter', () => {
   it('exposes execute capability without ranking language', () => {
     expect(INVESTOR_ASK_CONTRACT).toBe('investor-ask-v1');
     expect(INVESTOR_ASK_CAPABILITY.federatedExecution).toBe('execute');
-    expect(INVESTOR_ASK_CAPABILITY.identifier).toBe('labeled_crd');
+    expect(INVESTOR_ASK_CAPABILITY.identifier).toBe('labeled_firm_crd_or_sec_file_number');
     expect(JSON.stringify(INVESTOR_ASK_CAPABILITY)).not.toMatch(/best adviser/i);
   });
 

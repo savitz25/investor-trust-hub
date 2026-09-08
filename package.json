@@ -25,6 +25,7 @@
     "typecheck": "npm run typecheck --workspaces --if-present",
     "test": "vitest run",
     "check:inv-cap-001": "vitest run packages/domain/tests/investor-specialist-execution-v2.test.ts apps/web/tests/inv-cap-001-static.test.ts packages/domain/tests/investor-ask.test.ts",
+    "check:th-search-001f": "vitest run apps/web/tests/th-search-001f.test.ts packages/domain/tests/investor-ask.test.ts packages/domain/tests/investor-specialist-execution-v2.test.ts",
     "check:inv-cust-cap-001": "vitest run packages/domain/tests/investor-customer-claim-validation-v1.test.ts apps/web/tests/inv-cust-cap-001-static.test.ts",
     "check:ath-cust-net-002b": "vitest run apps/web/tests/ath-cust-net-002b.test.ts",
     "test:watch": "vitest",
