@@ -1,0 +1,101 @@
+{
+  "contract": "investor-co-iapd-census-v1",
+  "safeAsCurrentColoradoBulkStateLayer": true,
+  "filterLogic": "Colorado selected by IAPD registration/notice jurisdiction fields (StateRgstn/Rgltr/@Cd, ERA/Rgltr/@Cd, NoticeFiled/States/@RgltrCd). Principal-office MainAddr/@State=CO is a separate national overlay and is not the state-RIA denominator.",
+  "state": {
+    "filename": "IA_FIRM_STATE_Feed_08_27_2026.xml.gz",
+    "authority": "IAPD (FINRA-held state compilation)",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_08_27_2026.xml.gz",
+    "sourceAsOf": "2026-08-27",
+    "publishedAt": "2026-08-27",
+    "retrievedAt": "2026-08-28T16:36:30Z",
+    "bytes": 5072645,
+    "sha256": "4dc5ec13827c2546213fba16d3397448ba5c08cb8c092f1135c405a7f8472eda",
+    "grain": "Firm CRD; StateRgstn/Rgltr/@Cd=jurisdiction; @St=status; ERA/Rgltr/@Cd=jurisdiction. Not MainAddr/@State.",
+    "filter": "Rgltr/@Cd=CO (registration jurisdiction). Address is recorded only for overlap diagnostics.",
+    "firms_in_feed": 21818,
+    "co_state_ia_registration_rows": 741,
+    "co_state_ia_distinct_crd": 741,
+    "co_state_ia_approved_distinct_crd": 740,
+    "co_state_ia_current_distinct_crd": 740,
+    "co_state_ia_termrequest_distinct_crd": 1,
+    "co_state_era_registration_rows": 209,
+    "co_state_era_distinct_crd": 209,
+    "co_state_era_active_distinct_crd": 209,
+    "ia_era_overlap_distinct_crd": 0,
+    "status_ia": [
+      [
+        "APPROVED",
+        740
+      ],
+      [
+        "TERMREQUEST",
+        1
+      ]
+    ],
+    "status_era": [
+      [
+        "ACTIVE",
+        209
+      ]
+    ],
+    "principal_office_co_among_state_ia": 216,
+    "principal_office_not_co_among_state_ia": 525,
+    "address_co_without_co_jurisdiction": 5
+  },
+  "sec": {
+    "filename": "IA_FIRM_SEC_Feed_08_27_2026.xml.gz",
+    "authority": "SEC / IAPD",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_SEC_Feed_08_27_2026.xml.gz",
+    "sourceAsOf": "2026-08-27",
+    "publishedAt": "2026-08-27",
+    "retrievedAt": "2026-08-28T16:36:30Z",
+    "bytes": 7271790,
+    "sha256": "967217b0cdb4548f496407f7232eff30deba12217c36447fad0cee757473b65c",
+    "grain": "Firm CRD; NoticeFiled/States/@RgltrCd=jurisdiction; MainAddr/@State=principal office (separate overlay).",
+    "firms_in_feed": 23780,
+    "firm_types": [
+      [
+        "Registered",
+        17141
+      ],
+      [
+        "ERA",
+        6639
+      ]
+    ],
+    "co_notice_rows": 3673,
+    "co_notice_any_status_distinct_crd": 3673,
+    "co_notice_filed_distinct_crd": 3673,
+    "co_notice_era_any_status": 0,
+    "notice_status": [
+      [
+        "FILED",
+        3673
+      ]
+    ],
+    "co_principal_office_distinct_crd": 565,
+    "principal_and_notice_filed": 354,
+    "notice_filed_not_principal": 3319,
+    "principal_not_notice_filed": 211
+  },
+  "overlaps": {
+    "state_ia_and_principal_office": 3,
+    "state_ia_approved_and_principal_office": 3,
+    "state_ia_and_notice_filed": 7,
+    "state_ia_approved_and_notice_filed": 6,
+    "state_era_and_principal_office": 42,
+    "state_era_and_notice_filed": 0,
+    "state_ia_and_state_era": 0,
+    "notice_filed_and_principal_office": 354,
+    "approved_state_ia_not_in_sec_principal_or_notice": 733
+  },
+  "invariants": {
+    "state_ria_ne_sec_ria": true,
+    "state_ria_ne_federal_notice": true,
+    "ria_ne_era": true,
+    "principal_office_ne_state_registration": true,
+    "principal_office_589_ne_state_ria_denominator": true,
+    "registration_rows_ne_distinct_crd": true
+  }
+}

@@ -29,3 +29,4 @@ export * from './ca-public-intel';
 export * from './tx-public-intel';
 export * from './wa-public-intel';
 export * from './az-public-intel';
+export * from './co-public-intel';

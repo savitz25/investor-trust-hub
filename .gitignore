@@ -70,5 +70,6 @@ tmp/
 
 # Official regulatory releases — never commit
 data/raw/
+data/colorado/co-inv-001/*.html
 data/reports/
 data/generated/

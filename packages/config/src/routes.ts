@@ -30,6 +30,7 @@ export const STATE_DISCOVERY_ROUTES = [
   { href: '/texas', label: 'Texas' },
   { href: '/washington', label: 'Washington' },
   { href: '/arizona', label: 'Arizona' },
+  { href: '/colorado', label: 'Colorado' },
 ] as const;
 
 export const INDEXABLE_PATHS = [
@@ -45,6 +46,7 @@ export const INDEXABLE_PATHS = [
   '/texas',
   '/washington',
   '/arizona',
+  '/colorado',
   '/disclaimer',
   '/privacy',
   '/terms',

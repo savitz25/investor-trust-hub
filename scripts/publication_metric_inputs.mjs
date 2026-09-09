@@ -38,6 +38,11 @@ export function publicationMetricInputs() {
       .replace(/^[\s\S]*export const AZ_PUBLIC_SNAPSHOT = /, "")
       .replace(/\s+as const;[\s\S]*$/, ""),
   );
+  const co = JSON.parse(
+    read("packages/domain/src/co-public-snapshot.ts")
+      .replace(/^[\s\S]*export const CO_PUBLIC_SNAPSHOT = /, "")
+      .replace(/\s+as const;[\s\S]*$/, ""),
+  );
 
   const stateBlock = routes.match(/export const STATE_DISCOVERY_ROUTES = \[([\s\S]*?)\] as const/)[1];
   const publishedStateIntelligencePaths = [...stateBlock.matchAll(/href: '(\/[^']+)'/g)].map((m) => m[1]);
@@ -80,5 +85,11 @@ export function publicationMetricInputs() {
     azStateRiaRoster: az.stateRia.AZ_STATE_IA_BUSINESS_ROSTER,
     azEnforcementIndexRows: az.enforcement.indexRows,
     azRoute: az.route,
+    coPrincipalOfficeFirms: co.nationalOverlay.coPrincipalOfficeSecIardFirms,
+    coStateRiaRoster: co.stateRia.STATE_RIA_BULK_ROSTER,
+    coStateRiaApproved: co.stateRia.approvedDistinctCrd,
+    coNoticeFiled: co.federalNotice.noticeFiledDistinctCrd,
+    coEnforcementNarrativeEntries: co.enforcement.sanctionsNarrativeEntries,
+    coRoute: co.route,
   };
 }

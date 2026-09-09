@@ -1,9 +1,9 @@
 {
   "schemaVersion": "investor-network-metrics-v1",
-  "generatedAt": "2026-09-04T20:11:51.639Z",
+  "generatedAt": "2026-09-09T20:25:17.597Z",
   "newestDocumentedSourceAsOf": "2026-09-03",
   "newestDocumentedSourceAsOfNote": "Newest documented official source-effective date among metrics that carry a calendar sourceAsOf. Not the as-of date of every filing, not Git time, and not deploy time.",
-  "sourceFingerprint": "2f74128e140c692272e178c4039b94e32a0064e33e3bc723633635e89f3dfe3c",
+  "sourceFingerprint": "563adf0d99f0e27f68fabe866e91b2f210b45a0beeaa8772d08b150d1621a81d",
   "source": {
     "dataset": "iapd_sec_compilation",
     "releaseLabel": "IA_FIRM_SEC_Feed_08_27_2026",
@@ -81,14 +81,22 @@
     "statewideStateRiaUniverse": null,
     "enforcementIndexRowsProfiled": 205
   },
+  "colorado": {
+    "principalOfficeRosterFirms": 589,
+    "stateRiaRosterCoverage": "ACQUIRED_IAPD_STATE_COMPILATION",
+    "statewideStateRiaUniverse": 740,
+    "noticeFiledFirms": 3673,
+    "enforcementNarrativeEntriesProfiled": 10
+  },
   "network": {
-    "publishedStateIntelligencePages": 5,
+    "publishedStateIntelligencePages": 6,
     "publishedStateIntelligencePaths": [
       "/new-jersey",
       "/california",
       "/texas",
       "/washington",
-      "/arizona"
+      "/arizona",
+      "/colorado"
     ]
   },
   "rejectedTotals": [
@@ -113,6 +121,10 @@
       "reason": "Missing bulk state rosters are UNKNOWN, not zero. Available-by-request is not acquired."
     },
     {
+      "total": "589 + 740 + 3673 as Colorado advisers",
+      "reason": "Incompatible grains. Principal office, state IA, and federal notice must stay separate. 589 is not the state-RIA denominator."
+    },
+    {
       "total": "0 disclosure events as no-wrongdoing",
       "reason": "Empty table is not a clean history. Item 11 is a checkbox, not a finding."
     }
@@ -133,7 +145,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-04T20:11:51.639Z",
+      "generatedAt": "2026-09-09T20:25:17.597Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One current form_adv_firm_facts row per CRD in the monthly RIA+ERA pair.",
@@ -144,7 +156,7 @@
         ],
         "geographicCoverage": "National SEC IARD roster; principal office is not service territory",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 published 2026-08-27; retrieved 2026-08-28",
-        "generationDate": "2026-09-04",
+        "generationDate": "2026-09-09",
         "currentActiveRule": "dataset_kind is ria XOR era; 17,018 + 6,604 = 23,622"
       }
     },
@@ -163,7 +175,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-04T20:11:51.639Z",
+      "generatedAt": "2026-09-09T20:25:17.597Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "RIA facts (registered + pending).",
@@ -173,7 +185,7 @@
         ],
         "geographicCoverage": "National",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -191,7 +203,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-04T20:11:51.639Z",
+      "generatedAt": "2026-09-09T20:25:17.597Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "ERA facts with reporting status.",
@@ -201,7 +213,7 @@
         ],
         "geographicCoverage": "National",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -218,7 +230,7 @@
         "search_documents"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-04T20:11:51.639Z",
+      "generatedAt": "2026-09-09T20:25:17.597Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Indexable firm search documents on official firms.",
@@ -228,7 +240,7 @@
         ],
         "geographicCoverage": "National Wave-1 gate",
         "sourceDates": "Publication gate on IA_FIRM_SEC_Feed_08_27_2026",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -245,7 +257,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-04T20:11:51.639Z",
+      "generatedAt": "2026-09-09T20:25:17.597Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One form_adv_filings row.",
@@ -255,7 +267,7 @@
         ],
         "geographicCoverage": "National filing history as stored",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -272,7 +284,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-04T20:11:51.639Z",
+      "generatedAt": "2026-09-09T20:25:17.597Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One normalized Item observation row.",
@@ -282,7 +294,7 @@
         ],
         "geographicCoverage": "National extract",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -299,7 +311,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-04T20:11:51.639Z",
+      "generatedAt": "2026-09-09T20:25:17.597Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "RIA facts with a non-null RAUM amount. Zero is a reported value.",
@@ -309,7 +321,7 @@
         ],
         "geographicCoverage": "National RIA file",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -326,7 +338,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-04T20:11:51.639Z",
+      "generatedAt": "2026-09-09T20:25:17.597Z",
       "publicationStatus": "PUBLIC_PARTIAL",
       "trace": {
         "counts": "Facts with disclosure_indicator Y (RIA and ERA kept visible in Trace).",
@@ -336,7 +348,7 @@
         ],
         "geographicCoverage": "National",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -353,7 +365,7 @@
         "disclosure_events"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-04T20:11:51.639Z",
+      "generatedAt": "2026-09-09T20:25:17.597Z",
       "publicationStatus": "INTERNAL",
       "trace": {
         "counts": "disclosure_events rows.",
@@ -363,7 +375,7 @@
         ],
         "geographicCoverage": "National table as stored",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -380,7 +392,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-04T20:11:51.639Z",
+      "generatedAt": "2026-09-09T20:25:17.597Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One owner/control entity observation.",
@@ -390,7 +402,7 @@
         ],
         "geographicCoverage": "National extract",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     },
     {
@@ -407,7 +419,7 @@
         "nj_bos"
       ],
       "sourceAsOf": "2026-09-02",
-      "generatedAt": "2026-09-04T20:11:51.639Z",
+      "generatedAt": "2026-09-09T20:25:17.597Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "Nothing numeric is published for the complete NJ state-RIA universe.",
@@ -417,7 +429,7 @@
         ],
         "geographicCoverage": "New Jersey",
         "sourceDates": "NJ-INV snapshot as_of 2026-09-02",
-        "generationDate": "2026-09-04",
+        "generationDate": "2026-09-09",
         "whyUnknown": "A complete current New Jersey state-registered investment adviser roster remains an official records request. UNKNOWN must never render as zero."
       }
     },
@@ -435,7 +447,7 @@
         "ca_dfpi"
       ],
       "sourceAsOf": "2026-09-03",
-      "generatedAt": "2026-09-04T20:11:51.639Z",
+      "generatedAt": "2026-09-09T20:25:17.597Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "Nothing numeric is published for the complete CA state-RIA universe.",
@@ -445,7 +457,7 @@
         ],
         "geographicCoverage": "California",
         "sourceDates": "CA-INV snapshot as_of 2026-09-03",
-        "generationDate": "2026-09-04",
+        "generationDate": "2026-09-09",
         "whyUnknown": "Public DFPI verification is search-only. Do not estimate the missing state roster from SEC principal-office geography."
       }
     },
@@ -463,7 +475,7 @@
         "tx_ssb"
       ],
       "sourceAsOf": "2026-09-04",
-      "generatedAt": "2026-09-04T20:11:51.639Z",
+      "generatedAt": "2026-09-09T20:25:17.597Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "Nothing numeric is published for the complete TX state-RIA universe.",
@@ -473,7 +485,7 @@
         ],
         "geographicCoverage": "Texas",
         "sourceDates": "TX-INV snapshot as_of 2026-09-04",
-        "generationDate": "2026-09-04",
+        "generationDate": "2026-09-09",
         "whyUnknown": "Public SSB verification is search-only. Do not estimate the missing state roster from SEC principal-office geography. Missing is not zero."
       }
     },
@@ -491,7 +503,7 @@
         "wa_dfi"
       ],
       "sourceAsOf": "2026-09-04",
-      "generatedAt": "2026-09-04T20:11:51.639Z",
+      "generatedAt": "2026-09-09T20:25:17.597Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "Nothing numeric is published for the complete WA state-RIA universe.",
@@ -501,7 +513,7 @@
         ],
         "geographicCoverage": "Washington",
         "sourceDates": "WA-INV snapshot as_of 2026-09-04",
-        "generationDate": "2026-09-04",
+        "generationDate": "2026-09-09",
         "whyUnknown": "Public DFI verification is search-only. Do not estimate the missing state roster from SEC principal-office geography or from the 2024 year-end aggregate. Missing is not zero."
       }
     },
@@ -519,7 +531,7 @@
         "az_acc"
       ],
       "sourceAsOf": "2026-09-04",
-      "generatedAt": "2026-09-04T20:11:51.639Z",
+      "generatedAt": "2026-09-09T20:25:17.597Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "Nothing numeric is published for the complete AZ state-IA universe.",
@@ -529,35 +541,62 @@
         ],
         "geographicCoverage": "Arizona",
         "sourceDates": "AZ-INV snapshot as_of 2026-09-04",
-        "generationDate": "2026-09-04",
+        "generationDate": "2026-09-09",
         "whyUnknown": "ACC can provide a CSV by public-records request. The request was not filed. Do not estimate the missing state roster from SEC principal-office geography. UNKNOWN must never render as zero."
+      }
+    },
+    {
+      "unit": "count",
+      "key": "co_state_ria_roster",
+      "label": "Colorado state-registered investment-adviser firms",
+      "value": 740,
+      "valueState": "KNOWN",
+      "grain": "co_state_ria_roster",
+      "denominator": "IAPD state compilation APPROVED firms with registration jurisdiction = CO",
+      "description": "Colorado state-registered investment-adviser firms from IA_FIRM_STATE_Feed_08_27_2026. Not SEC RIA, not notice filing, not ERA, and not the 589 principal-office overlay.",
+      "coverage": "Colorado",
+      "contributingSourceSystems": [
+        "iapd_state_compilation"
+      ],
+      "sourceAsOf": "2026-08-27",
+      "generatedAt": "2026-09-09T20:25:17.597Z",
+      "publicationStatus": "PUBLIC",
+      "trace": {
+        "counts": "IAPD StateRgstn/Rgltr/@Cd=CO and status APPROVED, counted as distinct firm CRD.",
+        "doesNotCount": "Not SEC/IARD principal-office firms. Not federal-covered notice filings. Not state ERA reporting. Not IAR people.",
+        "contributingSourceSystems": [
+          "iapd_state_compilation"
+        ],
+        "geographicCoverage": "Colorado",
+        "sourceDates": "IA_FIRM_STATE_Feed_08_27_2026",
+        "generationDate": "2026-09-09"
       }
     },
     {
       "unit": "count",
       "key": "published_state_intelligence_pages",
       "label": "Published state investment-intelligence pages",
-      "value": 5,
+      "value": 6,
       "valueState": "KNOWN",
       "grain": "published_state_intelligence_page",
       "denominator": "Indexable specialist state intelligence routes currently published",
-      "description": "New Jersey, California, Texas, Washington, and Arizona state intelligence pages. Not a count of advisers.",
-      "coverage": "/new-jersey, /california, /texas, /washington, /arizona",
+      "description": "New Jersey, California, Texas, Washington, Arizona, and Colorado state intelligence pages. Not a count of advisers.",
+      "coverage": "/new-jersey, /california, /texas, /washington, /arizona, /colorado",
       "contributingSourceSystems": [
         "investor-state-intel"
       ],
       "sourceAsOf": "2026-09-03",
-      "generatedAt": "2026-09-04T20:11:51.639Z",
+      "generatedAt": "2026-09-09T20:25:17.597Z",
       "publicationStatus": "PUBLIC",
       "trace": {
-        "counts": "Published /new-jersey, /california, /texas, /washington, and /arizona intelligence routes.",
+        "counts": "Published /new-jersey, /california, /texas, /washington, /arizona, and /colorado intelligence routes.",
         "doesNotCount": "Not county pages. Not national roster rows. Florida is not published on this hub.",
         "contributingSourceSystems": [
           "investor-state-intel"
         ],
-        "geographicCoverage": "/new-jersey, /california, /texas, /washington, /arizona",
+        "geographicCoverage": "/new-jersey, /california, /texas, /washington, /arizona, /colorado",
         "sourceDates": "Publication gates in specialist catalogs",
-        "generationDate": "2026-09-04"
+        "generationDate": "2026-09-09"
       }
     }
   ]

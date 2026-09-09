@@ -63,6 +63,14 @@ assert(byKey.az_state_ria_roster.valueState === "REQUEST_ONLY", "AZ request-only
 assert(v1.arizona.stateRiaRosterCoverage === pub.azStateRiaRoster, "AZ catalog coverage");
 assert(v1.arizona.principalOfficeRosterFirms === pub.azPrincipalOfficeFirms, "AZ principal-office overlay");
 assert(v1.arizona.enforcementIndexRowsProfiled === pub.azEnforcementIndexRows, "AZ enforcement index rows");
+assert(v1.colorado.principalOfficeRosterFirms === pub.coPrincipalOfficeFirms, "CO principal-office overlay");
+assert(v1.colorado.stateRiaRosterCoverage === pub.coStateRiaRoster, "CO catalog coverage");
+assert(v1.colorado.statewideStateRiaUniverse === pub.coStateRiaApproved, "CO state-RIA approved");
+assert(v1.colorado.noticeFiledFirms === pub.coNoticeFiled, "CO notice filed");
+assert(v1.colorado.statewideStateRiaUniverse !== v1.colorado.principalOfficeRosterFirms, "CO state RIA != overlay");
+assert(byKey.co_state_ria_roster.value === 740, "CO state RIA metric");
+assert(byKey.co_state_ria_roster.valueState === "KNOWN", "CO state RIA known");
+assert(byKey.published_state_intelligence_pages.value === 6, "state pages 6");
 assert(v1.florida.stateIntelligencePage === false, "no invented Florida page");
 assert(!pub.publishedStateIntelligencePaths.includes("/florida"), "no Florida route");
 assert(byKey.investment_advisory_firms.label === "Investment advisory firms", "consumer firm label");

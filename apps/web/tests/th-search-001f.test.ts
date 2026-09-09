@@ -9,6 +9,9 @@ describe('TH-SEARCH-001F', () => {
     expect(SPECIALIST_SEARCH_ANALYTICS_EVENTS).toHaveLength(7);
     expect(INVESTOR_SEARCH_CAPABILITIES.find((x) => x.key === 'nj_state_ria')?.supportState).toBe('REQUEST_ONLY');
     expect(INVESTOR_SEARCH_CAPABILITIES.find((x) => x.key === 'ca_state_ria')?.supportState).toBe('NOT_ACQUIRED');
+    expect(INVESTOR_SEARCH_CAPABILITIES.find((x) => x.key === 'co_state_ria')?.supportState).toBe('PARTIAL');
+    expect(interpretInvestorAskQuery('Colorado state RIAs').query.mode).toBe('fail_closed');
+    expect(interpretInvestorAskQuery('Colorado state RIAs').query.failReason).toMatch(/does not treat the 589/i);
     expect(INVESTOR_SEARCH_CAPABILITIES.find((x) => x.key === 'client_service_area')?.supportState).toBe('UNSUPPORTED');
   });
   it('has a 90+ question corpus with no expected failures', () => {
