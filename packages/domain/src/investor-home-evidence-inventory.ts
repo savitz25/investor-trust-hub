@@ -1,5 +1,6 @@
 import { AZ_PUBLIC_SNAPSHOT } from './az-public-snapshot';
 import { CA_PUBLIC_SNAPSHOT } from './ca-public-snapshot';
+import { CO_PUBLIC_SNAPSHOT } from './co-public-snapshot';
 import { loadInvestorNetworkMetrics } from './load-network-metrics';
 import { NJ_PUBLIC_SNAPSHOT } from './nj-public-snapshot';
 import { TX_PUBLIC_SNAPSHOT } from './tx-public-snapshot';
@@ -62,12 +63,12 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO';
   name: string;
   href: string;
   regulator: string;
   principalOfficeFirms: number;
-  rosterStatus: 'Available by request' | 'Not acquired';
+  rosterStatus: 'Available by request' | 'Not acquired' | 'IAPD compilation (740 approved)';
   evidence: string[];
   identityNote: string;
   limitation: string;
@@ -348,6 +349,48 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
         sourceAsOf: null,
         retrievedAt: null,
         snapshotAsOf: AZ_PUBLIC_SNAPSHOT.asOf,
+        generatedAt: null,
+      },
+    ],
+  },
+  {
+    code: 'CO',
+    name: 'Colorado',
+    href: CO_PUBLIC_SNAPSHOT.route,
+    regulator: 'Colorado Division of Securities',
+    principalOfficeFirms:
+      CO_PUBLIC_SNAPSHOT.nationalOverlay.coPrincipalOfficeSecIardFirms,
+    rosterStatus: 'IAPD compilation (740 approved)',
+    evidence: [
+      'SEC/IARD principal-office overlay',
+      'IAPD Colorado state-registered IA compilation',
+      'federal-covered notice filings',
+      'sanctions narrative profile',
+    ],
+    identityNote:
+      '740 is IAPD state-compilation APPROVED firms with Colorado as registration jurisdiction. It is not the 589 SEC principal-office overlay and not a combined Colorado adviser total.',
+    limitation:
+      'State-only CRDs were not minted as public SEC firm profiles. Name-only sanctions entries were not attached.',
+    sourceClocks: [
+      {
+        label: 'SEC/IARD feed',
+        sourceAsOf: CO_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+        retrievedAt: CO_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+        snapshotAsOf: null,
+        generatedAt: null,
+      },
+      {
+        label: 'IAPD state compilation',
+        sourceAsOf: CO_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+        retrievedAt: CO_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+        snapshotAsOf: CO_PUBLIC_SNAPSHOT.stateRia.snapshotAsOf,
+        generatedAt: null,
+      },
+      {
+        label: 'Colorado web indexes',
+        sourceAsOf: null,
+        retrievedAt: CO_PUBLIC_SNAPSHOT.enforcement.retrievedAt,
+        snapshotAsOf: CO_PUBLIC_SNAPSHOT.asOf,
         generatedAt: null,
       },
     ],
@@ -746,6 +789,62 @@ export function buildInvestorHomepageEvidenceInventory(): InvestorHomepageEviden
       'PDFs and eDockets were not crawled.',
     ),
     stateMeasure(
+      'co_overlay',
+      'Colorado SEC/IARD principal-office firms',
+      metrics.colorado.principalOfficeRosterFirms,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'SEC/IARD firm with CO principal office',
+      'Colorado',
+      'SEC IAPD / IARD',
+      'artifacts/co-inv-001-public-snapshot.json',
+      CO_PUBLIC_SNAPSHOT.asOf,
+      'Federal roster firms reporting CO principal office.',
+      'Colorado state-RIA roster, notice filing, or Division of Securities authority.',
+      '/colorado',
+      'PUBLIC',
+      CO_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+      CO_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+    ),
+    stateMeasure(
+      'co_state_roster',
+      'Colorado state-registered investment-adviser firms',
+      CO_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'IAPD state-compilation APPROVED firm with jurisdiction CO',
+      'Colorado',
+      'IAPD state compilation',
+      'artifacts/co-inv-001-public-snapshot.json',
+      CO_PUBLIC_SNAPSHOT.asOf,
+      'Approved Colorado state-IA firms in IA_FIRM_STATE_Feed_08_27_2026.',
+      'SEC principal-office overlay, federal notice filings, ERA reporting, or IAR people.',
+      '/colorado',
+      'PUBLIC',
+      CO_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+      CO_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+      'Exact firm CRD. State-only identities were not minted as public SEC profiles.',
+      'Filter is registration jurisdiction, not address.',
+    ),
+    stateMeasure(
+      'co_notice_filed',
+      'SEC/IARD firms with a Colorado notice filing',
+      CO_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'NoticeFiled RgltrCd=CO FILED',
+      'Colorado',
+      'SEC IAPD / IARD',
+      'artifacts/co-inv-001-public-snapshot.json',
+      CO_PUBLIC_SNAPSHOT.asOf,
+      'SEC/IARD firms with a Colorado notice filing in the cited compilation.',
+      'Colorado state-RIA licensure or the 589 principal-office overlay.',
+      '/colorado',
+      'PUBLIC',
+      CO_PUBLIC_SNAPSHOT.federalNotice.sourceAsOf,
+      CO_PUBLIC_SNAPSHOT.federalNotice.retrievedAt,
+    ),
+    stateMeasure(
       'az_index_crd_mentions',
       'Arizona index rows mentioning CRD',
       AZ_PUBLIC_SNAPSHOT.enforcement.rowsWithCrdInRespondentText,
@@ -911,7 +1010,7 @@ export function buildInvestorHomepageEvidenceInventory(): InvestorHomepageEviden
       'KNOWN',
       'PUBLIC_RESEARCH',
       'published state intelligence page',
-      'NJ, CA, TX, WA, AZ',
+      'NJ, CA, TX, WA, AZ, CO',
       'Accepted state publication models',
       'INVESTOR_HOMEPAGE_STATE_CARDS',
       null,
@@ -970,11 +1069,11 @@ export function assertInvestorHomepageEvidenceInventory(
   )
     throw new Error('Cross-grain or national RAUM totals cannot publish');
   if (
-    INVESTOR_HOMEPAGE_STATE_CARDS.length !== 5 ||
+    INVESTOR_HOMEPAGE_STATE_CARDS.length !== 6 ||
     INVESTOR_HOMEPAGE_STATE_CARDS.some((state) => state.href === '/florida')
   )
     throw new Error(
-      'Exactly five accepted state pages may publish; Florida is not one',
+      'Exactly six accepted state pages may publish; Florida is not one',
     );
   if (
     inventory.find((item) => item.key === 'published_state_pages')?.value !==

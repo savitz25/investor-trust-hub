@@ -42,6 +42,10 @@ export type InvestorNetworkMetricsInput = {
   waPrincipalOfficeFirms: number;
   azPrincipalOfficeFirms: number;
   azEnforcementIndexRowsProfiled: number;
+  coPrincipalOfficeFirms: number;
+  coStateRiaApproved: number;
+  coNoticeFiled: number;
+  coEnforcementNarrativeEntries: number;
 };
 
 function metric(partial: Omit<InvestorNetworkMetric, 'unit'>): InvestorNetworkMetric {
@@ -104,7 +108,7 @@ export function assertGrainSafety(input: InvestorNetworkMetricsInput): void {
   if (input.disclosureEvents === input.item11YesRia + input.item11YesEra && input.disclosureEvents > 0) {
     throw new Error('disclosure events must not be equated to Item 11 yes indicators');
   }
-  for (const path of ['/new-jersey', '/california', '/texas', '/washington', '/arizona']) {
+  for (const path of ['/new-jersey', '/california', '/texas', '/washington', '/arizona', '/colorado']) {
     if (!input.publishedStateIntelligencePaths.includes(path)) {
       throw new Error(`state intelligence path missing: ${path}`);
     }
@@ -129,6 +133,9 @@ export function assertGrainSafety(input: InvestorNetworkMetricsInput): void {
   }
   if (input.azPrincipalOfficeFirms === input.rosterFirms) {
     throw new Error('AZ principal-office overlay must not equal the national roster');
+  }
+  if (input.coPrincipalOfficeFirms === input.rosterFirms) {
+    throw new Error('CO principal-office overlay must not equal the national roster');
   }
 }
 
@@ -500,20 +507,42 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       ),
     }),
     metric({
+      key: 'co_state_ria_roster',
+      label: 'Colorado state-registered investment-adviser firms',
+      value: input.coStateRiaApproved,
+      valueState: 'KNOWN',
+      grain: 'co_state_ria_roster',
+      denominator: 'IAPD state compilation APPROVED firms with registration jurisdiction = CO',
+      description:
+        'Colorado state-registered investment-adviser firms from IA_FIRM_STATE_Feed_08_27_2026. Not SEC RIA, not notice filing, not ERA, and not the 589 principal-office overlay.',
+      coverage: 'Colorado',
+      contributingSourceSystems: ['iapd_state_compilation'],
+      sourceAsOf: input.publishedAt,
+      generatedAt,
+      publicationStatus: 'PUBLIC',
+      trace: commonTrace(
+        'IAPD StateRgstn/Rgltr/@Cd=CO and status APPROVED, counted as distinct firm CRD.',
+        'Not SEC/IARD principal-office firms. Not federal-covered notice filings. Not state ERA reporting. Not IAR people.',
+        ['iapd_state_compilation'],
+        'Colorado',
+        'IA_FIRM_STATE_Feed_08_27_2026',
+      ),
+    }),
+    metric({
       key: 'published_state_intelligence_pages',
       label: 'Published state investment-intelligence pages',
       value: input.publishedStateIntelligencePaths.length,
       valueState: 'KNOWN',
       grain: 'published_state_intelligence_page',
       denominator: 'Indexable specialist state intelligence routes currently published',
-      description: 'New Jersey, California, Texas, Washington, and Arizona state intelligence pages. Not a count of advisers.',
+      description: 'New Jersey, California, Texas, Washington, Arizona, and Colorado state intelligence pages. Not a count of advisers.',
       coverage: input.publishedStateIntelligencePaths.join(', '),
       contributingSourceSystems: ['investor-state-intel'],
       sourceAsOf: newestDocumentedSourceAsOf,
       generatedAt,
       publicationStatus: 'PUBLIC',
       trace: commonTrace(
-        'Published /new-jersey, /california, /texas, /washington, and /arizona intelligence routes.',
+        'Published /new-jersey, /california, /texas, /washington, /arizona, and /colorado intelligence routes.',
         'Not county pages. Not national roster rows. Florida is not published on this hub.',
         ['investor-state-intel'],
         input.publishedStateIntelligencePaths.join(', '),
@@ -545,6 +574,10 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
     azHq: input.azPrincipalOfficeFirms,
     azEnf: input.azEnforcementIndexRowsProfiled,
     njEnf: input.njEnforcementDocumentsAcquired,
+    coHq: input.coPrincipalOfficeFirms,
+    coStateRia: input.coStateRiaApproved,
+    coNotice: input.coNoticeFiled,
+    coEnf: input.coEnforcementNarrativeEntries,
     publishedAt: input.publishedAt,
   };
 
@@ -631,6 +664,13 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       statewideStateRiaUniverse: null,
       enforcementIndexRowsProfiled: input.azEnforcementIndexRowsProfiled,
     },
+    colorado: {
+      principalOfficeRosterFirms: input.coPrincipalOfficeFirms,
+      stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION',
+      statewideStateRiaUniverse: input.coStateRiaApproved,
+      noticeFiledFirms: input.coNoticeFiled,
+      enforcementNarrativeEntriesProfiled: input.coEnforcementNarrativeEntries,
+    },
     network: {
       publishedStateIntelligencePages: input.publishedStateIntelligencePaths.length,
       publishedStateIntelligencePaths: input.publishedStateIntelligencePaths,
@@ -655,6 +695,10 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       {
         total: 'NJ, CA, TX, WA, or AZ state-RIA universe = 0',
         reason: 'Missing bulk state rosters are UNKNOWN, not zero. Available-by-request is not acquired.',
+      },
+      {
+        total: `${input.coPrincipalOfficeFirms} + ${input.coStateRiaApproved} + ${input.coNoticeFiled} as Colorado advisers`,
+        reason: 'Incompatible grains. Principal office, state IA, and federal notice must stay separate. 589 is not the state-RIA denominator.',
       },
       {
         total: `${input.disclosureEvents} disclosure events as no-wrongdoing`,

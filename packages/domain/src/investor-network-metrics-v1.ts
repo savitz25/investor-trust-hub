@@ -34,6 +34,7 @@ export type MetricGrain =
   | 'tx_state_ria_roster'
   | 'wa_state_ria_roster'
   | 'az_state_ria_roster'
+  | 'co_state_ria_roster'
   | 'form_adv_withdrawal'
   | 'form_adv_successor_link';
 
@@ -199,6 +200,13 @@ export type InvestorNetworkMetricsV1 = {
     stateRiaRosterCoverage: 'SOURCE_AVAILABLE_BY_REQUEST';
     statewideStateRiaUniverse: null;
     enforcementIndexRowsProfiled: number;
+  };
+  colorado: {
+    principalOfficeRosterFirms: number;
+    stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION';
+    statewideStateRiaUniverse: number;
+    noticeFiledFirms: number;
+    enforcementNarrativeEntriesProfiled: number;
   };
   network: {
     publishedStateIntelligencePages: number;

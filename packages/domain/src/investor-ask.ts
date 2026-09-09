@@ -482,6 +482,14 @@ export function interpretInvestorAskQuery(raw: string, overrides: InvestorAskOve
     push('Coverage', 'NOT_ACQUIRED');
     return { raw: q, query, interpretation: lines };
   }
+  if (/\b(?:colorado state rias?|advisers? registered in colorado|licensed (?:investment )?advisers? in colorado)\b/i.test(q)) {
+    const query = failClosed(
+      'Colorado state-registered investment-adviser firms are published on /colorado from the IAPD state compilation (jurisdiction=CO). Search V1 remains the SEC/IARD roster and does not treat the 589 principal-office overlay as Colorado state registration.',
+      ['SEC/IARD firms reporting a principal office in Colorado.', 'RIA principal offices in Colorado.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
 
   if (/\bhow many form adv observations\b|\bhow many (normalized )?adv observations\b/i.test(q)) {
     const query: InvestorResearchQuery = {

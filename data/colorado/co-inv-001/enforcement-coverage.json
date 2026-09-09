@@ -1,0 +1,76 @@
+{
+  "ticket": "CO-INV-001",
+  "retrievedAt": "2026-09-09",
+  "sourceAsOf": null,
+  "officialIndex": "https://securities.colorado.gov/enforcement-actions",
+  "sanctionsUrl": "https://securities.colorado.gov/sanctions-against-licensees",
+  "enforcementActions": {
+    "http_status": 200,
+    "bytes": 21642,
+    "sha256": "0098db2186abe1372fe9bc50f59926ea5d7ced49bb87473f2f8ac8de5d5f252e",
+    "staticHtmlTables": 0,
+    "coverage": "OPEN_HTML_INDEX / JS_RENDERED_TABLE_NOT_EXTRACTED",
+    "note": "Drupal page announces an enforcement-action table. The table is not present in static HTML. Bulk rows were not extracted. PDFs were not downloaded."
+  },
+  "sanctionsAgainstLicensees": {
+    "http_status": 200,
+    "bytes": 29213,
+    "sha256": "ce4e4d4b6085d2ceefd1a2be9bb8dea3973c2a114a9cbbc4cdde73fc98b8809d",
+    "coverage": "NARRATIVE_INDEX_PROFILED_NOT_ATTACHED",
+    "datedNarrativeEntries": 10,
+    "entriesWithCrdInText": 0,
+    "entriesNameOnly": 10,
+    "nativeCrdInHtml": [],
+    "sampleEntries": [
+      {
+        "date": "January 16, 2026",
+        "respondentText": "Mullins Investment Management, Inc"
+      },
+      {
+        "date": "January 12, 2026",
+        "respondentText": "Marshall Financial Advisory, LLC; Richard David Marshall"
+      },
+      {
+        "date": "January 30, 2025",
+        "respondentText": "Flotilla Capital Management Inc"
+      },
+      {
+        "date": "January 21, 2025",
+        "respondentText": "Edward D"
+      },
+      {
+        "date": "January 17, 2025",
+        "respondentText": "Vanguard Marketing Corporation; The Vanguard Group, Inc"
+      },
+      {
+        "date": "December 3, 2024",
+        "respondentText": "Global Wealth LLC; James Palumbo"
+      },
+      {
+        "date": "October 14, 2024",
+        "respondentText": "Jekada Financial Group, LLC and Kevin Brady"
+      },
+      {
+        "date": "September 16, 2024",
+        "respondentText": "Celtic Consulting Services, LLC"
+      },
+      {
+        "date": "June 4, 2024",
+        "respondentText": "McGehee Wealth Management Inc"
+      },
+      {
+        "date": "May 28, 2024",
+        "respondentText": "Vailshire Capital Management, LLC; Jeffrey Ross"
+      }
+    ],
+    "note": "Official narrative list of sanctions against licensees. Dates and respondent names are present. Static HTML does not include CRD/IARD numbers. Name-only adverse attachment is UNSAFE. Complaint is not a violation. Allegation is not a final finding."
+  },
+  "pdfsDownloaded": 0,
+  "profileAttachments": 0,
+  "identity": {
+    "EXACT": "firm CRD/IARD, person CRD for person grain only, exact Colorado case/order/file ID",
+    "UNSAFE": "name alone",
+    "REVIEW_REQUIRED": "name + city, DBA, name variants",
+    "auto_attach": false
+  }
+}

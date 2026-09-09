@@ -1,0 +1,310 @@
+{
+  "contract": "investor-co-iapd-census-v1",
+  "safeAsCurrentColoradoBulkStateLayer": true,
+  "filterLogic": "Colorado selected by IAPD registration/notice jurisdiction fields (StateRgstn/Rgltr/@Cd, ERA/Rgltr/@Cd, NoticeFiled/States/@RgltrCd). Principal-office MainAddr/@State=CO is a separate national overlay and is not the state-RIA denominator.",
+  "state": {
+    "filename": "IA_FIRM_STATE_Feed_08_27_2026.xml.gz",
+    "authority": "IAPD (FINRA-held state compilation)",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_08_27_2026.xml.gz",
+    "sourceAsOf": "2026-08-27",
+    "publishedAt": "2026-08-27",
+    "retrievedAt": "2026-08-28T16:36:30Z",
+    "bytes": 5072645,
+    "sha256": "4dc5ec13827c2546213fba16d3397448ba5c08cb8c092f1135c405a7f8472eda",
+    "grain": "Firm CRD; StateRgstn/Rgltr/@Cd=jurisdiction; @St=status; ERA/Rgltr/@Cd=jurisdiction. Not MainAddr/@State.",
+    "filter": "Rgltr/@Cd=CO (registration jurisdiction). Address is recorded only for overlap diagnostics.",
+    "firms_in_feed": 21818,
+    "co_state_ia_registration_rows": 741,
+    "co_state_ia_distinct_crd": 741,
+    "co_state_ia_approved_distinct_crd": 740,
+    "co_state_ia_current_distinct_crd": 740,
+    "co_state_ia_termrequest_distinct_crd": 1,
+    "co_state_era_registration_rows": 209,
+    "co_state_era_distinct_crd": 209,
+    "co_state_era_active_distinct_crd": 209,
+    "ia_era_overlap_distinct_crd": 0,
+    "status_ia": [
+      [
+        "APPROVED",
+        740
+      ],
+      [
+        "TERMREQUEST",
+        1
+      ]
+    ],
+    "status_era": [
+      [
+        "ACTIVE",
+        209
+      ]
+    ],
+    "principal_office_co_among_state_ia": 216,
+    "principal_office_not_co_among_state_ia": 525,
+    "address_co_without_co_jurisdiction": 5
+  },
+  "sec": {
+    "filename": "IA_FIRM_SEC_Feed_08_27_2026.xml.gz",
+    "authority": "SEC / IAPD",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_SEC_Feed_08_27_2026.xml.gz",
+    "sourceAsOf": "2026-08-27",
+    "publishedAt": "2026-08-27",
+    "retrievedAt": "2026-08-28T16:36:30Z",
+    "bytes": 7271790,
+    "sha256": "967217b0cdb4548f496407f7232eff30deba12217c36447fad0cee757473b65c",
+    "grain": "Firm CRD; NoticeFiled/States/@RgltrCd=jurisdiction; MainAddr/@State=principal office (separate overlay).",
+    "firms_in_feed": 23780,
+    "firm_types": [
+      [
+        "Registered",
+        17141
+      ],
+      [
+        "ERA",
+        6639
+      ]
+    ],
+    "co_notice_rows": 3673,
+    "co_notice_any_status_distinct_crd": 3673,
+    "co_notice_filed_distinct_crd": 3673,
+    "co_notice_era_any_status": 0,
+    "co_notice_filed_firm_type": {
+      "Registered": 3673,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          3673
+        ]
+      ]
+    },
+    "notice_status": [
+      [
+        "FILED",
+        3673
+      ]
+    ],
+    "co_principal_office_distinct_crd": 565,
+    "principal_and_notice_filed": 354,
+    "notice_filed_not_principal": 3319,
+    "principal_not_notice_filed": 211
+  },
+  "overlaps": {
+    "state_ia_and_principal_office": 3,
+    "state_ia_approved_and_principal_office": 3,
+    "state_ia_and_notice_filed": 7,
+    "state_ia_approved_and_notice_filed": 6,
+    "state_era_and_principal_office": 42,
+    "state_era_and_notice_filed": 0,
+    "state_ia_and_state_era": 0,
+    "notice_filed_and_principal_office": 354,
+    "approved_state_ia_not_in_sec_principal_or_notice": 733,
+    "state_ia_approved_and_notice_filed_crds": [
+      "113249",
+      "125071",
+      "13478",
+      "140285",
+      "323530",
+      "340871"
+    ],
+    "state_ia_approved_and_notice_filed_joinMethod": "exact firm CRD set intersection of APPROVED StateRgstn/Rgltr/@Cd=CO and NoticeFiled/States/@RgltrCd=CO St=FILED",
+    "state_ia_approved_and_notice_filed_records": [
+      {
+        "crd": "113249",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "CO",
+          "filter": "StateRgstn/Rgltr/@Cd=CO",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "1999-01-01"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=CO",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-06-18",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2026-06-18"
+          },
+          "secFileNumber": "801-135979"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED Colorado StateRgstn and FILED Colorado NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "125071",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "CO",
+          "filter": "StateRgstn/Rgltr/@Cd=CO",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2020-04-03"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=CO",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2021-04-13",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2021-04-13"
+          },
+          "secFileNumber": "801-120789"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED Colorado StateRgstn and FILED Colorado NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "13478",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "CO",
+          "filter": "StateRgstn/Rgltr/@Cd=CO",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2023-08-15"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=CO",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-04-22",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2026-04-22"
+          },
+          "secFileNumber": "801-135680"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED Colorado StateRgstn and FILED Colorado NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "140285",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "CO",
+          "filter": "StateRgstn/Rgltr/@Cd=CO",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2006-07-10"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=CO",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-04-27",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2026-04-27"
+          },
+          "secFileNumber": "801-135990"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED Colorado StateRgstn and FILED Colorado NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "323530",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "CO",
+          "filter": "StateRgstn/Rgltr/@Cd=CO",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2022-12-12"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=CO",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-02-23",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2026-02-23"
+          },
+          "secFileNumber": "801-135454"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED Colorado StateRgstn and FILED Colorado NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "340871",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "CO",
+          "filter": "StateRgstn/Rgltr/@Cd=CO",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2026-07-29"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=CO",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-03-27",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED-120",
+            "Dt": "2026-03-27"
+          },
+          "secFileNumber": "801-135684"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED Colorado StateRgstn and FILED Colorado NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      }
+    ]
+  },
+  "semanticGrainRules": {
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_SEC_RIA": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_NOTICE_FILING": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_STATE_ERA": true,
+    "PRINCIPAL_OFFICE_IS_NOT_REGISTRATION": true,
+    "REGISTRATION_ROW_IS_DISTINCT_GRAIN_FROM_DISTINCT_FIRM_CRD": true,
+    "note": "These are contract/credential rules. They do not assert that CRD sets are disjoint or that counts are numerically unequal."
+  },
+  "computedDiagnostics": {
+    "state_ia_registration_rows": 741,
+    "state_ia_distinct_crd": 741,
+    "state_ia_approved_distinct_crd": 740,
+    "state_ia_termrequest_distinct_crd": 1,
+    "state_era_registration_rows": 209,
+    "state_era_distinct_crd": 209,
+    "state_ia_and_state_era_overlap_distinct_crd": 0,
+    "state_ia_approved_and_notice_filed_overlap_distinct_crd": 6,
+    "notice_filed_distinct_crd": 3673,
+    "notice_filed_firm_type": {
+      "Registered": 3673,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          3673
+        ]
+      ]
+    },
+    "registration_rows_equal_distinct_crd": true
+  }
+}

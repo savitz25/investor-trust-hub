@@ -23,6 +23,16 @@ describe('investor-ask-v1 interpreter', () => {
     expect(bare.query.failReason).toMatch(/labeled CRD/i);
   });
 
+  it('does not treat Colorado state RIAs as the 589 principal-office overlay', () => {
+    const parsed = interpretInvestorAskQuery('Colorado state RIAs');
+    expect(parsed.query.mode).toBe('fail_closed');
+    expect(parsed.query.failReason).toMatch(/does not treat the 589/i);
+    const hq = interpretInvestorAskQuery('RIA principal offices in Colorado');
+    expect(hq.query.geography?.value).toBe('CO');
+    expect(hq.query.geography?.type).toBe('principal_office_state');
+    expect(hq.query.mode).not.toBe('fail_closed');
+  });
+
   it('interprets Florida RIAs as principal-office geography', () => {
     const parsed = interpretInvestorAskQuery('Show SEC-registered RIAs in Florida.');
     expect(parsed.query.mode).toBe('entity');

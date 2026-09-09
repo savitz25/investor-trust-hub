@@ -105,13 +105,14 @@ describe('INV-HOME-003 public evidence inventory', () => {
     ).toBe(true);
   });
 
-  it('derives exactly five state surfaces and never invents Florida', () => {
+  it('derives exactly six state surfaces and never invents Florida', () => {
     expect(INVESTOR_HOMEPAGE_STATE_CARDS.map((state) => state.href)).toEqual([
       '/new-jersey',
       '/california',
       '/texas',
       '/washington',
       '/arizona',
+      '/colorado',
     ]);
     expect(get('published_state_pages').value).toBe(
       INVESTOR_HOMEPAGE_STATE_CARDS.length,
@@ -135,6 +136,12 @@ describe('INV-HOME-003 public evidence inventory', () => {
     expect(get('ca_state_roster').valueState).toBe('NOT_ACQUIRED');
     expect(get('tx_state_roster').valueState).toBe('NOT_ACQUIRED');
     expect(get('wa_state_roster').valueState).toBe('NOT_ACQUIRED');
+    expect(get('co_state_roster').value).toBe(740);
+    expect(get('co_state_roster').valueState).toBe('KNOWN');
+    expect(get('co_overlay').value).toBe(589);
+    expect(get('co_overlay').grain).toMatch(/principal office/i);
+    expect(get('co_state_roster').grain).toMatch(/jurisdiction CO/i);
+    expect(get('co_notice_filed').value).toBe(3673);
   });
 
   it('preserves Arizona enforcement index and attribution grains', () => {
@@ -164,7 +171,7 @@ describe('INV-HOME-003 public evidence inventory', () => {
       ).toBe(true);
     }
     const stateMeasures = inventory.filter((item) =>
-      ['New Jersey', 'California', 'Texas', 'Washington', 'Arizona'].includes(
+      ['New Jersey', 'California', 'Texas', 'Washington', 'Arizona', 'Colorado'].includes(
         item.geography,
       ),
     );
