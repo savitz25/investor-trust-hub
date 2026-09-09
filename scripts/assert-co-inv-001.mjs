@@ -40,10 +40,15 @@ assert(!existsSync(join(root, 'apps/web/src/app/colorado/denver')), 'no Denver f
 assert(routes.includes("href: '/colorado'"), 'STATE_DISCOVERY_ROUTES');
 assert(snap.nationalOverlay.coPrincipalOfficeSecIardFirms === 589, '589 overlay');
 assert(snap.stateRia.completeStateRiaCount === 740, '740 approved state IA');
-assert(snap.stateRia.completeStateRiaCount !== snap.nationalOverlay.coPrincipalOfficeSecIardFirms, 'state RIA != overlay');
-assert(snap.stateRia.completeStateRiaCount !== snap.federalNotice.noticeFiledDistinctCrd, 'state RIA != notice');
+assert(snap.stateRia.filter.includes('StateRgstn/Rgltr/@Cd=CO'), 'state IA jurisdiction filter');
+assert(snap.federalNotice.filter.includes('NoticeFiled/States/@RgltrCd=CO'), 'notice jurisdiction filter');
+assert(snap.stateEra.filter.includes('ERA/Rgltr/@Cd=CO'), 'ERA jurisdiction filter');
+assert(String(snap.nationalOverlay.grain).includes('principal-office'), 'overlay grain');
 assert(snap.stateEra.activeDistinctCrd === 209, 'state ERA');
-assert(snap.stateRia.completeStateRiaCount !== snap.stateEra.activeDistinctCrd, 'RIA != ERA');
+assert(snap.federalNotice.overlapApprovedStateIa === 6, 'exact-CRD overlap count');
+assert(String(snap.federalNotice.overlapApprovedStateIaJoinMethod).includes('exact firm CRD'), 'overlap join method');
+assert(snap.expansionLedger.NEW_FEDERAL_NOTICE_FILING_ROWS === 3673, 'notice rows in ledger');
+assert(snap.expansionLedger.TOTAL_NEW_COLORADO_REGULATORY_OBSERVATION_ROWS === 4623, 'observation rows labeled');
 assert(snap.stateRia.filter.includes('jurisdiction'), 'jurisdiction filter');
 assert(/not MainAddr|not address/i.test(snap.stateRia.filter), 'not address filter');
 assert(snap.expansionLedger.NET_NEW_CANONICAL_ORGANIZATIONS === 0, 'no new canonical orgs');

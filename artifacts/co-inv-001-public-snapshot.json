@@ -93,9 +93,31 @@
     "retrievedAt": "2026-08-28",
     "snapshotAsOf": "2026-08-27",
     "overlapApprovedStateIa": 6,
+    "overlapApprovedStateIaJoinMethod": "exact firm CRD set intersection of APPROVED StateRgstn/Rgltr/@Cd=CO and NoticeFiled/States/@RgltrCd=CO St=FILED",
+    "overlapApprovedStateIaCrds": [
+      "113249",
+      "125071",
+      "13478",
+      "140285",
+      "323530",
+      "340871"
+    ],
+    "overlapApprovedStateIaReading": "The credential classes are separate but the source populations are not perfectly disjoint; six firm CRDs appear in both source-defined sets in the 2026-08-27 compilations. Exact-CRD inspection shows each CRD is APPROVED in StateRgstn/Rgltr/@Cd=CO and FILED in NoticeFiled/States/@RgltrCd=CO with FirmType=Registered. Several SEC Rgstn dates are 2026 while the corresponding state APPROVED dates are earlier, which is consistent with coexisting official records and possible transition or status lag. Neither classification was discarded.",
     "overlapPrincipalOfficeRawMainAddr": 354,
+    "filedFirmType": {
+      "Registered": 3673,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          3673
+        ]
+      ]
+    },
     "label": "SEC/IARD firms with a Colorado notice filing",
-    "caveat": "Federal-covered / notice-filed is not Colorado state-RIA licensure. Notice-filed is not the 589 principal-office overlay. A Colorado principal office does not prove a current notice filing."
+    "caveat": "Federal-covered / notice-filed is not Colorado state-RIA licensure. Notice-filed is not the 589 principal-office overlay. A Colorado principal office does not prove a current notice filing. The credential classes are separate but the source populations are not perfectly disjoint; six firm CRDs appear in both source-defined sets in the 2026-08-27 compilations."
   },
   "iar": {
     "IA_INDVL_FEED": "ACQUIRED_NATIONAL_FEED",
@@ -283,6 +305,14 @@
     "REVIEW_REQUIRED": "name + city, DBA, name variants, address-only",
     "UNSAFE": "name alone — not used for adverse profile attachment"
   },
+  "semanticGrainRules": {
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_SEC_RIA": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_NOTICE_FILING": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_STATE_ERA": true,
+    "PRINCIPAL_OFFICE_IS_NOT_REGISTRATION": true,
+    "REGISTRATION_ROW_IS_DISTINCT_GRAIN_FROM_DISTINCT_FIRM_CRD": true,
+    "note": "Credential/grain rules. They do not require disjoint CRD sets or unequal counts."
+  },
   "profileAttachments": [],
   "expansionLedger": {
     "PRE_INGEST_COLORADO_PRINCIPAL_OFFICE_FIRMS": 589,
@@ -291,6 +321,8 @@
     "NEW_STATE_IDENTITIES": 950,
     "EXISTING_ORGANIZATIONS_ENRICHED": 0,
     "NEW_STATE_REGISTRATION_ROWS": 950,
+    "NEW_FEDERAL_NOTICE_FILING_ROWS": 3673,
+    "TOTAL_NEW_COLORADO_REGULATORY_OBSERVATION_ROWS": 4623,
     "NEW_ENFORCEMENT_EVIDENCE_ROWS": 10,
     "EXACT_ADVERSE_PROFILE_ATTACHMENTS": 0,
     "REVIEW_REQUIRED_JOINS": 0,
@@ -298,7 +330,7 @@
     "notes": {
       "overlay": "589 Colorado principal-office firms already existed on the federal SEC/IARD spine. Not new organizations.",
       "stateRoster": "IAPD state compilation added 741 distinct Colorado state-IA CRDs and 209 distinct Colorado state-ERA CRDs as state-intelligence identities. They were not minted as canonical organizations or public /firm profiles. Exact CRD enrichment did not create duplicate canonical organizations.",
-      "notice": "3,673 Colorado notice-filed SEC/IARD firms are a federal-covered layer, not state-RIA identities.",
+      "notice": "NEW_FEDERAL_NOTICE_FILING_ROWS = 3,673 is a notice-filing observation count, not extra firms, not extra canonical organizations, and not a Colorado adviser denominator. TOTAL_NEW_COLORADO_REGULATORY_OBSERVATION_ROWS = 4,623 is 950 state IA/ERA rows + 3,673 notice-filing rows. Observation rows are not unique CRDs, firms, or advisers.",
       "enforcement": "10 sanctions narrative entries were profiled. All 10 are name-only in static HTML and were rejected as unsafe adverse joins. Zero exact attachments."
     }
   },
@@ -470,5 +502,5 @@
     "NO TRUST SCORE",
     "NO PAID RANKING"
   ],
-  "fingerprint": "0fe4fa514faf7446038a52f9c76d55fa8da7c42963c506412297be9e049f7539"
+  "fingerprint": "0da0aa6fad8ee73fd141783b08a716c44e8bba42fd0ea43525ff66d53286132d"
 }

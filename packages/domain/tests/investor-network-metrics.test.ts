@@ -117,7 +117,9 @@ describe('investor-network-metrics-v1 grain safety', () => {
     expect(m.colorado.principalOfficeRosterFirms).toBe(589);
     expect(m.colorado.statewideStateRiaUniverse).toBe(740);
     expect(m.colorado.noticeFiledFirms).toBe(3673);
-    expect(m.colorado.principalOfficeRosterFirms).not.toBe(m.colorado.statewideStateRiaUniverse);
+    expect(metricByKey(m, 'co_state_ria_roster').grain).toBe('co_state_ria_roster');
+    expect(metricByKey(m, 'co_state_ria_roster').label).toMatch(/state-registered/i);
+    expect(m.colorado.stateRiaRosterCoverage).toBe('ACQUIRED_IAPD_STATE_COMPILATION');
     expect(metricByKey(m, 'published_state_intelligence_pages').value).toBe(6);
     expect(metricByKey(m, 'nj_state_ria_roster').trace.whyUnknown ?? '').toMatch(/never render as zero/i);
     expect(metricByKey(m, 'tx_state_ria_roster').trace.whyUnknown ?? '').toMatch(/not zero/i);

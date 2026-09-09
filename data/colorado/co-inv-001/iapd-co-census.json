@@ -68,6 +68,18 @@
     "co_notice_any_status_distinct_crd": 3673,
     "co_notice_filed_distinct_crd": 3673,
     "co_notice_era_any_status": 0,
+    "co_notice_filed_firm_type": {
+      "Registered": 3673,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          3673
+        ]
+      ]
+    },
     "notice_status": [
       [
         "FILED",
@@ -88,14 +100,211 @@
     "state_era_and_notice_filed": 0,
     "state_ia_and_state_era": 0,
     "notice_filed_and_principal_office": 354,
-    "approved_state_ia_not_in_sec_principal_or_notice": 733
+    "approved_state_ia_not_in_sec_principal_or_notice": 733,
+    "state_ia_approved_and_notice_filed_crds": [
+      "113249",
+      "125071",
+      "13478",
+      "140285",
+      "323530",
+      "340871"
+    ],
+    "state_ia_approved_and_notice_filed_joinMethod": "exact firm CRD set intersection of APPROVED StateRgstn/Rgltr/@Cd=CO and NoticeFiled/States/@RgltrCd=CO St=FILED",
+    "state_ia_approved_and_notice_filed_records": [
+      {
+        "crd": "113249",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "CO",
+          "filter": "StateRgstn/Rgltr/@Cd=CO",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "1999-01-01"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=CO",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-06-18",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2026-06-18"
+          },
+          "secFileNumber": "801-135979"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED Colorado StateRgstn and FILED Colorado NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "125071",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "CO",
+          "filter": "StateRgstn/Rgltr/@Cd=CO",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2020-04-03"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=CO",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2021-04-13",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2021-04-13"
+          },
+          "secFileNumber": "801-120789"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED Colorado StateRgstn and FILED Colorado NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "13478",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "CO",
+          "filter": "StateRgstn/Rgltr/@Cd=CO",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2023-08-15"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=CO",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-04-22",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2026-04-22"
+          },
+          "secFileNumber": "801-135680"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED Colorado StateRgstn and FILED Colorado NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "140285",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "CO",
+          "filter": "StateRgstn/Rgltr/@Cd=CO",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2006-07-10"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=CO",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-04-27",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2026-04-27"
+          },
+          "secFileNumber": "801-135990"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED Colorado StateRgstn and FILED Colorado NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "323530",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "CO",
+          "filter": "StateRgstn/Rgltr/@Cd=CO",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2022-12-12"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=CO",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-02-23",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2026-02-23"
+          },
+          "secFileNumber": "801-135454"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED Colorado StateRgstn and FILED Colorado NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "340871",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "CO",
+          "filter": "StateRgstn/Rgltr/@Cd=CO",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2026-07-29"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=CO",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-03-27",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED-120",
+            "Dt": "2026-03-27"
+          },
+          "secFileNumber": "801-135684"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED Colorado StateRgstn and FILED Colorado NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      }
+    ]
   },
-  "invariants": {
-    "state_ria_ne_sec_ria": true,
-    "state_ria_ne_federal_notice": true,
-    "ria_ne_era": true,
-    "principal_office_ne_state_registration": true,
-    "principal_office_589_ne_state_ria_denominator": true,
-    "registration_rows_ne_distinct_crd": true
+  "semanticGrainRules": {
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_SEC_RIA": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_NOTICE_FILING": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_STATE_ERA": true,
+    "PRINCIPAL_OFFICE_IS_NOT_REGISTRATION": true,
+    "REGISTRATION_ROW_IS_DISTINCT_GRAIN_FROM_DISTINCT_FIRM_CRD": true,
+    "note": "These are contract/credential rules. They do not assert that CRD sets are disjoint or that counts are numerically unequal."
+  },
+  "computedDiagnostics": {
+    "state_ia_registration_rows": 741,
+    "state_ia_distinct_crd": 741,
+    "state_ia_approved_distinct_crd": 740,
+    "state_ia_termrequest_distinct_crd": 1,
+    "state_era_registration_rows": 209,
+    "state_era_distinct_crd": 209,
+    "state_ia_and_state_era_overlap_distinct_crd": 0,
+    "state_ia_approved_and_notice_filed_overlap_distinct_crd": 6,
+    "notice_filed_distinct_crd": 3673,
+    "notice_filed_firm_type": {
+      "Registered": 3673,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          3673
+        ]
+      ]
+    },
+    "registration_rows_equal_distinct_crd": true
   }
 }

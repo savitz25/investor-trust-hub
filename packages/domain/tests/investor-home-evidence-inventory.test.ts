@@ -139,7 +139,8 @@ describe('INV-HOME-003 public evidence inventory', () => {
     expect(get('co_state_roster').value).toBe(740);
     expect(get('co_state_roster').valueState).toBe('KNOWN');
     expect(get('co_overlay').value).toBe(589);
-    expect(get('co_overlay').value).not.toBe(get('co_state_roster').value);
+    expect(get('co_overlay').grain).toMatch(/principal office/i);
+    expect(get('co_state_roster').grain).toMatch(/jurisdiction CO/i);
     expect(get('co_notice_filed').value).toBe(3673);
   });
 

@@ -137,12 +137,6 @@ export function assertGrainSafety(input: InvestorNetworkMetricsInput): void {
   if (input.coPrincipalOfficeFirms === input.rosterFirms) {
     throw new Error('CO principal-office overlay must not equal the national roster');
   }
-  if (input.coPrincipalOfficeFirms === input.coStateRiaApproved) {
-    throw new Error('CO principal-office overlay must not equal the state-RIA count');
-  }
-  if (input.coStateRiaApproved === input.coNoticeFiled) {
-    throw new Error('CO state RIA must not equal federal notice filing');
-  }
 }
 
 export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput): InvestorNetworkMetricsV1 {

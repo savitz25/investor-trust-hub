@@ -5,7 +5,7 @@ export { CO_PUBLIC_SNAPSHOT, type CoPublicSnapshot };
 
 export const CO_PUBLIC_ROUTE = '/colorado' as const;
 export const CO_PUBLIC_FINGERPRINT =
-  '0fe4fa514faf7446038a52f9c76d55fa8da7c42963c506412297be9e049f7539';
+  '0da0aa6fad8ee73fd141783b08a716c44e8bba42fd0ea43525ff66d53286132d';
 
 export function coPrincipalOfficeCountFromNationalRoster(): number {
   const row = V1_ROSTER_PRINCIPAL_OFFICE_STATES.find((cell) => cell.region === 'CO');
@@ -59,21 +59,22 @@ export function assertColoradoPublicIntel(
   if (typeof value.stateRia.registrationRows !== 'number' || typeof value.stateRia.distinctFirmCrd !== 'number') {
     throw new Error('Registration rows and distinct CRD must remain separate numeric fields');
   }
-  const overlay = Number(value.nationalOverlay.coPrincipalOfficeSecIardFirms);
-  const stateRia = Number(value.stateRia.completeStateRiaCount);
-  const notice = Number(value.federalNotice.noticeFiledDistinctCrd);
-  const stateEra = Number(value.stateEra.activeDistinctCrd);
-  if (stateRia === overlay) {
-    throw new Error('State RIA must not equal principal-office overlay');
+  if (!value.stateRia.filter.includes('StateRgstn/Rgltr/@Cd=CO')) {
+    throw new Error('State RIA filter must use StateRgstn/Rgltr/@Cd=CO');
   }
-  if (stateRia === notice) {
-    throw new Error('State RIA must not equal federal notice filing');
+  if (!value.federalNotice.filter.includes('NoticeFiled/States/@RgltrCd=CO')) {
+    throw new Error('Federal notice filter must use NoticeFiled/States/@RgltrCd=CO');
   }
-  if (notice === overlay) {
-    throw new Error('Notice filing must not equal principal-office overlay');
+  if (!value.stateEra.filter.includes('ERA/Rgltr/@Cd=CO')) {
+    throw new Error('State ERA filter must use ERA/Rgltr/@Cd=CO');
   }
-  if (stateRia === stateEra) {
-    throw new Error('State RIA must not collapse into ERA');
+  if (!value.nationalOverlay.grain.includes('principal-office')) {
+    throw new Error('National overlay grain must remain principal-office geography');
+  }
+  if (value.federalNotice.overlapApprovedStateIaJoinMethod !== undefined) {
+    if (!String(value.federalNotice.overlapApprovedStateIaJoinMethod).includes('exact firm CRD')) {
+      throw new Error('State-IA / notice overlap must be exact-CRD intersection');
+    }
   }
   if (value.stateEra.overlapWithStateIa !== 0) {
     throw new Error('State IA and state ERA overlap must remain zero in this extract');
@@ -95,6 +96,12 @@ export function assertColoradoPublicIntel(
   }
   if (value.expansionLedger.NET_NEW_PUBLIC_INVESTOR_PROFILES !== 0) {
     throw new Error('Do not mint public investor profiles in CO-INV-001');
+  }
+  if (value.expansionLedger.NEW_FEDERAL_NOTICE_FILING_ROWS !== 3673) {
+    throw new Error('Colorado notice-filing rows must remain a separate ledger field');
+  }
+  if (value.expansionLedger.TOTAL_NEW_COLORADO_REGULATORY_OBSERVATION_ROWS !== 4623) {
+    throw new Error('Colorado regulatory observation-row aggregate drifted');
   }
   if (value.expansionLedger.EXACT_ADVERSE_PROFILE_ATTACHMENTS !== 0) {
     throw new Error('No exact adverse attachments were accepted');

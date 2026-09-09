@@ -1,5 +1,5 @@
-import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
+import { fingerprintSemanticSnapshot } from '../src/co-canonical-json';
 import {
   CO_PUBLIC_FINGERPRINT,
   CO_PUBLIC_ROUTE,
@@ -22,11 +22,11 @@ describe('CO public snapshot', () => {
     expect(snap.stateRia.registrationRows).toBe(741);
     expect(snap.stateRia.distinctFirmCrd).toBe(741);
     expect(snap.federalNotice.noticeFiledDistinctCrd).toBe(3673);
-    expect(snap.stateRia.completeStateRiaCount).not.toBe(snap.nationalOverlay.coPrincipalOfficeSecIardFirms);
-    expect(snap.stateRia.completeStateRiaCount).not.toBe(snap.federalNotice.noticeFiledDistinctCrd);
-    expect(snap.federalNotice.noticeFiledDistinctCrd).not.toBe(snap.nationalOverlay.coPrincipalOfficeSecIardFirms);
-    expect(snap.stateRia.filter).toMatch(/jurisdiction/i);
-    expect(snap.stateRia.filter).toMatch(/Not MainAddr/i);
+    expect(snap.stateRia.filter).toContain('StateRgstn/Rgltr/@Cd=CO');
+    expect(snap.federalNotice.filter).toContain('NoticeFiled/States/@RgltrCd=CO');
+    expect(snap.stateEra.filter).toContain('ERA/Rgltr/@Cd=CO');
+    expect(snap.nationalOverlay.grain).toMatch(/principal-office/i);
+    expect(snap.semanticGrainRules.STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_NOTICE_FILING).toBe(true);
     expect(snap.nationalOverlay.caveat.toLowerCase()).toContain('not the colorado state-registered');
     expect(snap.stateRia.caveat.toLowerCase()).toContain('not an sec ria');
   });
@@ -38,9 +38,7 @@ describe('CO public snapshot', () => {
     expect(CO_PUBLIC_SNAPSHOT.riaEra.caveat).toMatch(/ERA is not an RIA/);
     expect(CO_PUBLIC_SNAPSHOT.stateEra.activeDistinctCrd).toBe(209);
     expect(CO_PUBLIC_SNAPSHOT.stateEra.overlapWithStateIa).toBe(0);
-    expect(CO_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd).not.toBe(
-      CO_PUBLIC_SNAPSHOT.stateEra.activeDistinctCrd,
-    );
+    expect(CO_PUBLIC_SNAPSHOT.stateEra.filter).not.toBe(CO_PUBLIC_SNAPSHOT.stateRia.filter);
   });
 
   it('does not treat the 589 overlay or state identities as entity growth', () => {
@@ -50,6 +48,8 @@ describe('CO public snapshot', () => {
     expect(CO_PUBLIC_SNAPSHOT.expansionLedger.EXISTING_ORGANIZATIONS_ENRICHED).toBe(0);
     expect(CO_PUBLIC_SNAPSHOT.expansionLedger.NEW_STATE_IDENTITIES).toBe(950);
     expect(CO_PUBLIC_SNAPSHOT.expansionLedger.NEW_STATE_REGISTRATION_ROWS).toBe(950);
+    expect(CO_PUBLIC_SNAPSHOT.expansionLedger.NEW_FEDERAL_NOTICE_FILING_ROWS).toBe(3673);
+    expect(CO_PUBLIC_SNAPSHOT.expansionLedger.TOTAL_NEW_COLORADO_REGULATORY_OBSERVATION_ROWS).toBe(4623);
     expect(CO_PUBLIC_SNAPSHOT.expansionLedger.NEW_ENFORCEMENT_EVIDENCE_ROWS).toBe(10);
     expect(CO_PUBLIC_SNAPSHOT.expansionLedger.EXACT_ADVERSE_PROFILE_ATTACHMENTS).toBe(0);
     expect(CO_PUBLIC_SNAPSHOT.expansionLedger.REVIEW_REQUIRED_JOINS).toBe(0);
@@ -81,12 +81,43 @@ describe('CO public snapshot', () => {
     expect(CO_PUBLIC_SNAPSHOT.stateRia.sourceAsOf).toBe('2026-08-27');
     expect(CO_PUBLIC_SNAPSHOT.enforcement.retrievedAt).toBe('2026-09-09');
     expect(CO_PUBLIC_SNAPSHOT.enforcement.sourceAsOf).toBeNull();
-    const { fingerprint: _fp, ...rest } = CO_PUBLIC_SNAPSHOT;
-    const hashed = createHash('sha256')
-      .update(JSON.stringify(rest, Object.keys(rest).sort()))
-      .digest('hex');
-    expect(hashed).toBe(CO_PUBLIC_FINGERPRINT);
     expect(JSON.stringify(CO_PUBLIC_SNAPSHOT)).not.toMatch(/2026-09-09T/);
+  });
+
+  it('computes the six-CRD state-IA / notice overlap by exact CRD intersection', () => {
+    expect(CO_PUBLIC_SNAPSHOT.federalNotice.overlapApprovedStateIa).toBe(6);
+    expect(CO_PUBLIC_SNAPSHOT.federalNotice.overlapApprovedStateIaJoinMethod).toMatch(/exact firm CRD/);
+    expect(CO_PUBLIC_SNAPSHOT.federalNotice.overlapApprovedStateIaCrds).toHaveLength(6);
+    expect(new Set(CO_PUBLIC_SNAPSHOT.federalNotice.overlapApprovedStateIaCrds).size).toBe(6);
+    expect(CO_PUBLIC_SNAPSHOT.federalNotice.caveat).toMatch(/not perfectly disjoint/i);
+    expect(CO_PUBLIC_SNAPSHOT.federalNotice.filedFirmType.Registered).toBe(3673);
+    expect(CO_PUBLIC_SNAPSHOT.federalNotice.filedFirmType.ERA).toBe(0);
+    expect(CO_PUBLIC_SNAPSHOT.federalNotice.filedFirmType.other).toBe(0);
+    expect(CO_PUBLIC_SNAPSHOT.federalNotice.filedFirmType.blank).toBe(0);
+  });
+
+  it('uses a recursive semantic fingerprint that reacts to nested mutations', () => {
+    const clone = structuredClone(CO_PUBLIC_SNAPSHOT) as Record<string, unknown>;
+    const once = fingerprintSemanticSnapshot(clone);
+    const twice = fingerprintSemanticSnapshot(structuredClone(CO_PUBLIC_SNAPSHOT) as Record<string, unknown>);
+    expect(once).toBe(CO_PUBLIC_FINGERPRINT);
+    expect(twice).toBe(once);
+
+    const withExtraFingerprint = structuredClone(CO_PUBLIC_SNAPSHOT) as Record<string, unknown>;
+    withExtraFingerprint.fingerprint = '0'.repeat(64);
+    expect(fingerprintSemanticSnapshot(withExtraFingerprint)).toBe(once);
+
+    const stateMut = structuredClone(CO_PUBLIC_SNAPSHOT) as typeof CO_PUBLIC_SNAPSHOT;
+    (stateMut.stateRia as { approvedDistinctCrd: number }).approvedDistinctCrd += 1;
+    expect(fingerprintSemanticSnapshot(stateMut as unknown as Record<string, unknown>)).not.toBe(once);
+
+    const noticeMut = structuredClone(CO_PUBLIC_SNAPSHOT) as typeof CO_PUBLIC_SNAPSHOT;
+    (noticeMut.federalNotice as { noticeFiledDistinctCrd: number }).noticeFiledDistinctCrd += 1;
+    expect(fingerprintSemanticSnapshot(noticeMut as unknown as Record<string, unknown>)).not.toBe(once);
+
+    const enfMut = structuredClone(CO_PUBLIC_SNAPSHOT) as typeof CO_PUBLIC_SNAPSHOT;
+    (enfMut.enforcement as { rowsNameOnly: number }).rowsNameOnly += 1;
+    expect(fingerprintSemanticSnapshot(enfMut as unknown as Record<string, unknown>)).not.toBe(once);
   });
 
   it('does not invent a combined Colorado adviser denominator', () => {
@@ -95,5 +126,8 @@ describe('CO public snapshot', () => {
     expect(CO_PUBLIC_SNAPSHOT.iar.coloradoPersonDirectory).toBe('NOT_PUBLISHED');
     expect(CO_PUBLIC_SNAPSHOT.brokerDealer.CO_BD_BULK_ROSTER).toBe('SOURCE_NOT_ACQUIRED');
     expect(CO_PUBLIC_SNAPSHOT.complaints.completeComplaintCount).toBe('UNKNOWN');
+    expect(CO_PUBLIC_SNAPSHOT.nationalOverlay.universe).toBe(23622);
+    expect(CO_PUBLIC_SNAPSHOT.expansionLedger.NEW_FEDERAL_NOTICE_FILING_ROWS).toBe(3673);
+    expect(CO_PUBLIC_SNAPSHOT.expansionLedger.NET_NEW_CANONICAL_ORGANIZATIONS).toBe(0);
   });
 });

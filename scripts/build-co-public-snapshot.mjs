@@ -7,6 +7,7 @@ import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { canonicalJson } from './co-canonical-json.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const census = JSON.parse(
@@ -34,17 +35,11 @@ const NOTICE_ROWS = census.sec.co_notice_rows;
 const SANCTIONS_ENTRIES = enforcement.sanctionsAgainstLicensees.datedNarrativeEntries;
 const SANCTIONS_NAME_ONLY = enforcement.sanctionsAgainstLicensees.entriesNameOnly;
 
-if (CO_PRINCIPAL_OFFICE === STATE_IA_APPROVED) {
-  throw new Error('principal-office overlay must not equal state-RIA approved count');
+if (census.state.filter.includes('MainAddr/@State=CO') && !/Not MainAddr|not address/i.test(census.state.filter)) {
+  throw new Error('Colorado state IA must be selected by registration jurisdiction, not address');
 }
-if (STATE_IA_APPROVED === NOTICE_FILED) {
-  throw new Error('state RIA must not equal federal notice filing');
-}
-if (STATE_IA_APPROVED === STATE_ERA_ACTIVE) {
-  throw new Error('state RIA must not equal state ERA');
-}
-if (STATE_IA_ROWS !== STATE_IA_CRD) {
-  // Equal is allowed; fields must still remain separate in the snapshot.
+if (!String(census.state.filter).includes('Rgltr/@Cd=CO')) {
+  throw new Error('Colorado state IA filter must use Rgltr/@Cd=CO');
 }
 
 const snapshot = {
@@ -147,10 +142,15 @@ const snapshot = {
     retrievedAt: '2026-08-28',
     snapshotAsOf: '2026-08-27',
     overlapApprovedStateIa: census.overlaps.state_ia_approved_and_notice_filed,
+    overlapApprovedStateIaJoinMethod: census.overlaps.state_ia_approved_and_notice_filed_joinMethod,
+    overlapApprovedStateIaCrds: census.overlaps.state_ia_approved_and_notice_filed_crds,
+    overlapApprovedStateIaReading:
+      'The credential classes are separate but the source populations are not perfectly disjoint; six firm CRDs appear in both source-defined sets in the 2026-08-27 compilations. Exact-CRD inspection shows each CRD is APPROVED in StateRgstn/Rgltr/@Cd=CO and FILED in NoticeFiled/States/@RgltrCd=CO with FirmType=Registered. Several SEC Rgstn dates are 2026 while the corresponding state APPROVED dates are earlier, which is consistent with coexisting official records and possible transition or status lag. Neither classification was discarded.',
     overlapPrincipalOfficeRawMainAddr: census.sec.principal_and_notice_filed,
+    filedFirmType: census.sec.co_notice_filed_firm_type,
     label: 'SEC/IARD firms with a Colorado notice filing',
     caveat:
-      'Federal-covered / notice-filed is not Colorado state-RIA licensure. Notice-filed is not the 589 principal-office overlay. A Colorado principal office does not prove a current notice filing.',
+      'Federal-covered / notice-filed is not Colorado state-RIA licensure. Notice-filed is not the 589 principal-office overlay. A Colorado principal office does not prove a current notice filing. The credential classes are separate but the source populations are not perfectly disjoint; six firm CRDs appear in both source-defined sets in the 2026-08-27 compilations.',
   },
   iar: {
     IA_INDVL_FEED: 'ACQUIRED_NATIONAL_FEED',
@@ -340,6 +340,14 @@ const snapshot = {
     REVIEW_REQUIRED: 'name + city, DBA, name variants, address-only',
     UNSAFE: 'name alone — not used for adverse profile attachment',
   },
+  semanticGrainRules: {
+    STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_SEC_RIA: true,
+    STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_NOTICE_FILING: true,
+    STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_STATE_ERA: true,
+    PRINCIPAL_OFFICE_IS_NOT_REGISTRATION: true,
+    REGISTRATION_ROW_IS_DISTINCT_GRAIN_FROM_DISTINCT_FIRM_CRD: true,
+    note: 'Credential/grain rules. They do not require disjoint CRD sets or unequal counts.',
+  },
   profileAttachments: [],
   expansionLedger: {
     PRE_INGEST_COLORADO_PRINCIPAL_OFFICE_FIRMS: CO_PRINCIPAL_OFFICE,
@@ -348,6 +356,8 @@ const snapshot = {
     NEW_STATE_IDENTITIES: STATE_IA_CRD + STATE_ERA_CRD,
     EXISTING_ORGANIZATIONS_ENRICHED: 0,
     NEW_STATE_REGISTRATION_ROWS: STATE_IA_ROWS + STATE_ERA_ROWS,
+    NEW_FEDERAL_NOTICE_FILING_ROWS: NOTICE_FILED,
+    TOTAL_NEW_COLORADO_REGULATORY_OBSERVATION_ROWS: STATE_IA_ROWS + STATE_ERA_ROWS + NOTICE_FILED,
     NEW_ENFORCEMENT_EVIDENCE_ROWS: SANCTIONS_ENTRIES,
     EXACT_ADVERSE_PROFILE_ATTACHMENTS: 0,
     REVIEW_REQUIRED_JOINS: 0,
@@ -357,7 +367,8 @@ const snapshot = {
         '589 Colorado principal-office firms already existed on the federal SEC/IARD spine. Not new organizations.',
       stateRoster:
         'IAPD state compilation added 741 distinct Colorado state-IA CRDs and 209 distinct Colorado state-ERA CRDs as state-intelligence identities. They were not minted as canonical organizations or public /firm profiles. Exact CRD enrichment did not create duplicate canonical organizations.',
-      notice: '3,673 Colorado notice-filed SEC/IARD firms are a federal-covered layer, not state-RIA identities.',
+      notice:
+        'NEW_FEDERAL_NOTICE_FILING_ROWS = 3,673 is a notice-filing observation count, not extra firms, not extra canonical organizations, and not a Colorado adviser denominator. TOTAL_NEW_COLORADO_REGULATORY_OBSERVATION_ROWS = 4,623 is 950 state IA/ERA rows + 3,673 notice-filing rows. Observation rows are not unique CRDs, firms, or advisers.',
       enforcement:
         '10 sanctions narrative entries were profiled. All 10 are name-only in static HTML and were rejected as unsafe adverse joins. Zero exact attachments.',
     },
@@ -533,8 +544,7 @@ const snapshot = {
   ],
 };
 
-const canonical = JSON.stringify(snapshot, Object.keys(snapshot).sort());
-snapshot.fingerprint = createHash('sha256').update(canonical).digest('hex');
+snapshot.fingerprint = createHash('sha256').update(canonicalJson(snapshot)).digest('hex');
 
 const ts = `/** Generated by scripts/build-co-public-snapshot.mjs. Do not edit by hand. */\nexport const CO_PUBLIC_SNAPSHOT = ${JSON.stringify(snapshot, null, 2)} as const;\nexport type CoPublicSnapshot = typeof CO_PUBLIC_SNAPSHOT;\n`;
 writeFileSync(join(root, 'packages/domain/src/co-public-snapshot.ts'), ts, 'utf8');

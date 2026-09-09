@@ -48,9 +48,9 @@ describe('CO-INV-001 Colorado publication', () => {
     expect(coPrincipalOfficeCountFromNationalRoster()).toBe(589);
     expect(CO_PUBLIC_SNAPSHOT.nationalOverlay.coPrincipalOfficeSecIardFirms).toBe(589);
     expect(CO_PUBLIC_SNAPSHOT.stateRia.completeStateRiaCount).toBe(740);
-    expect(CO_PUBLIC_SNAPSHOT.stateRia.completeStateRiaCount).not.toBe(589);
     expect(CO_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd).toBe(3673);
-    expect(CO_PUBLIC_SNAPSHOT.stateRia.filter).toMatch(/jurisdiction/i);
+    expect(CO_PUBLIC_SNAPSHOT.stateRia.filter).toContain('StateRgstn/Rgltr/@Cd=CO');
+    expect(CO_PUBLIC_SNAPSHOT.nationalOverlay.grain).toMatch(/principal-office/i);
     expect(CO_PUBLIC_SNAPSHOT.nationalOverlay.universe).toBe(23622);
   });
 

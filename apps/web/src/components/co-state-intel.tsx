@@ -223,8 +223,9 @@ export function ColoradoStateIntelligence() {
                 notice filing
               </h3>
               <p>
-                Notice-filed is not Colorado state licensure. Overlap with approved state IA is{' '}
-                {snap.federalNotice.overlapApprovedStateIa} firms.
+                Notice-filed is not Colorado state licensure. The credential classes are separate but the source
+                populations are not perfectly disjoint; {snap.federalNotice.overlapApprovedStateIa} firm CRDs appear in
+                both source-defined sets in the 2026-08-27 compilations.
               </p>
             </article>
             <article className="ith-finding">
@@ -246,7 +247,8 @@ export function ColoradoStateIntelligence() {
                 net-new public profiles {snap.expansionLedger.NET_NEW_PUBLIC_INVESTOR_PROFILES}; new state identities{' '}
                 {snap.expansionLedger.NEW_STATE_IDENTITIES}; existing organizations enriched{' '}
                 {snap.expansionLedger.EXISTING_ORGANIZATIONS_ENRICHED}; state registration rows{' '}
-                {snap.expansionLedger.NEW_STATE_REGISTRATION_ROWS}; exact adverse attachments{' '}
+                {snap.expansionLedger.NEW_STATE_REGISTRATION_ROWS}; federal notice-filing rows{' '}
+                {snap.expansionLedger.NEW_FEDERAL_NOTICE_FILING_ROWS}; exact adverse attachments{' '}
                 {snap.expansionLedger.EXACT_ADVERSE_PROFILE_ATTACHMENTS}; rejected unsafe joins{' '}
                 {snap.expansionLedger.REJECTED_UNSAFE_JOINS}. Federal overlay is not entity growth.
               </p>

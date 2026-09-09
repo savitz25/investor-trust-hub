@@ -107,9 +107,9 @@ def parse_state(path: Path) -> dict:
                 "main_state": main_st,
             }
             if crd and co_ia:
-                state_ia[crd] = {**rec, "regs": co_ia}
+                state_ia[crd] = {**rec, "regs": co_ia, "jurisdiction": "CO"}
             if crd and co_era:
-                state_era[crd] = {**rec, "regs": co_era}
+                state_era[crd] = {**rec, "regs": co_era, "jurisdiction": "CO"}
             if crd and main_st == "CO" and not co_ia and not co_era:
                 address_co_without_co_jurisdiction += 1
             elem.clear()
@@ -152,6 +152,7 @@ def parse_state(path: Path) -> dict:
         "_ia_current": sorted(current_ia),
         "_era_crds": sorted(state_era),
         "_era_active": sorted(era_active),
+        "_ia_recs": state_ia,
     }
 
 
@@ -198,6 +199,10 @@ def parse_sec(path: Path) -> dict:
                 "crd": crd,
                 "firm_type": firm_type,
                 "main_state": main_st,
+                "bus": (info.attrib.get("BusNm") if info is not None else None) or "",
+                "legal": (info.attrib.get("LegalNm") if info is not None else None) or "",
+                "sec": info.attrib.get("SECNb") if info is not None else None,
+                "rgstn": dict(rgstn.attrib) if rgstn is not None else {},
             }
             if crd and main_st == "CO":
                 principal[crd] = rec
@@ -207,6 +212,7 @@ def parse_sec(path: Path) -> dict:
                 notice[crd] = {**rec, **co_notice}
             elem.clear()
     filed = {c: r for c, r in notice.items() if r.get("status") == "FILED"}
+    filed_types = Counter((r.get("firm_type") or "").strip() or "(blank)" for r in filed.values())
     return {
         "filename": path.name,
         "authority": "SEC / IAPD",
@@ -223,6 +229,13 @@ def parse_sec(path: Path) -> dict:
         "co_notice_any_status_distinct_crd": len(notice),
         "co_notice_filed_distinct_crd": len(filed),
         "co_notice_era_any_status": notice_era,
+        "co_notice_filed_firm_type": {
+            "Registered": filed_types.get("Registered", 0),
+            "ERA": filed_types.get("ERA", 0),
+            "other": sum(n for k, n in filed_types.items() if k not in {"Registered", "ERA", "(blank)"}),
+            "blank": filed_types.get("(blank)", 0),
+            "raw": filed_types.most_common(),
+        },
         "notice_status": notice_status.most_common(),
         "co_principal_office_distinct_crd": len(principal),
         "principal_and_notice_filed": len(set(filed) & set(principal)),
@@ -234,6 +247,7 @@ def parse_sec(path: Path) -> dict:
         "_sec_crds": None,
         "_principal_set": set(principal),
         "_filed_set": set(filed),
+        "_filed_recs": filed,
         "_all_sec": set(principal) | set(notice),
     }
 
@@ -260,6 +274,36 @@ def main() -> None:
     notice_filed = set(sec["_filed_set"])
     notice_all = set(sec["_notice_all"])
 
+    overlap_approved_notice_crds = sorted(ia_approved & notice_filed)
+    ia_recs = state["_ia_recs"]
+    filed_recs = sec["_filed_recs"]
+    overlap_records = []
+    for crd in overlap_approved_notice_crds:
+        state_rec = ia_recs[crd]
+        sec_rec = filed_recs[crd]
+        co_regs = [r for r in state_rec["regs"] if True]
+        overlap_records.append(
+            {
+                "crd": crd,
+                "joinMethod": "exact firm CRD set intersection",
+                "stateCompilation": {
+                    "jurisdiction": "CO",
+                    "filter": "StateRgstn/Rgltr/@Cd=CO",
+                    "statuses": [r["status"] for r in co_regs],
+                    "dates": [r.get("dt") for r in co_regs],
+                },
+                "secCompilation": {
+                    "filter": "NoticeFiled/States/@RgltrCd=CO",
+                    "firmType": sec_rec.get("firm_type") or None,
+                    "noticeStatus": sec_rec.get("status"),
+                    "noticeDate": sec_rec.get("dt"),
+                    "rgstn": sec_rec.get("rgstn") or {},
+                    "secFileNumber": sec_rec.get("sec"),
+                },
+                "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED Colorado StateRgstn and FILED Colorado NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint.",
+            }
+        )
+
     overlaps = {
         "state_ia_and_principal_office": len(ia & principal),
         "state_ia_approved_and_principal_office": len(ia_approved & principal),
@@ -270,6 +314,9 @@ def main() -> None:
         "state_ia_and_state_era": len(ia & era),
         "notice_filed_and_principal_office": len(notice_filed & principal),
         "approved_state_ia_not_in_sec_principal_or_notice": len(ia_approved - principal - notice_all),
+        "state_ia_approved_and_notice_filed_crds": overlap_approved_notice_crds,
+        "state_ia_approved_and_notice_filed_joinMethod": "exact firm CRD set intersection of APPROVED StateRgstn/Rgltr/@Cd=CO and NoticeFiled/States/@RgltrCd=CO St=FILED",
+        "state_ia_approved_and_notice_filed_records": overlap_records,
     }
 
     public = {
@@ -279,16 +326,27 @@ def main() -> None:
         "state": {k: v for k, v in state.items() if not str(k).startswith("_")},
         "sec": {k: v for k, v in sec.items() if not str(k).startswith("_")},
         "overlaps": overlaps,
-        "invariants": {
-            "state_ria_ne_sec_ria": True,
-            "state_ria_ne_federal_notice": True,
-            "ria_ne_era": True,
-            "principal_office_ne_state_registration": True,
-            "principal_office_589_ne_state_ria_denominator": True,
-            "registration_rows_ne_distinct_crd": state["co_state_ia_registration_rows"]
-            != state["co_state_ia_distinct_crd"]
-            or state["co_state_era_registration_rows"] != state["co_state_era_distinct_crd"]
-            or True,
+        "semanticGrainRules": {
+            "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_SEC_RIA": True,
+            "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_NOTICE_FILING": True,
+            "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_STATE_ERA": True,
+            "PRINCIPAL_OFFICE_IS_NOT_REGISTRATION": True,
+            "REGISTRATION_ROW_IS_DISTINCT_GRAIN_FROM_DISTINCT_FIRM_CRD": True,
+            "note": "These are contract/credential rules. They do not assert that CRD sets are disjoint or that counts are numerically unequal.",
+        },
+        "computedDiagnostics": {
+            "state_ia_registration_rows": state["co_state_ia_registration_rows"],
+            "state_ia_distinct_crd": state["co_state_ia_distinct_crd"],
+            "state_ia_approved_distinct_crd": state["co_state_ia_approved_distinct_crd"],
+            "state_ia_termrequest_distinct_crd": state["co_state_ia_termrequest_distinct_crd"],
+            "state_era_registration_rows": state["co_state_era_registration_rows"],
+            "state_era_distinct_crd": state["co_state_era_distinct_crd"],
+            "state_ia_and_state_era_overlap_distinct_crd": len(ia & era),
+            "state_ia_approved_and_notice_filed_overlap_distinct_crd": len(ia_approved & notice_filed),
+            "notice_filed_distinct_crd": len(notice_filed),
+            "notice_filed_firm_type": sec["co_notice_filed_firm_type"],
+            "registration_rows_equal_distinct_crd": state["co_state_ia_registration_rows"]
+            == state["co_state_ia_distinct_crd"],
         },
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
