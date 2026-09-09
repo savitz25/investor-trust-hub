@@ -145,7 +145,7 @@ const snapshot = {
     overlapApprovedStateIaJoinMethod: census.overlaps.state_ia_approved_and_notice_filed_joinMethod,
     overlapApprovedStateIaCrds: census.overlaps.state_ia_approved_and_notice_filed_crds,
     overlapApprovedStateIaReading:
-      'The credential classes are separate but the source populations are not perfectly disjoint; six firm CRDs appear in both source-defined sets in the 2026-08-27 compilations. Exact-CRD inspection shows each CRD is APPROVED in StateRgstn/Rgltr/@Cd=CO and FILED in NoticeFiled/States/@RgltrCd=CO with FirmType=Registered. Several SEC Rgstn dates are 2026 while the corresponding state APPROVED dates are earlier, which is consistent with coexisting official records and possible transition or status lag. Neither classification was discarded.',
+      'The credential classes are separate but the source populations are not perfectly disjoint; six firm CRDs appear in both source-defined sets in the 2026-08-27 compilations. Exact-CRD inspection shows each CRD is APPROVED in StateRgstn/Rgltr/@Cd=CO and FILED in NoticeFiled/States/@RgltrCd=CO with FirmType=Registered. The source dates differ across the two official compilations, consistent with possible registration-transition or compilation-timing effects; the source evidence does not establish a single causal explanation. Neither classification was discarded.',
     overlapPrincipalOfficeRawMainAddr: census.sec.principal_and_notice_filed,
     filedFirmType: census.sec.co_notice_filed_firm_type,
     label: 'SEC/IARD firms with a Colorado notice filing',

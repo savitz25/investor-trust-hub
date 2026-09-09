@@ -103,7 +103,7 @@ export const CO_PUBLIC_SNAPSHOT = {
       "323530",
       "340871"
     ],
-    "overlapApprovedStateIaReading": "The credential classes are separate but the source populations are not perfectly disjoint; six firm CRDs appear in both source-defined sets in the 2026-08-27 compilations. Exact-CRD inspection shows each CRD is APPROVED in StateRgstn/Rgltr/@Cd=CO and FILED in NoticeFiled/States/@RgltrCd=CO with FirmType=Registered. Several SEC Rgstn dates are 2026 while the corresponding state APPROVED dates are earlier, which is consistent with coexisting official records and possible transition or status lag. Neither classification was discarded.",
+    "overlapApprovedStateIaReading": "The credential classes are separate but the source populations are not perfectly disjoint; six firm CRDs appear in both source-defined sets in the 2026-08-27 compilations. Exact-CRD inspection shows each CRD is APPROVED in StateRgstn/Rgltr/@Cd=CO and FILED in NoticeFiled/States/@RgltrCd=CO with FirmType=Registered. The source dates differ across the two official compilations, consistent with possible registration-transition or compilation-timing effects; the source evidence does not establish a single causal explanation. Neither classification was discarded.",
     "overlapPrincipalOfficeRawMainAddr": 354,
     "filedFirmType": {
       "Registered": 3673,
@@ -503,6 +503,6 @@ export const CO_PUBLIC_SNAPSHOT = {
     "NO TRUST SCORE",
     "NO PAID RANKING"
   ],
-  "fingerprint": "0da0aa6fad8ee73fd141783b08a716c44e8bba42fd0ea43525ff66d53286132d"
+  "fingerprint": "b4a5808d2758bc5fd41e747156f6cbf9ca4cb3a263c6a2def4ae6897fff220e5"
 } as const;
 export type CoPublicSnapshot = typeof CO_PUBLIC_SNAPSHOT;

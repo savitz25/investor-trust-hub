@@ -5,7 +5,7 @@ export { CO_PUBLIC_SNAPSHOT, type CoPublicSnapshot };
 
 export const CO_PUBLIC_ROUTE = '/colorado' as const;
 export const CO_PUBLIC_FINGERPRINT =
-  '0da0aa6fad8ee73fd141783b08a716c44e8bba42fd0ea43525ff66d53286132d';
+  'b4a5808d2758bc5fd41e747156f6cbf9ca4cb3a263c6a2def4ae6897fff220e5';
 
 export function coPrincipalOfficeCountFromNationalRoster(): number {
   const row = V1_ROSTER_PRINCIPAL_OFFICE_STATES.find((cell) => cell.region === 'CO');
