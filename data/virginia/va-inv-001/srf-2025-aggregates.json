@@ -1,0 +1,245 @@
+{
+  "year": 2025,
+  "source": "SCC Division of Securities and Retail Franchising Annual Report for 2025",
+  "source_url": "https://www.scc.virginia.gov/media/sccvirginiagov-home/about-the-scc/annual-reports/2025srf.pdf",
+  "grain": "2025_activity_process_count",
+  "not_current_registrant_universe": true,
+  "items": [
+    {
+      "section": "VIRGINIA_SECURITIES_ACT",
+      "count": 121,
+      "label": "investment company notice filings originals and renewals denied, withdrawn, or terminated"
+    },
+    {
+      "section": "VIRGINIA_SECURITIES_ACT",
+      "count": 3,
+      "label": "securities registrations denied, withdrawn, or terminated"
+    },
+    {
+      "section": "VIRGINIA_SECURITIES_ACT",
+      "count": 37,
+      "label": "securities registrations approved"
+    },
+    {
+      "section": "VIRGINIA_SECURITIES_ACT",
+      "count": 2800,
+      "label": "investment company notice filings originals and renewals accepted"
+    },
+    {
+      "section": "VIRGINIA_SECURITIES_ACT",
+      "count": 5721,
+      "label": "exemptions from registration approved"
+    },
+    {
+      "section": "VIRGINIA_SECURITIES_ACT",
+      "count": 5669,
+      "label": "exemption notice filings for federal-covered securities accepted"
+    },
+    {
+      "section": "VIRGINIA_SECURITIES_ACT",
+      "count": 1859,
+      "label": "broker-dealer registrations and renewals approved"
+    },
+    {
+      "section": "VIRGINIA_SECURITIES_ACT",
+      "count": 119,
+      "label": "broker-dealer registrations and renewals denied, withdrawn, or terminated"
+    },
+    {
+      "section": "VIRGINIA_SECURITIES_ACT",
+      "count": 51,
+      "label": "broker-dealer audits completed"
+    },
+    {
+      "section": "VIRGINIA_SECURITIES_ACT",
+      "count": 308131,
+      "label": "broker-dealer agent registrations and renewals approved"
+    },
+    {
+      "section": "VIRGINIA_SECURITIES_ACT",
+      "count": 40221,
+      "label": "broker-dealer agent registrations and renewals denied, withdrawn, or terminated"
+    },
+    {
+      "section": "VIRGINIA_SECURITIES_ACT",
+      "count": 24,
+      "label": "investment advisor eras approved"
+    },
+    {
+      "section": "VIRGINIA_SECURITIES_ACT",
+      "count": 66,
+      "label": "investment advisor other amendments approved"
+    },
+    {
+      "section": "VIRGINIA_SECURITIES_ACT",
+      "count": 31,
+      "label": "investment advisor other amendments denied, withdrawn, or terminated"
+    },
+    {
+      "section": "VIRGINIA_SECURITIES_ACT",
+      "count": 4481,
+      "label": "investment advisor registrations, renewals, and amendments approved"
+    },
+    {
+      "section": "VIRGINIA_SECURITIES_ACT",
+      "count": 444,
+      "label": "investment advisor registrations, renewals, and amendments denied, withdrawn, or terminated"
+    },
+    {
+      "section": "VIRGINIA_SECURITIES_ACT",
+      "count": 69,
+      "label": "investment advisor audits completed"
+    },
+    {
+      "section": "VIRGINIA_SECURITIES_ACT",
+      "count": 439,
+      "label": "audit violation deficiencies resolved"
+    },
+    {
+      "section": "VIRGINIA_SECURITIES_ACT",
+      "count": 18946,
+      "label": "investment advisor representative registrations and renewals approved"
+    },
+    {
+      "section": "VIRGINIA_SECURITIES_ACT",
+      "count": 4017,
+      "label": "investment advisor representative registrations and renewals denied, withdrawn, or terminated"
+    },
+    {
+      "section": "VIRGINIA_SECURITIES_ACT",
+      "count": 88,
+      "label": "agent of issuer registrations and renewals approved"
+    },
+    {
+      "section": "VIRGINIA_SECURITIES_ACT",
+      "count": 12,
+      "label": "agent of issuer registrations and renewals denied, withdrawn, or terminated"
+    },
+    {
+      "section": "VIRGINIA_SECURITIES_ACT",
+      "count": 68,
+      "label": "investigations completed"
+    },
+    {
+      "section": "TRADEMARK_AND_SERVICE_MARK_ACT",
+      "count": 659,
+      "label": "trademarks and/or service marks approved, renewed, or assigned"
+    },
+    {
+      "section": "TRADEMARK_AND_SERVICE_MARK_ACT",
+      "count": 369,
+      "label": "trademarks and/or service marks denied, abandoned, expired, or withdrawn"
+    },
+    {
+      "section": "VIRGINIA_RETAIL_FRANCHISING_ACT",
+      "count": 2396,
+      "label": "franchise registrations, renewals, or post-effective amendments approved"
+    },
+    {
+      "section": "VIRGINIA_RETAIL_FRANCHISING_ACT",
+      "count": 416,
+      "label": "franchise registrations, renewals, or post-effective amendments denied, withdrawn, non-renewed, or terminated"
+    },
+    {
+      "section": "VIRGINIA_RETAIL_FRANCHISING_ACT",
+      "count": 17,
+      "label": "investigations completed"
+    },
+    {
+      "section": "ORDERS_JUDGMENTS_AND_SETTLEMENTS",
+      "count": 8,
+      "label": "orders granting exemptions and/or official interpretations"
+    },
+    {
+      "section": "ORDERS_JUDGMENTS_AND_SETTLEMENTS",
+      "count": 0,
+      "label": "orders filing and/or canceling surety bonds"
+    },
+    {
+      "section": "ORDERS_JUDGMENTS_AND_SETTLEMENTS",
+      "count": 19,
+      "label": "orders for subpoena of records by banks, corporations, and individuals"
+    },
+    {
+      "section": "ORDERS_JUDGMENTS_AND_SETTLEMENTS",
+      "count": 3,
+      "label": "orders of show cause"
+    },
+    {
+      "section": "ORDERS_JUDGMENTS_AND_SETTLEMENTS",
+      "count": 19,
+      "label": "judgments of compromise and settlement"
+    },
+    {
+      "section": "ORDERS_JUDGMENTS_AND_SETTLEMENTS",
+      "count": 17,
+      "label": "final orders and/or judgments"
+    },
+    {
+      "section": "ORDERS_JUDGMENTS_AND_SETTLEMENTS",
+      "count": 0,
+      "label": "temporary injunctions"
+    },
+    {
+      "section": "ORDERS_JUDGMENTS_AND_SETTLEMENTS",
+      "count": 7,
+      "label": "special supervision"
+    },
+    {
+      "section": "TELEPHONE_CALLS_EMAILS_AND_COMPLAINTS",
+      "count": 662,
+      "label": "calls/e-mails regarding pending investigations"
+    },
+    {
+      "section": "TELEPHONE_CALLS_EMAILS_AND_COMPLAINTS",
+      "count": 27,
+      "label": "calls/e-mails regarding pending registrations"
+    },
+    {
+      "section": "TELEPHONE_CALLS_EMAILS_AND_COMPLAINTS",
+      "count": 307,
+      "label": "calls/e-mails regarding pending audits"
+    },
+    {
+      "section": "TELEPHONE_CALLS_EMAILS_AND_COMPLAINTS",
+      "count": 1,
+      "label": "audit general inquiry calls/e-mails"
+    },
+    {
+      "section": "TELEPHONE_CALLS_EMAILS_AND_COMPLAINTS",
+      "count": 79,
+      "label": "calls/e-mails regarding pending examinations"
+    },
+    {
+      "section": "TELEPHONE_CALLS_EMAILS_AND_COMPLAINTS",
+      "count": 85,
+      "label": "complaints resulting in investigations"
+    },
+    {
+      "section": "TELEPHONE_CALLS_EMAILS_AND_COMPLAINTS",
+      "count": 65,
+      "label": "complaints referred"
+    },
+    {
+      "section": "TELEPHONE_CALLS_EMAILS_AND_COMPLAINTS",
+      "count": 17,
+      "label": "complaints with no authority to investigate"
+    },
+    {
+      "section": "TELEPHONE_CALLS_EMAILS_AND_COMPLAINTS",
+      "count": 2,
+      "label": "complaints with no violation of Securities or Franchise Acts"
+    }
+  ],
+  "headline": {
+    "broker_dealer_registrations_and_renewals_approved": 1859,
+    "broker_dealer_agent_registrations_and_renewals_approved": 308131,
+    "investment_advisor_registrations_renewals_and_amendments_approved": 4481,
+    "investment_advisor_representative_registrations_and_renewals_approved": 18946,
+    "investment_advisor_audits_completed": 69,
+    "investigations_completed": 68,
+    "complaints_resulting_in_investigations": 85,
+    "investment_advisor_eras_approved": 24,
+    "audit_violation_deficiencies_resolved": 439
+  }
+}

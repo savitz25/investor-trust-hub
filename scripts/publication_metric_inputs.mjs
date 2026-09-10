@@ -43,6 +43,11 @@ export function publicationMetricInputs() {
       .replace(/^[\s\S]*export const CO_PUBLIC_SNAPSHOT = /, "")
       .replace(/\s+as const;[\s\S]*$/, ""),
   );
+  const va = JSON.parse(
+    read("packages/domain/src/va-public-snapshot.ts")
+      .replace(/^[\s\S]*export const VA_PUBLIC_SNAPSHOT = /, "")
+      .replace(/\s+as const;[\s\S]*$/, ""),
+  );
 
   const stateBlock = routes.match(/export const STATE_DISCOVERY_ROUTES = \[([\s\S]*?)\] as const/)[1];
   const publishedStateIntelligencePaths = [...stateBlock.matchAll(/href: '(\/[^']+)'/g)].map((m) => m[1]);
@@ -91,5 +96,11 @@ export function publicationMetricInputs() {
     coNoticeFiled: co.federalNotice.noticeFiledDistinctCrd,
     coEnforcementNarrativeEntries: co.enforcement.sanctionsNarrativeEntries,
     coRoute: co.route,
+    vaPrincipalOfficeFirms: va.nationalOverlay.vaPrincipalOfficeSecIardFirms,
+    vaStateRiaRoster: va.stateRia.STATE_RIA_BULK_ROSTER,
+    vaStateRiaApproved: va.stateRia.approvedDistinctCrd,
+    vaNoticeFiled: va.federalNotice.noticeFiledDistinctCrd,
+    vaRegulatoryActivityRows: va.enforcement.observationRows,
+    vaRoute: va.route,
   };
 }

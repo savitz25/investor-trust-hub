@@ -1,6 +1,7 @@
 import { AZ_PUBLIC_SNAPSHOT } from './az-public-snapshot';
 import { CA_PUBLIC_SNAPSHOT } from './ca-public-snapshot';
 import { CO_PUBLIC_SNAPSHOT } from './co-public-snapshot';
+import { VA_PUBLIC_SNAPSHOT } from './va-public-snapshot';
 import { loadInvestorNetworkMetrics } from './load-network-metrics';
 import { NJ_PUBLIC_SNAPSHOT } from './nj-public-snapshot';
 import { TX_PUBLIC_SNAPSHOT } from './tx-public-snapshot';
@@ -63,12 +64,12 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA';
   name: string;
   href: string;
   regulator: string;
   principalOfficeFirms: number;
-  rosterStatus: 'Available by request' | 'Not acquired' | 'IAPD compilation (740 approved)';
+  rosterStatus: string;
   evidence: string[];
   identityNote: string;
   limitation: string;
@@ -391,6 +392,48 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
         sourceAsOf: null,
         retrievedAt: CO_PUBLIC_SNAPSHOT.enforcement.retrievedAt,
         snapshotAsOf: CO_PUBLIC_SNAPSHOT.asOf,
+        generatedAt: null,
+      },
+    ],
+  },
+  {
+    code: 'VA',
+    name: 'Virginia',
+    href: VA_PUBLIC_SNAPSHOT.route,
+    regulator: 'Virginia SCC Division of Securities and Retail Franchising',
+    principalOfficeFirms:
+      VA_PUBLIC_SNAPSHOT.nationalOverlay.vaPrincipalOfficeSecIardFirms,
+    rosterStatus: 'IAPD compilation (697 approved)',
+    evidence: [
+      'SEC/IARD principal-office overlay',
+      'IAPD Virginia state-registered IA compilation',
+      'federal-covered notice filings',
+      'SCC 2025 SRF aggregates and regulatory-activity table',
+    ],
+    identityNote:
+      '697 is IAPD state-compilation APPROVED firms with Virginia as registration jurisdiction. It is not the 339 SEC principal-office overlay and not 4,481 2025 activity approvals.',
+    limitation:
+      'State-only CRDs were not minted as public SEC firm profiles. SCC activity rows are mixed subjects and were not name-matched.',
+    sourceClocks: [
+      {
+        label: 'SEC/IARD feed',
+        sourceAsOf: VA_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+        retrievedAt: VA_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+        snapshotAsOf: null,
+        generatedAt: null,
+      },
+      {
+        label: 'IAPD state compilation',
+        sourceAsOf: VA_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+        retrievedAt: VA_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+        snapshotAsOf: VA_PUBLIC_SNAPSHOT.stateRia.snapshotAsOf,
+        generatedAt: null,
+      },
+      {
+        label: 'SCC SRF 2025 report / activity table',
+        sourceAsOf: '2025',
+        retrievedAt: VA_PUBLIC_SNAPSHOT.enforcement.retrievedAt,
+        snapshotAsOf: VA_PUBLIC_SNAPSHOT.asOf,
         generatedAt: null,
       },
     ],
@@ -845,6 +888,62 @@ export function buildInvestorHomepageEvidenceInventory(): InvestorHomepageEviden
       CO_PUBLIC_SNAPSHOT.federalNotice.retrievedAt,
     ),
     stateMeasure(
+      'va_overlay',
+      'Virginia SEC/IARD principal-office firms',
+      metrics.virginia.principalOfficeRosterFirms,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'SEC/IARD firm with VA principal office',
+      'Virginia',
+      'SEC IAPD / IARD',
+      'artifacts/va-inv-001-public-snapshot.json',
+      VA_PUBLIC_SNAPSHOT.asOf,
+      'Federal roster firms reporting VA principal office.',
+      'Virginia state-RIA roster, notice filing, or SCC authority.',
+      '/virginia',
+      'PUBLIC',
+      VA_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+      VA_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+    ),
+    stateMeasure(
+      'va_state_roster',
+      'Virginia state-registered investment-adviser firms',
+      VA_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'IAPD state-compilation APPROVED firm with jurisdiction VA',
+      'Virginia',
+      'IAPD state compilation',
+      'artifacts/va-inv-001-public-snapshot.json',
+      VA_PUBLIC_SNAPSHOT.asOf,
+      'Approved Virginia state-IA firms in IA_FIRM_STATE_Feed_08_27_2026.',
+      'SEC principal-office overlay, federal notice filings, ERA reporting, IAR people, or 4,481 2025 activity approvals.',
+      '/virginia',
+      'PUBLIC',
+      VA_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+      VA_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+      'Exact firm CRD. State-only identities were not minted as public SEC profiles.',
+      'Filter is registration jurisdiction, not address.',
+    ),
+    stateMeasure(
+      'va_notice_filed',
+      'SEC/IARD firms with a Virginia notice filing',
+      VA_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'NoticeFiled RgltrCd=VA FILED',
+      'Virginia',
+      'SEC IAPD / IARD',
+      'artifacts/va-inv-001-public-snapshot.json',
+      VA_PUBLIC_SNAPSHOT.asOf,
+      'SEC/IARD firms with a Virginia notice filing in the cited compilation.',
+      'Virginia state-RIA licensure or the 339 principal-office overlay.',
+      '/virginia',
+      'PUBLIC',
+      VA_PUBLIC_SNAPSHOT.federalNotice.sourceAsOf,
+      VA_PUBLIC_SNAPSHOT.federalNotice.retrievedAt,
+    ),
+    stateMeasure(
       'az_index_crd_mentions',
       'Arizona index rows mentioning CRD',
       AZ_PUBLIC_SNAPSHOT.enforcement.rowsWithCrdInRespondentText,
@@ -1010,7 +1109,7 @@ export function buildInvestorHomepageEvidenceInventory(): InvestorHomepageEviden
       'KNOWN',
       'PUBLIC_RESEARCH',
       'published state intelligence page',
-      'NJ, CA, TX, WA, AZ, CO',
+      'NJ, CA, TX, WA, AZ, CO, VA',
       'Accepted state publication models',
       'INVESTOR_HOMEPAGE_STATE_CARDS',
       null,
@@ -1069,11 +1168,11 @@ export function assertInvestorHomepageEvidenceInventory(
   )
     throw new Error('Cross-grain or national RAUM totals cannot publish');
   if (
-    INVESTOR_HOMEPAGE_STATE_CARDS.length !== 6 ||
+    INVESTOR_HOMEPAGE_STATE_CARDS.length !== 7 ||
     INVESTOR_HOMEPAGE_STATE_CARDS.some((state) => state.href === '/florida')
   )
     throw new Error(
-      'Exactly six accepted state pages may publish; Florida is not one',
+      'Exactly seven accepted state pages may publish; Florida is not one',
     );
   if (
     inventory.find((item) => item.key === 'published_state_pages')?.value !==

@@ -1,0 +1,254 @@
+{
+  "contract": "investor-va-iapd-census-v1",
+  "safeAsCurrentVirginiaBulkStateLayer": true,
+  "filterLogic": "Virginia selected by IAPD registration/notice jurisdiction fields (StateRgstn/Rgltr/@Cd, ERA/Rgltr/@Cd, NoticeFiled/States/@RgltrCd). Principal-office MainAddr/@State=VA is a separate national overlay and is not the state-RIA denominator.",
+  "state": {
+    "filename": "IA_FIRM_STATE_Feed_08_27_2026.xml.gz",
+    "authority": "IAPD (FINRA-held state compilation)",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_08_27_2026.xml.gz",
+    "sourceAsOf": "2026-08-27",
+    "publishedAt": "2026-08-27",
+    "retrievedAt": "2026-08-28T16:36:30Z",
+    "bytes": 5072645,
+    "sha256": "4dc5ec13827c2546213fba16d3397448ba5c08cb8c092f1135c405a7f8472eda",
+    "grain": "Firm CRD; StateRgstn/Rgltr/@Cd=jurisdiction; @St=status; ERA/Rgltr/@Cd=jurisdiction. Not MainAddr/@State.",
+    "filter": "Rgltr/@Cd=VA (registration jurisdiction). Address is recorded only for overlap diagnostics.",
+    "firms_in_feed": 21818,
+    "co_state_ia_registration_rows": 700,
+    "co_state_ia_distinct_crd": 700,
+    "co_state_ia_approved_distinct_crd": 697,
+    "co_state_ia_current_distinct_crd": 697,
+    "co_state_ia_termrequest_distinct_crd": 3,
+    "co_state_era_registration_rows": 107,
+    "co_state_era_distinct_crd": 107,
+    "co_state_era_active_distinct_crd": 107,
+    "ia_era_overlap_distinct_crd": 0,
+    "status_ia": [
+      [
+        "APPROVED",
+        697
+      ],
+      [
+        "TERMREQUEST",
+        3
+      ]
+    ],
+    "status_era": [
+      [
+        "ACTIVE",
+        107
+      ]
+    ],
+    "principal_office_co_among_state_ia": 198,
+    "principal_office_not_co_among_state_ia": 502,
+    "address_co_without_co_jurisdiction": 3
+  },
+  "sec": {
+    "filename": "IA_FIRM_SEC_Feed_08_27_2026.xml.gz",
+    "authority": "SEC / IAPD",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_SEC_Feed_08_27_2026.xml.gz",
+    "sourceAsOf": "2026-08-27",
+    "publishedAt": "2026-08-27",
+    "retrievedAt": "2026-08-28T16:36:30Z",
+    "bytes": 7271790,
+    "sha256": "967217b0cdb4548f496407f7232eff30deba12217c36447fad0cee757473b65c",
+    "grain": "Firm CRD; NoticeFiled/States/@RgltrCd=jurisdiction; MainAddr/@State=principal office (separate overlay).",
+    "firms_in_feed": 23780,
+    "firm_types": [
+      [
+        "Registered",
+        17141
+      ],
+      [
+        "ERA",
+        6639
+      ]
+    ],
+    "co_notice_rows": 3289,
+    "co_notice_any_status_distinct_crd": 3289,
+    "co_notice_filed_distinct_crd": 3289,
+    "co_notice_era_any_status": 0,
+    "co_notice_filed_firm_type": {
+      "Registered": 3289,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          3289
+        ]
+      ]
+    },
+    "notice_status": [
+      [
+        "FILED",
+        3289
+      ]
+    ],
+    "co_principal_office_distinct_crd": 342,
+    "principal_and_notice_filed": 294,
+    "notice_filed_not_principal": 2995,
+    "principal_not_notice_filed": 48
+  },
+  "overlaps": {
+    "state_ia_and_principal_office": 2,
+    "state_ia_approved_and_principal_office": 1,
+    "state_ia_and_notice_filed": 7,
+    "state_ia_approved_and_notice_filed": 4,
+    "state_era_and_principal_office": 30,
+    "state_era_and_notice_filed": 0,
+    "state_ia_and_state_era": 0,
+    "notice_filed_and_principal_office": 294,
+    "approved_state_ia_not_in_sec_principal_or_notice": 693,
+    "state_ia_approved_and_notice_filed_crds": [
+      "118537",
+      "144340",
+      "156685",
+      "283813"
+    ],
+    "state_ia_approved_and_notice_filed_joinMethod": "exact firm CRD set intersection of APPROVED StateRgstn/Rgltr/@Cd=VA and NoticeFiled/States/@RgltrCd=VA St=FILED",
+    "state_ia_approved_and_notice_filed_records": [
+      {
+        "crd": "118537",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "VA",
+          "filter": "StateRgstn/Rgltr/@Cd=VA",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2018-02-06"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=VA",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2018-05-29",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2018-05-29"
+          },
+          "secFileNumber": "801-113326"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED Virginia StateRgstn and FILED Virginia NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "144340",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "VA",
+          "filter": "StateRgstn/Rgltr/@Cd=VA",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2008-04-07"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=VA",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2025-12-09",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2025-12-09"
+          },
+          "secFileNumber": "801-133870"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED Virginia StateRgstn and FILED Virginia NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "156685",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "VA",
+          "filter": "StateRgstn/Rgltr/@Cd=VA",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2011-03-10"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=VA",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-04-09",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2026-04-09"
+          },
+          "secFileNumber": "801-135701"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED Virginia StateRgstn and FILED Virginia NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "283813",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "VA",
+          "filter": "StateRgstn/Rgltr/@Cd=VA",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2016-05-25"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=VA",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-08-21",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2026-08-21"
+          },
+          "secFileNumber": "801-136943"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED Virginia StateRgstn and FILED Virginia NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      }
+    ]
+  },
+  "semanticGrainRules": {
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_SEC_RIA": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_NOTICE_FILING": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_STATE_ERA": true,
+    "PRINCIPAL_OFFICE_IS_NOT_REGISTRATION": true,
+    "REGISTRATION_ROW_IS_DISTINCT_GRAIN_FROM_DISTINCT_FIRM_CRD": true,
+    "note": "These are contract/credential rules. They do not assert that CRD sets are disjoint or that counts are numerically unequal."
+  },
+  "computedDiagnostics": {
+    "state_ia_registration_rows": 700,
+    "state_ia_distinct_crd": 700,
+    "state_ia_approved_distinct_crd": 697,
+    "state_ia_termrequest_distinct_crd": 3,
+    "state_era_registration_rows": 107,
+    "state_era_distinct_crd": 107,
+    "state_ia_and_state_era_overlap_distinct_crd": 0,
+    "state_ia_approved_and_notice_filed_overlap_distinct_crd": 4,
+    "notice_filed_distinct_crd": 3289,
+    "notice_filed_firm_type": {
+      "Registered": 3289,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          3289
+        ]
+      ]
+    },
+    "registration_rows_equal_distinct_crd": true
+  }
+}

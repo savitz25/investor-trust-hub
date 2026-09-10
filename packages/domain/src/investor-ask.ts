@@ -490,6 +490,30 @@ export function interpretInvestorAskQuery(raw: string, overrides: InvestorAskOve
     push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };
   }
+  if (/\b(?:virginia state rias?|advisers? registered in virginia|licensed (?:investment )?advisers? in virginia)\b/i.test(q)) {
+    const query = failClosed(
+      'Virginia state-registered investment-adviser firms are published on /virginia from the IAPD state compilation (jurisdiction=VA). Search V1 remains the SEC/IARD roster and does not treat the 339 principal-office overlay as Virginia state registration. Current verification is IAPD/SCC search, not the 2025 SCC activity totals.',
+      ['SEC/IARD firms reporting a principal office in Virginia.', 'RIA principal offices in Virginia.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\bvirginia\b/i.test(q) && /\bcomplaint/i.test(q)) {
+    const query = failClosed(
+      'SCC 2025 complaint/investigation aggregates are statewide process counts. They are not firm-specific complaints, not violations, and not findings. Use /virginia for the aggregate context.',
+      ['Virginia investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\bvirginia scc action against\b/i.test(q)) {
+    const query = failClosed(
+      'Virginia SCC Securities & Retail Franchising regulatory activity is a mixed case table. Name-only matching is unsafe. Exact CRD/case identity is required before attaching a row to a firm.',
+      ['Virginia SCC Regulatory Activity table on /virginia.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
 
   if (/\bhow many form adv observations\b|\bhow many (normalized )?adv observations\b/i.test(q)) {
     const query: InvestorResearchQuery = {
