@@ -5,7 +5,7 @@ export { NY_PUBLIC_SNAPSHOT, type NyPublicSnapshot };
 
 export const NY_PUBLIC_ROUTE = '/new-york' as const;
 export const NY_PUBLIC_FINGERPRINT =
-  '75ebcafb799270b54c3e84b9edfa1b05e145f74d6efdcdeae69cf3ebe10bc88b';
+  '99934341f3307ee00802256cc143d904085d2cf464f9cc15fd97ae48f9c00a1a';
 
 export function nyPrincipalOfficeCountFromNationalRoster(): number {
   const row = V1_ROSTER_PRINCIPAL_OFFICE_STATES.find((cell) => cell.region === 'NY');
@@ -86,6 +86,21 @@ export function assertNewYorkPublicIntel(
   }
   if (value.expansionLedger.NET_NEW_PUBLIC_INVESTOR_PROFILES !== 0) {
     throw new Error('Do not mint public investor profiles in NY-INV-001');
+  }
+  if (value.expansionLedger.EXISTING_ORGANIZATIONS_ENRICHED !== 0) {
+    throw new Error('NY principal-office overlay was pre-existing; EXISTING_ORGANIZATIONS_ENRICHED must be 0');
+  }
+  if (value.expansionLedger.PRE_EXISTING_NY_PRINCIPAL_OFFICE_OVERLAY !== 3152) {
+    throw new Error('Pre-existing NY principal-office overlay must remain 3152');
+  }
+  if (value.expansionLedger.GRAPH_WRITES !== 0) {
+    throw new Error('NY-INV-001 must not write graph enrichment');
+  }
+  if (value.enforcement.COMPLETE_REGULATORY_ACTIVITY_COUNT !== 'UNKNOWN') {
+    throw new Error('Complete OAG regulatory-activity count must remain UNKNOWN');
+  }
+  if (value.enforcement.REGULATORY_ACTIVITY_COVERAGE !== 'PUBLIC_RESEARCH_PATH') {
+    throw new Error('OAG coverage must remain PUBLIC_RESEARCH_PATH');
   }
   if (value.iar.newYorkPersonDirectory !== 'NOT_PUBLISHED') {
     throw new Error('Do not publish a New York IAR person directory');

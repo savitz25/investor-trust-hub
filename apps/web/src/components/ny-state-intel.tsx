@@ -225,9 +225,10 @@ export function NewYorkStateIntelligence() {
           <h2 id="ny-cases-title">OAG Investor Protection research path</h2>
           <p>{snap.enforcement.caveat}</p>
           <p>
-            Coverage: {snap.enforcement.result}. Exact CRD crosswalks:{' '}
-            {snap.enforcement.exactCrdCrosswalks}. PDFs opened: {snap.enforcement.pdfsDownloaded}. Name-only is
-            unsafe.
+            Coverage: {snap.enforcement.REGULATORY_ACTIVITY_COVERAGE}. Complete OAG regulatory-activity count is
+            unknown — not zero. This ticket attached {snap.enforcement.exactCrdCrosswalks} exact CRD records and
+            opened {snap.enforcement.pdfsDownloaded} PDFs; those are execution counts, not an OAG action census.
+            Name-only is unsafe. No action found is not a clean record.
           </p>
           <p>
             <a href={snap.enforcement.officialIndex}>OAG Advocacy and Enforcement Actions library</a>

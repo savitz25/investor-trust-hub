@@ -22,6 +22,9 @@ describe('NY-INV-001 publication', () => {
     expect(ui).toMatch(/<h3>State ERA<\/h3>/);
     expect(ui).toMatch(/ERA is not an RIA/);
     expect(ui).not.toMatch(/3152 \+ 1297|New York advisers total/i);
+    expect(ui).toMatch(/unknown — not zero/i);
+    expect(ui).not.toMatch(/zero OAG actions|OAG regulatory activity rows = 0/i);
+    expect(ui).not.toContain('observationRows');
     expect(NY_PUBLIC_SNAPSHOT.route).toBe('/new-york');
     expect(NY_PUBLIC_SNAPSHOT.stateEra.activeDistinctCrd).toBe(327);
     expect(NY_PUBLIC_SNAPSHOT.iar.newYorkPersonDirectory).toBe('NOT_PUBLISHED');

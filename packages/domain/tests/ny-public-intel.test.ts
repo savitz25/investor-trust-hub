@@ -40,10 +40,30 @@ describe('NY public snapshot', () => {
   it('does not treat overlay or state identities as entity growth', () => {
     expect(NY_PUBLIC_SNAPSHOT.expansionLedger.NET_NEW_CANONICAL_ORGANIZATIONS).toBe(0);
     expect(NY_PUBLIC_SNAPSHOT.expansionLedger.NET_NEW_PUBLIC_INVESTOR_PROFILES).toBe(0);
+    expect(NY_PUBLIC_SNAPSHOT.expansionLedger.EXISTING_ORGANIZATIONS_ENRICHED).toBe(0);
+    expect(NY_PUBLIC_SNAPSHOT.expansionLedger.GRAPH_WRITES).toBe(0);
     expect(NY_PUBLIC_SNAPSHOT.expansionLedger.NY_PRINCIPAL_OFFICE_FIRMS).toBe(3152);
+    expect(NY_PUBLIC_SNAPSHOT.expansionLedger.PRE_EXISTING_NY_PRINCIPAL_OFFICE_OVERLAY).toBe(3152);
     expect(NY_PUBLIC_SNAPSHOT.expansionLedger.NEW_NY_STATE_IDENTITIES).toBe(1624);
     expect(NY_PUBLIC_SNAPSHOT.expansionLedger.EXACT_PROFILE_ATTACHMENTS).toBe(0);
     expect(NY_PUBLIC_SNAPSHOT.expansionLedger.EXACT_CRD_ADVERSE_CROSSWALKS).toBe(0);
+    expect(NY_PUBLIC_SNAPSHOT.expansionLedger.notes.overlay).toMatch(/already existed/i);
+    expect(NY_PUBLIC_SNAPSHOT.expansionLedger.notes.overlay).toMatch(/did not write new principal-office enrichment/i);
+  });
+
+  it('treats OAG enforcement census as UNKNOWN, not zero activity', () => {
+    expect(NY_PUBLIC_SNAPSHOT.enforcement.result).toBe('PUBLIC_RESEARCH_PATH');
+    expect(NY_PUBLIC_SNAPSHOT.enforcement.REGULATORY_ACTIVITY_COVERAGE).toBe('PUBLIC_RESEARCH_PATH');
+    expect(NY_PUBLIC_SNAPSHOT.enforcement.COMPLETE_REGULATORY_ACTIVITY_COUNT).toBe('UNKNOWN');
+    expect(NY_PUBLIC_SNAPSHOT.enforcement.observationRows).toBeNull();
+    expect(NY_PUBLIC_SNAPSHOT.expansionLedger.NEW_NY_REGULATORY_ACTIVITY_ROWS).toBeNull();
+    expect(NY_PUBLIC_SNAPSHOT.enforcement.pdfsDownloaded).toBe(0);
+    expect(NY_PUBLIC_SNAPSHOT.enforcement.exactCrdCrosswalks).toBe(0);
+    expect(NY_PUBLIC_SNAPSHOT.enforcement.caveat).toMatch(/UNKNOWN, not zero/i);
+    expect(NY_PUBLIC_SNAPSHOT.enforcement.caveat).toMatch(/execution counts/i);
+    expect(NY_PUBLIC_SNAPSHOT.rejectedTotals.some((row) => /OAG regulatory activity rows = 0/.test(row.total))).toBe(
+      true,
+    );
   });
 
   it('rejects name-only adverse joins', () => {
@@ -78,5 +98,11 @@ describe('NY public snapshot', () => {
     const mutatedCov = structuredClone(NY_PUBLIC_SNAPSHOT);
     mutatedCov.stateRia.STATE_RIA_BULK_ROSTER = 'SOURCE_NOT_ACQUIRED';
     expect(fingerprintSemanticSnapshot(asRecord(mutatedCov))).not.toBe(NY_PUBLIC_FINGERPRINT);
+    const mutatedEnrich = structuredClone(NY_PUBLIC_SNAPSHOT);
+    mutatedEnrich.expansionLedger.EXISTING_ORGANIZATIONS_ENRICHED = 3152;
+    expect(fingerprintSemanticSnapshot(asRecord(mutatedEnrich))).not.toBe(NY_PUBLIC_FINGERPRINT);
+    const mutatedOag = structuredClone(NY_PUBLIC_SNAPSHOT);
+    mutatedOag.enforcement.COMPLETE_REGULATORY_ACTIVITY_COUNT = 'ZERO';
+    expect(fingerprintSemanticSnapshot(asRecord(mutatedOag))).not.toBe(NY_PUBLIC_FINGERPRINT);
   });
 });

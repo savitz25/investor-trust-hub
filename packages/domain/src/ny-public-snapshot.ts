@@ -184,12 +184,15 @@ export const NY_PUBLIC_SNAPSHOT = {
     "result": "PUBLIC_RESEARCH_PATH",
     "officialIndex": "https://ag.ny.gov/libraries-documents/advocacy-and-enforcement-actions",
     "coverage": "New York OAG mixed Advocacy and Enforcement Actions library; Investor Protection Bureau is one of many bureaus",
-    "observationRows": 0,
-    "distinctCaseNumbers": 0,
+    "REGULATORY_ACTIVITY_COVERAGE": "PUBLIC_RESEARCH_PATH",
+    "COMPLETE_REGULATORY_ACTIVITY_COUNT": "UNKNOWN",
+    "observationRows": null,
+    "distinctCaseNumbers": null,
     "dateMin": null,
     "dateMax": null,
-    "rowsWithCrd": 0,
-    "rowsNameOnly": 0,
+    "rowsWithCrd": null,
+    "rowsNameOnly": null,
+    "ROWS_ACQUIRED_BY_THIS_TICKET": 0,
     "pdfsDownloaded": 0,
     "exactCrdCrosswalks": 0,
     "doNotCalculateEnforcementRate": true,
@@ -201,7 +204,7 @@ export const NY_PUBLIC_SNAPSHOT = {
     "sourceAsOf": null,
     "retrievedAt": "2026-09-10",
     "snapshotAsOf": "2026-09-10",
-    "caveat": "OAG Investor Protection Bureau handles a broad range of securities and investment matters (broker-dealers, investment advisers, issuers, crypto businesses, individuals, fraud schemes, and other securities actors). The public library is mixed-bureau, press-release and document oriented, not a clean IA enforcement census. Name-only attachment is unsafe. OAG action is not an investment-adviser disciplinary census. Case is not a criminal conviction. Action count is not quality. No action found is not a clean record."
+    "caveat": "OAG Investor Protection Bureau handles a broad range of securities and investment matters (broker-dealers, investment advisers, issuers, crypto businesses, individuals, fraud schemes, and other securities actors). The public library is mixed-bureau, press-release and document oriented, not a clean IA enforcement census. No bounded OAG regulatory-activity dataset was acquired. Complete OAG regulatory-activity count is UNKNOWN, not zero. Missing census is not zero enforcement activity. This ticket attached zero exact CRD records and downloaded zero PDFs; those are execution counts, not an OAG action census. Name-only attachment is unsafe. OAG action is not an investment-adviser disciplinary census. Case is not a criminal conviction. Action count is not quality. No action found is not a clean record."
   },
   "complaints": {
     "publicResearchPath": "https://ag.ny.gov/investor-protection-complaint-form",
@@ -356,17 +359,20 @@ export const NY_PUBLIC_SNAPSHOT = {
     "NEW_NY_STATE_IDENTITIES_DEFINITION": "distinct firm CRDs in IAPD StateRgstn/Rgltr/@Cd=NY plus distinct firm CRDs in ERA/Rgltr/@Cd=NY (overlap 0 in this extract). Not new companies, not public profiles, not a combined New York adviser universe.",
     "NET_NEW_CANONICAL_ORGANIZATIONS": 0,
     "NET_NEW_PUBLIC_INVESTOR_PROFILES": 0,
-    "EXISTING_ORGANIZATIONS_ENRICHED": 3152,
-    "NEW_NY_REGULATORY_ACTIVITY_ROWS": 0,
+    "EXISTING_ORGANIZATIONS_ENRICHED": 0,
+    "PRE_EXISTING_NY_PRINCIPAL_OFFICE_OVERLAY": 3152,
+    "GRAPH_WRITES": 0,
+    "NEW_NY_REGULATORY_ACTIVITY_ROWS": null,
+    "REGULATORY_ACTIVITY_COVERAGE": "PUBLIC_RESEARCH_PATH",
     "EXACT_CRD_ADVERSE_CROSSWALKS": 0,
     "REVIEW_REQUIRED_CROSSWALKS": 0,
     "REJECTED_UNSAFE_CROSSWALKS": 0,
     "EXACT_PROFILE_ATTACHMENTS": 0,
     "notes": {
-      "overlay": "3,152 New York principal-office firms already existed on the federal SEC/IARD spine. Not new organizations.",
+      "overlay": "3,152 New York principal-office firms already existed on the federal SEC/IARD spine before NY-INV-001. This ticket reused the existing canonical overlay. It did not write new principal-office enrichment into those organizations. EXISTING_ORGANIZATIONS_ENRICHED = 0. GRAPH_WRITES = 0.",
       "stateRoster": "IAPD state compilation added 1,297 distinct New York state-IA CRDs and 327 distinct New York state-ERA CRDs as state-intelligence identities. They were not minted as canonical organizations or public /firm profiles.",
       "notice": "5,856 notice-filing rows are observations, not extra firms.",
-      "activity": "No bounded OAG IA enforcement table was acquired. Mixed publications library remains a research path."
+      "activity": "No bounded OAG IA enforcement table was acquired. Mixed publications library remains PUBLIC_RESEARCH_PATH. Complete OAG regulatory-activity count is UNKNOWN, not zero."
     }
   },
   "preIngestBaseline": {
@@ -456,6 +462,10 @@ export const NY_PUBLIC_SNAPSHOT = {
     {
       "total": "Missing IAR/BD/complaint counts as zero",
       "reason": "Missing and search-only are unknown, not zero."
+    },
+    {
+      "total": "New York OAG regulatory activity rows = 0",
+      "reason": "No bounded OAG census was acquired. PUBLIC_RESEARCH_PATH / UNKNOWN is not zero enforcement activity."
     }
   ],
   "semanticGuardrails": [
@@ -475,6 +485,6 @@ export const NY_PUBLIC_SNAPSHOT = {
     "NO TRUST SCORE",
     "NO PAID RANKING"
   ],
-  "fingerprint": "75ebcafb799270b54c3e84b9edfa1b05e145f74d6efdcdeae69cf3ebe10bc88b"
+  "fingerprint": "99934341f3307ee00802256cc143d904085d2cf464f9cc15fd97ae48f9c00a1a"
 } as const;
 export type NyPublicSnapshot = typeof NY_PUBLIC_SNAPSHOT;
