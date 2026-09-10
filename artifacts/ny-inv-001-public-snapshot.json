@@ -1,0 +1,478 @@
+{
+  "version": "investor-ny-state-intel-v1",
+  "generatedFrom": {
+    "nationalRoster": "packages/domain/src/investor-home-intel.ts V1_ROSTER_PRINCIPAL_OFFICE_STATES + V1_SEC_ROSTER",
+    "iapdStateCensus": "data/new-york/ny-inv-001/iapd-ny-census.json"
+  },
+  "asOf": "2026-09-10",
+  "publicationGate": "ON",
+  "publicEligibility": "state_page",
+  "route": "/new-york",
+  "growthClassification": "INTELLIGENCE_GROWTH_HEAVY",
+  "uiGrains": {
+    "stateIa": "VISIBLE_PUBLIC_METRIC",
+    "stateEra": "VISIBLE_PUBLIC_METRIC",
+    "notice": "VISIBLE_PUBLIC_METRIC",
+    "principalOffice": "VISIBLE_PUBLIC_METRIC",
+    "overlapApprovedStateIaNotice": "VISIBLE_SUPPORTING_CONTEXT",
+    "oagEnforcement": "VISIBLE_SUPPORTING_CONTEXT",
+    "iarPersonUniverse": "INTERNAL_DIAGNOSTIC_ONLY"
+  },
+  "nationalOverlay": {
+    "nyPrincipalOfficeSecIardFirms": 3152,
+    "grain": "SEC IARD roster firm with principal-office region = NY",
+    "source": "IA_FIRM_SEC_Feed_08_27_2026",
+    "sourceAsOf": "2026-08-27",
+    "publishedAt": "2026-08-27",
+    "retrievedAt": "2026-08-28",
+    "snapshotAsOf": "2026-08-27",
+    "universe": 23622,
+    "resolvedPrincipalOfficeRegions": 17997,
+    "unresolvedPrincipalOfficeRegions": 5625,
+    "shareOfResolvedRegionsPct": 17.51,
+    "searchHref": "/firms?state=NY",
+    "rawCompilationMainAddrNy": 3179,
+    "label": "SEC/IARD roster firms with a New York principal office",
+    "caveat": "This is the national SEC/IARD roster overlay for firms that report a New York principal office on the reconciled 23,622-firm geography table (NY = 3,152). It is not the New York state-registered adviser universe, not a federal-covered notice-filing count, and not proof of current New York OAG Investor Protection Bureau authority. NEW YORK PRINCIPAL OFFICE != NEW YORK STATE REGISTRATION. These 3,152 firms already exist in the federal graph and are not net-new organizations. A raw compilation MainAddr=@State=NY count is a different extract and is not this overlay."
+  },
+  "riaEra": {
+    "nationalRiaFacts": 17018,
+    "nationalEraFacts": 6604,
+    "nationalTotalFacts": 23622,
+    "nyPrincipalOfficeSplit": "SOURCE_NOT_SPLIT",
+    "caveat": "National roster keeps RIA (17,018) and ERA (6,604) separate. Committed geography is on the combined roster. New York principal-office counts are not an RIA-only or ERA-only state denominator. ERA is not an RIA. SEC RIA is not a New York state RIA."
+  },
+  "firmMarket": {
+    "raumBandsByNewYorkPrincipalOffice": "SOURCE_NOT_SPLIT",
+    "note": "National RIA RAUM bands and Form ADV attributes exist on the federal spine. This snapshot does not invent a New York-only size ranking or treat RAUM as investment performance. A New York principal office is not New York registration."
+  },
+  "stateRia": {
+    "STATE_RIA_BULK_ROSTER": "ACQUIRED_IAPD_STATE_COMPILATION",
+    "access": "ACQUIRED",
+    "completeStateRiaCount": 1297,
+    "registrationRows": 1297,
+    "distinctFirmCrd": 1297,
+    "approvedDistinctCrd": 1297,
+    "termrequestDistinctCrd": 0,
+    "filter": "StateRgstn/Rgltr/@Cd=NY (registration jurisdiction). Not MainAddr/@State.",
+    "currentness": "APPROVED = current state IA in this compilation. TERMREQUEST is not approved current.",
+    "source": "IA_FIRM_STATE_Feed_08_27_2026",
+    "sourceAsOf": "2026-08-27",
+    "publishedAt": "2026-08-27",
+    "retrievedAt": "2026-08-28",
+    "snapshotAsOf": "2026-08-27",
+    "checksumSha256": "4dc5ec13827c2546213fba16d3397448ba5c08cb8c092f1135c405a7f8472eda",
+    "releaseLabel": "IA_FIRM_STATE_Feed_08_27_2026",
+    "officialUrl": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_08_27_2026.xml.gz",
+    "oagSearch": "OPEN_SEARCH_ONLY",
+    "verifyUrl": "https://adviserinfo.sec.gov/",
+    "oagHomeUrl": "https://ag.ny.gov/resources/government-organizations/investments-registration-regulation",
+    "oagAdviserFaqUrl": "https://ag.ny.gov/investment-advisers-faq",
+    "oagInvestorProtectionFaqUrl": "https://ag.ny.gov/resources/organizations/investments-registration-regulation/investor-protection-faqs",
+    "iapdUrl": "https://adviserinfo.sec.gov/",
+    "brokercheckUrl": "https://brokercheck.finra.org/",
+    "label": "New York state-registered investment-adviser firms",
+    "caveat": "IAPD state compilation firms with New York as the registration jurisdiction and status APPROVED. This is not an SEC RIA count, not a federal-covered notice-filing count, not an ERA count, and not the 3,152 principal-office overlay. Duplicate/multi-jurisdiction rows were collapsed to distinct firm CRD. State-only CRDs were not minted as public SEC firm profiles and were not added to the 23,622 SEC/IARD roster."
+  },
+  "stateEra": {
+    "STATE_ERA_REPORTING": "ACQUIRED_IAPD_STATE_COMPILATION",
+    "registrationRows": 327,
+    "distinctFirmCrd": 327,
+    "activeDistinctCrd": 327,
+    "overlapWithStateIa": 0,
+    "filter": "ERA/Rgltr/@Cd=NY (reporting jurisdiction). Not address. Not StateRgstn.",
+    "source": "IA_FIRM_STATE_Feed_08_27_2026",
+    "sourceAsOf": "2026-08-27",
+    "retrievedAt": "2026-08-28",
+    "label": "New York state ERA reporting firms",
+    "caveat": "State ERA reporting is not a New York state RIA and is not an SEC RIA. Overlap with state IA is zero in this extract."
+  },
+  "federalNotice": {
+    "FEDERAL_COVERED_NOTICE_ROSTER": "ACQUIRED_IAPD_SEC_COMPILATION",
+    "access": "ACQUIRED",
+    "noticeRows": 5856,
+    "noticeFiledDistinctCrd": 5856,
+    "noticeStatus": "FILED",
+    "filter": "NoticeFiled/States/@RgltrCd=NY",
+    "source": "IA_FIRM_SEC_Feed_08_27_2026",
+    "sourceAsOf": "2026-08-27",
+    "publishedAt": "2026-08-27",
+    "retrievedAt": "2026-08-28",
+    "snapshotAsOf": "2026-08-27",
+    "overlapApprovedStateIa": 27,
+    "overlapApprovedStateIaJoinMethod": "exact firm CRD set intersection of APPROVED StateRgstn/Rgltr/@Cd=NY and NoticeFiled/States/@RgltrCd=NY St=FILED",
+    "overlapApprovedStateIaCrds": [
+      "118537",
+      "126545",
+      "127852",
+      "134374",
+      "144340",
+      "144673",
+      "147076",
+      "152447",
+      "153496",
+      "154295",
+      "155088",
+      "169817",
+      "173224",
+      "277083",
+      "284061",
+      "288345",
+      "293551",
+      "295320",
+      "298277",
+      "298549",
+      "305263",
+      "307332",
+      "313006",
+      "317854",
+      "319716",
+      "332215",
+      "44357"
+    ],
+    "overlapApprovedStateIaReading": "The credential classes are separate but the source populations are not perfectly disjoint; twenty-seven firm CRDs appear in both source-defined sets in the 2026-08-27 compilations. Exact-CRD inspection shows each CRD is APPROVED in StateRgstn/Rgltr/@Cd=NY and FILED in NoticeFiled/States/@RgltrCd=NY with FirmType=Registered. Neither classification was discarded.",
+    "filedFirmType": {
+      "Registered": 5856,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          5856
+        ]
+      ]
+    },
+    "label": "SEC/IARD firms with a New York notice filing",
+    "caveat": "Federal-covered / notice-filed is not New York state-RIA licensure. Notice-filed is not the 3,152 principal-office overlay. A New York principal office does not prove a current notice filing."
+  },
+  "iar": {
+    "IA_INDVL_FEED": "ACQUIRED_NATIONAL_FEED",
+    "newYorkPersonDirectory": "NOT_PUBLISHED",
+    "access": "OPEN_SEARCH_ONLY",
+    "completeIarCount": "UNKNOWN",
+    "grain": "person CRD (not firm CRD)",
+    "source": "IA_INDVL_Feed_08_27_2026",
+    "sourceAsOf": "2026-08-27",
+    "retrievedAt": "2026-08-28",
+    "verifyUrl": "https://adviserinfo.sec.gov/",
+    "caveat": "The national IAR compilation exists. This ticket does not publish a New York person directory. IAR is not the firm. Search V1 remains firm-focused. Complete New York IAR universe is UNKNOWN, not zero."
+  },
+  "brokerDealer": {
+    "NY_BD_BULK_ROSTER": "SOURCE_NOT_ACQUIRED",
+    "NY_AGENT_BULK_ROSTER": "SOURCE_NOT_ACQUIRED",
+    "access": "OPEN_SEARCH_ONLY",
+    "completeDealerCount": "UNKNOWN",
+    "completeAgentCount": "UNKNOWN",
+    "verifyUrl": "https://brokercheck.finra.org/",
+    "caveat": "Broker-dealer is not an investment adviser. Registered representative is not an IAR. New York OAG also regulates broker-dealer registration; FINRA-member firms use CRD. BrokerCheck is not scraped. Search-only is not zero."
+  },
+  "oagFramework": {
+    "regulator": "Office of the New York Attorney General, Investor Protection Bureau",
+    "notDfs": true,
+    "ruleCitation": "13 NYCRR Part 11; GBL § 359-eee",
+    "ruleEffective": "2021-02-01",
+    "officialFaqUrl": "https://ag.ny.gov/investment-advisers-faq",
+    "officialHomeUrl": "https://ag.ny.gov/resources/government-organizations/investments-registration-regulation",
+    "clientThresholdNote": "Official OAG FAQ: registration or notice filing is generally required when an investment adviser or solicitor has six or more New York clients, with exemptions and separate federally covered adviser treatment. This is regulatory context, not a determination that any particular firm is currently authorized. Do not infer a firm’s New York authority from address, principal office, guessed client counts, Form ADV marketing text, or name match.",
+    "notLegalAdvice": true,
+    "retrievedAt": "2026-09-10"
+  },
+  "enforcement": {
+    "pass": "oag_publications_library_audit",
+    "result": "PUBLIC_RESEARCH_PATH",
+    "officialIndex": "https://ag.ny.gov/libraries-documents/advocacy-and-enforcement-actions",
+    "coverage": "New York OAG mixed Advocacy and Enforcement Actions library; Investor Protection Bureau is one of many bureaus",
+    "observationRows": 0,
+    "distinctCaseNumbers": 0,
+    "dateMin": null,
+    "dateMax": null,
+    "rowsWithCrd": 0,
+    "rowsNameOnly": 0,
+    "pdfsDownloaded": 0,
+    "exactCrdCrosswalks": 0,
+    "doNotCalculateEnforcementRate": true,
+    "notInvestmentAdviserEnforcementCensus": true,
+    "profileAttachments": [],
+    "identityBar": "EXACT_FIRM_CRD, EXACT_PERSON_CRD for person grain only, or exact source-native OAG matter identifier",
+    "nameOnly": "UNSAFE",
+    "namePlusCity": "REVIEW_REQUIRED",
+    "sourceAsOf": null,
+    "retrievedAt": "2026-09-10",
+    "snapshotAsOf": "2026-09-10",
+    "caveat": "OAG Investor Protection Bureau handles a broad range of securities and investment matters (broker-dealers, investment advisers, issuers, crypto businesses, individuals, fraud schemes, and other securities actors). The public library is mixed-bureau, press-release and document oriented, not a clean IA enforcement census. Name-only attachment is unsafe. OAG action is not an investment-adviser disciplinary census. Case is not a criminal conviction. Action count is not quality. No action found is not a clean record."
+  },
+  "complaints": {
+    "publicResearchPath": "https://ag.ny.gov/investor-protection-complaint-form",
+    "bulkComplaintDataset": "SOURCE_NOT_ACQUIRED",
+    "access": "OPEN_SEARCH_ONLY",
+    "completeComplaintCount": "UNKNOWN",
+    "caveat": "OAG complaint intake is a public research path. Complaint is not a violation. Investigation is not a finding. Do not answer firm-specific complaint questions with statewide OAG activity."
+  },
+  "formD": {
+    "overlay": "SOURCE_NOT_ACQUIRED",
+    "caveat": "FORM D / EFD FILING != NEW YORK STATE APPROVAL. FORM D FILING != INVESTMENT QUALITY. FORM D FILING != ADVISER."
+  },
+  "contacts": {
+    "policy": "Official/public business sources only. No internet enrichment. No IAPD/BrokerCheck/OAG search scrape. No person contact publication from this ticket.",
+    "oagSearchScrape": false
+  },
+  "juiceSqueeze": [
+    {
+      "decision": "GRABBED — HIGH YIELD",
+      "source": "IAPD New York state IA registration slice (jurisdiction=NY)"
+    },
+    {
+      "decision": "GRABBED — HIGH YIELD",
+      "source": "IAPD New York ERA slice"
+    },
+    {
+      "decision": "GRABBED — HIGH YIELD",
+      "source": "IAPD New York federal notice slice"
+    },
+    {
+      "decision": "GRABBED — HIGH YIELD",
+      "source": "Existing NY principal-office overlay (V1_ROSTER_PRINCIPAL_OFFICE_STATES)"
+    },
+    {
+      "decision": "GRABBED — EASY SECONDARY",
+      "source": "OAG Investor Protection Bureau registration/rule FAQ context (13 NYCRR 11)"
+    },
+    {
+      "decision": "LEFT — SEARCH ONLY",
+      "source": "Current IAPD/BrokerCheck/OAG interactive verification systems"
+    },
+    {
+      "decision": "LEFT — TOO MUCH WORK FOR CURRENT YIELD",
+      "source": "OAG Assurance of Discontinuance PDF census and press-release classification"
+    },
+    {
+      "decision": "LEFT — TOO MUCH WORK FOR CURRENT YIELD",
+      "source": "Individual U4/U5 histories and broker-agent current roster"
+    },
+    {
+      "decision": "LEFT — REQUEST ONLY",
+      "source": "FOIL"
+    },
+    {
+      "decision": "LEFT — SHARED / FUTURE",
+      "source": "Broad NY corporate entity graph; Form D issuer intelligence"
+    },
+    {
+      "decision": "LEFT — LOCAL / FUTURE",
+      "source": "NYC / counties / cities"
+    }
+  ],
+  "regulatorMatrix": [
+    {
+      "credential": "SEC-registered investment adviser",
+      "regulator": "U.S. SEC / IARD",
+      "identity": "CRD / IARD firm ID; SEC file number",
+      "proves": "Federal registration category as reported on Form ADV in the cited extract",
+      "doesNotProve": "New York state-RIA licensure or current New York notice-filing status"
+    },
+    {
+      "credential": "Exempt reporting adviser (ERA)",
+      "regulator": "SEC / IARD (and New York reporting when applicable)",
+      "identity": "CRD / IARD firm ID",
+      "proves": "ERA reporting status in the cited extract",
+      "doesNotProve": "SEC RIA registration or New York state-RIA licensure"
+    },
+    {
+      "credential": "New York state-registered investment adviser",
+      "regulator": "New York Attorney General Investor Protection Bureau / IARD",
+      "identity": "Firm CRD / IARD",
+      "proves": "New York state-IA registration when the official IARD state record says APPROVED",
+      "doesNotProve": "SEC registration. Principal-office geography is not this credential. Client-count guesses are not this credential."
+    },
+    {
+      "credential": "Federally covered / notice-filed investment adviser",
+      "regulator": "New York OAG (notice) / SEC (federal registration)",
+      "identity": "CRD / IARD firm ID",
+      "proves": "Notice-filing posture when the official IARD record says FILED",
+      "doesNotProve": "New York state-RIA licensure"
+    },
+    {
+      "credential": "Investment adviser representative",
+      "regulator": "New York OAG Investor Protection Bureau / CRD",
+      "identity": "Person CRD (not firm CRD)",
+      "proves": "Individual representative reporting when official CRD evidence exists",
+      "doesNotProve": "Firm registration. IAR is not the firm. IAR is not a broker-dealer registered representative."
+    },
+    {
+      "credential": "Broker-dealer / registered representative",
+      "regulator": "New York OAG / FINRA / CRD",
+      "identity": "Firm or person CRD",
+      "proves": "Broker-dealer or representative registration when official evidence exists",
+      "doesNotProve": "Investment-adviser registration"
+    },
+    {
+      "credential": "OAG Investor Protection matter",
+      "regulator": "Office of the New York Attorney General, Investor Protection Bureau",
+      "identity": "Exact source-native matter identifier; CRD only if source-native",
+      "proves": "A public OAG action/document observation when attached by exact identity",
+      "doesNotProve": "That every OAG matter is an investment-adviser disciplinary finding or a criminal conviction"
+    }
+  ],
+  "identityRules": {
+    "EXACT": [
+      "firm CRD/IARD ID",
+      "person CRD for person grain only",
+      "SEC file number where source-native",
+      "exact official OAG matter identifier"
+    ],
+    "HIGH_CONFIDENCE": "exact legal name + exact official address for non-adverse descriptive review only",
+    "REVIEW_REQUIRED": "name + city, DBA, name variants, address-only",
+    "UNSAFE": "name alone — not used for adverse profile attachment"
+  },
+  "semanticGrainRules": {
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_SEC_RIA": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_NOTICE_FILING": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_STATE_ERA": true,
+    "PRINCIPAL_OFFICE_IS_NOT_REGISTRATION": true,
+    "REGISTRATION_ROW_IS_DISTINCT_GRAIN_FROM_DISTINCT_FIRM_CRD": true,
+    "BROKER_DEALER_IS_NOT_INVESTMENT_ADVISER": true,
+    "AGENT_IS_NOT_IAR": true,
+    "FIRM_IS_NOT_INDIVIDUAL": true,
+    "OAG_ACTION_IS_NOT_IA_DISCIPLINARY_CENSUS": true,
+    "COMPLAINT_IS_NOT_VIOLATION": true,
+    "RAUM_IS_NOT_PERFORMANCE": true,
+    "note": "Credential/grain rules. They do not require disjoint CRD sets or unequal counts."
+  },
+  "profileAttachments": [],
+  "expansionLedger": {
+    "PRE_INGEST_CANONICAL_FIRMS": 25777,
+    "NY_PRINCIPAL_OFFICE_FIRMS": 3152,
+    "NY_STATE_IA_REGISTRATION_ROWS": 1297,
+    "NY_STATE_IA_DISTINCT_CRDS": 1297,
+    "NY_STATE_IA_CURRENT_FIRMS": 1297,
+    "NY_STATE_ERA_ROWS": 327,
+    "NY_STATE_ERA_IDENTITIES": 327,
+    "NY_FEDERAL_NOTICE_ROWS": 5856,
+    "NY_FEDERAL_NOTICE_DISTINCT_CRDS": 5856,
+    "NY_IAR_PERSON_ROWS": null,
+    "NEW_NY_STATE_IDENTITIES": 1624,
+    "NEW_NY_STATE_IDENTITIES_DEFINITION": "distinct firm CRDs in IAPD StateRgstn/Rgltr/@Cd=NY plus distinct firm CRDs in ERA/Rgltr/@Cd=NY (overlap 0 in this extract). Not new companies, not public profiles, not a combined New York adviser universe.",
+    "NET_NEW_CANONICAL_ORGANIZATIONS": 0,
+    "NET_NEW_PUBLIC_INVESTOR_PROFILES": 0,
+    "EXISTING_ORGANIZATIONS_ENRICHED": 3152,
+    "NEW_NY_REGULATORY_ACTIVITY_ROWS": 0,
+    "EXACT_CRD_ADVERSE_CROSSWALKS": 0,
+    "REVIEW_REQUIRED_CROSSWALKS": 0,
+    "REJECTED_UNSAFE_CROSSWALKS": 0,
+    "EXACT_PROFILE_ATTACHMENTS": 0,
+    "notes": {
+      "overlay": "3,152 New York principal-office firms already existed on the federal SEC/IARD spine. Not new organizations.",
+      "stateRoster": "IAPD state compilation added 1,297 distinct New York state-IA CRDs and 327 distinct New York state-ERA CRDs as state-intelligence identities. They were not minted as canonical organizations or public /firm profiles.",
+      "notice": "5,856 notice-filing rows are observations, not extra firms.",
+      "activity": "No bounded OAG IA enforcement table was acquired. Mixed publications library remains a research path."
+    }
+  },
+  "preIngestBaseline": {
+    "newYorkPrincipalOfficeFirmsAlreadyInFederalGraph": 3152,
+    "canonicalFirmsAlreadyPresent": 25777,
+    "note": "Recomputed from V1_ROSTER_PRINCIPAL_OFFICE_STATES NY = 3152. Do not call these firms new."
+  },
+  "sourceInventory": [
+    {
+      "authority": "SEC / IAPD",
+      "source": "IA_FIRM_SEC_Feed_08_27_2026",
+      "coverageStatus": "ACQUIRED",
+      "sourceAsOf": "2026-08-27",
+      "retrievedAt": "2026-08-28",
+      "count": 23622
+    },
+    {
+      "authority": "IAPD",
+      "source": "IA_FIRM_STATE_Feed_08_27_2026",
+      "coverageStatus": "ACQUIRED",
+      "sourceAsOf": "2026-08-27",
+      "retrievedAt": "2026-08-28",
+      "count": 1297
+    },
+    {
+      "authority": "New York OAG IPB",
+      "source": "Investment Advisers FAQ / 13 NYCRR 11",
+      "coverageStatus": "ACQUIRED_CONTEXT",
+      "sourceAsOf": "2021-02-01",
+      "retrievedAt": "2026-09-10",
+      "count": null
+    },
+    {
+      "authority": "New York OAG",
+      "source": "Advocacy and Enforcement Actions library",
+      "coverageStatus": "PUBLIC_RESEARCH_PATH",
+      "sourceAsOf": null,
+      "retrievedAt": "2026-09-10",
+      "count": null
+    },
+    {
+      "authority": "IAPD / BrokerCheck / OAG records",
+      "source": "interactive verification",
+      "coverageStatus": "OPEN_SEARCH_ONLY",
+      "sourceAsOf": null,
+      "retrievedAt": "2026-09-10",
+      "count": null
+    }
+  ],
+  "gaps": [
+    "Live OAG/IAPD/BrokerCheck verification is OPEN_SEARCH_ONLY; search-only is not zero.",
+    "Complete New York IAR person universe is UNKNOWN and is not published as a directory.",
+    "Complete New York broker-dealer and agent rosters are UNKNOWN.",
+    "OAG enforcement is mixed-bureau document/press-release library, not a bounded IA census.",
+    "No New York city/county investor pages.",
+    "Form D overlay not acquired."
+  ],
+  "rejectedJoins": [
+    {
+      "join": "name-only OAG matter → public firm profile",
+      "status": "REJECTED_UNSAFE",
+      "count": 0,
+      "reason": "Name alone is unsafe for adverse attachment. No bulk OAG table was acquired."
+    },
+    {
+      "join": "person CRD → firm CRD",
+      "status": "REJECTED_UNSAFE",
+      "count": 0,
+      "reason": "Exact person CRD does not become firm CRD."
+    },
+    {
+      "join": "3,152 principal-office firms → New York state IA universe",
+      "status": "REJECTED",
+      "count": 0,
+      "reason": "Principal office is geography, not registration."
+    }
+  ],
+  "rejectedTotals": [
+    {
+      "total": "New York has 3,152 investment advisers",
+      "reason": "3,152 is SEC/IARD principal-office geography, not a combined New York adviser universe."
+    },
+    {
+      "total": "3,152 + 1,297 + 327 + 5,856 as New York advisers",
+      "reason": "Incompatible grains."
+    },
+    {
+      "total": "Missing IAR/BD/complaint counts as zero",
+      "reason": "Missing and search-only are unknown, not zero."
+    }
+  ],
+  "semanticGuardrails": [
+    "NEW YORK PRINCIPAL OFFICE != STATE REGISTRATION",
+    "SEC RIA != NEW YORK STATE RIA",
+    "STATE RIA != FEDERAL-COVERED NOTICE FILING",
+    "RIA != ERA",
+    "IAR != FIRM",
+    "BROKER-DEALER != IA",
+    "REGISTERED REPRESENTATIVE != IAR",
+    "RAUM != INVESTMENT PERFORMANCE",
+    "COMPLAINT != VIOLATION",
+    "OAG ACTION != IA DISCIPLINARY CENSUS",
+    "NAME-ONLY ADVERSE MATCH = UNSAFE",
+    "MISSING != ZERO",
+    "SEARCH-ONLY != ZERO",
+    "NO TRUST SCORE",
+    "NO PAID RANKING"
+  ],
+  "fingerprint": "75ebcafb799270b54c3e84b9edfa1b05e145f74d6efdcdeae69cf3ebe10bc88b"
+}

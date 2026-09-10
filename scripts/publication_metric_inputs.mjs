@@ -48,6 +48,11 @@ export function publicationMetricInputs() {
       .replace(/^[\s\S]*export const VA_PUBLIC_SNAPSHOT = /, "")
       .replace(/\s+as const;[\s\S]*$/, ""),
   );
+  const ny = JSON.parse(
+    read("packages/domain/src/ny-public-snapshot.ts")
+      .replace(/^[\s\S]*export const NY_PUBLIC_SNAPSHOT = /, "")
+      .replace(/\s+as const;[\s\S]*$/, ""),
+  );
 
   const stateBlock = routes.match(/export const STATE_DISCOVERY_ROUTES = \[([\s\S]*?)\] as const/)[1];
   const publishedStateIntelligencePaths = [...stateBlock.matchAll(/href: '(\/[^']+)'/g)].map((m) => m[1]);
@@ -102,5 +107,10 @@ export function publicationMetricInputs() {
     vaNoticeFiled: va.federalNotice.noticeFiledDistinctCrd,
     vaRegulatoryActivityRows: va.enforcement.observationRows,
     vaRoute: va.route,
+    nyPrincipalOfficeFirms: ny.nationalOverlay.nyPrincipalOfficeSecIardFirms,
+    nyStateRiaRoster: ny.stateRia.STATE_RIA_BULK_ROSTER,
+    nyStateRiaApproved: ny.stateRia.approvedDistinctCrd,
+    nyNoticeFiled: ny.federalNotice.noticeFiledDistinctCrd,
+    nyRoute: ny.route,
   };
 }

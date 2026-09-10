@@ -1,6 +1,7 @@
 import { AZ_PUBLIC_SNAPSHOT } from './az-public-snapshot';
 import { CA_PUBLIC_SNAPSHOT } from './ca-public-snapshot';
 import { CO_PUBLIC_SNAPSHOT } from './co-public-snapshot';
+import { NY_PUBLIC_SNAPSHOT } from './ny-public-snapshot';
 import { VA_PUBLIC_SNAPSHOT } from './va-public-snapshot';
 import { loadInvestorNetworkMetrics } from './load-network-metrics';
 import { NJ_PUBLIC_SNAPSHOT } from './nj-public-snapshot';
@@ -64,7 +65,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY';
   name: string;
   href: string;
   regulator: string;
@@ -434,6 +435,41 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
         sourceAsOf: '2025',
         retrievedAt: VA_PUBLIC_SNAPSHOT.enforcement.retrievedAt,
         snapshotAsOf: VA_PUBLIC_SNAPSHOT.asOf,
+        generatedAt: null,
+      },
+    ],
+  },
+  {
+    code: 'NY',
+    name: 'New York',
+    href: NY_PUBLIC_SNAPSHOT.route,
+    regulator: 'New York Attorney General Investor Protection Bureau',
+    principalOfficeFirms:
+      NY_PUBLIC_SNAPSHOT.nationalOverlay.nyPrincipalOfficeSecIardFirms,
+    rosterStatus: 'IAPD compilation (1297 approved)',
+    evidence: [
+      'SEC/IARD principal-office overlay',
+      'IAPD New York state-registered IA compilation',
+      'IAPD New York state ERA reporting',
+      'federal-covered notice filings',
+    ],
+    identityNote:
+      '1,297 is IAPD state-compilation APPROVED firms with New York as registration jurisdiction. It is not the 3,152 SEC principal-office overlay and not 5,856 notice filings.',
+    limitation:
+      'State-only CRDs were not minted as public SEC firm profiles. OAG enforcement remains a mixed research path, not an IA census.',
+    sourceClocks: [
+      {
+        label: 'SEC/IARD feed',
+        sourceAsOf: NY_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+        retrievedAt: NY_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+        snapshotAsOf: null,
+        generatedAt: null,
+      },
+      {
+        label: 'IAPD state compilation',
+        sourceAsOf: NY_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+        retrievedAt: NY_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+        snapshotAsOf: NY_PUBLIC_SNAPSHOT.stateRia.snapshotAsOf,
         generatedAt: null,
       },
     ],
@@ -944,6 +980,62 @@ export function buildInvestorHomepageEvidenceInventory(): InvestorHomepageEviden
       VA_PUBLIC_SNAPSHOT.federalNotice.retrievedAt,
     ),
     stateMeasure(
+      'ny_overlay',
+      'New York SEC/IARD principal-office firms',
+      metrics.newYork.principalOfficeRosterFirms,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'SEC/IARD firm with NY principal office',
+      'New York',
+      'SEC IAPD / IARD',
+      'artifacts/ny-inv-001-public-snapshot.json',
+      NY_PUBLIC_SNAPSHOT.asOf,
+      'Federal roster firms reporting NY principal office.',
+      'New York state-RIA roster, notice filing, or OAG authority.',
+      '/new-york',
+      'PUBLIC',
+      NY_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+      NY_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+    ),
+    stateMeasure(
+      'ny_state_roster',
+      'New York state-registered investment-adviser firms',
+      NY_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'IAPD state-compilation APPROVED firm with jurisdiction NY',
+      'New York',
+      'IAPD state compilation',
+      'artifacts/ny-inv-001-public-snapshot.json',
+      NY_PUBLIC_SNAPSHOT.asOf,
+      'Approved New York state-IA firms in IA_FIRM_STATE_Feed_08_27_2026.',
+      'SEC principal-office overlay, federal notice filings, ERA reporting, or IAR people.',
+      '/new-york',
+      'PUBLIC',
+      NY_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+      NY_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+      'Exact firm CRD. State-only identities were not minted as public SEC profiles.',
+      'Filter is registration jurisdiction, not address.',
+    ),
+    stateMeasure(
+      'ny_notice_filed',
+      'SEC/IARD firms with a New York notice filing',
+      NY_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'NoticeFiled RgltrCd=NY FILED',
+      'New York',
+      'SEC IAPD / IARD',
+      'artifacts/ny-inv-001-public-snapshot.json',
+      NY_PUBLIC_SNAPSHOT.asOf,
+      'SEC/IARD firms with a New York notice filing in the cited compilation.',
+      'New York state-RIA licensure or the 3,152 principal-office overlay.',
+      '/new-york',
+      'PUBLIC',
+      NY_PUBLIC_SNAPSHOT.federalNotice.sourceAsOf,
+      NY_PUBLIC_SNAPSHOT.federalNotice.retrievedAt,
+    ),
+    stateMeasure(
       'az_index_crd_mentions',
       'Arizona index rows mentioning CRD',
       AZ_PUBLIC_SNAPSHOT.enforcement.rowsWithCrdInRespondentText,
@@ -1109,7 +1201,7 @@ export function buildInvestorHomepageEvidenceInventory(): InvestorHomepageEviden
       'KNOWN',
       'PUBLIC_RESEARCH',
       'published state intelligence page',
-      'NJ, CA, TX, WA, AZ, CO, VA',
+      'NJ, CA, TX, WA, AZ, CO, VA, NY',
       'Accepted state publication models',
       'INVESTOR_HOMEPAGE_STATE_CARDS',
       null,
@@ -1168,11 +1260,11 @@ export function assertInvestorHomepageEvidenceInventory(
   )
     throw new Error('Cross-grain or national RAUM totals cannot publish');
   if (
-    INVESTOR_HOMEPAGE_STATE_CARDS.length !== 7 ||
+    INVESTOR_HOMEPAGE_STATE_CARDS.length !== 8 ||
     INVESTOR_HOMEPAGE_STATE_CARDS.some((state) => state.href === '/florida')
   )
     throw new Error(
-      'Exactly seven accepted state pages may publish; Florida is not one',
+      'Exactly eight accepted state pages may publish; Florida is not one',
     );
   if (
     inventory.find((item) => item.key === 'published_state_pages')?.value !==

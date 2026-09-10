@@ -1,0 +1,894 @@
+{
+  "contract": "investor-ny-iapd-census-v1",
+  "safeAsCurrentNewYorkBulkStateLayer": true,
+  "filterLogic": "New York selected by IAPD registration/notice jurisdiction fields (StateRgstn/Rgltr/@Cd, ERA/Rgltr/@Cd, NoticeFiled/States/@RgltrCd). Principal-office MainAddr/@State=NY is a separate national overlay and is not the state-RIA denominator.",
+  "state": {
+    "filename": "IA_FIRM_STATE_Feed_08_27_2026.xml.gz",
+    "authority": "IAPD (FINRA-held state compilation)",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_08_27_2026.xml.gz",
+    "sourceAsOf": "2026-08-27",
+    "publishedAt": "2026-08-27",
+    "retrievedAt": "2026-08-28T16:36:30Z",
+    "bytes": 5072645,
+    "sha256": "4dc5ec13827c2546213fba16d3397448ba5c08cb8c092f1135c405a7f8472eda",
+    "grain": "Firm CRD; StateRgstn/Rgltr/@Cd=jurisdiction; @St=status; ERA/Rgltr/@Cd=jurisdiction. Not MainAddr/@State.",
+    "filter": "Rgltr/@Cd=NY (registration jurisdiction). Address is recorded only for overlap diagnostics.",
+    "firms_in_feed": 21818,
+    "co_state_ia_registration_rows": 1297,
+    "co_state_ia_distinct_crd": 1297,
+    "co_state_ia_approved_distinct_crd": 1297,
+    "co_state_ia_current_distinct_crd": 1297,
+    "co_state_ia_termrequest_distinct_crd": 0,
+    "co_state_era_registration_rows": 327,
+    "co_state_era_distinct_crd": 327,
+    "co_state_era_active_distinct_crd": 327,
+    "ia_era_overlap_distinct_crd": 0,
+    "status_ia": [
+      [
+        "APPROVED",
+        1297
+      ]
+    ],
+    "status_era": [
+      [
+        "ACTIVE",
+        327
+      ]
+    ],
+    "principal_office_co_among_state_ia": 369,
+    "principal_office_not_co_among_state_ia": 928,
+    "address_co_without_co_jurisdiction": 35
+  },
+  "sec": {
+    "filename": "IA_FIRM_SEC_Feed_08_27_2026.xml.gz",
+    "authority": "SEC / IAPD",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_SEC_Feed_08_27_2026.xml.gz",
+    "sourceAsOf": "2026-08-27",
+    "publishedAt": "2026-08-27",
+    "retrievedAt": "2026-08-28T16:36:30Z",
+    "bytes": 7271790,
+    "sha256": "967217b0cdb4548f496407f7232eff30deba12217c36447fad0cee757473b65c",
+    "grain": "Firm CRD; NoticeFiled/States/@RgltrCd=jurisdiction; MainAddr/@State=principal office (separate overlay).",
+    "firms_in_feed": 23780,
+    "firm_types": [
+      [
+        "Registered",
+        17141
+      ],
+      [
+        "ERA",
+        6639
+      ]
+    ],
+    "co_notice_rows": 5856,
+    "co_notice_any_status_distinct_crd": 5856,
+    "co_notice_filed_distinct_crd": 5856,
+    "co_notice_era_any_status": 0,
+    "co_notice_filed_firm_type": {
+      "Registered": 5856,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          5856
+        ]
+      ]
+    },
+    "notice_status": [
+      [
+        "FILED",
+        5856
+      ]
+    ],
+    "co_principal_office_distinct_crd": 3179,
+    "principal_and_notice_filed": 1709,
+    "notice_filed_not_principal": 4147,
+    "principal_not_notice_filed": 1470
+  },
+  "overlaps": {
+    "state_ia_and_principal_office": 16,
+    "state_ia_approved_and_principal_office": 16,
+    "state_ia_and_notice_filed": 27,
+    "state_ia_approved_and_notice_filed": 27,
+    "state_era_and_principal_office": 73,
+    "state_era_and_notice_filed": 0,
+    "state_ia_and_state_era": 0,
+    "notice_filed_and_principal_office": 1709,
+    "approved_state_ia_not_in_sec_principal_or_notice": 1269,
+    "state_ia_approved_and_notice_filed_crds": [
+      "118537",
+      "126545",
+      "127852",
+      "134374",
+      "144340",
+      "144673",
+      "147076",
+      "152447",
+      "153496",
+      "154295",
+      "155088",
+      "169817",
+      "173224",
+      "277083",
+      "284061",
+      "288345",
+      "293551",
+      "295320",
+      "298277",
+      "298549",
+      "305263",
+      "307332",
+      "313006",
+      "317854",
+      "319716",
+      "332215",
+      "44357"
+    ],
+    "state_ia_approved_and_notice_filed_joinMethod": "exact firm CRD set intersection of APPROVED StateRgstn/Rgltr/@Cd=NY and NoticeFiled/States/@RgltrCd=NY St=FILED",
+    "state_ia_approved_and_notice_filed_records": [
+      {
+        "crd": "118537",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "1998-02-23"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2018-05-29",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2018-05-29"
+          },
+          "secFileNumber": "801-113326"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "126545",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2002-05-28"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2017-05-03",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2015-04-03"
+          },
+          "secFileNumber": "801-85194"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "127852",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2000-10-19"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2008-05-21",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2008-05-21"
+          },
+          "secFileNumber": "801-69165"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "134374",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2026-02-09"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-01-22",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2026-01-22"
+          },
+          "secFileNumber": "801-135226"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "144340",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2012-09-10"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2025-12-09",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2025-12-09"
+          },
+          "secFileNumber": "801-133870"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "144673",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2007-08-27"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2022-03-30",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2019-05-07"
+          },
+          "secFileNumber": "801-115244"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "147076",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2008-07-11"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2020-05-01",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2020-05-01"
+          },
+          "secFileNumber": "801-118628"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "152447",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2010-02-01"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-02-27",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2022-12-20"
+          },
+          "secFileNumber": "801-125917"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "153496",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2010-11-30"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2025-09-25",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2025-09-25"
+          },
+          "secFileNumber": "801-134318"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "154295",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2010-08-02"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2024-04-25",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2024-04-25"
+          },
+          "secFileNumber": "801-130118"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "155088",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2010-11-08"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2018-04-27",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2018-04-27"
+          },
+          "secFileNumber": "801-113075"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "169817",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2023-08-02"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2025-04-28",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2025-04-28"
+          },
+          "secFileNumber": "801-132576"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "173224",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2023-02-16"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2025-11-14",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2025-11-14"
+          },
+          "secFileNumber": "801-134729"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "277083",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2022-01-10"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-04-20",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2026-04-20"
+          },
+          "secFileNumber": "801-135828"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "284061",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2016-06-24"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2020-12-11",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2020-12-11"
+          },
+          "secFileNumber": "801-120137"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "288345",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2022-09-06"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2025-12-09",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2025-12-09"
+          },
+          "secFileNumber": "801-134918"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "293551",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2018-10-10"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2019-07-09",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2019-07-09"
+          },
+          "secFileNumber": "801-116941"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "295320",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2018-06-07"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-08-19",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2026-08-19"
+          },
+          "secFileNumber": "801-137119"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "298277",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2021-10-06"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-04-22",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2026-04-22"
+          },
+          "secFileNumber": "801-135930"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "298549",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2020-06-08"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2025-02-04",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2025-02-04"
+          },
+          "secFileNumber": "801-131895"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "305263",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2019-08-27"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2022-01-26",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2022-01-26"
+          },
+          "secFileNumber": "801-122329"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "307332",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2020-02-13"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-03-26",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2026-03-26"
+          },
+          "secFileNumber": "801-135660"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "313006",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2022-02-07"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-08-05",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2026-08-05"
+          },
+          "secFileNumber": "801-136972"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "317854",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2022-03-17"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2024-02-13",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2024-02-13"
+          },
+          "secFileNumber": "801-129483"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "319716",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2022-05-04"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-04-09",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2026-04-09"
+          },
+          "secFileNumber": "801-135877"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "332215",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2026-08-14"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2025-09-02",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED-120",
+            "Dt": "2025-09-02"
+          },
+          "secFileNumber": "801-134265"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "44357",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NY",
+          "filter": "StateRgstn/Rgltr/@Cd=NY",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "1998-09-15"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NY",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2009-01-30",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2008-01-14"
+          },
+          "secFileNumber": "801-64064"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED New York StateRgstn and FILED New York NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      }
+    ]
+  },
+  "semanticGrainRules": {
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_SEC_RIA": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_NOTICE_FILING": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_STATE_ERA": true,
+    "PRINCIPAL_OFFICE_IS_NOT_REGISTRATION": true,
+    "REGISTRATION_ROW_IS_DISTINCT_GRAIN_FROM_DISTINCT_FIRM_CRD": true,
+    "note": "These are contract/credential rules. They do not assert that CRD sets are disjoint or that counts are numerically unequal."
+  },
+  "computedDiagnostics": {
+    "state_ia_registration_rows": 1297,
+    "state_ia_distinct_crd": 1297,
+    "state_ia_approved_distinct_crd": 1297,
+    "state_ia_termrequest_distinct_crd": 0,
+    "state_era_registration_rows": 327,
+    "state_era_distinct_crd": 327,
+    "state_ia_and_state_era_overlap_distinct_crd": 0,
+    "state_ia_approved_and_notice_filed_overlap_distinct_crd": 27,
+    "notice_filed_distinct_crd": 5856,
+    "notice_filed_firm_type": {
+      "Registered": 5856,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          5856
+        ]
+      ]
+    },
+    "registration_rows_equal_distinct_crd": true
+  }
+}

@@ -62,6 +62,9 @@ async function main() {
     vaStateRiaApproved: pub.vaStateRiaApproved,
     vaNoticeFiled: pub.vaNoticeFiled,
     vaRegulatoryActivityRows: pub.vaRegulatoryActivityRows,
+    nyPrincipalOfficeFirms: pub.nyPrincipalOfficeFirms,
+    nyStateRiaApproved: pub.nyStateRiaApproved,
+    nyNoticeFiled: pub.nyNoticeFiled,
   };
 
   if (input.riaFacts !== pub.riaFacts || input.eraFacts !== pub.eraFacts || input.rosterFirms !== pub.rosterFirms) {

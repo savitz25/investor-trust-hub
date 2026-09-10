@@ -514,6 +514,38 @@ export function interpretInvestorAskQuery(raw: string, overrides: InvestorAskOve
     push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };
   }
+  if (/\b(?:new york state rias?|advisers? registered in new york|licensed (?:investment )?advisers? in new york|investment advisers? registered in new york)\b/i.test(q)) {
+    const query = failClosed(
+      'New York state-registered investment-adviser firms are published on /new-york from the IAPD state compilation (jurisdiction=NY). Search V1 remains the SEC/IARD roster and does not treat the 3,152 principal-office overlay as New York state registration. Notice filing is a different grain from state IA.',
+      ['SEC/IARD firms reporting a principal office in New York.', 'RIA principal offices in New York.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:new york era|new york state era)\b/i.test(q)) {
+    const query = failClosed(
+      'New York state ERA reporting firms are published on /new-york. ERA is not an RIA and is not New York state IA registration. Search V1 remains the SEC/IARD roster.',
+      ['New York investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:sec adviser doing business in new york|notice-?filed in new york)\b/i.test(q)) {
+    const query = failClosed(
+      'A federal-covered notice filing in New York is not New York state IA registration and is not a New York principal office. Use /new-york for the separate grains. Verify current status on IAPD.',
+      ['New York investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if ((/\bnew york\b/i.test(q) || /\bnyc\b/i.test(q) || /\bnew york city\b/i.test(q)) && /\bcomplaint/i.test(q)) {
+    const query = failClosed(
+      'OAG Investor Protection activity is mixed and is not a firm-specific complaint history. Name-only matching is unsafe. Use IAPD/BrokerCheck and /new-york for statewide context.',
+      ['New York investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
 
   if (/\bhow many form adv observations\b|\bhow many (normalized )?adv observations\b/i.test(q)) {
     const query: InvestorResearchQuery = {
