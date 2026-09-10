@@ -46,6 +46,10 @@ export type InvestorNetworkMetricsInput = {
   coStateRiaApproved: number;
   coNoticeFiled: number;
   coEnforcementNarrativeEntries: number;
+  vaPrincipalOfficeFirms: number;
+  vaStateRiaApproved: number;
+  vaNoticeFiled: number;
+  vaRegulatoryActivityRows: number;
 };
 
 function metric(partial: Omit<InvestorNetworkMetric, 'unit'>): InvestorNetworkMetric {
@@ -108,7 +112,7 @@ export function assertGrainSafety(input: InvestorNetworkMetricsInput): void {
   if (input.disclosureEvents === input.item11YesRia + input.item11YesEra && input.disclosureEvents > 0) {
     throw new Error('disclosure events must not be equated to Item 11 yes indicators');
   }
-  for (const path of ['/new-jersey', '/california', '/texas', '/washington', '/arizona', '/colorado']) {
+  for (const path of ['/new-jersey', '/california', '/texas', '/washington', '/arizona', '/colorado', '/virginia']) {
     if (!input.publishedStateIntelligencePaths.includes(path)) {
       throw new Error(`state intelligence path missing: ${path}`);
     }
@@ -136,6 +140,12 @@ export function assertGrainSafety(input: InvestorNetworkMetricsInput): void {
   }
   if (input.coPrincipalOfficeFirms === input.rosterFirms) {
     throw new Error('CO principal-office overlay must not equal the national roster');
+  }
+  if (input.vaPrincipalOfficeFirms === input.rosterFirms) {
+    throw new Error('VA principal-office overlay must not equal the national roster');
+  }
+  if (input.vaStateRiaApproved === 4481) {
+    throw new Error('Do not use 4,481 activity approvals as the Virginia state-IA universe');
   }
 }
 
@@ -529,20 +539,42 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       ),
     }),
     metric({
+      key: 'va_state_ria_roster',
+      label: 'Virginia state-registered investment-adviser firms',
+      value: input.vaStateRiaApproved,
+      valueState: 'KNOWN',
+      grain: 'va_state_ria_roster',
+      denominator: 'IAPD state compilation APPROVED firms with registration jurisdiction = VA',
+      description:
+        'Virginia state-registered investment-adviser firms from IA_FIRM_STATE_Feed_08_27_2026. Not SEC RIA, not notice filing, not ERA, not the 339 principal-office overlay, and not 4,481 2025 activity approvals.',
+      coverage: 'Virginia',
+      contributingSourceSystems: ['iapd_state_compilation'],
+      sourceAsOf: input.publishedAt,
+      generatedAt,
+      publicationStatus: 'PUBLIC',
+      trace: commonTrace(
+        'IAPD StateRgstn/Rgltr/@Cd=VA and status APPROVED, counted as distinct firm CRD.',
+        'Not SEC/IARD principal-office firms. Not federal-covered notice filings. Not state ERA reporting. Not IAR people. Not SCC 2025 activity counts.',
+        ['iapd_state_compilation'],
+        'Virginia',
+        'IA_FIRM_STATE_Feed_08_27_2026',
+      ),
+    }),
+    metric({
       key: 'published_state_intelligence_pages',
       label: 'Published state investment-intelligence pages',
       value: input.publishedStateIntelligencePaths.length,
       valueState: 'KNOWN',
       grain: 'published_state_intelligence_page',
       denominator: 'Indexable specialist state intelligence routes currently published',
-      description: 'New Jersey, California, Texas, Washington, Arizona, and Colorado state intelligence pages. Not a count of advisers.',
+      description: 'New Jersey, California, Texas, Washington, Arizona, Colorado, and Virginia state intelligence pages. Not a count of advisers.',
       coverage: input.publishedStateIntelligencePaths.join(', '),
       contributingSourceSystems: ['investor-state-intel'],
       sourceAsOf: newestDocumentedSourceAsOf,
       generatedAt,
       publicationStatus: 'PUBLIC',
       trace: commonTrace(
-        'Published /new-jersey, /california, /texas, /washington, /arizona, and /colorado intelligence routes.',
+        'Published /new-jersey, /california, /texas, /washington, /arizona, /colorado, and /virginia intelligence routes.',
         'Not county pages. Not national roster rows. Florida is not published on this hub.',
         ['investor-state-intel'],
         input.publishedStateIntelligencePaths.join(', '),
@@ -578,6 +610,10 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
     coStateRia: input.coStateRiaApproved,
     coNotice: input.coNoticeFiled,
     coEnf: input.coEnforcementNarrativeEntries,
+    vaHq: input.vaPrincipalOfficeFirms,
+    vaStateRia: input.vaStateRiaApproved,
+    vaNotice: input.vaNoticeFiled,
+    vaAct: input.vaRegulatoryActivityRows,
     publishedAt: input.publishedAt,
   };
 
@@ -671,6 +707,13 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       noticeFiledFirms: input.coNoticeFiled,
       enforcementNarrativeEntriesProfiled: input.coEnforcementNarrativeEntries,
     },
+    virginia: {
+      principalOfficeRosterFirms: input.vaPrincipalOfficeFirms,
+      stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION',
+      statewideStateRiaUniverse: input.vaStateRiaApproved,
+      noticeFiledFirms: input.vaNoticeFiled,
+      regulatoryActivityRows: input.vaRegulatoryActivityRows,
+    },
     network: {
       publishedStateIntelligencePages: input.publishedStateIntelligencePaths.length,
       publishedStateIntelligencePaths: input.publishedStateIntelligencePaths,
@@ -699,6 +742,10 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       {
         total: `${input.coPrincipalOfficeFirms} + ${input.coStateRiaApproved} + ${input.coNoticeFiled} as Colorado advisers`,
         reason: 'Incompatible grains. Principal office, state IA, and federal notice must stay separate. 589 is not the state-RIA denominator.',
+      },
+      {
+        total: `${input.vaPrincipalOfficeFirms} + ${input.vaStateRiaApproved} + ${input.vaNoticeFiled} as Virginia advisers`,
+        reason: 'Incompatible grains. Principal office, state IA, and federal notice must stay separate. 339 is not the state-RIA denominator. 4,481 is not a firm universe.',
       },
       {
         total: `${input.disclosureEvents} disclosure events as no-wrongdoing`,

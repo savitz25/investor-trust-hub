@@ -1,0 +1,36 @@
+import assert from 'node:assert/strict';
+import { existsSync, readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { publicationMetricInputs } from './publication_metric_inputs.mjs';
+
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const snap = JSON.parse(readFileSync(join(root, 'artifacts/va-inv-001-public-snapshot.json'), 'utf8'));
+const pub = publicationMetricInputs();
+const routes = readFileSync(join(root, 'packages/config/src/routes.ts'), 'utf8');
+const ui = readFileSync(join(root, 'apps/web/src/components/va-state-intel.tsx'), 'utf8');
+
+assert.equal(snap.version, 'investor-va-state-intel-v1');
+assert.equal(snap.route, '/virginia');
+assert.equal(snap.fingerprint, 'b5f82ff25157a614a18ec134253996ab54fc5961b282bda68ff228e85a525a7b');
+assert.equal(typeof snap.fingerprint, 'string');
+assert.equal(snap.fingerprint.length, 64);
+assert(pub.publishedStateIntelligencePaths.includes('/virginia'), 'catalog includes /virginia');
+assert(!pub.indexablePaths.includes('/virginia/richmond'), 'no Richmond path');
+assert(!existsSync(join(root, 'apps/web/src/app/virginia/richmond')), 'no Richmond folder');
+assert(routes.includes("href: '/virginia'"), 'STATE_DISCOVERY_ROUTES');
+assert.equal(snap.nationalOverlay.vaPrincipalOfficeSecIardFirms, 339);
+assert.equal(snap.stateRia.approvedDistinctCrd, 697);
+assert.notEqual(snap.stateRia.approvedDistinctCrd, 4481);
+assert.equal(snap.federalNotice.noticeFiledDistinctCrd, 3289);
+assert.equal(snap.stateEra.activeDistinctCrd, 107);
+assert.equal(snap.expansionLedger.NET_NEW_CANONICAL_ORGANIZATIONS, 0);
+assert.equal(snap.expansionLedger.NET_NEW_PUBLIC_INVESTOR_PROFILES, 0);
+assert.equal(snap.expansionLedger.EXACT_PROFILE_ATTACHMENTS, 0);
+assert.equal(snap.iar.virginiaPersonDirectory, 'NOT_PUBLISHED');
+assert.equal(snap.enforcement.pdfsDownloaded, 0);
+assert.equal(snap.sccAnnualReport.headline.investment_advisor_audits_completed, 69);
+assert.match(ui, /not 4,481 firms/);
+assert.match(ui, /Trust Score/);
+assert.doesNotMatch(ui, /best adviser|safest adviser/i);
+console.log('VA-INV-001 publication assert: PASS');

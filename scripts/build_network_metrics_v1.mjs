@@ -58,6 +58,10 @@ async function main() {
     coStateRiaApproved: pub.coStateRiaApproved,
     coNoticeFiled: pub.coNoticeFiled,
     coEnforcementNarrativeEntries: pub.coEnforcementNarrativeEntries,
+    vaPrincipalOfficeFirms: pub.vaPrincipalOfficeFirms,
+    vaStateRiaApproved: pub.vaStateRiaApproved,
+    vaNoticeFiled: pub.vaNoticeFiled,
+    vaRegulatoryActivityRows: pub.vaRegulatoryActivityRows,
   };
 
   if (input.riaFacts !== pub.riaFacts || input.eraFacts !== pub.eraFacts || input.rosterFirms !== pub.rosterFirms) {

@@ -522,7 +522,7 @@ export function InvestorHomeIntelligence({
       >
         <div className="ith-shell">
           <p className="ith-eyebrow">
-            Five published state intelligence surfaces
+            Seven published state intelligence surfaces
           </p>
           <h2 id="states-title">
             Federal identity plus state regulatory context
