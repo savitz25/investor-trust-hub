@@ -107,7 +107,7 @@ export function VirginiaStateIntelligence() {
       <section className="ith-intel-section" aria-labelledby="va-record-title">
         <div className="th-shell">
           <p className="ith-eyebrow">State of the record</p>
-          <h2 id="va-record-title">Universe · Current · Notice · Activity · As-of</h2>
+          <h2 id="va-record-title">Universe · Current · State ERA · Notice · Activity · As-of</h2>
           <div className="ith-metric-rail">
             <article className="ith-metric">
               <p className="ith-metric__value">{overlayCount.toLocaleString('en-US')}</p>
@@ -133,6 +133,19 @@ export function VirginiaStateIntelligence() {
                 grain="state-registered investment adviser firm; registration jurisdiction = VA"
                 calculation={`${snap.stateRia.registrationRows} Virginia StateRgstn rows; ${snap.stateRia.distinctFirmCrd} distinct firm CRDs; ${snap.stateRia.approvedDistinctCrd} APPROVED; ${snap.stateRia.termrequestDistinctCrd} TERMREQUEST. Filter is Rgltr/@Cd=VA, not address.`}
                 caveat={snap.stateRia.caveat}
+              />
+            </article>
+            <article className="ith-metric">
+              <p className="ith-metric__value">{snap.stateEra.activeDistinctCrd.toLocaleString('en-US')}</p>
+              <h3>State ERA</h3>
+              <p className="ith-kicker">Virginia state ERA reporting firms. ERA is not an RIA.</p>
+              <Trace
+                source={snap.stateEra.source}
+                sourceDate={snap.stateEra.sourceAsOf}
+                coverage={snap.stateEra.STATE_ERA_REPORTING}
+                grain="Virginia state ERA reporting firm; ERA/Rgltr/@Cd=VA; distinct firm CRD"
+                calculation={`${snap.stateEra.registrationRows} registration rows; ${snap.stateEra.distinctFirmCrd} distinct firm CRDs; ${snap.stateEra.activeDistinctCrd} ACTIVE; overlap with Virginia state IA = ${snap.stateEra.overlapWithStateIa}.`}
+                caveat={snap.stateEra.caveat}
               />
             </article>
             <article className="ith-metric">
@@ -263,6 +276,11 @@ export function VirginiaStateIntelligence() {
         <div className="th-shell">
           <h2 id="va-not-title">What this page does not mean</h2>
           <ul>
+            <li>
+              {snap.stateEra.activeDistinctCrd.toLocaleString('en-US')} Virginia state ERA reporting firms are a
+              separate source-defined class from the {snap.stateRia.approvedDistinctCrd.toLocaleString('en-US')}{' '}
+              approved Virginia state-registered IA firms. ERA is not an RIA.
+            </li>
             <li>It does not say Virginia has one investment-adviser total.</li>
             <li>4,481 2025 approvals/renewals/amendments are not current firms.</li>
             <li>IAR registration/renewal activity is person grain, not firms.</li>
