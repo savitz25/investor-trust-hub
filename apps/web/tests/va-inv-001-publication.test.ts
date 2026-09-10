@@ -16,7 +16,12 @@ describe('VA-INV-001 publication', () => {
     expect(ui).not.toMatch(/best adviser|safest adviser|vetted adviser/i);
     expect(ui).toMatch(/4,481/);
     expect(ui).toMatch(/not 4,481 firms/);
+    expect(ui).toContain('snap.stateEra.activeDistinctCrd');
+    expect(ui).toMatch(/<h3>State ERA<\/h3>/);
+    expect(ui).toMatch(/ERA is not an RIA/);
+    expect(ui).not.toMatch(/339 \+ 697|339\+697\+107|Virginia advisers total/i);
     expect(VA_PUBLIC_SNAPSHOT.route).toBe('/virginia');
+    expect(VA_PUBLIC_SNAPSHOT.stateEra.activeDistinctCrd).toBe(107);
     expect(VA_PUBLIC_SNAPSHOT.iar.virginiaPersonDirectory).toBe('NOT_PUBLISHED');
   });
 
