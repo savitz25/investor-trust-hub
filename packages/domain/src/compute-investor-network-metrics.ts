@@ -50,6 +50,9 @@ export type InvestorNetworkMetricsInput = {
   vaStateRiaApproved: number;
   vaNoticeFiled: number;
   vaRegulatoryActivityRows: number;
+  nyPrincipalOfficeFirms: number;
+  nyStateRiaApproved: number;
+  nyNoticeFiled: number;
 };
 
 function metric(partial: Omit<InvestorNetworkMetric, 'unit'>): InvestorNetworkMetric {
@@ -112,7 +115,7 @@ export function assertGrainSafety(input: InvestorNetworkMetricsInput): void {
   if (input.disclosureEvents === input.item11YesRia + input.item11YesEra && input.disclosureEvents > 0) {
     throw new Error('disclosure events must not be equated to Item 11 yes indicators');
   }
-  for (const path of ['/new-jersey', '/california', '/texas', '/washington', '/arizona', '/colorado', '/virginia']) {
+  for (const path of ['/new-jersey', '/california', '/texas', '/washington', '/arizona', '/colorado', '/virginia', '/new-york']) {
     if (!input.publishedStateIntelligencePaths.includes(path)) {
       throw new Error(`state intelligence path missing: ${path}`);
     }
@@ -146,6 +149,12 @@ export function assertGrainSafety(input: InvestorNetworkMetricsInput): void {
   }
   if (input.vaStateRiaApproved === 4481) {
     throw new Error('Do not use 4,481 activity approvals as the Virginia state-IA universe');
+  }
+  if (input.nyPrincipalOfficeFirms === input.rosterFirms) {
+    throw new Error('NY principal-office overlay must not equal the national roster');
+  }
+  if (input.nyStateRiaApproved === input.nyPrincipalOfficeFirms) {
+    throw new Error('NY state IA must not equal the principal-office overlay');
   }
 }
 
@@ -561,20 +570,42 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       ),
     }),
     metric({
+      key: 'ny_state_ria_roster',
+      label: 'New York state-registered investment-adviser firms',
+      value: input.nyStateRiaApproved,
+      valueState: 'KNOWN',
+      grain: 'ny_state_ria_roster',
+      denominator: 'IAPD state compilation APPROVED firms with registration jurisdiction = NY',
+      description:
+        'New York state-registered investment-adviser firms from IA_FIRM_STATE_Feed_08_27_2026. Not SEC RIA, not notice filing, not ERA, and not the 3,152 principal-office overlay.',
+      coverage: 'New York',
+      contributingSourceSystems: ['iapd_state_compilation'],
+      sourceAsOf: input.publishedAt,
+      generatedAt,
+      publicationStatus: 'PUBLIC',
+      trace: commonTrace(
+        'IAPD StateRgstn/Rgltr/@Cd=NY and status APPROVED, counted as distinct firm CRD.',
+        'Not SEC/IARD principal-office firms. Not federal-covered notice filings. Not state ERA reporting. Not IAR people.',
+        ['iapd_state_compilation'],
+        'New York',
+        'IA_FIRM_STATE_Feed_08_27_2026',
+      ),
+    }),
+    metric({
       key: 'published_state_intelligence_pages',
       label: 'Published state investment-intelligence pages',
       value: input.publishedStateIntelligencePaths.length,
       valueState: 'KNOWN',
       grain: 'published_state_intelligence_page',
       denominator: 'Indexable specialist state intelligence routes currently published',
-      description: 'New Jersey, California, Texas, Washington, Arizona, Colorado, and Virginia state intelligence pages. Not a count of advisers.',
+      description: 'New Jersey, California, Texas, Washington, Arizona, Colorado, Virginia, and New York state intelligence pages. Not a count of advisers.',
       coverage: input.publishedStateIntelligencePaths.join(', '),
       contributingSourceSystems: ['investor-state-intel'],
       sourceAsOf: newestDocumentedSourceAsOf,
       generatedAt,
       publicationStatus: 'PUBLIC',
       trace: commonTrace(
-        'Published /new-jersey, /california, /texas, /washington, /arizona, /colorado, and /virginia intelligence routes.',
+        'Published /new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, and /new-york intelligence routes.',
         'Not county pages. Not national roster rows. Florida is not published on this hub.',
         ['investor-state-intel'],
         input.publishedStateIntelligencePaths.join(', '),
@@ -713,6 +744,12 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       statewideStateRiaUniverse: input.vaStateRiaApproved,
       noticeFiledFirms: input.vaNoticeFiled,
       regulatoryActivityRows: input.vaRegulatoryActivityRows,
+    },
+    newYork: {
+      principalOfficeRosterFirms: input.nyPrincipalOfficeFirms,
+      stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION',
+      statewideStateRiaUniverse: input.nyStateRiaApproved,
+      noticeFiledFirms: input.nyNoticeFiled,
     },
     network: {
       publishedStateIntelligencePages: input.publishedStateIntelligencePaths.length,

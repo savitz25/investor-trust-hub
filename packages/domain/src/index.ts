@@ -31,3 +31,4 @@ export * from './wa-public-intel';
 export * from './az-public-intel';
 export * from './co-public-intel';
 export * from './va-public-intel';
+export * from './ny-public-intel';

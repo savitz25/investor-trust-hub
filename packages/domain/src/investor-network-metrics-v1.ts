@@ -36,6 +36,7 @@ export type MetricGrain =
   | 'az_state_ria_roster'
   | 'co_state_ria_roster'
   | 'va_state_ria_roster'
+  | 'ny_state_ria_roster'
   | 'form_adv_withdrawal'
   | 'form_adv_successor_link';
 
@@ -215,6 +216,12 @@ export type InvestorNetworkMetricsV1 = {
     statewideStateRiaUniverse: number;
     noticeFiledFirms: number;
     regulatoryActivityRows: number;
+  };
+  newYork: {
+    principalOfficeRosterFirms: number;
+    stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION';
+    statewideStateRiaUniverse: number;
+    noticeFiledFirms: number;
   };
   network: {
     publishedStateIntelligencePages: number;

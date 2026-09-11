@@ -37,6 +37,7 @@
     "assert:inv-home-003": "vitest run packages/domain/tests/investor-home-evidence-inventory.test.ts apps/web/tests/inv-home-003.test.ts",
     "assert:co-inv-001": "node scripts/assert-co-inv-001.mjs && vitest run packages/domain/tests/co-public-intel.test.ts apps/web/tests/co-inv-001-publication.test.ts",
     "assert:va-inv-001": "node scripts/assert-va-inv-001.mjs && vitest run packages/domain/tests/va-public-intel.test.ts apps/web/tests/va-inv-001-publication.test.ts",
+    "assert:ny-inv-001": "node scripts/assert-ny-inv-001.mjs && vitest run packages/domain/tests/ny-public-intel.test.ts apps/web/tests/ny-inv-001-publication.test.ts",
     "build:network-metrics": "npx tsx scripts/build_network_metrics_v1.mjs"
   },
   "devDependencies": {

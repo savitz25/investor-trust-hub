@@ -33,6 +33,22 @@ describe('investor-ask-v1 interpreter', () => {
     expect(hq.query.mode).not.toBe('fail_closed');
   });
 
+  it('does not treat New York state RIAs as the 3,152 principal-office overlay', () => {
+    const parsed = interpretInvestorAskQuery('investment advisers registered in New York');
+    expect(parsed.query.mode).toBe('fail_closed');
+    expect(parsed.query.failReason).toMatch(/does not treat the 3,152/i);
+    const hq = interpretInvestorAskQuery('RIA principal offices in New York');
+    expect(hq.query.geography?.value).toBe('NY');
+    expect(hq.query.geography?.type).toBe('principal_office_state');
+    expect(hq.query.mode).not.toBe('fail_closed');
+    const era = interpretInvestorAskQuery('New York ERA');
+    expect(era.query.mode).toBe('fail_closed');
+    expect(era.query.failReason).toMatch(/ERA is not an RIA/i);
+    const complaints = interpretInvestorAskQuery('complaints against investment advisers in New York');
+    expect(complaints.query.mode).toBe('fail_closed');
+    expect(complaints.query.failReason).toMatch(/not a firm-specific/i);
+  });
+
   it('does not treat Virginia state RIAs as the 339 principal-office overlay', () => {
     const parsed = interpretInvestorAskQuery('licensed investment advisers in Virginia');
     expect(parsed.query.mode).toBe('fail_closed');
