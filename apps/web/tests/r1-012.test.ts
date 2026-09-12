@@ -54,6 +54,7 @@ describe('R1-012 original research defects', () => {
   it('named research preserves a following registration condition',()=>{const q=interpretInvestorAskQuery('research Alpha Capital registered in Florida with an office in New York').query;expect(q.nameQuery).toBe('Alpha Capital');expect(q.registrationJurisdictions).toEqual(['FL']);expect(q.geography?.value).toBe('NY');expect(q.mode).toBe('fail_closed');});
   it('unknown row publication date never borrows the reference snapshot clock',async()=>{fixtureDb();const r=await executeInvestorAsk('CRD 105958');expect(r.results[0]?.officialAsOf).toBeNull();expect(r.provenance.officialAsOf).toBe('Not established for all returned rows');expect(r.provenance.retrievedAt).toBe('2026-08-18');expect(publicAskPayload(r).results[0]?.sourceRelease).toMatchObject({releaseLabel:'2026-08-03',officialAsOf:null,sha256:null});});
   it('a bounded candidate window offers refinement rather than repeat pagination',async()=>{fixtureDb();const original=db.query.getMockImplementation()!;db.query.mockImplementation(async(sql,params)=>sql.includes('SELECT count(')?{rows:[{n:25}]}:original(sql,params));const r=await executeInvestorAsk('show me Form ADV for Alpha',{page:2});expect(r.candidateSelection).toBe(true);expect(r.pagination).toMatchObject({page:1,pageSize:10,total:25,hasMore:false});expect(r.answer).toMatch(/at most 10 candidates.*Refine/);});
+  it('existing file label retains SEC exact precedence',()=>{expect(interpretInvestorAskQuery('file 801-11953').query.identifier).toEqual({type:'sec_file_number',value:'801-11953'});});
   it('existing Form ADV definition remains a definition', () => {
     expect(interpretInvestorAskQuery('what is Form ADV?').query.definitionId).toBe('form_adv');
   });
@@ -197,7 +198,7 @@ describe('R1-012 typed plan and production source predicates', () => {
         .every(([s]) => s.includes('crd.identifier_value =')),
     ).toBe(true);
   });
-  it.each(['CRD 105,958', 'CRD 105 and 958', 'CRD 105.958', 'CRD 1e5', 'CRD 105958 CRD 77'])(
+  it.each(['CRD 105958abc', 'SEC 801-11953abc', 'CRD 105,958', 'CRD 105 and 958', 'CRD 105.958', 'CRD 1e5', 'CRD 105958 CRD 77'])(
     'does not invent an identifier: %s',
     (raw) => {
       expect(interpretInvestorAskQuery(raw).query.mode).toBe('fail_closed');

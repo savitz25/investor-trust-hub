@@ -130,7 +130,7 @@ export function planInvestorResearch(raw: string, o: InvestorAskOverrides, core:
   const task = /\bhow many form adv observations\b/i.test(text) ? undefined : evidenceTask(text);
   // A labeled family span ends before another label/word; never strip digits from the whole sentence.
   const ids = [
-    ...text.matchAll(/\b(?:crd\s*(?:number|id)?|sec(?:\s+file)?(?:\s+number)?)\s*#?\s*([0-9][0-9 \t-]*)/gi),
+    ...text.matchAll(/\b(?:crd\s*(?:number|id)?|sec(?:\s+file)?(?:\s+number)?|file)\s*#?\s*([0-9][0-9 \t-]*)/gi),
   ];
   let canonicalText = text;
   if (ids.length > 1)
@@ -143,6 +143,7 @@ export function planInvestorResearch(raw: string, o: InvestorAskOverrides, core:
     const tail = text.slice(m.index! + m[0].length);
     if (
       !(isCrd ? /^\d{1,10}$/ : /^801-\d{1,8}$/).test(value) ||
+      (/[0-9]$/.test(m[0]) && /^[A-Za-z]/.test(tail)) ||
       /^\s*(?:[.,/]\s*\d|and\s+\d|e[+-]?\d)/i.test(tail)
     )
       return stop(
