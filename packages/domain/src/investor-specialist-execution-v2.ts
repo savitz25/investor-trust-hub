@@ -107,7 +107,7 @@ const STATE_CODES = Object.fromEntries(Object.entries(STATE_NAMES).map(([code, n
 export function resolvePrincipalOfficeGeography(geography: SpecialistExecutionRequest['geography']): InvestorResearchQuery['geography'] | undefined {
   if (!geography) return undefined;
   if (geography.zip) return { type: 'zip', value: geography.zip.slice(0, 5), meaning: `Principal-office ZIP ${geography.zip.slice(0, 5)} on the SEC/IARD roster. Not client geography or service territory.` };
-  if (geography.city) return { type: 'principal_office_city', value: geography.city, meaning: `Principal-office city ${geography.city} on the SEC/IARD roster. Not client geography or service territory.` };
+  if (geography.city) return { type: 'principal_office_city', value: geography.city, state: geography.stateCode ?? (geography.stateName ? STATE_CODES[geography.stateName.toLowerCase()] : undefined), meaning: `Principal-office city ${geography.city} on the SEC/IARD roster. Not client geography or service territory.` };
   const code = geography.stateCode ?? (geography.stateName ? STATE_CODES[geography.stateName.toLowerCase()] : undefined);
   if (!code || !STATE_NAMES[code]) return undefined;
   return { type: 'principal_office_state', value: code, meaning: `Principal office in ${STATE_NAMES[code]} (SEC/IARD main-office region). Not client geography or service territory.` };
@@ -131,6 +131,11 @@ export function structuredRequestToParsed(request: SpecialistExecutionRequest): 
     status: request.filters?.registrationType?.[0], evidenceFamilies: request.requestedEvidence,
     sort: request.queryType === 'identifier' ? 'crd' : 'name',
   };
+  if(request.queryType==='evidence') {
+    query.intent=request.requestedEvidence?.some(e=>/disclosure/i.test(e))?'DISCLOSURE_RESEARCH':'FORM_ADV_RESEARCH';
+    if(!query.identifier&&!query.nameQuery){query.mode='fail_closed';query.terminalState='NEEDS_CLARIFICATION';query.failReason='An exact firm identifier or name is required before firm evidence can be attached.';}
+    else query.answer='Only published identity and selected Form ADV fields are available here. No disclosure or all-time clean-history determination is established by this request.';
+  }
   const interpretation = [
     { label: 'Mode', value: request.queryType ?? 'cohort' },
     { label: 'Firm class', value: request.entityClass ?? 'RIA and ERA, kept distinct' },

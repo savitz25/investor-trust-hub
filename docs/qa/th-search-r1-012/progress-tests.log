@@ -1,0 +1,10 @@
+
+ RUN  v3.2.7 C:/Users/makei/th-search-r1-012-work
+
+ ✓ packages/domain/tests/investor-ask.test.ts (17 tests) 30ms
+ ✓ apps/web/tests/r1-012.test.ts (6 tests) 25ms
+
+ Test Files  2 passed (2)
+      Tests  23 passed (23)
+   Start at  13:22:00
+   Duration  964ms (transform 491ms, setup 0ms, collect 781ms, tests 55ms, environment 0ms, prepare 230ms)

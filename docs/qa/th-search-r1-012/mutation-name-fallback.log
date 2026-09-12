@@ -1,0 +1,113 @@
+
+> investor-trust-hub@0.1.0 check:th-search-r1-012
+> vitest run apps/web/tests/r1-012.test.ts packages/domain/tests/investor-ask.test.ts packages/domain/tests/investor-specialist-execution-v2.test.ts apps/web/tests/th-search-001f.test.ts
+
+
+ RUN  v3.2.7 C:/Users/makei/th-search-r1-012-work
+
+ ✓ packages/domain/tests/investor-specialist-execution-v2.test.ts (10 tests) 14ms
+ ✓ packages/domain/tests/investor-ask.test.ts (17 tests) 33ms
+ ✓ apps/web/tests/th-search-001f.test.ts (3 tests) 42ms
+ ❯ apps/web/tests/r1-012.test.ts (54 tests | 2 failed) 109ms
+   × R1-012 original research defects > portfolio service requests never become firm names or call a directory 8ms
+     → expected 'manage my portfolio' to be undefined
+   ✓ R1-012 original research defects > unspecified Form ADV needs identity, not a cohort 9ms
+   ✓ R1-012 original research defects > unspecified disclosure research needs identity 5ms
+   ✓ R1-012 original research defects > Austin is retained with Texas 2ms
+   ✓ R1-012 original research defects > Wyoming registration cannot execute the office cohort 2ms
+   ✓ R1-012 original research defects > existing Form ADV definition remains a definition 0ms
+   ✓ R1-012 typed plan and production source predicates > native page/API share the same full fixture identity and scope 42ms
+   ✓ R1-012 typed plan and production source predicates > native/API reject full oversized input rather than discarding its suffix 4ms
+   ✓ R1-012 typed plan and production source predicates > structured unspecified evidence cannot bypass identity requirement 2ms
+   ✓ R1-012 typed plan and production source predicates > city counts execute the same full compound cohort before pagination 1ms
+   ✓ R1-012 typed plan and production source predicates > held profiles and separate identities remain separate 2ms
+   ✓ R1-012 typed plan and production source predicates > name predicates and exact-name relevance precede the limit 1ms
+   ✓ R1-012 typed plan and production source predicates > SQL wildcard characters remain bound and escaped 1ms
+   ✓ R1-012 typed plan and production source predicates > exact identity retains unsupported additional registration condition without substitution 2ms
+   × R1-012 typed plan and production source predicates > personal boundary: manage my portfolio 1ms
+     → expected 'manage my portfolio' to be undefined
+   ✓ R1-012 typed plan and production source predicates > personal boundary: pick stocks for me 0ms
+   ✓ R1-012 typed plan and production source predicates > personal boundary: what should I invest in 0ms
+   ✓ R1-012 typed plan and production source predicates > personal boundary: which adviser should I hire 0ms
+   ✓ R1-012 typed plan and production source predicates > personal boundary: who will make me the most money 0ms
+   ✓ R1-012 typed plan and production source predicates > exact full family: CRD 105958 1ms
+   ✓ R1-012 typed plan and production source predicates > exact full family: find CRD 105 958 1ms
+   ✓ R1-012 typed plan and production source predicates > exact full family: CRD #105958 0ms
+   ✓ R1-012 typed plan and production source predicates > exact miss never broadens 0ms
+   ✓ R1-012 typed plan and production source predicates > does not invent an identifier: CRD 105,958 0ms
+   ✓ R1-012 typed plan and production source predicates > does not invent an identifier: CRD 105 and 958 0ms
+   ✓ R1-012 typed plan and production source predicates > does not invent an identifier: CRD 105.958 0ms
+   ✓ R1-012 typed plan and production source predicates > does not invent an identifier: CRD 1e5 0ms
+   ✓ R1-012 typed plan and production source predicates > does not invent an identifier: CRD 105958 CRD 77 0ms
+   ✓ R1-012 typed plan and production source predicates > unavailable jurisdiction does not call office rows: state-registered investment advisers in Wyoming 1ms
+   ✓ R1-012 typed plan and production source predicates > unavailable jurisdiction does not call office rows: advisers registered in Wyoming 1ms
+   ✓ R1-012 typed plan and production source predicates > unavailable jurisdiction does not call office rows: notice-filed advisers in Wyoming 1ms
+   ✓ R1-012 typed plan and production source predicates > unavailable jurisdiction does not call office rows: Wyoming state ERAs 0ms
+   ✓ R1-012 typed plan and production source predicates > office WY is a separate supported operation 1ms
+   ✓ R1-012 typed plan and production source predicates > compound office before limits: investment advisers in Austin Texas 1ms
+   ✓ R1-012 typed plan and production source predicates > compound office before limits: RIA firms in Austin TX 1ms
+   ✓ R1-012 typed plan and production source predicates > compound office before limits: investment advisers in Austin, TX 0ms
+   ✓ R1-012 typed plan and production source predicates > Dallas and another explicit city use the same parser 1ms
+   ✓ R1-012 typed plan and production source predicates > city-only clarifies then typed state completes 2ms
+   ✓ R1-012 typed plan and production source predicates > explicit broadening is visible and validated 2ms
+   ✓ R1-012 typed plan and production source predicates > registration NY and office FL remain distinct 0ms
+   ✓ R1-012 typed plan and production source predicates > multi-registration jurisdictions require resolution 0ms
+   ✓ R1-012 typed plan and production source predicates > SEC current RIA uses actual current SEC registration predicate 1ms
+   ✓ R1-012 typed plan and production source predicates > research is not a name: find Form ADV filings 1ms
+   ✓ R1-012 typed plan and production source predicates > research is not a name: does this firm have disclosures? 0ms
+   ✓ R1-012 typed plan and production source predicates > research is not a name: which firms have disclosures 0ms
+   ✓ R1-012 typed plan and production source predicates > research is not a name: show me Form ADV for this firm 0ms
+   ✓ R1-012 typed plan and production source predicates > research is not a name: how do I find an adviser's Form ADV? 0ms
+   ✓ R1-012 typed plan and production source predicates > unique exact source name preserves the Form ADV question 1ms
+   ✓ R1-012 typed plan and production source predicates > ambiguous firm selection is revalidated and preserves evidence 2ms
+   ✓ R1-012 typed plan and production source predicates > disclosures do not expose internal fields or promise clean history 1ms
+   ✓ R1-012 typed plan and production source predicates > structured compound city/state reaches the same predicate 1ms
+   ✓ R1-012 typed plan and production source predicates > missing source is an error, not zero 2ms
+   ✓ R1-012 typed plan and production source predicates > common request rejects duplicate/overlong/unsafe pagination and keeps typed filters 1ms
+   ✓ R1-012 typed plan and production source predicates > official recovery is the maintained allowlisted HTTPS destination 0ms
+
+ Test Files  1 failed | 3 passed (4)
+      Tests  2 failed | 82 passed (84)
+   Start at  13:45:14
+   Duration  1.39s (transform 657ms, setup 0ms, collect 1.85s, tests 199ms, environment 1ms, prepare 575ms)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/tests/r1-012.test.ts > R1-012 original research defects > portfolio service requests never become firm names or call a directory
+AssertionError: expected 'manage my portfolio' to be undefined
+
+- Expected:
+undefined
+
++ Received:
+"manage my portfolio"
+
+ ❯ apps/web/tests/r1-012.test.ts:27:31
+     25|     db.query.mockClear();
+     26|     const p = interpretInvestorAskQuery('manage my portfolio');
+     27|     expect(p.query.nameQuery).toBeUndefined();
+       |                               ^
+     28|     expect(p.query.mode).toBe('fail_closed');
+     29|     await executeInvestorAsk('manage my portfolio');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  apps/web/tests/r1-012.test.ts > R1-012 typed plan and production source predicates > personal boundary: manage my portfolio
+AssertionError: expected 'manage my portfolio' to be undefined
+
+- Expected:
+undefined
+
++ Received:
+"manage my portfolio"
+
+ ❯ apps/web/tests/r1-012.test.ts:169:38
+    167|     fixtureDb();
+    168|     const r = await executeInvestorAsk(raw);
+    169|     expect(r.parsed.query.nameQuery).toBeUndefined();
+       |                                      ^
+    170|     expect(r.results).toEqual([]);
+    171|     expect(db.query).not.toHaveBeenCalled();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯

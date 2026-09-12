@@ -19,8 +19,11 @@ import {
   type ParsedInvestorAsk,
 } from '@ith/domain';
 import { query } from '../db';
+import { overrideEntries } from './request';
 
 export type AskFirmCard = {
+  recordedOffice?: { city: string | null; state: string | null };
+  selectionHref?: string;
   firmId: string;
   slug: string;
   displayName: string;
@@ -48,6 +51,9 @@ export type AskCountRow = {
 };
 
 export type InvestorAskResult = {
+  terminalState?: 'COMPLETE' | 'NO_MATCH' | 'NEEDS_CLARIFICATION' | 'UNSUPPORTED' | 'INVALID_INPUT';
+  candidateSelection?: boolean;
+  answer?: string;
   contract: typeof INVESTOR_ASK_CONTRACT;
   queryText: string;
   parsed: ParsedInvestorAsk;
@@ -116,6 +122,7 @@ type FirmRow = {
   raum_amount: string | number | null;
   latest_adv_filing_date: Date | string | null;
   retrieved_at: Date | string | null;
+  published_at?: Date | string | null;
   indexable: boolean | null;
 };
 
@@ -154,11 +161,12 @@ function orderSql(sort: InvestorAskSort | undefined): string {
 
 function filtersSql(q: InvestorResearchQuery, params: unknown[]): { where: string } {
   const clauses = ['f.is_synthetic = false'];
+  if (q.registrationJurisdictions?.length || (q.registrationType && q.registrationType !== 'sec_ria')) throw new Error('Unsupported registration jurisdiction reached roster execution');
   if (q.firmType === 'ria') clauses.push(`adv.dataset_kind = 'ria'`);
   if (q.firmType === 'era') clauses.push(`adv.dataset_kind = 'era'`);
   if (q.status === 'registered') {
     clauses.push(`adv.dataset_kind = 'ria'`);
-    clauses.push(`r.status = 'registered'`);
+    clauses.push(`EXISTS (SELECT 1 FROM registrations sr WHERE sr.firm_id = f.id AND sr.subject_kind = 'firm' AND sr.regulator_authority_id = 'sec' AND sr.registration_type = 'registered_investment_adviser' AND sr.status = 'registered' AND sr.is_current)`);
   }
   if (q.geography?.type === 'principal_office_state') {
     params.push(q.geography.value);
@@ -167,6 +175,9 @@ function filtersSql(q: InvestorResearchQuery, params: unknown[]): { where: strin
   if (q.geography?.type === 'principal_office_city') {
     params.push(q.geography.value);
     clauses.push(`lower(b.city) = lower($${params.length})`);
+    if (!q.geography.state) throw new Error('City execution requires its state');
+    params.push(q.geography.state);
+    clauses.push(`b.region = $${params.length}`);
   }
   if (q.geography?.type === 'zip') {
     params.push(q.geography.value);
@@ -181,7 +192,7 @@ function filtersSql(q: InvestorResearchQuery, params: unknown[]): { where: strin
     clauses.push(`EXISTS (SELECT 1 FROM firm_identifiers sec WHERE sec.firm_id = f.id AND sec.identifier_type = 'sec_file_number' AND upper(sec.identifier_value) = upper($${params.length}))`);
   }
   if (q.nameQuery) {
-    params.push(`%${q.nameQuery.replace(/[%_]/g, '\\$&')}%`);
+    params.push(`%${q.nameQuery.replace(/[\\%_]/g, '\\$&')}%`);
     clauses.push(`(f.display_name ILIKE $${params.length} OR f.legal_name ILIKE $${params.length})`);
   }
   if (q.raum?.equalsZero) {
@@ -278,6 +289,7 @@ const SELECT_SQL = `
     adv.raum_amount,
     adv.latest_adv_filing_date,
     rel.retrieved_at,
+    rel.published_at,
     sd.indexable
 `;
 
@@ -325,7 +337,7 @@ function toCard(row: FirmRow, parsed: ParsedInvestorAsk, compensation: string[])
     raum: raum ? { exact: raum.exact, display: raum.display, amount: raum.amount } : null,
     compensation,
     filingDate: isoDate(row.latest_adv_filing_date),
-    officialAsOf: isoDate(row.retrieved_at) ?? V1_SOURCE.retrievedAt,
+    officialAsOf: isoDate(row.published_at) ?? V1_SOURCE.publishedAt,
     href: indexable ? `/firm/${row.slug}` : null,
     currentlyIndexable: indexable,
     publicationNote: indexable
@@ -354,13 +366,19 @@ async function listFirms(parsed: ParsedInvestorAsk, pageSize = INVESTOR_ASK_PAGE
     `SELECT ${countExpr} AS n ${from} WHERE ${where}`,
     params,
   );
-  const listParams = [...params, pageSize, offset];
+  const listParams = [...params];
+  let nameOrder = '';
+  if (parsed.query.nameQuery) {
+    listParams.push(parsed.query.nameQuery);
+    nameOrder = `CASE WHEN lower(f.legal_name) = lower($${listParams.length}) OR lower(f.display_name) = lower($${listParams.length}) THEN 0 ELSE 1 END, `;
+  }
+  listParams.push(pageSize, offset);
   const needsDistinct = (parsed.query.compensationMethods?.length ?? 0) > 1;
   const distinct = needsDistinct ? 'DISTINCT ON (crd.identifier_value)' : '';
   const list = await query<FirmRow>(
     `${SELECT_SQL.replace('SELECT', `SELECT ${distinct}`)} ${from}
      WHERE ${where}
-     ORDER BY ${needsDistinct ? `crd.identifier_value ASC, ${orderSql(parsed.query.sort)}` : orderSql(parsed.query.sort)}
+     ORDER BY ${needsDistinct ? `crd.identifier_value ASC, ${orderSql(parsed.query.sort)}` : nameOrder + orderSql(parsed.query.sort)}
      LIMIT $${listParams.length - 1} OFFSET $${listParams.length}`,
     listParams,
   );
@@ -397,18 +415,9 @@ async function countRoster(parsed: ParsedInvestorAsk): Promise<AskCountRow[]> {
     q.firmType === 'ria' ? ['ria'] : q.firmType === 'era' ? ['era'] : ['ria', 'era'];
   const rows: AskCountRow[] = [];
   for (const kind of types) {
-    const params: unknown[] = [kind];
-    const extra: string[] = ['adv.dataset_kind = $1', 'f.is_synthetic = false'];
-    if (q.geography?.type === 'principal_office_state') {
-      params.push(q.geography.value);
-      extra.push(`b.region = $${params.length}`);
-    }
-    const result = await query<{ n: number }>(
-      `SELECT count(*)::int AS n
-       ${FROM_SQL}
-       WHERE ${extra.join(' AND ')}`,
-      params,
-    );
+    const params: unknown[] = [];
+    const { where } = filtersSql({ ...q, firmType: kind }, params);
+    const result = await query<{ n: number }>(`SELECT count(DISTINCT crd.identifier_value)::int AS n ${FROM_SQL} WHERE ${where}`, params);
     rows.push({
       label: kind === 'ria' ? 'RIA firm facts' : 'ERA firm facts',
       value: result.rows[0]?.n ?? 0,
@@ -423,11 +432,7 @@ async function aggregate(parsed: ParsedInvestorAsk): Promise<AskCountRow[]> {
   const q = parsed.query;
   if (q.aggregateMetric === 'raum_bands') {
     const params: unknown[] = [];
-    const extra = [`adv.dataset_kind = 'ria'`, 'f.is_synthetic = false'];
-    if (q.geography?.type === 'principal_office_state') {
-      params.push(q.geography.value);
-      extra.push(`b.region = $${params.length}`);
-    }
+    const { where } = filtersSql({ ...q, firmType: 'ria' }, params);
     const result = await query<{ band: string; n: number }>(
       `SELECT
          CASE
@@ -441,7 +446,7 @@ async function aggregate(parsed: ParsedInvestorAsk): Promise<AskCountRow[]> {
          END AS band,
          count(*)::int AS n
        ${FROM_SQL}
-       WHERE ${extra.join(' AND ')}
+       WHERE ${where}
        GROUP BY 1`,
       params,
     );
@@ -515,7 +520,12 @@ async function compare(parsed: ParsedInvestorAsk): Promise<AskCountRow[]> {
 
 export async function executeParsedInvestorAsk(parsed: ParsedInvestorAsk, pageSize = INVESTOR_ASK_PAGE_SIZE): Promise<InvestorAskResult> {
   const started = Date.now();
-  const q = parsed.query;
+  let q = parsed.query;
+  // Structured callers must obey the same capability restrictions before any retrieval.
+  if (!q.identifier && q.mode !== 'fail_closed' && (q.registrationJurisdictions?.length || q.registrationType && q.registrationType !== 'sec_ria' || q.geography?.type === 'principal_office_city' && !q.geography.state)) {
+    q = { ...q, mode: 'fail_closed', terminalState: 'NEEDS_CLARIFICATION', failReason: 'The requested registration or city/state scope is not executable as supplied. No broader cohort was searched.' };
+    parsed = { ...parsed, query: q };
+  }
   const emptyCards: AskFirmCard[] = [];
   const boundedPageSize = Math.max(1, Math.min(INVESTOR_ASK_PAGE_SIZE, pageSize));
   const pagination = { page: q.page, pageSize: boundedPageSize, total: 0, hasMore: false };
@@ -526,6 +536,7 @@ export async function executeParsedInvestorAsk(parsed: ParsedInvestorAsk, pageSi
       queryText: parsed.raw,
       parsed,
       resultType: q.mode,
+      terminalState: q.mode === 'definition' ? 'COMPLETE' : q.terminalState ?? 'UNSUPPORTED',
       results: emptyCards,
       counts: [],
       pagination,
@@ -583,14 +594,46 @@ export async function executeParsedInvestorAsk(parsed: ParsedInvestorAsk, pageSi
     };
   }
 
-  const { rows, total } = await listFirms(parsed, boundedPageSize);
+  if (q.selectedCrd && !q.nameQuery) throw new Error('Selection requires revalidated name candidates');
+  const identityOnly = q.identifier ? { ...parsed, query: { ...q, geography: undefined, registrationJurisdictions: undefined, registrationType: undefined, status: undefined, firmType: undefined, raum: undefined, compensationMethods: undefined } } : parsed;
+  if(q.identifier && q.conditions?.length) { q.answer=[q.answer,'The exact identifier resolves identity independently. Additional requested name, office, registration or activity criteria are not established by this identity-only lookup.'].filter(Boolean).join(' ');q.conditions=q.conditions.map(c=>({...c,outcome:'NEEDS_CLARIFICATION'})); }
+  const candidates = Boolean(q.nameQuery && (q.intent === 'FORM_ADV_RESEARCH' || q.intent === 'DISCLOSURE_RESEARCH'));
+  let { rows, total } = await listFirms(candidates ? { ...parsed, query: { ...q, page: 1 } } : identityOnly, candidates ? 10 : boundedPageSize);
+  let candidateSelection = false;
+  if (candidates) {
+    const exact = rows.filter(r => [r.display_name, r.legal_name].some(n => n.trim().toLowerCase() === q.nameQuery!.trim().toLowerCase()));
+    const selected = q.selectedCrd ? rows.find(r => r.crd === q.selectedCrd) : total <= 10 && exact.length === 1 ? exact[0] : undefined;
+    if (q.selectedCrd && !selected) {
+      return executeParsedInvestorAsk({ ...parsed, query: { ...q, mode: 'fail_closed', terminalState: 'INVALID_INPUT', failReason: 'That selection does not belong to this current firm-name candidate set. Search and select again.' } });
+    }
+    if (selected) {
+      q = { ...q, originalName: q.nameQuery, nameQuery: undefined, identifier: { type: 'crd', value: selected.crd }, mode: 'evidence' };
+      parsed = { ...parsed, query: q };
+      ({ rows, total } = await listFirms(parsed, 1));
+    } else candidateSelection = rows.length > 0;
+  }
   const compensation = await loadCompensation(rows.map((r) => r.id));
-  const results = rows.map((row) => toCard(row, parsed, compensation.get(row.id) ?? []));
+  const results = rows.map((row) => {
+    if (q.identifier?.type === 'crd' && row.crd !== q.identifier.value) throw new Error('Source identity contract mismatch');
+    if (!q.identifier && q.geography?.type === 'principal_office_city' && (row.city?.toLowerCase() !== q.geography.value.toLowerCase() || row.region !== q.geography.state)) throw new Error('Source location contract mismatch');
+    const card = toCard(row, q.identifier ? { ...parsed, query: { ...q, geography: undefined, registrationJurisdictions: undefined, registrationType: undefined, status: undefined, firmType: undefined, raum: undefined, compensationMethods: undefined } } : parsed, compensation.get(row.id) ?? []);
+    if (q.nameQuery) {
+      const field = row.legal_name.toLowerCase().includes(q.nameQuery.toLowerCase()) ? 'legal name' : row.display_name.toLowerCase().includes(q.nameQuery.toLowerCase()) ? 'display name' : undefined;
+      if (!field) throw new Error('Source name contract mismatch');
+      card.whyMatched += ` Matched source ${field}: ${field === 'legal name' ? row.legal_name : row.display_name}.`;
+    }
+    card.recordedOffice = { city: row.city, state: row.region };
+    if (candidateSelection) card.selectionHref = '/ask?' + new URLSearchParams({ q: parsed.raw, ...Object.fromEntries(overrideEntries(q.inputOverrides)), selected: row.crd });
+    return card;
+  });
   return {
     contract: INVESTOR_ASK_CONTRACT,
     queryText: parsed.raw,
     parsed,
     resultType: q.mode,
+    terminalState: candidateSelection ? 'NEEDS_CLARIFICATION' : results.length ? 'COMPLETE' : 'NO_MATCH',
+    candidateSelection,
+    answer: candidateSelection ? 'Choose the exact firm before attaching the requested evidence. These are source-name candidates, not confirmed regulatory relationships.' : q.answer,
     results,
     counts: [{ label: 'Matching firm facts', value: total, grain: 'form_adv_firm_facts rows matching filters' }],
     pagination: {
@@ -611,6 +654,9 @@ export async function executeInvestorAsk(raw: string, overrides: InvestorAskOver
 
 export function publicAskPayload(result: InvestorAskResult) {
   return {
+    terminalState: result.terminalState,
+    candidateSelection: result.candidateSelection,
+    answer: result.answer,
     contract: result.contract,
     interpretation: result.parsed.interpretation,
     query: {
@@ -625,10 +671,17 @@ export function publicAskPayload(result: InvestorAskResult) {
       failReason: result.parsed.query.failReason,
       alternatives: result.parsed.query.alternatives,
       definitionId: result.parsed.query.definitionId,
+      intent: result.parsed.query.intent,
+      conditions: result.parsed.query.conditions,
+      registrationJurisdictions: result.parsed.query.registrationJurisdictions,
+      registrationType: result.parsed.query.registrationType,
+      nameQuery: result.parsed.query.nameQuery,
     },
     resultType: result.resultType,
     results: result.results.map((row) => ({
       crd: row.crd,
+      recordedOffice: row.recordedOffice,
+      selectionHref: row.selectionHref,
       firmName: row.displayName,
       firmType: row.firmType,
       principalOffice: row.principalOffice,

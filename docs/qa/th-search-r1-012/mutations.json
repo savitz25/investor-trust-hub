@@ -1,0 +1,20 @@
+[
+  {
+    "mutation": "name-fallback",
+    "exit": 1,
+    "detected": true,
+    "at": "2026-09-12T17:45:16.576418+00:00"
+  },
+  {
+    "mutation": "registration-as-office",
+    "exit": 1,
+    "detected": true,
+    "at": "2026-09-12T17:45:19.620191+00:00"
+  },
+  {
+    "mutation": "drop-city",
+    "exit": 1,
+    "detected": true,
+    "at": "2026-09-12T17:45:22.654147+00:00"
+  }
+]

@@ -1,0 +1,35 @@
+WE INTERPRETED YOUR QUESTION AS
+
+RESEARCH TASK
+identity by identifier
+IDENTIFIER
+CRD 9999999999
+NAME
+CRD 9999999999 — NEEDS_CLARIFICATION
+
+Natural-language parsing and regulatory execution stay separate. Change the question and resubmit.
+
+Change interpretation
+Change interpretation
+Show SEC-registered RIAs in Florida.
+Find CRD 123456.
+What does RAUM mean?
+Research answer
+
+The exact identifier resolves identity independently. Additional requested name, office, registration or activity criteria are not established by this identity-only lookup.
+
+Research on official SEC / IAPD
+
+Search firm CRD 9999999999.
+
+This link does not mean InvestorTrustHub checked current status live. Choose Firm and search the sourced CRD or firm name.
+
+Distribution
+Matching firm facts
+0
+
+form_adv_firm_facts rows matching filters
+
+We did not find this firm CRD in the current published SEC/IARD research corpus. That is not proof the identifier is invalid in another regulatory or person context.
+
+Trace this query

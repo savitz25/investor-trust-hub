@@ -1,0 +1,1647 @@
+{
+  "at": "2026-09-12T17:36:54.913Z",
+  "base": "http://localhost:3212",
+  "sha": "uncommitted",
+  "cases": [
+    {
+      "q": "manage my portfolio",
+      "width": 390,
+      "ms": 803,
+      "terminal": "UNSUPPORTED",
+      "query": {
+        "mode": "fail_closed",
+        "page": 1,
+        "failReason": "InvestorTrustHub does not manage portfolios, execute trades, give individualized investment advice, predict returns, or choose an adviser for you. You can research firm registrations, Form ADV, reported assets, office locations and available evidence. Choose a research topic or identify a firm.",
+        "intent": "UNSUPPORTED_PERSONAL_ADVICE",
+        "conditions": []
+      },
+      "identities": [],
+      "total": 0,
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Not geography-filtered",
+        "metric": "fail_closed",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Not an identifier query"
+      }
+    },
+    {
+      "q": "what is Form ADV?",
+      "width": 390,
+      "ms": 108,
+      "terminal": "COMPLETE",
+      "query": {
+        "mode": "definition",
+        "page": 1,
+        "definitionId": "form_adv",
+        "intent": "EXPLANATION"
+      },
+      "identities": [],
+      "total": 0,
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Not geography-filtered",
+        "metric": "definition",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Not an identifier query"
+      }
+    },
+    {
+      "q": "show me Form ADV for VANGUARD GROUP INC",
+      "width": 390,
+      "ms": 1265,
+      "terminal": "COMPLETE",
+      "query": {
+        "mode": "evidence",
+        "identifier": {
+          "type": "crd",
+          "value": "105958"
+        },
+        "sort": "name",
+        "page": 1,
+        "intent": "FORM_ADV_RESEARCH",
+        "conditions": []
+      },
+      "identities": [
+        {
+          "crd": "105958",
+          "name": "VANGUARD GROUP INC",
+          "office": {
+            "city": "MALVERN",
+            "state": "PA"
+          },
+          "why": "This firm matches because its sourced firm name contains “VANGUARD GROUP INC”."
+        }
+      ],
+      "total": 1,
+      "answer": "Current indexed Form ADV identity, filing date, reported RAUM and compensation fields are shown where available. These selected fields are not the complete filing; use the official firm record for Form ADV.",
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Not geography-filtered",
+        "metric": "entity list",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Exact labeled firm CRD 105958"
+      }
+    },
+    {
+      "q": "state-registered investment advisers in Wyoming",
+      "width": 390,
+      "ms": 115,
+      "terminal": "UNSUPPORTED",
+      "query": {
+        "mode": "fail_closed",
+        "firmType": "ria",
+        "geography": {
+          "type": "principal_office_state",
+          "value": "WY",
+          "ambiguous": false,
+          "meaning": "Principal office in Wyoming (SEC/IARD main-office region). Not client geography."
+        },
+        "sort": "name",
+        "page": 1,
+        "failReason": "The current searchable SEC/IARD firm corpus does not establish the requested state-registration or notice-filing jurisdiction. An office in that state is not a substitute. Use the applicable official jurisdiction search or published state research.",
+        "intent": "REGISTRATION_RESEARCH",
+        "conditions": [
+          {
+            "kind": "registration_jurisdiction",
+            "requested": "WY",
+            "outcome": "UNSUPPORTED",
+            "meaning": "Registration/notice jurisdiction, not principal office",
+            "sourceField": "StateRgstn/Rgltr/@Cd + APPROVED"
+          },
+          {
+            "kind": "registration_type",
+            "requested": "state_ria",
+            "outcome": "UNSUPPORTED",
+            "meaning": "Source-native registration class; RIA, ERA and notice filing remain separate"
+          }
+        ],
+        "registrationJurisdictions": [
+          "WY"
+        ],
+        "registrationType": "state_ria"
+      },
+      "identities": [],
+      "total": 0,
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Principal office in Wyoming (SEC/IARD main-office region). Not client geography.",
+        "metric": "fail_closed",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Not an identifier query"
+      }
+    },
+    {
+      "q": "investment advisers in Austin Texas",
+      "width": 390,
+      "ms": 569,
+      "terminal": "COMPLETE",
+      "query": {
+        "mode": "entity",
+        "firmType": "all",
+        "geography": {
+          "type": "principal_office_city",
+          "value": "Austin",
+          "state": "TX",
+          "meaning": "Recorded principal office, not client geography, registration jurisdiction or service territory"
+        },
+        "sort": "name",
+        "page": 1,
+        "intent": "FIRM_DISCOVERY",
+        "conditions": [
+          {
+            "kind": "office_city",
+            "requested": "Austin",
+            "effective": "Austin",
+            "outcome": "APPLIED",
+            "meaning": "Recorded principal office, not client geography, registration jurisdiction or service territory",
+            "sourceField": "branches.city (is_main_office)"
+          },
+          {
+            "kind": "office_state",
+            "requested": "TX",
+            "effective": "TX",
+            "outcome": "APPLIED",
+            "meaning": "Recorded principal office, not client geography, registration jurisdiction or service territory",
+            "sourceField": "branches.region (is_main_office)"
+          }
+        ]
+      },
+      "identities": [
+        {
+          "crd": "321758",
+          "name": "13CAPITAL LLC",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an ERA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "335265",
+          "name": "1802 VENTURES GP LLC",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an ERA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "331371",
+          "name": "3A PARTNERS, LLC",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an ERA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "319484",
+          "name": "49 FINANCIAL",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "339082",
+          "name": "818 FAMILY OFFICE, LLC",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "289923",
+          "name": "994 GROUP",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "173027",
+          "name": "AB PRIVATE CREDIT INVESTORS LLC",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "281887",
+          "name": "ACACIA PARTNERS, LLC",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "299694",
+          "name": "ADAR1 CAPITAL MANAGEMENT, LLC",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "109201",
+          "name": "ADVISORS CRYPTO, INC.",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "299317",
+          "name": "AFI CAPITAL PARTNERS LLC",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an ERA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "333587",
+          "name": "ALONGSIDE, LLC",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "121703",
+          "name": "ALPHA CAPITAL MANAGEMENT",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "141112",
+          "name": "ANCIENT ART, L.P.",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "131544",
+          "name": "AQS ASSET MANAGEMENT, L.L.C.",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "317264",
+          "name": "ARK WEALTH MANAGEMENT",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "315672",
+          "name": "ARVIN CAPITAL MANAGEMENT LP",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "152635",
+          "name": "ATLASMARK FINANCIAL, INC.",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "296819",
+          "name": "ATOM INVESTORS LP",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "311589",
+          "name": "ATX FINANCIAL PLANNING, LLC",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        }
+      ],
+      "total": 241,
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Recorded principal office, not client geography, registration jurisdiction or service territory",
+        "metric": "entity list",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Not an identifier query"
+      }
+    },
+    {
+      "q": "adviser registered in New York with an office in Florida",
+      "width": 390,
+      "ms": 113,
+      "terminal": "UNSUPPORTED",
+      "query": {
+        "mode": "fail_closed",
+        "geography": {
+          "type": "principal_office_state",
+          "value": "FL",
+          "meaning": "Recorded principal office, not client geography, registration jurisdiction or service territory"
+        },
+        "page": 1,
+        "failReason": "New York state-registered investment-adviser firms are published on /new-york from the IAPD state compilation (jurisdiction=NY). Search V1 remains the SEC/IARD roster and does not treat the 3,152 principal-office overlay as New York state registration. Notice filing is a different grain from state IA.",
+        "alternatives": [
+          "SEC/IARD firms reporting a principal office in New York.",
+          "RIA principal offices in New York."
+        ],
+        "intent": "REGISTRATION_RESEARCH",
+        "conditions": [
+          {
+            "kind": "office_state",
+            "requested": "FL",
+            "effective": "FL",
+            "outcome": "UNSUPPORTED",
+            "meaning": "Recorded principal office, not client geography, registration jurisdiction or service territory",
+            "sourceField": "branches.region (is_main_office)"
+          },
+          {
+            "kind": "registration_jurisdiction",
+            "requested": "NY",
+            "outcome": "UNSUPPORTED",
+            "meaning": "Registration/notice jurisdiction, not principal office",
+            "sourceField": "StateRgstn/Rgltr/@Cd + APPROVED"
+          },
+          {
+            "kind": "registration_type",
+            "requested": "state_ria",
+            "outcome": "UNSUPPORTED",
+            "meaning": "Source-native registration class; RIA, ERA and notice filing remain separate"
+          }
+        ],
+        "registrationJurisdictions": [
+          "NY"
+        ],
+        "registrationType": "state_ria"
+      },
+      "identities": [],
+      "total": 0,
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Recorded principal office, not client geography, registration jurisdiction or service territory",
+        "metric": "fail_closed",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Not an identifier query"
+      }
+    },
+    {
+      "q": "does this firm have disclosures?",
+      "width": 390,
+      "ms": 106,
+      "terminal": "NEEDS_CLARIFICATION",
+      "query": {
+        "mode": "fail_closed",
+        "sort": "name",
+        "page": 1,
+        "failReason": "Which firm do you mean? Enter a firm name or labeled CRD/SEC file number. No evidence has been attached to an unspecified firm.",
+        "intent": "DISCLOSURE_RESEARCH",
+        "conditions": []
+      },
+      "identities": [],
+      "total": 0,
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Not geography-filtered",
+        "metric": "fail_closed",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Not an identifier query"
+      }
+    },
+    {
+      "q": "CRD 105 958",
+      "width": 390,
+      "ms": 445,
+      "terminal": "COMPLETE",
+      "query": {
+        "mode": "identifier",
+        "identifier": {
+          "type": "crd",
+          "value": "105958"
+        },
+        "sort": "crd",
+        "page": 1,
+        "intent": "IDENTITY_BY_IDENTIFIER",
+        "conditions": [
+          {
+            "kind": "name",
+            "requested": "CRD 105 958",
+            "outcome": "NEEDS_CLARIFICATION",
+            "meaning": "Exact identifier resolves identity; additional name is not asserted to match"
+          }
+        ]
+      },
+      "identities": [
+        {
+          "crd": "105958",
+          "name": "VANGUARD GROUP INC",
+          "office": {
+            "city": "MALVERN",
+            "state": "PA"
+          },
+          "why": "This firm matches because its organization CRD is 105958."
+        }
+      ],
+      "total": 1,
+      "answer": "The exact identifier resolves identity independently. Additional requested name, office, registration or activity criteria are not established by this identity-only lookup.",
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Not geography-filtered",
+        "metric": "CRD identity",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Exact labeled firm CRD 105958"
+      }
+    },
+    {
+      "q": "CRD 9999999999",
+      "width": 390,
+      "ms": 359,
+      "terminal": "NO_MATCH",
+      "query": {
+        "mode": "identifier",
+        "identifier": {
+          "type": "crd",
+          "value": "9999999999"
+        },
+        "sort": "crd",
+        "page": 1,
+        "intent": "IDENTITY_BY_IDENTIFIER",
+        "conditions": [
+          {
+            "kind": "name",
+            "requested": "CRD 9999999999",
+            "outcome": "NEEDS_CLARIFICATION",
+            "meaning": "Exact identifier resolves identity; additional name is not asserted to match"
+          }
+        ]
+      },
+      "identities": [],
+      "total": 0,
+      "answer": "The exact identifier resolves identity independently. Additional requested name, office, registration or activity criteria are not established by this identity-only lookup.",
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Not geography-filtered",
+        "metric": "CRD identity",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Exact labeled firm CRD 9999999999"
+      }
+    },
+    {
+      "q": "research VANGUARD GROUP INC",
+      "width": 390,
+      "ms": 501,
+      "terminal": "COMPLETE",
+      "query": {
+        "mode": "entity",
+        "sort": "name",
+        "page": 1,
+        "intent": "IDENTITY_BY_NAME",
+        "conditions": [],
+        "nameQuery": "VANGUARD GROUP INC"
+      },
+      "identities": [
+        {
+          "crd": "105958",
+          "name": "VANGUARD GROUP INC",
+          "office": {
+            "city": "MALVERN",
+            "state": "PA"
+          },
+          "why": "This firm matches because its sourced firm name contains “VANGUARD GROUP INC”."
+        }
+      ],
+      "total": 1,
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Not geography-filtered",
+        "metric": "entity list",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Not an identifier query"
+      }
+    },
+    {
+      "q": "show me Form ADV for Vanguard",
+      "width": 390,
+      "ms": 536,
+      "terminal": "NEEDS_CLARIFICATION",
+      "query": {
+        "mode": "entity",
+        "sort": "name",
+        "page": 1,
+        "intent": "FORM_ADV_RESEARCH",
+        "conditions": [],
+        "nameQuery": "Vanguard"
+      },
+      "identities": [
+        {
+          "crd": "106715",
+          "name": "VANGUARD ADVISERS, INC.",
+          "office": {
+            "city": "MALVERN",
+            "state": "PA"
+          },
+          "why": "This firm matches because its sourced firm name contains “Vanguard”."
+        },
+        {
+          "crd": "341357",
+          "name": "VANGUARD ALTERNATIVE ASSETS ADVISER, LLC",
+          "office": {
+            "city": "MALVERN",
+            "state": "PA"
+          },
+          "why": "This firm matches because its sourced firm name contains “Vanguard”."
+        },
+        {
+          "crd": "285052",
+          "name": "VANGUARD CAPITAL",
+          "office": {
+            "city": "DENVER",
+            "state": "CO"
+          },
+          "why": "This firm matches because its sourced firm name contains “Vanguard”."
+        },
+        {
+          "crd": "338002",
+          "name": "VANGUARD CAPITAL MANAGEMENT, LLC",
+          "office": {
+            "city": "MALVERN",
+            "state": "PA"
+          },
+          "why": "This firm matches because its sourced firm name contains “Vanguard”."
+        },
+        {
+          "crd": "164593",
+          "name": "VANGUARD GLOBAL ADVISERS, LLC",
+          "office": {
+            "city": "MALVERN",
+            "state": "PA"
+          },
+          "why": "This firm matches because its sourced firm name contains “Vanguard”."
+        },
+        {
+          "crd": "105958",
+          "name": "VANGUARD GROUP INC",
+          "office": {
+            "city": "MALVERN",
+            "state": "PA"
+          },
+          "why": "This firm matches because its sourced firm name contains “Vanguard”."
+        },
+        {
+          "crd": "285366",
+          "name": "VANGUARD PERSONALIZED INDEXING MANAGEMENT",
+          "office": {
+            "city": "OAKLAND",
+            "state": "CA"
+          },
+          "why": "This firm matches because its sourced firm name contains “Vanguard”."
+        },
+        {
+          "crd": "338003",
+          "name": "VANGUARD PORTFOLIO MANAGEMENT, LLC",
+          "office": {
+            "city": "MALVERN",
+            "state": "PA"
+          },
+          "why": "This firm matches because its sourced firm name contains “Vanguard”."
+        }
+      ],
+      "total": 8,
+      "answer": "Choose the exact firm before attaching the requested evidence. These are source-name candidates, not confirmed regulatory relationships.",
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Not geography-filtered",
+        "metric": "entity list",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Not an identifier query"
+      }
+    },
+    {
+      "q": "investment advisers in Austin",
+      "width": 390,
+      "ms": 99,
+      "terminal": "NEEDS_CLARIFICATION",
+      "query": {
+        "mode": "fail_closed",
+        "firmType": "all",
+        "geography": {
+          "type": "principal_office_city",
+          "value": "Austin",
+          "ambiguous": true,
+          "meaning": "Recorded principal office, not client geography, registration jurisdiction or service territory"
+        },
+        "sort": "name",
+        "page": 1,
+        "failReason": "Which state is Austin in? The city remains requested; no national cohort was searched.",
+        "intent": "FIRM_DISCOVERY",
+        "conditions": [
+          {
+            "kind": "office_city",
+            "requested": "Austin",
+            "effective": "Austin",
+            "outcome": "NEEDS_CLARIFICATION",
+            "meaning": "Recorded principal office, not client geography, registration jurisdiction or service territory",
+            "sourceField": "branches.city (is_main_office)"
+          }
+        ]
+      },
+      "identities": [],
+      "total": 0,
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Recorded principal office, not client geography, registration jurisdiction or service territory",
+        "metric": "fail_closed",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Not an identifier query"
+      }
+    },
+    {
+      "q": "manage my portfolio",
+      "width": 1280,
+      "ms": 800,
+      "terminal": "UNSUPPORTED",
+      "query": {
+        "mode": "fail_closed",
+        "page": 1,
+        "failReason": "InvestorTrustHub does not manage portfolios, execute trades, give individualized investment advice, predict returns, or choose an adviser for you. You can research firm registrations, Form ADV, reported assets, office locations and available evidence. Choose a research topic or identify a firm.",
+        "intent": "UNSUPPORTED_PERSONAL_ADVICE",
+        "conditions": []
+      },
+      "identities": [],
+      "total": 0,
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Not geography-filtered",
+        "metric": "fail_closed",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Not an identifier query"
+      }
+    },
+    {
+      "q": "what is Form ADV?",
+      "width": 1280,
+      "ms": 107,
+      "terminal": "COMPLETE",
+      "query": {
+        "mode": "definition",
+        "page": 1,
+        "definitionId": "form_adv",
+        "intent": "EXPLANATION"
+      },
+      "identities": [],
+      "total": 0,
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Not geography-filtered",
+        "metric": "definition",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Not an identifier query"
+      }
+    },
+    {
+      "q": "show me Form ADV for VANGUARD GROUP INC",
+      "width": 1280,
+      "ms": 1219,
+      "terminal": "COMPLETE",
+      "query": {
+        "mode": "evidence",
+        "identifier": {
+          "type": "crd",
+          "value": "105958"
+        },
+        "sort": "name",
+        "page": 1,
+        "intent": "FORM_ADV_RESEARCH",
+        "conditions": []
+      },
+      "identities": [
+        {
+          "crd": "105958",
+          "name": "VANGUARD GROUP INC",
+          "office": {
+            "city": "MALVERN",
+            "state": "PA"
+          },
+          "why": "This firm matches because its sourced firm name contains “VANGUARD GROUP INC”."
+        }
+      ],
+      "total": 1,
+      "answer": "Current indexed Form ADV identity, filing date, reported RAUM and compensation fields are shown where available. These selected fields are not the complete filing; use the official firm record for Form ADV.",
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Not geography-filtered",
+        "metric": "entity list",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Exact labeled firm CRD 105958"
+      }
+    },
+    {
+      "q": "state-registered investment advisers in Wyoming",
+      "width": 1280,
+      "ms": 103,
+      "terminal": "UNSUPPORTED",
+      "query": {
+        "mode": "fail_closed",
+        "firmType": "ria",
+        "geography": {
+          "type": "principal_office_state",
+          "value": "WY",
+          "ambiguous": false,
+          "meaning": "Principal office in Wyoming (SEC/IARD main-office region). Not client geography."
+        },
+        "sort": "name",
+        "page": 1,
+        "failReason": "The current searchable SEC/IARD firm corpus does not establish the requested state-registration or notice-filing jurisdiction. An office in that state is not a substitute. Use the applicable official jurisdiction search or published state research.",
+        "intent": "REGISTRATION_RESEARCH",
+        "conditions": [
+          {
+            "kind": "registration_jurisdiction",
+            "requested": "WY",
+            "outcome": "UNSUPPORTED",
+            "meaning": "Registration/notice jurisdiction, not principal office",
+            "sourceField": "StateRgstn/Rgltr/@Cd + APPROVED"
+          },
+          {
+            "kind": "registration_type",
+            "requested": "state_ria",
+            "outcome": "UNSUPPORTED",
+            "meaning": "Source-native registration class; RIA, ERA and notice filing remain separate"
+          }
+        ],
+        "registrationJurisdictions": [
+          "WY"
+        ],
+        "registrationType": "state_ria"
+      },
+      "identities": [],
+      "total": 0,
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Principal office in Wyoming (SEC/IARD main-office region). Not client geography.",
+        "metric": "fail_closed",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Not an identifier query"
+      }
+    },
+    {
+      "q": "investment advisers in Austin Texas",
+      "width": 1280,
+      "ms": 611,
+      "terminal": "COMPLETE",
+      "query": {
+        "mode": "entity",
+        "firmType": "all",
+        "geography": {
+          "type": "principal_office_city",
+          "value": "Austin",
+          "state": "TX",
+          "meaning": "Recorded principal office, not client geography, registration jurisdiction or service territory"
+        },
+        "sort": "name",
+        "page": 1,
+        "intent": "FIRM_DISCOVERY",
+        "conditions": [
+          {
+            "kind": "office_city",
+            "requested": "Austin",
+            "effective": "Austin",
+            "outcome": "APPLIED",
+            "meaning": "Recorded principal office, not client geography, registration jurisdiction or service territory",
+            "sourceField": "branches.city (is_main_office)"
+          },
+          {
+            "kind": "office_state",
+            "requested": "TX",
+            "effective": "TX",
+            "outcome": "APPLIED",
+            "meaning": "Recorded principal office, not client geography, registration jurisdiction or service territory",
+            "sourceField": "branches.region (is_main_office)"
+          }
+        ]
+      },
+      "identities": [
+        {
+          "crd": "321758",
+          "name": "13CAPITAL LLC",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an ERA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "335265",
+          "name": "1802 VENTURES GP LLC",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an ERA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "331371",
+          "name": "3A PARTNERS, LLC",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an ERA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "319484",
+          "name": "49 FINANCIAL",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "339082",
+          "name": "818 FAMILY OFFICE, LLC",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "289923",
+          "name": "994 GROUP",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "173027",
+          "name": "AB PRIVATE CREDIT INVESTORS LLC",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "281887",
+          "name": "ACACIA PARTNERS, LLC",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "299694",
+          "name": "ADAR1 CAPITAL MANAGEMENT, LLC",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "109201",
+          "name": "ADVISORS CRYPTO, INC.",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "299317",
+          "name": "AFI CAPITAL PARTNERS LLC",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an ERA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "333587",
+          "name": "ALONGSIDE, LLC",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "121703",
+          "name": "ALPHA CAPITAL MANAGEMENT",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "141112",
+          "name": "ANCIENT ART, L.P.",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "131544",
+          "name": "AQS ASSET MANAGEMENT, L.L.C.",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "317264",
+          "name": "ARK WEALTH MANAGEMENT",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "315672",
+          "name": "ARVIN CAPITAL MANAGEMENT LP",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "152635",
+          "name": "ATLASMARK FINANCIAL, INC.",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "296819",
+          "name": "ATOM INVESTORS LP",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        },
+        {
+          "crd": "311589",
+          "name": "ATX FINANCIAL PLANNING, LLC",
+          "office": {
+            "city": "AUSTIN",
+            "state": "TX"
+          },
+          "why": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal-office city as Austin."
+        }
+      ],
+      "total": 241,
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Recorded principal office, not client geography, registration jurisdiction or service territory",
+        "metric": "entity list",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Not an identifier query"
+      }
+    },
+    {
+      "q": "adviser registered in New York with an office in Florida",
+      "width": 1280,
+      "ms": 125,
+      "terminal": "UNSUPPORTED",
+      "query": {
+        "mode": "fail_closed",
+        "geography": {
+          "type": "principal_office_state",
+          "value": "FL",
+          "meaning": "Recorded principal office, not client geography, registration jurisdiction or service territory"
+        },
+        "page": 1,
+        "failReason": "New York state-registered investment-adviser firms are published on /new-york from the IAPD state compilation (jurisdiction=NY). Search V1 remains the SEC/IARD roster and does not treat the 3,152 principal-office overlay as New York state registration. Notice filing is a different grain from state IA.",
+        "alternatives": [
+          "SEC/IARD firms reporting a principal office in New York.",
+          "RIA principal offices in New York."
+        ],
+        "intent": "REGISTRATION_RESEARCH",
+        "conditions": [
+          {
+            "kind": "office_state",
+            "requested": "FL",
+            "effective": "FL",
+            "outcome": "UNSUPPORTED",
+            "meaning": "Recorded principal office, not client geography, registration jurisdiction or service territory",
+            "sourceField": "branches.region (is_main_office)"
+          },
+          {
+            "kind": "registration_jurisdiction",
+            "requested": "NY",
+            "outcome": "UNSUPPORTED",
+            "meaning": "Registration/notice jurisdiction, not principal office",
+            "sourceField": "StateRgstn/Rgltr/@Cd + APPROVED"
+          },
+          {
+            "kind": "registration_type",
+            "requested": "state_ria",
+            "outcome": "UNSUPPORTED",
+            "meaning": "Source-native registration class; RIA, ERA and notice filing remain separate"
+          }
+        ],
+        "registrationJurisdictions": [
+          "NY"
+        ],
+        "registrationType": "state_ria"
+      },
+      "identities": [],
+      "total": 0,
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Recorded principal office, not client geography, registration jurisdiction or service territory",
+        "metric": "fail_closed",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Not an identifier query"
+      }
+    },
+    {
+      "q": "does this firm have disclosures?",
+      "width": 1280,
+      "ms": 105,
+      "terminal": "NEEDS_CLARIFICATION",
+      "query": {
+        "mode": "fail_closed",
+        "sort": "name",
+        "page": 1,
+        "failReason": "Which firm do you mean? Enter a firm name or labeled CRD/SEC file number. No evidence has been attached to an unspecified firm.",
+        "intent": "DISCLOSURE_RESEARCH",
+        "conditions": []
+      },
+      "identities": [],
+      "total": 0,
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Not geography-filtered",
+        "metric": "fail_closed",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Not an identifier query"
+      }
+    },
+    {
+      "q": "CRD 105 958",
+      "width": 1280,
+      "ms": 478,
+      "terminal": "COMPLETE",
+      "query": {
+        "mode": "identifier",
+        "identifier": {
+          "type": "crd",
+          "value": "105958"
+        },
+        "sort": "crd",
+        "page": 1,
+        "intent": "IDENTITY_BY_IDENTIFIER",
+        "conditions": [
+          {
+            "kind": "name",
+            "requested": "CRD 105 958",
+            "outcome": "NEEDS_CLARIFICATION",
+            "meaning": "Exact identifier resolves identity; additional name is not asserted to match"
+          }
+        ]
+      },
+      "identities": [
+        {
+          "crd": "105958",
+          "name": "VANGUARD GROUP INC",
+          "office": {
+            "city": "MALVERN",
+            "state": "PA"
+          },
+          "why": "This firm matches because its organization CRD is 105958."
+        }
+      ],
+      "total": 1,
+      "answer": "The exact identifier resolves identity independently. Additional requested name, office, registration or activity criteria are not established by this identity-only lookup.",
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Not geography-filtered",
+        "metric": "CRD identity",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Exact labeled firm CRD 105958"
+      }
+    },
+    {
+      "q": "CRD 9999999999",
+      "width": 1280,
+      "ms": 367,
+      "terminal": "NO_MATCH",
+      "query": {
+        "mode": "identifier",
+        "identifier": {
+          "type": "crd",
+          "value": "9999999999"
+        },
+        "sort": "crd",
+        "page": 1,
+        "intent": "IDENTITY_BY_IDENTIFIER",
+        "conditions": [
+          {
+            "kind": "name",
+            "requested": "CRD 9999999999",
+            "outcome": "NEEDS_CLARIFICATION",
+            "meaning": "Exact identifier resolves identity; additional name is not asserted to match"
+          }
+        ]
+      },
+      "identities": [],
+      "total": 0,
+      "answer": "The exact identifier resolves identity independently. Additional requested name, office, registration or activity criteria are not established by this identity-only lookup.",
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Not geography-filtered",
+        "metric": "CRD identity",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Exact labeled firm CRD 9999999999"
+      }
+    },
+    {
+      "q": "research VANGUARD GROUP INC",
+      "width": 1280,
+      "ms": 501,
+      "terminal": "COMPLETE",
+      "query": {
+        "mode": "entity",
+        "sort": "name",
+        "page": 1,
+        "intent": "IDENTITY_BY_NAME",
+        "conditions": [],
+        "nameQuery": "VANGUARD GROUP INC"
+      },
+      "identities": [
+        {
+          "crd": "105958",
+          "name": "VANGUARD GROUP INC",
+          "office": {
+            "city": "MALVERN",
+            "state": "PA"
+          },
+          "why": "This firm matches because its sourced firm name contains “VANGUARD GROUP INC”."
+        }
+      ],
+      "total": 1,
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Not geography-filtered",
+        "metric": "entity list",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Not an identifier query"
+      }
+    },
+    {
+      "q": "show me Form ADV for Vanguard",
+      "width": 1280,
+      "ms": 529,
+      "terminal": "NEEDS_CLARIFICATION",
+      "query": {
+        "mode": "entity",
+        "sort": "name",
+        "page": 1,
+        "intent": "FORM_ADV_RESEARCH",
+        "conditions": [],
+        "nameQuery": "Vanguard"
+      },
+      "identities": [
+        {
+          "crd": "106715",
+          "name": "VANGUARD ADVISERS, INC.",
+          "office": {
+            "city": "MALVERN",
+            "state": "PA"
+          },
+          "why": "This firm matches because its sourced firm name contains “Vanguard”."
+        },
+        {
+          "crd": "341357",
+          "name": "VANGUARD ALTERNATIVE ASSETS ADVISER, LLC",
+          "office": {
+            "city": "MALVERN",
+            "state": "PA"
+          },
+          "why": "This firm matches because its sourced firm name contains “Vanguard”."
+        },
+        {
+          "crd": "285052",
+          "name": "VANGUARD CAPITAL",
+          "office": {
+            "city": "DENVER",
+            "state": "CO"
+          },
+          "why": "This firm matches because its sourced firm name contains “Vanguard”."
+        },
+        {
+          "crd": "338002",
+          "name": "VANGUARD CAPITAL MANAGEMENT, LLC",
+          "office": {
+            "city": "MALVERN",
+            "state": "PA"
+          },
+          "why": "This firm matches because its sourced firm name contains “Vanguard”."
+        },
+        {
+          "crd": "164593",
+          "name": "VANGUARD GLOBAL ADVISERS, LLC",
+          "office": {
+            "city": "MALVERN",
+            "state": "PA"
+          },
+          "why": "This firm matches because its sourced firm name contains “Vanguard”."
+        },
+        {
+          "crd": "105958",
+          "name": "VANGUARD GROUP INC",
+          "office": {
+            "city": "MALVERN",
+            "state": "PA"
+          },
+          "why": "This firm matches because its sourced firm name contains “Vanguard”."
+        },
+        {
+          "crd": "285366",
+          "name": "VANGUARD PERSONALIZED INDEXING MANAGEMENT",
+          "office": {
+            "city": "OAKLAND",
+            "state": "CA"
+          },
+          "why": "This firm matches because its sourced firm name contains “Vanguard”."
+        },
+        {
+          "crd": "338003",
+          "name": "VANGUARD PORTFOLIO MANAGEMENT, LLC",
+          "office": {
+            "city": "MALVERN",
+            "state": "PA"
+          },
+          "why": "This firm matches because its sourced firm name contains “Vanguard”."
+        }
+      ],
+      "total": 8,
+      "answer": "Choose the exact firm before attaching the requested evidence. These are source-name candidates, not confirmed regulatory relationships.",
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Not geography-filtered",
+        "metric": "entity list",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Not an identifier query"
+      }
+    },
+    {
+      "q": "investment advisers in Austin",
+      "width": 1280,
+      "ms": 115,
+      "terminal": "NEEDS_CLARIFICATION",
+      "query": {
+        "mode": "fail_closed",
+        "firmType": "all",
+        "geography": {
+          "type": "principal_office_city",
+          "value": "Austin",
+          "ambiguous": true,
+          "meaning": "Recorded principal office, not client geography, registration jurisdiction or service territory"
+        },
+        "sort": "name",
+        "page": 1,
+        "failReason": "Which state is Austin in? The city remains requested; no national cohort was searched.",
+        "intent": "FIRM_DISCOVERY",
+        "conditions": [
+          {
+            "kind": "office_city",
+            "requested": "Austin",
+            "effective": "Austin",
+            "outcome": "NEEDS_CLARIFICATION",
+            "meaning": "Recorded principal office, not client geography, registration jurisdiction or service territory",
+            "sourceField": "branches.city (is_main_office)"
+          }
+        ]
+      },
+      "identities": [],
+      "total": 0,
+      "provenance": {
+        "sourceFamily": "SEC / IARD Form ADV",
+        "dataset": "iapd_sec_compilation",
+        "officialAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "geographyMeaning": "Recorded principal office, not client geography, registration jurisdiction or service territory",
+        "metric": "fail_closed",
+        "raumUnits": "USD as reported on Form ADV Item 5F(2)(c)",
+        "compensationTaxonomy": "Form ADV Item 5.E(1)–5.E(7) Y/N methods",
+        "exclusions": [
+          "Do not add RIA + ERA into one adviser quality total.",
+          "Do not treat principal office as service territory.",
+          "2,155 canonical firms without ADV facts are outside the roster universe."
+        ],
+        "identifierMethod": "Not an identifier query"
+      }
+    }
+  ],
+  "flows": [
+    {
+      "width": 320,
+      "q": "manage my portfolio",
+      "overflow": true
+    },
+    {
+      "width": 320,
+      "q": "investment advisers in Austin Texas",
+      "overflow": false
+    },
+    {
+      "width": 320,
+      "q": "show me Form ADV for VANGUARD GROUP INC",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "q": "manage my portfolio",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "q": "investment advisers in Austin Texas",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "q": "show me Form ADV for VANGUARD GROUP INC",
+      "overflow": false
+    }
+  ],
+  "failures": [
+    {
+      "width": 390,
+      "flow": "selection/history",
+      "error": "TimeoutError: page.waitForURL: Timeout 30000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation to \"**identity=Vanguard**\" until \"load\"\n  navigated to \"http://localhost:3212/ask?q=does+this+firm+have+disclosures%3F&identity=Vanguard\"\n============================================================"
+    },
+    {
+      "width": 390,
+      "flow": "state/broadening",
+      "error": "TimeoutError: page.waitForURL: Timeout 30000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation to \"**state=TX\" until \"load\"\n  navigated to \"http://localhost:3212/ask?q=investment+advisers+in+Austin&state=TX\"\n============================================================"
+    },
+    {
+      "width": 1280,
+      "flow": "selection/history",
+      "error": "TimeoutError: page.waitForURL: Timeout 30000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation to \"**identity=Vanguard**\" until \"load\"\n  navigated to \"http://localhost:3212/ask?q=does+this+firm+have+disclosures%3F&identity=Vanguard\"\n============================================================"
+    },
+    {
+      "width": 1280,
+      "flow": "state/broadening",
+      "error": "TimeoutError: page.waitForURL: Timeout 30000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation to \"**state=TX\" until \"load\"\n  navigated to \"http://localhost:3212/ask?q=investment+advisers+in+Austin&state=TX\"\n============================================================"
+    },
+    {
+      "width": 320,
+      "q": "manage my portfolio",
+      "error": "overflow"
+    }
+  ],
+  "errors": []
+}

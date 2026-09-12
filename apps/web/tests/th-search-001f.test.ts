@@ -19,7 +19,11 @@ describe('TH-SEARCH-001F', () => {
   it('has a 90+ question corpus with no expected failures', () => {
     expect(INVESTOR_SEARCH_GOLDEN_QUESTIONS.length).toBeGreaterThanOrEqual(90);
     expect(INVESTOR_SEARCH_GOLDEN_QUESTIONS.filter((x) => x.expected === 'FAIL')).toHaveLength(0);
-    for (const item of INVESTOR_SEARCH_GOLDEN_QUESTIONS) expect(interpretInvestorAskQuery(item.query).raw.length).toBeLessThanOrEqual(400);
+    for (const item of INVESTOR_SEARCH_GOLDEN_QUESTIONS) {
+      const parsed=interpretInvestorAskQuery(item.query);
+      if(item.query.length>400)expect(parsed.query.terminalState).toBe('INVALID_INPUT');
+      else expect(parsed.raw.length).toBeLessThanOrEqual(400);
+    }
   });
   it('preserves exact identity and epistemic boundaries', () => {
     expect(interpretInvestorAskQuery('SEC file 801-11953').query.identifier).toEqual({ type: 'sec_file_number', value: '801-11953' });

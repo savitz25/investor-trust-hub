@@ -1,0 +1,10 @@
+
+ RUN  v3.2.7 C:/Users/makei/th-search-r1-012-work
+
+ ✓ apps/web/tests/th-search-001f.test.ts (3 tests) 42ms
+ ✓ apps/web/tests/r1-012.test.ts (46 tests) 65ms
+
+ Test Files  2 passed (2)
+      Tests  49 passed (49)
+   Start at  13:30:01
+   Duration  1.18s (transform 495ms, setup 0ms, collect 1.39s, tests 107ms, environment 0ms, prepare 214ms)

@@ -1,0 +1,15 @@
+
+> investor-trust-hub@0.1.0 assert:va-inv-001
+> node scripts/assert-va-inv-001.mjs && vitest run packages/domain/tests/va-public-intel.test.ts apps/web/tests/va-inv-001-publication.test.ts
+
+VA-INV-001 publication assert: PASS
+
+ RUN  v3.2.7 C:/Users/makei/th-search-r1-012-work
+
+ ✓ packages/domain/tests/va-public-intel.test.ts (5 tests) 10ms
+ ✓ apps/web/tests/va-inv-001-publication.test.ts (2 tests) 6ms
+
+ Test Files  2 passed (2)
+      Tests  7 passed (7)
+   Start at  13:45:41
+   Duration  1.18s (transform 433ms, setup 0ms, collect 767ms, tests 16ms, environment 1ms, prepare 293ms)

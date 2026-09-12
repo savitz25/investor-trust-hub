@@ -101,14 +101,16 @@ function appliedFilters(request: SpecialistExecutionRequest, result: InvestorAsk
   const q = result.parsed.query;
   return {
     entityClass: q.firmType === 'all' ? 'ria_and_era' : q.firmType ?? null,
-    identifier: q.identifier ? { type: 'CRD', value: q.identifier.value } : null,
+    identifier: q.identifier ? { type: q.identifier.type === 'crd' ? 'CRD' : 'SEC', value: q.identifier.value } : null,
     identityName: q.nameQuery ?? null,
     geography: q.geography
-      ? { grain: q.geography.type, value: q.geography.value, intent: 'PRINCIPAL_OFFICE', meaning: q.geography.meaning }
+      ? { grain: q.geography.type, value: q.geography.value, state: q.geography.state, intent: 'PRINCIPAL_OFFICE', meaning: q.geography.meaning }
       : null,
     raum: q.raum ?? null,
     compensationMethods: q.compensationMethods ?? [],
     registrationType: q.status ?? null,
+    conditions: q.conditions ?? [],
+    researchIntent: q.intent ?? null,
     page: result.pagination.page,
     limit: request.limit,
   };

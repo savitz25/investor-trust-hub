@@ -1,0 +1,17 @@
+{
+  "ticket": "TH-SEARCH-R1-012",
+  "checkedAt": "2026-09-12T17:50:43.039533+00:00",
+  "sources": [
+    {
+      "agency": "SEC / NASAA IAPD",
+      "jurisdiction": "US",
+      "url": "https://adviserinfo.sec.gov/",
+      "title": "IAPD - Investment Adviser Public Disclosure - Homepage",
+      "purpose": "Official Firm name or CRD/SEC search, Form ADV and public regulatory disclosures",
+      "deepLinkParameters": false,
+      "browser": "Opened official HTTPS landing; observed Firm Name or CRD/SEC# field, FirmSearch action and official investor warnings. No challenge bypass or firm-status lookup.",
+      "evidence": "official-iapd.png",
+      "limitation": "Working destination is not live verification of any firm."
+    }
+  ]
+}

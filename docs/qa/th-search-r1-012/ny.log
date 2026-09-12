@@ -1,0 +1,15 @@
+
+> investor-trust-hub@0.1.0 assert:ny-inv-001
+> node scripts/assert-ny-inv-001.mjs && vitest run packages/domain/tests/ny-public-intel.test.ts apps/web/tests/ny-inv-001-publication.test.ts
+
+NY-INV-001 publication assert: PASS
+
+ RUN  v3.2.7 C:/Users/makei/th-search-r1-012-work
+
+ ✓ packages/domain/tests/ny-public-intel.test.ts (6 tests) 12ms
+ ✓ apps/web/tests/ny-inv-001-publication.test.ts (2 tests) 8ms
+
+ Test Files  2 passed (2)
+      Tests  8 passed (8)
+   Start at  13:45:36
+   Duration  1.71s (transform 587ms, setup 0ms, collect 939ms, tests 20ms, environment 0ms, prepare 331ms)

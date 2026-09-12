@@ -1,0 +1,126 @@
+
+ RUN  v3.2.7 C:/Users/makei/th-search-r1-012-work
+
+ ❯ apps/web/tests/r1-012.test.ts (6 tests | 5 failed) 32ms
+   × R1-012 original research defects > portfolio service requests never become firm names or call a directory 11ms
+     → expected 'manage my portfolio' to be undefined
+   × R1-012 original research defects > unspecified Form ADV needs identity, not a cohort 7ms
+     → expected 'entity' to be 'fail_closed' // Object.is equality
+   × R1-012 original research defects > unspecified disclosure research needs identity 1ms
+     → expected 'entity' to be 'fail_closed' // Object.is equality
+   × R1-012 original research defects > Austin is retained with Texas 8ms
+     → expected { Object (type, value, ...) } to match object { type: 'principal_office_city', …(2) }
+(2 matching properties omitted from actual)
+   × R1-012 original research defects > Wyoming registration cannot execute the office cohort 2ms
+     → expected 'entity' to be 'fail_closed' // Object.is equality
+   ✓ R1-012 original research defects > existing Form ADV definition remains a definition 1ms
+node.exe :
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/tests/r1-012.test.ts > R1-012 original research defects > portfolio service requests never become firm
+names or call a directory
+AssertionError: expected 'manage my portfolio' to be undefined
+
+- Expected:
+undefined
+
++ Received:
+"manage my portfolio"
+
+ ❯ apps/web/tests/r1-012.test.ts:12:31
+     10|     db.query.mockClear();
+     11|     const p = interpretInvestorAskQuery('manage my portfolio');
+     12|     expect(p.query.nameQuery).toBeUndefined();
+       |                               ^
+     13|     expect(p.query.mode).toBe('fail_closed');
+     14|     await executeInvestorAsk('manage my portfolio');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  apps/web/tests/r1-012.test.ts > R1-012 original research defects > unspecified Form ADV needs identity, not a
+cohort
+AssertionError: expected 'entity' to be 'fail_closed' // Object.is equality
+
+Expected: "fail_closed"
+Received: "entity"
+
+ ❯ apps/web/tests/r1-012.test.ts:18:84
+     16|   });
+     17|   it('unspecified Form ADV needs identity, not a cohort', () => {
+     18|     expect(interpretInvestorAskQuery('show me Form ADV for this firm')…
+       |                                                                                    ^
+     19|   });
+     20|   it('unspecified disclosure research needs identity', () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  apps/web/tests/r1-012.test.ts > R1-012 original research defects > unspecified disclosure research needs
+identity
+AssertionError: expected 'entity' to be 'fail_closed' // Object.is equality
+
+Expected: "fail_closed"
+Received: "entity"
+
+ ❯ apps/web/tests/r1-012.test.ts:21:86
+     19|   });
+     20|   it('unspecified disclosure research needs identity', () => {
+     21|     expect(interpretInvestorAskQuery('does this firm have disclosures?…
+       |                                                                                      ^
+     22|   });
+     23|   it('Austin is retained with Texas', () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  apps/web/tests/r1-012.test.ts > R1-012 original research defects > Austin is retained with Texas
+AssertionError: expected { Object (type, value, ...) } to match object { type: 'principal_office_city', …(2) }
+(2 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "state": "TX",
+-   "type": "principal_office_city",
+-   "value": "Austin",
++   "type": "principal_office_state",
++   "value": "TX",
+  }
+
+ ❯ apps/web/tests/r1-012.test.ts:24:94
+     22|   });
+     23|   it('Austin is retained with Texas', () => {
+     24|     expect(interpretInvestorAskQuery('investment advisers in Austin Te…
+       |                                                                                              ^
+     25|   });
+     26|   it('Wyoming registration cannot execute the office cohort', async ()…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  apps/web/tests/r1-012.test.ts > R1-012 original research defects > Wyoming registration cannot execute the
+office cohort
+AssertionError: expected 'entity' to be 'fail_closed' // Object.is equality
+
+Expected: "fail_closed"
+Received: "entity"
+
+ ❯ apps/web/tests/r1-012.test.ts:29:26
+     27|     db.query.mockClear();
+     28|     const p = interpretInvestorAskQuery('state-registered investment a…
+     29|     expect(p.query.mode).toBe('fail_closed');
+       |                          ^
+     30|     await executeInvestorAsk('state-registered investment advisers in …
+     31|     expect(db.query).not.toHaveBeenCalled();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed | 1 passed (6)
+   Start at  13:17:22
+   Duration  3.21s (transform 500ms, setup 0ms, collect 1.11s, tests 32ms, environment 0ms, prepare 1.56s)
