@@ -211,6 +211,8 @@ export function planInvestorResearch(raw: string, o: InvestorAskOverrides, core:
     !task &&
     !q.identifier &&
     /^[A-Z][\w&'.-]*(?:\s+[\w&'.-]+){0,7}$/.test(text) &&
+    (/\b(?:capital|advisors?|advisers?|llc|inc|group|management|partners|investments|financial)\.?$/i.test(text) || /^[A-Z][\w&'.-]*(?:\s+[A-Z][\w&'.-]*){0,2}$/.test(text)) &&
+    !/^(?:explain|tell|describe|help|learn|calculate|can|does|who|where)\b/i.test(text) &&
     !/\b(?:manage|pick|show|find|firms?|advisers?|advisors?|registered|rias?|eras?|portfolio|stocks?|what|how|in)\b/i.test(
       text,
     )
