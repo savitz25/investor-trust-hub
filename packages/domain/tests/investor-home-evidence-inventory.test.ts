@@ -105,7 +105,7 @@ describe('INV-HOME-003 public evidence inventory', () => {
     ).toBe(true);
   });
 
-  it('derives exactly eight state surfaces and never invents Florida', () => {
+  it('derives exactly nine state surfaces and never invents Florida', () => {
     expect(INVESTOR_HOMEPAGE_STATE_CARDS.map((state) => state.href)).toEqual([
       '/new-jersey',
       '/california',
@@ -115,6 +115,7 @@ describe('INV-HOME-003 public evidence inventory', () => {
       '/colorado',
       '/virginia',
       '/new-york',
+      '/illinois',
     ]);
     expect(get('published_state_pages').value).toBe(
       INVESTOR_HOMEPAGE_STATE_CARDS.length,
@@ -144,6 +145,10 @@ describe('INV-HOME-003 public evidence inventory', () => {
     expect(get('co_overlay').grain).toMatch(/principal office/i);
     expect(get('co_state_roster').grain).toMatch(/jurisdiction CO/i);
     expect(get('co_notice_filed').value).toBe(3673);
+    expect(get('il_state_roster').value).toBe(855);
+    expect(get('il_state_roster').valueState).toBe('KNOWN');
+    expect(get('il_overlay').value).toBe(793);
+    expect(get('il_notice_filed').value).toBe(3560);
   });
 
   it('preserves Arizona enforcement index and attribution grains', () => {

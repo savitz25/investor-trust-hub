@@ -53,6 +53,11 @@ export function publicationMetricInputs() {
       .replace(/^[\s\S]*export const NY_PUBLIC_SNAPSHOT = /, "")
       .replace(/\s+as const;[\s\S]*$/, ""),
   );
+  const il = JSON.parse(
+    read("packages/domain/src/il-public-snapshot.ts")
+      .replace(/^[\s\S]*export const IL_PUBLIC_SNAPSHOT = /, "")
+      .replace(/\s+as const;[\s\S]*$/, ""),
+  );
 
   const stateBlock = routes.match(/export const STATE_DISCOVERY_ROUTES = \[([\s\S]*?)\] as const/)[1];
   const publishedStateIntelligencePaths = [...stateBlock.matchAll(/href: '(\/[^']+)'/g)].map((m) => m[1]);
@@ -112,5 +117,10 @@ export function publicationMetricInputs() {
     nyStateRiaApproved: ny.stateRia.approvedDistinctCrd,
     nyNoticeFiled: ny.federalNotice.noticeFiledDistinctCrd,
     nyRoute: ny.route,
+    ilPrincipalOfficeFirms: il.nationalOverlay.ilPrincipalOfficeSecIardFirms,
+    ilStateRiaRoster: il.stateRia.STATE_RIA_BULK_ROSTER,
+    ilStateRiaApproved: il.stateRia.approvedDistinctCrd,
+    ilNoticeFiled: il.federalNotice.noticeFiledDistinctCrd,
+    ilRoute: il.route,
   };
 }
