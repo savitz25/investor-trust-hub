@@ -1,0 +1,24 @@
+{
+  "head": "dff7f0bc4ffbc8f8b016b71850161e793465ab98",
+  "mutations": [
+    {
+      "name": "name-fallback",
+      "detected": true,
+      "exit": 1,
+      "at": "2026-09-12T18:05:44.688418+00:00"
+    },
+    {
+      "name": "registration-as-office",
+      "detected": true,
+      "exit": 1,
+      "at": "2026-09-12T18:05:47.460628+00:00"
+    },
+    {
+      "name": "drop-city",
+      "detected": true,
+      "exit": 1,
+      "at": "2026-09-12T18:05:50.682561+00:00"
+    }
+  ],
+  "restored": true
+}

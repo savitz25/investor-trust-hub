@@ -1,0 +1,19 @@
+
+> investor-trust-hub@0.1.0 typecheck
+> npm run typecheck --workspaces --if-present
+
+
+> @ith/web@0.1.0 typecheck
+> tsc --noEmit
+
+
+> @ith/domain@0.1.0 typecheck
+> tsc --noEmit
+
+
+> @ith/config@0.1.0 typecheck
+> tsc --noEmit
+
+
+> @ith/ui@0.1.0 typecheck
+> tsc --noEmit

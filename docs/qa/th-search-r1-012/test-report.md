@@ -19,3 +19,5 @@ Regression coverage includes existing identity, structured API, RAUM, state inte
 Review: separate self-review and automated checks; no independent human review claimed. CI additionally runs Python ingestion and isolated PostgreSQL fixture/migration jobs. Local tests do not write Production data. CI outcomes and exact release identities will be appended after they exist.
 
 Final local result: focused 87/87 (57 new ticket tests), repository 308/308, typecheck/lint/build PASS. Optimized browser 24 cases + 10 flows, zero failures/page errors at 320/390/768/1280; core completion 99?1310 ms. See local-pass-browser.json.
+
+Final release: 93 focused/63 R1-012, 322 repository tests across 48 files after preserving Illinois main; typecheck/lint/build PASS. CI browser 12/12; ingestion/database/metrics/preview/review PASS. Final optimized local and canonical Production each passed 24 cases + 10 flows at all four widths. Production core completion 246-4481 ms. Source-clock assertion is included; initial production-browser.json alone was not the final certificate. Final runtime deployment dpl_2R88zjWs3dfowVKrjoeKFxHJWgg4, SHA 12c995346dc8fc1daf97b06fd072fd4dc1096bbf.
