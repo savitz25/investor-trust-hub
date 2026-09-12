@@ -52,6 +52,7 @@ describe('R1-012 original research defects', () => {
   it.each(['find investment advisers in Austin Texas','research state-registered investment advisers in Wyoming'])('discovery verbs do not manufacture names: %s',(raw)=>{const q=interpretInvestorAskQuery(raw).query;expect(q.nameQuery).toBeUndefined();if(raw.includes('Austin'))expect(q.geography).toMatchObject({value:'Austin',state:'TX'});else expect(q.registrationJurisdictions).toEqual(['WY']);});
   it('a labeled identifier is not also an inferred name',async()=>{fixtureDb();const r=await executeInvestorAsk('CRD 9999999999');expect(r.parsed.query.conditions?.some(c=>c.kind==='name')).toBe(false);expect(r.answer).toBeUndefined();expect(r.results).toEqual([]);});
   it('named research preserves a following registration condition',()=>{const q=interpretInvestorAskQuery('research Alpha Capital registered in Florida with an office in New York').query;expect(q.nameQuery).toBe('Alpha Capital');expect(q.registrationJurisdictions).toEqual(['FL']);expect(q.geography?.value).toBe('NY');expect(q.mode).toBe('fail_closed');});
+  it('unknown row publication date never borrows the reference snapshot clock',async()=>{fixtureDb();const r=await executeInvestorAsk('CRD 105958');expect(r.results[0]?.officialAsOf).toBeNull();expect(r.provenance.officialAsOf).toBe('Not established for all returned rows');expect(r.provenance.retrievedAt).toBe('2026-08-18');expect(publicAskPayload(r).results[0]?.sourceRelease).toMatchObject({releaseLabel:'2026-08-03',officialAsOf:null,sha256:null});});
   it('existing Form ADV definition remains a definition', () => {
     expect(interpretInvestorAskQuery('what is Form ADV?').query.definitionId).toBe('form_adv');
   });
@@ -72,7 +73,11 @@ const fixture = [
     source_status_text: 'Approved',
     raum_amount: '2000000000',
     latest_adv_filing_date: '2026-01-01',
-    retrieved_at: '2026-08-28',
+    retrieved_at: '2026-08-18',
+    published_at: null,
+    source_dataset_id: 'sec_ia_ria',
+    release_label: '2026-08-03',
+    checksum_sha256: null,
   },
   {
     id: 'b',

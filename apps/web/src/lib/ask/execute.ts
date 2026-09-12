@@ -21,7 +21,12 @@ import {
 import { query } from '../db';
 import { overrideEntries } from './request';
 
+type FirmSourceRelease = { dataset: string | null; releaseLabel: string | null; officialAsOf: string | null; retrievedAt: string | null; sha256: string | null };
+function firmSource(row: FirmRow): FirmSourceRelease {
+  return {dataset:row.source_dataset_id??null,releaseLabel:row.release_label??null,officialAsOf:isoDate(row.published_at),retrievedAt:isoDate(row.retrieved_at),sha256:row.checksum_sha256??null};
+}
 export type AskFirmCard = {
+  sourceRelease?: FirmSourceRelease;
   recordedOffice?: { city: string | null; state: string | null };
   selectionHref?: string;
   firmId: string;
@@ -62,6 +67,8 @@ export type InvestorAskResult = {
   counts: AskCountRow[];
   pagination: { page: number; pageSize: number; total: number; hasMore: boolean };
   provenance: {
+    sourceClockMeaning?: string;
+    sourceReleases?: FirmSourceRelease[];
     sourceFamily: string;
     dataset: string;
     officialAsOf: string;
@@ -87,13 +94,20 @@ const LIMITATIONS = [
   'Public firm reports are a publication gate (Wave-1), not a ranking.',
 ];
 
-function provenance(parsed: ParsedInvestorAsk, metric: string): InvestorAskResult['provenance'] {
+function provenance(parsed: ParsedInvestorAsk, metric: string, rows?: FirmRow[]): InvestorAskResult['provenance'] {
   const q = parsed.query;
+  const sources = rows ? [...new Map(rows.map(row => {const source=firmSource(row);return [JSON.stringify(source),source] as const;})).values()] : undefined;
+  const sourceValue = (key:'dataset'|'officialAsOf'|'retrievedAt') => {
+    const values=sources?.map(s=>s[key])??[];
+    return values.length && values.every(v=>v!==null) && new Set(values).size===1 ? values[0]! : 'Not established for all returned rows';
+  };
   return {
     sourceFamily: 'SEC / IARD Form ADV',
-    dataset: V1_SOURCE.dataset,
-    officialAsOf: V1_SOURCE.publishedAt,
-    retrievedAt: V1_SOURCE.retrievedAt,
+    dataset: sources ? sources.length ? sourceValue('dataset') : 'Published SEC/IARD firm-fact index (no returned row)' : V1_SOURCE.dataset,
+    officialAsOf: sources ? sourceValue('officialAsOf') : V1_SOURCE.publishedAt,
+    retrievedAt: sources ? sourceValue('retrievedAt') : V1_SOURCE.retrievedAt,
+    sourceReleases: sources,
+    sourceClockMeaning: sources ? 'Source releases attached to returned firm facts; unknown publication dates remain unknown. Release labels are not converted to official effective dates.' : 'Reference snapshot metadata; this is not a per-firm source observation or a live regulatory check.',
     geographyMeaning: q.geography?.meaning ?? 'Not geography-filtered',
     metric,
     raumUnits: 'USD as reported on Form ADV Item 5F(2)(c)',
@@ -123,6 +137,9 @@ type FirmRow = {
   latest_adv_filing_date: Date | string | null;
   retrieved_at: Date | string | null;
   published_at?: Date | string | null;
+  source_dataset_id?: string | null;
+  release_label?: string | null;
+  checksum_sha256?: string | null;
   indexable: boolean | null;
 };
 
@@ -290,6 +307,9 @@ const SELECT_SQL = `
     adv.latest_adv_filing_date,
     rel.retrieved_at,
     rel.published_at,
+    rel.source_dataset_id,
+    rel.release_label,
+    rel.checksum_sha256,
     sd.indexable
 `;
 
@@ -337,7 +357,8 @@ function toCard(row: FirmRow, parsed: ParsedInvestorAsk, compensation: string[])
     raum: raum ? { exact: raum.exact, display: raum.display, amount: raum.amount } : null,
     compensation,
     filingDate: isoDate(row.latest_adv_filing_date),
-    officialAsOf: isoDate(row.published_at) ?? V1_SOURCE.publishedAt,
+    officialAsOf: isoDate(row.published_at),
+    sourceRelease: firmSource(row),
     href: indexable ? `/firm/${row.slug}` : null,
     currentlyIndexable: indexable,
     publicationNote: indexable
@@ -642,7 +663,7 @@ export async function executeParsedInvestorAsk(parsed: ParsedInvestorAsk, pageSi
       total,
       hasMore: q.page * boundedPageSize < total,
     },
-    provenance: provenance(parsed, q.mode === 'identifier' ? 'CRD identity' : 'entity list'),
+    provenance: provenance(parsed, q.identifier ? 'exact firm identity' : 'entity list', rows),
     limitations: LIMITATIONS,
     elapsedMs: Date.now() - started,
   };
@@ -681,6 +702,7 @@ export function publicAskPayload(result: InvestorAskResult) {
     results: result.results.map((row) => ({
       crd: row.crd,
       recordedOffice: row.recordedOffice,
+      sourceRelease: row.sourceRelease,
       selectionHref: row.selectionHref,
       firmName: row.displayName,
       firmType: row.firmType,

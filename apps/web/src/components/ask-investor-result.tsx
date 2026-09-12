@@ -167,7 +167,7 @@ export function AskInvestorResultView({ result }: { result: InvestorAskResult })
                 <summary className="min-h-11 cursor-pointer py-2 font-semibold text-[var(--ith-navy)]">Trace this result</summary>
                 <dl className="grid gap-2 text-sm sm:grid-cols-2">
                   <div><dt className="text-xs uppercase">Identity</dt><dd>Firm CRD {firm.crd}; {firm.firmTypeLabel}</dd></div>
-                  <div><dt className="text-xs uppercase">Source as of</dt><dd>{firm.officialAsOf ?? result.provenance.officialAsOf}</dd></div>
+                  <div><dt className="text-xs uppercase">Source as of</dt><dd>{firm.officialAsOf ?? 'Official publication date not established'}</dd></div>
                   <div><dt className="text-xs uppercase">Geography meaning</dt><dd>{result.provenance.geographyMeaning}</dd></div>
                   <div><dt className="text-xs uppercase">Publication</dt><dd>{firm.currentlyIndexable ? 'Public research profile published' : 'No public research profile is currently published for this identity'}</dd></div>
                 </dl>
@@ -231,6 +231,7 @@ export function AskInvestorResultView({ result }: { result: InvestorAskResult })
               {result.provenance.officialAsOf} / {result.provenance.retrievedAt}
             </dd>
           </div>
+          <div className="min-w-0 sm:col-span-2"><dt className="text-xs uppercase">Source clock meaning</dt><dd>{result.provenance.sourceClockMeaning}</dd>{result.provenance.sourceReleases?.map((s,i)=><p key={i} className="mt-2 break-words">{s.dataset??'Dataset unknown'}; release label {s.releaseLabel??'unknown'}; official publication {s.officialAsOf??'not established'}; retrieved {s.retrievedAt??'unknown'}; fingerprint {s.sha256??'not recorded'}.</p>)}</div>
           <div>
             <dt className="text-xs uppercase">Geography meaning</dt>
             <dd>{result.provenance.geographyMeaning}</dd>
