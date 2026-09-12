@@ -167,7 +167,7 @@ export function AskInvestorResultView({ result }: { result: InvestorAskResult })
                 <summary className="min-h-11 cursor-pointer py-2 font-semibold text-[var(--ith-navy)]">Trace this result</summary>
                 <dl className="grid gap-2 text-sm sm:grid-cols-2">
                   <div><dt className="text-xs uppercase">Identity</dt><dd>Firm CRD {firm.crd}; {firm.firmTypeLabel}</dd></div>
-                  <div><dt className="text-xs uppercase">Source as of</dt><dd>{firm.officialAsOf ?? result.provenance.officialAsOf}</dd></div>
+                  <div><dt className="text-xs uppercase">Source as of</dt><dd>{firm.officialAsOf ?? 'Official publication date not established'}</dd></div>
                   <div><dt className="text-xs uppercase">Geography meaning</dt><dd>{result.provenance.geographyMeaning}</dd></div>
                   <div><dt className="text-xs uppercase">Publication</dt><dd>{firm.currentlyIndexable ? 'Public research profile published' : 'No public research profile is currently published for this identity'}</dd></div>
                 </dl>
@@ -195,7 +195,7 @@ export function AskInvestorResultView({ result }: { result: InvestorAskResult })
 
       {!result.results.length && !q.identifier && result.resultType === 'entity' ? <p className="rounded-2xl border border-[var(--ith-border)] p-5 text-sm">No matching published firm record for these criteria. Missing evidence is not zero or a clean history.</p> : null}
 
-      {result.results.length && result.pagination.total > INVESTOR_ASK_PAGE_SIZE ? (
+      {!result.candidateSelection && result.results.length && result.pagination.total > INVESTOR_ASK_PAGE_SIZE ? (
         <nav className="flex gap-3" aria-label="Pagination">
           {result.pagination.page > 1 ? (
             <Link href={askHref(result.queryText, result.pagination.page - 1,q.inputOverrides)} className="th-btn-secondary min-h-11 px-4">
@@ -231,6 +231,7 @@ export function AskInvestorResultView({ result }: { result: InvestorAskResult })
               {result.provenance.officialAsOf} / {result.provenance.retrievedAt}
             </dd>
           </div>
+          <div className="min-w-0 sm:col-span-2"><dt className="text-xs uppercase">Source clock meaning</dt><dd>{result.provenance.sourceClockMeaning}</dd>{result.provenance.sourceReleases?.map((s,i)=><p key={i} className="mt-2 break-words">{s.dataset??'Dataset unknown'}; release label {s.releaseLabel??'unknown'}; official publication {s.officialAsOf??'not established'}; retrieved {s.retrievedAt??'unknown'}; fingerprint {s.sha256??'not recorded'}.</p>)}</div>
           <div>
             <dt className="text-xs uppercase">Geography meaning</dt>
             <dd>{result.provenance.geographyMeaning}</dd>
