@@ -195,7 +195,7 @@ export function AskInvestorResultView({ result }: { result: InvestorAskResult })
 
       {!result.results.length && !q.identifier && result.resultType === 'entity' ? <p className="rounded-2xl border border-[var(--ith-border)] p-5 text-sm">No matching published firm record for these criteria. Missing evidence is not zero or a clean history.</p> : null}
 
-      {result.results.length && result.pagination.total > INVESTOR_ASK_PAGE_SIZE ? (
+      {!result.candidateSelection && result.results.length && result.pagination.total > INVESTOR_ASK_PAGE_SIZE ? (
         <nav className="flex gap-3" aria-label="Pagination">
           {result.pagination.page > 1 ? (
             <Link href={askHref(result.queryText, result.pagination.page - 1,q.inputOverrides)} className="th-btn-secondary min-h-11 px-4">
