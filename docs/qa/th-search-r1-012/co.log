@@ -1,0 +1,15 @@
+
+> investor-trust-hub@0.1.0 assert:co-inv-001
+> node scripts/assert-co-inv-001.mjs && vitest run packages/domain/tests/co-public-intel.test.ts apps/web/tests/co-inv-001-publication.test.ts
+
+CO-INV-001 PASS Colorado grain, clocks, routing, and identity gates
+
+ RUN  v3.2.7 C:/Users/makei/th-search-r1-012-work
+
+ ✓ packages/domain/tests/co-public-intel.test.ts (8 tests) 12ms
+ ✓ apps/web/tests/co-inv-001-publication.test.ts (6 tests) 11ms
+
+ Test Files  2 passed (2)
+      Tests  14 passed (14)
+   Start at  13:45:43
+   Duration  1.13s (transform 486ms, setup 0ms, collect 836ms, tests 23ms, environment 0ms, prepare 255ms)

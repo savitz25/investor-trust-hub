@@ -5,6 +5,8 @@
 
 import { COMPENSATION_METHOD_LABELS } from './adv-profile-intelligence';
 import { REGION_NAMES, V1_RIA_RAUM_BANDS, V1_SOURCE } from './investor-home-intel';
+import { planInvestorResearch, type InvestorResearchIntent, type InvestorCondition } from './investor-research-plan';
+export type { InvestorResearchIntent, InvestorCondition } from './investor-research-plan';
 
 export const INVESTOR_ASK_CONTRACT = 'investor-ask-v1' as const;
 export const INVESTOR_ASK_PAGE_SIZE = 20;
@@ -97,6 +99,15 @@ export const AFFILIATION_FIELDS = {
 } as const;
 
 export type InvestorResearchQuery = {
+  intent?: InvestorResearchIntent;
+  conditions?: InvestorCondition[];
+  registrationJurisdictions?: string[];
+  registrationType?: 'state_ria' | 'state_era' | 'notice' | 'sec_ria';
+  terminalState?: 'NEEDS_CLARIFICATION' | 'UNSUPPORTED' | 'INVALID_INPUT';
+  answer?: string;
+  selectedCrd?: string;
+  originalName?: string;
+  inputOverrides?: InvestorAskOverrides;
   mode: InvestorAskMode;
   firmType?: InvestorFirmType;
   status?: 'registered' | 'pending' | 'reporting' | 'current_roster';
@@ -105,6 +116,7 @@ export type InvestorResearchQuery = {
     value: string;
     meaning: string;
     ambiguous?: boolean;
+    state?: string;
   };
   compareGeography?: {
     type: 'principal_office_state';
@@ -145,6 +157,11 @@ export type InvestorAskOverrides = {
   sort?: InvestorAskSort;
   firmType?: InvestorFirmType;
   state?: string;
+  broaden?: string;
+  selected?: string;
+  identity?: string;
+  raum?: InvestorResearchQuery['raum'];
+  compensationMethods?: CompensationMethodKey[];
 };
 
 const STATE_NAME_TO_CODE: Record<string, string> = Object.fromEntries(
@@ -312,7 +329,7 @@ function isFiduciaryBinary(q: string): boolean {
   return /\b(more trustworthy|more fiduciary|ria or broker)\b/i.test(q) && /\b(ria|broker)\b/i.test(q);
 }
 
-export function interpretInvestorAskQuery(raw: string, overrides: InvestorAskOverrides = {}): ParsedInvestorAsk {
+function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverrides = {}): ParsedInvestorAsk {
   const queryText = raw.trim().slice(0, 400);
   const q = queryText;
   const page = Math.max(1, Math.min(200, overrides.page ?? 1));
@@ -775,6 +792,10 @@ export function interpretInvestorAskQuery(raw: string, overrides: InvestorAskOve
   };
 }
 
+export function interpretInvestorAskQuery(raw: string, overrides: InvestorAskOverrides = {}): ParsedInvestorAsk {
+  return planInvestorResearch(raw, overrides, interpretInvestorAskQueryCore);
+}
+
 function definitionResult(raw: string, definitionId: string, page: number): ParsedInvestorAsk {
   const def = ASK_DEFINITIONS[definitionId];
   return {
@@ -827,7 +848,7 @@ export function whyThisMatched(input: {
     bits.push(`it reports its principal office in ${REGION_NAMES[input.geography.value] ?? input.geography.value}`);
   }
   if (input.geography?.type === 'principal_office_city') {
-    bits.push(`it reports its principal-office city as ${input.geography.value}`);
+    bits.push(`it reports its principal-office city as ${input.geography.value}${input.geography.state ? `, ${REGION_NAMES[input.geography.state] ?? input.geography.state}` : ''}`);
   }
   if (input.raum) bits.push(`it reports RAUM ${rangeLabel(input.raum)} on Form ADV Item 5F(2)(c)`);
   if (input.compensationMethods?.length) {

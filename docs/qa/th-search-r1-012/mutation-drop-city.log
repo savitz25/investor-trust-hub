@@ -1,0 +1,163 @@
+
+> investor-trust-hub@0.1.0 check:th-search-r1-012
+> vitest run apps/web/tests/r1-012.test.ts packages/domain/tests/investor-ask.test.ts packages/domain/tests/investor-specialist-execution-v2.test.ts apps/web/tests/th-search-001f.test.ts
+
+
+ RUN  v3.2.7 C:/Users/makei/th-search-r1-012-work
+
+ ✓ packages/domain/tests/investor-specialist-execution-v2.test.ts (10 tests) 12ms
+ ✓ packages/domain/tests/investor-ask.test.ts (17 tests) 35ms
+ ✓ apps/web/tests/th-search-001f.test.ts (3 tests) 43ms
+ ❯ apps/web/tests/r1-012.test.ts (54 tests | 7 failed) 116ms
+   ✓ R1-012 original research defects > portfolio service requests never become firm names or call a directory 4ms
+   ✓ R1-012 original research defects > unspecified Form ADV needs identity, not a cohort 8ms
+   ✓ R1-012 original research defects > unspecified disclosure research needs identity 7ms
+   ✓ R1-012 original research defects > Austin is retained with Texas 3ms
+   ✓ R1-012 original research defects > Wyoming registration cannot execute the office cohort 2ms
+   ✓ R1-012 original research defects > existing Form ADV definition remains a definition 0ms
+   × R1-012 typed plan and production source predicates > native page/API share the same full fixture identity and scope 25ms
+     → [vitest] No "DatabaseUnavailableError" export is defined on the "../src/lib/db" mock. Did you forget to return it from "vi.mock"?
+If you need to partially mock a module, you can use "importOriginal" helper inside:
+
+   ✓ R1-012 typed plan and production source predicates > native/API reject full oversized input rather than discarding its suffix 17ms
+   ✓ R1-012 typed plan and production source predicates > structured unspecified evidence cannot bypass identity requirement 3ms
+   × R1-012 typed plan and production source predicates > city counts execute the same full compound cohort before pagination 6ms
+     → expected [ 2, 1 ] to deeply equal [ 1, 1 ]
+   ✓ R1-012 typed plan and production source predicates > held profiles and separate identities remain separate 2ms
+   ✓ R1-012 typed plan and production source predicates > name predicates and exact-name relevance precede the limit 2ms
+   ✓ R1-012 typed plan and production source predicates > SQL wildcard characters remain bound and escaped 1ms
+   ✓ R1-012 typed plan and production source predicates > exact identity retains unsupported additional registration condition without substitution 1ms
+   ✓ R1-012 typed plan and production source predicates > personal boundary: manage my portfolio 0ms
+   ✓ R1-012 typed plan and production source predicates > personal boundary: pick stocks for me 0ms
+   ✓ R1-012 typed plan and production source predicates > personal boundary: what should I invest in 0ms
+   ✓ R1-012 typed plan and production source predicates > personal boundary: which adviser should I hire 0ms
+   ✓ R1-012 typed plan and production source predicates > personal boundary: who will make me the most money 0ms
+   ✓ R1-012 typed plan and production source predicates > exact full family: CRD 105958 1ms
+   ✓ R1-012 typed plan and production source predicates > exact full family: find CRD 105 958 0ms
+   ✓ R1-012 typed plan and production source predicates > exact full family: CRD #105958 0ms
+   ✓ R1-012 typed plan and production source predicates > exact miss never broadens 0ms
+   ✓ R1-012 typed plan and production source predicates > does not invent an identifier: CRD 105,958 0ms
+   ✓ R1-012 typed plan and production source predicates > does not invent an identifier: CRD 105 and 958 0ms
+   ✓ R1-012 typed plan and production source predicates > does not invent an identifier: CRD 105.958 0ms
+   ✓ R1-012 typed plan and production source predicates > does not invent an identifier: CRD 1e5 0ms
+   ✓ R1-012 typed plan and production source predicates > does not invent an identifier: CRD 105958 CRD 77 0ms
+   ✓ R1-012 typed plan and production source predicates > unavailable jurisdiction does not call office rows: state-registered investment advisers in Wyoming 1ms
+   ✓ R1-012 typed plan and production source predicates > unavailable jurisdiction does not call office rows: advisers registered in Wyoming 0ms
+   ✓ R1-012 typed plan and production source predicates > unavailable jurisdiction does not call office rows: notice-filed advisers in Wyoming 0ms
+   ✓ R1-012 typed plan and production source predicates > unavailable jurisdiction does not call office rows: Wyoming state ERAs 0ms
+   ✓ R1-012 typed plan and production source predicates > office WY is a separate supported operation 0ms
+   × R1-012 typed plan and production source predicates > compound office before limits: investment advisers in Austin Texas 2ms
+     → Source location contract mismatch
+   × R1-012 typed plan and production source predicates > compound office before limits: RIA firms in Austin TX 1ms
+     → Source location contract mismatch
+   × R1-012 typed plan and production source predicates > compound office before limits: investment advisers in Austin, TX 1ms
+     → Source location contract mismatch
+   ✓ R1-012 typed plan and production source predicates > Dallas and another explicit city use the same parser 1ms
+   × R1-012 typed plan and production source predicates > city-only clarifies then typed state completes 2ms
+     → Source location contract mismatch
+   ✓ R1-012 typed plan and production source predicates > explicit broadening is visible and validated 2ms
+   ✓ R1-012 typed plan and production source predicates > registration NY and office FL remain distinct 0ms
+   ✓ R1-012 typed plan and production source predicates > multi-registration jurisdictions require resolution 0ms
+   ✓ R1-012 typed plan and production source predicates > SEC current RIA uses actual current SEC registration predicate 1ms
+   ✓ R1-012 typed plan and production source predicates > research is not a name: find Form ADV filings 1ms
+   ✓ R1-012 typed plan and production source predicates > research is not a name: does this firm have disclosures? 1ms
+   ✓ R1-012 typed plan and production source predicates > research is not a name: which firms have disclosures 1ms
+   ✓ R1-012 typed plan and production source predicates > research is not a name: show me Form ADV for this firm 1ms
+   ✓ R1-012 typed plan and production source predicates > research is not a name: how do I find an adviser's Form ADV? 1ms
+   ✓ R1-012 typed plan and production source predicates > unique exact source name preserves the Form ADV question 1ms
+   ✓ R1-012 typed plan and production source predicates > ambiguous firm selection is revalidated and preserves evidence 2ms
+   ✓ R1-012 typed plan and production source predicates > disclosures do not expose internal fields or promise clean history 1ms
+   × R1-012 typed plan and production source predicates > structured compound city/state reaches the same predicate 2ms
+     → Source location contract mismatch
+   ✓ R1-012 typed plan and production source predicates > missing source is an error, not zero 3ms
+   ✓ R1-012 typed plan and production source predicates > common request rejects duplicate/overlong/unsafe pagination and keeps typed filters 2ms
+   ✓ R1-012 typed plan and production source predicates > official recovery is the maintained allowlisted HTTPS destination 0ms
+
+ Test Files  1 failed | 3 passed (4)
+      Tests  7 failed | 77 passed (84)
+   Start at  13:45:20
+   Duration  1.40s (transform 668ms, setup 0ms, collect 1.83s, tests 205ms, environment 1ms, prepare 533ms)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/tests/r1-012.test.ts > R1-012 typed plan and production source predicates > native page/API share the same full fixture identity and scope
+Error: [vitest] No "DatabaseUnavailableError" export is defined on the "../src/lib/db" mock. Did you forget to return it from "vi.mock"?
+If you need to partially mock a module, you can use "importOriginal" helper inside:
+
+vi.mock(import("../src/lib/db"), async (importOriginal) => {
+  const actual = await importOriginal()
+  return {
+    ...actual,
+    // your mocked methods
+  }
+})
+
+ ❯ Module.GET apps/web/src/app/api/ask/route.ts:31:26
+     29|     });
+     30|   } catch (error) {
+     31|     if (error instanceof DatabaseUnavailableError) {
+       |                          ^
+     32|       return NextResponse.json(
+     33|         { contract: 'investor-ask-v1', error: 'Research database tempo…
+ ❯ apps/web/tests/r1-012.test.ts:148:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  apps/web/tests/r1-012.test.ts > R1-012 typed plan and production source predicates > city counts execute the same full compound cohort before pagination
+AssertionError: expected [ 2, 1 ] to deeply equal [ 1, 1 ]
+
+- Expected
++ Received
+
+  [
+-   1,
++   2,
+    1,
+  ]
+
+ ❯ apps/web/tests/r1-012.test.ts:155:213
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  apps/web/tests/r1-012.test.ts > R1-012 typed plan and production source predicates > compound office before limits: investment advisers in Austin Texas
+ FAIL  apps/web/tests/r1-012.test.ts > R1-012 typed plan and production source predicates > compound office before limits: RIA firms in Austin TX
+ FAIL  apps/web/tests/r1-012.test.ts > R1-012 typed plan and production source predicates > compound office before limits: investment advisers in Austin, TX
+Error: Source location contract mismatch
+ ❯ apps/web/src/lib/ask/execute.ts:1235:180
+    694|     elapsedMs: result.elapsedMs,
+    695|   };
+    696| }
+       |    ^
+    697|
+ ❯ executeParsedInvestorAsk apps/web/src/lib/ask/execute.ts:1231:24
+ ❯ apps/web/tests/r1-012.test.ts:221:15
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  apps/web/tests/r1-012.test.ts > R1-012 typed plan and production source predicates > city-only clarifies then typed state completes
+Error: Source location contract mismatch
+ ❯ apps/web/src/lib/ask/execute.ts:1235:180
+    694|     elapsedMs: result.elapsedMs,
+    695|   };
+    696| }
+       |    ^
+    697|
+ ❯ executeParsedInvestorAsk apps/web/src/lib/ask/execute.ts:1231:24
+ ❯ apps/web/tests/r1-012.test.ts:241:15
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  apps/web/tests/r1-012.test.ts > R1-012 typed plan and production source predicates > structured compound city/state reaches the same predicate
+Error: Source location contract mismatch
+ ❯ apps/web/src/lib/ask/execute.ts:1235:180
+    694|     elapsedMs: result.elapsedMs,
+    695|   };
+    696| }
+       |    ^
+    697|
+ ❯ Module.executeParsedInvestorAsk apps/web/src/lib/ask/execute.ts:1231:24
+ ❯ apps/web/tests/r1-012.test.ts:332:15
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯

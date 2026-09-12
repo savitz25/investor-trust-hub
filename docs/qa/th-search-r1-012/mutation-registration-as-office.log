@@ -1,0 +1,270 @@
+
+> investor-trust-hub@0.1.0 check:th-search-r1-012
+> vitest run apps/web/tests/r1-012.test.ts packages/domain/tests/investor-ask.test.ts packages/domain/tests/investor-specialist-execution-v2.test.ts apps/web/tests/th-search-001f.test.ts
+
+
+ RUN  v3.2.7 C:/Users/makei/th-search-r1-012-work
+
+ ✓ packages/domain/tests/investor-specialist-execution-v2.test.ts (10 tests) 11ms
+ ❯ packages/domain/tests/investor-ask.test.ts (17 tests | 3 failed) 45ms
+   ✓ investor-ask-v1 interpreter > exposes execute capability without ranking language 2ms
+   ✓ investor-ask-v1 interpreter > parses labeled CRD and fails closed on bare digits 8ms
+   × investor-ask-v1 interpreter > does not treat Colorado state RIAs as the 589 principal-office overlay 10ms
+     → expected 'entity' to be 'fail_closed' // Object.is equality
+   × investor-ask-v1 interpreter > does not treat New York state RIAs as the 3,152 principal-office overlay 2ms
+     → expected 'entity' to be 'fail_closed' // Object.is equality
+   × investor-ask-v1 interpreter > does not treat Virginia state RIAs as the 339 principal-office overlay 1ms
+     → expected 'entity' to be 'fail_closed' // Object.is equality
+   ✓ investor-ask-v1 interpreter > interprets Florida RIAs as principal-office geography 6ms
+   ✓ investor-ask-v1 interpreter > does not treat serves-Florida as client geography 4ms
+   ✓ investor-ask-v1 interpreter > parses RAUM $1B–$10B as Item 5F range on RIAs 1ms
+   ✓ investor-ask-v1 interpreter > fails closed when ERA is asked for RAUM 1ms
+   ✓ investor-ask-v1 interpreter > parses compensation methods as Item 5.E, not fee amounts 1ms
+   ✓ investor-ask-v1 interpreter > keeps RIA and ERA counts separate 1ms
+   ✓ investor-ask-v1 interpreter > distinguishes observation grain from firm grain 0ms
+   ✓ investor-ask-v1 interpreter > defines RAUM without calling it performance 0ms
+   ✓ investor-ask-v1 interpreter > fails closed on recommendation, performance, fee, and hiring questions 1ms
+   ✓ investor-ask-v1 interpreter > fails closed on Form ADV what-changed 2ms
+   ✓ investor-ask-v1 interpreter > compares Florida and Texas as principal-office counts 1ms
+   ✓ investor-ask-v1 interpreter > builds deterministic why-this-matched language 0ms
+ ❯ apps/web/tests/th-search-001f.test.ts (3 tests | 1 failed) 50ms
+   × TH-SEARCH-001F > implements the portable network contract and capability states 16ms
+     → expected 'entity' to be 'fail_closed' // Object.is equality
+   ✓ TH-SEARCH-001F > has a 90+ question corpus with no expected failures 31ms
+   ✓ TH-SEARCH-001F > preserves exact identity and epistemic boundaries 1ms
+ ❯ apps/web/tests/r1-012.test.ts (54 tests | 6 failed) 164ms
+   ✓ R1-012 original research defects > portfolio service requests never become firm names or call a directory 4ms
+   ✓ R1-012 original research defects > unspecified Form ADV needs identity, not a cohort 9ms
+   ✓ R1-012 original research defects > unspecified disclosure research needs identity 5ms
+   ✓ R1-012 original research defects > Austin is retained with Texas 2ms
+   × R1-012 original research defects > Wyoming registration cannot execute the office cohort 7ms
+     → expected 'entity' to be 'fail_closed' // Object.is equality
+   ✓ R1-012 original research defects > existing Form ADV definition remains a definition 1ms
+   ✓ R1-012 typed plan and production source predicates > native page/API share the same full fixture identity and scope 62ms
+   ✓ R1-012 typed plan and production source predicates > native/API reject full oversized input rather than discarding its suffix 10ms
+   ✓ R1-012 typed plan and production source predicates > structured unspecified evidence cannot bypass identity requirement 6ms
+   ✓ R1-012 typed plan and production source predicates > city counts execute the same full compound cohort before pagination 2ms
+   ✓ R1-012 typed plan and production source predicates > held profiles and separate identities remain separate 3ms
+   ✓ R1-012 typed plan and production source predicates > name predicates and exact-name relevance precede the limit 2ms
+   ✓ R1-012 typed plan and production source predicates > SQL wildcard characters remain bound and escaped 1ms
+   ✓ R1-012 typed plan and production source predicates > exact identity retains unsupported additional registration condition without substitution 2ms
+   ✓ R1-012 typed plan and production source predicates > personal boundary: manage my portfolio 0ms
+   ✓ R1-012 typed plan and production source predicates > personal boundary: pick stocks for me 0ms
+   ✓ R1-012 typed plan and production source predicates > personal boundary: what should I invest in 0ms
+   ✓ R1-012 typed plan and production source predicates > personal boundary: which adviser should I hire 0ms
+   ✓ R1-012 typed plan and production source predicates > personal boundary: who will make me the most money 0ms
+   ✓ R1-012 typed plan and production source predicates > exact full family: CRD 105958 1ms
+   ✓ R1-012 typed plan and production source predicates > exact full family: find CRD 105 958 1ms
+   ✓ R1-012 typed plan and production source predicates > exact full family: CRD #105958 1ms
+   ✓ R1-012 typed plan and production source predicates > exact miss never broadens 1ms
+   ✓ R1-012 typed plan and production source predicates > does not invent an identifier: CRD 105,958 0ms
+   ✓ R1-012 typed plan and production source predicates > does not invent an identifier: CRD 105 and 958 0ms
+   ✓ R1-012 typed plan and production source predicates > does not invent an identifier: CRD 105.958 0ms
+   ✓ R1-012 typed plan and production source predicates > does not invent an identifier: CRD 1e5 0ms
+   ✓ R1-012 typed plan and production source predicates > does not invent an identifier: CRD 105958 CRD 77 0ms
+   × R1-012 typed plan and production source predicates > unavailable jurisdiction does not call office rows: state-registered investment advisers in Wyoming 7ms
+     → expected [ { firmId: 'e', …(17) } ] to deeply equal []
+   × R1-012 typed plan and production source predicates > unavailable jurisdiction does not call office rows: advisers registered in Wyoming 2ms
+     → expected [ { firmId: 'e', …(17) } ] to deeply equal []
+   × R1-012 typed plan and production source predicates > unavailable jurisdiction does not call office rows: notice-filed advisers in Wyoming 2ms
+     → expected [ { firmId: 'e', …(17) } ] to deeply equal []
+   × R1-012 typed plan and production source predicates > unavailable jurisdiction does not call office rows: Wyoming state ERAs 1ms
+     → expected undefined to deeply equal [ 'WY' ]
+   ✓ R1-012 typed plan and production source predicates > office WY is a separate supported operation 1ms
+   ✓ R1-012 typed plan and production source predicates > compound office before limits: investment advisers in Austin Texas 1ms
+   ✓ R1-012 typed plan and production source predicates > compound office before limits: RIA firms in Austin TX 2ms
+   ✓ R1-012 typed plan and production source predicates > compound office before limits: investment advisers in Austin, TX 2ms
+   ✓ R1-012 typed plan and production source predicates > Dallas and another explicit city use the same parser 2ms
+   ✓ R1-012 typed plan and production source predicates > city-only clarifies then typed state completes 3ms
+   ✓ R1-012 typed plan and production source predicates > explicit broadening is visible and validated 3ms
+   × R1-012 typed plan and production source predicates > registration NY and office FL remain distinct 2ms
+     → expected undefined to deeply equal [ 'NY' ]
+   ✓ R1-012 typed plan and production source predicates > multi-registration jurisdictions require resolution 1ms
+   ✓ R1-012 typed plan and production source predicates > SEC current RIA uses actual current SEC registration predicate 1ms
+   ✓ R1-012 typed plan and production source predicates > research is not a name: find Form ADV filings 1ms
+   ✓ R1-012 typed plan and production source predicates > research is not a name: does this firm have disclosures? 0ms
+   ✓ R1-012 typed plan and production source predicates > research is not a name: which firms have disclosures 1ms
+   ✓ R1-012 typed plan and production source predicates > research is not a name: show me Form ADV for this firm 1ms
+   ✓ R1-012 typed plan and production source predicates > research is not a name: how do I find an adviser's Form ADV? 1ms
+   ✓ R1-012 typed plan and production source predicates > unique exact source name preserves the Form ADV question 1ms
+   ✓ R1-012 typed plan and production source predicates > ambiguous firm selection is revalidated and preserves evidence 2ms
+   ✓ R1-012 typed plan and production source predicates > disclosures do not expose internal fields or promise clean history 1ms
+   ✓ R1-012 typed plan and production source predicates > structured compound city/state reaches the same predicate 2ms
+   ✓ R1-012 typed plan and production source predicates > missing source is an error, not zero 2ms
+   ✓ R1-012 typed plan and production source predicates > common request rejects duplicate/overlong/unsafe pagination and keeps typed filters 1ms
+   ✓ R1-012 typed plan and production source predicates > official recovery is the maintained allowlisted HTTPS destination 0ms
+
+ Test Files  3 failed | 1 passed (4)
+      Tests  10 failed | 74 passed (84)
+   Start at  13:45:17
+   Duration  1.49s (transform 703ms, setup 0ms, collect 1.83s, tests 271ms, environment 1ms, prepare 536ms)
+
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 10 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/tests/r1-012.test.ts > R1-012 original research defects > Wyoming registration cannot execute the office cohort
+AssertionError: expected 'entity' to be 'fail_closed' // Object.is equality
+
+Expected: "fail_closed"
+Received: "entity"
+
+ ❯ apps/web/tests/r1-012.test.ts:48:26
+     46|     db.query.mockClear();
+     47|     const p = interpretInvestorAskQuery('state-registered investment a…
+     48|     expect(p.query.mode).toBe('fail_closed');
+       |                          ^
+     49|     await executeInvestorAsk('state-registered investment advisers in …
+     50|     expect(db.query).not.toHaveBeenCalled();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/10]⎯
+
+ FAIL  apps/web/tests/r1-012.test.ts > R1-012 typed plan and production source predicates > unavailable jurisdiction does not call office rows: state-registered investment advisers in Wyoming
+ FAIL  apps/web/tests/r1-012.test.ts > R1-012 typed plan and production source predicates > unavailable jurisdiction does not call office rows: advisers registered in Wyoming
+ FAIL  apps/web/tests/r1-012.test.ts > R1-012 typed plan and production source predicates > unavailable jurisdiction does not call office rows: notice-filed advisers in Wyoming
+AssertionError: expected [ { firmId: 'e', …(17) } ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   {
++     "compensation": [],
++     "crd": "99",
++     "currentlyIndexable": false,
++     "displayName": "WY OFFICE ONLY LLC",
++     "filingDate": null,
++     "firmId": "e",
++     "firmType": "ria",
++     "firmTypeLabel": "Registered investment adviser (RIA)",
++     "href": null,
++     "legalName": "WY OFFICE ONLY LLC",
++     "officialAsOf": "2026-08-27",
++     "principalOffice": "Cheyenne, WY",
++     "publicationNote": "Research identity — public firm report not currently published.",
++     "raum": null,
++     "recordedOffice": {
++       "city": "Cheyenne",
++       "state": "WY",
++     },
++     "slug": undefined,
++     "statusLabel": "registered",
++     "whyMatched": "This firm matches because it is classified as an RIA in the current SEC/IARD roster, it reports its principal office in Wyoming.",
++   },
++ ]
+
+ ❯ apps/web/tests/r1-012.test.ts:205:23
+    203|     fixtureDb();
+    204|     const r = await executeInvestorAsk(raw);
+    205|     expect(r.results).toEqual([]);
+       |                       ^
+    206|     expect(r.parsed.query.registrationJurisdictions).toEqual(['WY']);
+    207|     expect(db.query).not.toHaveBeenCalled();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/10]⎯
+
+ FAIL  apps/web/tests/r1-012.test.ts > R1-012 typed plan and production source predicates > unavailable jurisdiction does not call office rows: Wyoming state ERAs
+AssertionError: expected undefined to deeply equal [ 'WY' ]
+
+- Expected:
+[
+  "WY",
+]
+
++ Received:
+undefined
+
+ ❯ apps/web/tests/r1-012.test.ts:206:54
+    204|     const r = await executeInvestorAsk(raw);
+    205|     expect(r.results).toEqual([]);
+    206|     expect(r.parsed.query.registrationJurisdictions).toEqual(['WY']);
+       |                                                      ^
+    207|     expect(db.query).not.toHaveBeenCalled();
+    208|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/10]⎯
+
+ FAIL  apps/web/tests/r1-012.test.ts > R1-012 typed plan and production source predicates > registration NY and office FL remain distinct
+AssertionError: expected undefined to deeply equal [ 'NY' ]
+
+- Expected:
+[
+  "NY",
+]
+
++ Received:
+undefined
+
+ ❯ apps/web/tests/r1-012.test.ts:263:41
+    261|   it('registration NY and office FL remain distinct', () => {
+    262|     const q = interpretInvestorAskQuery('adviser registered in New Yor…
+    263|     expect(q.registrationJurisdictions).toEqual(['NY']);
+       |                                         ^
+    264|     expect(q.geography?.value).toBe('FL');
+    265|     expect(q.mode).toBe('fail_closed');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/10]⎯
+
+ FAIL  apps/web/tests/th-search-001f.test.ts > TH-SEARCH-001F > implements the portable network contract and capability states
+AssertionError: expected 'entity' to be 'fail_closed' // Object.is equality
+
+Expected: "fail_closed"
+Received: "entity"
+
+ ❯ apps/web/tests/th-search-001f.test.ts:15:73
+     13|     expect(INVESTOR_SEARCH_CAPABILITIES.find((x) => x.key === 'va_stat…
+     14|     expect(INVESTOR_SEARCH_CAPABILITIES.find((x) => x.key === 'ny_stat…
+     15|     expect(interpretInvestorAskQuery('Colorado state RIAs').query.mode…
+       |                                                                         ^
+     16|     expect(interpretInvestorAskQuery('Colorado state RIAs').query.fail…
+     17|     expect(INVESTOR_SEARCH_CAPABILITIES.find((x) => x.key === 'client_…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/10]⎯
+
+ FAIL  packages/domain/tests/investor-ask.test.ts > investor-ask-v1 interpreter > does not treat Colorado state RIAs as the 589 principal-office overlay
+AssertionError: expected 'entity' to be 'fail_closed' // Object.is equality
+
+Expected: "fail_closed"
+Received: "entity"
+
+ ❯ packages/domain/tests/investor-ask.test.ts:28:31
+     26|   it('does not treat Colorado state RIAs as the 589 principal-office o…
+     27|     const parsed = interpretInvestorAskQuery('Colorado state RIAs');
+     28|     expect(parsed.query.mode).toBe('fail_closed');
+       |                               ^
+     29|     expect(parsed.query.failReason).toMatch(/does not treat the 589/i);
+     30|     const hq = interpretInvestorAskQuery('RIA principal offices in Col…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/10]⎯
+
+ FAIL  packages/domain/tests/investor-ask.test.ts > investor-ask-v1 interpreter > does not treat New York state RIAs as the 3,152 principal-office overlay
+AssertionError: expected 'entity' to be 'fail_closed' // Object.is equality
+
+Expected: "fail_closed"
+Received: "entity"
+
+ ❯ packages/domain/tests/investor-ask.test.ts:38:31
+     36|   it('does not treat New York state RIAs as the 3,152 principal-office…
+     37|     const parsed = interpretInvestorAskQuery('investment advisers regi…
+     38|     expect(parsed.query.mode).toBe('fail_closed');
+       |                               ^
+     39|     expect(parsed.query.failReason).toMatch(/does not treat the 3,152/…
+     40|     const hq = interpretInvestorAskQuery('RIA principal offices in New…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/10]⎯
+
+ FAIL  packages/domain/tests/investor-ask.test.ts > investor-ask-v1 interpreter > does not treat Virginia state RIAs as the 339 principal-office overlay
+AssertionError: expected 'entity' to be 'fail_closed' // Object.is equality
+
+Expected: "fail_closed"
+Received: "entity"
+
+ ❯ packages/domain/tests/investor-ask.test.ts:54:31
+     52|   it('does not treat Virginia state RIAs as the 339 principal-office o…
+     53|     const parsed = interpretInvestorAskQuery('licensed investment advi…
+     54|     expect(parsed.query.mode).toBe('fail_closed');
+       |                               ^
+     55|     expect(parsed.query.failReason).toMatch(/does not treat the 339/i);
+     56|     const hq = interpretInvestorAskQuery('RIA principal offices in Vir…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/10]⎯

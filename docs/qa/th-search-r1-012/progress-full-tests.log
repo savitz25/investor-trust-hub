@@ -1,0 +1,93 @@
+
+> investor-trust-hub@0.1.0 test
+> vitest run
+
+
+ RUN  v3.2.7 C:/Users/makei/th-search-r1-012-work
+
+ ✓ packages/domain/tests/adv-profile-intelligence.test.ts (11 tests) 38ms
+ ✓ packages/domain/tests/investor-home-intel.test.ts (13 tests) 52ms
+ ✓ packages/domain/tests/investor-ask.test.ts (17 tests) 43ms
+ ✓ packages/domain/tests/investor-home-evidence-inventory.test.ts (8 tests) 22ms
+ ✓ packages/domain/tests/firm-report.test.ts (16 tests) 47ms
+ ✓ apps/web/tests/home-intel.test.ts (2 tests) 55ms
+ ✓ apps/web/tests/inv-home-003.test.ts (4 tests) 55ms
+ ❯ apps/web/tests/th-search-001f.test.ts (3 tests | 1 failed) 60ms
+   ✓ TH-SEARCH-001F > implements the portable network contract and capability states 14ms
+   ✓ TH-SEARCH-001F > has a 90+ question corpus with no expected failures 35ms
+   × TH-SEARCH-001F > preserves exact identity and epistemic boundaries 9ms
+     → expected 'InvestorTrustHub does not manage port…' to match /specific adviser/i
+ ✓ apps/web/tests/r1-012.test.ts (6 tests) 30ms
+ ✓ apps/web/tests/tx-inv-001-publication.test.ts (6 tests) 9ms
+ ✓ packages/domain/tests/investor-specialist-execution-v2.test.ts (10 tests) 14ms
+ ✓ packages/domain/tests/identifiers.test.ts (4 tests) 9ms
+ ✓ apps/web/tests/ca-inv-001-publication.test.ts (6 tests) 12ms
+ ✓ packages/domain/tests/ny-public-intel.test.ts (6 tests) 14ms
+ ✓ apps/web/tests/copy-guardrails.test.ts (3 tests) 18ms
+ ✓ packages/domain/tests/co-public-intel.test.ts (8 tests) 15ms
+ ✓ apps/web/tests/az-inv-001-publication.test.ts (7 tests) 12ms
+ ✓ packages/domain/tests/synthetic.test.ts (4 tests) 14ms
+ ✓ packages/domain/tests/investor-network-metrics.test.ts (6 tests) 14ms
+ ✓ packages/config/tests/env.test.ts (8 tests) 15ms
+ ✓ apps/web/tests/ath-cust-net-002b.test.ts (6 tests) 12ms
+ ✓ apps/web/tests/co-inv-001-publication.test.ts (6 tests) 12ms
+ ✓ apps/web/tests/nj-inv-003-publication.test.ts (10 tests) 11ms
+ ✓ packages/domain/tests/va-public-intel.test.ts (5 tests) 12ms
+ ✓ apps/web/tests/wa-inv-001-publication.test.ts (7 tests) 12ms
+ ✓ apps/web/tests/share-003.test.ts (6 tests) 9ms
+ ✓ packages/domain/tests/investor-customer-claim-validation-v1.test.ts (4 tests) 8ms
+ ✓ apps/web/tests/firm-seo.test.ts (5 tests) 6ms
+ ✓ apps/web/tests/nj-inv-001-publication.test.ts (3 tests) 7ms
+ ✓ packages/domain/tests/evidence.test.ts (4 tests) 7ms
+ ✓ apps/web/tests/ny-inv-001-publication.test.ts (2 tests) 8ms
+ ✓ packages/domain/tests/copy.test.ts (3 tests) 6ms
+ ✓ apps/web/tests/nj-inv-002-publication.test.ts (3 tests) 7ms
+ ✓ apps/web/tests/va-inv-001-publication.test.ts (2 tests) 7ms
+ ✓ packages/domain/tests/status.test.ts (3 tests) 7ms
+ ✓ packages/domain/tests/wa-public-intel.test.ts (4 tests) 6ms
+ ✓ packages/domain/tests/nj-public-intel.test.ts (2 tests) 5ms
+ ✓ apps/web/tests/inv-cap-001-static.test.ts (8 tests) 6ms
+ ✓ apps/web/tests/routes.test.ts (2 tests) 5ms
+ ✓ apps/web/tests/inv-cust-cap-001-static.test.ts (6 tests) 5ms
+ ✓ packages/domain/tests/az-public-intel.test.ts (4 tests) 6ms
+ ✓ apps/web/tests/share-hub.test.ts (4 tests) 6ms
+ ✓ packages/domain/tests/ca-public-intel.test.ts (3 tests) 6ms
+ ✓ packages/domain/tests/tx-public-intel.test.ts (3 tests) 6ms
+ ✓ packages/config/tests/sources.test.ts (3 tests) 5ms
+ ✓ apps/web/tests/bundle-secrets.test.ts (1 test) 3ms
+node.exe :
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  apps/web/tests/th-search-001f.test.ts > TH-SEARCH-001F > preserves exact identity and epistemic boundaries
+AssertionError: expected 'InvestorTrustHub does not manage port…' to match /specific adviser/i
+
+- Expected:
+/specific adviser/i
+
++ Received:
+"InvestorTrustHub does not manage portfolios, execute trades, give individualized investment advice, predict returns,
+or choose an adviser for you. You can research firm registrations, Form ADV, reported assets, office locations and
+available evidence. Choose a research topic or identify a firm."
+
+ ❯ apps/web/tests/th-search-001f.test.ts:36:116
+     34|     expect(interpretInvestorAskQuery('best financial adviser').query.m…
+     35|     expect(interpretInvestorAskQuery('adviser with no disclosures').qu…
+     36|     expect(interpretInvestorAskQuery('I want to check the adviser who …
+       |
+     ^
+     37|     expect(interpretInvestorAskQuery('ownership evidence for an advise…
+     38|     expect(interpretInvestorAskQuery('firms affiliated with broker-dea…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 45 passed (46)
+      Tests  1 failed | 256 passed (257)
+   Start at  13:27:24
+   Duration  4.45s (transform 2.07s, setup 0ms, collect 8.22s, tests 738ms, environment 11ms, prepare 7.13s)

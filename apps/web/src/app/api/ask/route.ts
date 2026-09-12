@@ -1,13 +1,18 @@
 import { NextResponse } from 'next/server';
 import { executeInvestorAsk, publicAskPayload } from '@/lib/ask/execute';
 import { DatabaseUnavailableError } from '@/lib/db';
+import { readInvestorRequest, InvalidInvestorRequest } from '@/lib/ask/request';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
-  const q = (url.searchParams.get('q') ?? '').trim().slice(0, 400);
-  const page = Number(url.searchParams.get('page') ?? '1') || 1;
+  let input;
+  try { input = readInvestorRequest(url.searchParams); } catch(error) {
+    if(error instanceof InvalidInvestorRequest)return NextResponse.json({contract:'investor-ask-v1',terminalState:'INVALID_INPUT',error:error.message},{status:400,headers:{'X-Robots-Tag':'noindex, follow'}});
+    throw error;
+  }
+  const q = input.raw;
   if (!q) {
     return NextResponse.json(
       { contract: 'investor-ask-v1', error: 'Missing q' },
@@ -15,7 +20,7 @@ export async function GET(request: Request) {
     );
   }
   try {
-    const result = await executeInvestorAsk(q, { page });
+    const result = await executeInvestorAsk(q, input.overrides);
     return NextResponse.json(publicAskPayload(result), {
       headers: {
         'Cache-Control': 'public, max-age=60, stale-while-revalidate=300',

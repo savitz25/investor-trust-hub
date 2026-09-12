@@ -1,0 +1,71 @@
+{
+  "ticket": "TH-SEARCH-R1-012",
+  "status": "READY_FOR_REVIEW",
+  "at": "2026-09-12T17:55:45.458019+00:00",
+  "model": "GPT-6 Astra / High ? USER-CONFIRMED",
+  "baseline": "e1f57a1b5092233892365f1c02a21b2cc935a2f5",
+  "implementationSha": null,
+  "mergeSha": null,
+  "deployedSha": null,
+  "candidateFileSha256": {
+    ".github/workflows/ci.yml": "0c9b148a6773da8d0e3582812dce0dabb47859aa22b30e6be2c807e1fa9a64c5",
+    "apps/web/src/app/api/ask/route.ts": "dd4b070698953dca7c995fe74a23ce37dfadbf930c54793718f359f76158c40a",
+    "apps/web/src/app/ask/page.tsx": "4ad33dd67177bb74ddf5d375d2b406fd0aa0070e2e95310162070d90cf4611ef",
+    "apps/web/src/components/ask-investor-result.tsx": "e1d58ab1ee893f467b0923dafd9a52553925ae1ca387c79cc8c3a6b340b88fc4",
+    "apps/web/src/components/specialist-search/investor-specialist-search-shell.tsx": "2227bc40552bb39bf425ed6be18c9cbcf1dc54c2116a973d4f4512522c22f0d1",
+    "apps/web/src/lib/ask/execute.ts": "46fb5df715bcac9d7b7fe2da2c48271df8f6c5aa48d4196f5abfc23cf1d689c2",
+    "apps/web/src/lib/specialist-execution/v2.ts": "596afcf1cd3c342ed2e774151695b610cdd2c52a64bff163c6d60da48564c480",
+    "apps/web/tests/th-search-001f.test.ts": "e538d6ccc323bfdf535fe51e03972249fed95a2583dfb201bc6019b2fdfcc168",
+    "package.json": "f62b5dc038082e0f14b68db4d90ac46b7185363590bdff3b95e3d3aa2405510c",
+    "packages/domain/src/investor-ask.ts": "47975f8abcee23ee8b4746c900632d34ff62755470fb4c525a7e6c4203b284c9",
+    "packages/domain/src/investor-specialist-execution-v2.ts": "43170c29c781615eee0a920cb2433847a550e0f6c07ed5aec0aca192880da1a2",
+    "vitest.config.ts": "00f1bb89585266e3c7941cf0702cca0c446145265a733cc43680a99b9fdd9083",
+    "packages/domain/src/investor-research-plan.ts": "b4ee559847fad3db8f9cb8bf9600406df846c82a287074b17ed49737db8e389a",
+    "apps/web/src/lib/ask/request.ts": "4bc6aeaf659b96ffc861efdc982a8c0c3ed1eb77db32693c6d8ff564e3a45d11",
+    "apps/web/src/lib/ask/recovery.ts": "e9362efbfa8bd8f59e7b66ee98de4ea56fa68493d504252dd5411f455ad2ccc5",
+    "apps/web/tests/r1-012.test.ts": "48e886eedd4eab972a81c67538023390b5788eb9cf17d2da0fdb7f155e871e80"
+  },
+  "sourceOracle": "source-oracle.json",
+  "tests": {
+    "baseline": 251,
+    "originalRed": {
+      "fail": 5,
+      "pass": 1
+    },
+    "focused": 87,
+    "r1012": 57,
+    "full": 308,
+    "typecheck": "PASS",
+    "lint": "PASS",
+    "build": "PASS",
+    "mutations": "3/3 detected; restored",
+    "stateScripts": "NY 8, VA 7, CO 14 tests + static assertions PASS",
+    "metrics": "6 tests + static assertion PASS",
+    "visual": "PASS"
+  },
+  "browser": {
+    "evidence": "local-pass-browser.json",
+    "build": "optimized Next production build",
+    "cases": 24,
+    "flows": 10,
+    "failures": 0,
+    "pageErrors": 0,
+    "widths": [
+      320,
+      390,
+      768,
+      1280
+    ],
+    "minMs": 99,
+    "maxMs": 1310,
+    "official": "official-sources.json"
+  },
+  "review": "self + automated; review.md",
+  "limitations": [
+    "No new state-registration corpus; Wyoming approval cannot be inferred from office location.",
+    "Item 11 detail remains INTERNAL_ONLY; official recovery is not a live disclosure determination.",
+    "Existing npm audit findings and Windows multi-lockfile warning retained.",
+    "CI/merge/Production verification pending at creation."
+  ],
+  "rollback": "Reviewed Investor-only revert/deployment preserving safe no-substitution behavior; no DB rollback."
+}

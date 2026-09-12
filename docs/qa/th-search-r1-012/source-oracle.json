@@ -1,0 +1,51 @@
+{
+  "ticket": "TH-SEARCH-R1-012",
+  "checkedAt": "2026-09-12T17:35:22.168931+00:00",
+  "method": "Bounded read-only connected Supabase SELECTs against existing source tables; not the production parser/executor",
+  "project": "ghjhcxfirxnszfnymdxb",
+  "writes": false,
+  "release": {
+    "dataset": "iapd_sec_compilation",
+    "label": "IA_FIRM_SEC_Feed_08_27_2026",
+    "publishedAt": "2026-08-27T00:00:00Z",
+    "retrievedAt": "2026-08-28T16:36:30.264282Z",
+    "sha256": "967217b0cdb4548f496407f7232eff30deba12217c36447fad0cee757473b65c"
+  },
+  "registrationGrains": [
+    {
+      "regulator": "sec",
+      "type": "registered_investment_adviser",
+      "status": "registered",
+      "observations": 16783
+    },
+    {
+      "regulator": "sec",
+      "type": "registered_investment_adviser",
+      "status": "pending",
+      "observations": 235
+    },
+    {
+      "regulator": "sec",
+      "type": "exempt_reporting_adviser",
+      "status": "reporting",
+      "observations": 6604
+    }
+  ],
+  "stateRegistration": "No state-regulator rows in this operational registration source. CO/VA/NY separately published state snapshots remain distinct; release metadata alone is not a jurisdiction lookup. Wyoming office observations cannot establish registration.",
+  "identity": {
+    "crd": "105958",
+    "name": "VANGUARD GROUP INC",
+    "city": "MALVERN",
+    "state": "PA",
+    "secSourceStatus": "Approved"
+  },
+  "miss": "9999999999 absent from the bounded selected CRD set",
+  "austinOffice": {
+    "city": "Austin",
+    "state": "TX",
+    "ria": 176,
+    "era": 65,
+    "meaning": "Current firm-fact rows with main-office city Austin AND region TX, not service territory; window-specific observations, not immutable totals"
+  },
+  "disclosure": "Item 11 catalog INTERNAL_ONLY; no new public disclosure filter or raw evidence publication. Existing profile/source recovery remains allowed."
+}

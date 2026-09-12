@@ -1,0 +1,5 @@
+
+> investor-trust-hub@0.1.0 assert:visual
+> node scripts/assert-visual-003.mjs
+
+VISUAL-003 Investor network-shell assertions passed.

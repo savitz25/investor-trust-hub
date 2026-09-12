@@ -1,0 +1,135 @@
+
+ RUN  v3.2.7 C:/Users/makei/th-search-r1-012-work
+
+ ❯ packages/domain/tests/investor-ask.test.ts (17 tests | 5 failed) 39ms
+   ✓ investor-ask-v1 interpreter > exposes execute capability without ranking language 1ms
+   ✓ investor-ask-v1 interpreter > parses labeled CRD and fails closed on bare digits 7ms
+   × investor-ask-v1 interpreter > does not treat Colorado state RIAs as the 589 principal-office overlay 8ms
+     → expected 'entity' to be 'fail_closed' // Object.is equality
+   ✓ investor-ask-v1 interpreter > does not treat New York state RIAs as the 3,152 principal-office overlay 6ms
+   ✓ investor-ask-v1 interpreter > does not treat Virginia state RIAs as the 339 principal-office overlay 4ms
+   ✓ investor-ask-v1 interpreter > interprets Florida RIAs as principal-office geography 1ms
+   × investor-ask-v1 interpreter > does not treat serves-Florida as client geography 2ms
+     → expected undefined to be true // Object.is equality
+   ✓ investor-ask-v1 interpreter > parses RAUM $1B–$10B as Item 5F range on RIAs 1ms
+   ✓ investor-ask-v1 interpreter > fails closed when ERA is asked for RAUM 0ms
+   ✓ investor-ask-v1 interpreter > parses compensation methods as Item 5.E, not fee amounts 1ms
+   × investor-ask-v1 interpreter > keeps RIA and ERA counts separate 1ms
+     → expected '[{"label":"Research task","value":"FI…' to match /RIA \+ ERA/
+   × investor-ask-v1 interpreter > distinguishes observation grain from firm grain 1ms
+     → expected 'fail_closed' to be 'count' // Object.is equality
+   ✓ investor-ask-v1 interpreter > defines RAUM without calling it performance 0ms
+   ✓ investor-ask-v1 interpreter > fails closed on recommendation, performance, fee, and hiring questions 1ms
+   × investor-ask-v1 interpreter > fails closed on Form ADV what-changed 2ms
+     → expected 'Which firm do you mean? Enter a firm …' to match /not supported/i
+   ✓ investor-ask-v1 interpreter > compares Florida and Texas as principal-office counts 1ms
+   ✓ investor-ask-v1 interpreter > builds deterministic why-this-matched language 0ms
+ ✓ apps/web/tests/r1-012.test.ts (6 tests) 52ms
+node.exe :
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  packages/domain/tests/investor-ask.test.ts > investor-ask-v1 interpreter > does not treat Colorado state RIAs
+as the 589 principal-office overlay
+AssertionError: expected 'entity' to be 'fail_closed' // Object.is equality
+
+Expected: "fail_closed"
+Received: "entity"
+
+ ❯ packages/domain/tests/investor-ask.test.ts:28:31
+     26|   it('does not treat Colorado state RIAs as the 589 principal-office o…
+     27|     const parsed = interpretInvestorAskQuery('Colorado state RIAs');
+     28|     expect(parsed.query.mode).toBe('fail_closed');
+       |                               ^
+     29|     expect(parsed.query.failReason).toMatch(/does not treat the 589/i);
+     30|     const hq = interpretInvestorAskQuery('RIA principal offices in Col…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  packages/domain/tests/investor-ask.test.ts > investor-ask-v1 interpreter > does not treat serves-Florida as
+client geography
+AssertionError: expected undefined to be true // Object.is equality
+
+- Expected:
+true
+
++ Received:
+undefined
+
+ ❯ packages/domain/tests/investor-ask.test.ts:79:47
+     77|     const parsed = interpretInvestorAskQuery('Show advisers serving Fl…
+     78|     expect(parsed.query.geography?.value).toBe('FL');
+     79|     expect(parsed.query.geography?.ambiguous).toBe(true);
+       |                                               ^
+     80|     expect(parsed.query.geography?.meaning).toMatch(/not client geogra…
+     81|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  packages/domain/tests/investor-ask.test.ts > investor-ask-v1 interpreter > keeps RIA and ERA counts separate
+AssertionError: expected '[{"label":"Research task","value":"FI…' to match /RIA \+ ERA/
+
+- Expected:
+/RIA \+ ERA/
+
++ Received:
+"[{\"label\":\"Research task\",\"value\":\"FIRM_DISCOVERY\"},{\"label\":\"Firm class\",\"value\":\"RIA and ERA
+(separate classes)\"}]"
+
+ ❯ packages/domain/tests/investor-ask.test.ts:119:49
+    117|     const both = interpretInvestorAskQuery('How many investment advise…
+    118|     expect(both.query.firmType).toBe('all');
+    119|     expect(JSON.stringify(both.interpretation)).toMatch(/RIA \+ ERA/);
+       |                                                 ^
+    120|   });
+    121|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  packages/domain/tests/investor-ask.test.ts > investor-ask-v1 interpreter > distinguishes observation grain from
+firm grain
+AssertionError: expected 'fail_closed' to be 'count' // Object.is equality
+
+Expected: "count"
+Received: "fail_closed"
+
+ ❯ packages/domain/tests/investor-ask.test.ts:124:31
+    122|   it('distinguishes observation grain from firm grain', () => {
+    123|     const parsed = interpretInvestorAskQuery('How many Form ADV observ…
+    124|     expect(parsed.query.mode).toBe('count');
+       |                               ^
+    125|     expect(parsed.query.aggregateMetric).toBe('observation_count');
+    126|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  packages/domain/tests/investor-ask.test.ts > investor-ask-v1 interpreter > fails closed on Form ADV what-changed
+AssertionError: expected 'Which firm do you mean? Enter a firm …' to match /not supported/i
+
+- Expected:
+/not supported/i
+
++ Received:
+"Which firm do you mean? Enter a firm name or labeled CRD/SEC file number. No evidence has been attached to an
+unspecified firm."
+
+ ❯ packages/domain/tests/investor-ask.test.ts:159:37
+    157|     const parsed = interpretInvestorAskQuery('What changed in this fir…
+    158|     expect(parsed.query.mode).toBe('fail_closed');
+    159|     expect(parsed.query.failReason).toMatch(/not supported/i);
+       |                                     ^
+    160|   });
+    161|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  5 failed | 18 passed (23)
+   Start at  13:20:04
+   Duration  1.01s (transform 392ms, setup 0ms, collect 738ms, tests 90ms, environment 0ms, prepare 223ms)
