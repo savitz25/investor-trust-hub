@@ -1,6 +1,6 @@
 # TH-SEARCH-R1-012 release report
 
-Certificate scope: runtime merge `12c995346dc8fc1daf97b06fd072fd4dc1096bbf`, verified on canonical Production on 2026-09-12. This receipt is committed retrospectively; a future documentation-only SHA is not fabricated.
+Certificate scope: runtime merge `a7bee5af0c9e3a3cdbfd204f288f0079eadb90a6`, verified on canonical Production on 2026-09-12. This receipt is committed retrospectively; a future documentation-only SHA is not fabricated.
 
 | Item | Observed result |
 | --- | --- |
@@ -20,23 +20,25 @@ Certificate scope: runtime merge `12c995346dc8fc1daf97b06fd072fd4dc1096bbf`, ver
 | N. Disclosures | Unspecified firm needs identity. Internal-only Item 11 details are not newly published; no clean-history or all-time absence finding is invented. |
 | O. Broadening | Explicit state action records USER_APPROVED_RELAXATION, preserving raw city and unrelated typed filters. No automatic Austin-to-Texas substitution. |
 | P. Trace/clocks | Requested/applied/unresolved conditions and actual returned-row release metadata are distinct. Live RIA/ERA sources: label 2026-08-03, retrieved August 18; official publication/checksum unknown. August 27 reference manifest is separate. |
-| Q. Tests | Final 93 focused checks (63 ticket), 322 repository tests/48 files, typecheck/lint/build PASS. State/metrics/visual gates PASS. CI ingestion/database/metrics/preview and 12 browser smokes PASS. |
+| Q. Tests | Final 99 focused checks (69 ticket), 328 repository tests/48 files, typecheck/lint/build PASS. State/metrics/visual gates PASS. CI ingestion/database/metrics/preview and 12 browser smokes PASS. |
 | R. Red/green | Original gate: 5 failures/1 already-correct pass on unchanged base. Final clean gates pass. Baseline full suite 251/typecheck/lint passed. Intermediate failures and fixes retained honestly. |
 | S. Mutations | Name fallback, registration-to-office, dropped city and borrowed official date were detected; restored. Logs identify the tested heads, without pretending all mutations ran on a future merge. |
-| T. Browser | Final optimized local and canonical Production each: 24 cases + 10 flows, zero failures/page errors; 320/390/768/1280. Enter, keyboard candidate selection, exact selected CRD, Trace, state choice, explicit broadening, edit-to-miss, refresh/history verified. Production core timings 246-4481 ms. |
+| T. Browser | Final optimized local and canonical Production each: 28 cases + 10 flows, zero failures/page errors; 320/390/768/1280. Enter, keyboard candidate selection, exact selected CRD, Trace, state choice, explicit broadening, edit-to-miss, refresh/history verified. Production core timings 312-4134 ms. |
 | U. Baseline limitations | Existing dependency audit: 8 findings; no upgrade. Windows multiple-lockfile warning remains; build passes. Preview browser required Vercel login and was not bypassed/counting as certification. |
 | V. Review | Separate self-review, automated behavioral/CI/browser checks and Vercel Agent review. Final follow-up head received SUCCESS/0 suggestions. No independent human review claimed. |
-| W. Implementation | Initial `7a3558b...`; first PR head `dff7f0b...`; final tested implementation `f2ae01ed35627fe602560598cd6884084967ed7d`. |
-| X. PRs | [#30](https://github.com/savitz25/investor-trust-hub/pull/30) and [#32](https://github.com/savitz25/investor-trust-hub/pull/32), normally merged after checks. |
-| Y. Merge | First runtime `8b4799ac36faa0d392e0e47ab5bf00a8a1eb53ea`; final runtime `12c995346dc8fc1daf97b06fd072fd4dc1096bbf`. |
-| Z. Main | Main at runtime certification `12c9953...`; protected Illinois main `7dc6c318ce1792b115ae416cffeb48268cc32841` was merged by its owner and reconciled. No other owner's PR was merged by this task. |
-| AA. Deployment | READY `dpl_2R88zjWs3dfowVKrjoeKFxHJWgg4`, exact runtime merge SHA, alias `www.investortrusthub.com`. |
-| AB. Production smokes | `production-final-browser.json`: full identifier/identity/scope/class/clock comparisons, actual rendered records, source-limited outcomes, selection/navigation and responsive checks PASS. Independent Austin source oracle remains 176 RIA/65 ERA for this window, not a permanent count assertion. |
+| W. Implementation | Initial `7a3558b...`; first PR head `dff7f0b...`; final tested implementation `1a0e88a669d52e09633b5ba04f0785b3a4e897db`. |
+| X. PRs | [#30](https://github.com/savitz25/investor-trust-hub/pull/30) , [#32](https://github.com/savitz25/investor-trust-hub/pull/32) and [#34](https://github.com/savitz25/investor-trust-hub/pull/34), normally merged after checks. |
+| Y. Merge | First runtime `8b4799ac36faa0d392e0e47ab5bf00a8a1eb53ea`; final runtime `a7bee5af0c9e3a3cdbfd204f288f0079eadb90a6`. |
+| Z. Main | Main at runtime certification `a7bee5a...`; protected Illinois main `7dc6c318ce1792b115ae416cffeb48268cc32841` was merged by its owner and reconciled. No other owner's PR was merged by this task. |
+| AA. Deployment | READY `dpl_6SpbQY8gFmqJWRW6bDFfhFUcnqUE`, exact runtime merge SHA, alias `www.investortrusthub.com`. |
+| AB. Production smokes | `final-name-production-browser.json`: full identifier/identity/scope/class/clock comparisons, actual rendered records, source-limited outcomes, selection/navigation and responsive checks PASS. Independent Austin source oracle remains 176 RIA/65 ERA for this window, not a permanent count assertion. |
 | AC. Blockers | None for certified runtime cases. No data writes/migrations/ingestion/paid resources or other-repository changes. No canonical source correction was executed. |
 | AD. Remaining work | State-registration search projection/publication gaps, public disclosure capability and missing legacy source metadata remain separately scoped. Broader Investor/Ask/Insurance/Search R1 and Move pending canonical correction are not closed. |
 
 Changed boundaries/files: domain `investor-ask.ts`, new `investor-research-plan.ts`, structured execution adapter; web shared request/executor/recovery, native/API routes, search shell and result/Trace renderer; focused behavioral tests, CI gate and QA artifacts. State, profile publication, claims, account and source data were not rewritten.
 
-Evidence: [result.json](result.json), [source oracle](source-oracle.json), [test report](test-report.md), [source-clock follow-up](source-clock-followup.md), [review](review.md), [final Production browser](production-final-browser.json), [official destinations](official-sources.json).
+Evidence: [result.json](result.json), [source oracle](source-oracle.json), [test report](test-report.md), [source-clock follow-up](source-clock-followup.md), [review](review.md), [final Production browser](final-name-production-browser.json), [official destinations](official-sources.json).
 
 Rollback: reviewed Investor-only revert/deployment of this ticket, retaining safe no-substitution and truthful unknown-date behavior. No database rollback. Only TH-SEARCH-R1-012 is closed by this certificate.
+
+Final capitalized-input follow-up: PR #34 fixes `Explain investment strategies` being treated as a bare name on prior runtime `12c995346dc8fc1daf97b06fd072fd4dc1096bbf`. Three ordinary-sentence negatives and three proper-name positives execute the real boundary. The 28-case final browser suite includes this negative and Vanguard as a name positive. PR #33 is the retrospective documentation-only receipt; its future merge SHA is not invented.

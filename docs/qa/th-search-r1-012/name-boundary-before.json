@@ -1,0 +1,77 @@
+{
+    "query":  "Explain investment strategies",
+    "testedRuntime":  "12c995346dc8fc1daf97b06fd072fd4dc1096bbf",
+    "checkedAt":  "2026-09-12T18:41:37.4836888Z",
+    "observed":  {
+                     "terminalState":  "NO_MATCH",
+                     "candidateSelection":  false,
+                     "contract":  "investor-ask-v1",
+                     "interpretation":  [
+                                            {
+                                                "label":  "Research task",
+                                                "value":  "identity by name"
+                                            },
+                                            {
+                                                "label":  "Requested firm name",
+                                                "value":  "Explain investment strategies"
+                                            }
+                                        ],
+                     "query":  {
+                                   "mode":  "entity",
+                                   "sort":  "name",
+                                   "page":  1,
+                                   "intent":  "IDENTITY_BY_NAME",
+                                   "conditions":  [
+
+                                                  ],
+                                   "nameQuery":  "Explain investment strategies"
+                               },
+                     "resultType":  "entity",
+                     "results":  [
+
+                                 ],
+                     "counts":  [
+                                    {
+                                        "label":  "Matching firm facts",
+                                        "value":  0,
+                                        "grain":  "form_adv_firm_facts rows matching filters"
+                                    }
+                                ],
+                     "pagination":  {
+                                        "page":  1,
+                                        "pageSize":  20,
+                                        "total":  0,
+                                        "hasMore":  false
+                                    },
+                     "provenance":  {
+                                        "sourceFamily":  "SEC / IARD Form ADV",
+                                        "dataset":  "Published SEC/IARD firm-fact index (no returned row)",
+                                        "officialAsOf":  "Not established for all returned rows",
+                                        "retrievedAt":  "Not established for all returned rows",
+                                        "sourceReleases":  [
+
+                                                           ],
+                                        "sourceClockMeaning":  "Source releases attached to returned firm facts; unknown publication dates remain unknown. Release labels are not converted to official effective dates.",
+                                        "geographyMeaning":  "Not geography-filtered",
+                                        "metric":  "entity list",
+                                        "raumUnits":  "USD as reported on Form ADV Item 5F(2)(c)",
+                                        "compensationTaxonomy":  "Form ADV Item 5.E(1)â5.E(7) Y/N methods",
+                                        "exclusions":  [
+                                                           "Do not add RIA + ERA into one adviser quality total.",
+                                                           "Do not treat principal office as service territory.",
+                                                           "2,155 canonical firms without ADV facts are outside the roster universe."
+                                                       ],
+                                        "identifierMethod":  "Not an identifier query"
+                                    },
+                     "limitations":  [
+                                         "Ask does not invent firm facts. Results come from the current SEC/IARD extract.",
+                                         "RIA is not ERA. Counts stay in their class.",
+                                         "Principal office is not client geography.",
+                                         "RAUM is Item 5F(2)(c), not performance.",
+                                         "Item 5.E methods are not fee amounts.",
+                                         "Missing disclosure is not a clean history.",
+                                         "Public firm reports are a publication gate (Wave-1), not a ranking."
+                                     ],
+                     "elapsedMs":  185
+                 }
+}

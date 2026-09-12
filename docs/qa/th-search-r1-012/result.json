@@ -1,26 +1,27 @@
 {
   "ticket": "TH-SEARCH-R1-012",
   "status": "RELEASED_AND_VERIFIED",
-  "certifiedAt": "2026-09-12T18:30:39.183469+00:00",
+  "certifiedAt": "2026-09-12T18:49:25.996085+00:00",
   "model": "GPT-6 Astra / High - USER-CONFIRMED; no independent session metadata",
   "baseline": "e1f57a1b5092233892365f1c02a21b2cc935a2f5",
   "initialImplementation": "7a3558be38368fd3b36fc6b84a8e510cb73640a2",
   "firstPrHead": "dff7f0bc4ffbc8f8b016b71850161e793465ab98",
   "firstRuntimeMerge": "8b4799ac36faa0d392e0e47ab5bf00a8a1eb53ea",
   "preservedMainAdvance": "7dc6c318ce1792b115ae416cffeb48268cc32841",
-  "testedFinalImplementation": "f2ae01ed35627fe602560598cd6884084967ed7d",
-  "runtimeMerge": "12c995346dc8fc1daf97b06fd072fd4dc1096bbf",
-  "mainAtCertification": "12c995346dc8fc1daf97b06fd072fd4dc1096bbf",
+  "testedFinalImplementation": "1a0e88a669d52e09633b5ba04f0785b3a4e897db",
+  "runtimeMerge": "a7bee5af0c9e3a3cdbfd204f288f0079eadb90a6",
+  "mainAtCertification": "a7bee5af0c9e3a3cdbfd204f288f0079eadb90a6",
   "deployment": {
-    "id": "dpl_2R88zjWs3dfowVKrjoeKFxHJWgg4",
-    "sha": "12c995346dc8fc1daf97b06fd072fd4dc1096bbf",
+    "id": "dpl_6SpbQY8gFmqJWRW6bDFfhFUcnqUE",
+    "sha": "a7bee5af0c9e3a3cdbfd204f288f0079eadb90a6",
     "state": "READY",
     "canonicalAlias": "www.investortrusthub.com",
     "aliasVerified": true
   },
   "prs": [
     "https://github.com/savitz25/investor-trust-hub/pull/30",
-    "https://github.com/savitz25/investor-trust-hub/pull/32"
+    "https://github.com/savitz25/investor-trust-hub/pull/32",
+    "https://github.com/savitz25/investor-trust-hub/pull/34"
   ],
   "documentationFollowup": "This retrospective receipt is created after runtime certification. Its future commit/merge SHA is not invented; final documentation-only deployment will be checked separately.",
   "sourceOracle": "source-oracle.json",
@@ -31,9 +32,9 @@
       "failed": 5,
       "alreadyCorrectPassed": 1
     },
-    "finalFocused": 93,
-    "r1012": 63,
-    "finalFull": 322,
+    "finalFocused": 99,
+    "r1012": 69,
+    "finalFull": 328,
     "files": 48,
     "typecheck": "PASS",
     "lint": "PASS",
@@ -44,9 +45,9 @@
     "additionalStateMetricsVisual": "NY/VA/CO/IL, metrics and visual checks passed"
   },
   "browser": {
-    "production": "production-final-browser.json",
-    "local": "final-local-browser.json",
-    "casesPerSurface": 24,
+    "production": "final-name-production-browser.json",
+    "local": "final-name-local-browser.json",
+    "casesPerSurface": 28,
     "flowsPerSurface": 10,
     "widths": [
       320,
@@ -56,14 +57,14 @@
     ],
     "failures": 0,
     "pageErrors": 0,
-    "minMs": 246,
-    "maxMs": 4481,
+    "minMs": 312,
+    "maxMs": 4134,
     "preview": "Authentication required; not bypassed or counted as browser certification.",
     "officialDestination": "official-sources.json"
   },
   "review": {
     "method": "self-review + automated behavioral/CI/browser and Vercel Agent review; not independent human",
-    "finalHead": "f2ae01ed35627fe602560598cd6884084967ed7d",
+    "finalHead": "1a0e88a669d52e09633b5ba04f0785b3a4e897db",
     "vercelReview": "SUCCESS, zero suggestions on final follow-up head; original review summary reported one inaccessible suggestion, documented separately"
   },
   "writes": {
@@ -78,5 +79,8 @@
     "Legacy source publication dates/checksums remain unknown; no metadata/database correction executed.",
     "Broader Investor/Ask/Insurance/Search R1 work and Move canonical correction are not closed."
   ],
-  "rollback": "Reviewed Investor-only revert/deployment preserving no silent substitution, exact identity and truthful unknown source clocks. No database rollback."
+  "rollback": "Reviewed Investor-only revert/deployment preserving no silent substitution, exact identity and truthful unknown source clocks. No database rollback.",
+  "previousRuntimeMerge": "12c995346dc8fc1daf97b06fd072fd4dc1096bbf",
+  "previousTestedImplementation": "f2ae01ed35627fe602560598cd6884084967ed7d",
+  "additionalRedEvidence": "name-boundary-before.json: capitalized ordinary sentence still entered name lookup on 12c9953; PR34 repairs it while retaining proper-name positives."
 }
