@@ -65,6 +65,9 @@ async function main() {
     nyPrincipalOfficeFirms: pub.nyPrincipalOfficeFirms,
     nyStateRiaApproved: pub.nyStateRiaApproved,
     nyNoticeFiled: pub.nyNoticeFiled,
+    ilPrincipalOfficeFirms: pub.ilPrincipalOfficeFirms,
+    ilStateRiaApproved: pub.ilStateRiaApproved,
+    ilNoticeFiled: pub.ilNoticeFiled,
   };
 
   if (input.riaFacts !== pub.riaFacts || input.eraFacts !== pub.eraFacts || input.rosterFirms !== pub.rosterFirms) {

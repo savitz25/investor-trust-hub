@@ -563,6 +563,54 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };
   }
+  if (/\bis this adviser registered in illinois\b/i.test(q)) {
+    const query = failClosed(
+      'Current Illinois registration is verified on IAPD with an exact firm CRD or SEC file number. Name-only matching is unsafe. Use /illinois for statewide grains.',
+      ['Find CRD 105958.', 'Illinois investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:illinois state rias?|advisers? registered in illinois|licensed (?:investment )?advisers? in illinois|investment advisers? registered in illinois|how many state registered advisers are in illinois)\b/i.test(q)) {
+    const query = failClosed(
+      'Illinois state-registered investment-adviser firms are published on /illinois from the IAPD state compilation (jurisdiction=IL). Search V1 remains the SEC/IARD roster and does not treat the 793 principal-office overlay as Illinois state registration. Notice filing is a different grain from state IA.',
+      ['SEC/IARD firms reporting a principal office in Illinois.', 'RIA principal offices in Illinois.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:illinois era|illinois state era|exempt reporting advisers? in illinois)\b/i.test(q)) {
+    const query = failClosed(
+      'Illinois state ERA reporting firms are published on /illinois. ERA is not an RIA and is not Illinois state IA registration. Search V1 remains the SEC/IARD roster.',
+      ['Illinois investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:sec adviser doing business in illinois|notice-?filed in illinois|federal advisers? doing business in illinois)\b/i.test(q)) {
+    const query = failClosed(
+      'A federal-covered notice filing in Illinois is not Illinois state IA registration and is not an Illinois principal office. Use /illinois for the separate grains. Verify current status on IAPD.',
+      ['Illinois investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if ((/\billinois\b/i.test(q) || /\bchicago\b/i.test(q)) && /\b(?:complaint|disciplin|enforcement|administrative action)\b/i.test(q)) {
+    const query = failClosed(
+      'Illinois SOS Administrative Actions are mixed and are not a firm-specific enforcement history. Name-only matching is unsafe. Exact CRD or official matter identity is required. Use IAPD/BrokerCheck and /illinois for statewide context. Chicago is not a separate InvestorTrustHub route.',
+      ['Illinois investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:best|highest performing|safe) (?:investment )?adviser in (?:illinois|chicago)\b/i.test(q)) {
+    const query = failClosed(
+      'InvestorTrustHub does not rank advisers, score performance, or publish a Trust Score. Chicago is not a separate InvestorTrustHub route.',
+      ['Illinois investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
 
   if (/\bhow many form adv observations\b|\bhow many (normalized )?adv observations\b/i.test(q)) {
     const query: InvestorResearchQuery = {
