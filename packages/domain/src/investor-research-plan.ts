@@ -216,7 +216,7 @@ export function planInvestorResearch(raw: string, o: InvestorAskOverrides, core:
   )
     name = text;
   if (name && !quoted && !/\b(?:named|called|firm name)\b/i.test(text) && /^(?:(?:sec|state)[- ]registered\s+)?(?:investment\s+)?(?:advisers?|advisors?|ria\s+firms?|era\s+firms?)(?:\s+(?:in|based|registered|with)\b|$)/i.test(name)) name = undefined;
-  if (name && !quoted) name = name.split(/\s+(?:with (?:an? )?office|in)\s+/i)[0]!.trim();
+  if (name && !quoted) name = name.split(/\s+(?:with (?:an? )?offices?|registered in|based in|headquartered in|in)\s+/i)[0]!.trim();
   if (o.identity) {
     if (q.identifier || name || !task || o.identity.length > 120 || /[<>\x00-\x1f]/.test(o.identity))
       return stop(text, q, 'Identity entry cannot replace an already supplied firm.', 'INVALID_INPUT');

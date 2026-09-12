@@ -51,6 +51,7 @@ describe('R1-012 original research defects', () => {
   });
   it.each(['find investment advisers in Austin Texas','research state-registered investment advisers in Wyoming'])('discovery verbs do not manufacture names: %s',(raw)=>{const q=interpretInvestorAskQuery(raw).query;expect(q.nameQuery).toBeUndefined();if(raw.includes('Austin'))expect(q.geography).toMatchObject({value:'Austin',state:'TX'});else expect(q.registrationJurisdictions).toEqual(['WY']);});
   it('a labeled identifier is not also an inferred name',async()=>{fixtureDb();const r=await executeInvestorAsk('CRD 9999999999');expect(r.parsed.query.conditions?.some(c=>c.kind==='name')).toBe(false);expect(r.answer).toBeUndefined();expect(r.results).toEqual([]);});
+  it('named research preserves a following registration condition',()=>{const q=interpretInvestorAskQuery('research Alpha Capital registered in Florida with an office in New York').query;expect(q.nameQuery).toBe('Alpha Capital');expect(q.registrationJurisdictions).toEqual(['FL']);expect(q.geography?.value).toBe('NY');expect(q.mode).toBe('fail_closed');});
   it('existing Form ADV definition remains a definition', () => {
     expect(interpretInvestorAskQuery('what is Form ADV?').query.definitionId).toBe('form_adv');
   });
