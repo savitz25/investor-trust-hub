@@ -18,3 +18,7 @@ Protected limitations: searchable operational registration rows establish SEC fa
 Rollback: reviewed Investor-only revert/deployment preserving safe clarification and no registration-to-office substitution. No database rollback. Do not restore the known broad fallback without equivalent containment.
 
 - Browser continuation exposed duplicate CRD-as-name inference: bare-name detection now excludes an already parsed exact identifier. A miss has no invented name condition or answer claiming identity resolution. Added a production-executor regression.
+
+Final follow-up review: Vercel Agent SUCCESS on f2ae01ed35627fe602560598cd6884084967ed7d, zero suggestions. Self-review additionally fixed source-clock borrowing, repeat candidate-window pagination, retained SEC file alias and rejected attached identifier suffixes. Illinois main 7dc6c31 was merged by its owner, reconciled, and protected by 322 passing tests. No independent human review claimed.
+
+Final PR #34 review: separate self-review and Vercel Agent SUCCESS, zero suggestions on 1a0e88a669d52e09633b5ba04f0785b3a4e897db; all GitHub CI and Vercel checks passed before normal merge. The capitalized-sentence loophole was fixed with negative and known-name positive coverage. No independent human review claimed.

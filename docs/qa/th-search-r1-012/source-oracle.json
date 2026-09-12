@@ -4,13 +4,6 @@
   "method": "Bounded read-only connected Supabase SELECTs against existing source tables; not the production parser/executor",
   "project": "ghjhcxfirxnszfnymdxb",
   "writes": false,
-  "release": {
-    "dataset": "iapd_sec_compilation",
-    "label": "IA_FIRM_SEC_Feed_08_27_2026",
-    "publishedAt": "2026-08-27T00:00:00Z",
-    "retrievedAt": "2026-08-28T16:36:30.264282Z",
-    "sha256": "967217b0cdb4548f496407f7232eff30deba12217c36447fad0cee757473b65c"
-  },
   "registrationGrains": [
     {
       "regulator": "sec",
@@ -47,5 +40,44 @@
     "era": 65,
     "meaning": "Current firm-fact rows with main-office city Austin AND region TX, not service territory; window-specific observations, not immutable totals"
   },
-  "disclosure": "Item 11 catalog INTERNAL_ONLY; no new public disclosure filter or raw evidence publication. Existing profile/source recovery remains allowed."
+  "disclosure": "Item 11 catalog INTERNAL_ONLY; no new public disclosure filter or raw evidence publication. Existing profile/source recovery remains allowed.",
+  "referenceSnapshot": {
+    "dataset": "iapd_sec_compilation",
+    "label": "IA_FIRM_SEC_Feed_08_27_2026",
+    "publishedAt": "2026-08-27T00:00:00Z",
+    "retrievedAt": "2026-08-28T16:36:30.264282Z",
+    "sha256": "967217b0cdb4548f496407f7232eff30deba12217c36447fad0cee757473b65c"
+  },
+  "exactControlSource": {
+    "dataset": "sec_ia_ria",
+    "releaseId": "c0e02f60-ba4b-452c-b3af-5cff8de471b5",
+    "releaseLabel": "2026-08-03",
+    "officialAsOf": null,
+    "retrievedAt": "2026-08-18",
+    "sha256": null
+  },
+  "austinSourceReleases": [
+    {
+      "dataset": "sec_ia_ria",
+      "releaseId": "c0e02f60-ba4b-452c-b3af-5cff8de471b5",
+      "releaseLabel": "2026-08-03",
+      "officialAsOf": null,
+      "retrievedAt": "2026-08-18",
+      "sha256": null,
+      "firmClass": "ria",
+      "observedRows": 176
+    },
+    {
+      "dataset": "sec_ia_era",
+      "releaseId": "6824473e-7dbb-4b18-93ae-073e3babecc4",
+      "releaseLabel": "2026-08-03",
+      "officialAsOf": null,
+      "retrievedAt": "2026-08-18",
+      "sha256": null,
+      "firmClass": "era",
+      "observedRows": 65
+    }
+  ],
+  "sourceClockAuditAt": "2026-09-12T18:11:55.356235+00:00",
+  "sourceClockCorrection": "The reference manifest does not supply per-firm-fact dates. Actual indexed releases have no recorded publication date/fingerprint. No source records changed."
 }

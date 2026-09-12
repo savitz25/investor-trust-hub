@@ -1,0 +1,7 @@
+
+> investor-trust-hub@0.1.0 lint
+> npm run lint -w @ith/web
+
+
+> @ith/web@0.1.0 lint
+> eslint .

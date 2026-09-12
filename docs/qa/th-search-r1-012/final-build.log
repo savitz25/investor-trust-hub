@@ -1,0 +1,96 @@
+
+> investor-trust-hub@0.1.0 build
+> npm run build -w @ith/web
+
+
+> @ith/web@0.1.0 build
+> next build
+
+node.exe :  ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ( ⚠ Warning: Nex...not be correct.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+ We detected multiple lockfiles and selected the directory of C:\Users\makei\package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the
+lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles:
+   * C:\Users\makei\th-search-r1-012-work\package-lock.json
+
+   ▲ Next.js 15.5.23
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 6.4s
+   Linting and checking validity of types ...
+   Collecting page data ...
+ ⚠ Using edge runtime on a page currently disables static generation for that page
+   Generating static pages (0/36) ...
+   Generating static pages (9/36)
+   Generating static pages (18/36)
+   Generating static pages (27/36)
+ ✓ Generating static pages (36/36)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ƒ /                                    1.64 kB         108 kB
+├ ○ /_not-found                            170 B         103 kB
+├ ƒ /about                                 170 B         103 kB
+├ ƒ /api/ask                               170 B         103 kB
+├ ƒ /api/claim/handoff/[slug]              170 B         103 kB
+├ ƒ /api/customer-claim-validation/v1      170 B         103 kB
+├ ƒ /api/specialist-execution/v2           170 B         103 kB
+├ ○ /apple-icon.png                          0 B            0 B
+├ ƒ /arizona                               220 B         106 kB
+├ ƒ /ask                                 1.19 kB         107 kB
+├ ƒ /california                            220 B         106 kB
+├ ƒ /colorado                              220 B         106 kB
+├ ƒ /company/[slug]                        610 B         103 kB
+├ ○ /compare                               610 B         103 kB
+├ ƒ /disclaimer                            170 B         103 kB
+├ ƒ /firm/[slug]                           596 B         107 kB
+├ ƒ /firm/[slug]/share-og                  170 B         103 kB
+├ ƒ /firms                                 166 B         106 kB
+├ ƒ /fund/[slug]                           610 B         103 kB
+├ ○ /icon.svg                                0 B            0 B
+├ ƒ /illinois                              220 B         106 kB
+├ ○ /internal/sec-adv                      610 B         103 kB
+├ ƒ /internal/seo-gates                    170 B         103 kB
+├ ƒ /methodology                           610 B         103 kB
+├ ○ /my-investor-trust-hub                 610 B         103 kB
+├ ƒ /new-jersey                            220 B         106 kB
+├ ƒ /new-york                              220 B         106 kB
+├ ƒ /opengraph-image                       170 B         103 kB
+├ ƒ /privacy                               170 B         103 kB
+├ ● /professional/[slug]                   595 B         107 kB
+├   ├ /professional/jordan-p-elmwood
+├   ├ /professional/samira-n-brookfield
+├   ├ /professional/casey-quill
+├   └ [+2 more paths]
+├ ƒ /professionals                         979 B         144 kB
+├ ƒ /research                              610 B         103 kB
+├ ƒ /research/share-og                     170 B         103 kB
+├ ƒ /robots.txt                            170 B         103 kB
+├ ƒ /sitemap.xml                           170 B         103 kB
+├ ƒ /sources                               610 B         103 kB
+├ ƒ /terms                                 170 B         103 kB
+├ ƒ /texas                                 220 B         106 kB
+├ ƒ /tools                                 610 B         103 kB
+├ ○ /twitter-image                         170 B         103 kB
+├ ƒ /virginia                              220 B         106 kB
+└ ƒ /washington                            220 B         106 kB
++ First Load JS shared by all             103 kB
+  ├ chunks/18-536e344942e9442c.js        46.4 kB
+  ├ chunks/87c73c54-24122e7b92478d00.js  54.2 kB
+  └ other shared chunks (total)          2.01 kB
+
+
+ƒ Middleware                             48.3 kB
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand

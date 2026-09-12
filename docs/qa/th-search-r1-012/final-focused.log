@@ -1,0 +1,16 @@
+
+> investor-trust-hub@0.1.0 check:th-search-r1-012
+> vitest run apps/web/tests/r1-012.test.ts packages/domain/tests/investor-ask.test.ts packages/domain/tests/investor-specialist-execution-v2.test.ts apps/web/tests/th-search-001f.test.ts
+
+
+ RUN  v3.2.7 C:/Users/makei/th-search-r1-012-work
+
+ ✓ packages/domain/tests/investor-specialist-execution-v2.test.ts (10 tests) 10ms
+ ✓ packages/domain/tests/investor-ask.test.ts (17 tests) 32ms
+ ✓ apps/web/tests/th-search-001f.test.ts (3 tests) 47ms
+ ✓ apps/web/tests/r1-012.test.ts (63 tests) 116ms
+
+ Test Files  4 passed (4)
+      Tests  93 passed (93)
+   Start at  14:23:02
+   Duration  1.35s (transform 688ms, setup 0ms, collect 1.83s, tests 205ms, environment 1ms, prepare 458ms)

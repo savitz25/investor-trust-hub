@@ -1,0 +1,78 @@
+{
+  "baseRefOid": "7dc6c318ce1792b115ae416cffeb48268cc32841",
+  "headRefOid": "f2ae01ed35627fe602560598cd6884084967ed7d",
+  "mergeCommit": {
+    "oid": "12c995346dc8fc1daf97b06fd072fd4dc1096bbf"
+  },
+  "mergedAt": "2026-09-12T18:26:28Z",
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-09-12T18:25:13Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/savitz25/investor-trust-hub/actions/runs/34711031482/job/103599746545",
+      "name": "Typecheck, lint, test, build",
+      "startedAt": "2026-09-12T18:23:18Z",
+      "status": "COMPLETED",
+      "workflowName": "CI"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-09-12T18:23:45Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/savitz25/investor-trust-hub/actions/runs/34711031459/job/103599746161",
+      "name": "stale-manifest",
+      "startedAt": "2026-09-12T18:23:18Z",
+      "status": "COMPLETED",
+      "workflowName": "Investor network metrics"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-09-12T18:23:30Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/savitz25/investor-trust-hub/actions/runs/34711031482/job/103599746548",
+      "name": "Ingestion lint and tests",
+      "startedAt": "2026-09-12T18:23:19Z",
+      "status": "COMPLETED",
+      "workflowName": "CI"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-09-12T18:23:46Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/savitz25/investor-trust-hub/actions/runs/34711031482/job/103599746436",
+      "name": "Schema migrations",
+      "startedAt": "2026-09-12T18:23:18Z",
+      "status": "COMPLETED",
+      "workflowName": "CI"
+    },
+    {
+      "__typename": "StatusContext",
+      "context": "Vercel",
+      "startedAt": "2026-09-12T18:23:58Z",
+      "state": "SUCCESS",
+      "targetUrl": "https://vercel.com/savitz25-s-projects/investor-trust-hub-web/A83sezrQMwHFXHBqbap4ohpKk3nK"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-09-12T18:24:59Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://vercel.com/github",
+      "name": "Vercel Agent Review",
+      "startedAt": "2026-09-12T18:23:17Z",
+      "status": "COMPLETED",
+      "workflowName": ""
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-09-12T18:23:58Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://vercel.com/github",
+      "name": "Vercel Preview Comments",
+      "startedAt": "2026-09-12T18:23:58Z",
+      "status": "COMPLETED",
+      "workflowName": ""
+    }
+  ],
+  "url": "https://github.com/savitz25/investor-trust-hub/pull/32"
+}

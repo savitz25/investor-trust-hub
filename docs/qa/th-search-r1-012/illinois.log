@@ -1,0 +1,15 @@
+
+> investor-trust-hub@0.1.0 assert:il-inv-001
+> node scripts/assert-il-inv-001.mjs && vitest run packages/domain/tests/il-public-intel.test.ts apps/web/tests/il-inv-001-publication.test.ts
+
+IL-INV-001 publication assert: PASS
+
+ RUN  v3.2.7 C:/Users/makei/th-search-r1-012-work
+
+ ✓ packages/domain/tests/il-public-intel.test.ts (6 tests) 7ms
+ ✓ apps/web/tests/il-inv-001-publication.test.ts (2 tests) 11ms
+
+ Test Files  2 passed (2)
+      Tests  8 passed (8)
+   Start at  14:19:22
+   Duration  963ms (transform 440ms, setup 0ms, collect 760ms, tests 18ms, environment 0ms, prepare 229ms)
