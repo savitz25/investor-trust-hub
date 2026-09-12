@@ -1,0 +1,166 @@
+{
+  "contract": "investor-il-iapd-census-v1",
+  "safeAsCurrentIllinoisBulkStateLayer": true,
+  "filterLogic": "Illinois selected by IAPD registration/notice jurisdiction fields (StateRgstn/Rgltr/@Cd, ERA/Rgltr/@Cd, NoticeFiled/States/@RgltrCd). Principal-office MainAddr/@State=IL is a separate national overlay and is not the state-RIA denominator.",
+  "state": {
+    "filename": "IA_FIRM_STATE_Feed_08_27_2026.xml.gz",
+    "authority": "IAPD (FINRA-held state compilation)",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_08_27_2026.xml.gz",
+    "sourceAsOf": "2026-08-27",
+    "publishedAt": "2026-08-27",
+    "retrievedAt": "2026-08-28T16:36:30Z",
+    "bytes": 5072645,
+    "sha256": "4dc5ec13827c2546213fba16d3397448ba5c08cb8c092f1135c405a7f8472eda",
+    "grain": "Firm CRD; StateRgstn/Rgltr/@Cd=jurisdiction; @St=status; ERA/Rgltr/@Cd=jurisdiction. Not MainAddr/@State.",
+    "filter": "Rgltr/@Cd=IL (registration jurisdiction). Address is recorded only for overlap diagnostics.",
+    "firms_in_feed": 21818,
+    "co_state_ia_registration_rows": 855,
+    "co_state_ia_distinct_crd": 855,
+    "co_state_ia_approved_distinct_crd": 855,
+    "co_state_ia_current_distinct_crd": 855,
+    "co_state_ia_termrequest_distinct_crd": 0,
+    "co_state_era_registration_rows": 55,
+    "co_state_era_distinct_crd": 55,
+    "co_state_era_active_distinct_crd": 55,
+    "ia_era_overlap_distinct_crd": 0,
+    "status_ia": [
+      [
+        "APPROVED",
+        855
+      ]
+    ],
+    "status_era": [
+      [
+        "ACTIVE",
+        55
+      ]
+    ],
+    "principal_office_co_among_state_ia": 296,
+    "principal_office_not_co_among_state_ia": 559,
+    "address_co_without_co_jurisdiction": 17
+  },
+  "sec": {
+    "filename": "IA_FIRM_SEC_Feed_08_27_2026.xml.gz",
+    "authority": "SEC / IAPD",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_SEC_Feed_08_27_2026.xml.gz",
+    "sourceAsOf": "2026-08-27",
+    "publishedAt": "2026-08-27",
+    "retrievedAt": "2026-08-28T16:36:30Z",
+    "bytes": 7271790,
+    "sha256": "967217b0cdb4548f496407f7232eff30deba12217c36447fad0cee757473b65c",
+    "grain": "Firm CRD; NoticeFiled/States/@RgltrCd=jurisdiction; MainAddr/@State=principal office (separate overlay).",
+    "firms_in_feed": 23780,
+    "firm_types": [
+      [
+        "Registered",
+        17141
+      ],
+      [
+        "ERA",
+        6639
+      ]
+    ],
+    "co_notice_rows": 3560,
+    "co_notice_any_status_distinct_crd": 3560,
+    "co_notice_filed_distinct_crd": 3560,
+    "co_notice_era_any_status": 0,
+    "co_notice_filed_firm_type": {
+      "Registered": 3560,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          3560
+        ]
+      ]
+    },
+    "notice_status": [
+      [
+        "FILED",
+        3560
+      ]
+    ],
+    "co_principal_office_distinct_crd": 798,
+    "principal_and_notice_filed": 622,
+    "notice_filed_not_principal": 2938,
+    "principal_not_notice_filed": 176
+  },
+  "overlaps": {
+    "state_ia_and_principal_office": 0,
+    "state_ia_approved_and_principal_office": 0,
+    "state_ia_and_notice_filed": 1,
+    "state_ia_approved_and_notice_filed": 1,
+    "state_era_and_principal_office": 13,
+    "state_era_and_notice_filed": 0,
+    "state_ia_and_state_era": 0,
+    "notice_filed_and_principal_office": 622,
+    "approved_state_ia_not_in_sec_principal_or_notice": 854,
+    "state_ia_approved_and_notice_filed_crds": [
+      "290683"
+    ],
+    "state_ia_approved_and_notice_filed_joinMethod": "exact firm CRD set intersection of APPROVED StateRgstn/Rgltr/@Cd=IL and NoticeFiled/States/@RgltrCd=IL St=FILED",
+    "state_ia_approved_and_notice_filed_records": [
+      {
+        "crd": "290683",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "IL",
+          "filter": "StateRgstn/Rgltr/@Cd=IL",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2026-04-27"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=IL",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2021-12-15",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2017-12-15"
+          },
+          "secFileNumber": "801-112170"
+        },
+        "reading": "Both official 2026-08-27 compilations carry this exact firm CRD: APPROVED Illinois StateRgstn and FILED Illinois NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      }
+    ]
+  },
+  "semanticGrainRules": {
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_SEC_RIA": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_NOTICE_FILING": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_STATE_ERA": true,
+    "PRINCIPAL_OFFICE_IS_NOT_REGISTRATION": true,
+    "REGISTRATION_ROW_IS_DISTINCT_GRAIN_FROM_DISTINCT_FIRM_CRD": true,
+    "note": "These are contract/credential rules. They do not assert that CRD sets are disjoint or that counts are numerically unequal."
+  },
+  "computedDiagnostics": {
+    "state_ia_registration_rows": 855,
+    "state_ia_distinct_crd": 855,
+    "state_ia_approved_distinct_crd": 855,
+    "state_ia_termrequest_distinct_crd": 0,
+    "state_era_registration_rows": 55,
+    "state_era_distinct_crd": 55,
+    "state_ia_and_state_era_overlap_distinct_crd": 0,
+    "state_ia_approved_and_notice_filed_overlap_distinct_crd": 1,
+    "notice_filed_distinct_crd": 3560,
+    "notice_filed_firm_type": {
+      "Registered": 3560,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          3560
+        ]
+      ]
+    },
+    "registration_rows_equal_distinct_crd": true
+  }
+}

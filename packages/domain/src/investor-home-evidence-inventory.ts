@@ -2,6 +2,7 @@ import { AZ_PUBLIC_SNAPSHOT } from './az-public-snapshot';
 import { CA_PUBLIC_SNAPSHOT } from './ca-public-snapshot';
 import { CO_PUBLIC_SNAPSHOT } from './co-public-snapshot';
 import { NY_PUBLIC_SNAPSHOT } from './ny-public-snapshot';
+import { IL_PUBLIC_SNAPSHOT } from './il-public-snapshot';
 import { VA_PUBLIC_SNAPSHOT } from './va-public-snapshot';
 import { loadInvestorNetworkMetrics } from './load-network-metrics';
 import { NJ_PUBLIC_SNAPSHOT } from './nj-public-snapshot';
@@ -65,7 +66,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL';
   name: string;
   href: string;
   regulator: string;
@@ -470,6 +471,41 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
         sourceAsOf: NY_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
         retrievedAt: NY_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
         snapshotAsOf: NY_PUBLIC_SNAPSHOT.stateRia.snapshotAsOf,
+        generatedAt: null,
+      },
+    ],
+  },
+  {
+    code: 'IL',
+    name: 'Illinois',
+    href: IL_PUBLIC_SNAPSHOT.route,
+    regulator: 'Illinois Secretary of State, Securities Department',
+    principalOfficeFirms:
+      IL_PUBLIC_SNAPSHOT.nationalOverlay.ilPrincipalOfficeSecIardFirms,
+    rosterStatus: 'IAPD compilation (855 approved)',
+    evidence: [
+      'SEC/IARD principal-office overlay',
+      'IAPD Illinois state-registered IA compilation',
+      'IAPD Illinois state ERA reporting',
+      'federal-covered notice filings',
+    ],
+    identityNote:
+      '855 is IAPD state-compilation APPROVED firms with Illinois as registration jurisdiction. It is not the 793 SEC principal-office overlay and not 3,560 notice filings.',
+    limitation:
+      'State-only CRDs were not minted as public SEC firm profiles. SOS enforcement remains a mixed research path, not an IA census.',
+    sourceClocks: [
+      {
+        label: 'SEC/IARD feed',
+        sourceAsOf: IL_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+        retrievedAt: IL_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+        snapshotAsOf: null,
+        generatedAt: null,
+      },
+      {
+        label: 'IAPD state compilation',
+        sourceAsOf: IL_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+        retrievedAt: IL_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+        snapshotAsOf: IL_PUBLIC_SNAPSHOT.stateRia.snapshotAsOf,
         generatedAt: null,
       },
     ],
@@ -1036,6 +1072,62 @@ export function buildInvestorHomepageEvidenceInventory(): InvestorHomepageEviden
       NY_PUBLIC_SNAPSHOT.federalNotice.retrievedAt,
     ),
     stateMeasure(
+      'il_overlay',
+      'Illinois SEC/IARD principal-office firms',
+      metrics.illinois.principalOfficeRosterFirms,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'SEC/IARD firm with IL principal office',
+      'Illinois',
+      'SEC IAPD / IARD',
+      'artifacts/il-inv-001-public-snapshot.json',
+      IL_PUBLIC_SNAPSHOT.asOf,
+      'Federal roster firms reporting IL principal office.',
+      'Illinois state-RIA roster, notice filing, or SOS authority.',
+      '/illinois',
+      'PUBLIC',
+      IL_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+      IL_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+    ),
+    stateMeasure(
+      'il_state_roster',
+      'Illinois state-registered investment-adviser firms',
+      IL_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'IAPD state-compilation APPROVED firm with jurisdiction IL',
+      'Illinois',
+      'IAPD state compilation',
+      'artifacts/il-inv-001-public-snapshot.json',
+      IL_PUBLIC_SNAPSHOT.asOf,
+      'Approved Illinois state-IA firms in IA_FIRM_STATE_Feed_08_27_2026.',
+      'SEC principal-office overlay, federal notice filings, ERA reporting, or IAR people.',
+      '/illinois',
+      'PUBLIC',
+      IL_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+      IL_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+      'Exact firm CRD. State-only identities were not minted as public SEC profiles.',
+      'Filter is registration jurisdiction, not address.',
+    ),
+    stateMeasure(
+      'il_notice_filed',
+      'SEC/IARD firms with an Illinois notice filing',
+      IL_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'NoticeFiled RgltrCd=IL FILED',
+      'Illinois',
+      'SEC IAPD / IARD',
+      'artifacts/il-inv-001-public-snapshot.json',
+      IL_PUBLIC_SNAPSHOT.asOf,
+      'SEC/IARD firms with an Illinois notice filing in the cited compilation.',
+      'Illinois state-RIA licensure or the 793 principal-office overlay.',
+      '/illinois',
+      'PUBLIC',
+      IL_PUBLIC_SNAPSHOT.federalNotice.sourceAsOf,
+      IL_PUBLIC_SNAPSHOT.federalNotice.retrievedAt,
+    ),
+    stateMeasure(
       'az_index_crd_mentions',
       'Arizona index rows mentioning CRD',
       AZ_PUBLIC_SNAPSHOT.enforcement.rowsWithCrdInRespondentText,
@@ -1260,11 +1352,11 @@ export function assertInvestorHomepageEvidenceInventory(
   )
     throw new Error('Cross-grain or national RAUM totals cannot publish');
   if (
-    INVESTOR_HOMEPAGE_STATE_CARDS.length !== 8 ||
+    INVESTOR_HOMEPAGE_STATE_CARDS.length !== 9 ||
     INVESTOR_HOMEPAGE_STATE_CARDS.some((state) => state.href === '/florida')
   )
     throw new Error(
-      'Exactly eight accepted state pages may publish; Florida is not one',
+      'Exactly nine accepted state pages may publish; Florida is not one',
     );
   if (
     inventory.find((item) => item.key === 'published_state_pages')?.value !==
