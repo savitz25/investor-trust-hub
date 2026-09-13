@@ -1,7 +1,7 @@
 /**
  * Build investor-network-metrics-v1 from production-reconciled counts + catalogs.
  */
-import { writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { publicationMetricInputs } from "./publication_metric_inputs.mjs";
@@ -14,38 +14,18 @@ async function main() {
     pathToFileURL(join(root, "packages/domain/src/compute-investor-network-metrics.ts")).href
   );
 
+  const census = JSON.parse(readFileSync(join(root, "data/home/investor-national-census-r2-04.json"), "utf8"));
+  const out = join(root, "data/home/investor-network-metrics-v1.json");
+  const check = process.argv.includes("--check");
+  const generatedAt = check ? JSON.parse(readFileSync(out, "utf8")).generatedAt : new Date().toISOString();
   const input = {
-    generatedAt: new Date().toISOString(),
+    ...census.counts,
+    generatedAt,
     publishedAt: pub.publishedAt,
-    retrievedAt: "2026-08-28",
+    retrievedAt: census.counts.retrievedAt,
     releaseLabel: pub.releaseLabel,
     dataset: "iapd_sec_compilation",
-    rosterFirms: 23622,
-    riaFacts: 17018,
-    eraFacts: 6604,
-    riaRegistered: 16783,
-    riaPending: 235,
-    eraReporting: 6604,
-    canonicalFirms: 25777,
-    crdIdentifiers: 25777,
-    crdDistinctFirms: 25777,
-    secFileIdentifiers: 23621,
-    secFileDistinctFirms: 23621,
-    formAdvFilings: 635269,
-    formAdvAttributes: 5149596,
-    formAdvWithdrawals: 22592,
-    formAdvSuccessorLinks: 16,
-    riaRaumNonNull: 17018,
-    riaRaumZero: 613,
-    riaRaumPositive: 16405,
-    riaRaumNull: 0,
-    disclosureEvents: 0,
-    item11YesRia: 876,
-    item11YesEra: 80,
-    ownerEntities: 158560,
-    evidenceRecords: 165354,
     indexableTrustReports: pub.indexableTrustReports,
-    searchableRosterFirms: 23622,
     publishedStateIntelligencePaths: pub.publishedStateIntelligencePaths,
     njPrincipalOfficeFirms: pub.njPrincipalOfficeFirms,
     njEnforcementDocumentsAcquired: pub.njEnforcementDocumentsAcquired,
@@ -75,8 +55,12 @@ async function main() {
   }
 
   const manifest = computeInvestorNetworkMetrics(input);
-  const out = join(root, "data/home/investor-network-metrics-v1.json");
-  writeFileSync(out, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
+  const { reconcile } = await import("./reconcile-network-metrics-r2-04.mjs");
+  reconcile(manifest, root, census);
+  const serialized = `${JSON.stringify(manifest, null, 2)}\n`;
+  if (check) {
+    if (readFileSync(out, "utf8").replace(/\r\n/g, "\n") !== serialized) throw new Error("Metric drift: npm run build:network-metrics");
+  } else writeFileSync(out, serialized, "utf8");
   console.log(
     JSON.stringify(
       {

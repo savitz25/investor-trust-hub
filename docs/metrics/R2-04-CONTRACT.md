@@ -1,0 +1,15 @@
+# Investor network metrics R2-04
+
+The existing `data/home/investor-network-metrics-v1.json` is the runtime/API authority. Schema remains investor-network-metrics-v1; contractRevision is ATH-METRICS-R2-04. `/api/network-metrics` exposes it.
+
+Run `npm run build:network-metrics`, then `npm run check:metrics`. The second command is read-only and exits nonzero on accepted-input, output, identity, status, CRD bridge, clock or unknown-semantic drift. CI runs it before the existing typecheck/lint/full tests/build. Generation is offline and never reads the old output except to preserve generatedAt during --check. Repeating generation changes only legitimate generation clocks; sourceFingerprint excludes those clocks.
+
+Inputs: data/home/investor-national-census-r2-04.json preserves the production-reconciled canonical census; investor-home-census-r2-04.json preserves the accepted INV-HOME census, geography, RAUM and compensation measures previously embedded in TypeScript. Provenance names the exact prior commit. This is not a fresh database census. Official release is 2026-08-27, retrieved 2026-08-28. Refresh these reviewed inputs from the canonical pipeline when a new national release is accepted; never infer firm counts from state filings.
+
+publication_metric_inputs.mjs reads accepted artifacts/*-public-snapshot.json and the existing route catalog. reconcile-network-metrics-r2-04.mjs validates and exports `reconciliation.states`, `reconciliation.measures`, `reconciliation.identity`, `homepageInputs`, `acceptedStateSnapshots` and LF-normalized `acceptedInputHashes`. Full accepted snapshot context retains unenumerated capabilities and source-specific limitations. It is not an invitation to aggregate arbitrary numeric fields.
+
+The homepage consumes generated national presentation inputs and generated accepted state snapshots. New ERA, all-status registration, exact bridge, and regulatory observation measures flow directly from reconciliation.measures. Rendering performs formatting only; current changing totals are no longer literals. A new state with a new source shape requires a reviewed grain adapter and capability mapping, then regeneration; no homepage number needs editing. Route existence is not acquisition. Published state pages are counted as pages, not fully covered states.
+
+State IA, ERA, federal notice and principal office remain distinct. A registration bridge authorizes no adverse attachment. CO/VA narrative/activity remains unattached; NY/IL regulatory bulk counts remain null despite known-zero acquisition/attachment execution counts. Canonical firms = current SEC/IARD roster + canonical firms without current ADV facts, with zero unexplained remainder. State layers add zero canonical firms.
+
+Prompt 5: consume this revision and reconciliation.measures by explicit grain, preserving sourceAsOf/snapshotAsOf/retrievedAt/generatedAt and null. Do not re-run registration arithmetic in Ask or treat acceptedStateSnapshots as a new canonical firm roster. Prior Ask fingerprint pins must be revised deliberately; specialist contracts were not weakened for them.

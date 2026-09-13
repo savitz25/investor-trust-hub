@@ -1,13 +1,14 @@
-import { AZ_PUBLIC_SNAPSHOT } from './az-public-snapshot';
-import { CA_PUBLIC_SNAPSHOT } from './ca-public-snapshot';
-import { CO_PUBLIC_SNAPSHOT } from './co-public-snapshot';
-import { NY_PUBLIC_SNAPSHOT } from './ny-public-snapshot';
-import { IL_PUBLIC_SNAPSHOT } from './il-public-snapshot';
-import { VA_PUBLIC_SNAPSHOT } from './va-public-snapshot';
+import networkMetrics from '../../../data/home/investor-network-metrics-v1.json';
+const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
+const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
+const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
+const NY_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.NY;
+const IL_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.IL;
+const VA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.VA;
 import { loadInvestorNetworkMetrics } from './load-network-metrics';
-import { NJ_PUBLIC_SNAPSHOT } from './nj-public-snapshot';
-import { TX_PUBLIC_SNAPSHOT } from './tx-public-snapshot';
-import { WA_PUBLIC_SNAPSHOT } from './wa-public-snapshot';
+const NJ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.NJ;
+const TX_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.TX;
+const WA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.WA;
 import { V1_RIA_COMPENSATION_METHODS } from './investor-home-intel';
 import {
   metricByKey,
@@ -34,6 +35,7 @@ export type InvestorHomepagePublicationStatus =
   | 'PUBLIC_PARTIAL'
   | 'PUBLIC_UNKNOWN';
 export type InvestorHomepageValueState =
+  | 'UNKNOWN'
   | 'KNOWN'
   | 'PARTIAL'
   | 'NOT_ACQUIRED'
@@ -363,7 +365,7 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
     regulator: 'Colorado Division of Securities',
     principalOfficeFirms:
       CO_PUBLIC_SNAPSHOT.nationalOverlay.coPrincipalOfficeSecIardFirms,
-    rosterStatus: 'IAPD compilation (740 approved)',
+    rosterStatus: `IAPD compilation (${CO_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd.toLocaleString('en-US')} approved)`,
     evidence: [
       'SEC/IARD principal-office overlay',
       'IAPD Colorado state-registered IA compilation',
@@ -371,7 +373,7 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
       'sanctions narrative profile',
     ],
     identityNote:
-      '740 is IAPD state-compilation APPROVED firms with Colorado as registration jurisdiction. It is not the 589 SEC principal-office overlay and not a combined Colorado adviser total.',
+      'Approved state IA registrations are distinct from SEC principal-office overlays, federal notices, ERA reporting, and regulatory activity.',
     limitation:
       'State-only CRDs were not minted as public SEC firm profiles. Name-only sanctions entries were not attached.',
     sourceClocks: [
@@ -405,7 +407,7 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
     regulator: 'Virginia SCC Division of Securities and Retail Franchising',
     principalOfficeFirms:
       VA_PUBLIC_SNAPSHOT.nationalOverlay.vaPrincipalOfficeSecIardFirms,
-    rosterStatus: 'IAPD compilation (697 approved)',
+    rosterStatus: `IAPD compilation (${VA_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd.toLocaleString('en-US')} approved)`,
     evidence: [
       'SEC/IARD principal-office overlay',
       'IAPD Virginia state-registered IA compilation',
@@ -413,7 +415,7 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
       'SCC 2025 SRF aggregates and regulatory-activity table',
     ],
     identityNote:
-      '697 is IAPD state-compilation APPROVED firms with Virginia as registration jurisdiction. It is not the 339 SEC principal-office overlay and not 4,481 2025 activity approvals.',
+      'Approved state IA registrations are distinct from SEC principal-office overlays, federal notices, ERA reporting, and regulatory activity.',
     limitation:
       'State-only CRDs were not minted as public SEC firm profiles. SCC activity rows are mixed subjects and were not name-matched.',
     sourceClocks: [
@@ -447,7 +449,7 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
     regulator: 'New York Attorney General Investor Protection Bureau',
     principalOfficeFirms:
       NY_PUBLIC_SNAPSHOT.nationalOverlay.nyPrincipalOfficeSecIardFirms,
-    rosterStatus: 'IAPD compilation (1297 approved)',
+    rosterStatus: `IAPD compilation (${NY_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd.toLocaleString('en-US')} approved)`,
     evidence: [
       'SEC/IARD principal-office overlay',
       'IAPD New York state-registered IA compilation',
@@ -455,7 +457,7 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
       'federal-covered notice filings',
     ],
     identityNote:
-      '1,297 is IAPD state-compilation APPROVED firms with New York as registration jurisdiction. It is not the 3,152 SEC principal-office overlay and not 5,856 notice filings.',
+      'Approved state IA registrations are distinct from SEC principal-office overlays, federal notices, ERA reporting, and regulatory activity.',
     limitation:
       'State-only CRDs were not minted as public SEC firm profiles. OAG enforcement remains a mixed research path, not an IA census.',
     sourceClocks: [
@@ -482,7 +484,7 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
     regulator: 'Illinois Secretary of State, Securities Department',
     principalOfficeFirms:
       IL_PUBLIC_SNAPSHOT.nationalOverlay.ilPrincipalOfficeSecIardFirms,
-    rosterStatus: 'IAPD compilation (855 approved)',
+    rosterStatus: `IAPD compilation (${IL_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd.toLocaleString('en-US')} approved)`,
     evidence: [
       'SEC/IARD principal-office overlay',
       'IAPD Illinois state-registered IA compilation',
@@ -490,7 +492,7 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
       'federal-covered notice filings',
     ],
     identityNote:
-      '855 is IAPD state-compilation APPROVED firms with Illinois as registration jurisdiction. It is not the 793 SEC principal-office overlay and not 3,560 notice filings.',
+      'Approved state IA registrations are distinct from SEC principal-office overlays, federal notices, ERA reporting, and regulatory activity.',
     limitation:
       'State-only CRDs were not minted as public SEC firm profiles. SOS enforcement remains a mixed research path, not an IA census.',
     sourceClocks: [
@@ -989,7 +991,7 @@ export function buildInvestorHomepageEvidenceInventory(): InvestorHomepageEviden
       'artifacts/va-inv-001-public-snapshot.json',
       VA_PUBLIC_SNAPSHOT.asOf,
       'Approved Virginia state-IA firms in IA_FIRM_STATE_Feed_08_27_2026.',
-      'SEC principal-office overlay, federal notice filings, ERA reporting, IAR people, or 4,481 2025 activity approvals.',
+      'SEC principal-office overlay, federal notice filings, ERA reporting, IAR people, or annual activity approvals.',
       '/virginia',
       'PUBLIC',
       VA_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
@@ -1065,7 +1067,7 @@ export function buildInvestorHomepageEvidenceInventory(): InvestorHomepageEviden
       'artifacts/ny-inv-001-public-snapshot.json',
       NY_PUBLIC_SNAPSHOT.asOf,
       'SEC/IARD firms with a New York notice filing in the cited compilation.',
-      'New York state-RIA licensure or the 3,152 principal-office overlay.',
+      'New York state-RIA licensure or the principal-office overlay.',
       '/new-york',
       'PUBLIC',
       NY_PUBLIC_SNAPSHOT.federalNotice.sourceAsOf,
@@ -1289,11 +1291,11 @@ export function buildInvestorHomepageEvidenceInventory(): InvestorHomepageEviden
     stateMeasure(
       'published_state_pages',
       'Published state intelligence pages',
-      INVESTOR_HOMEPAGE_STATE_CARDS.length,
+      metrics.network.publishedStateIntelligencePaths.length,
       'KNOWN',
       'PUBLIC_RESEARCH',
       'published state intelligence page',
-      'NJ, CA, TX, WA, AZ, CO, VA, NY',
+      INVESTOR_HOMEPAGE_STATE_CARDS.map(state => state.code).join(', '),
       'Accepted state publication models',
       'INVESTOR_HOMEPAGE_STATE_CARDS',
       null,
@@ -1325,6 +1327,11 @@ export function buildInvestorHomepageEvidenceInventory(): InvestorHomepageEviden
     ),
   );
 
+  for (const m of networkMetrics.reconciliation.measures) {
+    // Existing state cards already show approved IA, notice CRDs and principal office.
+    if (['stateRia.approvedDistinctCrd', 'federalNotice.noticeFiledDistinctCrd'].includes(m.sourceField) || m.sourceField.startsWith('nationalOverlay.')) continue;
+    inventory.push({key:m.key,label:m.label,value:m.value,display:fmt(m.value,m.value === null ? 'UNKNOWN' : 'KNOWN'),valueState:m.value === null ? 'UNKNOWN' : 'KNOWN',family:'STATE_SECURITIES',grain:m.grain,firmClass:'Source-defined state layer',geography:m.key.slice(0,2).toUpperCase(),sourceSystem:m.sourceArtifact,acceptedArtifact:m.sourceArtifact,sourceAsOf:m.sourceAsOf,retrievedAt:m.retrievedAt,snapshotAsOf:m.snapshotAsOf,generatedAt:m.generatedAt,definition:m.counts,counts:m.counts,doesNotCount:m.doesNotCount,publicationStatus:m.value===null?'PUBLIC_UNKNOWN':'PUBLIC',researchDestination:m.destination,identityRule:'Exact CRD only; registration bridges do not authorize adverse attachment',coverageLimitation:m.value===null?'Public research path; no defensible bulk count.':null});
+  }
   assertInvestorHomepageEvidenceInventory(inventory);
   return inventory;
 }
@@ -1352,11 +1359,11 @@ export function assertInvestorHomepageEvidenceInventory(
   )
     throw new Error('Cross-grain or national RAUM totals cannot publish');
   if (
-    INVESTOR_HOMEPAGE_STATE_CARDS.length !== 9 ||
+    INVESTOR_HOMEPAGE_STATE_CARDS.length !== metrics.network.publishedStateIntelligencePaths.length ||
     INVESTOR_HOMEPAGE_STATE_CARDS.some((state) => state.href === '/florida')
   )
     throw new Error(
-      'Exactly nine accepted state pages may publish; Florida is not one',
+      'State cards must reconcile to accepted published state paths',
     );
   if (
     inventory.find((item) => item.key === 'published_state_pages')?.value !==

@@ -124,6 +124,13 @@ export type InvestorNetworkMetric = {
 };
 
 export type InvestorNetworkMetricsV1 = {
+  contractRevision?: 'ATH-METRICS-R2-04';
+  reconciliation?: {
+    identity: {canonicalFirms:number; rosterFirms:number; withoutCurrentAdvFacts:number; deltaFromStateRegistrations:number; deltaFromPrincipalOffice:number; deltaFromRegulatoryEvidence:number; unexplainedDelta:number};
+    states: Record<string,unknown>;
+    measures: Array<{key:string;label:string;value:number|null;valueState:string;grain:string;capabilityStatus:string;sourceArtifact:string;sourceField:string;sourceAsOf:string|null;snapshotAsOf:string|null;retrievedAt:string|null;generatedAt:string;counts:string;doesNotCount:string;publicationStatus:string;destination:string}>;
+    aggregationPolicy:string;
+  };
   schemaVersion: typeof INVESTOR_NETWORK_METRICS_VERSION;
   generatedAt: string;
   newestDocumentedSourceAsOf: string | null;

@@ -1,3 +1,4 @@
+import networkMetrics from '../../../data/home/investor-network-metrics-v1.json';
 /**
  * investor-home-intel-v1 — INV-HOME-001 locked census + INV-HOME-002 payload.
  * Precomputed aggregates only. No homepage query of raw ADV observation rows.
@@ -9,43 +10,13 @@ import { loadInvestorNetworkMetrics } from './load-network-metrics';
 export const INVESTOR_HOME_INTEL_VERSION = 'investor-home-intel-v1' as const;
 export const INVESTOR_HOME_PUBLICATION_VERSION = 'inv-home-002-v1' as const;
 
-export const V1_SOURCE = {
-  dataset: 'iapd_sec_compilation',
-  releaseLabel: 'IA_FIRM_SEC_Feed_08_27_2026',
-  publishedAt: '2026-08-27',
-  retrievedAt: '2026-08-28',
-  officialUrl:
-    'https://www.sec.gov/data-research/sec-markets-data/information-about-registered-investment-advisers-exempt-reporting-advisers',
-  iapdHome: 'https://adviserinfo.sec.gov/',
-} as const;
+export const V1_SOURCE = networkMetrics.homepageInputs.source;
 
 /** SEC IARD monthly firm roster universe used for V1 homepage metrics. */
-export const V1_SEC_ROSTER = {
-  riaFacts: 17018,
-  eraFacts: 6604,
-  totalFacts: 23622,
-  riaRegistered: 16783,
-  riaPending: 235,
-  eraReporting: 6604,
-  indexableTrustReports: 1000,
-  extraFirmsWithoutAdvFacts: 2155,
-  allCanonicalFirms: 25777,
-  mainOfficeBranches: 23622,
-  rosterPrincipalOfficeWithRegion: 17997,
-  rosterPrincipalOfficeNullRegion: 5625,
-  advReportedAttributes: 5149596,
-  advFilings: 635269,
-} as const;
+export const V1_SEC_ROSTER = networkMetrics.homepageInputs.roster;
 
 /** RIA-only reported total RAUM (Item 5F(2)(c)) bands. Zeros kept separate. */
-export const V1_RIA_RAUM_BANDS = {
-  zero: 613,
-  under25m: 371,
-  from25mTo100m: 759,
-  from100mTo1b: 9887,
-  from1bTo10b: 4023,
-  atLeast10b: 1365,
-} as const;
+export const V1_RIA_RAUM_BANDS = networkMetrics.homepageInputs.raumBands;
 
 export const V1_FEATURED_STORY_IDS = [
   'sec-iard-ria-vs-era',
@@ -113,128 +84,10 @@ export type CompensationMethodMetric = {
   eligibleDenominator: number;
 };
 
-export const V1_RIA_COMPENSATION_METHODS: readonly CompensationMethodMetric[] = [
-  {
-    field: '5E(1)',
-    key: 'percentage_of_assets',
-    officialLabel: COMPENSATION_METHOD_LABELS.percentage_of_assets ?? 'Percentage of assets under management',
-    reportedYes: 16246,
-    reportedNo: 772,
-    notFiledByFormType: 6604,
-    eligibleDenominator: 17018,
-  },
-  {
-    field: '5E(2)',
-    key: 'hourly_charges',
-    officialLabel: COMPENSATION_METHOD_LABELS.hourly_charges ?? 'Hourly charges',
-    reportedYes: 4925,
-    reportedNo: 12093,
-    notFiledByFormType: 6604,
-    eligibleDenominator: 17018,
-  },
-  {
-    field: '5E(3)',
-    key: 'subscription_fees',
-    officialLabel: COMPENSATION_METHOD_LABELS.subscription_fees ?? 'Subscription fees',
-    reportedYes: 181,
-    reportedNo: 16837,
-    notFiledByFormType: 6604,
-    eligibleDenominator: 17018,
-  },
-  {
-    field: '5E(4)',
-    key: 'fixed_fees',
-    officialLabel: COMPENSATION_METHOD_LABELS.fixed_fees ?? 'Fixed fees',
-    reportedYes: 7707,
-    reportedNo: 9311,
-    notFiledByFormType: 6604,
-    eligibleDenominator: 17018,
-  },
-  {
-    field: '5E(5)',
-    key: 'commissions',
-    officialLabel: COMPENSATION_METHOD_LABELS.commissions ?? 'Commissions',
-    reportedYes: 324,
-    reportedNo: 16694,
-    notFiledByFormType: 6604,
-    eligibleDenominator: 17018,
-  },
-  {
-    field: '5E(6)',
-    key: 'performance_based_fees',
-    officialLabel: COMPENSATION_METHOD_LABELS.performance_based_fees ?? 'Performance-based fees',
-    reportedYes: 6078,
-    reportedNo: 10940,
-    notFiledByFormType: 6604,
-    eligibleDenominator: 17018,
-  },
-  {
-    field: '5E(7)',
-    key: 'other_compensation',
-    officialLabel: COMPENSATION_METHOD_LABELS.other_compensation ?? 'Other',
-    reportedYes: 2380,
-    reportedNo: 14638,
-    notFiledByFormType: 6604,
-    eligibleDenominator: 17018,
-  },
-];
+export const V1_RIA_COMPENSATION_METHODS = networkMetrics.homepageInputs.compensation as readonly CompensationMethodMetric[];
 
-/** Roster principal-office region counts. Extra 2,155 non-roster firms are all unresolved and excluded. */
-export const V1_ROSTER_PRINCIPAL_OFFICE_STATES: ReadonlyArray<{ region: string; count: number }> = [
-  { region: 'NY', count: 3152 },
-  { region: 'CA', count: 2699 },
-  { region: 'TX', count: 1302 },
-  { region: 'FL', count: 1284 },
-  { region: 'MA', count: 803 },
-  { region: 'IL', count: 793 },
-  { region: 'PA', count: 623 },
-  { region: 'CO', count: 589 },
-  { region: 'CT', count: 584 },
-  { region: 'NJ', count: 438 },
-  { region: 'OH', count: 426 },
-  { region: 'GA', count: 364 },
-  { region: 'VA', count: 339 },
-  { region: 'MI', count: 327 },
-  { region: 'NC', count: 325 },
-  { region: 'WA', count: 306 },
-  { region: 'MN', count: 293 },
-  { region: 'TN', count: 264 },
-  { region: 'MD', count: 263 },
-  { region: 'MO', count: 217 },
-  { region: 'AZ', count: 213 },
-  { region: 'WI', count: 211 },
-  { region: 'UT', count: 192 },
-  { region: 'OR', count: 167 },
-  { region: 'IN', count: 161 },
-  { region: 'KS', count: 139 },
-  { region: 'SC', count: 122 },
-  { region: 'NV', count: 99 },
-  { region: 'AL', count: 98 },
-  { region: 'IA', count: 95 },
-  { region: 'DC', count: 91 },
-  { region: 'OK', count: 91 },
-  { region: 'KY', count: 89 },
-  { region: 'NH', count: 86 },
-  { region: 'LA', count: 84 },
-  { region: 'PR', count: 83 },
-  { region: 'NE', count: 71 },
-  { region: 'DE', count: 70 },
-  { region: 'AR', count: 61 },
-  { region: 'ID', count: 56 },
-  { region: 'RI', count: 51 },
-  { region: 'WY', count: 45 },
-  { region: 'VT', count: 37 },
-  { region: 'MS', count: 35 },
-  { region: 'ME', count: 33 },
-  { region: 'MT', count: 27 },
-  { region: 'NM', count: 27 },
-  { region: 'HI', count: 22 },
-  { region: 'SD', count: 17 },
-  { region: 'WV', count: 12 },
-  { region: 'AK', count: 9 },
-  { region: 'ND', count: 9 },
-  { region: 'VI', count: 3 },
-];
+/** Roster principal-office region counts. Non-roster firms are excluded. */
+export const V1_ROSTER_PRINCIPAL_OFFICE_STATES = networkMetrics.homepageInputs.principalOfficeStates;
 
 export const REGION_NAMES: Record<string, string> = {
   AL: 'Alabama',
@@ -1143,7 +996,7 @@ export async function buildInvestorHomeIntelV1(
 
 export function compensationYesShare(field: CompensationMethodMetric['field']): number {
   const row = V1_RIA_COMPENSATION_METHODS.find((item) => item.field === field);
-  if (!row) return 0;
+  if (!row) throw new Error(`Unacquired compensation field: ${field}`);
   return row.reportedYes / row.eligibleDenominator;
 }
 

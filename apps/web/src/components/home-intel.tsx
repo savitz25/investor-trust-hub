@@ -35,7 +35,7 @@ function MeasureCard({
     measure.snapshotAsOf ??
     measure.generatedAt;
   return (
-    <article
+    <article data-metric-key={measure.key}
       className={`ith-inventory-card ith-inventory-card--${measure.valueState.toLowerCase()}`}
     >
       <div className="ith-inventory-card__top">

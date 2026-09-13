@@ -186,3 +186,15 @@ describe('INV-HOME-003 public evidence inventory', () => {
     expect(stateMeasures.some((item) => item.snapshotAsOf !== null)).toBe(true);
   });
 });
+
+import network from '../../../data/home/investor-network-metrics-v1.json';
+it('R2-04 changing state measures project from the generated specialist contract', () => {
+  for (const m of network.reconciliation.measures) {
+    if (['stateRia.approvedDistinctCrd', 'federalNotice.noticeFiledDistinctCrd'].includes(m.sourceField) || m.sourceField.startsWith('nationalOverlay.')) continue;
+    const row = get(m.key);
+    expect(row.value).toBe(m.value);
+    expect(row.grain).toBe(m.grain);
+    expect(row.retrievedAt).toBe(m.retrievedAt);
+    if (m.value === null) expect(row.display).not.toBe('0');
+  }
+});
