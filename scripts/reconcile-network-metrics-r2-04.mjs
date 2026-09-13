@@ -71,6 +71,27 @@ export function reconcile(manifest,root,census) {
   state.statusPartition={sourceRows:s.stateRia.registrationRows,distinctCrds:s.stateRia.distinctFirmCrd,approved:s.stateRia.approvedDistinctCrd,termrequest:s.stateRia.termrequestDistinctCrd,unexplainedDelta:0};
   state.exactAdverseProfileAttachments=s.enforcement.profileAttachments.length;
  }
+ const officialClocks=[home.source.publishedAt];
+ const collect=value=>{
+  if(!value || typeof value!=="object") return;
+  for(const [key,child] of Object.entries(value)) {
+   if((key==="sourceAsOf" || key==="sourceDate") && typeof child==="string" && /^\d{4}-\d{2}-\d{2}/.test(child)) officialClocks.push(child.slice(0,10));
+   else if(child && typeof child==="object") collect(child);
+  }
+ };
+ collect(all);
+ manifest.newestDocumentedSourceAsOf=officialClocks.sort().at(-1);
+ manifest.newestDocumentedSourceAsOfNote="Newest explicitly named sourceAsOf/sourceDate in accepted inputs; snapshot, retrieval and build dates excluded. Not a network-wide freshness guarantee.";
+ for(const metric of manifest.metrics) {
+  const code=metric.key.slice(0,2).toUpperCase();
+  if(all[code] && metric.key.endsWith("_state_ria_roster")) {
+   const layer=all[code].stateRia;
+   metric.sourceAsOf=layer?.sourceAsOf ?? null;
+   metric.snapshotAsOf=layer?.snapshotAsOf ?? all[code].asOf ?? null;
+   metric.retrievedAt=layer?.retrievedAt ?? null;
+  }
+  if(metric.key==="published_state_intelligence_pages") {metric.sourceAsOf=null;metric.snapshotAsOf=manifest.generatedAt;}
+ }
  manifest.contractRevision="ATH-METRICS-R2-04";
  manifest.homepageInputs=home;
  manifest.acceptedStateSnapshots=all;

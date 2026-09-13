@@ -39,3 +39,8 @@ test('source clocks are independent of generation and every exported number trac
  for(const r of m.reconciliation.measures){const s=sources[r.key.slice(0,2).toUpperCase()];assert.equal(r.value,count(s,r.sourceField));assert.notEqual(r.sourceAsOf,m.generatedAt);}
  assert.equal(sources.IL.stateRia.sourceAsOf,'2026-08-27');assert.equal(sources.IL.enforcement.sourceAsOf,null);
 });
+
+test('snapshot dates cannot masquerade as official source freshness',()=>{
+ assert.equal(m.newestDocumentedSourceAsOf,'2026-08-27');
+ for(const key of ['nj_state_ria_roster','ca_state_ria_roster','published_state_intelligence_pages']) assert.equal(m.metrics.find(r=>r.key===key).sourceAsOf,null);
+});
