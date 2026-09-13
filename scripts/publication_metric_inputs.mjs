@@ -12,52 +12,16 @@ const read = (rel) => readFileSync(join(root, rel), "utf8");
 
 export function publicationMetricInputs() {
   const routes = read("packages/config/src/routes.ts");
-  const home = read("packages/domain/src/investor-home-intel.ts");
-  const nj = JSON.parse(
-    read("packages/domain/src/nj-public-snapshot.ts")
-      .replace(/^[\s\S]*export const NJ_PUBLIC_SNAPSHOT = /, "")
-      .replace(/\s+as const;[\s\S]*$/, ""),
-  );
-  const ca = JSON.parse(
-    read("packages/domain/src/ca-public-snapshot.ts")
-      .replace(/^[\s\S]*export const CA_PUBLIC_SNAPSHOT = /, "")
-      .replace(/\s+as const;[\s\S]*$/, ""),
-  );
-  const tx = JSON.parse(
-    read("packages/domain/src/tx-public-snapshot.ts")
-      .replace(/^[\s\S]*export const TX_PUBLIC_SNAPSHOT = /, "")
-      .replace(/\s+as const;[\s\S]*$/, ""),
-  );
-  const wa = JSON.parse(
-    read("packages/domain/src/wa-public-snapshot.ts")
-      .replace(/^[\s\S]*export const WA_PUBLIC_SNAPSHOT = /, "")
-      .replace(/\s+as const;[\s\S]*$/, ""),
-  );
-  const az = JSON.parse(
-    read("packages/domain/src/az-public-snapshot.ts")
-      .replace(/^[\s\S]*export const AZ_PUBLIC_SNAPSHOT = /, "")
-      .replace(/\s+as const;[\s\S]*$/, ""),
-  );
-  const co = JSON.parse(
-    read("packages/domain/src/co-public-snapshot.ts")
-      .replace(/^[\s\S]*export const CO_PUBLIC_SNAPSHOT = /, "")
-      .replace(/\s+as const;[\s\S]*$/, ""),
-  );
-  const va = JSON.parse(
-    read("packages/domain/src/va-public-snapshot.ts")
-      .replace(/^[\s\S]*export const VA_PUBLIC_SNAPSHOT = /, "")
-      .replace(/\s+as const;[\s\S]*$/, ""),
-  );
-  const ny = JSON.parse(
-    read("packages/domain/src/ny-public-snapshot.ts")
-      .replace(/^[\s\S]*export const NY_PUBLIC_SNAPSHOT = /, "")
-      .replace(/\s+as const;[\s\S]*$/, ""),
-  );
-  const il = JSON.parse(
-    read("packages/domain/src/il-public-snapshot.ts")
-      .replace(/^[\s\S]*export const IL_PUBLIC_SNAPSHOT = /, "")
-      .replace(/\s+as const;[\s\S]*$/, ""),
-  );
+  const home = JSON.parse(read("data/home/investor-home-census-r2-04.json"));
+  const nj = JSON.parse(read("artifacts/nj-inv-003-public-snapshot.json"));
+  const ca = JSON.parse(read("artifacts/ca-inv-001-public-snapshot.json"));
+  const tx = JSON.parse(read("artifacts/tx-inv-001-public-snapshot.json"));
+  const wa = JSON.parse(read("artifacts/wa-inv-001-public-snapshot.json"));
+  const az = JSON.parse(read("artifacts/az-inv-001-public-snapshot.json"));
+  const co = JSON.parse(read("artifacts/co-inv-001-public-snapshot.json"));
+  const va = JSON.parse(read("artifacts/va-inv-001-public-snapshot.json"));
+  const ny = JSON.parse(read("artifacts/ny-inv-001-public-snapshot.json"));
+  const il = JSON.parse(read("artifacts/il-inv-001-public-snapshot.json"));
 
   const stateBlock = routes.match(/export const STATE_DISCOVERY_ROUTES = \[([\s\S]*?)\] as const/)[1];
   const publishedStateIntelligencePaths = [...stateBlock.matchAll(/href: '(\/[^']+)'/g)].map((m) => m[1]);
@@ -66,13 +30,13 @@ export function publicationMetricInputs() {
     ...routes.match(/export const INDEXABLE_PATHS = \[([\s\S]*?)\] as const/)[1].matchAll(/'([^']+)'/g),
   ].map((m) => m[1]);
 
-  const ria = Number(home.match(/riaFacts: (\d+)/)[1]);
-  const era = Number(home.match(/eraFacts: (\d+)/)[1]);
-  const total = Number(home.match(/totalFacts: (\d+)/)[1]);
-  const indexableTrustReports = Number(home.match(/indexableTrustReports: (\d+)/)[1]);
-  const attributes = Number(home.match(/advReportedAttributes: (\d+)/)[1]);
-  const publishedAt = home.match(/publishedAt: '([^']+)'/)[1];
-  const releaseLabel = home.match(/releaseLabel: '([^']+)'/)[1];
+  const ria = home.roster.riaFacts;
+  const era = home.roster.eraFacts;
+  const total = home.roster.totalFacts;
+  const indexableTrustReports = home.roster.indexableTrustReports;
+  const attributes = home.roster.advReportedAttributes;
+  const publishedAt = home.source.publishedAt;
+  const releaseLabel = home.source.releaseLabel;
 
   return {
     publishedStateIntelligencePaths,

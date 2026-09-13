@@ -9,5 +9,6 @@ export function loadInvestorNetworkMetrics(): InvestorNetworkMetricsV1 {
   if (snap.schemaVersion !== INVESTOR_NETWORK_METRICS_VERSION) {
     throw new Error(`Unexpected network metrics version: ${snap.schemaVersion}`);
   }
+  if (snap.contractRevision !== "ATH-METRICS-R2-04" || !snap.reconciliation) throw new Error("Missing accepted R2 metric reconciliation");
   return snap;
 }

@@ -1,0 +1,38 @@
+{
+  "provenance": {
+    "acceptedRelease": "INV-HOME-001 / INV-HOME-002",
+    "source": "packages/domain/src/investor-home-intel.ts at 08db4a98c11ea364e39be9397936cddef2135fb6",
+    "note": "Preserved accepted census; not a new acquisition or fresh database recount."
+  },
+  "counts": {
+    "rosterFirms": 23622,
+    "riaFacts": 17018,
+    "eraFacts": 6604,
+    "riaRegistered": 16783,
+    "riaPending": 235,
+    "eraReporting": 6604,
+    "canonicalFirms": 25777,
+    "crdIdentifiers": 25777,
+    "crdDistinctFirms": 25777,
+    "secFileIdentifiers": 23621,
+    "secFileDistinctFirms": 23621,
+    "formAdvFilings": 635269,
+    "formAdvAttributes": 5149596,
+    "formAdvWithdrawals": 22592,
+    "formAdvSuccessorLinks": 16,
+    "riaRaumNonNull": 17018,
+    "riaRaumZero": 613,
+    "riaRaumPositive": 16405,
+    "riaRaumNull": 0,
+    "disclosureEvents": 0,
+    "item11YesRia": 876,
+    "item11YesEra": 80,
+    "ownerEntities": 158560,
+    "evidenceRecords": 165354,
+    "searchableRosterFirms": 23622,
+    "publishedAt": "2026-08-27",
+    "retrievedAt": "2026-08-28",
+    "releaseLabel": "IA_FIRM_SEC_Feed_08_27_2026",
+    "dataset": "iapd_sec_compilation"
+  }
+}
