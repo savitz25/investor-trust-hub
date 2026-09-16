@@ -758,7 +758,14 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
 
   const nameQuoted = q.match(/[“"]([^”"]{2,80})[”"]/);
   const named = q.match(/\b(?:named|called|firm name)\s+([A-Za-z0-9&.,' -]{2,80})/i);
-  const simpleFirmName = !firmType && !states.length && !raum && !compensation.length && !affiliation && /^[A-Za-z][A-Za-z0-9&.,' -]{1,79}$/.test(q) && !/\b(what|how|who|does|is|show|find|adviser|firm|fees?|ownership|disclosure)\b/i.test(q) ? q : undefined;
+  // TH-DISCOVERY-RESET-001 (production certification fix): the exclusion list below only matched
+  // singular "adviser," not "advisers"/"advisor"/"advisors" -- \badviser\b never matches inside
+  // "advisers" (no word boundary right after "adviser"). "financial advisers in Miami" therefore
+  // matched none of these exclusion words and the entire descriptive query became a literal
+  // simpleFirmName search, which combined with investor-research-plan.ts's own bare-city geography
+  // fix (Miami -> FL) to silently AND a real geography filter with a nonexistent literal firm
+  // name, always returning zero rows even after that geography fix correctly applied.
+  const simpleFirmName = !firmType && !states.length && !raum && !compensation.length && !affiliation && /^[A-Za-z][A-Za-z0-9&.,' -]{1,79}$/.test(q) && !/\b(what|how|who|does|is|show|find|advis(?:er|or)s?|firm|fees?|ownership|disclosure)\b/i.test(q) ? q : undefined;
   const nameQuery = nameQuoted?.[1]?.trim() || named?.[1]?.trim() || simpleFirmName;
 
   const effectiveType: InvestorFirmType | undefined =
