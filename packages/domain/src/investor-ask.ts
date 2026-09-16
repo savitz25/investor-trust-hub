@@ -210,7 +210,12 @@ function detectFirmType(q: string): InvestorFirmType | undefined {
   if (ria && era) return 'all';
   if (ria) return 'ria';
   if (era) return 'era';
-  if (/\binvestment advisers?\b|\badviser firms?\b|\badvisory firms?\b/i.test(q)) return 'all';
+  // TH-DISCOVERY-GEN-001: "financial adviser" is an ordinary consumer provider-category phrase
+  // (ticket Section 2) exactly like "investment adviser" -- it was missing from this list, so a
+  // bare "financial adviser" (no geography, no RIA/ERA keyword) fell through with no firm type and
+  // no geography, which planInvestorResearch's catch-all reads as "no signal at all" and asks
+  // "What would you like to research?" instead of defaulting to discovery.
+  if (/\b(?:investment|financial) advis(?:er|or)s?\b|\badvis(?:er|or) firms?\b|\badvisory firms?\b/i.test(q)) return 'all';
   return undefined;
 }
 

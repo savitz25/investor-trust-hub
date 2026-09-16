@@ -202,4 +202,27 @@ describe('investor-ask-v1 interpreter', () => {
     // literal firm name ("financial advisers in Miami"), always returning zero rows.
     expect(parsed.query.nameQuery).toBeUndefined();
   });
+
+  // TH-DISCOVERY-GEN-001: "financial adviser" is an ordinary consumer provider-category phrase,
+  // not a company name and not a request needing clarification. detectFirmType() only recognized
+  // "investment adviser(s)"/"adviser firm(s)"/"advisory firm(s)" and RIA/ERA keywords, so a bare
+  // "financial adviser" (no geography) fell through with no firm type and no geography --
+  // planInvestorResearch's catch-all reads that combination as "no signal at all" and asked
+  // "What would you like to research?" instead of defaulting to discovery.
+  it('a bare "financial adviser" category phrase defaults to discovery, not a clarification dead end', () => {
+    const parsed = interpretInvestorAskQuery('financial adviser');
+    expect(parsed.query.mode).toBe('entity');
+    expect(parsed.query.firmType).toBe('all');
+    expect(parsed.query.nameQuery).toBeUndefined();
+  });
+
+  it('"financial adviser in Dallas Texas" is DISCOVERY with firm type and geography, not a literal name', () => {
+    const parsed = interpretInvestorAskQuery('financial adviser in Dallas Texas');
+    expect(parsed.query.mode).toBe('entity');
+    expect(parsed.query.firmType).toBe('all');
+    expect(parsed.query.geography?.type).toBe('principal_office_city');
+    expect(parsed.query.geography?.value).toBe('Dallas');
+    expect(parsed.query.geography?.state).toBe('TX');
+    expect(parsed.query.nameQuery).toBeUndefined();
+  });
 });
