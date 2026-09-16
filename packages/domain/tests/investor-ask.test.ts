@@ -203,6 +203,17 @@ describe('investor-ask-v1 interpreter', () => {
     expect(parsed.query.nameQuery).toBeUndefined();
   });
 
+  it('Oregon complaint and enforcement questions fail closed without inventing zero', () => {
+    const complaints = interpretInvestorAskQuery('complaints against a firm in Oregon');
+    expect(complaints.query.mode).toBe('fail_closed');
+    expect(complaints.query.failReason).toMatch(/not a firm-specific complaint/i);
+    expect(complaints.query.failReason).toMatch(/missing is not zero/i);
+    const crd = interpretInvestorAskQuery('CRD 105958 Oregon');
+    expect(crd.query.mode).toBe('identifier');
+    const hq = interpretInvestorAskQuery('SEC adviser headquartered in Oregon');
+    expect(hq.query.mode).toBe('entity');
+  });
+
   // TH-DISCOVERY-GEN-001: "financial adviser" is an ordinary consumer provider-category phrase,
   // not a company name and not a request needing clarification. detectFirmType() only recognized
   // "investment adviser(s)"/"adviser firm(s)"/"advisory firm(s)" and RIA/ERA keywords, so a bare
