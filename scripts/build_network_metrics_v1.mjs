@@ -48,6 +48,9 @@ async function main() {
     ilPrincipalOfficeFirms: pub.ilPrincipalOfficeFirms,
     ilStateRiaApproved: pub.ilStateRiaApproved,
     ilNoticeFiled: pub.ilNoticeFiled,
+    orPrincipalOfficeFirms: pub.orPrincipalOfficeFirms,
+    orStateRiaApproved: pub.orStateRiaApproved,
+    orNoticeFiled: pub.orNoticeFiled,
   };
 
   if (input.riaFacts !== pub.riaFacts || input.eraFacts !== pub.eraFacts || input.rosterFirms !== pub.rosterFirms) {

@@ -35,10 +35,10 @@ export function validateInvestor(sources,census,home) {
  }
 }
 export function reconcile(manifest,root,census) {
- const codes=["NJ","CA","TX","WA","AZ","CO","VA","NY","IL"];
+ const codes=["NJ","CA","TX","WA","AZ","CO","VA","NY","IL","OR"];
  const paths=Object.fromEntries(codes.map(c=>[c,`artifacts/${c.toLowerCase()}-inv-${c==="NJ"?"003":"001"}-public-snapshot.json`]));
  const all=Object.fromEntries(codes.map(c=>[c,read(root,paths[c])]));
- const sources=Object.fromEntries(["CO","VA","NY","IL"].map(c=>[c,all[c]]));
+ const sources=Object.fromEntries(["CO","VA","NY","IL","OR"].map(c=>[c,all[c]]));
  const home=read(root,"data/home/investor-home-census-r2-04.json");
  validateInvestor(sources,census,home);
  const states={}, measures=[];

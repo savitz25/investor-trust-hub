@@ -95,7 +95,15 @@ assert(byKey.il_state_ria_roster.grain === "il_state_ria_roster", "IL state RIA 
 assert(v1.illinois.stateRiaRosterCoverage === "ACQUIRED_IAPD_STATE_COMPILATION", "IL coverage remains acquired");
 assert(byKey.il_state_ria_roster.value === 855, "IL state RIA metric");
 assert(byKey.il_state_ria_roster.valueState === "KNOWN", "IL state RIA known");
-assert(byKey.published_state_intelligence_pages.value === 9, "state pages 9");
+assert(v1.oregon.principalOfficeRosterFirms === pub.orPrincipalOfficeFirms, "OR principal-office overlay");
+assert(v1.oregon.stateRiaRosterCoverage === pub.orStateRiaRoster, "OR catalog coverage");
+assert(v1.oregon.statewideStateRiaUniverse === pub.orStateRiaApproved, "OR state-RIA approved");
+assert(v1.oregon.noticeFiledFirms === pub.orNoticeFiled, "OR notice filed");
+assert(byKey.or_state_ria_roster.grain === "or_state_ria_roster", "OR state RIA grain key");
+assert(v1.oregon.stateRiaRosterCoverage === "ACQUIRED_IAPD_STATE_COMPILATION", "OR coverage remains acquired");
+assert(byKey.or_state_ria_roster.value === 335, "OR state RIA metric");
+assert(byKey.or_state_ria_roster.valueState === "KNOWN", "OR state RIA known");
+assert(byKey.published_state_intelligence_pages.value === 10, "state pages 10");
 assert(v1.florida.stateIntelligencePage === false, "no invented Florida page");
 assert(!pub.publishedStateIntelligencePaths.includes("/florida"), "no Florida route");
 assert(byKey.investment_advisory_firms.label === "Investment advisory firms", "consumer firm label");

@@ -1,0 +1,3938 @@
+{
+  "filter": "FSObjType=0 and DFRCaseNumber startswith S- (Oregon DFR securities case prefix)",
+  "documentRows": 431,
+  "distinctCaseNumbers": 394,
+  "actions": [
+    [
+      "(blank)",
+      311
+    ],
+    [
+      "Enforcement",
+      112
+    ],
+    [
+      "Securities sales",
+      7
+    ],
+    [
+      "Producer",
+      1
+    ]
+  ],
+  "types": [
+    [
+      "(blank)",
+      355
+    ],
+    [
+      "Consent Order",
+      42
+    ],
+    [
+      "Default Order",
+      21
+    ],
+    [
+      "Final Order",
+      5
+    ],
+    [
+      "Final",
+      4
+    ],
+    [
+      "Cease & Desist",
+      3
+    ],
+    [
+      "Amended",
+      1
+    ]
+  ],
+  "dateMin": "1988-03-22T08:00:00Z",
+  "dateMax": "2026-06-02T07:00:00Z",
+  "sourceModifiedAt": "2026-09-15T21:18:58Z",
+  "retrievedAt": "2026-09-16T18:45:00Z",
+  "rows": [
+    {
+      "id": 6810,
+      "caseNumber": "S-87-0042",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "1988-03-22T08:00:00Z",
+      "name": "ATLANTA-ONE, INC.",
+      "fileRef": "/AdminOrders/enf-orders1999older/Atlanta-One Consent Order.pdf"
+    },
+    {
+      "id": 6924,
+      "caseNumber": "S-93-0014",
+      "action": null,
+      "type": null,
+      "orderDate": "1995-04-07T07:00:00Z",
+      "name": "Les Kruse, an individual, James B. Gilmore, an individual, Gerrick Rod Powell, an individual and Morgan Investment Pool, Inc., a Nevada corporation",
+      "fileRef": "/AdminOrders/enf-orders1999older/S-93-0014.pdf"
+    },
+    {
+      "id": 6926,
+      "caseNumber": "S-96-0018",
+      "action": null,
+      "type": null,
+      "orderDate": "1999-09-23T07:00:00Z",
+      "name": "Creative Pet Products, Inc., Phillip A. Berlin, and Frederick M. Bloom",
+      "fileRef": "/AdminOrders/enf-orders1999older/s-96-0018acknowledge.pdf"
+    },
+    {
+      "id": 6927,
+      "caseNumber": "S-96-0018",
+      "action": null,
+      "type": null,
+      "orderDate": "1995-07-09T07:00:00Z",
+      "name": "Creative Pet Products, Inc., Phillip A. Berlin, and Frederick M. Bloom",
+      "fileRef": "/AdminOrders/enf-orders1999older/s-96-0018cd.pdf"
+    },
+    {
+      "id": 7107,
+      "caseNumber": "S-03-0033",
+      "action": null,
+      "type": null,
+      "orderDate": "2003-09-29T07:00:00Z",
+      "name": "U.S. Bancorp Piper Jaffray Inc.",
+      "fileRef": "/AdminOrders/enf-orders2003/S-03-0033.pdf"
+    },
+    {
+      "id": 7108,
+      "caseNumber": "S-03-0035",
+      "action": null,
+      "type": null,
+      "orderDate": "2003-09-30T07:00:00Z",
+      "name": "Citigroup Global Markets Inc. (formerly known as Salomon Smith Barney Inc.) 388 Greenwich Street, New York, New York 10013",
+      "fileRef": "/AdminOrders/enf-orders2003/S-03-0035.pdf"
+    },
+    {
+      "id": 7109,
+      "caseNumber": "S-03-0044",
+      "action": null,
+      "type": null,
+      "orderDate": "2003-12-18T08:00:00Z",
+      "name": "Jim Georgen",
+      "fileRef": "/AdminOrders/enf-orders2003/S-03-0044.pdf"
+    },
+    {
+      "id": 7110,
+      "caseNumber": "S-03-0047a",
+      "action": null,
+      "type": null,
+      "orderDate": "2003-12-15T08:00:00Z",
+      "name": "National Equipment Providers, LLD; Spa Marketing, LLC: Walter Theis; Ross Rambach; Mark Kennison, and Harry Proudfoot III",
+      "fileRef": "/AdminOrders/enf-orders2003/S-03-0047a.pdf"
+    },
+    {
+      "id": 7136,
+      "caseNumber": "S-03-0039",
+      "action": null,
+      "type": null,
+      "orderDate": "2004-02-24T08:00:00Z",
+      "name": "Omni Advisor Group, Inc., Brian P. McGuane, Kevin E. Sullivan, Brent Burke, Chris Duda, Nora Fileccia, Bernie Lemke, and Gus Thomas",
+      "fileRef": "/AdminOrders/enf-orders2004/S-03-0039.pdf"
+    },
+    {
+      "id": 7137,
+      "caseNumber": "S-03-0040",
+      "action": null,
+      "type": null,
+      "orderDate": "2004-07-20T07:00:00Z",
+      "name": "Accelerated Benefits Corporation, C. Keith Lamonda and Jess Lamonda",
+      "fileRef": "/AdminOrders/enf-orders2004/S-03-0040.pdf"
+    },
+    {
+      "id": 7138,
+      "caseNumber": "S-03-0046",
+      "action": null,
+      "type": null,
+      "orderDate": "2004-08-16T07:00:00Z",
+      "name": "Michael D. Mansfield, Mansfield Trust, Mansfield Corporation, and Mansfield Viatical Management",
+      "fileRef": "/AdminOrders/enf-orders2004/S-03-0046.pdf"
+    },
+    {
+      "id": 7139,
+      "caseNumber": "S-03-0047-b",
+      "action": null,
+      "type": null,
+      "orderDate": "2004-07-29T07:00:00Z",
+      "name": "National Equipment Providers, LLC; Spa Marketing, LLC; Walter Theis; Ross Rambach; Mark Kennison, and Harry Proudfoot III",
+      "fileRef": "/AdminOrders/enf-orders2004/S-03-0047b.pdf"
+    },
+    {
+      "id": 7140,
+      "caseNumber": "S-03-0051",
+      "action": null,
+      "type": null,
+      "orderDate": "2004-04-19T07:00:00Z",
+      "name": "Michael Francis Dobbs and GIT Securities Corporation",
+      "fileRef": "/AdminOrders/enf-orders2004/S-03-0051.pdf"
+    },
+    {
+      "id": 7141,
+      "caseNumber": "S-03-0056",
+      "action": null,
+      "type": null,
+      "orderDate": "2004-08-09T07:00:00Z",
+      "name": "David Arnold Miller dba Western Internet Services Corp., aka Wincorp",
+      "fileRef": "/AdminOrders/enf-orders2004/S-03-0056.pdf"
+    },
+    {
+      "id": 7142,
+      "caseNumber": "S-03-0057",
+      "action": null,
+      "type": null,
+      "orderDate": "2004-05-20T07:00:00Z",
+      "name": "Ragen Mackenzie Investment Services LLC and Peter E. Nipoti",
+      "fileRef": "/AdminOrders/enf-orders2004/S-03-0057.pdf"
+    },
+    {
+      "id": 7143,
+      "caseNumber": "S-04-0005",
+      "action": null,
+      "type": null,
+      "orderDate": "2004-06-01T07:00:00Z",
+      "name": "Presidents Trust Company, LLC, Jon Patrick Pierce, David D. Klasna and Herbert L. Perilloux",
+      "fileRef": "/AdminOrders/enf-orders2004/S-04-0005.pdf"
+    },
+    {
+      "id": 7144,
+      "caseNumber": "S-05-0064-3",
+      "action": null,
+      "type": null,
+      "orderDate": "2004-09-02T07:00:00Z",
+      "name": "Orion International, Inc., Russell B. Cline, April Duffy, Bangone Vorachith, and Nancy Hoyt",
+      "fileRef": "/AdminOrders/enf-orders2004/s-05-0064-3.pdf"
+    },
+    {
+      "id": 7145,
+      "caseNumber": "S-05-0064-8",
+      "action": null,
+      "type": null,
+      "orderDate": "2004-09-02T07:00:00Z",
+      "name": "Orion International, Inc., Russell B. Cline, April Duffy, Bangone Vorachith, and Nancy Hoyt",
+      "fileRef": "/AdminOrders/enf-orders2004/s-05-0064-8.pdf"
+    },
+    {
+      "id": 7146,
+      "caseNumber": "S-05-0064-9",
+      "action": null,
+      "type": null,
+      "orderDate": "2004-09-02T07:00:00Z",
+      "name": "Orion International, Inc., Russell B., Cline, April Duffy, Bangone Vorachith, and Nancy Hoyt",
+      "fileRef": "/AdminOrders/enf-orders2004/s-05-0064-9.pdf"
+    },
+    {
+      "id": 7207,
+      "caseNumber": "S-04-0011",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-06-13T07:00:00Z",
+      "name": "Henry Paul Regan, Jr.",
+      "fileRef": "/AdminOrders/enf-orders2005/S-04-0011.pdf"
+    },
+    {
+      "id": 7208,
+      "caseNumber": "S-04-0012",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-06-03T07:00:00Z",
+      "name": "Northwest Paytele Communications, Inc., and Steven Cooper",
+      "fileRef": "/AdminOrders/enf-orders2005/S-04-0012-1.pdf"
+    },
+    {
+      "id": 7209,
+      "caseNumber": "S-04-0012",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-06-03T07:00:00Z",
+      "name": "Northwest Paytele Communications, Inc., and Steven Cooper",
+      "fileRef": "/AdminOrders/enf-orders2005/S-04-0012-2.pdf"
+    },
+    {
+      "id": 7210,
+      "caseNumber": "S-04-0014",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-02-10T08:00:00Z",
+      "name": "First Liberty Financial, Kerry Dalbert, Stephen M. Parrino, Danny M. Rayburn, Michael Donaldson, Joshua Craig",
+      "fileRef": "/AdminOrders/enf-orders2005/S-04-0014.pdf"
+    },
+    {
+      "id": 7211,
+      "caseNumber": "S-05-00004",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-03-17T08:00:00Z",
+      "name": "Thomas Weisel Partners, LLC",
+      "fileRef": "/AdminOrders/enf-orders2005/S-05-00004.pdf"
+    },
+    {
+      "id": 7212,
+      "caseNumber": "S-05-0001",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-11-29T08:00:00Z",
+      "name": "Joseph M. Blackwell and Blackwell Donaldson & Company",
+      "fileRef": "/AdminOrders/enf-orders2005/S-05-0001.pdf"
+    },
+    {
+      "id": 7213,
+      "caseNumber": "S-05-0003",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-03-17T08:00:00Z",
+      "name": "Deutsche Bank Securities, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2005/S-05-0003.pdf"
+    },
+    {
+      "id": 7214,
+      "caseNumber": "S-05-0005",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-04-06T07:00:00Z",
+      "name": "Mary Manin Morrissey, and individual; Edward P. Morrissey, and individual; The Living Enrichment Center, a non-profit religious organization, Living Enrichment Ministries, a non-profit religious corporation; New Thought Broadcasting, Inc.; and New Thought Broadcasting Foundation, a dissolved Oregon corporation",
+      "fileRef": "/AdminOrders/enf-orders2005/S-05-0005.pdf"
+    },
+    {
+      "id": 7215,
+      "caseNumber": "S-05-0006",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-09-06T07:00:00Z",
+      "name": "Metlife Securities, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2005/S-05-0006.pdf"
+    },
+    {
+      "id": 7216,
+      "caseNumber": "S-05-00",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-07-14T07:00:00Z",
+      "name": "Ronald L. McLain, Constance McLain and IQ Travel & Entertainment, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2005/S-05-0011.pdf"
+    },
+    {
+      "id": 7217,
+      "caseNumber": "S-05-0016",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-09-15T07:00:00Z",
+      "name": "Kevin Reber, an individual, dba A1 Buyers",
+      "fileRef": "/AdminOrders/enf-orders2005/S-05-0016.pdf"
+    },
+    {
+      "id": 7218,
+      "caseNumber": "S-05-0017 (a)",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-11-02T08:00:00Z",
+      "name": "Brookstreet Securities Corporation, Inc., and Ricardo Cabezas",
+      "fileRef": "/AdminOrders/enf-orders2005/S-05-0017a.pdf"
+    },
+    {
+      "id": 7219,
+      "caseNumber": "S-05-0017b",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-11-02T08:00:00Z",
+      "name": "Brookstreet Securities Corporation, Inc., and Ricardo Cabezas",
+      "fileRef": "/AdminOrders/enf-orders2005/S-05-0017b.pdf"
+    },
+    {
+      "id": 7220,
+      "caseNumber": "S-05-0023",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-06-16T07:00:00Z",
+      "name": "James Dombrowski aka James dba Entrepenuer Exports Corp.",
+      "fileRef": "/AdminOrders/enf-orders2005/S-05-0023.pdf"
+    },
+    {
+      "id": 7221,
+      "caseNumber": "S-05-0028",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-06-02T07:00:00Z",
+      "name": "Gordon Rodney Baze, Jr., aka Gordy Baze",
+      "fileRef": "/AdminOrders/enf-orders2005/S-05-0028.pdf"
+    },
+    {
+      "id": 7222,
+      "caseNumber": "S-05-0029-18",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-08-18T07:00:00Z",
+      "name": "Redwood Trust, Aaron Bolleddula, et al",
+      "fileRef": "/AdminOrders/enf-orders2005/S-05-0029-18.pdf"
+    },
+    {
+      "id": 7223,
+      "caseNumber": "S-05-0029-3",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-08-11T07:00:00Z",
+      "name": "Redwood Trust, Greg Diamond, et al",
+      "fileRef": "/AdminOrders/enf-orders2005/S-05-0029-3.pdf"
+    },
+    {
+      "id": 7224,
+      "caseNumber": "S-05-0029-4",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-08-11T07:00:00Z",
+      "name": "Redwood Trust, Lisa Diamond, et al",
+      "fileRef": "/AdminOrders/enf-orders2005/S-05-0029-4.pdf"
+    },
+    {
+      "id": 7225,
+      "caseNumber": "S-05-0031",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-06-20T07:00:00Z",
+      "name": "Carla Key CRD #1348780",
+      "fileRef": "/AdminOrders/enf-orders2005/S-05-0031.pdf"
+    },
+    {
+      "id": 7226,
+      "caseNumber": "S-05-0039",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-07-19T07:00:00Z",
+      "name": "L.H. Ross & Company, Inc., a New York corporation",
+      "fileRef": "/AdminOrders/enf-orders2005/S-05-0039.pdf"
+    },
+    {
+      "id": 7227,
+      "caseNumber": "S-05-0040",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-09-16T07:00:00Z",
+      "name": "Unlimited Cash, Inc., Wayne Flesher, Douglas Network Enterprises, Inc., Nancy Khalial, Ruttenberg and Associates MVP, Inc., Mark Ruttenberg, Kenneth Gebarowski, Randall Covelli, and Bill Boedeker",
+      "fileRef": "/AdminOrders/enf-orders2005/S-05-0040_2.pdf"
+    },
+    {
+      "id": 7228,
+      "caseNumber": "S-05-0054",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-09-22T07:00:00Z",
+      "name": "Christopher John Tento and James Joseph Honse",
+      "fileRef": "/AdminOrders/enf-orders2005/S-05-0054.pdf"
+    },
+    {
+      "id": 7229,
+      "caseNumber": "S-05-0054",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-08-15T07:00:00Z",
+      "name": "Christopher John Tento and James Joseph Honse",
+      "fileRef": "/AdminOrders/enf-orders2005/S-05-0054a.pdf"
+    },
+    {
+      "id": 7230,
+      "caseNumber": "S-05-0059",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-08-09T07:00:00Z",
+      "name": "Waddell & Reed, Inc., and W & R Insurance Agency, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2005/S-05-0059.pdf"
+    },
+    {
+      "id": 7231,
+      "caseNumber": "S-05-0087-2",
+      "action": null,
+      "type": null,
+      "orderDate": "2005-12-05T08:00:00Z",
+      "name": "Michelle Moses",
+      "fileRef": "/AdminOrders/enf-orders2005/S-05-0087-2.pdf"
+    },
+    {
+      "id": 7267,
+      "caseNumber": "S-03-0048",
+      "action": null,
+      "type": null,
+      "orderDate": "2006-05-01T07:00:00Z",
+      "name": "Ultimate Ventures, Inc., a Canadian corporation, Cameron Kuipers, an individual, Assurance Financial, Inc., an Idaho corporation, and K. Barth Williams, an individual",
+      "fileRef": "/AdminOrders/enf-orders2006/S-03-0048_bwilliams.pdf"
+    },
+    {
+      "id": 7268,
+      "caseNumber": "S-05-0029-15",
+      "action": null,
+      "type": null,
+      "orderDate": "2006-02-02T08:00:00Z",
+      "name": "Bountiful LLC, Redwood Trust, Jeff Preece, et al",
+      "fileRef": "/AdminOrders/enf-orders2006/S-05-0029-15.pdf"
+    },
+    {
+      "id": 7269,
+      "caseNumber": "S-05-0040",
+      "action": null,
+      "type": null,
+      "orderDate": "2006-07-27T07:00:00Z",
+      "name": "Unlimited Cash, Inc., Wayne Flesher, Douglas Network Enterprises, INc., Nancy Khalial, Ruttenberg and Associates MVP, Inc., Mark Ruttenberg, Kenneth Gebarowski, Randall Covelli, and Bill Boedeker",
+      "fileRef": "/AdminOrders/enf-orders2006/S-05-0040.pdf"
+    },
+    {
+      "id": 7270,
+      "caseNumber": "S-05-0040",
+      "action": null,
+      "type": null,
+      "orderDate": "2006-03-16T08:00:00Z",
+      "name": "Unlimited Cash, Inc., Wayne Flesher, Douglas Network Enterprises, Inc., Nancy Khalial, Ruttenberg and Associates MVP, Inc., Mark Ruttenberg, Kenneth Begarowski, Randall Covelli, and Bill Boedeker",
+      "fileRef": "/AdminOrders/enf-orders2006/S-05-0040_1.pdf"
+    },
+    {
+      "id": 7271,
+      "caseNumber": "S-05-0056",
+      "action": null,
+      "type": null,
+      "orderDate": "2006-11-01T08:00:00Z",
+      "name": "Hans Wayne Schnauber, an individual, Kathy Charlee, an individual, and Horace T. Johnson, an individual",
+      "fileRef": "/AdminOrders/enf-orders2006/s-05-0056charlee.pdf"
+    },
+    {
+      "id": 7272,
+      "caseNumber": "S-05-0056",
+      "action": null,
+      "type": null,
+      "orderDate": "2006-11-01T08:00:00Z",
+      "name": "Hans Wayne Schnauber, an individual, Kathy Charlee, an individual, and Horace T. Johnson, an individual",
+      "fileRef": "/AdminOrders/enf-orders2006/s-05-0056johnson.pdf"
+    },
+    {
+      "id": 7273,
+      "caseNumber": "S-05-0056",
+      "action": null,
+      "type": null,
+      "orderDate": "2006-11-01T08:00:00Z",
+      "name": "Hans Wayne Schnauber, an individual, Kathy Charlee, an individual, and Horace T. Johnson, an individual",
+      "fileRef": "/AdminOrders/enf-orders2006/s-05-0056schnauber.pdf"
+    },
+    {
+      "id": 7274,
+      "caseNumber": "S-05-0064-1",
+      "action": null,
+      "type": null,
+      "orderDate": "2006-06-16T07:00:00Z",
+      "name": "Orion International, Inc., Russell B. Cline, April Duffy, Bangone Vorachith, and Nancy Hoyt",
+      "fileRef": "/AdminOrders/enf-orders2006/s-05-0064-1.pdf"
+    },
+    {
+      "id": 7275,
+      "caseNumber": "S-05-0064-4",
+      "action": null,
+      "type": null,
+      "orderDate": "2006-12-19T08:00:00Z",
+      "name": "Orion International, Inc., Russell B. Cline, April Duffy, Bangone Vorachith, and Nancy Hoyt",
+      "fileRef": "/AdminOrders/enf-orders2006/s-05-0064-4.pdf"
+    },
+    {
+      "id": 7276,
+      "caseNumber": "S-05-0064-7",
+      "action": null,
+      "type": null,
+      "orderDate": "2006-05-12T07:00:00Z",
+      "name": "James John Rask",
+      "fileRef": "/AdminOrders/enf-orders2006/s-05-0064-7.pdf"
+    },
+    {
+      "id": 7277,
+      "caseNumber": "S-05-0087-4",
+      "action": null,
+      "type": null,
+      "orderDate": "2006-03-15T08:00:00Z",
+      "name": "Pathfinders Mortgage, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2006/S-05-0087-4.pdf"
+    },
+    {
+      "id": 7278,
+      "caseNumber": "S-05-0089",
+      "action": null,
+      "type": null,
+      "orderDate": "2006-10-12T07:00:00Z",
+      "name": "Charles V. Pownall, and Kovert Soft Technologies, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2006/S-05-0089.pdf"
+    },
+    {
+      "id": 7279,
+      "caseNumber": "S-06-0019",
+      "action": null,
+      "type": null,
+      "orderDate": "2006-09-30T07:00:00Z",
+      "name": "Childcare Seekers One Stop, Inc., and Christina Hart",
+      "fileRef": "/AdminOrders/enf-orders2006/S-06-0019.pdf"
+    },
+    {
+      "id": 7280,
+      "caseNumber": "S-06-0028-1",
+      "action": null,
+      "type": null,
+      "orderDate": "2006-07-27T07:00:00Z",
+      "name": "Billy Lynn Boedeker dba Lifeline Insurance Service",
+      "fileRef": "/AdminOrders/enf-orders2006/S-06-0028.pdf"
+    },
+    {
+      "id": 7281,
+      "caseNumber": "S-06-0036 (A)",
+      "action": null,
+      "type": null,
+      "orderDate": "2006-09-15T07:00:00Z",
+      "name": "Rhodes Econometrics, Inc., and Charles Wesley Rhodes, Jr., doing business individually and under the names \"The Rhodes Company,\" \"Professional Practice Planning Service,\" and \"PPPS,\"",
+      "fileRef": "/AdminOrders/enf-orders2006/S-06-0036_a.pdf"
+    },
+    {
+      "id": 7307,
+      "caseNumber": "S-03-0048",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-07-16T07:00:00Z",
+      "name": "Ultimate Ventures, Inc., Cameron Kuipers, Assurance Financial, Inc., and K. Barth Williams",
+      "fileRef": "/AdminOrders/enf-orders2007/S-03-0048.pdf"
+    },
+    {
+      "id": 7308,
+      "caseNumber": "S-05-0029",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-09-10T07:00:00Z",
+      "name": "Bountiful LLC, Redwood Trust, Nancy Alexander, et al",
+      "fileRef": "/AdminOrders/enf-orders2007/s-05-0029_alexander.pdf"
+    },
+    {
+      "id": 7309,
+      "caseNumber": "S-05-0029",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-09-10T07:00:00Z",
+      "name": "Bountiful LLC, Redwood Trust, Christa Kirby, et al",
+      "fileRef": "/AdminOrders/enf-orders2007/s-05-0029_kirby.pdf"
+    },
+    {
+      "id": 7310,
+      "caseNumber": "S-05-0029",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-09-10T07:00:00Z",
+      "name": "Bountiful LLC, Redwood Trust, Leta Mae Haragan, et al",
+      "fileRef": "/AdminOrders/enf-orders2007/s-05-0029_lm_haragan.pdf"
+    },
+    {
+      "id": 7311,
+      "caseNumber": "S-05-0029",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-09-10T07:00:00Z",
+      "name": "Bountiful LLC, Redwood Trust, Mary Ann Mathis, et al",
+      "fileRef": "/AdminOrders/enf-orders2007/s-05-0029_mathis.pdf"
+    },
+    {
+      "id": 7312,
+      "caseNumber": "S-05-0029",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-09-10T07:00:00Z",
+      "name": "Bountiful LLC, Redwood Trust, Shawn McCorkle, et al",
+      "fileRef": "/AdminOrders/enf-orders2007/s-05-0029_mccorkle.pdf"
+    },
+    {
+      "id": 7313,
+      "caseNumber": "S-05-0029",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-09-10T07:00:00Z",
+      "name": "Bountiful LLC,  Redwood Trust, Riley Haragan, et al",
+      "fileRef": "/AdminOrders/enf-orders2007/s-05-0029_r_haragan.pdf"
+    },
+    {
+      "id": 7314,
+      "caseNumber": "S-05-0029",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-09-10T07:00:00Z",
+      "name": "Bountiful LLC, Redwood Trust, Michael Whelan, et al",
+      "fileRef": "/AdminOrders/enf-orders2007/s-05-0029_whelan.pdf"
+    },
+    {
+      "id": 7315,
+      "caseNumber": "S-05-0029",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-06-15T07:00:00Z",
+      "name": "Rex A. Haragan dba Bountiful LLC",
+      "fileRef": "/AdminOrders/enf-orders2007/s-05-0029-haragan.pdf"
+    },
+    {
+      "id": 7316,
+      "caseNumber": "S-05-0029",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-06-15T07:00:00Z",
+      "name": "Kenneth G. Titus, Sr. dba Redwood Trust",
+      "fileRef": "/AdminOrders/enf-orders2007/s-05-0029-titus.pdf"
+    },
+    {
+      "id": 7317,
+      "caseNumber": "S-05-0067",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-01-17T08:00:00Z",
+      "name": "Corporate Executives, Inc. and Larry M. Pember",
+      "fileRef": "/AdminOrders/enf-orders2007/S-05-0067.pdf"
+    },
+    {
+      "id": 7318,
+      "caseNumber": "S-05-0095",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-03-05T08:00:00Z",
+      "name": "Umraan Syed Hasan, aka Suvraan Hasan, aka Ron Hasan, and individual, dba Strategic Funds Group, LP, dba Strategic Hedge Fund, LP, and dba Strategic Mini Hedge Fund, LP",
+      "fileRef": "/AdminOrders/enf-orders2007/S-05-0095.pdf"
+    },
+    {
+      "id": 7319,
+      "caseNumber": "S-06-0026",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-03-20T07:00:00Z",
+      "name": "Savory Telecom, Inc., and International Internet & Telecom, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2007/S-06-0026.pdf"
+    },
+    {
+      "id": 7320,
+      "caseNumber": "S-06-0032-1",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-01-25T08:00:00Z",
+      "name": "Michael Wayne Smith and Stacey Lynne Smith",
+      "fileRef": "/AdminOrders/enf-orders2007/S-06-0032-1.pdf"
+    },
+    {
+      "id": 7321,
+      "caseNumber": "S-06-0032-2",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-01-25T08:00:00Z",
+      "name": "Michael Wayne Smith and Stacey Lynne Smith",
+      "fileRef": "/AdminOrders/enf-orders2007/S-06-0032-2.pdf"
+    },
+    {
+      "id": 7322,
+      "caseNumber": "S-07-0001",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-04-20T07:00:00Z",
+      "name": "Jack Kleck, doing business individually and under the name Jack Kleck Investments",
+      "fileRef": "/AdminOrders/enf-orders2007/S-07-0001.pdf"
+    },
+    {
+      "id": 7323,
+      "caseNumber": "S-07-0002",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-12-05T08:00:00Z",
+      "name": "Frank T. Dunn, Jr.",
+      "fileRef": "/AdminOrders/enf-orders2007/S-07-0002.pdf"
+    },
+    {
+      "id": 7324,
+      "caseNumber": "S-07-0009-1",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-07-26T07:00:00Z",
+      "name": "Daniel Michael Wheatley",
+      "fileRef": "/AdminOrders/enf-orders2007/S-07-0009-1.pdf"
+    },
+    {
+      "id": 7325,
+      "caseNumber": "S-07-0009-2",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-07-26T07:00:00Z",
+      "name": "Sunshine Elise Merie Simmons",
+      "fileRef": "/AdminOrders/enf-orders2007/S-07-0009-2.pdf"
+    },
+    {
+      "id": 7326,
+      "caseNumber": "S-07-0009-3",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-07-26T07:00:00Z",
+      "name": "Edwin Tolentino Garcia",
+      "fileRef": "/AdminOrders/enf-orders2007/S-07-0009-3.pdf"
+    },
+    {
+      "id": 7327,
+      "caseNumber": "S-07-0015",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-08-27T07:00:00Z",
+      "name": "Southwest Exchange, Inc., a Nevada Corporation, dba Arrow 1031 Exchange, aka Southwest 1031 Exchange, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2007/S-07-0015.pdf"
+    },
+    {
+      "id": 7328,
+      "caseNumber": "S-07-0022",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-11-11T08:00:00Z",
+      "name": "Elder Research Corporation, an Oregon corporation; Ronald R. Elder, and individual; and Rita M. Elder, and individual",
+      "fileRef": "/AdminOrders/enf-orders2007/S-07-0022.pdf"
+    },
+    {
+      "id": 7329,
+      "caseNumber": "S-07-0034",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-10-22T07:00:00Z",
+      "name": "The Prudential Investment Portfolios, Inc., a Maryland corporation",
+      "fileRef": "/AdminOrders/enf-orders2007/S-07-0034.pdf"
+    },
+    {
+      "id": 7330,
+      "caseNumber": "S-07-0043-12",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-10-31T07:00:00Z",
+      "name": "Michael Kelly, Yucatan Resorts, S.A., Resort Holdings International, Inc., Resort Holdings International, S.A., World Phantasy Tours a/k/a Majesty Travel a/k/a Viajes Majesty, Galaxy Properties Management, S.A., Gabriel Escalante, Ruttenberg and Associates Financial Marketing, Inc., Mark Ruttenberg, Rick Greene, Roger Stewart, Douglas Laird, Stephen Monroe, Lawrence Beard, Kenneth Christensen, Royal Edwards, Joel Whaley, and Dale Lauder",
+      "fileRef": "/AdminOrders/enf-orders2007/S-07-0043-12.pdf"
+    },
+    {
+      "id": 7331,
+      "caseNumber": "S-09-0054",
+      "action": null,
+      "type": null,
+      "orderDate": "2007-10-08T07:00:00Z",
+      "name": "James Hampton Simmons Jr",
+      "fileRef": "/AdminOrders/enf-orders2007/S-09-0054.pdf"
+    },
+    {
+      "id": 7410,
+      "caseNumber": "S-05-0087-3",
+      "action": null,
+      "type": null,
+      "orderDate": "2008-12-30T08:00:00Z",
+      "name": "Vickie Pritchett",
+      "fileRef": "/AdminOrders/enf-orders2008/S-05-0087-3.pdf"
+    },
+    {
+      "id": 7411,
+      "caseNumber": "S-06-0025",
+      "action": null,
+      "type": null,
+      "orderDate": "2008-07-16T07:00:00Z",
+      "name": "Lawrence Lewis Beard, and individual",
+      "fileRef": "/AdminOrders/enf-orders2008/S-06-0025.pdf"
+    },
+    {
+      "id": 7412,
+      "caseNumber": "S-07-0006",
+      "action": null,
+      "type": null,
+      "orderDate": "2008-10-23T07:00:00Z",
+      "name": "Michael Patrick Kaiser",
+      "fileRef": "/AdminOrders/enf-orders2008/S-07-0006.pdf"
+    },
+    {
+      "id": 7413,
+      "caseNumber": "S-07-0025",
+      "action": null,
+      "type": null,
+      "orderDate": "2008-03-08T08:00:00Z",
+      "name": "Douglas Goodrum, Alpha Energy, Inc., Alliance Resources Group, Inc., Alex Bailey, and Jay Reynolds",
+      "fileRef": "/AdminOrders/enf-orders2008/S-07-0025.pdf"
+    },
+    {
+      "id": 7414,
+      "caseNumber": "S-07-0025 (B)",
+      "action": null,
+      "type": null,
+      "orderDate": "2008-05-18T07:00:00Z",
+      "name": "Douglas Goodrum, Alpha Energy, Inc., Alliance Resources Group, Inc., Alex Bailey, and Jay Reynolds",
+      "fileRef": "/AdminOrders/enf-orders2008/S-07-0025b.pdf"
+    },
+    {
+      "id": 7415,
+      "caseNumber": "S-07-0025 (C)",
+      "action": null,
+      "type": null,
+      "orderDate": "2008-04-18T07:00:00Z",
+      "name": "Douglas Goodrum, Alpha Energy, Inc., Alliance Resources Group, Inc., Alex Bailey, and Jay Reynolds",
+      "fileRef": "/AdminOrders/enf-orders2008/S-07-0025c.pdf"
+    },
+    {
+      "id": 7416,
+      "caseNumber": "S-07-0025",
+      "action": null,
+      "type": null,
+      "orderDate": "2008-04-08T07:00:00Z",
+      "name": "Douglas Goodrum, Alpha Energy, Inc., Alliance Resources Group, Inc., Alex Bailey, and Jay Reynolds",
+      "fileRef": "/AdminOrders/enf-orders2008/S-07-0025d.pdf"
+    },
+    {
+      "id": 7417,
+      "caseNumber": "S-07-0043",
+      "action": null,
+      "type": null,
+      "orderDate": "2008-01-24T08:00:00Z",
+      "name": "Michael Kelly, Yucatan Resorts a/k/a Avalon Resorts, Yucatan Resorts, S.A. Resort Holdings International, Inc., Resort Holdings International, S.A., World Phantasy Tours a/k/a Majesty Travel a/k/a Viajes Majesty, Galaxy Properties Management, S.A., Gabriel Escalante, Ruttenberg and Associates Financial Marketing, Inc., Mark Ruttenberg, Rick Greene, Roger Stewart, Douglas Laird, Stephen Monroe, Lawrence Beard, Kenneth Christensen, Royal Edwards, Joel Whaley, and Dale Lauder",
+      "fileRef": "/AdminOrders/enf-orders2008/S-07-0043.pdf"
+    },
+    {
+      "id": 7418,
+      "caseNumber": "S-07-0043-11",
+      "action": null,
+      "type": null,
+      "orderDate": "2008-06-19T07:00:00Z",
+      "name": "Michael Kelly, Yucatan Resorts a/k/a Avalon Resorts, Yucatan Resorts, S.A., Resort Holdings International, Inc., Resort Holdings International, S.A., World Phatasy Tours a/ka/ Majesty Travel a/k/a Viajes Majesty, Galaxy Properties Management, S.A., Gabriel Escalante, Ruttenberg and Associates Financial Marketing, Inc., Mark  Ruttenberg, Rick Greene, Roger Stewart, Douglas Laird, Stephen Monroe, Lawrence Beard, Kenneth Christensen, Royal Edwards, Joel Whaley, and Dale Lauder",
+      "fileRef": "/AdminOrders/enf-orders2008/S-07-0043-11.pdf"
+    },
+    {
+      "id": 7419,
+      "caseNumber": "S-07-0043-15",
+      "action": null,
+      "type": null,
+      "orderDate": "2008-12-16T08:00:00Z",
+      "name": "Michael Kelly, Yucatan Resorts a/k/a Avalon Resorts, Yucatan Resorts, S.A., Resort Holdings International, Inc., Resort Holdings International, S.A., World Phantasy Tours a/k/a Majesty Travel a/k/a Viajes Majesty, Galaxy Properties Management, S.A., Gabriel Escalante, Ruttenberg and Associates Financial Marketing, Inc., Rick Greene, Roget Stewart, Douglas Laird, Stephen Monroe, Lawrence Beard, Kenneth Christensen, Royal Edwards, Joel Whaley, Dale Lauder, and James Theeler",
+      "fileRef": "/AdminOrders/enf-orders2008/S-07-0043-15.pdf"
+    },
+    {
+      "id": 7420,
+      "caseNumber": "S-07-0043-16",
+      "action": null,
+      "type": null,
+      "orderDate": "2008-03-20T07:00:00Z",
+      "name": "Michael Kelly, Yucatan Resorts a/k/a Avalon Resorts, Yucatan Resorts, S.A., Resort Holdings International, Inc., Resort Holdings International, S.A., World Phatasy Tours a/ka/ Majesty Travel a/k/a Viajes Majesty, Galaxy Properties Management, S.A., Gabriel Escalante, Ruttenberg and Associates Financial Marketing, Inc., Mark  Ruttenberg, Rick Greene, Roger Stewart, Douglas Laird, Stephen Monroe, Lawrence Beard, Kenneth Christensen, Royal Edwards, Joel Whaley, and Dale Lauder",
+      "fileRef": "/AdminOrders/enf-orders2008/S-07-0043-16.pdf"
+    },
+    {
+      "id": 7421,
+      "caseNumber": "S-07-0043-17",
+      "action": null,
+      "type": null,
+      "orderDate": "2008-02-29T08:00:00Z",
+      "name": "Michael Kelly, Yucatan Resorts a/k/a Avalon Resorts, Yucatan Resorts, S.A., Resort Holdings International, Inc., Resort Holdings International, S.A., World Phatasy Tours a/ka/ Majesty Travel a/k/a Viajes Majesty, Galaxy Properties Management, S.A., Gabriel Escalante, Ruttenberg and Associates Financial Marketing, Inc., Mark  Ruttenberg, Rick Greene, Roger Stewart, Douglas Laird, Stephen Monroe, Lawrence Beard, Kenneth Christensen, Royal Edwards, Joel Whaley, and Dale Lauder",
+      "fileRef": "/AdminOrders/enf-orders2008/S-07-0043-17.pdf"
+    },
+    {
+      "id": 7422,
+      "caseNumber": "S-07-0043-20",
+      "action": null,
+      "type": null,
+      "orderDate": "2008-10-30T07:00:00Z",
+      "name": "Michael Kelly, Yucatan Resorts, S.A., Resort Holdings International, Inc., Resort Holdings International, S.A., World Phantasy Tours a/k/a Majesty Travel a/k/a Viajes Majesty, Galaxy Properties Management, S.A., Gabriel Escalante, Ruttenberg and Associates Financial Marketing, Inc., Mark Ruttenberg, Rick Greene, Roger Stewart, Douglas Laird, Stephen Monroe, Lawrence Beard, Kenneth Christensen, Royal Edwards, Joel Whaley, and Dale Lauder, and James Theeler",
+      "fileRef": "/AdminOrders/enf-orders2008/S-07-0043-20.pdf"
+    },
+    {
+      "id": 7423,
+      "caseNumber": "S-08-0009-1",
+      "action": null,
+      "type": null,
+      "orderDate": "2008-07-21T07:00:00Z",
+      "name": "Royal Hannon Edwards, an individual",
+      "fileRef": "/AdminOrders/enf-orders2008/S-08-0009-1.pdf"
+    },
+    {
+      "id": 7424,
+      "caseNumber": "S-08-0009-2",
+      "action": null,
+      "type": null,
+      "orderDate": "2008-07-29T07:00:00Z",
+      "name": "Trend Management Group, Inc, an Arizona corporation, Trend Capital LLC, an Arizona limited liability corporation, The Trend Group, Inc., an Arizona corporation, and Ryan James Herndon",
+      "fileRef": "/AdminOrders/enf-orders2008/S-08-0009-2.pdf"
+    },
+    {
+      "id": 7425,
+      "caseNumber": "S-08-0014",
+      "action": null,
+      "type": null,
+      "orderDate": "2008-12-01T08:00:00Z",
+      "name": "James Salvatore Georgen, Jr.",
+      "fileRef": "/AdminOrders/enf-orders2008/S-08-0014.pdf"
+    },
+    {
+      "id": 7426,
+      "caseNumber": "S-08-0018",
+      "action": null,
+      "type": null,
+      "orderDate": "2008-09-02T07:00:00Z",
+      "name": "Gigapix Studios, Inc., a California corporation, and Christopher J. Blauvelt, an individual",
+      "fileRef": "/AdminOrders/enf-orders2008/S-08-0018.pdf"
+    },
+    {
+      "id": 7427,
+      "caseNumber": "S-08-0019",
+      "action": null,
+      "type": null,
+      "orderDate": "2008-09-04T07:00:00Z",
+      "name": "Thurston, Springer, Miller, Herd, & Titak, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2008/S-08-0019.pdf"
+    },
+    {
+      "id": 7428,
+      "caseNumber": "S-08-0033",
+      "action": null,
+      "type": null,
+      "orderDate": "2008-12-12T08:00:00Z",
+      "name": "Mortgage Exchange, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2008/S-08-0033.pdf"
+    },
+    {
+      "id": 7429,
+      "caseNumber": "S-08-0034",
+      "action": null,
+      "type": null,
+      "orderDate": "2008-12-10T08:00:00Z",
+      "name": "RJJ Pasadena Securities, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2008/S-08-0034.pdf"
+    },
+    {
+      "id": 7430,
+      "caseNumber": "S-08-0044",
+      "action": null,
+      "type": null,
+      "orderDate": "2008-11-12T08:00:00Z",
+      "name": "Canyon Creek Development, Inc; Canyon Creek Financial, LLC; Sunwest Management, Inc.; Jon M. Harder; Darryl E. Fisher; Michael J. Deines; J. Wallace Gutzler; Thomas Biesiadecki; Jeffrey Schumacher; John David Thurber; Francis J. Curtis; and Mark Devos",
+      "fileRef": "/AdminOrders/enf-orders2008/S-08-0044.pdf"
+    },
+    {
+      "id": 7531,
+      "caseNumber": "S-05-0087-6",
+      "action": null,
+      "type": null,
+      "orderDate": "2009-03-08T08:00:00Z",
+      "name": "Kent Davis",
+      "fileRef": "/AdminOrders/enf-orders2009/S-05-0087-6.pdf"
+    },
+    {
+      "id": 7532,
+      "caseNumber": "S-07-0043-13",
+      "action": null,
+      "type": null,
+      "orderDate": "2009-07-08T07:00:00Z",
+      "name": "Michael Kelly, Yucatan Resorts a/k/a Avalon Resorts, Yucatan Resorts, S.A., Resort Holdings International, Inc., Resort Holdings International, S.A., World Phatasy Tours a/ka/ Majesty Travel a/k/a Viajes Majesty, Galaxy Properties Management, S.A., Gabriel Escalante, Ruttenberg and Associates Financial Marketing, Inc., Mark  Ruttenberg, Rick Greene, Roger Stewart, Douglas Laird, Stephen Monroe, Lawrence Beard, Kenneth Christensen, Royal Edwards, Joel Whaley, and Dale Lauder, and James Theeler",
+      "fileRef": "/AdminOrders/enf-orders2009/S-07-0043-13.pdf"
+    },
+    {
+      "id": 7533,
+      "caseNumber": "S-07-0043-19",
+      "action": null,
+      "type": null,
+      "orderDate": "2009-04-18T07:00:00Z",
+      "name": "Michael Kelly, Yucatan Resorts a/k/a Avalon Resorts, Yucatan Resorts, S.A., Resort Holdings International, Inc., Resort Holdings International, S.A., World Phatasy Tours a/ka/ Majesty Travel a/k/a Viajes Majesty, Galaxy Properties Management, S.A., Gabriel Escalante, Ruttenberg and Associates Financial Marketing, Inc., Mark  Ruttenberg, Rick Greene, Roger Stewart, Douglas Laird, Stephen Monroe, Lawrence Beard, Kenneth Christensen, Royal Edwards, Joel Whaley, and Dale Lauder",
+      "fileRef": "/AdminOrders/enf-orders2009/S-07-0043-19.pdf"
+    },
+    {
+      "id": 7534,
+      "caseNumber": "S-07-0056",
+      "action": null,
+      "type": null,
+      "orderDate": "2009-12-22T08:00:00Z",
+      "name": "Susumu Alan Sasaki and MCCA Oregon Corporation",
+      "fileRef": "/AdminOrders/enf-orders2009/S-07-0056.pdf"
+    },
+    {
+      "id": 7535,
+      "caseNumber": "S-08-0017",
+      "action": null,
+      "type": null,
+      "orderDate": "2009-02-20T08:00:00Z",
+      "name": "Morgan Stanley & Co. Incorporated",
+      "fileRef": "/AdminOrders/enf-orders2009/S-08-0017.pdf"
+    },
+    {
+      "id": 7536,
+      "caseNumber": "S-08-0045",
+      "action": null,
+      "type": null,
+      "orderDate": "2009-06-19T07:00:00Z",
+      "name": "Prosper Marketplace, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2009/S-08-0045.pdf"
+    },
+    {
+      "id": 7537,
+      "caseNumber": "S-09-0008",
+      "action": null,
+      "type": null,
+      "orderDate": "2009-02-20T08:00:00Z",
+      "name": "Keeley Funds, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2009/S-09-0008.pdf"
+    },
+    {
+      "id": 7538,
+      "caseNumber": "s-09-0009",
+      "action": null,
+      "type": null,
+      "orderDate": "2009-07-22T07:00:00Z",
+      "name": "Morgan Stanley Charter Graham L.P. and Morgan Stanley Spectrum Select L.P.",
+      "fileRef": "/AdminOrders/enf-orders2009/S-09-0009.pdf"
+    },
+    {
+      "id": 7539,
+      "caseNumber": "S-09-0012",
+      "action": null,
+      "type": null,
+      "orderDate": "2009-06-19T07:00:00Z",
+      "name": "Dennis Reinold Thaut, dba First Security Financial",
+      "fileRef": "/AdminOrders/enf-orders2009/S-09-0012.pdf"
+    },
+    {
+      "id": 7540,
+      "caseNumber": "S-09-0017",
+      "action": null,
+      "type": null,
+      "orderDate": "2009-07-02T07:00:00Z",
+      "name": "Citigroup Global Markets Inc",
+      "fileRef": "/AdminOrders/enf-orders2009/S-09-0017.pdf"
+    },
+    {
+      "id": 7541,
+      "caseNumber": "S-09-0020",
+      "action": null,
+      "type": null,
+      "orderDate": "2009-09-21T07:00:00Z",
+      "name": "Owens Mortgage Investment Fund, A California Limited Partnership and Owns Securities Corporation",
+      "fileRef": "/AdminOrders/enf-orders2009/S-09-0020.pdf"
+    },
+    {
+      "id": 7542,
+      "caseNumber": "S-09-0022",
+      "action": null,
+      "type": null,
+      "orderDate": "2009-06-29T07:00:00Z",
+      "name": "Wachovia Securities LLC and Wachovia Capital Markets LLC",
+      "fileRef": "/AdminOrders/enf-orders2009/S-09-0022.pdf"
+    },
+    {
+      "id": 7543,
+      "caseNumber": "S-09-0024",
+      "action": null,
+      "type": null,
+      "orderDate": "2009-05-08T07:00:00Z",
+      "name": "RDSC, LLC",
+      "fileRef": "/AdminOrders/enf-orders2009/S-09-0024.pdf"
+    },
+    {
+      "id": 7544,
+      "caseNumber": "S-09-0028-1",
+      "action": null,
+      "type": null,
+      "orderDate": "2009-09-21T07:00:00Z",
+      "name": "Canyon Creek Development, Inc., Sunwest Management, Inc., Canyon Creek Financial, LLC., Senior Living Properties II, LLC., Senior Living Properties III, LLC., KDA Construction, Inc., Senenet, Inc., Encore Idemnity Management, LLC., Encore Indemnity, Ltd., Silver Insurance Management, LLC., and Silver Indemnity, Ltd.",
+      "fileRef": "/AdminOrders/enf-orders2009/S-09-0028-1.pdf"
+    },
+    {
+      "id": 7545,
+      "caseNumber": "S-09-0028-3",
+      "action": null,
+      "type": null,
+      "orderDate": "2009-12-02T08:00:00Z",
+      "name": "Canyon Creek Development, Inc., Sunwest Management, Inc., Canyon Creek Financial, LLC., Senior Living Properties III, LLC., KDA Construction, Inc., Senenet, Inc., Encore Indemnity Management, LLC., Encore Indemnity, LTD., Silver Insurance Management, LLC., and Silver Indemnity, LTD.",
+      "fileRef": "/AdminOrders/enf-orders2009/S-09-0028-3.pdf"
+    },
+    {
+      "id": 7546,
+      "caseNumber": "S-09-0033",
+      "action": null,
+      "type": null,
+      "orderDate": "2009-06-29T07:00:00Z",
+      "name": "Banc of America Securities LLC and Banc of America Investment Services, Inc",
+      "fileRef": "/AdminOrders/enf-orders2009/S-09-0033.pdf"
+    },
+    {
+      "id": 7547,
+      "caseNumber": "S-09-0034",
+      "action": null,
+      "type": null,
+      "orderDate": "2009-06-29T07:00:00Z",
+      "name": "Merrill Lynch Pierce Fenner & Smith Incorporated",
+      "fileRef": "/AdminOrders/enf-orders2009/S-09-0034.pdf"
+    },
+    {
+      "id": 7548,
+      "caseNumber": "S-09-0035",
+      "action": null,
+      "type": null,
+      "orderDate": "2009-08-07T07:00:00Z",
+      "name": "RBC Capital Markets Corporation",
+      "fileRef": "/AdminOrders/enf-orders2009/S-09-0035.pdf"
+    },
+    {
+      "id": 7549,
+      "caseNumber": "S-09-0041",
+      "action": null,
+      "type": null,
+      "orderDate": "2009-11-12T08:00:00Z",
+      "name": "REI Exchange, LLC, TMG Ventures, Inc., and Anthony C. Scwhartz",
+      "fileRef": "/AdminOrders/enf-orders2009/S-09-0041.pdf"
+    },
+    {
+      "id": 7550,
+      "caseNumber": "S-09-0045",
+      "action": null,
+      "type": null,
+      "orderDate": "2009-07-24T07:00:00Z",
+      "name": "Adriel J. Gaines",
+      "fileRef": "/AdminOrders/enf-orders2009/S-09-0045.pdf"
+    },
+    {
+      "id": 7551,
+      "caseNumber": "S-09-0050",
+      "action": null,
+      "type": null,
+      "orderDate": "2009-09-21T07:00:00Z",
+      "name": "Yongsu Meade, aka Young Sue Meade, aka Sue Meade",
+      "fileRef": "/AdminOrders/enf-orders2009/S-09-0050.pdf"
+    },
+    {
+      "id": 7552,
+      "caseNumber": "S-88-0011",
+      "action": null,
+      "type": null,
+      "orderDate": "2009-04-01T07:00:00Z",
+      "name": "First Colonial Bank, LTD a/k/a Pac-Rim, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2009/S-88-0011.pdf"
+    },
+    {
+      "id": 7585,
+      "caseNumber": "S-09-0016-2",
+      "action": null,
+      "type": null,
+      "orderDate": "2010-04-14T07:00:00Z",
+      "name": "Thomas F Biesiadecki",
+      "fileRef": "/AdminOrders/enf-orders2010/S-09-0016-2.pdf"
+    },
+    {
+      "id": 7586,
+      "caseNumber": "S-09-0016-4",
+      "action": null,
+      "type": null,
+      "orderDate": "2010-03-29T07:00:00Z",
+      "name": "John David Thurber",
+      "fileRef": "/AdminOrders/enf-orders2010/S-09-0016-4.pdf"
+    },
+    {
+      "id": 7587,
+      "caseNumber": "S-09-0028-2",
+      "action": null,
+      "type": null,
+      "orderDate": "2010-01-22T08:00:00Z",
+      "name": "Jon Michael Harder",
+      "fileRef": "/AdminOrders/enf-orders2010/S-09-0028-2.pdf"
+    },
+    {
+      "id": 7588,
+      "caseNumber": "S-09-0039",
+      "action": null,
+      "type": null,
+      "orderDate": "2010-01-20T08:00:00Z",
+      "name": "Deutsche Bank Securities Inc",
+      "fileRef": "/AdminOrders/enf-orders2010/S-09-0039.pdf"
+    },
+    {
+      "id": 7589,
+      "caseNumber": "S-09-0053",
+      "action": null,
+      "type": null,
+      "orderDate": "2010-05-17T07:00:00Z",
+      "name": "Credit Suisse Securities (USA) LLC",
+      "fileRef": "/AdminOrders/enf-orders2010/S-09-0053.pdf"
+    },
+    {
+      "id": 7590,
+      "caseNumber": "S-09-0059",
+      "action": null,
+      "type": null,
+      "orderDate": "2010-05-19T07:00:00Z",
+      "name": "Merrill Lynch, Pierce, Fenner & Smith Incorporated",
+      "fileRef": "/AdminOrders/enf-orders2010/S-09-0059.pdf"
+    },
+    {
+      "id": 7591,
+      "caseNumber": "S-09-0060",
+      "action": null,
+      "type": null,
+      "orderDate": "2010-11-15T08:00:00Z",
+      "name": "Morgan Stanley & Co Incorporated CRD#9209",
+      "fileRef": "/AdminOrders/enf-orders2010/S-09-0060.pdf"
+    },
+    {
+      "id": 7592,
+      "caseNumber": "S-09-0067-2",
+      "action": null,
+      "type": null,
+      "orderDate": "2010-01-16T08:00:00Z",
+      "name": "John M. Mendola",
+      "fileRef": "/AdminOrders/enf-orders2010/S-09-0067-2.pdf"
+    },
+    {
+      "id": 7593,
+      "caseNumber": "S-09-0071",
+      "action": null,
+      "type": null,
+      "orderDate": "2010-12-10T08:00:00Z",
+      "name": "Karl Kent Spencer, dba Kirby of Greater Oregon",
+      "fileRef": "/AdminOrders/enf-orders2010/S-09-0071.pdf"
+    },
+    {
+      "id": 7594,
+      "caseNumber": "S-09-0077",
+      "action": null,
+      "type": null,
+      "orderDate": "2010-01-11T08:00:00Z",
+      "name": "Piedmont Office Realty Trust Inc",
+      "fileRef": "/AdminOrders/enf-orders2010/S-09-0077.pdf"
+    },
+    {
+      "id": 7595,
+      "caseNumber": "S-10-0004",
+      "action": null,
+      "type": null,
+      "orderDate": "2010-03-03T08:00:00Z",
+      "name": "H. C. Denison Company",
+      "fileRef": "/AdminOrders/enf-orders2010/S-10-0004.pdf"
+    },
+    {
+      "id": 7596,
+      "caseNumber": "S-10-0006",
+      "action": null,
+      "type": null,
+      "orderDate": "2010-04-07T07:00:00Z",
+      "name": "Bank Watch; MBS Clearning; Donna A. Walls; and Larry D. Eady",
+      "fileRef": "/AdminOrders/enf-orders2010/S-10-0006.pdf"
+    },
+    {
+      "id": 7597,
+      "caseNumber": "S-10-0008",
+      "action": null,
+      "type": null,
+      "orderDate": "2010-10-06T07:00:00Z",
+      "name": "UBS Securities LLC (CRD #7654) and UBS Financial Services Inc. (CRD#8174)",
+      "fileRef": "/AdminOrders/enf-orders2010/S-10-0008.pdf"
+    },
+    {
+      "id": 7598,
+      "caseNumber": "S-10-0009",
+      "action": null,
+      "type": null,
+      "orderDate": "2010-12-06T08:00:00Z",
+      "name": "Goldman, Sachs & Co., CRD #361",
+      "fileRef": "/AdminOrders/enf-orders2010/S-10-0009.pdf"
+    },
+    {
+      "id": 7599,
+      "caseNumber": "S-10-0013",
+      "action": null,
+      "type": null,
+      "orderDate": "2010-04-23T07:00:00Z",
+      "name": "Derek R. Lenington and Lenington Financial LLC dba Lenington Financial",
+      "fileRef": "/AdminOrders/enf-orders2010/S-10-0013.pdf"
+    },
+    {
+      "id": 7600,
+      "caseNumber": "S-10-0022",
+      "action": null,
+      "type": null,
+      "orderDate": "2010-10-13T07:00:00Z",
+      "name": "Adriel J. Gaines",
+      "fileRef": "/AdminOrders/enf-orders2010/S-10-0022.pdf"
+    },
+    {
+      "id": 7601,
+      "caseNumber": "S-10-0028",
+      "action": null,
+      "type": null,
+      "orderDate": "2010-08-10T07:00:00Z",
+      "name": "Daniel Holz",
+      "fileRef": "/AdminOrders/enf-orders2010/S-10-0028.pdf"
+    },
+    {
+      "id": 7602,
+      "caseNumber": "S-10-0029",
+      "action": null,
+      "type": null,
+      "orderDate": "2010-08-30T07:00:00Z",
+      "name": "Caldwell Securities, Incorporated",
+      "fileRef": "/AdminOrders/enf-orders2010/S-10-0029.pdf"
+    },
+    {
+      "id": 7603,
+      "caseNumber": "S-10-0034",
+      "action": null,
+      "type": null,
+      "orderDate": "2010-08-04T07:00:00Z",
+      "name": "Andrew Scot Bolsinger",
+      "fileRef": "/AdminOrders/enf-orders2010/S-10-0034.pdf"
+    },
+    {
+      "id": 7668,
+      "caseNumber": "S-07-0001-2",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-11-07T08:00:00Z",
+      "name": "LPL Financial LLC, fka Linsco Private Ledger Corporation",
+      "fileRef": "/AdminOrders/enf-orders2011/S-07-0001-2.pdf"
+    },
+    {
+      "id": 7669,
+      "caseNumber": "S-08-0029",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-06-03T07:00:00Z",
+      "name": "Quantum Network Services, Inc., and Clifford Goehring",
+      "fileRef": "/AdminOrders/enf-orders2011/S-08-0029_Consent.pdf"
+    },
+    {
+      "id": 7670,
+      "caseNumber": "S-08-0029",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-06-07T07:00:00Z",
+      "name": "Quantum Network Services, Inc., Pacific Financial Solutions, Inc., and Clifford Goehring",
+      "fileRef": "/AdminOrders/enf-orders2011/S-08-0029_Dismissal.pdf"
+    },
+    {
+      "id": 7671,
+      "caseNumber": "S-09-0023",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-04-28T07:00:00Z",
+      "name": "Wells Fargo Investments, LLC, CRD #10582",
+      "fileRef": "/AdminOrders/enf-orders2011/S-09-0023.pdf"
+    },
+    {
+      "id": 7672,
+      "caseNumber": "S-09-0040",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-06-07T07:00:00Z",
+      "name": "JPMorgan Chase & Co., CRD #79",
+      "fileRef": "/AdminOrders/enf-orders2011/S-09-0040.pdf"
+    },
+    {
+      "id": 7673,
+      "caseNumber": "S-09-0051",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-05-26T07:00:00Z",
+      "name": "TD Ameritrade, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2011/S-09-0051.pdf"
+    },
+    {
+      "id": 7674,
+      "caseNumber": "S-10-0003",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-02-17T08:00:00Z",
+      "name": "Stifel, Nicolaus & Company Incorporated CRD #793",
+      "fileRef": "/AdminOrders/enf-orders2011/S-10-0003.pdf"
+    },
+    {
+      "id": 7675,
+      "caseNumber": "S-10-0015",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-08-03T07:00:00Z",
+      "name": "Cecil F. Smith Jr. aka \"Buz\" Smith, Church Ministries Distribution, Inc., dba Church Ministries Distribution",
+      "fileRef": "/AdminOrders/enf-orders2011/S-10-0015a.pdf"
+    },
+    {
+      "id": 7676,
+      "caseNumber": "S-10-0023",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-06-30T07:00:00Z",
+      "name": "International Business Development, LTD., and Yoram Gordon",
+      "fileRef": "/AdminOrders/enf-orders2011/S-10-0023.pdf"
+    },
+    {
+      "id": 7677,
+      "caseNumber": "S-10-0050",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-01-04T08:00:00Z",
+      "name": "Lendingclub Corporation",
+      "fileRef": "/AdminOrders/enf-orders2011/S-10-0050.pdf"
+    },
+    {
+      "id": 7678,
+      "caseNumber": "S-10-0051",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-01-19T08:00:00Z",
+      "name": "Lightstone Value Plus Real Estate Investment Trust, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2011/S-10-0051.pdf"
+    },
+    {
+      "id": 7679,
+      "caseNumber": "S-10-0058",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-08-25T07:00:00Z",
+      "name": "Robert Todd Calvert",
+      "fileRef": "/AdminOrders/enf-orders2011/S-10-0058.pdf"
+    },
+    {
+      "id": 7680,
+      "caseNumber": "S-10-0058-2",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-11-03T07:00:00Z",
+      "name": "James Edward Theeler",
+      "fileRef": "/AdminOrders/enf-orders2011/S-10-0058-2.pdf"
+    },
+    {
+      "id": 7681,
+      "caseNumber": "S-11-0003",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-04-11T07:00:00Z",
+      "name": "Capital Guardian, Inc., Blake Wilson, Malory Investments, LLC, Ronald Stein, Pacific Network and Consulting, Daniel Caterino, Randle \"Randy\" Villa, Tony Albany, Lifeline Imaging, LLC, Randall Morton, Consulting Dynamics, Inc., and Stanley Johnson",
+      "fileRef": "/AdminOrders/enf-orders2011/S-11-0003_Johnson.pdf"
+    },
+    {
+      "id": 7682,
+      "caseNumber": "S-11-0003",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-09-03T07:00:00Z",
+      "name": "Capital Guardian, Inc., Blake Wilson, Malory Investments, LLC, Ronald Stein, Pacific Network and Consulting, Daniel Caterino, Randle \"Randy\" Villa, Tony Albany, Lifeline Imaging, LLC., Randall Morton, Consulting Dynamics, Inc., and Stanley Johnons",
+      "fileRef": "/AdminOrders/enf-orders2011/S-11-0003_Stein.pdf"
+    },
+    {
+      "id": 7683,
+      "caseNumber": "S-11-0007",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-09-19T07:00:00Z",
+      "name": "Karl Kent Spencer, dba Kirby of Greater Oregon",
+      "fileRef": "/AdminOrders/enf-orders2011/S-11-0007.pdf"
+    },
+    {
+      "id": 7684,
+      "caseNumber": "S-11-0009",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-03-31T07:00:00Z",
+      "name": "Brent Lince dba Treasure Heart Financial Counseling and dba Treasure Heart Financial Coaching",
+      "fileRef": "/AdminOrders/enf-orders2011/S-11-0009.pdf"
+    },
+    {
+      "id": 7685,
+      "caseNumber": "S-11-0058-a",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-12-12T08:00:00Z",
+      "name": "Scott J Baklenko and BAK Ventures, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2011/S-11-0058-a.pdf"
+    },
+    {
+      "id": 7686,
+      "caseNumber": "S-11-0060",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-10-13T07:00:00Z",
+      "name": "Raymond James & Associates, Inc., and Raymond James Financial Services, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2011/S-11-0060.pdf"
+    },
+    {
+      "id": 7687,
+      "caseNumber": "S-11-0061",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-08-09T07:00:00Z",
+      "name": "Dale Stuart Lauder",
+      "fileRef": "/AdminOrders/enf-orders2011/S-11-0061.pdf"
+    },
+    {
+      "id": 7688,
+      "caseNumber": "S-11-0072",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-08-11T07:00:00Z",
+      "name": "Cutler Investment Counsel, LLC",
+      "fileRef": "/AdminOrders/enf-orders2011/S-11-0072.pdf"
+    },
+    {
+      "id": 7689,
+      "caseNumber": "S-11-0073",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-08-18T07:00:00Z",
+      "name": "Kristopher K. Keeney",
+      "fileRef": "/AdminOrders/enf-orders2011/S-11-0073.pdf"
+    },
+    {
+      "id": 7690,
+      "caseNumber": "S-11-0074",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-08-11T07:00:00Z",
+      "name": "David R. Loeser and D.R. Loeser & Co., Inc.",
+      "fileRef": "/AdminOrders/enf-orders2011/S-11-0074.pdf"
+    },
+    {
+      "id": 7691,
+      "caseNumber": "S-11-0076",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-10-11T07:00:00Z",
+      "name": "Richard Wielenbeck",
+      "fileRef": "/AdminOrders/enf-orders2011/S-11-0076.pdf"
+    },
+    {
+      "id": 7692,
+      "caseNumber": "S-11-0107",
+      "action": null,
+      "type": null,
+      "orderDate": "2011-12-12T08:00:00Z",
+      "name": "John Michael Grishkin",
+      "fileRef": "/AdminOrders/enf-orders2011/S-11-0107.pdf"
+    },
+    {
+      "id": 7781,
+      "caseNumber": "S-05-0057",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-07-05T07:00:00Z",
+      "name": "Lincoln Highlands Limited Partnership and Marjorie M. Boyd",
+      "fileRef": "/AdminOrders/enf-orders2012/S-05-0057.pdf"
+    },
+    {
+      "id": 7782,
+      "caseNumber": "S-09-0013",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-02-17T08:00:00Z",
+      "name": "RKane III, LLC, Rimrock III, Ltd., Three Nines Minerals, Ltd., Harry Proudfoot III, Family Benefits USA, LLC, Kurt Black, and Lyle Hathaway",
+      "fileRef": "/AdminOrders/enf-orders2012/S-09-0013.pdf"
+    },
+    {
+      "id": 7783,
+      "caseNumber": "S-09-0076",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-11-28T08:00:00Z",
+      "name": "Zurcrowner, P.C., dba Zurcrowner, Scott A. Whitney, and Randy A. Gray",
+      "fileRef": "/AdminOrders/enf-orders2012/S-09-0076.pdf"
+    },
+    {
+      "id": 7784,
+      "caseNumber": "S-10-0015",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-04-16T07:00:00Z",
+      "name": "Cecil F. Smith Jr. Aka \"Buz\" Smith, Church Ministries Distribution, Inc. dba Church Ministries Distribution",
+      "fileRef": "/AdminOrders/enf-orders2012/S-10-0015.pdf"
+    },
+    {
+      "id": 7785,
+      "caseNumber": "S-10-0026",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-03-14T07:00:00Z",
+      "name": "Resource Trading Group, Inc., and Thomas M. Moorman",
+      "fileRef": "/AdminOrders/enf-orders2012/S-10-0026.pdf"
+    },
+    {
+      "id": 7786,
+      "caseNumber": "s-11-0003",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-05-30T07:00:00Z",
+      "name": "Capital Guardian, Inc., Blake Wilson, Malory Investments, LLC, Ronald Stein, Pacific Network and Consulting, Daniel Caterino, Randle \"Randy\" Villa, Tony Albany, Lifeline Imaging, LLC, Randall Morton, Consulting Dynamics, Inc., and Stanley Johnson",
+      "fileRef": "/AdminOrders/enf-orders2012/S-11-0003.pdf"
+    },
+    {
+      "id": 7787,
+      "caseNumber": "S-11-0058-b",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-03-14T07:00:00Z",
+      "name": "Castle Advisers LLC",
+      "fileRef": "/AdminOrders/enf-orders2012/S-11-0058-b.pdf"
+    },
+    {
+      "id": 7788,
+      "caseNumber": "S-11-0067",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-01-26T08:00:00Z",
+      "name": "Morgan Asset Management, Inc., a wholly owned subsidiary of MK Holding, Inc., a wholly owned subsidiary of Regions Financial Corporation; and Morgan Keegan & Company, Inc., a wholly owned subsidiary of Regions Financial Corporation",
+      "fileRef": "/AdminOrders/enf-orders2012/S-11-0067.pdf"
+    },
+    {
+      "id": 7789,
+      "caseNumber": "S-11-0076",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-01-13T08:00:00Z",
+      "name": "Richard Wielenbeck",
+      "fileRef": "/AdminOrders/enf-orders2012/S-11-0076_combined.pdf"
+    },
+    {
+      "id": 7790,
+      "caseNumber": "S-11-0130",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-02-15T08:00:00Z",
+      "name": "E*Trade Securities LLC",
+      "fileRef": "/AdminOrders/enf-orders2012/S-11-0130.pdf"
+    },
+    {
+      "id": 7791,
+      "caseNumber": "S-12-0001",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-02-14T08:00:00Z",
+      "name": "Eljay Investment Company; and Leonard J. Chaitin",
+      "fileRef": "/AdminOrders/enf-orders2012/S-12-0001.pdf"
+    },
+    {
+      "id": 7792,
+      "caseNumber": "S-12-0007",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-03-07T08:00:00Z",
+      "name": "Wayne Von Borstel and Oregon Trail Financial Services, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2012/S-12-0007.pdf"
+    },
+    {
+      "id": 7793,
+      "caseNumber": "S-12-0011",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-08-30T07:00:00Z",
+      "name": "Berjac of Oregon, an Oregon general partnership, Michael Holcomb, and Gary Holcomb",
+      "fileRef": "/AdminOrders/enf-orders2012/S-12-0011.pdf"
+    },
+    {
+      "id": 7794,
+      "caseNumber": "S-12-0021",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-04-16T07:00:00Z",
+      "name": "John Michael Grishkin",
+      "fileRef": "/AdminOrders/enf-orders2012/S-12-0021.pdf"
+    },
+    {
+      "id": 7795,
+      "caseNumber": "S-12-0029-1",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-05-30T07:00:00Z",
+      "name": "Richard G. Thomas",
+      "fileRef": "/AdminOrders/enf-orders2012/S-12-0029.pdf"
+    },
+    {
+      "id": 7796,
+      "caseNumber": "S-12-0031-1",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-05-07T07:00:00Z",
+      "name": "Stephen W. Finley",
+      "fileRef": "/AdminOrders/enf-orders2012/S-12-0031-1.pdf"
+    },
+    {
+      "id": 7797,
+      "caseNumber": "S-12-0031-2",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-08-27T07:00:00Z",
+      "name": "Webster E. Barth III",
+      "fileRef": "/AdminOrders/enf-orders2012/S-12-0031-2.pdf"
+    },
+    {
+      "id": 7798,
+      "caseNumber": "S-12-0040",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-05-15T07:00:00Z",
+      "name": "Donald E. Freeman and Freeman Capital Management, LLC",
+      "fileRef": "/AdminOrders/enf-orders2012/S-12-0040.pdf"
+    },
+    {
+      "id": 7799,
+      "caseNumber": "S-12-0053",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-09-17T07:00:00Z",
+      "name": "Bankers Life and Casualty Company and BLC Financial Services, Inc.,",
+      "fileRef": "/AdminOrders/enf-orders2012/S-12-0053.pdf"
+    },
+    {
+      "id": 7800,
+      "caseNumber": "S-12-0054",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-09-13T07:00:00Z",
+      "name": "UVEST Financial Services Group, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2012/S-12-0054.pdf"
+    },
+    {
+      "id": 7801,
+      "caseNumber": "S-12-0055",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-08-22T07:00:00Z",
+      "name": "ProEquities, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2012/S-12-0055.pdf"
+    },
+    {
+      "id": 7802,
+      "caseNumber": "S-12-0064",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-08-03T07:00:00Z",
+      "name": "Shelby H. Bell; Hobo Prince Economic Project, LLC; and Be'Rio Transports, LLC",
+      "fileRef": "/AdminOrders/enf-orders2012/S-12-0064.pdf"
+    },
+    {
+      "id": 7803,
+      "caseNumber": "S-12-0068",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-10-08T07:00:00Z",
+      "name": "Safe Systems, Inc., Genesis Holdings Group, Inc., Phoenix Development Group, Inc., Philippine Gold Importation Venture, and Joseph A. Untalan",
+      "fileRef": "/AdminOrders/enf-orders2012/S-12-0068.pdf"
+    },
+    {
+      "id": 7804,
+      "caseNumber": "S-12-0076",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-09-06T07:00:00Z",
+      "name": "True North Productions, LLC and Cecil F.",
+      "fileRef": "/AdminOrders/enf-orders2012/S-12-0076.pdf"
+    },
+    {
+      "id": 7805,
+      "caseNumber": "S-12-0077",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-09-04T07:00:00Z",
+      "name": "Brendan Thomas Jones",
+      "fileRef": "/AdminOrders/enf-orders2012/S-12-0077.pdf"
+    },
+    {
+      "id": 7806,
+      "caseNumber": "S-12-0080",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-11-16T08:00:00Z",
+      "name": "True Wholesale Houses, LLC and Portland Funding, LLC",
+      "fileRef": "/AdminOrders/enf-orders2012/S-12-0080.pdf"
+    },
+    {
+      "id": 7807,
+      "caseNumber": "S-12-0095",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-11-07T08:00:00Z",
+      "name": "W.E. Nightingale Brokerage Services, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2012/S-12-0095.pdf"
+    },
+    {
+      "id": 7808,
+      "caseNumber": "S-12-0103",
+      "action": null,
+      "type": null,
+      "orderDate": "2012-12-19T08:00:00Z",
+      "name": "Gaia Capital Management, Inc., and James C. Pursley",
+      "fileRef": "/AdminOrders/enf-orders2012/S-12-0103.pdf"
+    },
+    {
+      "id": 7816,
+      "caseNumber": "S-12-0098",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-09-26T07:00:00Z",
+      "name": "Acuity Lending Corporation, Robert Canelosi, and Bret Costelow",
+      "fileRef": "/AdminOrders/enf-orders2013/Consent Order_Updated 7.13.2020.pdf"
+    },
+    {
+      "id": 7896,
+      "caseNumber": "S-09-0013",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-03-05T08:00:00Z",
+      "name": "RKane III, LLC, Rimrock III, Ltd., Three Nines Minerals, Ltd., Harry Proudfoot III, Family Benefits USA, LLC, Kurt Black, and Lyle Hathaway",
+      "fileRef": "/AdminOrders/enf-orders2013/S-09-0013_Black.pdf"
+    },
+    {
+      "id": 7897,
+      "caseNumber": "S-09-0013",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-06-17T07:00:00Z",
+      "name": "RKane III, LLC, Rimrock III, Ltd., Three Nines Minerals, Ltd., Harry Proudfoot III, Family Benefits USA, LLC, Kurt Black, and Lyle Hathaway",
+      "fileRef": "/AdminOrders/enf-orders2013/S-09-0013_Proudfoot.pdf"
+    },
+    {
+      "id": 7898,
+      "caseNumber": "S-09-0013",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-02-09T08:00:00Z",
+      "name": "RKane III, LLC, Rimrock III, Ltd., Three Nines Minerals, Ltd., Harry Proudfoot III, Family Benefits USA, LLC, Kurt Black, and Lyle Hathaway",
+      "fileRef": "/AdminOrders/enf-orders2013/S-09-0013_Rimrock.pdf"
+    },
+    {
+      "id": 7899,
+      "caseNumber": "S-09-0032",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-05-17T07:00:00Z",
+      "name": "Kim M. Victor, Respondent, and Northwest Investment Services, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2013/S-09-0032.pdf"
+    },
+    {
+      "id": 7900,
+      "caseNumber": "S-11-0046-A",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-06-17T07:00:00Z",
+      "name": "Jack Phillips and Elliott James",
+      "fileRef": "/AdminOrders/enf-orders2013/S-11-0046a.pdf"
+    },
+    {
+      "id": 7901,
+      "caseNumber": "S-11-0046-B",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-07-15T07:00:00Z",
+      "name": "Jack Phillips and Elliott James",
+      "fileRef": "/AdminOrders/enf-orders2013/S-11-0046b.pdf"
+    },
+    {
+      "id": 7902,
+      "caseNumber": "S-12-0003-3",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-09-20T07:00:00Z",
+      "name": "Andrew Hugh Meyer",
+      "fileRef": "/AdminOrders/enf-orders2013/S-12-0003-3.pdf"
+    },
+    {
+      "id": 7903,
+      "caseNumber": "S-12-0008",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-10-17T07:00:00Z",
+      "name": "Michael J. Eugenio and Cascade Financial Concepts, Inc., dba Eugenio Financial",
+      "fileRef": "/AdminOrders/enf-orders2013/S-12-0008.pdf"
+    },
+    {
+      "id": 7904,
+      "caseNumber": "S-12-0058",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-09-30T07:00:00Z",
+      "name": "Venulum Ltd., Venulum, Inc., and Giles D. Cadman",
+      "fileRef": "/AdminOrders/enf-orders2013/S-12-0058.pdf"
+    },
+    {
+      "id": 7905,
+      "caseNumber": "S-12-0066",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-01-18T08:00:00Z",
+      "name": "Jimmy Ray Kelly and The Roje",
+      "fileRef": "/AdminOrders/enf-orders2013/S-12-0066.pdf"
+    },
+    {
+      "id": 7906,
+      "caseNumber": "S-12-0068-2",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-05-07T07:00:00Z",
+      "name": "Clyde Paul Carr, Jr.",
+      "fileRef": "/AdminOrders/enf-orders2013/S-12-0068-2.pdf"
+    },
+    {
+      "id": 7907,
+      "caseNumber": "S-12-0079",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-03-22T07:00:00Z",
+      "name": "Dennis J. Martinez and Janice L. Martinez",
+      "fileRef": "/AdminOrders/enf-orders2013/S-12-0079.pdf"
+    },
+    {
+      "id": 7908,
+      "caseNumber": "S-12-0098",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-04-23T07:00:00Z",
+      "name": "Acuity Lending Corporation, Robert Cancelosi, and Bret Costelow",
+      "fileRef": "/AdminOrders/enf-orders2013/S-12-0098_Acuity.pdf"
+    },
+    {
+      "id": 7909,
+      "caseNumber": "S-12-0098",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-04-23T07:00:00Z",
+      "name": "Acuity Lending Corporation, Rober Cancelosi, and Bret Costelow",
+      "fileRef": "/AdminOrders/enf-orders2013/S-12-0098_Cancelosi.pdf"
+    },
+    {
+      "id": 7910,
+      "caseNumber": "S-12-0099",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-02-20T08:00:00Z",
+      "name": "Alliance Advisory & Securities, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2013/S-12-0099.pdf"
+    },
+    {
+      "id": 7911,
+      "caseNumber": "S-12-0100",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-01-14T08:00:00Z",
+      "name": "The Griswold Company, Inc.,",
+      "fileRef": "/AdminOrders/enf-orders2013/S-12-0100.pdf"
+    },
+    {
+      "id": 7912,
+      "caseNumber": "S-12-0102",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-02-05T08:00:00Z",
+      "name": "FTI Capital Advisors LLC",
+      "fileRef": "/AdminOrders/enf-orders2013/S-12-0102.pdf"
+    },
+    {
+      "id": 7913,
+      "caseNumber": "S-13-0025",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-08-13T07:00:00Z",
+      "name": "James Walter Malanowski",
+      "fileRef": "/AdminOrders/enf-orders2013/S-13-0025.pdf"
+    },
+    {
+      "id": 7914,
+      "caseNumber": "S-13-0050",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-07-09T07:00:00Z",
+      "name": "Catalyst Financial Resources, LLC, Marcus Whitney Rogins, and Scott David Butler",
+      "fileRef": "/AdminOrders/enf-orders2013/S-13-0050.pdf"
+    },
+    {
+      "id": 7915,
+      "caseNumber": "S-13-0070",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-08-02T07:00:00Z",
+      "name": "Great Circle Financial",
+      "fileRef": "/AdminOrders/enf-orders2013/S-13-0070.pdf"
+    },
+    {
+      "id": 7916,
+      "caseNumber": "S-13-0071",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-06-25T07:00:00Z",
+      "name": "Cascade Investment Counsel LLC",
+      "fileRef": "/AdminOrders/enf-orders2013/S-13-0071.pdf"
+    },
+    {
+      "id": 7917,
+      "caseNumber": "S-13-0132",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-09-17T07:00:00Z",
+      "name": "Avalon Investment & Securities Group, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2013/S-13-0132.pdf"
+    },
+    {
+      "id": 7918,
+      "caseNumber": "S-13-0133",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-07-03T07:00:00Z",
+      "name": "Clifford Puterbaugh dba The Wealth Keys",
+      "fileRef": "/AdminOrders/enf-orders2013/S-13-0133.pdf"
+    },
+    {
+      "id": 7919,
+      "caseNumber": "S-13-0139",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-12-03T08:00:00Z",
+      "name": "William E. Hamm & Associates, Inc., dba Independent Financial Partners",
+      "fileRef": "/AdminOrders/enf-orders2013/S-13-0139.pdf"
+    },
+    {
+      "id": 7920,
+      "caseNumber": "S-13-0146",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-11-01T07:00:00Z",
+      "name": "RBC Capital Markets, LLC",
+      "fileRef": "/AdminOrders/enf-orders2013/S-13-0146.pdf"
+    },
+    {
+      "id": 7921,
+      "caseNumber": "S-13-0169",
+      "action": null,
+      "type": null,
+      "orderDate": "2013-10-14T07:00:00Z",
+      "name": "UBS Financial Services, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2013/S-13-0169.pdf"
+    },
+    {
+      "id": 7974,
+      "caseNumber": "S-12-0003-1; S-12-0003-2",
+      "action": null,
+      "type": null,
+      "orderDate": "2014-02-24T08:00:00Z",
+      "name": "Casey A. Mock and Bruce R. Mock",
+      "fileRef": "/AdminOrders/enf-orders2014/S-12-0003BruceCaseyMock.pdf"
+    },
+    {
+      "id": 7975,
+      "caseNumber": "S-13-0038",
+      "action": null,
+      "type": null,
+      "orderDate": "2014-01-21T08:00:00Z",
+      "name": "Steven W. Erdmann dba Klamath Financial Consulting",
+      "fileRef": "/AdminOrders/enf-orders2014/S-13-0038.pdf"
+    },
+    {
+      "id": 7976,
+      "caseNumber": "S-13-0044",
+      "action": null,
+      "type": null,
+      "orderDate": "2014-01-17T08:00:00Z",
+      "name": "Anderson Heights Development LLC",
+      "fileRef": "/AdminOrders/enf-orders2014/S-13-0044.pdf"
+    },
+    {
+      "id": 7977,
+      "caseNumber": "S-13-0065",
+      "action": null,
+      "type": null,
+      "orderDate": "2014-03-05T08:00:00Z",
+      "name": "Kyle E. Higgins",
+      "fileRef": "/AdminOrders/enf-orders2014/S-13-0065.pdf"
+    },
+    {
+      "id": 7978,
+      "caseNumber": "S-13-0158",
+      "action": null,
+      "type": null,
+      "orderDate": "2014-02-13T08:00:00Z",
+      "name": "Gerald Thomas Rauscher aka Dominic Rauscher",
+      "fileRef": "/AdminOrders/enf-orders2014/S-13-0158.pdf"
+    },
+    {
+      "id": 7979,
+      "caseNumber": "S-13-0572",
+      "action": null,
+      "type": null,
+      "orderDate": "2014-02-13T08:00:00Z",
+      "name": "Smith Rock Race Group, LLC",
+      "fileRef": "/AdminOrders/enf-orders2014/S-13-0572.pdf"
+    },
+    {
+      "id": 7980,
+      "caseNumber": "S-13-0603",
+      "action": null,
+      "type": null,
+      "orderDate": "2014-01-10T08:00:00Z",
+      "name": "IRA Wealth, LLC, an Oregon limited liability company, dba Safeguard Financial and Safeguard IRA & 401(k) Advisors",
+      "fileRef": "/AdminOrders/enf-orders2014/S-13-0603.pdf"
+    },
+    {
+      "id": 7981,
+      "caseNumber": "S-13-0605",
+      "action": null,
+      "type": null,
+      "orderDate": "2014-02-13T08:00:00Z",
+      "name": "Redwine & Company, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2014/S-13-0605.pdf"
+    },
+    {
+      "id": 7982,
+      "caseNumber": "S-13-0606",
+      "action": null,
+      "type": null,
+      "orderDate": "2014-02-13T08:00:00Z",
+      "name": "Nativeone Institutional Trading, LLC",
+      "fileRef": "/AdminOrders/enf-orders2014/S-13-0606.pdf"
+    },
+    {
+      "id": 7983,
+      "caseNumber": "S-13-0607",
+      "action": null,
+      "type": null,
+      "orderDate": "2014-02-13T08:00:00Z",
+      "name": "Grace Financial Group, LLC",
+      "fileRef": "/AdminOrders/enf-orders2014/S-13-0607.pdf"
+    },
+    {
+      "id": 7984,
+      "caseNumber": "S-14-0017",
+      "action": null,
+      "type": null,
+      "orderDate": "2014-12-24T08:00:00Z",
+      "name": "J.P. Morgan Securities, LLC",
+      "fileRef": "/AdminOrders/enf-orders2014/S-14-0017.pdf"
+    },
+    {
+      "id": 7985,
+      "caseNumber": "S-14-0018",
+      "action": null,
+      "type": null,
+      "orderDate": "2014-09-03T07:00:00Z",
+      "name": "Janrain, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2014/S-14-0018.pdf"
+    },
+    {
+      "id": 7986,
+      "caseNumber": "S-14-0025",
+      "action": null,
+      "type": null,
+      "orderDate": "2014-06-12T07:00:00Z",
+      "name": "Derek Dunmyer",
+      "fileRef": "/AdminOrders/enf-orders2014/S-14-0025.pdf"
+    },
+    {
+      "id": 7987,
+      "caseNumber": "S-14-0032",
+      "action": null,
+      "type": null,
+      "orderDate": "2014-10-09T07:00:00Z",
+      "name": "Randy L. Leslie",
+      "fileRef": "/AdminOrders/enf-orders2014/S-14-0032.pdf"
+    },
+    {
+      "id": 7988,
+      "caseNumber": "S-14-0042",
+      "action": null,
+      "type": null,
+      "orderDate": "2014-09-25T07:00:00Z",
+      "name": "Daytradingbuddy LLC and Remzi Bajrami",
+      "fileRef": "/AdminOrders/enf-orders2014/S-14-0042.pdf"
+    },
+    {
+      "id": 7989,
+      "caseNumber": "S-14-0049",
+      "action": null,
+      "type": null,
+      "orderDate": "2014-11-17T08:00:00Z",
+      "name": "Westrum Funeral Services, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2014/S-14-0049.pdf"
+    },
+    {
+      "id": 7990,
+      "caseNumber": "S-14-0057",
+      "action": null,
+      "type": null,
+      "orderDate": "2014-11-19T08:00:00Z",
+      "name": "Todd M. Thorne, individually, and dba Thorne Trading & Investment Management",
+      "fileRef": "/AdminOrders/enf-orders2014/S-14-0057.pdf"
+    },
+    {
+      "id": 7991,
+      "caseNumber": "S-14-0058",
+      "action": null,
+      "type": null,
+      "orderDate": "2014-12-03T08:00:00Z",
+      "name": "Intelicloud Holdings, Inc., and Jeffrey Friederichs",
+      "fileRef": "/AdminOrders/enf-orders2014/S-14-0058.pdf"
+    },
+    {
+      "id": 7997,
+      "caseNumber": "S-15-0081",
+      "action": "Securities sales",
+      "type": "Consent Order",
+      "orderDate": "2015-08-19T07:00:00Z",
+      "name": "Gill, Robert D.",
+      "fileRef": "/AdminOrders/enf-orders2015/20150819-gillr-s-15-0081.pdf"
+    },
+    {
+      "id": 7998,
+      "caseNumber": "S-15-0101",
+      "action": "Securities sales",
+      "type": "Consent Order",
+      "orderDate": "2015-09-15T07:00:00Z",
+      "name": "Roque, Julio E.",
+      "fileRef": "/AdminOrders/enf-orders2015/20150915-roquej-s-15-0101.pdf"
+    },
+    {
+      "id": 7999,
+      "caseNumber": "S-15-0104",
+      "action": "Securities sales",
+      "type": "Consent Order",
+      "orderDate": "2015-09-23T07:00:00Z",
+      "name": "Sheets, Ryan L.",
+      "fileRef": "/AdminOrders/enf-orders2015/20150923-sheetsr-s-15-0104.pdf"
+    },
+    {
+      "id": 8000,
+      "caseNumber": "S-15-0085",
+      "action": "Securities sales",
+      "type": "Consent Order",
+      "orderDate": "2015-10-01T07:00:00Z",
+      "name": "Kennedy, Thomas F.",
+      "fileRef": "/AdminOrders/enf-orders2015/20151001-kennedyt-s-15-0085.pdf"
+    },
+    {
+      "id": 8088,
+      "caseNumber": "S-14-0003",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-02-04T08:00:00Z",
+      "name": "Securities America, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2015/S-14-0003.pdf"
+    },
+    {
+      "id": 8089,
+      "caseNumber": "S-14-0059 ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-05-12T07:00:00Z",
+      "name": "Invest Northwest, L.L.C., and Kevin Michael Winder",
+      "fileRef": "/AdminOrders/enf-orders2015/S-14-0059.pdf"
+    },
+    {
+      "id": 8090,
+      "caseNumber": "S-14-0061a ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-07-16T07:00:00Z",
+      "name": "William Alvin Faubion and Peter Michael Nissen a/k/a Michael Peter Nissen",
+      "fileRef": "/AdminOrders/enf-orders2015/S-14-0061a.pdf"
+    },
+    {
+      "id": 8091,
+      "caseNumber": "S-14-0061b ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-08-17T07:00:00Z",
+      "name": "William Alvin Faubion and Peter Michael Nissen a/k/a Michael Peter Nissen",
+      "fileRef": "/AdminOrders/enf-orders2015/S-14-0061b.pdf"
+    },
+    {
+      "id": 8092,
+      "caseNumber": "S-14-0066 ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-09-10T07:00:00Z",
+      "name": "Big Spring Gold, LLC, Louis A. Christensen, William Gary Clawson, and Darby Clawson",
+      "fileRef": "/AdminOrders/enf-orders2015/S-14-0066.pdf"
+    },
+    {
+      "id": 8093,
+      "caseNumber": "S-14-0069",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-01-22T08:00:00Z",
+      "name": "Cloudability, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2015/S-14-0069.pdf"
+    },
+    {
+      "id": 8094,
+      "caseNumber": "S-15-0007",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-02-23T08:00:00Z",
+      "name": "PBS Engineering and Environmental Inc.",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0007.pdf"
+    },
+    {
+      "id": 8095,
+      "caseNumber": "S-15-0009 ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-03-29T07:00:00Z",
+      "name": "Thomas F. Haran III ",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0009.pdf"
+    },
+    {
+      "id": 8096,
+      "caseNumber": "S-15-0010 ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-06-15T07:00:00Z",
+      "name": "Direct REO Investments Inc., and Debra K. Chruszch",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0010.pdf"
+    },
+    {
+      "id": 8097,
+      "caseNumber": "S-15-0014 ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-08-19T07:00:00Z",
+      "name": "REBECCA E. CASTLE, also known as REBECCA GOINS, an individual; BLUE CASTLE FILMS LLC, an Oregon limited liability company, doing business as BLUE CASTLE FILMS, formerly known as BLUE CASTLE FILMS, LLC; ONE FOR ALL, LLC, an Oregon limited liability company; REBL, LLC, an Oregon limited liability company, and; CASTLE ROCK VENTURES, LTD, a Nevada corporation",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0014.pdf"
+    },
+    {
+      "id": 8098,
+      "caseNumber": "S-15-0048 ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-11-05T08:00:00Z",
+      "name": "Shayne M. Kniss; Iris Capital Management Group, LLC; Iris Private Capital, LLC; Iris Capital Fund I, Limited Partnership; Iris Capital Fund I GP, LLC; Iris Private Capital Fund II, Limited Partnership; IPC Villages GP, LLC; IPC Fund III, Limited Partnership; IPC Woodridge GP, LLC; Iris Private Capital Fund IV, LP; and IPC Fund IV, GP, LLC",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0048.pdf"
+    },
+    {
+      "id": 8099,
+      "caseNumber": "S-15-0061 ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-12-14T08:00:00Z",
+      "name": "Christopher S. Geye",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0061.pdf"
+    },
+    {
+      "id": 8100,
+      "caseNumber": "S-15-0062 ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-10-14T07:00:00Z",
+      "name": "Jan P. Oelze, Jr. ",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0062.pdf"
+    },
+    {
+      "id": 8101,
+      "caseNumber": "S-15-0068 ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-06-17T07:00:00Z",
+      "name": "Jake M. McGlone",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0068.pdf"
+    },
+    {
+      "id": 8102,
+      "caseNumber": "S-15-0071 ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-06-24T07:00:00Z",
+      "name": "Patheon Development Services, Inc., f/k/a Agere Pharmaceuticals, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0071.pdf"
+    },
+    {
+      "id": 8103,
+      "caseNumber": "S-15-0074 ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-07-15T07:00:00Z",
+      "name": "David C. Cregger",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0074.pdf"
+    },
+    {
+      "id": 8104,
+      "caseNumber": "S-15-0077 ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-07-22T07:00:00Z",
+      "name": "Brian J. Boccio",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0077.pdf"
+    },
+    {
+      "id": 8105,
+      "caseNumber": "S-15-0078 ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-08-14T07:00:00Z",
+      "name": "Anthony D. Massara",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0078.pdf"
+    },
+    {
+      "id": 8106,
+      "caseNumber": "S-15-0079 ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-08-18T07:00:00Z",
+      "name": "Trudy L. McCabe",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0079.pdf"
+    },
+    {
+      "id": 8107,
+      "caseNumber": "S-15-0080 ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-07-31T07:00:00Z",
+      "name": "Matthew Miner",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0080.pdf"
+    },
+    {
+      "id": 8108,
+      "caseNumber": "S-15-0082 ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-07-28T07:00:00Z",
+      "name": "Doreen Moore",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0082.pdf"
+    },
+    {
+      "id": 8109,
+      "caseNumber": "S-15-0083 ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-10-08T07:00:00Z",
+      "name": "Richard E. Blanco",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0083.pdf"
+    },
+    {
+      "id": 8110,
+      "caseNumber": "S-15-0084 ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-07-07T07:00:00Z",
+      "name": "Errol Guerra",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0084.pdf"
+    },
+    {
+      "id": 8111,
+      "caseNumber": "S-15-0096 ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-09-25T07:00:00Z",
+      "name": "Christopher Michael Kiichle",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0096.pdf"
+    },
+    {
+      "id": 8112,
+      "caseNumber": "S-15-0102 ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-08-28T07:00:00Z",
+      "name": "Robert Sean O'Connell",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0102.pdf"
+    },
+    {
+      "id": 8113,
+      "caseNumber": "S-15-0105 ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-10-05T07:00:00Z",
+      "name": "Louis F. Vargas",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0105.pdf"
+    },
+    {
+      "id": 8114,
+      "caseNumber": "S-15-0110",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-10-28T07:00:00Z",
+      "name": "William G. Gray III",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0110.pdf"
+    },
+    {
+      "id": 8115,
+      "caseNumber": "S-15-0111",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-11-05T08:00:00Z",
+      "name": "Gregory A. Timmons",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0111.pdf"
+    },
+    {
+      "id": 8116,
+      "caseNumber": "S-15-0112 ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-09-23T07:00:00Z",
+      "name": "Justin Pike",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0112.pdf"
+    },
+    {
+      "id": 8117,
+      "caseNumber": "S-15-0130 ",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-12-23T08:00:00Z",
+      "name": "Halcyon Cabot Partners, LTD",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0130.pdf"
+    },
+    {
+      "id": 8118,
+      "caseNumber": "S-15-0142",
+      "action": null,
+      "type": null,
+      "orderDate": "2016-01-26T08:00:00Z",
+      "name": "Joshua E. Stroud",
+      "fileRef": "/AdminOrders/enf-orders2015/S-15-0142.pdf"
+    },
+    {
+      "id": 8121,
+      "caseNumber": "S-16-0307",
+      "action": "Securities sales",
+      "type": "Final",
+      "orderDate": "2016-10-07T07:00:00Z",
+      "name": "Alvis, Jaymon G.",
+      "fileRef": "/AdminOrders/enf-orders2016/20161007-alvisj-s-16-0307.pdf"
+    },
+    {
+      "id": 8168,
+      "caseNumber": "S-14-0011",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-02-25T08:00:00Z",
+      "name": "Rugg, Randall David, an individual, and Rapid Funding Group, Inc., and A Corporation of Nevada",
+      "fileRef": "/AdminOrders/enf-orders2016/S-14-0011.pdf"
+    },
+    {
+      "id": 8169,
+      "caseNumber": "S-15-0075",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-09-03T07:00:00Z",
+      "name": "Citigroup Global Markets Inc.",
+      "fileRef": "/AdminOrders/enf-orders2016/S-15-0075.pdf"
+    },
+    {
+      "id": 8170,
+      "caseNumber": "S-15-0086",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-10-27T07:00:00Z",
+      "name": "Matthew Cowell, dba Milestone Capital Growth Portfolio, and dba milestone capital growth portfolio LLC.",
+      "fileRef": "/AdminOrders/enf-orders2016/S-15-0086.pdf"
+    },
+    {
+      "id": 8171,
+      "caseNumber": "S-15-0108",
+      "action": null,
+      "type": null,
+      "orderDate": "2016-08-18T07:00:00Z",
+      "name": "Grange, Todd Christopher (DBA THC Pharmaceutical, Inc.)",
+      "fileRef": "/AdminOrders/enf-orders2016/S-15-0108.pdf"
+    },
+    {
+      "id": 8172,
+      "caseNumber": "S-15-0113",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-10-15T07:00:00Z",
+      "name": "Wagner, Kristina A.",
+      "fileRef": "/AdminOrders/enf-orders2016/S-15-0113.pdf"
+    },
+    {
+      "id": 8173,
+      "caseNumber": "S-15-0125",
+      "action": null,
+      "type": null,
+      "orderDate": "2015-10-30T07:00:00Z",
+      "name": "Cozy Services, LTD",
+      "fileRef": "/AdminOrders/enf-orders2016/S-15-0125.pdf"
+    },
+    {
+      "id": 8174,
+      "caseNumber": "S-15-0126",
+      "action": null,
+      "type": null,
+      "orderDate": "2016-04-29T07:00:00Z",
+      "name": "LPL Financial LLC",
+      "fileRef": "/AdminOrders/enf-orders2016/S-15-0126.pdf"
+    },
+    {
+      "id": 8175,
+      "caseNumber": "S-15-0136",
+      "action": null,
+      "type": null,
+      "orderDate": "2016-01-13T08:00:00Z",
+      "name": "Millegan, James W. ",
+      "fileRef": "/AdminOrders/enf-orders2016/S-15-0136.pdf"
+    },
+    {
+      "id": 8176,
+      "caseNumber": "S-16-0017",
+      "action": null,
+      "type": null,
+      "orderDate": "2016-08-15T07:00:00Z",
+      "name": "Smith, David W. ",
+      "fileRef": "/AdminOrders/enf-orders2016/S-16-0017.pdf"
+    },
+    {
+      "id": 8177,
+      "caseNumber": "S-16-0027",
+      "action": null,
+      "type": null,
+      "orderDate": "2016-02-18T08:00:00Z",
+      "name": "Business Development Corporation of America",
+      "fileRef": "/AdminOrders/enf-orders2016/S-16-0027.pdf"
+    },
+    {
+      "id": 8178,
+      "caseNumber": "S-16-0105",
+      "action": null,
+      "type": null,
+      "orderDate": "2016-03-07T08:00:00Z",
+      "name": "Richards, Merrill & Peterson, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2016/S-16-0105.pdf"
+    },
+    {
+      "id": 8179,
+      "caseNumber": "S-16-0119",
+      "action": null,
+      "type": null,
+      "orderDate": "2016-04-14T07:00:00Z",
+      "name": "Blue Ridge Gold, LLC and Roger Paul Villeneuve",
+      "fileRef": "/AdminOrders/enf-orders2016/S-16-0119-BlueRidgeGold,.pdf"
+    },
+    {
+      "id": 8180,
+      "caseNumber": "S-16-0119",
+      "action": null,
+      "type": null,
+      "orderDate": "2016-04-27T07:00:00Z",
+      "name": "Villeneuve, Roger Paul and Blue Ridge Gold, LLC",
+      "fileRef": "/AdminOrders/enf-orders2016/S-16-0119-Villeneuve.pdf"
+    },
+    {
+      "id": 8181,
+      "caseNumber": "S-16-0173",
+      "action": null,
+      "type": null,
+      "orderDate": "2016-04-28T07:00:00Z",
+      "name": "Thorne, Todd M. Thorne; dba\nThorne Trading & Investment Management",
+      "fileRef": "/AdminOrders/enf-orders2016/S-16-0173.pdf"
+    },
+    {
+      "id": 8182,
+      "caseNumber": "S-16-0189",
+      "action": "Producer",
+      "type": "Final",
+      "orderDate": "2016-04-13T07:00:00Z",
+      "name": "Bio Logic Aqua Research Technologies International, Incorporated; Rogue Valley Natural Springs, Incorporated",
+      "fileRef": "/AdminOrders/enf-orders2016/S-16-0189.pdf"
+    },
+    {
+      "id": 8183,
+      "caseNumber": "S-16-0195",
+      "action": null,
+      "type": null,
+      "orderDate": "2016-04-25T07:00:00Z",
+      "name": "American Finance Trust, Inc.",
+      "fileRef": "/AdminOrders/enf-orders2016/S-16-0195.pdf"
+    },
+    {
+      "id": 8184,
+      "caseNumber": "S-16-0206",
+      "action": null,
+      "type": null,
+      "orderDate": "2016-06-13T07:00:00Z",
+      "name": "Vaughan, Thomas Earl ",
+      "fileRef": "/AdminOrders/enf-orders2016/S-16-0206.pdf"
+    },
+    {
+      "id": 8185,
+      "caseNumber": "S-16-0295",
+      "action": null,
+      "type": null,
+      "orderDate": "2016-10-18T07:00:00Z",
+      "name": "Szelagowski, Leszek ",
+      "fileRef": "/AdminOrders/enf-orders2016/S-16-0295.pdf"
+    },
+    {
+      "id": 8186,
+      "caseNumber": "S-16-0311",
+      "action": null,
+      "type": null,
+      "orderDate": "2016-12-02T08:00:00Z",
+      "name": "Regier, John D.",
+      "fileRef": "/AdminOrders/enf-orders2016/S-16-0311.pdf"
+    },
+    {
+      "id": 8191,
+      "caseNumber": "S-17-0135",
+      "action": "Securities sales",
+      "type": "Cease & Desist",
+      "orderDate": "2017-11-29T08:00:00Z",
+      "name": "Becker, Jackson & Reed LLC, a Florida limited liability company, Alpine Family Entertainment Parks 1, LLC, a Delaware limited liability company, and Judith Jackson, an individual",
+      "fileRef": "/AdminOrders/enf-orders-2017/20171129-alpinebjr-s-17-0135.pdf"
+    },
+    {
+      "id": 8194,
+      "caseNumber": "S-17-0120",
+      "action": "Securities sales",
+      "type": "Cease & Desist",
+      "orderDate": "2017-12-11T08:00:00Z",
+      "name": "Marc J. Welch, aka Marc J. Bryant; Mike Cohen; and One World Energy Advisors, LLC",
+      "fileRef": "/AdminOrders/enf-orders-2017/20171211-welchmj-s-17-0120.pdf"
+    },
+    {
+      "id": 8209,
+      "caseNumber": "S-16-0007",
+      "action": null,
+      "type": null,
+      "orderDate": "2017-09-21T07:00:00Z",
+      "name": "Cannacea, LLC, and Tisha Siler",
+      "fileRef": "/AdminOrders/enf-orders-2017/Cannacea Final Order ssig.pdf"
+    },
+    {
+      "id": 8221,
+      "caseNumber": "S-16-0016",
+      "action": null,
+      "type": null,
+      "orderDate": "2016-07-28T07:00:00Z",
+      "name": "Green Rush Consulting LLC",
+      "fileRef": "/AdminOrders/enf-orders-2017/Consent Order.pdf"
+    },
+    {
+      "id": 8233,
+      "caseNumber": "S-17-0007",
+      "action": null,
+      "type": null,
+      "orderDate": "2017-08-11T07:00:00Z",
+      "name": "Cetera Advisors, LLC and George Merhoff",
+      "fileRef": "/AdminOrders/enf-orders-2017/Final Order Amended.pdf"
+    },
+    {
+      "id": 8259,
+      "caseNumber": "S-17-0038",
+      "action": null,
+      "type": null,
+      "orderDate": "2017-04-11T07:00:00Z",
+      "name": "Kostromitin, Eugene",
+      "fileRef": "/AdminOrders/enf-orders-2017/KostromitinConesnt ssig.pdf"
+    },
+    {
+      "id": 8277,
+      "caseNumber": "S-17-0125",
+      "action": null,
+      "type": null,
+      "orderDate": "2017-10-26T07:00:00Z",
+      "name": "MVP REIT, INC.",
+      "fileRef": "/AdminOrders/enf-orders-2017/MVP REIT Consent Order_Conformed.pdf"
+    },
+    {
+      "id": 8284,
+      "caseNumber": "S-17-0117",
+      "action": null,
+      "type": null,
+      "orderDate": "2017-10-06T07:00:00Z",
+      "name": "GAYLE MATSON and\nWELLSPRING FINANCIAL\nPLANNING, LLC",
+      "fileRef": "/AdminOrders/enf-orders-2017/ORD_171004_Wellspring_ConsentOrder2_SettlementOff SIGG.pdf"
+    },
+    {
+      "id": 8285,
+      "caseNumber": "S-17-0118",
+      "action": null,
+      "type": null,
+      "orderDate": "2017-10-06T07:00:00Z",
+      "name": "DOUGLAS ALBO and CAPITAL\nINCOME MANAGEMENT, LLC",
+      "fileRef": "/AdminOrders/enf-orders-2017/ORD_171006_CIM_ConsentOrder SIGG.pdf"
+    },
+    {
+      "id": 8297,
+      "caseNumber": "S-16-0367",
+      "action": null,
+      "type": null,
+      "orderDate": "2017-03-14T07:00:00Z",
+      "name": "Finley Financial, LLC. and Jason D. Finley",
+      "fileRef": "/AdminOrders/enf-orders-2017/S-16-0367.pdf"
+    },
+    {
+      "id": 8298,
+      "caseNumber": "S-17-0009",
+      "action": null,
+      "type": null,
+      "orderDate": "2017-02-09T08:00:00Z",
+      "name": "PAYRANGE INC.",
+      "fileRef": "/AdminOrders/enf-orders-2017/S-17-0005.pdf"
+    },
+    {
+      "id": 8299,
+      "caseNumber": "S-17-0063",
+      "action": null,
+      "type": null,
+      "orderDate": "2017-09-21T07:00:00Z",
+      "name": "ROBERT D. DOUGHTY, aka BOB D. DOUGHTY; INLAND PACIFIC ENERGY CENTER LLC; GLOBAL ALTERNATIVE ENERGY CENTERS, LLC; GLOBAL ALTERNATIVE ENERGY CENTERS, LLC",
+      "fileRef": "/AdminOrders/enf-orders-2017/S-17-0063.pdf"
+    },
+    {
+      "id": 8305,
+      "caseNumber": "S-17-0144",
+      "action": null,
+      "type": null,
+      "orderDate": "2017-12-19T08:00:00Z",
+      "name": "URBAN AIRSHIP, INC.",
+      "fileRef": "/AdminOrders/enf-orders-2017/Sigg Urban Airship Consent Order.pdf"
+    },
+    {
+      "id": 8310,
+      "caseNumber": "S-15-0087",
+      "action": null,
+      "type": null,
+      "orderDate": "2017-01-05T08:00:00Z",
+      "name": "TRAUTMAN, JEFFREY A. ",
+      "fileRef": "/AdminOrders/enf-orders-2017/Trautman Consent Order ssig.pdf"
+    },
+    {
+      "id": 8319,
+      "caseNumber": "S-17-0120",
+      "action": null,
+      "type": null,
+      "orderDate": "2017-12-11T08:00:00Z",
+      "name": "MARC J. WELCH, aka MARC J. BRYANT;\nMIKE COHEN; and ONE WORLD\nENERGY ADVISORS, LLC",
+      "fileRef": "/AdminOrders/enf-orders-2017/Welch, Marc Final Order_Conformed.pdf"
+    },
+    {
+      "id": 8348,
+      "caseNumber": "S-17-0135",
+      "action": null,
+      "type": null,
+      "orderDate": "2018-01-02T08:00:00Z",
+      "name": "BECKER, JACKSON & REED LLC, a Florida limited liability company, ALPINE FAMILY ENTERTAINMENT PARKS 1, LLC, a Delaware limited liability company, and JUDITH JACKSON, an individual",
+      "fileRef": "/AdminOrders/enf-orders-2018/Default Order sigg.pdf"
+    },
+    {
+      "id": 8350,
+      "caseNumber": "S-18-0035",
+      "action": null,
+      "type": null,
+      "orderDate": "2018-06-14T07:00:00Z",
+      "name": "DELORME, TIMARY A. ",
+      "fileRef": "/AdminOrders/enf-orders-2018/Delorme Default Order - SIGG.pdf"
+    },
+    {
+      "id": 8366,
+      "caseNumber": "S-18-0008",
+      "action": null,
+      "type": null,
+      "orderDate": "2018-02-22T08:00:00Z",
+      "name": "HOWARTH, GARY S.  and HOWARTH\nFINANCIAL SERVICES, LLC",
+      "fileRef": "/AdminOrders/enf-orders-2018/Howarth, Gary Consent Order_Conformed.pdf"
+    },
+    {
+      "id": 8416,
+      "caseNumber": "S-17-0103",
+      "action": null,
+      "type": null,
+      "orderDate": "2018-04-13T07:00:00Z",
+      "name": "Wellington Sports Club",
+      "fileRef": "/AdminOrders/enf-orders-2018/Wellington Final Consent Order_Conformed.pdf"
+    },
+    {
+      "id": 8418,
+      "caseNumber": "S-17-0129",
+      "action": null,
+      "type": null,
+      "orderDate": "2018-05-07T07:00:00Z",
+      "name": "WOODBRIDGE MORTGAGE INVESTMENT FUND 1, LLC;\nWOODBRIDGE MORTGAGE INVESTMENT FUND 2, LLC;\nWOODBRIDGE MORTGAGE INVESTMENT FUND 3, LLC;\nWOODBRIDGE MORTGAGE INVESTMENT FUND 3A, LLC;\nWOODBRIDGE MORTGAGE INVESTMENT FUND 4, LLC; \nWMF MANAGEMENT, LLC; and\nWOODBRIDGE GROUP OF COMPANIES, LLC\n",
+      "fileRef": "/AdminOrders/enf-orders-2018/Woodbridge Wealth Consent Order sigg.pdf"
+    },
+    {
+      "id": 8433,
+      "caseNumber": "S-19-0077",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2019-12-09T08:00:00Z",
+      "name": "Daniel Robert Burns and Burns Capital Investment Advisors, Inc.",
+      "fileRef": "/AdminOrders/enf-orders-2019/BurnsFinalConsentOrder_Conformed.pdf"
+    },
+    {
+      "id": 8443,
+      "caseNumber": "S-18-0089",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2019-04-17T07:00:00Z",
+      "name": "Couglar, Harold F",
+      "fileRef": "/AdminOrders/enf-orders-2019/Couglar Consent Order - SIGG.pdf"
+    },
+    {
+      "id": 8445,
+      "caseNumber": "S-18-0104",
+      "action": "Enforcement",
+      "type": "Final",
+      "orderDate": "2019-01-07T08:00:00Z",
+      "name": "CW Group, LLC (\u201cCWG\u201d) and Bruce A. Wilbur",
+      "fileRef": "/AdminOrders/enf-orders-2019/CWGroup-20190107-S-18-0104.pdf"
+    },
+    {
+      "id": 8452,
+      "caseNumber": "S-19-0081",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2019-11-12T08:00:00Z",
+      "name": "Wesleyan Investment Foundation, Inc. ",
+      "fileRef": "/AdminOrders/enf-orders-2019/Final consent order Wesleyan S-19-0081 SIGG.pdf"
+    },
+    {
+      "id": 8454,
+      "caseNumber": "S-18-0040",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2019-03-18T07:00:00Z",
+      "name": "Charles L. Frost aka Charles \"Jack\" Frost dba BOWLS4LIFE.COM dba BOWLS4LIFE dba ACRE (NPN 8799608)",
+      "fileRef": "/AdminOrders/enf-orders-2019/Frost Consent Order - SIGG.pdf"
+    },
+    {
+      "id": 8455,
+      "caseNumber": "S-19-0011",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2019-06-13T07:00:00Z",
+      "name": "Gotter, Steven A",
+      "fileRef": "/AdminOrders/enf-orders-2019/Gotter C.O. SIGG.pdf"
+    },
+    {
+      "id": 8478,
+      "caseNumber": "S-18-0034",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2019-01-31T08:00:00Z",
+      "name": "LPL Financial LLC",
+      "fileRef": "/AdminOrders/enf-orders-2019/LPL Financial LLC Consent Order SIGG.pdf"
+    },
+    {
+      "id": 8490,
+      "caseNumber": "S-18-0111",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2019-04-01T07:00:00Z",
+      "name": "Invest/O Registered Investment Advisors",
+      "fileRef": "/AdminOrders/enf-orders-2019/ORD_190401_InvestO_FinalOrder SSIG.pdf"
+    },
+    {
+      "id": 8491,
+      "caseNumber": "S-15-0089",
+      "action": null,
+      "type": null,
+      "orderDate": "2019-06-17T07:00:00Z",
+      "name": "Reliance Investing Inc",
+      "fileRef": "/AdminOrders/enf-orders-2019/ORD_190617_Reliance_ConsentOrder_SIGG.pdf"
+    },
+    {
+      "id": 8492,
+      "caseNumber": "S-16-0256",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2019-10-14T07:00:00Z",
+      "name": "Douglas J. Geiger",
+      "fileRef": "/AdminOrders/enf-orders-2019/ORD_191008_Geiger_ConsentOrder_DouglasGeigerOnlySIGG.pdf"
+    },
+    {
+      "id": 8493,
+      "caseNumber": "S-19-0047",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2019-11-05T08:00:00Z",
+      "name": "Robert Lee Adams and SimTradePro Inc.",
+      "fileRef": "/AdminOrders/enf-orders-2019/ORD_191105_SimTradePro_FinalOrderbyDefault_SIGG.pdf"
+    },
+    {
+      "id": 8503,
+      "caseNumber": "S-18-0067",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2019-04-23T07:00:00Z",
+      "name": "Platinum Trading Company",
+      "fileRef": "/AdminOrders/enf-orders-2019/PTCDefaultOrderSIGG.pdf"
+    },
+    {
+      "id": 8505,
+      "caseNumber": "S-19-0002",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2019-10-07T07:00:00Z",
+      "name": "Eugene Artisan Foods, LLC D/B/A \nRed Wagon Creamery, and \nRed Wagon Foods, Inc.",
+      "fileRef": "/AdminOrders/enf-orders-2019/RedWagonDefaultOrderastoRW SIGG.pdf"
+    },
+    {
+      "id": 8506,
+      "caseNumber": "S-19-0066",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2019-07-29T07:00:00Z",
+      "name": "Resource Real Estate Opportunity REIT, Inc. ",
+      "fileRef": "/AdminOrders/enf-orders-2019/RESOURCE REAL ESTATE CONSENT ORDER SIGG.pdf"
+    },
+    {
+      "id": 8509,
+      "caseNumber": "S-18-0098",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2019-01-03T08:00:00Z",
+      "name": "Scott, Lisa L.",
+      "fileRef": "/AdminOrders/enf-orders-2019/ScottLL-20190103-S-18-0098.pdf"
+    },
+    {
+      "id": 8510,
+      "caseNumber": "S-17-0156",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2019-01-17T08:00:00Z",
+      "name": "Shean, Laura",
+      "fileRef": "/AdminOrders/enf-orders-2019/Shean Consent Order SSIG.pdf"
+    },
+    {
+      "id": 8518,
+      "caseNumber": "S-19-0054",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2019-08-15T07:00:00Z",
+      "name": "Trinity National Holdings, LLC",
+      "fileRef": "/AdminOrders/enf-orders-2019/TrinityNationalHoldingsConsentOrderSIGG.pdf"
+    },
+    {
+      "id": 8526,
+      "caseNumber": "S-19-0030",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2019-06-13T07:00:00Z",
+      "name": "Walcher, Holly",
+      "fileRef": "/AdminOrders/enf-orders-2019/Walcher C.O. SIGG.pdf"
+    },
+    {
+      "id": 8527,
+      "caseNumber": "S-19-0031",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2019-06-13T07:00:00Z",
+      "name": "Weakland, Megan",
+      "fileRef": "/AdminOrders/enf-orders-2019/Weakland C.O. SIGG.pdf"
+    },
+    {
+      "id": 8529,
+      "caseNumber": "S-19-0013",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2019-06-13T07:00:00Z",
+      "name": "Justin D. Williams and Williams Wealth Management, Inc.",
+      "fileRef": "/AdminOrders/enf-orders-2019/WilliamsJustinFinalConsentOrder_Conformed.pdf"
+    },
+    {
+      "id": 8530,
+      "caseNumber": "S-19-0107",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2019-12-04T08:00:00Z",
+      "name": "Richard Wimbourne",
+      "fileRef": "/AdminOrders/enf-orders-2019/WimbourneConsentOrderSIGG.pdf"
+    },
+    {
+      "id": 8545,
+      "caseNumber": "S-20-0030",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2020-05-06T07:00:00Z",
+      "name": "CHARLES L. FROST aka JACK FROST dba BOWLS4LIFE.COM dba BOWLS4LIFE dba ACRE, an Individual",
+      "fileRef": "/AdminOrders/enf-orders-2020/Charles L Frost  Default Order - SIGG.pdf"
+    },
+    {
+      "id": 8548,
+      "caseNumber": "S-19-0099",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2020-02-24T08:00:00Z",
+      "name": "DARYL W. SUTTON dba THE BLON PROJECT, LLC,  an Individual, and JAMES F. MOORE dba THE BLON PROJECT, LLC, an Individual ",
+      "fileRef": "/AdminOrders/enf-orders-2020/Consent Order - Sutton - SIGG.pdf"
+    },
+    {
+      "id": 8558,
+      "caseNumber": "S-19-0108",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2019-12-08T08:00:00Z",
+      "name": "Jayden S. Edwards",
+      "fileRef": "/AdminOrders/enf-orders-2020/EdwardsDefaultOrderSIGG.pdf"
+    },
+    {
+      "id": 8564,
+      "caseNumber": "S-19-0041",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2020-04-27T07:00:00Z",
+      "name": "Keith R. Gerbert",
+      "fileRef": "/AdminOrders/enf-orders-2020/GebertConsentOrderSIGG.pdf"
+    },
+    {
+      "id": 8566,
+      "caseNumber": "S-19-0100",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2020-04-02T07:00:00Z",
+      "name": "Greenbacker Renewable Energy Company LLC",
+      "fileRef": "/AdminOrders/enf-orders-2020/Greenbacker Consent Order_SIGG.pdf"
+    },
+    {
+      "id": 8569,
+      "caseNumber": "S-19-0105",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2020-02-10T08:00:00Z",
+      "name": "Nathaniel C. Harvey",
+      "fileRef": "/AdminOrders/enf-orders-2020/HarveyDefaultOrderSIGG.pdf"
+    },
+    {
+      "id": 8570,
+      "caseNumber": "S-19-0112",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2020-07-14T07:00:00Z",
+      "name": "Roderick C. Hillian",
+      "fileRef": "/AdminOrders/enf-orders-2020/HillianConsentOrderSIGG.pdf"
+    },
+    {
+      "id": 8573,
+      "caseNumber": "S-18-0049",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2020-06-04T07:00:00Z",
+      "name": "MARTIN L. HUDDLER, an Individual, AUGUSTINE FLORES, an Individual, STRATEGIC CAPITAL HOLDINGS LLC aka STRATEGIC CAPITAL HOLDINGS, LLC, a Revoked Nevada Limited Liability Company and YORK AVENUE PROPERTIES, LLC, a Dissolved Limited Liability Company",
+      "fileRef": "/AdminOrders/enf-orders-2020/Hudler Default Order re Flores, Strategic and York - SIGG.pdf"
+    },
+    {
+      "id": 8577,
+      "caseNumber": "S-19-0086",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2020-04-27T07:00:00Z",
+      "name": "GABRIEL JOHNSON AND C2SQUARED INC.",
+      "fileRef": "/AdminOrders/enf-orders-2020/JohnsonDefaultOrderSIGG.pdf"
+    },
+    {
+      "id": 8582,
+      "caseNumber": "S-19-0020",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2020-03-02T08:00:00Z",
+      "name": "F. David Lent dba Lent & Company, an Individual, and Heather Hunter, an Individual ",
+      "fileRef": "/AdminOrders/enf-orders-2020/Lent Consent Order SIGG.pdf"
+    },
+    {
+      "id": 8583,
+      "caseNumber": "S-19-0064",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2020-02-04T08:00:00Z",
+      "name": "Lumentrades Financial Incorporated",
+      "fileRef": "/AdminOrders/enf-orders-2020/LumentradesDefaultOrderSIGG.pdf"
+    },
+    {
+      "id": 8589,
+      "caseNumber": "S-20-0028",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2020-10-29T07:00:00Z",
+      "name": "George C. Merhoff",
+      "fileRef": "/AdminOrders/enf-orders-2020/MerhoffConsentOrderSIGG.pdf"
+    },
+    {
+      "id": 8594,
+      "caseNumber": "S-16-0256",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2020-01-14T08:00:00Z",
+      "name": "99 Crossings, LLC",
+      "fileRef": "/AdminOrders/enf-orders-2020/ORD 2020 0114 Geiger Default Order as to 99 Crossings Only.pdf"
+    },
+    {
+      "id": 8595,
+      "caseNumber": "S-20-0007",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2020-03-30T07:00:00Z",
+      "name": "Michael Syman-Degler",
+      "fileRef": "/AdminOrders/enf-orders-2020/ORD 2020 0316 Syman Degler ConsentOrder SIGG.pdf"
+    },
+    {
+      "id": 8596,
+      "caseNumber": "S-19-0113",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2020-04-29T07:00:00Z",
+      "name": "HARVARD OPTIONS",
+      "fileRef": "/AdminOrders/enf-orders-2020/ORD 2020 04 28 Harvard Options Default Order SIGG.pdf"
+    },
+    {
+      "id": 8597,
+      "caseNumber": "S-20-0025",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2020-12-17T08:00:00Z",
+      "name": "BULLBEAR INVESTMENT MANAGEMENT, LLC AND RONALD THEDA",
+      "fileRef": "/AdminOrders/enf-orders-2020/ORD 2020 12 02 Bullbear Consent Order SIGG.pdf"
+    },
+    {
+      "id": 8608,
+      "caseNumber": "S-19-0104",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2019-12-19T08:00:00Z",
+      "name": "Victoria G. Richard",
+      "fileRef": "/AdminOrders/enf-orders-2020/RichardDefaultOrderSIGG.pdf"
+    },
+    {
+      "id": 8610,
+      "caseNumber": "S-19-0019",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2020-08-24T07:00:00Z",
+      "name": "Raymond James Financial Services, Inc.",
+      "fileRef": "/AdminOrders/enf-orders-2020/RJFSConsentOrderSIGG.pdf"
+    },
+    {
+      "id": 8619,
+      "caseNumber": "S-19-0128",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2020-01-08T08:00:00Z",
+      "name": "Solium Financial Services LLC",
+      "fileRef": "/AdminOrders/enf-orders-2020/SFSOregonConsentOrderSIGG.pdf"
+    },
+    {
+      "id": 8623,
+      "caseNumber": "S-19-0080",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2020-01-27T08:00:00Z",
+      "name": "Southern Trust Securities, Inc. (CRD #103781) and Susan Escobio (CRD #1062322)",
+      "fileRef": "/AdminOrders/enf-orders-2020/Southern Trust consent order SIGG.pdf"
+    },
+    {
+      "id": 8627,
+      "caseNumber": "S-19-0103",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2020-01-27T08:00:00Z",
+      "name": "Randall Strange",
+      "fileRef": "/AdminOrders/enf-orders-2020/StrangeConsentOrderSIGG.pdf"
+    },
+    {
+      "id": 8629,
+      "caseNumber": "S-19-0111",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2020-11-05T08:00:00Z",
+      "name": "Nadesh E. Tanyi",
+      "fileRef": "/AdminOrders/enf-orders-2020/TanyiConsentOrderSIGG.pdf"
+    },
+    {
+      "id": 8637,
+      "caseNumber": "S-19-0144",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2020-07-13T07:00:00Z",
+      "name": "WILLIAM C. WESTROM, JR., aka BILL WESTROM",
+      "fileRef": "/AdminOrders/enf-orders-2020/WestromFinalOrder_Conformed.pdf"
+    },
+    {
+      "id": 8641,
+      "caseNumber": "S-20-0041",
+      "action": "Enforcement",
+      "type": "Final",
+      "orderDate": "2021-03-04T08:00:00Z",
+      "name": "Kyle V. Roberts, The Short Interest, LLC, and The Short Manager, LLC.",
+      "fileRef": "/AdminOrders/enf-orders-2021/20210304-Roberts-Kyle-S-20-0041.pdf"
+    },
+    {
+      "id": 8644,
+      "caseNumber": "S-12-0053",
+      "action": "Enforcement",
+      "type": "Amended",
+      "orderDate": "2021-12-28T08:00:00Z",
+      "name": "Bankers Life and Casualty Company and BLC Financial Services, Inc. ",
+      "fileRef": "/AdminOrders/enf-orders-2021/Bankers Life Consent Order Amendment w Exhibit_Signed.pdf"
+    },
+    {
+      "id": 8647,
+      "caseNumber": "S-20-0031",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2021-11-23T08:00:00Z",
+      "name": "Bunsuand, LLC ",
+      "fileRef": "/AdminOrders/enf-orders-2021/BunsunadConsentOrder_Sigg.pdf"
+    },
+    {
+      "id": 8667,
+      "caseNumber": "s-19-0019",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2021-01-09T08:00:00Z",
+      "name": "GARY DODDS AND RAYMOND JAMES FINANCIAL SERVICES, INC.",
+      "fileRef": "/AdminOrders/enf-orders-2021/DoddsConsentOrderSIGG.pdf"
+    },
+    {
+      "id": 8694,
+      "caseNumber": "S-21-0028",
+      "action": "Enforcement",
+      "type": "Default Order",
+      "orderDate": "2021-12-14T08:00:00Z",
+      "name": "Lasting Connections, LLC; Lasting Connections Matchmaking APP LLC; and Sameera Abdulaziz Sullivan",
+      "fileRef": "/AdminOrders/enf-orders-2021/LastingConnectionsDefaultOrderSIGG.pdf"
+    },
+    {
+      "id": 8707,
+      "caseNumber": "S-20-0031",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2021-11-16T08:00:00Z",
+      "name": "Abiodun Azeez Ogundipe, dba Focus Automobile",
+      "fileRef": "/AdminOrders/enf-orders-2021/OgundipeConsentOrder_SSIG.pdf"
+    },
+    {
+      "id": 8715,
+      "caseNumber": "S-19-0040",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2021-05-11T07:00:00Z",
+      "name": "Nicholas R. Radke, Jr.",
+      "fileRef": "/AdminOrders/enf-orders-2021/S-19-0040-Radke-Nicholas-20200511.pdf"
+    },
+    {
+      "id": 8730,
+      "caseNumber": "S-19-0136",
+      "action": "Enforcement",
+      "type": null,
+      "orderDate": "2021-01-15T08:00:00Z",
+      "name": "WISHBONE GROUP LLC, US FIDELITY HOMES, ROBERT REIFER, AND EDWARD PREBLE",
+      "fileRef": "/AdminOrders/enf-orders-2021/Wishbone Consent Order SSIG.pdf"
+    },
+    {
+      "id": 8742,
+      "caseNumber": "S-21-0062",
+      "action": "Enforcement",
+      "type": "Default Order",
+      "orderDate": "2022-02-15T08:00:00Z",
+      "name": "Jeremy W. Fortner",
+      "fileRef": "/AdminOrders/enf-orders-2022/Fortner Default Order - SIGG.pdf"
+    },
+    {
+      "id": 8756,
+      "caseNumber": "S-20-0101",
+      "action": "Enforcement",
+      "type": "Default Order",
+      "orderDate": "2021-08-19T07:00:00Z",
+      "name": "Hassan J. Tarzaban, and TRZ Advisor Group LLC",
+      "fileRef": "/AdminOrders/enf-orders-2022/ORD 2021 08 19 TRZ DefaultOrder SIGG.pdf"
+    },
+    {
+      "id": 8762,
+      "caseNumber": "S-19-0002",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2022-02-10T08:00:00Z",
+      "name": "Emily L. Phillips, Randolph \"Stuart\" Phillips, Eugene Artisan Foods, LLC D/B/A Red Wagon Creamery, and Red Wagon Foods, Inc.",
+      "fileRef": "/AdminOrders/enf-orders-2022/RedWagon_Phillips Consent Order_SIGG.pdf"
+    },
+    {
+      "id": 8776,
+      "caseNumber": "S-24-0021",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2026-02-05T08:00:00Z",
+      "name": "PANKAJ DAYO MOTWANI a/k/a PARKER DAYO a/k/a\nPARKER DALE",
+      "fileRef": "/AdminOrders/2_5_26_Dayo ConsentOrder settlement_SIGG.pdf"
+    },
+    {
+      "id": 8802,
+      "caseNumber": "S-20-0031",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2022-07-21T07:00:00Z",
+      "name": "Van Straaten, Pieter",
+      "fileRef": "/AdminOrders/Alogba Consent Order_SIGG.pdf"
+    },
+    {
+      "id": 8805,
+      "caseNumber": "S-23-0013",
+      "action": "Enforcement",
+      "type": "Default Order",
+      "orderDate": "2025-09-09T07:00:00Z",
+      "name": "Martin L. Hudler",
+      "fileRef": "/AdminOrders/Amended Default Order(final)_SIGG.pdf"
+    },
+    {
+      "id": 8819,
+      "caseNumber": "S-21-2013",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2023-11-28T08:00:00Z",
+      "name": "Mark L. Bain and Bain Wealth Management Group, LLC",
+      "fileRef": "/AdminOrders/Bain Consent Order_SIGG.pdf"
+    },
+    {
+      "id": 8826,
+      "caseNumber": "S-25-0029",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2025-04-29T07:00:00Z",
+      "name": "Blue Owl Credit Income Corp.",
+      "fileRef": "/AdminOrders/Blue Owl Consent Order_SIGG.pdf"
+    },
+    {
+      "id": 8827,
+      "caseNumber": "S-25-0090",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2025-11-19T08:00:00Z",
+      "name": "Sharon Ann Bollinger",
+      "fileRef": "/AdminOrders/Bollinger_ConsentOrder_SIGG.pdf"
+    },
+    {
+      "id": 8828,
+      "caseNumber": "S-23-0057",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2023-12-28T08:00:00Z",
+      "name": "Blue Owl Technology Income Corp.",
+      "fileRef": "/AdminOrders/BOTIC_Consent Order_SIGG.pdf"
+    },
+    {
+      "id": 8831,
+      "caseNumber": "S-22-0129",
+      "action": "Enforcement",
+      "type": "Default Order",
+      "orderDate": "2023-06-20T07:00:00Z",
+      "name": "Bunsunad, LLC",
+      "fileRef": "/AdminOrders/Bunsunad_DefaultOrder_SIGG.pdf"
+    },
+    {
+      "id": 8860,
+      "caseNumber": "S-22-0056",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2022-06-23T07:00:00Z",
+      "name": "Hood River Electric Cooperative",
+      "fileRef": "/AdminOrders/Consent order S-22-0056_SIGG.pdf"
+    },
+    {
+      "id": 8865,
+      "caseNumber": "S-18-0049",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2022-06-14T07:00:00Z",
+      "name": "Hudler, Martin L",
+      "fileRef": "/AdminOrders/Consent Order_Hudler - SIGG.pdf"
+    },
+    {
+      "id": 8868,
+      "caseNumber": "S-22-0028",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": null,
+      "name": "SAFEGUARD METALS LLC and JEFFREY IKAHN (a/k/a JEFFREY S. SANTULAN and JEFF HILL)",
+      "fileRef": "/AdminOrders/ConsentOrderandRestitutionCivilPenaltyOrder_Redacted.pdf"
+    },
+    {
+      "id": 8888,
+      "caseNumber": "S-21-0067",
+      "action": "Enforcement",
+      "type": "Default Order",
+      "orderDate": "2022-06-28T07:00:00Z",
+      "name": "Milich, Jesse A",
+      "fileRef": "/AdminOrders/DEFAULT Order Jesse Milich (conformed copy).pdf"
+    },
+    {
+      "id": 8891,
+      "caseNumber": "S-21-0024",
+      "action": "Enforcement",
+      "type": "Final Order",
+      "orderDate": "2022-10-10T07:00:00Z",
+      "name": "ORAG, LLC",
+      "fileRef": "/AdminOrders/Default Order SSig.pdf"
+    },
+    {
+      "id": 8893,
+      "caseNumber": "S-25-0050",
+      "action": "Enforcement",
+      "type": "Default Order",
+      "orderDate": "2025-09-16T07:00:00Z",
+      "name": "Anna Townsend",
+      "fileRef": "/AdminOrders/Default Order_Townsend_SIGG.pdf"
+    },
+    {
+      "id": 8894,
+      "caseNumber": "S-25-0025",
+      "action": "Enforcement",
+      "type": "Default Order",
+      "orderDate": "2025-08-26T07:00:00Z",
+      "name": "THE ADVANCEMENT GROUP INVESTMENT FUND LLC ",
+      "fileRef": "/AdminOrders/Default Order-The Advancement Group_SIGG.pdf"
+    },
+    {
+      "id": 8896,
+      "caseNumber": "S-22-0061",
+      "action": "Enforcement",
+      "type": "Default Order",
+      "orderDate": "2022-11-29T08:00:00Z",
+      "name": "Moore, Shane D",
+      "fileRef": "/AdminOrders/Defaulte_Order_Moore_SIGG.pdf"
+    },
+    {
+      "id": 8906,
+      "caseNumber": "S-25-0038",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2025-09-04T07:00:00Z",
+      "name": "EDWARD D. JONES & CO., L.P.",
+      "fileRef": "/AdminOrders/EdwardJonesOregonConsentOrder_SIGG.pdf"
+    },
+    {
+      "id": 8919,
+      "caseNumber": "S-23-0042",
+      "action": "Enforcement",
+      "type": "Default Order",
+      "orderDate": "2023-09-28T07:00:00Z",
+      "name": "www.exnowapp.vip and James Yeh",
+      "fileRef": "/AdminOrders/ExNow Default Order_SIGG.pdf"
+    },
+    {
+      "id": 8927,
+      "caseNumber": "S-22-0035",
+      "action": "Enforcement",
+      "type": "Final Order",
+      "orderDate": "2022-11-01T07:00:00Z",
+      "name": "Heather Hunter",
+      "fileRef": "/AdminOrders/Final Order - Lent_SIGG.pdf"
+    },
+    {
+      "id": 8937,
+      "caseNumber": "S-22-0041",
+      "action": "Enforcement",
+      "type": "Default Order",
+      "orderDate": "2022-06-23T07:00:00Z",
+      "name": "FX Binary Option aka FXBot",
+      "fileRef": "/AdminOrders/FxBot Final Default Order_SIGG.pdf"
+    },
+    {
+      "id": 8940,
+      "caseNumber": "S-24-0041",
+      "action": "Enforcement",
+      "type": "Default Order",
+      "orderDate": "2025-02-11T08:00:00Z",
+      "name": "GBL PARTNERS LLC and ARAN DEFILIPPIS",
+      "fileRef": "/AdminOrders/GBLPartnersDefaultOrder_Conformed.pdf"
+    },
+    {
+      "id": 8945,
+      "caseNumber": "S-20-0089",
+      "action": "Enforcement",
+      "type": "Default Order",
+      "orderDate": "2022-12-15T08:00:00Z",
+      "name": "Gillingham, Aaron",
+      "fileRef": "/AdminOrders/GillinghamDefaultOrderSIGG.pdf"
+    },
+    {
+      "id": 8952,
+      "caseNumber": "S-23-0033",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2023-08-02T07:00:00Z",
+      "name": "Greenbacker Renewable Energy Company, LLC",
+      "fileRef": "/AdminOrders/GREC Consent Order_SIGGl.pdf"
+    },
+    {
+      "id": 8953,
+      "caseNumber": "S-20-0056",
+      "action": "Enforcement",
+      "type": "Final Order",
+      "orderDate": "2024-05-30T07:00:00Z",
+      "name": "Bill John Grigorieff, dba Wealth Planning Group",
+      "fileRef": "/AdminOrders/GrigorieffFinalOrder_Conformed.pdf"
+    },
+    {
+      "id": 8966,
+      "caseNumber": "S-23-0013",
+      "action": "Enforcement",
+      "type": "Default Order",
+      "orderDate": "2023-05-25T07:00:00Z",
+      "name": "Martin L. Hudler",
+      "fileRef": "/AdminOrders/Hudler_Default Order_SIGG.pdf"
+    },
+    {
+      "id": 9003,
+      "caseNumber": "S-25-0036",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2025-10-06T07:00:00Z",
+      "name": "LPL FINANCIAL LLC",
+      "fileRef": "/AdminOrders/LPL Financial_Consent Order_SIGG.pdf"
+    },
+    {
+      "id": 9019,
+      "caseNumber": "S-23-0039",
+      "action": "Enforcement",
+      "type": "Default Order",
+      "orderDate": "2024-05-28T07:00:00Z",
+      "name": "ALEX VIERA aka Alejandro F Mora Viera aka Alejandro Mora Viera aka Alejandro Fabian Mora Viera aka Alex Ramos",
+      "fileRef": "/AdminOrders/MPB_Default Order_SIGG.pdf"
+    },
+    {
+      "id": 9022,
+      "caseNumber": "S-23-0039",
+      "action": "Enforcement",
+      "type": "Default Order",
+      "orderDate": "2024-01-23T08:00:00Z",
+      "name": "My Private Bullion",
+      "fileRef": "/AdminOrders/My Private Bullion Default Order_SIGG.pdf"
+    },
+    {
+      "id": 9026,
+      "caseNumber": "S-23-0003",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2023-02-23T08:00:00Z",
+      "name": "Nexo Capital Inc",
+      "fileRef": "/AdminOrders/Nexo_SignedConsentOrder_SIGG.pdf"
+    },
+    {
+      "id": 9038,
+      "caseNumber": "S-24-0039",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2024-10-08T07:00:00Z",
+      "name": "Gold Coporation d/b/a The Perth Mint",
+      "fileRef": "/AdminOrders/OR Perth Mint CO_SIGG.pdf"
+    },
+    {
+      "id": 9039,
+      "caseNumber": "S-21-0030",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2022-04-21T07:00:00Z",
+      "name": "Dia D. Howell",
+      "fileRef": "/AdminOrders/ORD 2022 04 04 Howell Consent Order_SIGG.pdf"
+    },
+    {
+      "id": 9040,
+      "caseNumber": "S-22-0038",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2022-06-09T07:00:00Z",
+      "name": "BlockFi Lending LLC",
+      "fileRef": "/AdminOrders/ORD 2022 06 08 BlockFi Consent Order for Oregon SSIG.pdf"
+    },
+    {
+      "id": 9042,
+      "caseNumber": "S-20-0033",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2023-01-26T08:00:00Z",
+      "name": "Swanson, David Douglas Sr, Swanson Financial Services, Inc. and SF Commercial, LLC",
+      "fileRef": "/AdminOrders/ORD 2023 01 25  Swanson ConsentOrder_SIGGdocx.pdf"
+    },
+    {
+      "id": 9045,
+      "caseNumber": "S-21-0056",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2023-08-29T07:00:00Z",
+      "name": "Oregon Financial Products & Services LLC",
+      "fileRef": "/AdminOrders/ORD 2023 08 09 OFPS Consent Order_SIGG.pdf"
+    },
+    {
+      "id": 9046,
+      "caseNumber": "S-22-0118",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2023-09-05T07:00:00Z",
+      "name": "Preisz Associates, Inc. d/b/a Preisz Financial",
+      "fileRef": "/AdminOrders/ORD 2023 08 23  Preisz Financial Consent Order_SIGG.pdf"
+    },
+    {
+      "id": 9048,
+      "caseNumber": "S-22-0090",
+      "action": "Enforcement",
+      "type": "Default Order",
+      "orderDate": "2023-12-05T08:00:00Z",
+      "name": "Laura O. Shean and PlanNow, LLC, dba PlanNow",
+      "fileRef": "/AdminOrders/ORD 2023 12 05 Shean default order_SIGG.pdf"
+    },
+    {
+      "id": 9049,
+      "caseNumber": "S-23-0041",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2024-02-01T08:00:00Z",
+      "name": "Sovereign Legacy Securities, Inc.",
+      "fileRef": "/AdminOrders/ORD 2024 02 01 Sovereign Consent Order_SIGG.pdf"
+    },
+    {
+      "id": 9054,
+      "caseNumber": "S-25-0015",
+      "action": "Enforcement",
+      "type": "Default Order",
+      "orderDate": "2025-09-23T07:00:00Z",
+      "name": "Nicholas O. Button",
+      "fileRef": "/AdminOrders/ORD 2025 09 19 Button default order_SIIGG.pdf"
+    },
+    {
+      "id": 9056,
+      "caseNumber": "S-23-0046",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2024-12-26T08:00:00Z",
+      "name": "Edward D. Jones & Co., L.P.",
+      "fileRef": "/AdminOrders/Oregon Edward Jones Consent Order_SIGG.pdf"
+    },
+    {
+      "id": 9065,
+      "caseNumber": "S-22-0112",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2023-12-01T08:00:00Z",
+      "name": "Patten & Daves Capital Management, an Oregon assumed business name, and Liane Empio, an individual",
+      "fileRef": "/AdminOrders/Patten & Daves Consent Order_SIGG.pdf"
+    },
+    {
+      "id": 9077,
+      "caseNumber": "S-24-0030",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2024-10-31T07:00:00Z",
+      "name": "Plutus Financial Holdings Inc., Plutus Financial Inc., Plutus Lending LLC, Abra Boost LLC, and William Barhydt",
+      "fileRef": "/AdminOrders/Plutus et al Consent Order - Oregon Final_SIGGdocx.pdf"
+    },
+    {
+      "id": 9082,
+      "caseNumber": "S-25-0022",
+      "action": "Enforcement",
+      "type": "Default Order",
+      "orderDate": "2025-10-28T07:00:00Z",
+      "name": "Prime Trading Partners LLC and Keith Buck",
+      "fileRef": "/AdminOrders/PTP_Default Order_SIGG.pdf"
+    },
+    {
+      "id": 9084,
+      "caseNumber": "S-23-0045",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2024-01-16T08:00:00Z",
+      "name": "Raymond James & Assoiates, Inc. and Raymond James Financial Services, Inc.",
+      "fileRef": "/AdminOrders/Raymond James Consent Order_SIGG.pdf"
+    },
+    {
+      "id": 9085,
+      "caseNumber": "S-25-0035",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2025-11-20T08:00:00Z",
+      "name": "RBC Capital Markets, LLC",
+      "fileRef": "/AdminOrders/RBCOregonConsentOrder_SIGG.pdf"
+    },
+    {
+      "id": 9091,
+      "caseNumber": "S-23-0025",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2023-08-29T07:00:00Z",
+      "name": "Robinhood Financial LLC",
+      "fileRef": "/AdminOrders/Robinhood Consent Order Oregon_SIGG.pdf"
+    },
+    {
+      "id": 9110,
+      "caseNumber": "S-22-0057",
+      "action": "Enforcement",
+      "type": "Default Order",
+      "orderDate": "2023-11-28T08:00:00Z",
+      "name": "Skyshell Trading and Richard Lewis Marks",
+      "fileRef": "/AdminOrders/Skyshell Trading_Default_Vacate RM_Combine_SIGG.pdf"
+    },
+    {
+      "id": 9127,
+      "caseNumber": "S-25-0037",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2025-09-03T07:00:00Z",
+      "name": "STIFEL, NICOLAUS & COMPANY, INC.",
+      "fileRef": "/AdminOrders/StifelOregonConsentOrder_SIGG.pdf"
+    },
+    {
+      "id": 9130,
+      "caseNumber": "S-24-0007",
+      "action": "Enforcement",
+      "type": "Cease & Desist",
+      "orderDate": "2024-07-18T07:00:00Z",
+      "name": "Joshua E. Stroud and Reign Wealth Logic, LLC",
+      "fileRef": "/AdminOrders/Stroud_Signed_Consent Order_SIGG.pdf"
+    },
+    {
+      "id": 9132,
+      "caseNumber": "S-23-0001",
+      "action": "Enforcement",
+      "type": "Final Order",
+      "orderDate": "2024-03-19T07:00:00Z",
+      "name": "Daryl W. Sutton dba The Blon Project, LLC",
+      "fileRef": "/AdminOrders/Sutton Final Order-SIGG.pdf"
+    },
+    {
+      "id": 9139,
+      "caseNumber": "S-25-0039",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2025-10-10T07:00:00Z",
+      "name": "TD AMERITRADE, INC.",
+      "fileRef": "/AdminOrders/TDAmeritradeConsentOrder_SIGG.pdf"
+    },
+    {
+      "id": 9147,
+      "caseNumber": "S-23-0080",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2024-01-10T08:00:00Z",
+      "name": "Tradestation Crypto, Inc.",
+      "fileRef": "/AdminOrders/TradeStation Consent Order Oregon.SIGG.pdf"
+    },
+    {
+      "id": 9149,
+      "caseNumber": "S-23-0058",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2024-01-09T08:00:00Z",
+      "name": "True Bullion, LLC, d/b/a Gold Silver International Exchange, d/b/a GSI Exchange, and Anthony Allen Anderson",
+      "fileRef": "/AdminOrders/True Bullion et al Consent Order Oregon_SIGG.pdf"
+    },
+    {
+      "id": 9158,
+      "caseNumber": "S-25-0017",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2025-03-10T07:00:00Z",
+      "name": "VANGUARD MARKETING CORPORATION, AND THE VANGUARD GROUP, INC.",
+      "fileRef": "/AdminOrders/Vanguard_Consent Order_SIGG.pdf"
+    },
+    {
+      "id": 9166,
+      "caseNumber": "S-20-0053",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2020-12-15T08:00:00Z",
+      "name": "Wesleyan Investment Foundation, Inc.",
+      "fileRef": "/AdminOrders/Wesleyan Investment Consent Order_signed.pdf"
+    },
+    {
+      "id": 9175,
+      "caseNumber": "S-25-0079",
+      "action": "Enforcement",
+      "type": "Final Order",
+      "orderDate": "2026-03-06T08:00:00Z",
+      "name": "QUANTUM CORP. TECHNOLOGIES",
+      "fileRef": "/AdminOrders/Default Order-Quantum Corp-SIGG.pdf"
+    },
+    {
+      "id": 9183,
+      "caseNumber": "S-26-0012",
+      "action": "Enforcement",
+      "type": "Default Order",
+      "orderDate": "2026-03-31T07:00:00Z",
+      "name": "ANDREW MASON, an Individual, and BLUE OCEAN CAPITAL LLC\nAS AGAINST RESPONDENT BLUE OCEAN CAPITAL LLC ONLY",
+      "fileRef": "/AdminOrders/Default Order-Blue Ocean-SIGG.pdf"
+    },
+    {
+      "id": 9196,
+      "caseNumber": "S-24-0034",
+      "action": "Enforcement",
+      "type": "Consent Order",
+      "orderDate": "2026-06-02T07:00:00Z",
+      "name": "Mahogany Investments LLC and Tyson S. Blachard a/k/a Ty Marquez",
+      "fileRef": "/AdminOrders/ORD 2026 06 02  Mahogany Investments ConsentOrder_SIGG.pdf"
+    }
+  ]
+}

@@ -4,6 +4,7 @@ const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
 const NY_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.NY;
 const IL_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.IL;
+const OR_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.OR;
 const VA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.VA;
 import { loadInvestorNetworkMetrics } from './load-network-metrics';
 const NJ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.NJ;
@@ -68,7 +69,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR';
   name: string;
   href: string;
   regulator: string;
@@ -508,6 +509,42 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
         sourceAsOf: IL_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
         retrievedAt: IL_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
         snapshotAsOf: IL_PUBLIC_SNAPSHOT.stateRia.snapshotAsOf,
+        generatedAt: null,
+      },
+    ],
+  },
+  {
+    code: 'OR',
+    name: 'Oregon',
+    href: OR_PUBLIC_SNAPSHOT.route,
+    regulator: 'Oregon Division of Financial Regulation (DFR)',
+    principalOfficeFirms:
+      OR_PUBLIC_SNAPSHOT.nationalOverlay.orPrincipalOfficeSecIardFirms,
+    rosterStatus: `IAPD compilation (${OR_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd.toLocaleString('en-US')} approved)`,
+    evidence: [
+      'SEC/IARD principal-office overlay',
+      'IAPD Oregon state-registered IA compilation',
+      'IAPD Oregon state ERA reporting',
+      'federal-covered notice filings',
+      'DFR S- securities orders (unattached)',
+    ],
+    identityNote:
+      'Approved state IA registrations are distinct from SEC principal-office overlays, federal notices, ERA reporting, and DFR securities orders.',
+    limitation:
+      'State-only CRDs were not minted as public SEC firm profiles. DFR S- orders are mixed securities matters, not an IA census, and are not name-attached.',
+    sourceClocks: [
+      {
+        label: 'SEC/IARD feed',
+        sourceAsOf: OR_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+        retrievedAt: OR_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+        snapshotAsOf: null,
+        generatedAt: null,
+      },
+      {
+        label: 'IAPD state compilation',
+        sourceAsOf: OR_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+        retrievedAt: OR_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+        snapshotAsOf: OR_PUBLIC_SNAPSHOT.stateRia.snapshotAsOf,
         generatedAt: null,
       },
     ],
@@ -1128,6 +1165,62 @@ export function buildInvestorHomepageEvidenceInventory(): InvestorHomepageEviden
       'PUBLIC',
       IL_PUBLIC_SNAPSHOT.federalNotice.sourceAsOf,
       IL_PUBLIC_SNAPSHOT.federalNotice.retrievedAt,
+    ),
+    stateMeasure(
+      'or_hq_overlay',
+      'SEC/IARD firms with an Oregon principal office',
+      OR_PUBLIC_SNAPSHOT.nationalOverlay.orPrincipalOfficeSecIardFirms,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'SEC/IARD firm with OR principal office',
+      'Oregon',
+      'SEC IAPD / IARD',
+      'artifacts/or-inv-001-public-snapshot.json',
+      OR_PUBLIC_SNAPSHOT.asOf,
+      'Federal roster firms reporting OR principal office.',
+      'Oregon state-RIA roster, notice filing, or DFR authority.',
+      '/oregon',
+      'PUBLIC',
+      OR_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+      OR_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+    ),
+    stateMeasure(
+      'or_state_roster',
+      'Oregon state-registered investment-adviser firms',
+      OR_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'IAPD state-compilation APPROVED firm with jurisdiction OR',
+      'Oregon',
+      'IAPD state compilation',
+      'artifacts/or-inv-001-public-snapshot.json',
+      OR_PUBLIC_SNAPSHOT.asOf,
+      'Approved Oregon state-IA firms in IA_FIRM_STATE_Feed_09_10_2026.',
+      'SEC principal-office overlay, federal notice filings, ERA reporting, or IAR people.',
+      '/oregon',
+      'PUBLIC',
+      OR_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+      OR_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+      'Exact firm CRD. State-only identities were not minted as public SEC profiles.',
+      'Filter is registration jurisdiction, not address.',
+    ),
+    stateMeasure(
+      'or_notice_filed',
+      'SEC/IARD firms with an Oregon notice filing',
+      OR_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'NoticeFiled RgltrCd=OR FILED',
+      'Oregon',
+      'SEC IAPD / IARD',
+      'artifacts/or-inv-001-public-snapshot.json',
+      OR_PUBLIC_SNAPSHOT.asOf,
+      'SEC/IARD firms with an Oregon notice filing in the cited compilation.',
+      'Oregon state-RIA licensure or the 167 principal-office overlay.',
+      '/oregon',
+      'PUBLIC',
+      OR_PUBLIC_SNAPSHOT.federalNotice.sourceAsOf,
+      OR_PUBLIC_SNAPSHOT.federalNotice.retrievedAt,
     ),
     stateMeasure(
       'az_index_crd_mentions',
