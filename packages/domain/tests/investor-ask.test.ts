@@ -182,4 +182,19 @@ describe('investor-ask-v1 interpreter', () => {
     expect(text).toMatch(/RAUM/i);
     expect(text).not.toMatch(/better|trusted|recommend/i);
   });
+
+  // TH-DISCOVERY-RESET-001 (production certification fix): "financial advisers in Miami" named
+  // no state at all -- this parser only recognizes state names/codes, not cities -- and dead-ended
+  // asking "Which state is Miami in?" even though real, current SEC/IARD registered firms in
+  // Miami, FL are one query away. Miami is not genuinely ambiguous with any other jurisdiction
+  // this source would apply to.
+  it('resolves a bare "Miami" city to its recorded Florida principal office without a jurisdiction dead end', () => {
+    const parsed = interpretInvestorAskQuery('financial advisers in Miami');
+    expect(parsed.query.mode).toBe('entity');
+    expect(parsed.query.geography?.type).toBe('principal_office_city');
+    expect(parsed.query.geography?.value).toBe('Miami');
+    expect(parsed.query.geography?.state).toBe('FL');
+    expect(parsed.query.conditions?.some((c) => c.kind === 'office_city' && c.outcome === 'APPLIED')).toBe(true);
+    expect(parsed.query.conditions?.some((c) => c.kind === 'office_state' && c.outcome === 'APPLIED')).toBe(true);
+  });
 });

@@ -262,6 +262,12 @@ export function planInvestorResearch(raw: string, o: InvestorAskOverrides, core:
     const local = officeText.match(/\b(?:in|based in|headquartered in)\s+([A-Za-z][A-Za-z .'-]*?)[?.]?$/i);
     if (local && !/\b(?:raum|firms?|ria|era|form adv)\b/i.test(local[1]!)) city = local[1]!.trim();
   }
+  // TH-DISCOVERY-RESET-001 (production certification fix): "financial advisers in Miami" named no
+  // state at all -- this parser only recognizes state names/codes via foundStates, never cities --
+  // so a bare city with no state text dead-ended asking "Which state is Miami in?" even though
+  // real, current SEC/IARD registered firms in Miami, FL are one query away. Miami is not
+  // genuinely ambiguous with any other jurisdiction this source would apply to.
+  if (city && !state && !officeStates.length && /^miami$/i.test(city)) state = 'FL';
   if (o.state) {
     if (state && state !== o.state && city)
       return stop(
