@@ -28,6 +28,29 @@ describe('OR-INV-001 publication', () => {
     expect(OR_PUBLIC_SNAPSHOT.stateEra.activeDistinctCrd).toBe(26);
     expect(OR_PUBLIC_SNAPSHOT.iar.oregonPersonDirectory).toBe('NOT_PUBLISHED');
     expect(OR_PUBLIC_SNAPSHOT.uiGrains.stateEra).toBe('VISIBLE_PUBLIC_METRIC');
+    expect(OR_PUBLIC_SNAPSHOT.nationalOverlay.searchHref).toBe('/firms?state=OR');
+    expect(ui).toContain('Research Oregon-headquartered SEC/IARD firms');
+    expect(ui).toContain('principal-office region OR');
+    expect(ui).toContain('MainAddr=@State=OR');
+    expect(ui).toContain('registration jurisdiction = OR');
+    expect(ui).toContain('Oregon DFR investment-adviser license search');
+    expect(ui).toContain('id="or-title"');
+    expect(ui).toContain('aria-labelledby="or-title"');
+    expect(ui).toContain('id="or-record-title"');
+    expect(ui).toContain('id="or-rule-title"');
+    expect(ui).toContain('id="or-verify-title"');
+    expect(ui).toContain('id="or-cases-title"');
+    expect(ui).toContain('id="or-not-title"');
+    expect(ui).toContain('not a DFR action census');
+    expect(ui).not.toMatch(/Research IL-headquartered/);
+    expect(ui).not.toMatch(/principal-office region IL/);
+    expect(ui).not.toMatch(/MainAddr=@State=IL/);
+    expect(ui).not.toMatch(/registration jurisdiction = IL/);
+    expect(ui).not.toMatch(/business brokers \/ loan brokers, not IA/);
+    expect(ui).not.toMatch(/not an DFR action census/);
+    expect(ui).not.toMatch(/aria-labelledby="il-/);
+    expect(ui).not.toMatch(/\bid="il-/);
+    expect(ui).not.toMatch(/\bIllinois\b/);
   });
 
   it('does not add Oregon DFR identities to claim validation', () => {
