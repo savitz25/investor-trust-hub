@@ -196,5 +196,10 @@ describe('investor-ask-v1 interpreter', () => {
     expect(parsed.query.geography?.state).toBe('FL');
     expect(parsed.query.conditions?.some((c) => c.kind === 'office_city' && c.outcome === 'APPLIED')).toBe(true);
     expect(parsed.query.conditions?.some((c) => c.kind === 'office_state' && c.outcome === 'APPLIED')).toBe(true);
+    // The exclusion list that decides whether a whole descriptive query becomes a literal
+    // simpleFirmName search only matched singular "adviser" -- \badviser\b never matches inside
+    // "advisers" -- so this real geography filter used to be silently ANDed with a nonexistent
+    // literal firm name ("financial advisers in Miami"), always returning zero rows.
+    expect(parsed.query.nameQuery).toBeUndefined();
   });
 });
