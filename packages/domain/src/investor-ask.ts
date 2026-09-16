@@ -617,6 +617,71 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     return { raw: q, query, interpretation: lines };
   }
 
+  if (/\bis this adviser registered in oregon\b|\bis .+ registered in oregon\b/i.test(q)) {
+    const query = failClosed(
+      'Current Oregon registration is verified on IAPD with an exact firm CRD or SEC file number. Name-only matching is unsafe. An Oregon principal office is not Oregon state registration. Use /oregon for statewide grains.',
+      ['Find CRD 105958.', 'Oregon investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:oregon (?:state )?rias?|oregon registered investment adviser|advisers? registered in oregon|licensed (?:investment )?advisers? in oregon|investment advisers? registered in oregon)\b/i.test(q)) {
+    const query = failClosed(
+      'Oregon state-registered investment-adviser firms are published on /oregon from the IAPD state compilation (jurisdiction=OR, APPROVED). Search V1 remains the SEC/IARD roster and does not treat the 167 principal-office overlay as Oregon state registration. Notice filing is a different grain from state IA.',
+      ['SEC/IARD firms reporting a principal office in Oregon.', 'Oregon investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:oregon era|oregon state era|exempt reporting advisers? in oregon)\b/i.test(q)) {
+    const query = failClosed(
+      'Oregon state ERA reporting firms are published on /oregon. ERA is not an RIA and is not Oregon state IA registration. Search V1 remains the SEC/IARD roster.',
+      ['Oregon investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:oregon notice filing|notice-?filed in oregon|federal-covered advisers? in oregon|sec adviser doing business in oregon)\b/i.test(q)) {
+    const query = failClosed(
+      'A federal-covered notice filing in Oregon is not Oregon state IA registration and is not an Oregon principal office. Use /oregon for the separate grains. Verify current status on IAPD.',
+      ['Oregon investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:financial adviser in oregon|investment adviser in oregon)\b/i.test(q) && !/\bregistered\b|\bnotice\b|\bera\b|\bcrd\b|\b801-/i.test(q)) {
+    const query = failClosed(
+      'Financial adviser in Oregon is not a single universe. Oregon principal office, Oregon state IA registration, Oregon state ERA reporting, and Oregon notice filing are separate grains. Search V1 geography is principal office, not Oregon licensure. Use /oregon.',
+      ['SEC/IARD firms reporting a principal office in Oregon.', 'Oregon investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if ((/\boregon\b/i.test(q) || /\bportland\b/i.test(q) || /\bmultnomah\b/i.test(q)) && /\b(?:complaint|disciplin|enforcement|securities order|administrative (?:action|order))\b/i.test(q)) {
+    const query = failClosed(
+      'Oregon DFR S- prefix orders are mixed securities administrative matters, not a firm-specific complaint or IA disciplinary history. Name-only matching is unsafe. Exact firm CRD or exact DFR case number is required. Complaints were not acquired as a bulk dataset; missing is not zero. Portland is not a separate InvestorTrustHub route. Use /oregon.',
+      ['Oregon investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\binvestment adviser representative oregon|oregon iar\b/i.test(q)) {
+    const query = failClosed(
+      'No complete current Oregon IAR person universe was published. IAR is not the firm. Person CRD is not firm CRD. Official verification remains IAPD individual lookup. Search-only is not zero.',
+      ['Oregon investor research page.', 'Find CRD 105958.'],
+    );
+    push('Coverage', 'OPEN_SEARCH_ONLY');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:best|highest performing|safe) (?:investment )?adviser in (?:oregon|portland)\b/i.test(q)) {
+    const query = failClosed(
+      'InvestorTrustHub does not rank advisers, score performance, or publish a Trust Score. Portland is not a separate InvestorTrustHub route.',
+      ['Oregon investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+
   if (/\bhow many form adv observations\b|\bhow many (normalized )?adv observations\b/i.test(q)) {
     const query: InvestorResearchQuery = {
       mode: 'count',
