@@ -81,12 +81,12 @@ export function OregonStateIntelligence() {
     <div className="ith-intel">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <section className="ith-intel-section" aria-labelledby="il-title">
+      <section className="ith-intel-section" aria-labelledby="or-title">
         <div className="th-shell">
           <p className="ith-eyebrow">InvestorTrustHub · Oregon</p>
-          <h1 id="il-title">Oregon Investment Adviser Intelligence</h1>
+          <h1 id="or-title">Oregon Investment Adviser Intelligence</h1>
           <p className="ith-lede">
-            The Oregon Division of Financial Regulation (DFR), regulates securities registration and related
+            The Oregon Division of Financial Regulation (DFR) regulates securities registration and related
             actors. This page organizes separate research lenses from accepted IAPD compilations and official
             Oregon DFR paths. It does not rank advisers, score firms, or publish a Trust Score. An Oregon
             principal office is not Oregon state registration. Oregon registration is not SEC registration.
@@ -95,7 +95,7 @@ export function OregonStateIntelligence() {
           <p className="ith-kicker">We organize the evidence. You decide.</p>
           <div className="ith-actions">
             <Link className="th-btn-primary th-btn-hero" href={snap.nationalOverlay.searchHref}>
-              Research IL-headquartered SEC/IARD firms
+              Research Oregon-headquartered SEC/IARD firms
             </Link>
             <a className="th-btn-secondary th-btn-hero" href={snap.stateRia.verifyUrl}>
               Verify on IAPD
@@ -104,10 +104,10 @@ export function OregonStateIntelligence() {
         </div>
       </section>
 
-      <section className="ith-intel-section" aria-labelledby="il-record-title">
+      <section className="ith-intel-section" aria-labelledby="or-record-title">
         <div className="th-shell">
           <p className="ith-eyebrow">State of the record</p>
-          <h2 id="il-record-title">Universe · Current · State ERA · Notice · As-of</h2>
+          <h2 id="or-record-title">Universe · Current · State ERA · Notice · As-of</h2>
           <div className="ith-metric-rail">
             <article className="ith-metric">
               <p className="ith-metric__value">{overlayCount.toLocaleString('en-US')}</p>
@@ -118,7 +118,7 @@ export function OregonStateIntelligence() {
                 sourceDate={snap.nationalOverlay.sourceAsOf}
                 coverage="National roster overlay"
                 grain={snap.nationalOverlay.grain}
-                calculation={`COUNT of roster firms with principal-office region IL = ${overlayCount}. Raw compilation MainAddr=@State=IL = ${snap.nationalOverlay.rawCompilationMainAddrOr} is a different extract.`}
+                calculation={`COUNT of roster firms with principal-office region OR = ${overlayCount}. Raw compilation MainAddr=@State=OR = ${snap.nationalOverlay.rawCompilationMainAddrOr} is a different extract.`}
                 caveat={snap.nationalOverlay.caveat}
               />
             </article>
@@ -130,7 +130,7 @@ export function OregonStateIntelligence() {
                 source={snap.stateRia.officialUrl}
                 sourceDate={snap.stateRia.sourceAsOf}
                 coverage={snap.stateRia.STATE_RIA_BULK_ROSTER}
-                grain="state-registered investment adviser firm; registration jurisdiction = IL"
+                grain="state-registered investment adviser firm; registration jurisdiction = OR"
                 calculation={`${snap.stateRia.registrationRows} Oregon StateRgstn rows; ${snap.stateRia.distinctFirmCrd} distinct firm CRDs; ${snap.stateRia.approvedDistinctCrd} APPROVED; ${snap.stateRia.termrequestDistinctCrd} TERMREQUEST. Filter is Rgltr/@Cd=OR, not address.`}
                 caveat={snap.stateRia.caveat}
               />
@@ -178,9 +178,9 @@ export function OregonStateIntelligence() {
         </div>
       </section>
 
-      <section className="ith-intel-section" aria-labelledby="il-rule-title">
+      <section className="ith-intel-section" aria-labelledby="or-rule-title">
         <div className="th-shell">
-          <h2 id="il-rule-title">Oregon DFR registration context</h2>
+          <h2 id="or-rule-title">Oregon DFR registration context</h2>
           <p>{snap.sosFramework.clientThresholdNote}</p>
           <p>
             Always verify current official records. This is not legal advice and does not determine whether any
@@ -197,9 +197,9 @@ export function OregonStateIntelligence() {
         </div>
       </section>
 
-      <section className="ith-intel-section" aria-labelledby="il-verify-title">
+      <section className="ith-intel-section" aria-labelledby="or-verify-title">
         <div className="th-shell">
-          <h2 id="il-verify-title">Current verification paths</h2>
+          <h2 id="or-verify-title">Current verification paths</h2>
           <p>
             Current firm status comes from accepted IAPD/SEC data or official current IAPD, BrokerCheck, or Oregon
             DFR guidance. Interactive search was not enumerated. Search-only is not zero.
@@ -213,21 +213,20 @@ export function OregonStateIntelligence() {
               not IA)
             </li>
             <li>
-              <a href={snap.sosFramework.officialRegistrationSearchUrl}>DFR registration search</a> (business
-              brokers / loan brokers, not IA)
+              <a href={snap.sosFramework.officialRegistrationSearchUrl}>Oregon DFR investment-adviser license search</a>
             </li>
           </ul>
         </div>
       </section>
 
-      <section className="ith-intel-section" aria-labelledby="il-cases-title">
+      <section className="ith-intel-section" aria-labelledby="or-cases-title">
         <div className="th-shell">
-          <h2 id="il-cases-title">Oregon DFR enforcement research path</h2>
+          <h2 id="or-cases-title">Oregon DFR enforcement research path</h2>
           <p>{snap.enforcement.caveat}</p>
           <p>
             Coverage: {snap.enforcement.REGULATORY_ACTIVITY_COVERAGE}. Complete DFR regulatory-activity count is
             unknown — not zero. This ticket attached {snap.enforcement.exactCrdCrosswalks} exact CRD records and
-            opened {snap.enforcement.pdfsDownloaded} PDFs; those are execution counts, not an DFR action census.
+            opened {snap.enforcement.pdfsDownloaded} PDFs; those are execution counts, not a DFR action census.
             Name-only is unsafe. No action found is not a clean record.
           </p>
           <p>
@@ -236,9 +235,9 @@ export function OregonStateIntelligence() {
         </div>
       </section>
 
-      <section className="ith-intel-section" aria-labelledby="il-not-title">
+      <section className="ith-intel-section" aria-labelledby="or-not-title">
         <div className="th-shell">
-          <h2 id="il-not-title">What this page does not mean</h2>
+          <h2 id="or-not-title">What this page does not mean</h2>
           <ul>
             <li>
               {snap.stateEra.activeDistinctCrd.toLocaleString('en-US')} Oregon state ERA reporting firms are a
