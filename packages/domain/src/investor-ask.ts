@@ -657,7 +657,7 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };
   }
-  if ((/\boregon\b/i.test(q) || /\bportland\b/i.test(q) || /\bmultnomah\b/i.test(q)) && /\b(?:complaint|disciplin|enforcement|securities order|administrative (?:action|order))\b/i.test(q)) {
+  if ((/\boregon\b/i.test(q) || /\bportland\b/i.test(q) || /\bmultnomah\b/i.test(q)) && /\b(?:complaints?|disciplin|enforcement|securities order|administrative (?:action|order))\b/i.test(q)) {
     const query = failClosed(
       'Oregon DFR S- prefix orders are mixed securities administrative matters, not a firm-specific complaint or IA disciplinary history. Name-only matching is unsafe. Exact firm CRD or exact DFR case number is required. Complaints were not acquired as a bulk dataset; missing is not zero. Portland is not a separate InvestorTrustHub route. Use /oregon.',
       ['Oregon investor research page.'],
