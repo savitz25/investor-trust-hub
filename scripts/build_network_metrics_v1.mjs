@@ -54,6 +54,9 @@ async function main() {
     paPrincipalOfficeFirms: pub.paPrincipalOfficeFirms,
     paStateRiaApproved: pub.paStateRiaApproved,
     paNoticeFiled: pub.paNoticeFiled,
+    ncPrincipalOfficeFirms: pub.ncPrincipalOfficeFirms,
+    ncStateRiaApproved: pub.ncStateRiaApproved,
+    ncNoticeFiled: pub.ncNoticeFiled,
   };
 
   if (input.riaFacts !== pub.riaFacts || input.eraFacts !== pub.eraFacts || input.rosterFirms !== pub.rosterFirms) {

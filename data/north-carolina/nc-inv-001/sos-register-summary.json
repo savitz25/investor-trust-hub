@@ -1,0 +1,89 @@
+{
+  "retrievedAt": "2026-09-17T21:10:06Z",
+  "registers": {
+    "IA": {
+      "kind": "IA",
+      "file": "Register_of_NC_IAs.pdf",
+      "bytes": 146354,
+      "sha256": "2931670d2017a3b08a6ca94bf1bf835a3d4244566abad8ed80cc3a85f2cf7707",
+      "sourceAsOf": "2026-06-30",
+      "rows": 694,
+      "distinct_crds": 693,
+      "missing_crd": 0,
+      "sample": [
+        "40",
+        "95",
+        "133",
+        "360",
+        "1618",
+        "5280",
+        "46035",
+        "104343"
+      ],
+      "header_snippet": "CRD Number Full Legal Name Primary Business Name | 323440 NADAJE HOLDINGS LLC EUSTACE ADVISORS | 128027 STU HAWVER, CFA, MBA, LLC STU HAWVER, CFA, MBA, LLC | 297244 CLW FINANCIAL PLANNING LLC CLW FINANCIAL PLANNING LLC | 142323 PARAKLETE FINANCIAL, INC. PARAKLETE FINANCIAL, INC. | 332248 GOLDEN PINE ADVISORY, LLC GOLDEN PINE ADVISORY, LLC | 154893 J. BROOKS & COMPANY, LLC J. BROOKS & COMPANY, LLC | 339812 STRAT"
+    },
+    "IAR": {
+      "kind": "IAR",
+      "file": "Register_of_NC_IARs.pdf",
+      "bytes": 3573524,
+      "sha256": "c1fd862391c938aa86e58e50a2b5afb86cc71c2217bafb523f3ce2ba2a51a351",
+      "sourceAsOf": null,
+      "rows": 21510,
+      "distinct_crds": 21510,
+      "missing_crd": 0,
+      "sample": [
+        "15157",
+        "19753",
+        "20770",
+        "21318",
+        "22742",
+        "22831",
+        "25377",
+        "36324"
+      ],
+      "header_snippet": "CRD Number Last Name First Name Middle Name Suffix  | 4499165 Anderson John JAMES | 4632120 WEBB DON MATTHEW | 2332359 BRIGHT MATTHEW PATRICK | 2341934 BROSNAN JOHN FRANCIS III | 4138217 DUBEL JOHN EISER JR. | 2670649 LEAZER CHRISTOPHER BRADLEY | 2384846 GRIFFIN CORNELIUS | 1856035 PRIDNIA CHRISTOPHER MICHAEL | 4314283 BURKE ALAN FRANKLIN | 4351741 HUDSON BRADLEY SCOTT | 3173739 THOMAS BRETT LEE | 4140389 WEINSTEIN MAX J"
+    },
+    "BD": {
+      "kind": "BD",
+      "file": "Register_of_NC_BDs.pdf",
+      "bytes": 273893,
+      "sha256": "6455ef114cfda85879b643faeca5eddbd14ec180a09a8765d50b586db37d3080",
+      "sourceAsOf": "2026-06-30",
+      "rows": 1789,
+      "distinct_crds": 1789,
+      "missing_crd": 0,
+      "sample": [
+        "37",
+        "38",
+        "61",
+        "70",
+        "79",
+        "83",
+        "134",
+        "145"
+      ],
+      "header_snippet": "CRD Number Business Name Applicant Name | 37 WORLD CAPITAL BROKERAGE, INC. WORLD CAPITAL BROKERAGE, INC. | 38 AMERICAN INVESTORS COMPANY L. S. Y., INC. | 61 B. C. ZIEGLER AND COMPANY B. C. ZIEGLER AND COMPANY | 70 BCG SECURITIES, INC. BCG SECURITIES, INC. | 79 J.P. MORGAN SECURITIES LLC J.P. MORGAN SECURITIES LLC | 83 INTERCOASTAL CAPITAL MARKETS, INC. INTERCOASTAL CAPITAL MARKETS, INC. | 134 CANTOR FITZGERALD "
+    },
+    "AG": {
+      "kind": "AG",
+      "file": "Register_of_NC_AGs.pdf",
+      "bytes": 38786997,
+      "sha256": "33bc5cb997fae51165d8c89159850672329e817c3e0dfb344d89c49ef7d8f0cb",
+      "sourceAsOf": "2026-06-30",
+      "rows": 247984,
+      "distinct_crds": 247984,
+      "missing_crd": 0,
+      "sample": [
+        "663",
+        "1217",
+        "1753",
+        "1842",
+        "1852",
+        "1987",
+        "2776",
+        "2786"
+      ],
+      "header_snippet": "CRD Number Last Name First Name Middle Name Suffix  | 3193065 CUPP DAVID Dewayne | 7735106 Hurry James-Alexander Edward | 7048225 Hurry John Corsentino | 2400460 BRILL EDWARD ROBERT | 7977582 Gonzalez Jeffrey Nathaniel | 7964251 Takas Noah James | 451327 UERTZ LAWRENCE EDWARD | 2082577 DOW RUSSELL BRADFORD | 1404159 GRENIER RAYMOND GERARD | 2210751 NIMS CYNTHIA LEE | 4958605 ROGERS SHELLEY | 6121683 HOLUBIAK THOMAS | 85369"
+    }
+  }
+}

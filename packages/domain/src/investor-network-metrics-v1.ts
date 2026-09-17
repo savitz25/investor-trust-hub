@@ -40,6 +40,7 @@ export type MetricGrain =
   | 'il_state_ria_roster'
   | 'or_state_ria_roster'
   | 'pa_state_ria_roster'
+  | 'nc_state_ria_roster'
   | 'form_adv_withdrawal'
   | 'form_adv_successor_link';
 
@@ -246,6 +247,12 @@ export type InvestorNetworkMetricsV1 = {
     noticeFiledFirms: number;
   };
   pennsylvania: {
+    principalOfficeRosterFirms: number;
+    stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION';
+    statewideStateRiaUniverse: number;
+    noticeFiledFirms: number;
+  };
+  northCarolina: {
     principalOfficeRosterFirms: number;
     stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION';
     statewideStateRiaUniverse: number;

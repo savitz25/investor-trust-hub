@@ -62,6 +62,9 @@ export type InvestorNetworkMetricsInput = {
   paPrincipalOfficeFirms: number;
   paStateRiaApproved: number;
   paNoticeFiled: number;
+  ncPrincipalOfficeFirms: number;
+  ncStateRiaApproved: number;
+  ncNoticeFiled: number;
 };
 
 function metric(partial: Omit<InvestorNetworkMetric, 'unit'>): InvestorNetworkMetric {
@@ -124,7 +127,7 @@ export function assertGrainSafety(input: InvestorNetworkMetricsInput): void {
   if (input.disclosureEvents === input.item11YesRia + input.item11YesEra && input.disclosureEvents > 0) {
     throw new Error('disclosure events must not be equated to Item 11 yes indicators');
   }
-  for (const path of ['/new-jersey', '/california', '/texas', '/washington', '/arizona', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania']) {
+  for (const path of ['/new-jersey', '/california', '/texas', '/washington', '/arizona', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania', '/north-carolina']) {
     if (!input.publishedStateIntelligencePaths.includes(path)) {
       throw new Error(`state intelligence path missing: ${path}`);
     }
@@ -685,20 +688,42 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       ),
     }),
     metric({
+      key: 'nc_state_ria_roster',
+      label: 'North Carolina state-registered investment-adviser firms',
+      value: input.ncStateRiaApproved,
+      valueState: 'KNOWN',
+      grain: 'nc_state_ria_roster',
+      denominator: 'IAPD state compilation APPROVED firms with registration jurisdiction = NC',
+      description:
+        'North Carolina state-registered investment-adviser firms from IA_FIRM_STATE_Feed_09_17_2026. Not the SOS IA register, not SEC RIA, not notice filing, not ERA, and not the 325 principal-office overlay.',
+      coverage: 'North Carolina',
+      contributingSourceSystems: ['iapd_state_compilation'],
+      sourceAsOf: input.publishedAt,
+      generatedAt,
+      publicationStatus: 'PUBLIC',
+      trace: commonTrace(
+        'IAPD StateRgstn/Rgltr/@Cd=NC and status APPROVED, counted as distinct firm CRD.',
+        'Not the NC SOS IA register. Not SEC/IARD principal-office firms. Not federal-covered notice filings. Not state ERA reporting. Not IAR people.',
+        ['iapd_state_compilation'],
+        'North Carolina',
+        'IA_FIRM_STATE_Feed_09_17_2026',
+      ),
+    }),
+    metric({
       key: 'published_state_intelligence_pages',
       label: 'Published state investment-intelligence pages',
       value: input.publishedStateIntelligencePaths.length,
       valueState: 'KNOWN',
       grain: 'published_state_intelligence_page',
       denominator: 'Indexable specialist state intelligence routes currently published',
-      description: 'New Jersey, California, Texas, Washington, Arizona, Colorado, Virginia, New York, Illinois, and Oregon state intelligence pages. Not a count of advisers.',
+      description: 'Published specialist state intelligence pages including North Carolina. Not a count of advisers.',
       coverage: input.publishedStateIntelligencePaths.join(', '),
       contributingSourceSystems: ['investor-state-intel'],
       sourceAsOf: newestDocumentedSourceAsOf,
       generatedAt,
       publicationStatus: 'PUBLIC',
       trace: commonTrace(
-        'Published /new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, and /pennsylvania intelligence routes.',
+        'Published /new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, and /north-carolina intelligence routes.',
         'Not county pages. Not national roster rows. Florida is not published on this hub.',
         ['investor-state-intel'],
         input.publishedStateIntelligencePaths.join(', '),
@@ -866,6 +891,12 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION',
       statewideStateRiaUniverse: input.paStateRiaApproved,
       noticeFiledFirms: input.paNoticeFiled,
+    },
+    northCarolina: {
+      principalOfficeRosterFirms: input.ncPrincipalOfficeFirms,
+      stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION',
+      statewideStateRiaUniverse: input.ncStateRiaApproved,
+      noticeFiledFirms: input.ncNoticeFiled,
     },
     network: {
       publishedStateIntelligencePages: input.publishedStateIntelligencePaths.length,
