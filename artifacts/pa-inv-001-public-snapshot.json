@@ -1,0 +1,456 @@
+{
+  "version": "investor-pa-state-intel-v1",
+  "generatedFrom": {
+    "nationalRoster": "packages/domain/src/investor-home-intel.ts V1_ROSTER_PRINCIPAL_OFFICE_STATES + V1_SEC_ROSTER",
+    "iapdStateCensus": "data/pennsylvania/pa-inv-001/iapd-pa-census.json",
+    "dobsEnforcement": "data/pennsylvania/pa-inv-001/dobs-enforcement-coverage.json"
+  },
+  "asOf": "2026-09-17",
+  "publicationGate": "ON",
+  "publicEligibility": "state_page",
+  "route": "/pennsylvania",
+  "growthClassification": "INTELLIGENCE_GROWTH_HEAVY",
+  "uiGrains": {
+    "stateIa": "VISIBLE_PUBLIC_METRIC",
+    "stateEra": "VISIBLE_PUBLIC_METRIC",
+    "notice": "VISIBLE_PUBLIC_METRIC",
+    "principalOffice": "VISIBLE_PUBLIC_METRIC",
+    "overlapApprovedStateIaNotice": "VISIBLE_SUPPORTING_CONTEXT",
+    "sosEnforcement": "VISIBLE_SUPPORTING_CONTEXT",
+    "iarPersonUniverse": "INTERNAL_DIAGNOSTIC_ONLY"
+  },
+  "nationalOverlay": {
+    "paPrincipalOfficeSecIardFirms": 623,
+    "grain": "SEC IARD roster firm with principal-office region = PA",
+    "source": "IA_FIRM_SEC_Feed_08_27_2026 (reconciled V1 roster geography)",
+    "sourceAsOf": "2026-08-27",
+    "publishedAt": "2026-08-27",
+    "retrievedAt": "2026-08-28",
+    "snapshotAsOf": "2026-08-27",
+    "universe": 23622,
+    "resolvedPrincipalOfficeRegions": 17997,
+    "unresolvedPrincipalOfficeRegions": 5625,
+    "shareOfResolvedRegionsPct": 3.46,
+    "searchHref": "/firms?state=PA",
+    "rawCompilationMainAddrPa": 628,
+    "rawCompilationSource": "IA_FIRM_SEC_Feed_09_17_2026 MainAddr/@State=PA",
+    "label": "SEC/IARD roster firms with a Pennsylvania principal office",
+    "caveat": "This is the national SEC/IARD roster overlay for firms that report a Pennsylvania principal office on the reconciled 23,622-firm geography table (PA = 623). It is not the Pennsylvania state-registered adviser universe, not a federal-covered notice-filing count, and not proof of current DoBS authority. PENNSYLVANIA PRINCIPAL OFFICE != PENNSYLVANIA STATE REGISTRATION. These 623 firms already exist in the federal graph and are not net-new organizations. The raw 2026-09-17 compilation MainAddr=@State=PA count is a different extract (628) and is not this overlay."
+  },
+  "riaEra": {
+    "nationalRiaFacts": 17018,
+    "nationalEraFacts": 6604,
+    "nationalTotalFacts": 23622,
+    "paPrincipalOfficeSplit": "SOURCE_NOT_SPLIT",
+    "caveat": "National roster keeps RIA (17,018) and ERA (6,604) separate. Committed geography is on the combined roster. Pennsylvania principal-office counts are not an RIA-only or ERA-only state denominator. ERA is not an RIA. SEC RIA is not a Pennsylvania state RIA."
+  },
+  "firmMarket": {
+    "raumBandsByPennsylvaniaPrincipalOffice": "SOURCE_NOT_SPLIT",
+    "note": "National RIA RAUM bands exist on the federal spine. This snapshot does not invent a Pennsylvania-only size ranking. A Pennsylvania principal office is not Pennsylvania registration."
+  },
+  "stateRia": {
+    "STATE_RIA_BULK_ROSTER": "ACQUIRED_IAPD_STATE_COMPILATION",
+    "access": "ACQUIRED",
+    "completeStateRiaCount": 864,
+    "registrationRows": 864,
+    "distinctFirmCrd": 864,
+    "approvedDistinctCrd": 864,
+    "termrequestDistinctCrd": 0,
+    "filter": "StateRgstn/Rgltr/@Cd=PA (registration jurisdiction). Not MainAddr/@State.",
+    "currentness": "APPROVED = current state IA in this compilation. TERMREQUEST is not approved current.",
+    "source": "IA_FIRM_STATE_Feed_09_17_2026",
+    "sourceAsOf": "2026-09-17",
+    "publishedAt": "2026-09-17",
+    "retrievedAt": "2026-09-17T15:15:00Z",
+    "snapshotAsOf": "2026-09-17",
+    "checksumSha256": "5fa17c38ae2e812dbd4d58c359c4d624a54417e3f794a3287c3414ccfdaa6a02",
+    "releaseLabel": "IA_FIRM_STATE_Feed_09_17_2026",
+    "officialUrl": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "sosSearch": "OPEN_SEARCH_ONLY",
+    "verifyUrl": "https://adviserinfo.sec.gov/",
+    "sosHomeUrl": "https://www.pa.gov/agencies/dobs/securities",
+    "sosRegistrationSearchUrl": "https://pa.gov/agencies/dobs/securities/securities-registration-office",
+    "sosAdminActionsUrl": "https://www.pa.gov/agencies/dobs/enforcement-orders",
+    "iapdUrl": "https://adviserinfo.sec.gov/",
+    "brokercheckUrl": "https://brokercheck.finra.org/",
+    "label": "Pennsylvania state-registered investment-adviser firms",
+    "caveat": "IAPD state compilation firms with Pennsylvania as the registration jurisdiction and status APPROVED. This is IARD-derived state registration evidence used by DoBS. It is not an SEC RIA count, not a federal-covered notice-filing count, not an ERA count, not a broker-dealer count, and not the 623 principal-office overlay. Duplicate/multi-jurisdiction rows were collapsed to distinct firm CRD. State-only CRDs were not minted as public SEC firm profiles. DoBS mixed securities-class totals exceeding 200,000 are not this grain."
+  },
+  "stateEra": {
+    "STATE_ERA_REPORTING": "ACQUIRED_IAPD_STATE_COMPILATION",
+    "registrationRows": 99,
+    "distinctFirmCrd": 99,
+    "activeDistinctCrd": 99,
+    "overlapWithStateIa": 0,
+    "filter": "ERA/Rgltr/@Cd=PA (reporting jurisdiction). Not address. Not StateRgstn.",
+    "source": "IA_FIRM_STATE_Feed_09_17_2026",
+    "sourceAsOf": "2026-09-17",
+    "retrievedAt": "2026-09-17T15:15:00Z",
+    "label": "Pennsylvania state ERA reporting firms",
+    "caveat": "State ERA reporting is not a Pennsylvania state RIA and is not an SEC RIA. Overlap with state IA is zero in this extract."
+  },
+  "federalNotice": {
+    "FEDERAL_COVERED_NOTICE_ROSTER": "ACQUIRED_IAPD_SEC_COMPILATION",
+    "access": "ACQUIRED",
+    "noticeRows": 3411,
+    "noticeFiledDistinctCrd": 3411,
+    "noticeStatus": "FILED",
+    "filter": "NoticeFiled/States/@RgltrCd=PA",
+    "source": "IA_FIRM_SEC_Feed_09_17_2026",
+    "sourceAsOf": "2026-09-17",
+    "publishedAt": "2026-09-17",
+    "retrievedAt": "2026-09-17T15:15:00Z",
+    "snapshotAsOf": "2026-09-17",
+    "overlapApprovedStateIa": 5,
+    "overlapApprovedStateIaJoinMethod": "exact firm CRD set intersection of APPROVED StateRgstn/Rgltr/@Cd=PA and NoticeFiled/States/@RgltrCd=PA St=FILED",
+    "overlapApprovedStateIaCrds": [
+      "153659",
+      "158134",
+      "307239",
+      "321165",
+      "339188"
+    ],
+    "overlapApprovedStateIaReading": "Credential classes remain separate. Exact firm CRDs that appear in both APPROVED Pennsylvania StateRgstn and FILED Pennsylvania NoticeFiled are listed; neither grain is discarded or summed.",
+    "overlapEraNotice": 0,
+    "filedFirmType": {
+      "Registered": 3411,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          3411
+        ]
+      ]
+    },
+    "label": "SEC/IARD firms with a Pennsylvania notice filing",
+    "caveat": "Federal-covered / notice-filed is not Pennsylvania state-RIA licensure. Notice-filed is not the 623 principal-office overlay. A Pennsylvania principal office does not prove a current notice filing."
+  },
+  "iar": {
+    "IA_INDVL_FEED": "ACQUIRED_NATIONAL_FEED",
+    "pennsylvaniaPersonDirectory": "NOT_PUBLISHED",
+    "PA_IAR_ROSTER_STATUS": "OPEN_SEARCH_ONLY",
+    "access": "OPEN_SEARCH_ONLY",
+    "completeIarCount": "UNKNOWN",
+    "grain": "person CRD (not firm CRD)",
+    "source": "IA_INDVL_Feed_08_27_2026",
+    "sourceAsOf": "2026-08-27",
+    "retrievedAt": "2026-08-28",
+    "verifyUrl": "https://adviserinfo.sec.gov/",
+    "caveat": "The national IAR compilation exists. This ticket does not publish a Pennsylvania person directory. IAR is not the firm. Search V1 remains firm-focused. Complete Pennsylvania IAR universe is UNKNOWN, not zero."
+  },
+  "brokerDealer": {
+    "PA_BD_BULK_ROSTER": "SOURCE_NOT_ACQUIRED",
+    "PA_AGENT_BULK_ROSTER": "SOURCE_NOT_ACQUIRED",
+    "access": "OPEN_SEARCH_ONLY",
+    "completeDealerCount": "UNKNOWN",
+    "completeAgentCount": "UNKNOWN",
+    "verifyUrl": "https://brokercheck.finra.org/",
+    "caveat": "Broker-dealer is not an investment adviser. Registered representative is not an IAR. DoBS also licenses broker-dealers and agents; those classes are not added to IA counts. BrokerCheck is not scraped. Search-only is not zero."
+  },
+  "sosFramework": {
+    "regulator": "Pennsylvania Department of Banking and Securities (DoBS)",
+    "notDfi": true,
+    "ruleCitation": "Pennsylvania Securities Act of 1972, 70 P.S. § 1-101 et seq.; 10 Pa. Code",
+    "officialHomeUrl": "https://www.pa.gov/agencies/dobs/securities",
+    "officialRegistrationSearchUrl": "https://pa.gov/agencies/dobs/securities/securities-registration-office",
+    "officialAdminActionsUrl": "https://www.pa.gov/agencies/dobs/enforcement-orders",
+    "clientThresholdNote": "DoBS issues Investment Adviser, Investment Adviser Representative, Broker-Dealer, and Broker-Dealer Agent licenses/registrations and processes federally covered adviser notice filings through CRD/IARD. A mixed DoBS securities-class total exceeding 200,000 is not an investment-adviser count. This page is research evidence, not legal advice about whether a specific firm was required to register. Verify the current official record.",
+    "notLegalAdvice": true,
+    "mixedDoBsSecuritiesClassTotalIsNotIa": true,
+    "retrievedAt": "2026-09-17"
+  },
+  "dobsPortal": {
+    "coverage": "NOT_A_PUBLIC_FIRM_ROSTER",
+    "officialUrl": "https://www.pa.gov/agencies/dobs/dobs-portal",
+    "caveat": "The DoBS Portal is for compliance/examination communications. Portal accounts are not registrations."
+  },
+  "exams": {
+    "PA_IA_EXAM_RESULTS": "NOT_PUBLICLY_ACQUIRED",
+    "PA_IA_EXAM_RESULT_ROWS": null,
+    "caveat": "DoBS Bureau of Securities Compliance and Examinations examines investment advisers and broker-dealers. Public guidance is process guidance, not a list of exam findings. Examination guidance is not inspections, violations, or disciplinary matters."
+  },
+  "offerings": {
+    "coverage": "LEFT_FUTURE",
+    "caveat": "Registered securities offerings are an issuer/offering grain, not an adviser-firm registration grain."
+  },
+  "enforcement": {
+    "pass": "dobs_coveo_enforcement_orders_hub",
+    "result": "ACQUIRED_CURRENT_SNAPSHOT",
+    "officialIndex": "https://www.pa.gov/agencies/dobs/enforcement-orders",
+    "officialSearch": "https://www.pa.gov/agencies/dobs/enforcement-orders",
+    "coverage": "DoBS Enforcement Orders Coveo search hub DOBS-Enforcement Orders",
+    "REGULATORY_ACTIVITY_COVERAGE": "ACQUIRED_CURRENT_SNAPSHOT",
+    "COMPLETE_REGULATORY_ACTIVITY_COUNT": "UNKNOWN",
+    "PA_DOBS_ENFORCEMENT_CATALOG_STATUS": "ACQUIRED_CURRENT_SNAPSHOT",
+    "PA_DOBS_ALL_ORDER_DOCUMENTS_AUDITED": 1525,
+    "PA_DOBS_SECURITIES_ORDER_DOCUMENTS": null,
+    "PA_DOBS_SECURITIES_UNIQUE_MATTERS": null,
+    "PA_DOBS_IA_EXACT_CLASS_DOCUMENTS": null,
+    "PA_DOBS_IAR_EXACT_CLASS_DOCUMENTS": null,
+    "PA_DOBS_BD_EXACT_CLASS_DOCUMENTS": null,
+    "PA_DOBS_OTHER_SECURITIES_DOCUMENTS": null,
+    "PA_DOBS_EXACT_CRD_DOCUMENTS": 0,
+    "PA_DOBS_EXACT_CRD_ATTACHMENTS": 0,
+    "observationRows": 1525,
+    "distinctCaseNumbers": null,
+    "rowsWithCrd": 0,
+    "rowsNameOnly": 1525,
+    "ROWS_ACQUIRED_BY_THIS_TICKET": 1525,
+    "pdfsDownloaded": 0,
+    "exactCrdCrosswalks": 0,
+    "doNotCalculateEnforcementRate": true,
+    "notInvestmentAdviserEnforcementCensus": true,
+    "mixedCatalogNotSecuritiesOnly": true,
+    "catalogHasSourceNativeSecuritiesFacet": false,
+    "profileAttachments": [],
+    "identityBar": "EXACT_FIRM_CRD, EXACT_PERSON_CRD for person grain only, or exact source-native DoBS docket/matter identifier",
+    "nameOnly": "UNSAFE",
+    "namePlusCity": "REVIEW_REQUIRED",
+    "documentTypeFromFilename": {
+      "consent_agreement_and_order": 426,
+      "settlement": 9,
+      "final_order": 37,
+      "order_to_show_cause": 8,
+      "other_or_unlabeled": 1029,
+      "revocation": 2,
+      "denial": 1,
+      "suspension": 13
+    },
+    "sourceAsOf": null,
+    "retrievedAt": "2026-09-17T15:15:44Z",
+    "snapshotAsOf": "2026-09-17",
+    "caveat": "Coveo hub DOBS-Enforcement Orders returned 1,525 PDF documents. Metadata does not include docket number, industry/program, or CRD. The catalog mixes banking, mortgage, and securities. Securities-only and IA-only counts remain UNKNOWN, not zero. Filename tokens are not a source-native securities class. Unique matter identity was not invented. No PDFs downloaded. No name-only CRD attachments."
+  },
+  "complaints": {
+    "publicResearchPath": "https://www.pa.gov/services/dobs/file-a-complaint-about-a-financial-entity-or-professional",
+    "bulkComplaintDataset": "SOURCE_NOT_ACQUIRED",
+    "access": "OPEN_INTAKE",
+    "PA_IA_COMPLAINT_ROWS": null,
+    "PA_IA_COMPLAINT_COVERAGE": "OPEN_INTAKE",
+    "completeComplaintCount": "UNKNOWN",
+    "caveat": "DoBS Consumer Help Center is an intake channel. No public adviser-specific complaint bulk dataset was acquired. Intake capability is not a complaint total. Complaint is not an enforcement order."
+  },
+  "formD": {
+    "overlay": "SOURCE_NOT_ACQUIRED",
+    "caveat": "FORM D / EFD FILING != PENNSYLVANIA STATE APPROVAL. FORM D FILING != INVESTMENT QUALITY. FORM D FILING != ADVISER."
+  },
+  "contacts": {
+    "policy": "Official/public business sources only. No internet enrichment. No IAPD/BrokerCheck search scrape. No person contact publication from this ticket.",
+    "sosSearchScrape": false
+  },
+  "juiceSqueeze": [
+    {
+      "decision": "GRABBED — HIGH YIELD",
+      "source": "IAPD Pennsylvania state IA registration slice (jurisdiction=PA)"
+    },
+    {
+      "decision": "GRABBED — HIGH YIELD",
+      "source": "IAPD Pennsylvania ERA slice"
+    },
+    {
+      "decision": "GRABBED — HIGH YIELD",
+      "source": "IAPD Pennsylvania federal notice slice"
+    },
+    {
+      "decision": "GRABBED — HIGH YIELD",
+      "source": "Existing PA principal-office overlay (V1_ROSTER_PRINCIPAL_OFFICE_STATES = 623)"
+    },
+    {
+      "decision": "GRABBED — HIGH YIELD",
+      "source": "DoBS Enforcement Orders Coveo catalog (1,525 mixed PDF documents)"
+    },
+    {
+      "decision": "GRABBED — EASY SECONDARY",
+      "source": "DoBS Securities Registration Office and Consumer Help Center official paths"
+    },
+    {
+      "decision": "LEFT — SEARCH ONLY",
+      "source": "Current IAPD/BrokerCheck/DoBS Portal interactive verification"
+    },
+    {
+      "decision": "LEFT — TOO MUCH WORK FOR CURRENT YIELD",
+      "source": "Mass OCR of 1,525 DoBS enforcement PDFs for CRD/docket extraction"
+    },
+    {
+      "decision": "LEFT — TOO MUCH WORK FOR CURRENT YIELD",
+      "source": "Individual U4/U5 histories and IAR public directory"
+    },
+    {
+      "decision": "LEFT — REQUEST ONLY",
+      "source": "FOIA / structured securities-only export if later published"
+    },
+    {
+      "decision": "LEFT — SHARED / FUTURE",
+      "source": "Registered securities offerings; Form D issuer intelligence"
+    },
+    {
+      "decision": "LEFT — LOCAL / FUTURE",
+      "source": "Philadelphia / Pittsburgh / counties / cities"
+    }
+  ],
+  "regulatorMatrix": [
+    {
+      "credential": "SEC-registered investment adviser",
+      "regulator": "U.S. SEC / IARD",
+      "identity": "CRD / IARD firm ID; SEC file number",
+      "proves": "Federal registration category as reported on Form ADV in the cited extract",
+      "doesNotProve": "Pennsylvania state-RIA licensure or current Pennsylvania notice-filing status"
+    },
+    {
+      "credential": "Exempt reporting adviser (ERA)",
+      "regulator": "SEC / IARD (and Pennsylvania reporting when applicable)",
+      "identity": "CRD / IARD firm ID",
+      "proves": "ERA reporting status in the cited extract",
+      "doesNotProve": "SEC RIA registration or Pennsylvania state-RIA licensure"
+    },
+    {
+      "credential": "Pennsylvania state-registered investment adviser",
+      "regulator": "Pennsylvania Department of Banking and Securities (DoBS) / IARD",
+      "identity": "Firm CRD / IARD",
+      "proves": "Pennsylvania state-IA registration when the official IARD state record says APPROVED",
+      "doesNotProve": "SEC registration. Principal-office geography is not this credential."
+    },
+    {
+      "credential": "Federally covered / notice-filed investment adviser",
+      "regulator": "DoBS (notice) / SEC (federal registration)",
+      "identity": "CRD / IARD firm ID",
+      "proves": "Notice-filing posture when the official IARD record says FILED",
+      "doesNotProve": "Pennsylvania state-RIA licensure"
+    },
+    {
+      "credential": "Investment adviser representative",
+      "regulator": "DoBS / CRD",
+      "identity": "Person CRD (not firm CRD)",
+      "proves": "Individual representative reporting when official CRD evidence exists",
+      "doesNotProve": "Firm registration. IAR is not the firm."
+    },
+    {
+      "credential": "Broker-dealer / registered representative",
+      "regulator": "DoBS / FINRA / CRD",
+      "identity": "Firm or person CRD",
+      "proves": "Broker-dealer or representative registration when official evidence exists",
+      "doesNotProve": "Investment-adviser registration"
+    },
+    {
+      "credential": "DoBS enforcement order document",
+      "regulator": "Pennsylvania Department of Banking and Securities",
+      "identity": "Exact source-native docket/matter identifier; CRD only if source-native",
+      "proves": "A public DoBS enforcement-order PDF exists in the official catalog",
+      "doesNotProve": "That the document is an investment-adviser matter, a unique regulatory matter, or a criminal conviction"
+    }
+  ],
+  "identityRules": {
+    "EXACT": [
+      "firm CRD/IARD ID",
+      "person CRD for person grain only",
+      "SEC file number where source-native",
+      "exact official DoBS docket/matter identifier"
+    ],
+    "HIGH_CONFIDENCE": "exact legal name + exact official address for non-adverse descriptive review only",
+    "REVIEW_REQUIRED": "name + city, DBA, name variants, address-only",
+    "UNSAFE": "name alone — not used for adverse profile attachment"
+  },
+  "semanticGrainRules": {
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_SEC_RIA": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_NOTICE_FILING": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_STATE_ERA": true,
+    "PRINCIPAL_OFFICE_IS_NOT_REGISTRATION": true,
+    "REGISTRATION_ROW_IS_DISTINCT_GRAIN_FROM_DISTINCT_FIRM_CRD": true,
+    "BROKER_DEALER_IS_NOT_INVESTMENT_ADVISER": true,
+    "AGENT_IS_NOT_IAR": true,
+    "FIRM_IS_NOT_INDIVIDUAL": true,
+    "DOBS_ORDER_IS_NOT_IA_DISCIPLINARY_CENSUS": true,
+    "MIXED_DOBS_SECURITIES_CLASS_TOTAL_IS_NOT_IA": true,
+    "COMPLAINT_IS_NOT_VIOLATION": true,
+    "RAUM_IS_NOT_PERFORMANCE": true,
+    "note": "Credential/grain rules. They do not require disjoint CRD sets or unequal counts."
+  },
+  "profileAttachments": [],
+  "expansionLedger": {
+    "PRE_INGEST_CANONICAL_FIRMS": 25777,
+    "PA_PRINCIPAL_OFFICE_OVERLAY": 623,
+    "PA_PRINCIPAL_OFFICE_DISTINCT_CRDS": 623,
+    "PA_STATE_IA_ROWS": 864,
+    "PA_STATE_IA_DISTINCT_CRDS": 864,
+    "PA_STATE_IA_APPROVED_CURRENT": 864,
+    "PA_STATE_IA_OTHER_STATUS_ROWS": 0,
+    "PA_STATE_ERA_ROWS": 99,
+    "PA_STATE_ERA_DISTINCT_CRDS": 99,
+    "PA_NOTICE_FILING_ROWS": 3411,
+    "PA_NOTICE_FILING_DISTINCT_CRDS": 3411,
+    "PA_NOTICE_FILED_CURRENT": 3411,
+    "PA_IA_NOTICE_OVERLAP_EXACT_CRDS": 5,
+    "PA_ERA_NOTICE_OVERLAP_EXACT_CRDS": 0,
+    "PA_IA_ERA_OVERLAP_EXACT_CRDS": 0,
+    "PA_PRINCIPAL_OFFICE_STATE_IA_OVERLAP": 1,
+    "PA_IAR_ROSTER_STATUS": "OPEN_SEARCH_ONLY",
+    "NET_NEW_STATE_RESEARCH_IDENTITIES": 963,
+    "NET_NEW_STATE_RESEARCH_IDENTITIES_DEFINITION": "distinct firm CRDs in IAPD StateRgstn/Rgltr/@Cd=PA plus distinct firm CRDs in ERA/Rgltr/@Cd=PA (overlap 0 in this extract). Not new companies, not public profiles, not a combined Pennsylvania adviser universe.",
+    "NET_NEW_CANONICAL_ORGANIZATIONS": 0,
+    "NET_NEW_PUBLIC_INVESTOR_PROFILES": 0,
+    "EXISTING_ORGANIZATIONS_ENRICHED": 0,
+    "PRE_EXISTING_PA_PRINCIPAL_OFFICE_OVERLAY": 623,
+    "GRAPH_WRITES": 0,
+    "PA_DOBS_ENFORCEMENT_ROWS": 1525,
+    "PA_DOBS_UNIQUE_REGULATORY_MATTERS": null,
+    "PA_SECURITIES_COMPLAINT_OBSERVATIONS": null,
+    "CLAIM_ELIGIBILITY_BROADENED": false,
+    "REGULATORY_ACTIVITY_COVERAGE": "ACQUIRED_CURRENT_SNAPSHOT",
+    "EXACT_ENFORCEMENT_FIRM_ASSOCIATIONS": 0,
+    "REVIEW_REQUIRED_ASSOCIATIONS": 0,
+    "REJECTED_NAME_ONLY_ASSOCIATIONS": 0,
+    "EXACT_PROFILE_ATTACHMENTS": 0,
+    "notes": {
+      "overlay": "623 Pennsylvania principal-office firms already existed on the federal SEC/IARD spine before PA-INV-001. EXISTING_ORGANIZATIONS_ENRICHED = 0. GRAPH_WRITES = 0. Raw 2026-09-17 MainAddr=@State=PA = 628 is a different grain.",
+      "stateRoster": "IAPD state compilation added 864 distinct Pennsylvania state-IA CRDs and 99 distinct Pennsylvania state-ERA CRDs as state-intelligence identities. They were not minted as canonical organizations or public /firm profiles.",
+      "notice": "3,411 notice-filing rows are observations, not extra firms.",
+      "activity": "Acquired 1,525 mixed DoBS enforcement-order PDFs from the official Coveo catalog. The catalog has no source-native securities facet and no docket field. Securities-only and IA-only counts remain UNKNOWN. Zero profile attachments."
+    }
+  },
+  "preIngestBaseline": {
+    "pennsylvaniaPrincipalOfficeFirmsAlreadyInFederalGraph": 623,
+    "canonicalFirmsAlreadyPresent": 25777,
+    "note": "Recomputed from V1_ROSTER_PRINCIPAL_OFFICE_STATES PA = 623. Do not call these firms new."
+  },
+  "localWorkNeededNow": "NO",
+  "rejectedTotals": [
+    {
+      "total": "Pennsylvania investment advisers",
+      "reason": "State IA, ERA, notice, and principal office are incompatible grains."
+    },
+    {
+      "total": "DoBS 200,000+ securities-class total as advisers",
+      "reason": "Mixed broker-dealer, agent, IA, IAR, and notice-filer population."
+    },
+    {
+      "total": "DoBS enforcement documents = IA actions",
+      "reason": "Catalog has no source-native securities facet. Mixed banking/mortgage/securities PDFs."
+    },
+    {
+      "total": "DoBS regulatory activity rows = 0",
+      "reason": "Search-only or unacquired is unknown, not zero. Catalog has 1,525 documents."
+    }
+  ],
+  "semanticGuardrails": [
+    "STATE IA != NOTICE",
+    "ERA != RIA",
+    "PRINCIPAL OFFICE != REGISTRATION",
+    "IAR != FIRM",
+    "BROKER-DEALER != IA",
+    "DOBS MIXED CLASS TOTAL != IA CENSUS",
+    "ORDER != CONVICTION",
+    "ORDER TO SHOW CAUSE != FINAL FINDING",
+    "CONSENT != ADMISSION UNLESS SOURCE SAYS SO",
+    "DOCUMENT != UNIQUE MATTER",
+    "COMPLAINT != ENFORCEMENT ORDER",
+    "EXAM GUIDANCE != EXAM FINDING",
+    "NAME-ONLY ADVERSE MATCH = UNSAFE",
+    "MISSING != ZERO",
+    "SEARCH-ONLY != ZERO",
+    "NO TRUST SCORE",
+    "NO PAID RANKING"
+  ],
+  "fingerprint": "80420690c44566280ed43dd31e5a7976c182dbf473594d721d07ee3cfde5aad0"
+}

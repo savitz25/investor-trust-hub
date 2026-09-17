@@ -1,0 +1,37 @@
+import assert from 'node:assert/strict';
+import { existsSync, readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { publicationMetricInputs } from './publication_metric_inputs.mjs';
+
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const snap = JSON.parse(readFileSync(join(root, 'artifacts/pa-inv-001-public-snapshot.json'), 'utf8'));
+const pub = publicationMetricInputs();
+const routes = readFileSync(join(root, 'packages/config/src/routes.ts'), 'utf8');
+const ui = readFileSync(join(root, 'apps/web/src/components/pa-state-intel.tsx'), 'utf8');
+
+assert.equal(snap.version, 'investor-pa-state-intel-v1');
+assert.equal(snap.route, '/pennsylvania');
+assert.equal(snap.fingerprint, '80420690c44566280ed43dd31e5a7976c182dbf473594d721d07ee3cfde5aad0');
+assert(pub.publishedStateIntelligencePaths.includes('/pennsylvania'), 'catalog includes /pennsylvania');
+assert(!pub.indexablePaths.includes('/pennsylvania/philadelphia'), 'no Philadelphia path');
+assert(!existsSync(join(root, 'apps/web/src/app/pennsylvania/philadelphia')), 'no Philadelphia folder');
+assert(routes.includes("href: '/pennsylvania'"), 'STATE_DISCOVERY_ROUTES');
+assert.equal(snap.nationalOverlay.paPrincipalOfficeSecIardFirms, 623);
+assert.equal(snap.stateRia.approvedDistinctCrd, 864);
+assert.notEqual(snap.stateRia.approvedDistinctCrd, 623);
+assert.equal(snap.federalNotice.noticeFiledDistinctCrd, 3411);
+assert.equal(snap.stateEra.activeDistinctCrd, 99);
+assert.equal(snap.expansionLedger.NET_NEW_CANONICAL_ORGANIZATIONS, 0);
+assert.equal(snap.expansionLedger.GRAPH_WRITES, 0);
+assert.equal(snap.enforcement.observationRows, 1525);
+assert.equal(snap.enforcement.exactCrdCrosswalks, 0);
+assert.equal(snap.enforcement.PA_DOBS_SECURITIES_ORDER_DOCUMENTS, null);
+assert.match(ui, /unknown — not zero/i);
+assert.match(ui, /Trust Score/);
+assert.doesNotMatch(ui, /best adviser|safest adviser/i);
+assert.doesNotMatch(ui, /\bOregon\b|\bIllinois\b|\bDFR\b|\bIDFPR\b/);
+assert.doesNotMatch(ui, /principal-office region IL|MainAddr=@State=OR|registration jurisdiction = IL/);
+assert.match(ui, /id="pa-title"/);
+assert.match(ui, /aria-labelledby="pa-title"/);
+console.log('PA-INV-001 publication assert: PASS');

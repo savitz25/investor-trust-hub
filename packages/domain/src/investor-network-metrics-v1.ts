@@ -39,6 +39,7 @@ export type MetricGrain =
   | 'ny_state_ria_roster'
   | 'il_state_ria_roster'
   | 'or_state_ria_roster'
+  | 'pa_state_ria_roster'
   | 'form_adv_withdrawal'
   | 'form_adv_successor_link';
 
@@ -239,6 +240,12 @@ export type InvestorNetworkMetricsV1 = {
     noticeFiledFirms: number;
   };
   oregon: {
+    principalOfficeRosterFirms: number;
+    stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION';
+    statewideStateRiaUniverse: number;
+    noticeFiledFirms: number;
+  };
+  pennsylvania: {
     principalOfficeRosterFirms: number;
     stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION';
     statewideStateRiaUniverse: number;

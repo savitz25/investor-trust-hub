@@ -38,7 +38,7 @@ function baseInput(over: Partial<InvestorNetworkMetricsInput> = {}): InvestorNet
     evidenceRecords: 165354,
     indexableTrustReports: 1000,
     searchableRosterFirms: 23622,
-    publishedStateIntelligencePaths: ['/new-jersey', '/california', '/texas', '/washington', '/arizona', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon'],
+    publishedStateIntelligencePaths: ['/new-jersey', '/california', '/texas', '/washington', '/arizona', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania'],
     njPrincipalOfficeFirms: 438,
     njEnforcementDocumentsAcquired: 48,
     caPrincipalOfficeFirms: 2699,
@@ -63,6 +63,9 @@ function baseInput(over: Partial<InvestorNetworkMetricsInput> = {}): InvestorNet
     orPrincipalOfficeFirms: 167,
     orStateRiaApproved: 335,
     orNoticeFiled: 2262,
+    paPrincipalOfficeFirms: 623,
+    paStateRiaApproved: 864,
+    paNoticeFiled: 3411,
     ...over,
   };
 }
@@ -133,9 +136,11 @@ describe('investor-network-metrics-v1 grain safety', () => {
     expect(metricByKey(m, 'co_state_ria_roster').grain).toBe('co_state_ria_roster');
     expect(metricByKey(m, 'co_state_ria_roster').label).toMatch(/state-registered/i);
     expect(m.colorado.stateRiaRosterCoverage).toBe('ACQUIRED_IAPD_STATE_COMPILATION');
-    expect(metricByKey(m, 'published_state_intelligence_pages').value).toBe(10);
+    expect(metricByKey(m, 'published_state_intelligence_pages').value).toBe(11);
     expect(metricByKey(m, 'or_state_ria_roster').value).toBe(335);
     expect(m.oregon.principalOfficeRosterFirms).toBe(167);
+    expect(metricByKey(m, 'pa_state_ria_roster').value).toBe(864);
+    expect(m.pennsylvania.principalOfficeRosterFirms).toBe(623);
     expect(metricByKey(m, 'va_state_ria_roster').value).toBe(697);
     expect(metricByKey(m, 'ny_state_ria_roster').value).toBe(1297);
     expect(metricByKey(m, 'il_state_ria_roster').value).toBe(855);

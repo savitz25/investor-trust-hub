@@ -682,6 +682,98 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     return { raw: q, query, interpretation: lines };
   }
 
+  if (/\bis this adviser registered in pennsylvania\b|\bis .+ registered in pennsylvania\b/i.test(q)) {
+    const query = failClosed(
+      'Current Pennsylvania registration is verified on IAPD with an exact firm CRD or SEC file number. Name-only matching is unsafe. A Pennsylvania principal office is not Pennsylvania state registration. Use /pennsylvania for statewide grains.',
+      ['Pennsylvania investor research page.', 'Find CRD 105958.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:pennsylvania (?:state )?rias?|state registered investment adviser pennsylvania|pennsylvania investment adviser license|advisers? registered in pennsylvania|licensed (?:investment )?advisers? in pennsylvania|investment advisers? registered in pennsylvania|registered investment advisers? pennsylvania)\b/i.test(q)) {
+    const query = failClosed(
+      'Pennsylvania state-registered investment-adviser firms are published on /pennsylvania from the IAPD state compilation (jurisdiction=PA, APPROVED). Search V1 remains the SEC/IARD roster and does not treat the 623 principal-office overlay as Pennsylvania state registration. Notice filing is a different grain from state IA.',
+      ['Pennsylvania investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:pennsylvania era|era pennsylvania|exempt reporting advisers? in pennsylvania)\b/i.test(q)) {
+    const query = failClosed(
+      'Pennsylvania state ERA reporting firms are published on /pennsylvania. ERA is not an RIA and is not Pennsylvania state IA registration. Search V1 remains the SEC/IARD roster.',
+      ['Pennsylvania investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:pennsylvania notice filing|notice filing pennsylvania|notice-?filed in pennsylvania|sec registered adviser pennsylvania|federal-covered advisers? in pennsylvania)\b/i.test(q)) {
+    const query = failClosed(
+      'A federal-covered notice filing in Pennsylvania is not Pennsylvania state IA registration and is not a Pennsylvania principal office. Use /pennsylvania for the separate grains. Verify current status on IAPD.',
+      ['Pennsylvania investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:investment adviser headquartered pennsylvania|adviser headquartered in pennsylvania)\b/i.test(q)) {
+    const query = failClosed(
+      'A Pennsylvania principal office is not Pennsylvania state registration and is not a notice filing. Search V1 geography is principal office. Use /pennsylvania for the separate grains.',
+      ['Pennsylvania investor research page.', 'Research Pennsylvania-headquartered SEC/IARD firms.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:financial adviser in pennsylvania|investment adviser in pennsylvania|investment advisers pennsylvania)\b/i.test(q) && !/\bregistered\b|\bnotice\b|\bera\b|\bcrd\b|\b801-/i.test(q)) {
+    const query = failClosed(
+      'Financial adviser in Pennsylvania is not a single universe. Pennsylvania principal office, Pennsylvania state IA registration, Pennsylvania state ERA reporting, and Pennsylvania notice filing are separate grains. Search V1 geography is principal office, not Pennsylvania licensure. Use /pennsylvania. DoBS mixed securities-class totals exceeding 200,000 are not an adviser count.',
+      ['Pennsylvania investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if ((/\bpennsylvania\b/i.test(q) || /\bphiladelphia\b/i.test(q) || /\bpittsburgh\b/i.test(q)) && /\b(?:complaints?|disciplin|enforcement|dobs (?:order|enforcement)|administrative (?:action|order))\b/i.test(q)) {
+    const query = failClosed(
+      'Pennsylvania DoBS enforcement orders are a mixed catalog of banking, mortgage, and securities PDFs, not a firm-specific complaint or IA disciplinary history. Name-only matching is unsafe. Exact firm CRD or exact DoBS docket is required. Complaints were not acquired as a bulk dataset; missing is not zero. Philadelphia and Pittsburgh are not separate InvestorTrustHub routes. Use /pennsylvania.',
+      ['Pennsylvania investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\binvestment adviser examination pennsylvania|pennsylvania adviser exam/i.test(q)) {
+    const query = failClosed(
+      'DoBS examination program guidance is not a list of exam findings. Pennsylvania IA exam results were not publicly acquired. Examination guidance is not a violation or disciplinary matter.',
+      ['Pennsylvania investor research page.'],
+    );
+    push('Coverage', 'NOT_ACQUIRED');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\binvestment adviser representative pennsylvania|pennsylvania iar\b/i.test(q)) {
+    const query = failClosed(
+      'No complete current Pennsylvania IAR person universe was published. IAR is not the firm. Person CRD is not firm CRD. Official verification remains IAPD individual lookup. Search-only is not zero.',
+      ['Pennsylvania investor research page.', 'Find CRD 105958.'],
+    );
+    push('Coverage', 'OPEN_SEARCH_ONLY');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:best|highest performing|safe) (?:investment )?adviser in (?:pennsylvania|philadelphia|pittsburgh)\b/i.test(q)) {
+    const query = failClosed(
+      'InvestorTrustHub does not rank advisers, score performance, or publish a Trust Score. Philadelphia and Pittsburgh are not separate InvestorTrustHub routes.',
+      ['Pennsylvania investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (
+    /\b(philadelphia|pittsburgh|allegheny|montgomery county)\b/i.test(q) &&
+    /investment adviser|financial adviser|adviser/i.test(q)
+  ) {
+    const query = failClosed(
+      'InvestorTrustHub does not publish Philadelphia, Pittsburgh, Allegheny, or Montgomery intelligence routes. Statewide Pennsylvania research remains /pennsylvania. Ranking is unsupported.',
+      ['Pennsylvania investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+
   if (/\bhow many form adv observations\b|\bhow many (normalized )?adv observations\b/i.test(q)) {
     const query: InvestorResearchQuery = {
       mode: 'count',
