@@ -1,0 +1,37 @@
+import assert from 'node:assert/strict';
+import { existsSync, readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { publicationMetricInputs } from './publication_metric_inputs.mjs';
+
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const snap = JSON.parse(readFileSync(join(root, 'artifacts/nc-inv-001-public-snapshot.json'), 'utf8'));
+const pub = publicationMetricInputs();
+const routes = readFileSync(join(root, 'packages/config/src/routes.ts'), 'utf8');
+const ui = readFileSync(join(root, 'apps/web/src/components/nc-state-intel.tsx'), 'utf8');
+
+assert.equal(snap.version, 'investor-nc-state-intel-v1');
+assert.equal(snap.route, '/north-carolina');
+assert.equal(snap.fingerprint, '697edd7ef765dcc52930e2953ddeb55d111a3cd361afba79504d76588a696325');
+assert(pub.publishedStateIntelligencePaths.includes('/north-carolina'), 'catalog includes /north-carolina');
+assert(!pub.indexablePaths.includes('/north-carolina/charlotte'), 'no Charlotte path');
+assert(!existsSync(join(root, 'apps/web/src/app/north-carolina/charlotte')), 'no Charlotte folder');
+assert(!existsSync(join(root, 'apps/web/src/app/north-carolina/raleigh')), 'no Raleigh folder');
+assert(routes.includes("href: '/north-carolina'"), 'STATE_DISCOVERY_ROUTES');
+assert.equal(snap.sosRegisters.NC_SOS_IA_DISTINCT_CRDS, 687);
+assert.equal(snap.stateRia.approvedDistinctCrd, 701);
+assert.notEqual(snap.sosRegisters.NC_SOS_IA_DISTINCT_CRDS, snap.stateRia.approvedDistinctCrd);
+assert.equal(snap.federalNotice.noticeFiledDistinctCrd, 3704);
+assert.equal(snap.stateEra.activeDistinctCrd, 33);
+assert.equal(snap.expansionLedger.NET_NEW_CANONICAL_ORGANIZATIONS, 0);
+assert.equal(snap.expansionLedger.GRAPH_WRITES, 0);
+assert.equal(snap.enforcement.NC_ENFORCEMENT_EXACT_CRD_ATTACHMENTS, 0);
+assert.equal(snap.enforcement.summary_ne_final, true);
+assert.match(ui, /Trust Score/);
+assert.match(ui, /summary cease and desist is not a final finding/i);
+assert.doesNotMatch(ui, /best adviser|safest adviser/i);
+assert.doesNotMatch(ui, /\bDoBS\b|\bIDFPR\b|\bDFR\b/);
+assert.doesNotMatch(ui, /principal-office region PA|MainAddr=@State=PA|registration jurisdiction = PA/);
+assert.match(ui, /id="nc-title"/);
+assert.match(ui, /aria-labelledby="nc-title"/);
+console.log('NC-INV-001 publication assert: PASS');

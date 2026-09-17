@@ -35,3 +35,4 @@ export * from './ny-public-intel';
 export * from './il-public-intel';
 export * from './or-public-intel';
 export * from './pa-public-intel';
+export * from './nc-public-intel';
