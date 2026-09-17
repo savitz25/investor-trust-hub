@@ -6,6 +6,7 @@
 import { COMPENSATION_METHOD_LABELS } from './adv-profile-intelligence';
 import { REGION_NAMES, V1_RIA_RAUM_BANDS, V1_SOURCE } from './investor-home-intel';
 import { planInvestorResearch, type InvestorResearchIntent, type InvestorCondition } from './investor-research-plan';
+import { decideUsGeography } from './us-geography';
 export type { InvestorResearchIntent, InvestorCondition } from './investor-research-plan';
 
 export const INVESTOR_ASK_CONTRACT = 'investor-ask-v1' as const;
@@ -129,6 +130,10 @@ export type InvestorResearchQuery = {
   compensationMatch?: 'all' | 'any';
   affiliationField?: keyof typeof AFFILIATION_FIELDS;
   nameQuery?: string;
+  /** Honest disclosure when a fee-model or specialty qualifier (e.g. "fee-only", "retirement
+   * planning specialist") was asked for but is not a searchable Form ADV field -- the search
+   * broadens to real advisers/firms instead of dead-ending on the unsupported specificity. */
+  unsupportedSpecialtyNote?: string;
   evidenceFamilies?: string[];
   aggregateMetric?:
     | 'raum_bands'
@@ -201,8 +206,36 @@ function detectStates(q: string): string[] {
       add(code);
     }
   }
+  // TH-DISCOVERY-PARITY-001B: the checks above only ever recognise a literal state name/code
+  // token. A question that names only a city or county ("... near Fort Worth", "financial
+  // advisors Palm Beach County") resolved no state here at all. Fall back to the shared US
+  // geography gazetteer (city/county/metro -> state), which is the same general resolver every
+  // other layer of the interpreter now uses, so bare place names behave consistently everywhere
+  // detectStates() feeds a decision (count, aggregate, comparison, and the entity flow).
+  if (!found.length) {
+    const decision = decideUsGeography(q);
+    if (decision.state) add(decision.state);
+  }
   return found;
 }
+
+/**
+ * Finance-domain qualifier stems and the consumer role words they combine with. This is a
+ * generalised synonym/stem match (TH-DISCOVERY-PARITY-001B), not a growing allowlist of literal
+ * example strings -- it is meant to keep recognising new adjective + role combinations ("estate
+ * planning advisor", "asset management firm") without another one-off ticket.
+ */
+const FINANCE_QUALIFIER = '(?:investment|financial|wealth(?:\\s+management)?|retirement(?:[- ]planning)?|fee[- ]only|money|asset(?:\\s+management)?|estate(?:[- ]planning)?)';
+const DISCOVERY_ROLE = '(?:advis(?:er|or)s?|planners?|managers?|specialists?)';
+const DISCOVERY_QUALIFIER_ROLE_PATTERN = new RegExp(`\\b${FINANCE_QUALIFIER}[ -]?${DISCOVERY_ROLE}\\b`, 'i');
+const DISCOVERY_FIRM_PATTERN =
+  /\b(?:advis(?:er|or)|advisory|wealth management|financial planning|investment|money management)\s+firms?\b/i;
+
+/** Consumer product qualifiers (fee model or claimed specialty) not established by Form ADV source
+ * fields. These must never dead-end the search -- they broaden to real advisers/firms with an
+ * honest disclosure instead (ticket Section 4, same shape as the Insurance LOA-specificity fix). */
+const UNSUPPORTED_SPECIALTY_PATTERN =
+  /\bfee[- ]only\b|\bfee[- ]based\b|\bcommission[- ]only\b|\bno[- ]load\b|\bfiduciary[- ]only\b|\bretirement(?:[- ]planning)? specialist\b|\bretirement(?:[- ]planning)? expert\b|\bcertified\b/i;
 
 function detectFirmType(q: string): InvestorFirmType | undefined {
   const ria = /\brias?\b|\bregistered investment advisers?\b|\bsec-registered\b/i.test(q);
@@ -210,12 +243,13 @@ function detectFirmType(q: string): InvestorFirmType | undefined {
   if (ria && era) return 'all';
   if (ria) return 'ria';
   if (era) return 'era';
-  // TH-DISCOVERY-GEN-001: "financial adviser" is an ordinary consumer provider-category phrase
-  // (ticket Section 2) exactly like "investment adviser" -- it was missing from this list, so a
-  // bare "financial adviser" (no geography, no RIA/ERA keyword) fell through with no firm type and
-  // no geography, which planInvestorResearch's catch-all reads as "no signal at all" and asks
-  // "What would you like to research?" instead of defaulting to discovery.
-  if (/\b(?:investment|financial) advis(?:er|or)s?\b|\badvis(?:er|or) firms?\b|\badvisory firms?\b/i.test(q)) return 'all';
+  // TH-DISCOVERY-GEN-001 / TH-DISCOVERY-PARITY-001B: ordinary consumer provider-category phrases
+  // ("financial adviser", "wealth management firm", "fee-only financial planner", "retirement
+  // planning advisor" ...) are a request to browse the adviser/firm universe, not a company name
+  // and not a request that needs clarification. Generalised to a qualifier+role / role+firm
+  // pattern (see above) instead of a literal-string allowlist, so new phrasing of the same shape
+  // does not require another hardcoded fix.
+  if (DISCOVERY_QUALIFIER_ROLE_PATTERN.test(q) || DISCOVERY_FIRM_PATTERN.test(q)) return 'all';
   return undefined;
 }
 
@@ -957,6 +991,11 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     ? 'registered'
     : 'current_roster';
 
+  const unsupportedSpecialtyNote =
+    !compensation.length && UNSUPPORTED_SPECIALTY_PATTERN.test(q)
+      ? 'The requested fee-model or specialty (e.g. "fee-only", "retirement planning specialist") is not a searchable Form ADV field. Showing broader results across all reported compensation methods and firm types instead of stopping the search.'
+      : undefined;
+
   const query: InvestorResearchQuery = {
     mode: 'entity',
     firmType: effectiveType,
@@ -967,6 +1006,7 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     compensationMatch: /\bboth\b|\band\b/.test(q) && compensation.length > 1 ? 'all' : 'any',
     affiliationField: affiliation,
     nameQuery,
+    unsupportedSpecialtyNote,
     sort,
     page,
   };
@@ -994,6 +1034,7 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     push('Limitation', 'Item 5.E is a method checkbox, not a fee amount.');
   }
   if (affiliation) push('Affiliation', AFFILIATION_FIELDS[affiliation].label);
+  if (unsupportedSpecialtyNote) push('Limitation', unsupportedSpecialtyNote);
   if (nameQuery) push('Name contains', nameQuery);
   push('Source', `Form ADV / ${V1_SOURCE.dataset}`);
   push('Sort', sort.replace('_', ' '));
