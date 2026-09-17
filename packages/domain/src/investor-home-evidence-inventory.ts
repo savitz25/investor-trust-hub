@@ -5,6 +5,7 @@ const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
 const NY_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.NY;
 const IL_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.IL;
 const OR_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.OR;
+const PA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.PA;
 const VA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.VA;
 import { loadInvestorNetworkMetrics } from './load-network-metrics';
 const NJ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.NJ;
@@ -69,7 +70,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA';
   name: string;
   href: string;
   regulator: string;
@@ -545,6 +546,42 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
         sourceAsOf: OR_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
         retrievedAt: OR_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
         snapshotAsOf: OR_PUBLIC_SNAPSHOT.stateRia.snapshotAsOf,
+        generatedAt: null,
+      },
+    ],
+  },
+  {
+    code: 'PA',
+    name: 'Pennsylvania',
+    href: PA_PUBLIC_SNAPSHOT.route,
+    regulator: 'Pennsylvania Department of Banking and Securities (DoBS)',
+    principalOfficeFirms:
+      PA_PUBLIC_SNAPSHOT.nationalOverlay.paPrincipalOfficeSecIardFirms,
+    rosterStatus: `IAPD compilation (${PA_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd.toLocaleString('en-US')} approved)`,
+    evidence: [
+      'SEC/IARD principal-office overlay',
+      'IAPD Pennsylvania state-registered IA compilation',
+      'IAPD Pennsylvania state ERA reporting',
+      'federal-covered notice filings',
+      'DoBS mixed enforcement-order catalog (unattached)',
+    ],
+    identityNote:
+      'Approved state IA registrations are distinct from SEC principal-office overlays, federal notices, ERA reporting, and DoBS enforcement documents.',
+    limitation:
+      'State-only CRDs were not minted as public SEC firm profiles. DoBS orders mix banking, mortgage, and securities and are not an IA census. Name-only attachment is unsafe.',
+    sourceClocks: [
+      {
+        label: 'SEC/IARD feed',
+        sourceAsOf: PA_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+        retrievedAt: PA_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+        snapshotAsOf: null,
+        generatedAt: null,
+      },
+      {
+        label: 'IAPD state compilation',
+        sourceAsOf: PA_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+        retrievedAt: PA_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+        snapshotAsOf: PA_PUBLIC_SNAPSHOT.stateRia.snapshotAsOf,
         generatedAt: null,
       },
     ],
@@ -1221,6 +1258,62 @@ export function buildInvestorHomepageEvidenceInventory(): InvestorHomepageEviden
       'PUBLIC',
       OR_PUBLIC_SNAPSHOT.federalNotice.sourceAsOf,
       OR_PUBLIC_SNAPSHOT.federalNotice.retrievedAt,
+    ),
+    stateMeasure(
+      'pa_hq_overlay',
+      'SEC/IARD firms with a Pennsylvania principal office',
+      PA_PUBLIC_SNAPSHOT.nationalOverlay.paPrincipalOfficeSecIardFirms,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'SEC/IARD firm with PA principal office',
+      'Pennsylvania',
+      'SEC IAPD / IARD',
+      'artifacts/pa-inv-001-public-snapshot.json',
+      PA_PUBLIC_SNAPSHOT.asOf,
+      'Federal roster firms reporting PA principal office.',
+      'Pennsylvania state-RIA roster, notice filing, or DoBS authority.',
+      '/pennsylvania',
+      'PUBLIC',
+      PA_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+      PA_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+    ),
+    stateMeasure(
+      'pa_state_roster',
+      'Pennsylvania state-registered investment-adviser firms',
+      PA_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'IAPD state-compilation APPROVED firm with jurisdiction PA',
+      'Pennsylvania',
+      'IAPD state compilation',
+      'artifacts/pa-inv-001-public-snapshot.json',
+      PA_PUBLIC_SNAPSHOT.asOf,
+      'Approved Pennsylvania state-IA firms in IA_FIRM_STATE_Feed_09_17_2026.',
+      'SEC principal-office overlay, federal notice filings, ERA reporting, or IAR people.',
+      '/pennsylvania',
+      'PUBLIC',
+      PA_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+      PA_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+      'Exact firm CRD. State-only identities were not minted as public SEC profiles.',
+      'Filter is registration jurisdiction, not address.',
+    ),
+    stateMeasure(
+      'pa_notice_filed',
+      'SEC/IARD firms with a Pennsylvania notice filing',
+      PA_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'NoticeFiled RgltrCd=PA FILED',
+      'Pennsylvania',
+      'SEC IAPD / IARD',
+      'artifacts/pa-inv-001-public-snapshot.json',
+      PA_PUBLIC_SNAPSHOT.asOf,
+      'SEC/IARD firms with a Pennsylvania notice filing in the cited compilation.',
+      'Pennsylvania state-RIA licensure or the 623 principal-office overlay.',
+      '/pennsylvania',
+      'PUBLIC',
+      PA_PUBLIC_SNAPSHOT.federalNotice.sourceAsOf,
+      PA_PUBLIC_SNAPSHOT.federalNotice.retrievedAt,
     ),
     stateMeasure(
       'az_index_crd_mentions',

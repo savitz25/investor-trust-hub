@@ -35,6 +35,7 @@ export const STATE_DISCOVERY_ROUTES = [
   { href: '/new-york', label: 'New York' },
   { href: '/illinois', label: 'Illinois' },
   { href: '/oregon', label: 'Oregon' },
+  { href: '/pennsylvania', label: 'Pennsylvania' },
 ] as const;
 
 export const INDEXABLE_PATHS = [
@@ -55,6 +56,7 @@ export const INDEXABLE_PATHS = [
   '/new-york',
   '/illinois',
   '/oregon',
+  '/pennsylvania',
   '/disclaimer',
   '/privacy',
   '/terms',

@@ -59,6 +59,9 @@ export type InvestorNetworkMetricsInput = {
   orPrincipalOfficeFirms: number;
   orStateRiaApproved: number;
   orNoticeFiled: number;
+  paPrincipalOfficeFirms: number;
+  paStateRiaApproved: number;
+  paNoticeFiled: number;
 };
 
 function metric(partial: Omit<InvestorNetworkMetric, 'unit'>): InvestorNetworkMetric {
@@ -121,7 +124,7 @@ export function assertGrainSafety(input: InvestorNetworkMetricsInput): void {
   if (input.disclosureEvents === input.item11YesRia + input.item11YesEra && input.disclosureEvents > 0) {
     throw new Error('disclosure events must not be equated to Item 11 yes indicators');
   }
-  for (const path of ['/new-jersey', '/california', '/texas', '/washington', '/arizona', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon']) {
+  for (const path of ['/new-jersey', '/california', '/texas', '/washington', '/arizona', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania']) {
     if (!input.publishedStateIntelligencePaths.includes(path)) {
       throw new Error(`state intelligence path missing: ${path}`);
     }
@@ -173,6 +176,12 @@ export function assertGrainSafety(input: InvestorNetworkMetricsInput): void {
   }
   if (input.orStateRiaApproved === input.orPrincipalOfficeFirms) {
     throw new Error('OR state IA must not equal the principal-office overlay');
+  }
+  if (input.paPrincipalOfficeFirms === input.rosterFirms) {
+    throw new Error('PA principal-office overlay must not equal the national roster');
+  }
+  if (input.paStateRiaApproved === input.paPrincipalOfficeFirms) {
+    throw new Error('PA state IA must not equal the principal-office overlay');
   }
 }
 
@@ -654,6 +663,28 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       ),
     }),
     metric({
+      key: 'pa_state_ria_roster',
+      label: 'Pennsylvania state-registered investment-adviser firms',
+      value: input.paStateRiaApproved,
+      valueState: 'KNOWN',
+      grain: 'pa_state_ria_roster',
+      denominator: 'IAPD state compilation APPROVED firms with registration jurisdiction = PA',
+      description:
+        'Pennsylvania state-registered investment-adviser firms from IA_FIRM_STATE_Feed_09_17_2026. Not SEC RIA, not notice filing, not ERA, and not the 623 principal-office overlay.',
+      coverage: 'Pennsylvania',
+      contributingSourceSystems: ['iapd_state_compilation'],
+      sourceAsOf: input.publishedAt,
+      generatedAt,
+      publicationStatus: 'PUBLIC',
+      trace: commonTrace(
+        'IAPD StateRgstn/Rgltr/@Cd=PA and status APPROVED, counted as distinct firm CRD.',
+        'Not SEC/IARD principal-office firms. Not federal-covered notice filings. Not state ERA reporting. Not IAR people.',
+        ['iapd_state_compilation'],
+        'Pennsylvania',
+        'IA_FIRM_STATE_Feed_09_17_2026',
+      ),
+    }),
+    metric({
       key: 'published_state_intelligence_pages',
       label: 'Published state investment-intelligence pages',
       value: input.publishedStateIntelligencePaths.length,
@@ -667,7 +698,7 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       generatedAt,
       publicationStatus: 'PUBLIC',
       trace: commonTrace(
-        'Published /new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, and /oregon intelligence routes.',
+        'Published /new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, and /pennsylvania intelligence routes.',
         'Not county pages. Not national roster rows. Florida is not published on this hub.',
         ['investor-state-intel'],
         input.publishedStateIntelligencePaths.join(', '),
@@ -829,6 +860,12 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION',
       statewideStateRiaUniverse: input.orStateRiaApproved,
       noticeFiledFirms: input.orNoticeFiled,
+    },
+    pennsylvania: {
+      principalOfficeRosterFirms: input.paPrincipalOfficeFirms,
+      stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION',
+      statewideStateRiaUniverse: input.paStateRiaApproved,
+      noticeFiledFirms: input.paNoticeFiled,
     },
     network: {
       publishedStateIntelligencePages: input.publishedStateIntelligencePaths.length,

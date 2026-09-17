@@ -51,6 +51,9 @@ async function main() {
     orPrincipalOfficeFirms: pub.orPrincipalOfficeFirms,
     orStateRiaApproved: pub.orStateRiaApproved,
     orNoticeFiled: pub.orNoticeFiled,
+    paPrincipalOfficeFirms: pub.paPrincipalOfficeFirms,
+    paStateRiaApproved: pub.paStateRiaApproved,
+    paNoticeFiled: pub.paNoticeFiled,
   };
 
   if (input.riaFacts !== pub.riaFacts || input.eraFacts !== pub.eraFacts || input.rosterFirms !== pub.rosterFirms) {

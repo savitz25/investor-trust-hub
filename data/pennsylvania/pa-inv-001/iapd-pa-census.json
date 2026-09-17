@@ -1,0 +1,278 @@
+{
+  "contract": "investor-pa-iapd-census-v1",
+  "safeAsCurrentPennsylvaniaBulkStateLayer": true,
+  "filterLogic": "Pennsylvania selected by IAPD registration/notice jurisdiction fields (StateRgstn/Rgltr/@Cd, ERA/Rgltr/@Cd, NoticeFiled/States/@RgltrCd). Principal-office MainAddr/@State=PA is a separate national overlay and is not the state-RIA denominator.",
+  "state": {
+    "filename": "IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "authority": "IAPD (FINRA-held state compilation)",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "sourceAsOf": "2026-09-17",
+    "publishedAt": "2026-09-17",
+    "retrievedAt": "2026-09-17T15:15:00Z",
+    "bytes": 5080393,
+    "sha256": "5fa17c38ae2e812dbd4d58c359c4d624a54417e3f794a3287c3414ccfdaa6a02",
+    "grain": "Firm CRD; StateRgstn/Rgltr/@Cd=jurisdiction; @St=status; ERA/Rgltr/@Cd=jurisdiction. Not MainAddr/@State.",
+    "filter": "Rgltr/@Cd=PA (registration jurisdiction). Address is recorded only for overlap diagnostics.",
+    "firms_in_feed": 21861,
+    "co_state_ia_registration_rows": 864,
+    "co_state_ia_distinct_crd": 864,
+    "co_state_ia_approved_distinct_crd": 864,
+    "co_state_ia_current_distinct_crd": 864,
+    "co_state_ia_termrequest_distinct_crd": 0,
+    "co_state_era_registration_rows": 99,
+    "co_state_era_distinct_crd": 99,
+    "co_state_era_active_distinct_crd": 99,
+    "ia_era_overlap_distinct_crd": 0,
+    "status_ia": [
+      [
+        "APPROVED",
+        864
+      ]
+    ],
+    "status_era": [
+      [
+        "ACTIVE",
+        99
+      ]
+    ],
+    "principal_office_co_among_state_ia": 269,
+    "principal_office_not_co_among_state_ia": 595,
+    "address_co_without_co_jurisdiction": 3
+  },
+  "sec": {
+    "filename": "IA_FIRM_SEC_Feed_09_17_2026.xml.gz",
+    "authority": "SEC / IAPD",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_SEC_Feed_09_17_2026.xml.gz",
+    "sourceAsOf": "2026-09-17",
+    "publishedAt": "2026-09-17",
+    "retrievedAt": "2026-09-17T15:15:00Z",
+    "bytes": 7301907,
+    "sha256": "f01d6b17a7ed631125e76d3c1e5965f178235273eea6699c15400473cb2f1f22",
+    "grain": "Firm CRD; NoticeFiled/States/@RgltrCd=jurisdiction; MainAddr/@State=principal office (separate overlay).",
+    "firms_in_feed": 23911,
+    "firm_types": [
+      [
+        "Registered",
+        17206
+      ],
+      [
+        "ERA",
+        6705
+      ]
+    ],
+    "co_notice_rows": 3411,
+    "co_notice_any_status_distinct_crd": 3411,
+    "co_notice_filed_distinct_crd": 3411,
+    "co_notice_era_any_status": 0,
+    "co_notice_filed_firm_type": {
+      "Registered": 3411,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          3411
+        ]
+      ]
+    },
+    "notice_status": [
+      [
+        "FILED",
+        3411
+      ]
+    ],
+    "co_principal_office_distinct_crd": 628,
+    "principal_and_notice_filed": 542,
+    "notice_filed_not_principal": 2869,
+    "principal_not_notice_filed": 86
+  },
+  "overlaps": {
+    "state_ia_and_principal_office": 1,
+    "state_ia_approved_and_principal_office": 1,
+    "state_ia_and_notice_filed": 5,
+    "state_ia_approved_and_notice_filed": 5,
+    "state_era_and_principal_office": 21,
+    "state_era_and_notice_filed": 0,
+    "state_ia_and_state_era": 0,
+    "notice_filed_and_principal_office": 542,
+    "approved_state_ia_not_in_sec_principal_or_notice": 859,
+    "state_ia_approved_and_notice_filed_crds": [
+      "153659",
+      "158134",
+      "307239",
+      "321165",
+      "339188"
+    ],
+    "state_ia_approved_and_notice_filed_joinMethod": "exact firm CRD set intersection of APPROVED StateRgstn/Rgltr/@Cd=PA and NoticeFiled/States/@RgltrCd=PA St=FILED",
+    "state_ia_approved_and_notice_filed_records": [
+      {
+        "crd": "153659",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "PA",
+          "filter": "StateRgstn/Rgltr/@Cd=PA",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2026-06-15"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=PA",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-01-30",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2019-05-23"
+          },
+          "secFileNumber": "801-116672"
+        },
+        "reading": "Both official 2026-09-17 compilations carry this exact firm CRD: APPROVED Pennsylvania StateRgstn and FILED Pennsylvania NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "158134",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "PA",
+          "filter": "StateRgstn/Rgltr/@Cd=PA",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2018-10-05"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=PA",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-08-21",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2026-08-21"
+          },
+          "secFileNumber": "801-136984"
+        },
+        "reading": "Both official 2026-09-17 compilations carry this exact firm CRD: APPROVED Pennsylvania StateRgstn and FILED Pennsylvania NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "307239",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "PA",
+          "filter": "StateRgstn/Rgltr/@Cd=PA",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2020-03-27"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=PA",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-08-05",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2026-08-05"
+          },
+          "secFileNumber": "801-136634"
+        },
+        "reading": "Both official 2026-09-17 compilations carry this exact firm CRD: APPROVED Pennsylvania StateRgstn and FILED Pennsylvania NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "321165",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "PA",
+          "filter": "StateRgstn/Rgltr/@Cd=PA",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2022-07-08"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=PA",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-09-16",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2026-09-16"
+          },
+          "secFileNumber": "801-137191"
+        },
+        "reading": "Both official 2026-09-17 compilations carry this exact firm CRD: APPROVED Pennsylvania StateRgstn and FILED Pennsylvania NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "339188",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "PA",
+          "filter": "StateRgstn/Rgltr/@Cd=PA",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2026-04-23"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=PA",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2025-11-19",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2025-11-19"
+          },
+          "secFileNumber": "801-134735"
+        },
+        "reading": "Both official 2026-09-17 compilations carry this exact firm CRD: APPROVED Pennsylvania StateRgstn and FILED Pennsylvania NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      }
+    ]
+  },
+  "semanticGrainRules": {
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_SEC_RIA": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_NOTICE_FILING": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_STATE_ERA": true,
+    "PRINCIPAL_OFFICE_IS_NOT_REGISTRATION": true,
+    "REGISTRATION_ROW_IS_DISTINCT_GRAIN_FROM_DISTINCT_FIRM_CRD": true,
+    "note": "These are contract/credential rules. They do not assert that CRD sets are disjoint or that counts are numerically unequal."
+  },
+  "computedDiagnostics": {
+    "state_ia_registration_rows": 864,
+    "state_ia_distinct_crd": 864,
+    "state_ia_approved_distinct_crd": 864,
+    "state_ia_termrequest_distinct_crd": 0,
+    "state_era_registration_rows": 99,
+    "state_era_distinct_crd": 99,
+    "state_ia_and_state_era_overlap_distinct_crd": 0,
+    "state_ia_approved_and_notice_filed_overlap_distinct_crd": 5,
+    "notice_filed_distinct_crd": 3411,
+    "notice_filed_firm_type": {
+      "Registered": 3411,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          3411
+        ]
+      ]
+    },
+    "registration_rows_equal_distinct_crd": true
+  }
+}
