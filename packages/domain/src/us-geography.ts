@@ -41,7 +41,11 @@ export type UsGeographyOutcome =
   | 'CITY'
   | 'CITY_BROADENED_TO_STATE'
   | 'UNRESOLVED_PLACE'
-  | 'NO_LOCATION';
+  | 'NO_LOCATION'
+  /** TH-DISCOVERY-PARITY-001B-REVIEW finding 3: an explicit, deliberate request for nationwide
+   * scope ("in the US", "in the United States") -- this is not a place resolution failure, so it
+   * must never be reported as UNRESOLVED_PLACE. It legitimately carries no state/city filter. */
+  | 'NATIONWIDE';
 
 export type UsGeographyDecision = {
   outcome: UsGeographyOutcome;
@@ -857,6 +861,23 @@ const PLACE_STOPWORDS = new Set([
   'raum', 'assets', 'compensation', 'fiduciary', 'independent', 'certified', 'hourly', 'flat',
 ]);
 
+/**
+ * TH-DISCOVERY-PARITY-001B-REVIEW finding 2: normalized city names that are also ordinary English
+ * words. A bare, unqualified appearance of one of these words must never silently scope a query to
+ * that city ("financial advisers who value independence and self-direction" must not resolve to
+ * Independence, MO). Matching one of these requires real disambiguating evidence -- see the filter
+ * applied in resolveUsPlaces() below -- not just a gazetteer key collision.
+ */
+const COMMON_WORD_CITY_NAMES = new Set(['independence', 'liberty', 'mobile', 'normal', 'enterprise', 'superior']);
+
+/**
+ * Words that count as "this place-like token was deliberately introduced as a location" evidence
+ * for a COMMON_WORD_CITY_NAMES match -- the token immediately preceding it in the text.
+ */
+const CITY_EVIDENCE_PREPOSITIONS = new Set([
+  'in', 'near', 'around', 'at', 'outside', 'by', 'based', 'located', 'headquartered',
+]);
+
 type Token = { raw: string; norm: string; index: number; capitalized: boolean };
 
 function tokenize(text: string): Token[] {
@@ -943,7 +964,23 @@ export function resolveUsPlaces(text: string): UsPlaceMatch[] {
       });
     }
   }
-  return matches.sort((a, b) => a.start - b.start);
+  const sorted = matches.sort((a, b) => a.start - b.start);
+  // TH-DISCOVERY-PARITY-001B-REVIEW finding 2: a COMMON_WORD_CITY_NAMES match (e.g. "independence",
+  // "liberty", "mobile") is only real geography when there is actual evidence it was meant as a
+  // place -- proper capitalization plus either a location preposition immediately before it, or an
+  // explicit state named right next to it. A bare, lowercase, or otherwise unqualified appearance
+  // (the ordinary-word reading) must never resolve and silently scope a query to the wrong city.
+  return sorted.filter((match) => {
+    if (match.kind !== 'city' || !COMMON_WORD_CITY_NAMES.has(normalizePlaceName(match.label))) return true;
+    const firstToken = tokens[match.start];
+    if (!firstToken?.capitalized) return false;
+    const precedingToken = tokens[match.start - 1];
+    const precededByPreposition = !!precedingToken && CITY_EVIDENCE_PREPOSITIONS.has(precedingToken.norm);
+    const adjacentState = sorted.some(
+      (other) => other.kind === 'state' && (other.end === match.start || other.start === match.end),
+    );
+    return precededByPreposition || adjacentState;
+  });
 }
 
 /** Prepositions and phrasings that show the question asked about a location. */
@@ -954,8 +991,50 @@ export const LOCATION_PREPOSITION_PATTERN =
 export const METRO_PHRASING_PATTERN =
   /\b(?:near|nearby|around|close to|outside|outside of|surrounding|greater|metro|metropolitan|suburbs?|suburban|area|region|vicinity|commutable)\b/i;
 
-export function hasLocationPhrasing(text: string): boolean {
-  return LOCATION_PREPOSITION_PATTERN.test(text) || /\b(?:county|parish|metro|zip code)\b/i.test(text);
+/**
+ * TH-DISCOVERY-PARITY-001B-REVIEW finding 3: conventional nationwide-scope aliases. "US"/"USA" are
+ * matched case-sensitively (and only as a standalone token) so the pronoun "us" is never mistaken
+ * for the country; "United States" is unambiguous so it is matched case-insensitively. There is no
+ * existing normalization constant for this elsewhere in the domain package (checked
+ * firm-classification.ts's country-code display helper, which is a different, unrelated concept),
+ * so this is this module's own convention, kept next to the rest of its location-phrasing patterns.
+ */
+const NATIONWIDE_ACRONYM_PATTERN = /\bU\.?S\.?A?\.?\b/;
+const NATIONWIDE_NAME_PATTERN = /\bUnited States(?:\s+of\s+America)?\b/i;
+
+export function isNationwideScope(text: string): boolean {
+  return NATIONWIDE_NAME_PATTERN.test(text) || NATIONWIDE_ACRONYM_PATTERN.test(text);
+}
+
+function nationwideAlias(text: string): string | undefined {
+  return text.match(NATIONWIDE_NAME_PATTERN)?.[0] ?? text.match(NATIONWIDE_ACRONYM_PATTERN)?.[0];
+}
+
+/**
+ * TH-DISCOVERY-PARITY-001B-REVIEW finding 1: the mandatory fail-closed backstop in
+ * investor-research-plan.ts must only fire when there is real evidence of an attempted place
+ * reference the gazetteer scan did not resolve -- an explicit county/parish/metro/zip-code
+ * reference, or a location preposition immediately followed by something that looks like a place
+ * name attempt (a capitalized word that is not a shouting acronym like "AUM"/"SEC", and not a
+ * nationwide-scope alias). A sentence that merely contains a benign preposition ("in", "by",
+ * "across", "within", "throughout") followed by ordinary lowercase words ("in retirement
+ * planning", "by AUM") is not location evidence and must not fail closed.
+ */
+export function hasUnresolvedLocationSignal(text: string): boolean {
+  if (/\b(?:county|parish|metro|zip code)\b/i.test(text)) return true;
+  const re =
+    /\b(?:in|near|around|close to|outside(?: of)?|surrounding|nearby|by|within|throughout|across|based in|located in|headquartered in|serving)\s+([A-Za-z][A-Za-z.'’-]*)/gi;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(text))) {
+    const word = m[1]!;
+    if (isNationwideScope(word)) continue;
+    const looksLikePlaceAttempt = /^[A-Z]/.test(word) && word !== word.toUpperCase();
+    if (!looksLikePlaceAttempt) continue;
+    const norm = normalizePlaceName(word);
+    if (!norm || PLACE_STOPWORDS.has(norm)) continue;
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -969,6 +1048,7 @@ export function unresolvedPlaceCandidate(text: string): string | undefined {
   );
   const candidate = m?.[1]?.trim();
   if (!candidate) return undefined;
+  if (isNationwideScope(candidate)) return undefined;
   const words = candidate.split(/\s+/);
   if (words.every((w) => PLACE_STOPWORDS.has(normalizePlaceName(w)))) return undefined;
   if (/\b(?:raum|form adv|crd|sec file|fees?|compensation|assets)\b/i.test(candidate)) return undefined;
@@ -993,6 +1073,17 @@ export function decideUsGeography(text: string): UsGeographyDecision {
   const placeMatch = matches.find((m) => m.kind !== 'state');
 
   if (!matches.length) {
+    // TH-DISCOVERY-PARITY-001B-REVIEW finding 3: "in the US" / "in the United States" is a
+    // deliberate, recognized request for nationwide coverage, not a place this gazetteer failed to
+    // resolve. This must be checked before unresolvedPlaceCandidate(), which would otherwise read
+    // trailing "the United States" as an unresolved place candidate and fail closed on it.
+    if (isNationwideScope(text)) {
+      return {
+        outcome: 'NATIONWIDE',
+        requested: nationwideAlias(text),
+        broadenings: [],
+      };
+    }
     const unresolved = unresolvedPlaceCandidate(text);
     if (unresolved) {
       return {

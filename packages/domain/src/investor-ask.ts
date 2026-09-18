@@ -6,7 +6,7 @@
 import { COMPENSATION_METHOD_LABELS } from './adv-profile-intelligence';
 import { REGION_NAMES, V1_RIA_RAUM_BANDS, V1_SOURCE } from './investor-home-intel';
 import { planInvestorResearch, type InvestorResearchIntent, type InvestorCondition } from './investor-research-plan';
-import { decideUsGeography } from './us-geography';
+import { decideUsGeography, isNationwideScope } from './us-geography';
 export type { InvestorResearchIntent, InvestorCondition } from './investor-research-plan';
 
 export const INVESTOR_ASK_CONTRACT = 'investor-ask-v1' as const;
@@ -976,9 +976,16 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
       value: zipMatch[1]!,
       meaning: 'Principal-office ZIP on the SEC/IARD roster — not service territory.',
     };
-  } else if (cityMatch && /\bcity\b|\bin [A-Z]/i.test(q) && !states.length) {
+  } else if (cityMatch && /\bcity\b|\bin [A-Z]/.test(q) && !states.length) {
+    // TH-DISCOVERY-PARITY-001B-REVIEW findings 1 & 3: the `/i` flag on the guard above used to make
+    // `[A-Z]` match ANY case, so "in retirement planning" or "in the US" were read as "in
+    // <Capitalized city>" and silently produced a bogus principal_office_city geography ("retirement
+    // planning", "the US") instead of correctly finding no city here. The guard now genuinely
+    // requires a capitalized token after "in" (or the literal word "city"), and the captured phrase
+    // itself must still look like a real place attempt, not a nationwide-scope alias or ordinary
+    // lowercase text.
     const city = cityMatch[1]?.trim();
-    if (city && city.length > 2 && !/ria|era|firm/i.test(city)) {
+    if (city && city.length > 2 && /^[A-Z]/.test(city) && !isNationwideScope(city) && !/ria|era|firm/i.test(city)) {
       geography = {
         type: 'principal_office_city',
         value: city,

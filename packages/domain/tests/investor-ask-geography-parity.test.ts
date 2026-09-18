@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { interpretInvestorAskQuery } from '../src/investor-ask';
+import { US_STATE_CODES } from '../src/us-geography';
 
 /**
  * TH-DISCOVERY-PARITY-001B regression corpus.
@@ -377,6 +378,146 @@ describe('TH-DISCOVERY-PARITY-001B: general city/county/state geography resoluti
       const parsed = expectNeverUnfilteredNationalDump('wealth advisor Boulder Colorado');
       expect(parsed.query.mode).toBe('entity');
       expect(parsed.query.geography?.state).toBe('CO');
+    });
+  });
+
+  describe('TH-DISCOVERY-PARITY-001B-REVIEW finding 1: benign prepositions with no place-like token never fail closed', () => {
+    const benignQueries: Array<[string, string]> = [
+      ['financial advisers who specialize in retirement planning', '"in" + ordinary lowercase words'],
+      ['financial advisors who work across multiple asset classes', '"across" + ordinary lowercase words'],
+      ['advisory firms operating within fiduciary standards', '"within" + ordinary lowercase words'],
+      ['financial advisers who report throughout the year', '"throughout" + ordinary lowercase words'],
+      ['financial advisors who charge by AUM', '"by" + all-caps acronym (AUM), not a place attempt'],
+    ];
+    for (const [q, label] of benignQueries) {
+      it(`does not fail closed on ${label} ("${q}")`, () => {
+        const parsed = interpretInvestorAskQuery(q);
+        expect(parsed.query.mode, q).not.toBe('fail_closed');
+        expect(parsed.query.geography, q).toBeUndefined();
+      });
+    }
+
+    it('still fails closed for a genuine unresolved place attempt after a benign-looking preposition ("in Fakeburg")', () => {
+      const parsed = interpretInvestorAskQuery('financial advisers who specialize in Fakeburg retirement planning');
+      expect(parsed.query.mode).toBe('fail_closed');
+    });
+  });
+
+  describe('TH-DISCOVERY-PARITY-001B-REVIEW finding 2: common-word city names require real evidence', () => {
+    it('lowercase ordinary usage of "independence" is not read as a city', () => {
+      const parsed = interpretInvestorAskQuery(
+        'financial advisers who value independence and self-direction for their clients',
+      );
+      expect(parsed.query.mode).not.toBe('fail_closed');
+      expect(parsed.query.geography).toBeUndefined();
+    });
+
+    it('lowercase ordinary usage of "liberty" is not read as a city', () => {
+      const parsed = interpretInvestorAskQuery('financial advisors who champion liberty and personal choice');
+      expect(parsed.query.mode).not.toBe('fail_closed');
+      expect(parsed.query.geography).toBeUndefined();
+    });
+
+    it('lowercase ordinary usage of "mobile" is not read as a city', () => {
+      const parsed = interpretInvestorAskQuery('financial advisors with a mobile app for account access');
+      expect(parsed.query.mode).not.toBe('fail_closed');
+      expect(parsed.query.geography).toBeUndefined();
+    });
+
+    it('a bare capitalized common-word city with no other evidence does not silently apply a location filter ("Liberty")', () => {
+      const parsed = interpretInvestorAskQuery('financial advisor Liberty');
+      expect(parsed.query.mode).not.toBe('fail_closed');
+      expect(parsed.query.geography).toBeUndefined();
+    });
+
+    it('resolves "independence" as a city when prepositioned and state-qualified ("in Independence, Missouri")', () => {
+      const parsed = expectNeverUnfilteredNationalDump('financial advisor in Independence, Missouri');
+      expect(parsed.query.geography?.type).toBe('principal_office_city');
+      expect(parsed.query.geography?.value).toBe('Independence');
+      expect(parsed.query.geography?.state).toBe('MO');
+    });
+
+    it('resolves "independence" to the other real state when explicitly qualified ("in Independence, Kentucky")', () => {
+      const parsed = expectNeverUnfilteredNationalDump('financial advisor in Independence, Kentucky');
+      expect(parsed.query.geography?.type).toBe('principal_office_city');
+      expect(parsed.query.geography?.value).toBe('Independence');
+      expect(parsed.query.geography?.state).toBe('KY');
+    });
+
+    it('recognises "liberty" as real geography evidenced by a preposition alone, no state needed ("near Liberty")', () => {
+      // "near <place>" is radius phrasing (same convention as "financial advisor near Fort Worth"
+      // above), so this honestly broadens to state level rather than a city-level match -- the
+      // point here is that "Liberty" was accepted as evidenced geography at all, not filtered out.
+      const parsed = expectNeverUnfilteredNationalDump('wealth manager near Liberty');
+      expect(parsed.query.geography?.type).toBe('principal_office_state');
+      expect(parsed.query.geography?.value).toBe('MO');
+      expect(parsed.query.geography?.meaning).toMatch(/Liberty/);
+    });
+
+    it('resolves "mobile" as a city, prepositioned and state-qualified ("in Mobile, Alabama")', () => {
+      const parsed = expectNeverUnfilteredNationalDump('financial advisor in Mobile, Alabama');
+      expect(parsed.query.geography?.type).toBe('principal_office_city');
+      expect(parsed.query.geography?.value).toBe('Mobile');
+      expect(parsed.query.geography?.state).toBe('AL');
+    });
+
+    it('recognises "mobile" as real geography evidenced by a preposition and a bare state code ("near Mobile AL")', () => {
+      // Same radius-phrasing convention as above ("near" broadens to state, honestly disclosed) --
+      // this confirms "Mobile" was accepted as evidenced geography, not silently dropped.
+      const parsed = expectNeverUnfilteredNationalDump('financial advisor near Mobile AL');
+      expect(parsed.query.geography?.type).toBe('principal_office_state');
+      expect(parsed.query.geography?.value).toBe('AL');
+      expect(parsed.query.geography?.meaning).toMatch(/Mobile/);
+    });
+
+    it('resolves a common-word city + state combo with no preposition ("Liberty Missouri")', () => {
+      const parsed = expectNeverUnfilteredNationalDump('financial advisor Liberty Missouri');
+      expect(parsed.query.geography?.value).toBe('Liberty');
+      expect(parsed.query.geography?.state).toBe('MO');
+    });
+
+    it('resolves a common-word city + state combo with no preposition ("Mobile Alabama")', () => {
+      const parsed = expectNeverUnfilteredNationalDump('financial advisor Mobile Alabama');
+      expect(parsed.query.geography?.value).toBe('Mobile');
+      expect(parsed.query.geography?.state).toBe('AL');
+    });
+
+    it('the mechanism generalizes to other gazetteer common-word collisions ("normal")', () => {
+      const lowercase = interpretInvestorAskQuery('advisory firms that operate under normal market conditions');
+      expect(lowercase.query.geography).toBeUndefined();
+      const resolved = expectNeverUnfilteredNationalDump('financial advisor in Normal, Illinois');
+      expect(resolved.query.geography?.value).toBe('Normal');
+      expect(resolved.query.geography?.state).toBe('IL');
+    });
+  });
+
+  describe('TH-DISCOVERY-PARITY-001B-REVIEW finding 3: nationwide-scope phrasing browses broadly, not a resolution failure', () => {
+    const nationwideQueries: Array<[string, string]> = [
+      ['financial advisors in the US', '"US"'],
+      ['financial advisors in the U.S.', '"U.S."'],
+      ['financial advisors in the USA', '"USA"'],
+      ['investment advisers in the United States', '"United States"'],
+      ['investment advisers in the United States of America', '"United States of America"'],
+    ];
+    for (const [q, label] of nationwideQueries) {
+      it(`recognises ${label} as a deliberate nationwide request, not an unresolved place`, () => {
+        const parsed = interpretInvestorAskQuery(q);
+        expect(parsed.query.mode, q).toBe('entity');
+        expect(parsed.query.firmType, q).toBe('all');
+        expect(parsed.query.geography, q).toBeUndefined();
+        expect(parsed.query.failReason, q).toBeUndefined();
+      });
+    }
+
+    it('does not confuse the lowercase pronoun "us" with the nationwide alias (case-sensitive match)', () => {
+      // "us" here is a pronoun, not the country -- isNationwideScope() only matches "US"/"USA"
+      // case-sensitively so this is never silently read as nationwide scope. Whatever this phrasing
+      // resolves to, it must never be the dangerous silent-nationwide-dump pattern.
+      expectNeverUnfilteredNationalDump('financial advisor near us please');
+    });
+
+    it('a state code is never confused with the nationwide alias (no US_STATE_CODES collision)', () => {
+      expect(US_STATE_CODES.includes('US')).toBe(false);
     });
   });
 

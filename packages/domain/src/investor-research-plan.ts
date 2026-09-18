@@ -1,6 +1,6 @@
 import type { InvestorAskOverrides, InvestorResearchQuery, ParsedInvestorAsk } from './investor-ask';
 import { REGION_NAMES } from './investor-home-intel';
-import { decideUsGeography, hasLocationPhrasing } from './us-geography';
+import { decideUsGeography, hasUnresolvedLocationSignal } from './us-geography';
 
 export type InvestorResearchIntent =
   | 'IDENTITY_BY_IDENTIFIER'
@@ -282,6 +282,11 @@ export function planInvestorResearch(raw: string, o: InvestorAskOverrides, core:
     geoBroadenings = geoDecision.broadenings;
     geoBroadenedFrom = geoDecision.requested;
   }
+  // TH-DISCOVERY-PARITY-001B-REVIEW finding 3: NATIONWIDE ("in the US" / "in the United States")
+  // is a deliberate, recognized request to browse broadly. It intentionally leaves state/city
+  // unset -- this is legitimately unfiltered, not the UNRESOLVED_PLACE failure case below, and not
+  // the dangerous silent-nationwide-dump pattern either, because it is disclosed by construction:
+  // no location filter was ever requested to be applied and none was silently substituted.
   if (o.state) {
     if (state && state !== o.state && city)
       return stop(
@@ -539,7 +544,16 @@ export function planInvestorResearch(raw: string, o: InvestorAskOverrides, core:
   // ticket exists to close -- a discovery-shaped answer must never reach the caller with location
   // language present in the question and no geography filter attached, which is exactly how the
   // unfiltered 23k-row nationwide dump used to get served as if it answered a local question.
-  if (!q.identifier && q.mode !== 'fail_closed' && !q.geography && !q.nameQuery && hasLocationPhrasing(officeText)) {
+  //
+  // TH-DISCOVERY-PARITY-001B-REVIEW finding 1: this backstop previously used hasLocationPhrasing(),
+  // which fired on a bare benign preposition ("in", "by", "across", "within", "throughout") with no
+  // place-like token following it -- dead-ending ordinary, location-free questions like "advisers
+  // who specialize in retirement planning" or "advisors who charge by AUM". It now requires actual
+  // evidence of an attempted, unresolved place (a preposition immediately followed by a
+  // capitalized, non-acronym, non-nationwide word/phrase, or an explicit county/parish/metro/zip
+  // reference) via hasUnresolvedLocationSignal(). NATIONWIDE ("in the US") never reaches here as
+  // unresolved evidence either, since that phrasing is excluded by the same signal check.
+  if (!q.identifier && q.mode !== 'fail_closed' && !q.geography && !q.nameQuery && hasUnresolvedLocationSignal(officeText)) {
     return stop(
       text,
       q,
