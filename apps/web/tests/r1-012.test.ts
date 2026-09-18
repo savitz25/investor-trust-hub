@@ -244,12 +244,23 @@ describe('R1-012 typed plan and production source predicates', () => {
         { value: city, state: 'TX' },
       );
   });
-  it('city-only clarifies then typed state completes', async () => {
+  // TH-DISCOVERY-PARITY-001B: a bare city with no state spelled out ("investment advisers in
+  // Austin") used to dead-end on NEEDS_CLARIFICATION even though Austin is not genuinely
+  // ambiguous with any other jurisdiction this source would apply to -- the same shape of bug as
+  // the release-blocking "financial advisor near Fort Worth" nationwide-dump defect. The US
+  // geography gazetteer now resolves this directly, the same way "Austin Texas" already did, so
+  // this completes in one step instead of clarifying first. An explicit state override remains
+  // supported and produces the identical result.
+  it('bare city resolves directly via the US geography gazetteer instead of clarifying first', async () => {
     fixtureDb();
-    expect((await executeInvestorAsk('investment advisers in Austin')).terminalState).toBe(
-      'NEEDS_CLARIFICATION',
-    );
-    expect(db.query).not.toHaveBeenCalled();
+    const direct = await executeInvestorAsk('investment advisers in Austin');
+    expect(direct.parsed.query.geography).toMatchObject({
+      type: 'principal_office_city',
+      value: 'Austin',
+      state: 'TX',
+    });
+    expect(direct.results.every((x) => x.recordedOffice?.state === 'TX')).toBe(true);
+    expect(direct.results.length).toBe(2);
     const r = await executeInvestorAsk('investment advisers in Austin', { state: 'TX' });
     expect(r.results.every((x) => x.recordedOffice?.state === 'TX')).toBe(true);
     expect(r.results.length).toBe(2);

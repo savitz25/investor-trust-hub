@@ -1,5 +1,6 @@
 import type { InvestorAskOverrides, InvestorResearchQuery, ParsedInvestorAsk } from './investor-ask';
 import { REGION_NAMES } from './investor-home-intel';
+import { decideUsGeography, hasUnresolvedLocationSignal } from './us-geography';
 
 export type InvestorResearchIntent =
   | 'IDENTITY_BY_IDENTIFIER'
@@ -81,6 +82,7 @@ function finish(raw: string, q: InvestorResearchQuery): ParsedInvestorAsk {
     interpretation.push({ label: 'RAUM', value: JSON.stringify(q.raum) + ' (Form ADV Item 5F(2)(c), USD)' });
   if (q.compensationMethods?.length)
     interpretation.push({ label: 'Compensation methods', value: q.compensationMethods.join(', ') });
+  if (q.unsupportedSpecialtyNote) interpretation.push({ label: 'Limitation', value: q.unsupportedSpecialtyNote });
   return { raw, query: q, interpretation };
 }
 function stop(
@@ -213,9 +215,13 @@ export function planInvestorResearch(raw: string, o: InvestorAskOverrides, core:
     /^[A-Z][\w&'.-]*(?:\s+[\w&'.-]+){0,7}$/.test(text) &&
     (/\b(?:capital|advisors?|advisers?|llc|inc|group|management|partners|investments|financial)\.?$/i.test(text) || /^[A-Z][\w&'.-]*(?:\s+[A-Z][\w&'.-]*){0,2}$/.test(text)) &&
     !/^(?:explain|tell|describe|help|learn|calculate|can|does|who|where)\b/i.test(text) &&
-    !/\b(?:manage|pick|show|find|firms?|advisers?|advisors?|registered|rias?|eras?|portfolio|stocks?|what|how|in)\b/i.test(
+    !/\b(?:manage|pick|show|find|firms?|registered|rias?|eras?|portfolio|stocks?|what|how|in)\b/i.test(
       text,
-    )
+    ) &&
+    // A brand name legitimately ends in "... Advisor(s)"/"... Adviser(s)" (e.g. "Vanguard Personal
+    // Advisor"). Only treat the word as a generic descriptive-question signal (and so exclude it
+    // from a literal name guess) when it appears somewhere other than as the final word.
+    !/\badvis(?:er|or)s?\b(?!\.?$)/i.test(text)
   )
     name = text;
   if (name && !quoted && !/\b(?:named|called|firm name)\b/i.test(text) && /^(?:(?:sec|state)[- ]registered\s+)?(?:investment\s+)?(?:advisers?|advisors?|ria\s+firms?|era\s+firms?)(?:\s+(?:in|based|registered|with)\b|$)/i.test(name)) name = undefined;
@@ -249,25 +255,38 @@ export function planInvestorResearch(raw: string, o: InvestorAskOverrides, core:
     officeText = parts.length > 1 ? parts.slice(1).join(' ') : '';
   }
   const officeStates = foundStates(officeText);
-  const place = officeText.match(
-    new RegExp(
-      `\\b(?:in|based in|headquartered in)\\s+([A-Za-z][A-Za-z .'-]*?)\\s*,?\\s+(${statePattern})\\b`,
-      'i',
-    ),
-  );
-  let city = place?.[1]?.trim();
-  let state = place ? stateCode(place[2]!) : officeStates[0];
-  if (city && /\b(?:registered|advisers?|firms?|office|rias?|eras?|and|with)\b/i.test(city)) city = undefined;
-  if (!city && !officeStates.length) {
-    const local = officeText.match(/\b(?:in|based in|headquartered in)\s+([A-Za-z][A-Za-z .'-]*?)[?.]?$/i);
-    if (local && !/\b(?:raum|firms?|ria|era|form adv)\b/i.test(local[1]!)) city = local[1]!.trim();
+  // TH-DISCOVERY-PARITY-001B: the previous logic here only recognised
+  // "in|based in|headquartered in <city>, <STATE SPELLED OUT>". A bare city or county name
+  // ("... near Fort Worth", "Jersey City", "Palm Beach County"), or any location preposition other
+  // than those three ("near", "around", "close to", "outside" ...), resolved no office filter at
+  // all. Combined with a recognised firm-type phrase, that used to fall straight through to
+  // FIRM_DISCOVERY with no geography and silently serve the entire unfiltered national roster --
+  // the release-blocking pattern this ticket exists to close. This is now backed by the shared US
+  // geography gazetteer (city/county/metro -> state), a general resolver instead of a
+  // one-city (Miami) literal fix, and every broadening it makes (county/metro -> state,
+  // near/around -> state, ambiguous place name) is reported back so it can be disclosed honestly
+  // instead of applied silently.
+  const geoDecision = decideUsGeography(officeText);
+  let city: string | undefined;
+  let state: string | undefined = officeStates[0];
+  let geoBroadenings: string[] = [];
+  let geoBroadenedFrom: string | undefined;
+  if (geoDecision.outcome === 'STATE') {
+    state = state ?? geoDecision.state;
+  } else if (geoDecision.outcome === 'CITY') {
+    state = state ?? geoDecision.state;
+    city = geoDecision.city;
+    geoBroadenings = geoDecision.broadenings;
+  } else if (geoDecision.outcome === 'CITY_BROADENED_TO_STATE') {
+    state = state ?? geoDecision.state;
+    geoBroadenings = geoDecision.broadenings;
+    geoBroadenedFrom = geoDecision.requested;
   }
-  // TH-DISCOVERY-RESET-001 (production certification fix): "financial advisers in Miami" named no
-  // state at all -- this parser only recognizes state names/codes via foundStates, never cities --
-  // so a bare city with no state text dead-ended asking "Which state is Miami in?" even though
-  // real, current SEC/IARD registered firms in Miami, FL are one query away. Miami is not
-  // genuinely ambiguous with any other jurisdiction this source would apply to.
-  if (city && !state && !officeStates.length && /^miami$/i.test(city)) state = 'FL';
+  // TH-DISCOVERY-PARITY-001B-REVIEW finding 3: NATIONWIDE ("in the US" / "in the United States")
+  // is a deliberate, recognized request to browse broadly. It intentionally leaves state/city
+  // unset -- this is legitimately unfiltered, not the UNRESOLVED_PLACE failure case below, and not
+  // the dangerous silent-nationwide-dump pattern either, because it is disclosed by construction:
+  // no location filter was ever requested to be applied and none was silently substituted.
   if (o.state) {
     if (state && state !== o.state && city)
       return stop(
@@ -288,6 +307,19 @@ export function planInvestorResearch(raw: string, o: InvestorAskOverrides, core:
       );
     state = o.state;
   }
+  // TH-DISCOVERY-PARITY-001B (release-blocking fix): the question used a location preposition
+  // ("in"/"near"/"around"/...) naming a place, and the shared US geography gazetteer could not
+  // resolve it to any recognised city, county, or state. This must fail closed with an explicit
+  // reason -- it must never fall through to FIRM_DISCOVERY with no geography, which is how
+  // "financial advisor near Fort Worth" style questions used to silently return the entire
+  // unfiltered 23k-row national roster and present it as though it answered the local question.
+  if (!q.identifier && geoDecision.outcome === 'UNRESOLVED_PLACE') {
+    return stop(
+      text,
+      q,
+      `"${geoDecision.requested}" could not be resolved to a recognized US city, county, or state on the SEC/IARD principal-office roster. No location filter was applied -- an unfiltered nationwide list was not substituted for the named place. Name a supported city, county, or state, or remove the location to browse broadly.`,
+    );
+  }
   const conditions: InvestorCondition[] = [];
   if (city)
     conditions.push({
@@ -298,13 +330,26 @@ export function planInvestorResearch(raw: string, o: InvestorAskOverrides, core:
       meaning: officeMeaning,
       sourceField: 'branches.city (is_main_office)',
     });
+  // TH-DISCOVERY-PARITY-001B: the place named in the question was real but could not be executed
+  // as a principal-office city value (a county, a metro/region name, or "near/around" radius
+  // phrasing). The broadening to state level is disclosed here -- honest broadening, mirroring the
+  // "wealth advisor Boulder Colorado" -> "OFFICE STATE: CO" pattern, not a silent nationwide dump.
+  else if (geoBroadenedFrom && state)
+    conditions.push({
+      kind: 'office_city',
+      requested: geoBroadenedFrom,
+      effective: state,
+      outcome: 'APPLIED',
+      meaning: geoBroadenings.join(' ') || officeMeaning,
+      sourceField: 'branches.region (is_main_office)',
+    });
   if (state)
     conditions.push({
       kind: 'office_state',
       requested: state,
       effective: state,
       outcome: 'APPLIED',
-      meaning: officeMeaning,
+      meaning: geoBroadenings.length ? `${officeMeaning}. ${geoBroadenings.join(' ')}` : officeMeaning,
       sourceField: 'branches.region (is_main_office)',
     });
   for (const r of regStates)
@@ -401,10 +446,11 @@ export function planInvestorResearch(raw: string, o: InvestorAskOverrides, core:
     q.compensationMethods = o.compensationMethods;
     q.firmType = 'ria';
   }
+  const geoMeaning = geoBroadenings.length ? `${officeMeaning}. ${geoBroadenings.join(' ')}` : officeMeaning;
   if (state)
     q.geography = city
-      ? { type: 'principal_office_city', value: city, state, meaning: officeMeaning }
-      : { type: 'principal_office_state', value: state, meaning: officeMeaning };
+      ? { type: 'principal_office_city', value: city, state, meaning: geoMeaning }
+      : { type: 'principal_office_state', value: state, meaning: geoMeaning, ambiguous: geoDecision.ambiguous || undefined };
   if (city && !state)
     q.geography = { type: 'principal_office_city', value: city, ambiguous: true, meaning: officeMeaning };
   if (o.broaden) {
@@ -491,6 +537,29 @@ export function planInvestorResearch(raw: string, o: InvestorAskOverrides, core:
   if (regType === 'sec_ria') {
     q.status = 'registered';
     q.firmType = 'ria';
+  }
+  // TH-DISCOVERY-PARITY-001B structural close: a filter-application step is mandatory whenever the
+  // question used any location wording at all, even when the gazetteer/state detection above found
+  // no US-state token specifically. This is the final backstop against the dangerous default this
+  // ticket exists to close -- a discovery-shaped answer must never reach the caller with location
+  // language present in the question and no geography filter attached, which is exactly how the
+  // unfiltered 23k-row nationwide dump used to get served as if it answered a local question.
+  //
+  // TH-DISCOVERY-PARITY-001B-REVIEW finding 1: this backstop previously used hasLocationPhrasing(),
+  // which fired on a bare benign preposition ("in", "by", "across", "within", "throughout") with no
+  // place-like token following it -- dead-ending ordinary, location-free questions like "advisers
+  // who specialize in retirement planning" or "advisors who charge by AUM". It now requires actual
+  // evidence of an attempted, unresolved place (a preposition immediately followed by a
+  // capitalized, non-acronym, non-nationwide word/phrase, or an explicit county/parish/metro/zip
+  // reference) via hasUnresolvedLocationSignal(). NATIONWIDE ("in the US") never reaches here as
+  // unresolved evidence either, since that phrasing is excluded by the same signal check.
+  if (!q.identifier && q.mode !== 'fail_closed' && !q.geography && !q.nameQuery && hasUnresolvedLocationSignal(officeText)) {
+    return stop(
+      text,
+      q,
+      'This question named a location that could not be resolved to a recognized US city, county, or state on the SEC/IARD principal-office roster. No location filter was applied, so an unfiltered nationwide list was not substituted for it. Name a specific city, county, or state, or remove the location to browse broadly.',
+      'UNSUPPORTED',
+    );
   }
   return finish(text, q);
 }
