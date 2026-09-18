@@ -1,0 +1,254 @@
+{
+  "contract": "investor-nc-iapd-census-v1",
+  "safeAsCurrentNorthCarolinaBulkStateLayer": true,
+  "filterLogic": "North Carolina selected by IAPD registration/notice jurisdiction fields (StateRgstn/Rgltr/@Cd, ERA/Rgltr/@Cd, NoticeFiled/States/@RgltrCd). Principal-office MainAddr/@State=NC is a separate national overlay and is not the state-RIA denominator.",
+  "state": {
+    "filename": "IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "authority": "IAPD (FINRA-held state compilation)",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "sourceAsOf": "2026-09-17",
+    "publishedAt": "2026-09-17",
+    "retrievedAt": "2026-09-17T15:15:00Z",
+    "bytes": 5080393,
+    "sha256": "5fa17c38ae2e812dbd4d58c359c4d624a54417e3f794a3287c3414ccfdaa6a02",
+    "grain": "Firm CRD; StateRgstn/Rgltr/@Cd=jurisdiction; @St=status; ERA/Rgltr/@Cd=jurisdiction. Not MainAddr/@State.",
+    "filter": "Rgltr/@Cd=NC (registration jurisdiction). Address is recorded only for overlap diagnostics.",
+    "firms_in_feed": 21861,
+    "co_state_ia_registration_rows": 702,
+    "co_state_ia_distinct_crd": 702,
+    "co_state_ia_approved_distinct_crd": 701,
+    "co_state_ia_current_distinct_crd": 701,
+    "co_state_ia_termrequest_distinct_crd": 1,
+    "co_state_era_registration_rows": 33,
+    "co_state_era_distinct_crd": 33,
+    "co_state_era_active_distinct_crd": 33,
+    "ia_era_overlap_distinct_crd": 0,
+    "status_ia": [
+      [
+        "APPROVED",
+        701
+      ],
+      [
+        "TERMREQUEST",
+        1
+      ]
+    ],
+    "status_era": [
+      [
+        "ACTIVE",
+        33
+      ]
+    ],
+    "principal_office_co_among_state_ia": 181,
+    "principal_office_not_co_among_state_ia": 521,
+    "address_co_without_co_jurisdiction": 3
+  },
+  "sec": {
+    "filename": "IA_FIRM_SEC_Feed_09_17_2026.xml.gz",
+    "authority": "SEC / IAPD",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_SEC_Feed_09_17_2026.xml.gz",
+    "sourceAsOf": "2026-09-17",
+    "publishedAt": "2026-09-17",
+    "retrievedAt": "2026-09-17T15:15:00Z",
+    "bytes": 7301907,
+    "sha256": "f01d6b17a7ed631125e76d3c1e5965f178235273eea6699c15400473cb2f1f22",
+    "grain": "Firm CRD; NoticeFiled/States/@RgltrCd=jurisdiction; MainAddr/@State=principal office (separate overlay).",
+    "firms_in_feed": 23911,
+    "firm_types": [
+      [
+        "Registered",
+        17206
+      ],
+      [
+        "ERA",
+        6705
+      ]
+    ],
+    "co_notice_rows": 3704,
+    "co_notice_any_status_distinct_crd": 3704,
+    "co_notice_filed_distinct_crd": 3704,
+    "co_notice_era_any_status": 0,
+    "co_notice_filed_firm_type": {
+      "Registered": 3704,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          3704
+        ]
+      ]
+    },
+    "notice_status": [
+      [
+        "FILED",
+        3704
+      ]
+    ],
+    "co_principal_office_distinct_crd": 325,
+    "principal_and_notice_filed": 287,
+    "notice_filed_not_principal": 3417,
+    "principal_not_notice_filed": 38
+  },
+  "overlaps": {
+    "state_ia_and_principal_office": 0,
+    "state_ia_approved_and_principal_office": 0,
+    "state_ia_and_notice_filed": 4,
+    "state_ia_approved_and_notice_filed": 4,
+    "state_era_and_principal_office": 6,
+    "state_era_and_notice_filed": 0,
+    "state_ia_and_state_era": 0,
+    "notice_filed_and_principal_office": 287,
+    "approved_state_ia_not_in_sec_principal_or_notice": 697,
+    "state_ia_approved_and_notice_filed_crds": [
+      "125071",
+      "284793",
+      "307299",
+      "316840"
+    ],
+    "state_ia_approved_and_notice_filed_joinMethod": "exact firm CRD set intersection of APPROVED StateRgstn/Rgltr/@Cd=NC and NoticeFiled/States/@RgltrCd=NC St=FILED",
+    "state_ia_approved_and_notice_filed_records": [
+      {
+        "crd": "125071",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NC",
+          "filter": "StateRgstn/Rgltr/@Cd=NC",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2019-05-06"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NC",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2021-04-13",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2021-04-13"
+          },
+          "secFileNumber": "801-120789"
+        },
+        "reading": "Both official 2026-09-17 compilations carry this exact firm CRD: APPROVED North Carolina StateRgstn and FILED North Carolina NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "284793",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NC",
+          "filter": "StateRgstn/Rgltr/@Cd=NC",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2025-09-16"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NC",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2021-07-12",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2021-07-12"
+          },
+          "secFileNumber": "801-121743"
+        },
+        "reading": "Both official 2026-09-17 compilations carry this exact firm CRD: APPROVED North Carolina StateRgstn and FILED North Carolina NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "307299",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NC",
+          "filter": "StateRgstn/Rgltr/@Cd=NC",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2020-06-23"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NC",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2025-03-31",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2022-04-22"
+          },
+          "secFileNumber": "801-124758"
+        },
+        "reading": "Both official 2026-09-17 compilations carry this exact firm CRD: APPROVED North Carolina StateRgstn and FILED North Carolina NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "316840",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NC",
+          "filter": "StateRgstn/Rgltr/@Cd=NC",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2021-10-07"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NC",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-09-02",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2026-09-02"
+          },
+          "secFileNumber": "801-136105"
+        },
+        "reading": "Both official 2026-09-17 compilations carry this exact firm CRD: APPROVED North Carolina StateRgstn and FILED North Carolina NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      }
+    ]
+  },
+  "semanticGrainRules": {
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_SEC_RIA": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_NOTICE_FILING": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_STATE_ERA": true,
+    "PRINCIPAL_OFFICE_IS_NOT_REGISTRATION": true,
+    "REGISTRATION_ROW_IS_DISTINCT_GRAIN_FROM_DISTINCT_FIRM_CRD": true,
+    "note": "These are contract/credential rules. They do not assert that CRD sets are disjoint or that counts are numerically unequal."
+  },
+  "computedDiagnostics": {
+    "state_ia_registration_rows": 702,
+    "state_ia_distinct_crd": 702,
+    "state_ia_approved_distinct_crd": 701,
+    "state_ia_termrequest_distinct_crd": 1,
+    "state_era_registration_rows": 33,
+    "state_era_distinct_crd": 33,
+    "state_ia_and_state_era_overlap_distinct_crd": 0,
+    "state_ia_approved_and_notice_filed_overlap_distinct_crd": 4,
+    "notice_filed_distinct_crd": 3704,
+    "notice_filed_firm_type": {
+      "Registered": 3704,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          3704
+        ]
+      ]
+    },
+    "registration_rows_equal_distinct_crd": true
+  }
+}

@@ -1,4 +1,5 @@
 import networkMetrics from '../../../data/home/investor-network-metrics-v1.json';
+import NC_PUBLIC_SNAPSHOT from '../../../artifacts/nc-inv-001-public-snapshot.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -70,7 +71,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC';
   name: string;
   href: string;
   regulator: string;
@@ -582,6 +583,42 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
         sourceAsOf: PA_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
         retrievedAt: PA_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
         snapshotAsOf: PA_PUBLIC_SNAPSHOT.stateRia.snapshotAsOf,
+        generatedAt: null,
+      },
+    ],
+  },
+  {
+    code: 'NC',
+    name: 'North Carolina',
+    href: NC_PUBLIC_SNAPSHOT.route,
+    regulator: 'North Carolina Secretary of State Securities Division',
+    principalOfficeFirms:
+      NC_PUBLIC_SNAPSHOT.nationalOverlay.ncPrincipalOfficeSecIardFirms,
+    rosterStatus: `NC SOS IA register ${NC_PUBLIC_SNAPSHOT.sosRegisters.NC_SOS_IA_DISTINCT_CRDS.toLocaleString('en-US')} firm CRDs as of ${NC_PUBLIC_SNAPSHOT.sosRegisters.NC_SOS_REGISTER_SOURCE_AS_OF}`,
+    evidence: [
+      'Official NC SOS IA/IAR/BD/AG registers',
+      'IAPD North Carolina state-registered IA compilation',
+      'IAPD North Carolina state ERA reporting',
+      'federal-covered notice filings',
+      'NC SOS enforcement HTML catalog (unattached)',
+    ],
+    identityNote:
+      'The SOS IA register and IAPD NC state-IA lens are complementary clocks. Exact CRD is required. IAR people are not IA firms.',
+    limitation:
+      'Do not add IA+IAR+BD+AG or state IA+ERA+notice+principal office. Summary cease and desist is not a final finding. Name-only enforcement attachment is unsafe.',
+    sourceClocks: [
+      {
+        label: 'NC SOS IA register',
+        sourceAsOf: NC_PUBLIC_SNAPSHOT.sosRegisters.NC_SOS_REGISTER_SOURCE_AS_OF,
+        retrievedAt: NC_PUBLIC_SNAPSHOT.sosRegisters.retrievedAt,
+        snapshotAsOf: null,
+        generatedAt: null,
+      },
+      {
+        label: 'IAPD state compilation',
+        sourceAsOf: NC_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+        retrievedAt: NC_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+        snapshotAsOf: NC_PUBLIC_SNAPSHOT.asOf,
         generatedAt: null,
       },
     ],
@@ -1314,6 +1351,80 @@ export function buildInvestorHomepageEvidenceInventory(): InvestorHomepageEviden
       'PUBLIC',
       PA_PUBLIC_SNAPSHOT.federalNotice.sourceAsOf,
       PA_PUBLIC_SNAPSHOT.federalNotice.retrievedAt,
+    ),
+    stateMeasure(
+      'nc_hq_overlay',
+      'SEC/IARD firms with a North Carolina principal office',
+      NC_PUBLIC_SNAPSHOT.nationalOverlay.ncPrincipalOfficeSecIardFirms,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'SEC/IARD firm with NC principal office',
+      'North Carolina',
+      'SEC IAPD / IARD',
+      'artifacts/nc-inv-001-public-snapshot.json',
+      NC_PUBLIC_SNAPSHOT.asOf,
+      'Federal roster firms reporting NC principal office.',
+      'North Carolina state-RIA roster, SOS IA register, notice filing, or SOS authority.',
+      '/north-carolina',
+      'PUBLIC',
+      NC_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+      NC_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+    ),
+    stateMeasure(
+      'nc_sos_ia_register',
+      'North Carolina SOS IA register distinct firm CRDs',
+      NC_PUBLIC_SNAPSHOT.sosRegisters.NC_SOS_IA_DISTINCT_CRDS,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'NC SOS Register of NC IAs firm CRD',
+      'North Carolina',
+      'NC Secretary of State Securities Division',
+      'artifacts/nc-inv-001-public-snapshot.json',
+      NC_PUBLIC_SNAPSHOT.asOf,
+      'Distinct firm CRDs on the official Register of NC IAs current as of 2026-06-30.',
+      'IAR people, broker-dealers, agents, ERA, notice filings, or principal-office overlay.',
+      '/north-carolina',
+      'PUBLIC',
+      NC_PUBLIC_SNAPSHOT.sosRegisters.NC_SOS_REGISTER_SOURCE_AS_OF,
+      NC_PUBLIC_SNAPSHOT.sosRegisters.retrievedAt,
+    ),
+    stateMeasure(
+      'nc_state_roster',
+      'North Carolina IAPD state-registered investment-adviser firms',
+      NC_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'IAPD state-compilation APPROVED firm with jurisdiction NC',
+      'North Carolina',
+      'IAPD state compilation',
+      'artifacts/nc-inv-001-public-snapshot.json',
+      NC_PUBLIC_SNAPSHOT.asOf,
+      'Approved North Carolina state-IA firms in IA_FIRM_STATE_Feed_09_17_2026.',
+      'SOS IA register, SEC principal-office overlay, federal notice filings, ERA reporting, or IAR people.',
+      '/north-carolina',
+      'PUBLIC',
+      NC_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+      NC_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+      'Exact firm CRD. Complementary to the SOS register; clocks differ.',
+      'Filter is registration jurisdiction, not address.',
+    ),
+    stateMeasure(
+      'nc_notice_filed',
+      'SEC/IARD firms with a North Carolina notice filing',
+      NC_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'NoticeFiled RgltrCd=NC FILED',
+      'North Carolina',
+      'SEC IAPD / IARD',
+      'artifacts/nc-inv-001-public-snapshot.json',
+      NC_PUBLIC_SNAPSHOT.asOf,
+      'SEC/IARD firms with a North Carolina notice filing in the cited compilation.',
+      'North Carolina state-RIA licensure, SOS IA register, or the 325 principal-office overlay.',
+      '/north-carolina',
+      'PUBLIC',
+      NC_PUBLIC_SNAPSHOT.federalNotice.sourceAsOf,
+      NC_PUBLIC_SNAPSHOT.federalNotice.retrievedAt,
     ),
     stateMeasure(
       'az_index_crd_mentions',

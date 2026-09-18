@@ -716,6 +716,87 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     return { raw: q, query, interpretation: lines };
   }
 
+  if (/\bis this adviser registered in north carolina\b|\bis .+ registered in north carolina\b/i.test(q)) {
+    const query = failClosed(
+      'Current North Carolina registration is verified on IAPD with an exact firm CRD. Name-only matching is unsafe. A North Carolina principal office is not North Carolina state registration. The official NC SOS IA register (current as of 2026-06-30) is a complementary grain to IAPD. Use /north-carolina.',
+      ['North Carolina investor research page.', 'Find CRD 105958.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:how many (?:investment )?advisers? (?:are )?in north carolina|north carolina (?:state )?rias?|state registered investment adviser north carolina|nc investment adviser registration|investment advisers? north carolina|registered investment advisers? north carolina)\b/i.test(q)) {
+    const query = failClosed(
+      'The official Register of NC IAs (current as of 2026-06-30) has 687 distinct firm CRDs. That is not IAR people, not broker-dealers, not notice filings, and not principal-office firms. IAPD shows 701 APPROVED NC state IA CRDs on the 2026-09-17 compilation — a complementary clock, not a correction. Do not add the classes. Use /north-carolina.',
+      ['North Carolina investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:north carolina era|era north carolina|exempt reporting advisers? in north carolina)\b/i.test(q)) {
+    const query = failClosed(
+      'North Carolina state ERA reporting firms are published on /north-carolina. ERA is not an RIA and is not NC state IA registration.',
+      ['North Carolina investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:notice filing north carolina|sec registered adviser north carolina|federal-covered advisers? in north carolina)\b/i.test(q)) {
+    const query = failClosed(
+      'A federal-covered notice filing in North Carolina is not NC state IA registration and is not a North Carolina principal office. Use /north-carolina.',
+      ['North Carolina investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:investment adviser headquartered north carolina|adviser headquartered in north carolina)\b/i.test(q)) {
+    const query = failClosed(
+      'A North Carolina principal office is not North Carolina state registration and is not a notice filing. Use /north-carolina.',
+      ['North Carolina investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\binvestment adviser representative north carolina|\biar north carolina\b/i.test(q)) {
+    const query = failClosed(
+      'The Register of NC IARs is a person grain. IAR is not an IA firm. Person CRD is not firm CRD. This ticket does not mass-publish IAR profiles. Use /north-carolina.',
+      ['North Carolina investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\bbroker dealer north carolina|securities agent north carolina\b/i.test(q)) {
+    const query = failClosed(
+      'The Register of NC BDs and Register of NC AGs are separate securities classes. AG means securities agent, not Attorney General. Broker-dealers are not investment advisers. Use /north-carolina.',
+      ['North Carolina investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if ((/\bnorth carolina\b/i.test(q) || /\bcharlotte\b/i.test(q) || /\braleigh\b/i.test(q)) && /\b(?:complaints?|disciplin|enforcement|cease and desist|administrative (?:action|order))\b/i.test(q)) {
+    const query = failClosed(
+      'NC SOS Criminal Enforcement & Administrative Actions is a mixed securities catalog. A summary cease and desist is not a final finding. A charge is not a conviction. Exact CRD is required to attach a matter to a firm. Complaints were not acquired as a bulk dataset; missing is not zero. Charlotte and Raleigh are not separate InvestorTrustHub routes. Use /north-carolina.',
+      ['North Carolina investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:best|highest performing|safe) (?:investment |financial )?adviser in (?:north carolina|charlotte|raleigh)\b/i.test(q)) {
+    const query = failClosed(
+      'InvestorTrustHub does not rank advisers, score performance, or publish a Trust Score. Charlotte and Raleigh are not separate InvestorTrustHub routes.',
+      ['North Carolina investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(charlotte|raleigh|mecklenburg|wake county)\b/i.test(q) && /investment adviser|financial adviser|adviser/i.test(q)) {
+    const query = failClosed(
+      'InvestorTrustHub does not publish Charlotte, Raleigh, Mecklenburg, or Wake intelligence routes. Statewide North Carolina research remains /north-carolina. Ranking is unsupported.',
+      ['North Carolina investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+
   if (/\bis this adviser registered in pennsylvania\b|\bis .+ registered in pennsylvania\b/i.test(q)) {
     const query = failClosed(
       'Current Pennsylvania registration is verified on IAPD with an exact firm CRD or SEC file number. Name-only matching is unsafe. A Pennsylvania principal office is not Pennsylvania state registration. Use /pennsylvania for statewide grains.',

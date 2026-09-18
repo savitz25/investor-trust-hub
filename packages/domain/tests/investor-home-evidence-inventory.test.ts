@@ -118,6 +118,7 @@ describe('INV-HOME-003 public evidence inventory', () => {
       '/illinois',
       '/oregon',
       '/pennsylvania',
+      '/north-carolina',
     ]);
     expect(get('published_state_pages').value).toBe(
       INVESTOR_HOMEPAGE_STATE_CARDS.length,
