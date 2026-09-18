@@ -797,6 +797,79 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     return { raw: q, query, interpretation: lines };
   }
 
+  if (/\bis this adviser registered in ohio\b|\bis .+ registered in ohio\b/i.test(q)) {
+    const query = failClosed(
+      'Current Ohio registration is verified on IAPD with an exact firm CRD. Name-only matching is unsafe. An Ohio principal office is not Ohio state registration. STAR Filing Search is not an IA census. Use /ohio.',
+      ['Ohio investor research page.', 'Find CRD 105958.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:how many (?:investment )?advisers? (?:are )?in ohio|ohio (?:state )?rias?|state registered investment adviser ohio|ohio investment adviser license|investment advisers? ohio|registered investment advisers? ohio)\b/i.test(q)) {
+    const query = failClosed(
+      'IAPD shows 784 APPROVED Ohio state IA firm CRDs on the 2026-09-17 compilation (StateRgstn/Rgltr/@Cd=OH). That is not ERA, not notice filings, not principal-office firms, and not IAR people. Do not add the classes. Use /ohio.',
+      ['Ohio investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:ohio era|era ohio|exempt reporting advisers? in ohio)\b/i.test(q)) {
+    const query = failClosed(
+      'Ohio state ERA reporting firms are published on /ohio. ERA is not an RIA and is not Ohio state IA registration.',
+      ['Ohio investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:notice filing ohio|sec registered adviser ohio|federal covered adviser ohio|federal-covered advisers? in ohio)\b/i.test(q)) {
+    const query = failClosed(
+      'A federal-covered notice filing in Ohio is not Ohio state IA registration and is not an Ohio principal office. Use /ohio.',
+      ['Ohio investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:investment adviser headquartered ohio|adviser headquartered in ohio)\b/i.test(q)) {
+    const query = failClosed(
+      'An Ohio principal office is not Ohio state registration and is not a notice filing. Use /ohio.',
+      ['Ohio investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\binvestment adviser representative ohio\b|\biar ohio\b|\bohio iar\b/i.test(q) || (/\biar\b/i.test(q) && /\bohio\b/i.test(q))) {
+    const query = failClosed(
+      'Ohio IAR is a person grain, not an IA firm. Person CRD is not firm CRD. Statewide IAR bulk was not acquired; STAR/records-request is not a census. This ticket does not mass-publish IAR profiles. Use /ohio.',
+      ['Ohio investor research page.'],
+    );
+    push('Coverage', 'OPEN_SEARCH_ONLY');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:ohio securities final orders|ohio securities notice of opportunity for hearing|ohio investment adviser discipline|ohio cease and desist securities)\b/i.test(q) || ((/\bohio\b/i.test(q) || /\bcolumbus\b/i.test(q) || /\bcleveland\b/i.test(q)) && /\b(?:complaints?|disciplin|enforcement|final order|notice of opportunity|cease and desist|administrative (?:action|order))\b/i.test(q))) {
+    const query = failClosed(
+      'Ohio Division Orders distinguish a Notice of Opportunity for Hearing from a Final Order. NOH is not a final finding. The Division warns its online final-order search may not retrieve all responsive documents. Mixed securities orders are not an IA census. Exact CRD is required to attach a matter. Complaints are intake-only; missing is not zero. Columbus and Cleveland are not separate InvestorTrustHub routes. Use /ohio.',
+      ['Ohio investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:best|highest performing|safe) (?:investment |financial )?advisers?(?: in)? (?:ohio|columbus|cleveland)\b/i.test(q)) {
+    const query = failClosed(
+      'InvestorTrustHub does not rank advisers, score performance, or publish a Trust Score. Columbus and Cleveland are not separate InvestorTrustHub routes.',
+      ['Ohio investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(columbus|cleveland|cincinnati|toledo|akron|dayton)\b/i.test(q) && /investment adviser|financial adviser|adviser/i.test(q)) {
+    const query = failClosed(
+      'InvestorTrustHub does not publish Columbus, Cleveland, Cincinnati, Toledo, Akron, or Dayton intelligence routes. Statewide Ohio research remains /ohio. Ranking is unsupported.',
+      ['Ohio investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+
   if (/\bis this adviser registered in pennsylvania\b|\bis .+ registered in pennsylvania\b/i.test(q)) {
     const query = failClosed(
       'Current Pennsylvania registration is verified on IAPD with an exact firm CRD or SEC file number. Name-only matching is unsafe. A Pennsylvania principal office is not Pennsylvania state registration. Use /pennsylvania for statewide grains.',

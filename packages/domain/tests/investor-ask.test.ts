@@ -236,4 +236,35 @@ describe('investor-ask-v1 interpreter', () => {
     expect(parsed.query.geography?.state).toBe('TX');
     expect(parsed.query.nameQuery).toBeUndefined();
   });
+
+  it('keeps Ohio IAPD lenses, STAR, NOH, and cities fail-closed', () => {
+    const ia = interpretInvestorAskQuery('investment advisers Ohio');
+    expect(ia.query.mode).toBe('fail_closed');
+    expect(ia.query.failReason).toMatch(/784/);
+    expect(ia.query.failReason).not.toMatch(/combined|sum/i);
+    const ria = interpretInvestorAskQuery('state registered investment adviser Ohio');
+    expect(ria.query.mode).toBe('fail_closed');
+    const notice = interpretInvestorAskQuery('notice filing Ohio');
+    expect(notice.query.mode).toBe('fail_closed');
+    expect(notice.query.failReason).toMatch(/not Ohio state IA/i);
+    const era = interpretInvestorAskQuery('ERA Ohio');
+    expect(era.query.mode).toBe('fail_closed');
+    const hq = interpretInvestorAskQuery('investment adviser headquartered Ohio');
+    expect(hq.query.mode).toBe('fail_closed');
+    expect(hq.query.failReason).toMatch(/principal office/i);
+    const iar = interpretInvestorAskQuery('IAR Ohio');
+    expect(iar.query.mode).toBe('fail_closed');
+    expect(iar.query.failReason).toMatch(/person/i);
+    const noh = interpretInvestorAskQuery('Ohio securities Notice of Opportunity for Hearing');
+    expect(noh.query.mode).toBe('fail_closed');
+    expect(noh.query.failReason).toMatch(/not a final finding/i);
+    const best = interpretInvestorAskQuery('best financial adviser Ohio');
+    expect(best.query.mode).toBe('fail_closed');
+    expect(best.query.failReason).toMatch(/does not rank/i);
+    const col = interpretInvestorAskQuery('financial adviser Columbus');
+    expect(col.query.mode).toBe('fail_closed');
+    expect(col.query.failReason).not.toMatch(/\/ohio\/columbus/);
+    const crd = interpretInvestorAskQuery('CRD 105958');
+    expect(crd.query.mode).toBe('identifier');
+  });
 });

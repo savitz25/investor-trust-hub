@@ -390,7 +390,7 @@ export function planInvestorResearch(raw: string, o: InvestorAskOverrides, core:
   if (!q.identifier) {
     const p = core(canonicalText, { ...o, state: undefined });
     q = { ...p.query, inputOverrides: o };
-    if (name) {
+    if (name && p.query.mode !== 'fail_closed') {
       q = {
         ...q,
         mode: 'entity',
