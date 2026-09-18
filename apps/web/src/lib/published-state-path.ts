@@ -21,6 +21,7 @@ export function normalizedPublishedStatePath(pathname: string): string | null {
   const parts = pathname.split('/').filter(Boolean);
   if (parts.length !== 1) return null;
   const first = parts[0];
+  if (!first) return null;
   const lower = first.toLowerCase();
   if (!SLUGS.has(lower)) return null;
   if (first === lower) return null;
