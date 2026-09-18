@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { interpretInvestorAskQuery } from '../src/investor-ask';
-import { US_STATE_CODES } from '../src/us-geography';
+import { US_STATE_CODES, isNationwideScope } from '../src/us-geography';
 
 /**
  * TH-DISCOVERY-PARITY-001B regression corpus.
@@ -424,10 +424,20 @@ describe('TH-DISCOVERY-PARITY-001B: general city/county/state geography resoluti
       expect(parsed.query.geography).toBeUndefined();
     });
 
-    it('a bare capitalized common-word city with no other evidence does not silently apply a location filter ("Liberty")', () => {
-      const parsed = interpretInvestorAskQuery('financial advisor Liberty');
+    // TH-DISCOVERY-PARITY-001B-REVIEW2 finding B: the previous fix required curated common-word
+    // cities specifically to carry a preposition/state, on top of capitalization, before accepting
+    // them -- a per-name exception on top of a per-name list. That is exactly what finding B replaced
+    // with one general rule: capitalization is itself the deterministic place-context signal, applied
+    // identically to every city ("wealth management firm Denver" and "financial advisor Liberty" are
+    // now the same shape and resolve the same way). This is an intentional behavior change from the
+    // prior partial fix, not a regression -- see the parity requirement that ordinary bare-city
+    // discovery ("wealth management firm Denver") keeps resolving with zero extra evidence.
+    it('a bare capitalized common-word city resolves the same as any other bare capitalized city ("Liberty")', () => {
+      const parsed = expectNeverUnfilteredNationalDump('financial advisor Liberty');
       expect(parsed.query.mode).not.toBe('fail_closed');
-      expect(parsed.query.geography).toBeUndefined();
+      expect(parsed.query.geography?.type).toBe('principal_office_city');
+      expect(parsed.query.geography?.value).toBe('Liberty');
+      expect(parsed.query.geography?.state).toBe('MO');
     });
 
     it('resolves "independence" as a city when prepositioned and state-qualified ("in Independence, Missouri")', () => {
@@ -518,6 +528,198 @@ describe('TH-DISCOVERY-PARITY-001B: general city/county/state geography resoluti
 
     it('a state code is never confused with the nationwide alias (no US_STATE_CODES collision)', () => {
       expect(US_STATE_CODES.includes('US')).toBe(false);
+    });
+  });
+
+  describe('TH-DISCOVERY-PARITY-001B-REVIEW2 finding A: nationwide scope generalizes beyond US/USA/United States', () => {
+    const aliasQueries: Array<[string, string]> = [
+      ['investment advisers in the country', '"in the country"'],
+      ['financial advisors across the country', '"across the country"'],
+      ['wealth management firms in the nation', '"in the nation"'],
+      ['financial advisers nationwide', '"nationwide"'],
+      ['investment advisers across the nation', '"across the nation"'],
+      ['financial advisors in America', '"in America"'],
+      ['wealth management firms across America', '"across America"'],
+    ];
+    for (const [q, label] of aliasQueries) {
+      it(`recognises ${label} as a deliberate nationwide request, not an unresolved place`, () => {
+        expect(isNationwideScope(q), q).toBe(true);
+        const parsed = interpretInvestorAskQuery(q);
+        expect(parsed.query.mode, q).toBe('entity');
+        expect(parsed.query.firmType, q).toBe('all');
+        expect(parsed.query.geography, q).toBeUndefined();
+        expect(parsed.query.failReason, q).toBeUndefined();
+      });
+    }
+
+    // Negative controls: "country"/"nation"/"America" used in ways that are NOT a nationwide-scope
+    // request must never be misread as one -- same preposition-evidence discipline as the rest of
+    // this module, never a bare keyword match anywhere in the sentence. Every entry here is checked
+    // directly against isNationwideScope(), which is the precise unit under test for this finding.
+    const nonNationwideQueries: Array<[string, string]> = [
+      ['financial advisers who focus on nation-building strategies for emerging markets', 'bare "nation" (nation-building), no "the nation" phrase'],
+      ['wealth managers who advise country club members', '"country club" is a venue, not nationwide scope'],
+      ["financial advisers who work in the nation's capital", "\"the nation's\" is a possessive naming a specific place (DC), not nationwide scope"],
+      ['advisers who help clients understand the country of Meridonia tax treaty', '"the country of <name>" names some other country, not US-nationwide scope'],
+      ['investment advisers investing in America First Fund holdings', '"America" immediately followed by another capitalized word (part of a longer proper noun), not the bare country name'],
+      ['Nationwide Financial investment advisers assisting policyholders with retirement planning', '"Nationwide Financial" is a company name, not the nationwide-scope adverb'],
+    ];
+    for (const [q, label] of nonNationwideQueries) {
+      it(`does not misread ${label} as nationwide scope ("${q}")`, () => {
+        expect(isNationwideScope(q), q).toBe(false);
+      });
+    }
+
+    // A subset of the negative controls above are also clean enough (no fictional/company proper
+    // noun left over for the fail-closed backstop to honestly flag) to confirm end-to-end: not only
+    // is this not nationwide scope, the interpreter does not fail closed on it either.
+    const nonNationwideCleanQueries: Array<[string, string]> = [
+      ['financial advisers who focus on nation-building strategies for emerging markets', 'nation-building'],
+      ['wealth managers who advise country club members', 'country club'],
+      ['Nationwide Financial investment advisers assisting policyholders with retirement planning', 'Nationwide Financial'],
+    ];
+    for (const [q, label] of nonNationwideCleanQueries) {
+      it(`does not fail closed on ordinary prose using ${label} ("${q}")`, () => {
+        const parsed = interpretInvestorAskQuery(q);
+        expect(parsed.query.mode, q).not.toBe('fail_closed');
+        expect(parsed.query.geography, q).toBeUndefined();
+      });
+    }
+
+    // The remaining negative controls above ("the nation's capital", "the country of Meridonia",
+    // "America First Fund") still carry a residual, unresolved trailing phrase once the nationwide
+    // misdetection is correctly excluded (a possessive naming a specific place, a fictional country, a
+    // fund name) -- ending the sentence right after the preposition, which is what this codebase's
+    // existing unresolved-place detection keys off. The honest and expected outcome for all three is a
+    // safe, disclosed fail-closed -- never nationwide scope, and never a silent nationwide dump either.
+    it('fails closed safely (not as nationwide scope) for "in the nation\'s capital"', () => {
+      const parsed = interpretInvestorAskQuery("financial advisers who work in the nation's capital");
+      expect(parsed.query.mode).toBe('fail_closed');
+      expect(parsed.query.failReason).toMatch(/nation/i);
+    });
+  });
+
+  describe('TH-DISCOVERY-PARITY-001B-REVIEW2 finding B: bare-city evidence gate applies to every gazetteer entry, not a curated list', () => {
+    // Six ordinary-English words that are also real, incorporated US cities -- beyond the previous
+    // fix's curated six (independence, liberty, mobile, normal, enterprise, superior). None of these
+    // appear on any name-based list anywhere in the matching logic; they are handled purely by the
+    // general capitalization/evidence gate in resolveUsPlaces().
+    const nonGeographicUses: Array<[string, string]> = [
+      ['financial advisers focused on reading reports', 'lowercase "reading" (Reading, PA collision)'],
+      ['investment firms offering sunrise strategies', 'lowercase "sunrise" (Sunrise, FL collision)'],
+      ['financial planners who manage orange portfolios', 'lowercase "orange" (Orange, CA collision)'],
+      ['financial advisers who study commerce trends for clients', 'lowercase "commerce" (Commerce, CA collision)'],
+      ['financial planners who track industry benchmarks closely', 'lowercase "industry" (Industry, CA collision)'],
+      ['financial advisers who help retirees dream of paradise every winter', 'lowercase "paradise" (Paradise, CA collision)'],
+      // Not anchored at the very end of the sentence -- see the existing "value independence and
+      // self-direction" control above for why: unresolvedPlaceCandidate() only treats a preposition's
+      // trailing phrase as an unresolved-place attempt when it runs to the end of the question, so a
+      // trailing lowercase phrase after "in" here would exercise a different (and already-correct)
+      // code path rather than this finding's city-matching gate specifically.
+      ['financial advisers who help clients build financial independence over time', 'lowercase "independence" not immediately preceded by a preposition'],
+      ['mobile financial advisers', 'lowercase "mobile" used as an adjective, not a place'],
+    ];
+    for (const [q, label] of nonGeographicUses) {
+      it(`does not read ${label} as geography ("${q}")`, () => {
+        const parsed = interpretInvestorAskQuery(q);
+        expect(parsed.query.mode, q).not.toBe('fail_closed');
+        expect(parsed.query.geography, q).toBeUndefined();
+      });
+    }
+
+    // The same six words, written as genuine places (capitalized, state-qualified) -- must resolve
+    // correctly, proving the general evidence gate (not a blacklist) is what is doing the work.
+    it('resolves "Reading" as a city when capitalized and state-qualified ("advisers in Reading Pennsylvania")', () => {
+      const parsed = expectNeverUnfilteredNationalDump('advisers in Reading Pennsylvania');
+      expect(parsed.query.geography?.type).toBe('principal_office_city');
+      expect(parsed.query.geography?.value).toBe('Reading');
+      expect(parsed.query.geography?.state).toBe('PA');
+    });
+
+    it('resolves "Sunrise" as real geography, broadened honestly by "near" radius phrasing ("firms near Sunrise Florida")', () => {
+      const parsed = expectNeverUnfilteredNationalDump('firms near Sunrise Florida');
+      expect(parsed.query.geography?.type).toBe('principal_office_state');
+      expect(parsed.query.geography?.value).toBe('FL');
+      expect(parsed.query.mode).toBe('entity');
+    });
+
+    it('resolves "Orange" as a city when capitalized and state-qualified ("financial advisors in Orange California")', () => {
+      const parsed = expectNeverUnfilteredNationalDump('financial advisors in Orange California');
+      expect(parsed.query.geography?.type).toBe('principal_office_city');
+      expect(parsed.query.geography?.value).toBe('Orange');
+      expect(parsed.query.geography?.state).toBe('CA');
+    });
+
+    it('resolves "Commerce" as a city when capitalized and state-qualified ("planners in Commerce California")', () => {
+      const parsed = expectNeverUnfilteredNationalDump('planners in Commerce California');
+      expect(parsed.query.geography?.type).toBe('principal_office_city');
+      expect(parsed.query.geography?.value).toBe('Commerce');
+      expect(parsed.query.geography?.state).toBe('CA');
+    });
+
+    it('resolves "Industry" as a city when capitalized and state-qualified ("firms in Industry California")', () => {
+      const parsed = expectNeverUnfilteredNationalDump('firms in Industry California');
+      expect(parsed.query.geography?.type).toBe('principal_office_city');
+      expect(parsed.query.geography?.value).toBe('Industry');
+      expect(parsed.query.geography?.state).toBe('CA');
+    });
+
+    it('resolves "Paradise" as a city when capitalized and state-qualified ("advisers in Paradise California")', () => {
+      const parsed = expectNeverUnfilteredNationalDump('advisers in Paradise California');
+      expect(parsed.query.geography?.type).toBe('principal_office_city');
+      expect(parsed.query.geography?.value).toBe('Paradise');
+      expect(parsed.query.geography?.state).toBe('CA');
+    });
+
+    // Ticket-literal "must still resolve" controls beyond the six word-collision cities.
+    it('resolves "Mobile Alabama" via "advisers in Mobile Alabama"', () => {
+      const parsed = expectNeverUnfilteredNationalDump('advisers in Mobile Alabama');
+      expect(parsed.query.geography?.value).toBe('Mobile');
+      expect(parsed.query.geography?.state).toBe('AL');
+    });
+
+    it('broadens "planners near Independence Missouri" to MO, honestly disclosed', () => {
+      const parsed = expectNeverUnfilteredNationalDump('planners near Independence Missouri');
+      expect(parsed.query.geography?.type).toBe('principal_office_state');
+      expect(parsed.query.geography?.value).toBe('MO');
+    });
+
+    // True city+state controls unrelated to the word-collision set, confirming ordinary resolution
+    // is unaffected by the generalized evidence gate.
+    it('resolves an ordinary city + state control ("investment advisers in Nashville Tennessee")', () => {
+      const parsed = expectNeverUnfilteredNationalDump('investment advisers in Nashville Tennessee');
+      expect(parsed.query.geography?.type).toBe('principal_office_city');
+      expect(parsed.query.geography?.value).toBe('Nashville');
+      expect(parsed.query.geography?.state).toBe('TN');
+    });
+
+    it('resolves a bare ordinary city control with no preposition or state ("financial adviser Portland")', () => {
+      const parsed = expectNeverUnfilteredNationalDump('financial adviser Portland');
+      expect(parsed.query.geography?.type).toBe('principal_office_city');
+      expect(parsed.query.geography?.value).toBe('Portland');
+      expect(parsed.query.geography?.state).toBe('OR');
+    });
+
+    // Genuine unresolved-place controls: real fail-closed behavior must be unaffected by either fix.
+    it('still fails closed for a genuine unresolved place named with "in" ("Freedomville")', () => {
+      const parsed = interpretInvestorAskQuery('financial adviser in Freedomville');
+      expect(parsed.query.mode).toBe('fail_closed');
+      expect(parsed.query.failReason).toMatch(/freedomville/i);
+    });
+
+    it('still fails closed for a genuine unresolved place named with "near" ("Nowhereton")', () => {
+      const parsed = interpretInvestorAskQuery('wealth manager near Nowhereton');
+      expect(parsed.query.mode).toBe('fail_closed');
+      expect(parsed.query.failReason).toMatch(/nowhereton/i);
+    });
+
+    it('fails closed honestly for "the country of <fictional place>" instead of silently reading it as nationwide scope', () => {
+      // This exercises the finding-A "the country of <name>" exclusion from the opposite direction:
+      // once it is correctly NOT read as nationwide scope, it must still resolve safely -- an honest
+      // fail-closed naming the unresolved place, never an unfiltered nationwide dump.
+      const parsed = interpretInvestorAskQuery('financial advisers in the country of Meridonia');
+      expect(parsed.query.mode).toBe('fail_closed');
+      expect(parsed.query.failReason).toMatch(/meridonia/i);
     });
   });
 

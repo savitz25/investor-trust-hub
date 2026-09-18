@@ -1066,7 +1066,17 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     // itself must still look like a real place attempt, not a nationwide-scope alias or ordinary
     // lowercase text.
     const city = cityMatch[1]?.trim();
-    if (city && city.length > 2 && /^[A-Z]/.test(city) && !isNationwideScope(city) && !/ria|era|firm/i.test(city)) {
+    // TH-DISCOVERY-PARITY-001B-REVIEW2 finding A: isNationwideScope() must see the preposition
+    // attached (cityMatch[0], e.g. "in America") -- the nationwide-phrase patterns only match with
+    // their "in"/"across"/... prefix present, so checking the bare captured word alone ("America")
+    // would miss them and let this fallback silently manufacture a bogus "America" city filter.
+    if (
+      city &&
+      city.length > 2 &&
+      /^[A-Z]/.test(city) &&
+      !isNationwideScope(cityMatch[0]) &&
+      !/ria|era|firm/i.test(city)
+    ) {
       geography = {
         type: 'principal_office_city',
         value: city,

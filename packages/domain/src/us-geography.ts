@@ -95,6 +95,7 @@ const CITIES_BY_STATE: Record<string, string[]> = {
     'La Quinta', 'Rancho Mirage', 'Coachella', 'Banning', 'Beaumont', 'Wildomar', 'Menifee',
     'Lake Elsinore', 'Perris', 'San Jacinto', 'Yucaipa', 'Rialto', 'Colton', 'Highland',
     'Apple Valley', 'Hesperia', 'Barstow', 'Ridgecrest', 'Lompoc', 'Goleta', 'Solvang', 'Ojai',
+    'Commerce', 'Industry', 'Paradise',
   ],
   TX: [
     'Houston', 'San Antonio', 'Dallas', 'Austin', 'Fort Worth', 'El Paso', 'Arlington',
@@ -862,17 +863,15 @@ const PLACE_STOPWORDS = new Set([
 ]);
 
 /**
- * TH-DISCOVERY-PARITY-001B-REVIEW finding 2: normalized city names that are also ordinary English
- * words. A bare, unqualified appearance of one of these words must never silently scope a query to
- * that city ("financial advisers who value independence and self-direction" must not resolve to
- * Independence, MO). Matching one of these requires real disambiguating evidence -- see the filter
- * applied in resolveUsPlaces() below -- not just a gazetteer key collision.
- */
-const COMMON_WORD_CITY_NAMES = new Set(['independence', 'liberty', 'mobile', 'normal', 'enterprise', 'superior']);
-
-/**
- * Words that count as "this place-like token was deliberately introduced as a location" evidence
- * for a COMMON_WORD_CITY_NAMES match -- the token immediately preceding it in the text.
+ * TH-DISCOVERY-PARITY-001B-REVIEW2 finding B: a curated list of "city names that are also ordinary
+ * English words" (the previous fix's `COMMON_WORD_CITY_NAMES`) does not structurally solve this --
+ * there are far more real US cities that double as ordinary words than any list will ever enumerate
+ * (Reading PA, Sunrise FL, Orange CA, Commerce CA, Industry CA, Paradise CA, ...). The gate below is
+ * applied to EVERY gazetteer city match instead, with no name-based exception list at all -- see the
+ * filter in resolveUsPlaces().
+ *
+ * Words that count as "this place-like token was deliberately introduced as a location" evidence --
+ * the token immediately preceding a candidate city match in the text.
  */
 const CITY_EVIDENCE_PREPOSITIONS = new Set([
   'in', 'near', 'around', 'at', 'outside', 'by', 'based', 'located', 'headquartered',
@@ -965,15 +964,29 @@ export function resolveUsPlaces(text: string): UsPlaceMatch[] {
     }
   }
   const sorted = matches.sort((a, b) => a.start - b.start);
-  // TH-DISCOVERY-PARITY-001B-REVIEW finding 2: a COMMON_WORD_CITY_NAMES match (e.g. "independence",
-  // "liberty", "mobile") is only real geography when there is actual evidence it was meant as a
-  // place -- proper capitalization plus either a location preposition immediately before it, or an
-  // explicit state named right next to it. A bare, lowercase, or otherwise unqualified appearance
-  // (the ordinary-word reading) must never resolve and silently scope a query to the wrong city.
+  // TH-DISCOVERY-PARITY-001B-REVIEW2 finding B: this evidence gate now applies to EVERY bare city
+  // match -- not a curated subset of "words that also happen to be cities" -- because that is the
+  // only way it generalizes to city/word collisions nobody enumerated (Reading, Sunrise, Orange,
+  // Commerce, Industry, Paradise, and any other real US city that is also an ordinary English word).
+  //
+  // Evidence is either of:
+  //   (a) proper-noun capitalization on the matched token. Nobody writes "wealth management firm
+  //       Denver" and means the ordinary word "denver" -- capitalization is itself a deterministic
+  //       place-context signal, and it is what lets an unqualified, bare city mention like "Denver"
+  //       or "Austin" keep resolving with zero extra evidence, exactly as before.
+  //   (b) for a token that is NOT capitalized -- an unqualified, lowercase, ordinary-prose
+  //       appearance -- real disambiguating evidence is required: an explicit location preposition
+  //       immediately before it, or an explicit state name/code adjacent to it. A lowercase match
+  //       with neither is the ordinary-word reading ("financial advisers who value independence and
+  //       self-direction", "mobile financial advisers", "reading reports", "orange portfolios") and
+  //       must never silently become geography.
+  // (County/metro/ZIP structural markers are handled upstream of this filter: a "<word> County"/
+  // "<word> Parish" suffix already reclassifies the match to kind 'county', which this filter does
+  // not gate at all -- the suffix itself is the location evidence.)
   return sorted.filter((match) => {
-    if (match.kind !== 'city' || !COMMON_WORD_CITY_NAMES.has(normalizePlaceName(match.label))) return true;
+    if (match.kind !== 'city') return true;
     const firstToken = tokens[match.start];
-    if (!firstToken?.capitalized) return false;
+    if (firstToken?.capitalized) return true;
     const precedingToken = tokens[match.start - 1];
     const precededByPreposition = !!precedingToken && CITY_EVIDENCE_PREPOSITIONS.has(precedingToken.norm);
     const adjacentState = sorted.some(
@@ -1002,12 +1015,54 @@ export const METRO_PHRASING_PATTERN =
 const NATIONWIDE_ACRONYM_PATTERN = /\bU\.?S\.?A?\.?\b/;
 const NATIONWIDE_NAME_PATTERN = /\bUnited States(?:\s+of\s+America)?\b/i;
 
+/**
+ * TH-DISCOVERY-PARITY-001B-REVIEW2 finding A: "US"/"USA"/"United States" are not the only ordinary
+ * ways someone asks for nationwide coverage -- "nationwide", "in/across the country", "in/across the
+ * nation", and "in/across America" are all just as common and were still misread as an unresolved
+ * place (fail-closed) instead of the NATIONWIDE outcome. Each pattern below keeps the same
+ * preposition-evidence discipline as the rest of this module rather than a bare keyword match:
+ *
+ *   - "nationwide" is unambiguous as a standalone adverb, but is excluded when it is plainly part of
+ *     a company name ("Nationwide Insurance", "Nationwide Financial", "Nationwide Mutual") rather
+ *     than a scope word.
+ *   - "the country" / "the nation" only count with an explicit locating preposition immediately
+ *     before them (in/across/throughout/all over), and exclude three ordinary-English collisions
+ *     that would otherwise false-positive: "the nation's <noun>" (a possessive -- "the nation's
+ *     capital" names a specific place, not nationwide scope), "the country club" (a venue, not a
+ *     geography word), and "the country of <name>" / "the nation of <name>" (names some OTHER
+ *     country, not a request for US-nationwide scope).
+ *   - "America" likewise requires a locating preposition immediately before it, and excludes a
+ *     following capitalized word, which signals it is part of a longer proper noun ("America First
+ *     Fund") rather than the country name used alone.
+ *
+ * A bare, unqualified "country"/"nation"/"America" elsewhere in a sentence ("nation-building",
+ * "country music", "American Century Investments") is deliberately NOT matched by any of these --
+ * same discipline as the rest of the module: evidence of an intentional nationwide-scope reference,
+ * never a keyword match anywhere in the text.
+ */
+const NATIONWIDE_ADVERB_PATTERN = /\bnationwide\b(?!\s+(?:insurance|financial|mutual)\b)/i;
+const NATIONWIDE_PHRASE_PATTERN =
+  /\b(?:in|across|throughout|all over)\s+the\s+(?:country|nation)\b(?!'s)(?!\s+club)(?!\s+of\b)/i;
+const NATIONWIDE_AMERICA_PATTERN = /\b(?:in|across|throughout|all over)\s+America\b(?!\s+[A-Z])/i;
+
 export function isNationwideScope(text: string): boolean {
-  return NATIONWIDE_NAME_PATTERN.test(text) || NATIONWIDE_ACRONYM_PATTERN.test(text);
+  return (
+    NATIONWIDE_NAME_PATTERN.test(text) ||
+    NATIONWIDE_ACRONYM_PATTERN.test(text) ||
+    NATIONWIDE_ADVERB_PATTERN.test(text) ||
+    NATIONWIDE_PHRASE_PATTERN.test(text) ||
+    NATIONWIDE_AMERICA_PATTERN.test(text)
+  );
 }
 
 function nationwideAlias(text: string): string | undefined {
-  return text.match(NATIONWIDE_NAME_PATTERN)?.[0] ?? text.match(NATIONWIDE_ACRONYM_PATTERN)?.[0];
+  return (
+    text.match(NATIONWIDE_NAME_PATTERN)?.[0] ??
+    text.match(NATIONWIDE_ACRONYM_PATTERN)?.[0] ??
+    text.match(NATIONWIDE_ADVERB_PATTERN)?.[0] ??
+    text.match(NATIONWIDE_PHRASE_PATTERN)?.[0] ??
+    text.match(NATIONWIDE_AMERICA_PATTERN)?.[0]
+  );
 }
 
 /**
@@ -1027,7 +1082,12 @@ export function hasUnresolvedLocationSignal(text: string): boolean {
   let m: RegExpExecArray | null;
   while ((m = re.exec(text))) {
     const word = m[1]!;
-    if (isNationwideScope(word)) continue;
+    // TH-DISCOVERY-PARITY-001B-REVIEW2 finding A: the nationwide-phrase patterns ("in America",
+    // "across the nation", ...) only match with their preposition attached, so this must check the
+    // whole preposition+word match, not just the bare captured word -- checking `word` alone would
+    // never see the "in "/"across " prefix and would wrongly treat "in America" as an unresolved
+    // place attempt.
+    if (isNationwideScope(m[0])) continue;
     const looksLikePlaceAttempt = /^[A-Z]/.test(word) && word !== word.toUpperCase();
     if (!looksLikePlaceAttempt) continue;
     const norm = normalizePlaceName(word);
