@@ -1,0 +1,63 @@
+{
+  "retrievedAt": "2026-09-18T15:04:19Z",
+  "rows": [
+    {
+      "url": "https://com.ohio.gov/divisions-and-programs/securities",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "url": "https://com.ohio.gov/divisions-and-programs/securities/division-orders/division-orders",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "url": "https://com.ohio.gov/wps/portal/gov/com/divisions-and-programs/securities/division-orders",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "url": "https://com.ohio.gov/divisions-and-programs/securities/file-a-complaint-securities",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "url": "https://com.ohio.gov/divisions-and-programs/securities/consumers-and-investors/licensing-facts-for-investors",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "url": "https://com.ohio.gov/divisions-and-programs/securities/bulletins/aq-securities-bulletin-second-quarter-2024",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "url": "https://securities.com.ohio.gov/odoc/page/OH.ERNIE/portal.aspx",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "url": "https://recordrequest.com.ohio.gov/",
+      "status": 200,
+      "finalUrl": "https://recordrequest.com.ohio.gov/",
+      "bytes": 5257,
+      "title": "Home - Records Request",
+      "has_noh": false,
+      "has_final_order": false,
+      "has_incomplete": false,
+      "has_filing_search": false,
+      "has_complaint": false,
+      "has_crd": false,
+      "has_monthly": false,
+      "snippet": " Home - Records Request !function(a,b,c,d){var e,f=document,g=f.getElementsByTagName(\"SCRIPT\"),h=g[g.length-1].previousElementSibling,i=f.defaultView&&f.defaultView.getComputedStyle?f.defaultView.getComputedStyle(h):h.currentStyle;if(i&&i[a]!==b)for(e=0;e \")}(\"position\",\"absolute\",[\"/lib/kendo-ui/styles/kendo.common-bootstrap.min.css\"], \"rel=\\u0022stylesheet\\u0022 crossorigin=\\u0022anonymous\\u0022 type=\\u0022text/css\\u0022 \"); !function(a,b,c,d){var e,f=document,g=f.getElementsByTagName(\"SCRIPT\"),h=g[g.length-1].previousElementSibling,i=f.defaultView&&f.defaultView.getComputedStyle?f.defaultView.getComputedStyle(h):h.currentStyle;if(i&&i[a]!==b)for(e=0;e \")}(\"position\",\"absolute\",[\"/lib/kendo-ui/styles/kendo.bootstrap.min.css\"], \"rel=\\u0022stylesheet\\u0022 crossorigin=\\u0022anonymous\\u0022"
+    },
+    {
+      "url": "https://codes.ohio.gov/ohio-revised-code/chapter-1707",
+      "status": 200,
+      "finalUrl": "https://codes.ohio.gov/ohio-revised-code/chapter-1707",
+      "bytes": 400000,
+      "title": "Chapter 1707 - Ohio Revised Code | Ohio Laws",
+      "has_noh": false,
+      "has_final_order": true,
+      "has_incomplete": false,
+      "has_filing_search": false,
+      "has_complaint": true,
+      "has_crd": false,
+      "has_monthly": false,
+      "snippet": " window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag(\"js\", new Date()); gtag(\"config\", \"G-E4HLMDVMKH\"); window._monsido = window._monsido || { token: \"87hVpSXvcXqeefK5MDn5QA\", statistics: { enabled: true, documentTracking: { enabled: true, documentCls: \"monsido_download\", documentIgnoreCls: \"monsido_ignore_download\", documentExt: [], }, }, pageCorrect: { enabled: true, }, pageAssistV2: { enabled: true, theme: \"light\", mainColor: \"#11466e\", textColor: \"#ffffff\", linkColor: \"#11466e\", buttonHoverColor: \"#11466e\", mainDarkColor: \"#052942\", textDarkColor: \"#ffffff\", linkColorDark: \"#FFCF4B\", buttonHoverDarkColor: \"#FFCF4B\", greeting: \"Discover your personalization options\", direction: \"leftbottom\", coordinates: \"unset unset 3 20\", iconShape: \"circle\", ti"
+    }
+  ]
+}

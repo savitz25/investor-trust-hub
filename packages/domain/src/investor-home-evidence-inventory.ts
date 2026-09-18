@@ -1,5 +1,6 @@
 import networkMetrics from '../../../data/home/investor-network-metrics-v1.json';
 import NC_PUBLIC_SNAPSHOT from '../../../artifacts/nc-inv-001-public-snapshot.json';
+import OH_PUBLIC_SNAPSHOT from '../../../artifacts/oh-inv-001-public-snapshot.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -71,7 +72,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH';
   name: string;
   href: string;
   regulator: string;
@@ -619,6 +620,42 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
         sourceAsOf: NC_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
         retrievedAt: NC_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
         snapshotAsOf: NC_PUBLIC_SNAPSHOT.asOf,
+        generatedAt: null,
+      },
+    ],
+  },
+  {
+    code: 'OH',
+    name: 'Ohio',
+    href: OH_PUBLIC_SNAPSHOT.route,
+    regulator: 'Ohio Division of Securities',
+    principalOfficeFirms:
+      OH_PUBLIC_SNAPSHOT.nationalOverlay.ohPrincipalOfficeSecIardFirms,
+    rosterStatus: `IAPD OH APPROVED state IA ${OH_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd.toLocaleString('en-US')} firm CRDs as of ${OH_PUBLIC_SNAPSHOT.stateRia.sourceAsOf}`,
+    evidence: [
+      'IAPD Ohio state-registered IA compilation',
+      'IAPD Ohio state ERA reporting',
+      'federal-covered notice filings',
+      'STAR Filing Search (search-only)',
+      'Division Orders NOH vs Final Order (search-only)',
+    ],
+    identityNote:
+      'IAPD jurisdiction=OH APPROVED is the current structured IA spine. STAR/records-request is not a census. Exact CRD is required. IAR people are not IA firms.',
+    limitation:
+      'Do not add state IA+ERA+notice+principal office. NOH is not a final finding. Online final-order search is not a complete census. Name-only enforcement attachment is unsafe.',
+    sourceClocks: [
+      {
+        label: 'IAPD state compilation',
+        sourceAsOf: OH_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+        retrievedAt: OH_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+        snapshotAsOf: OH_PUBLIC_SNAPSHOT.asOf,
+        generatedAt: null,
+      },
+      {
+        label: 'SEC/IARD principal-office overlay',
+        sourceAsOf: OH_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+        retrievedAt: OH_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+        snapshotAsOf: null,
         generatedAt: null,
       },
     ],
@@ -1425,6 +1462,62 @@ export function buildInvestorHomepageEvidenceInventory(): InvestorHomepageEviden
       'PUBLIC',
       NC_PUBLIC_SNAPSHOT.federalNotice.sourceAsOf,
       NC_PUBLIC_SNAPSHOT.federalNotice.retrievedAt,
+    ),
+    stateMeasure(
+      'oh_hq_overlay',
+      'SEC/IARD firms with an Ohio principal office',
+      OH_PUBLIC_SNAPSHOT.nationalOverlay.ohPrincipalOfficeSecIardFirms,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'SEC/IARD firm with OH principal office',
+      'Ohio',
+      'SEC IAPD / IARD',
+      'artifacts/oh-inv-001-public-snapshot.json',
+      OH_PUBLIC_SNAPSHOT.asOf,
+      'Federal roster firms reporting OH principal office.',
+      'Ohio state-RIA roster, notice filing, ERA, or Division of Securities authority.',
+      '/ohio',
+      'PUBLIC',
+      OH_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+      OH_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+    ),
+    stateMeasure(
+      'oh_state_roster',
+      'Ohio IAPD state-registered investment-adviser firms',
+      OH_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'IAPD state-compilation APPROVED firm with jurisdiction OH',
+      'Ohio',
+      'IAPD state compilation',
+      'artifacts/oh-inv-001-public-snapshot.json',
+      OH_PUBLIC_SNAPSHOT.asOf,
+      'Approved Ohio state-IA firms in IA_FIRM_STATE_Feed_09_17_2026.',
+      'SEC principal-office overlay, federal notice filings, ERA reporting, or IAR people.',
+      '/ohio',
+      'PUBLIC',
+      OH_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+      OH_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+      'Exact firm CRD. STAR Filing Search is not this census.',
+      'Filter is registration jurisdiction, not address.',
+    ),
+    stateMeasure(
+      'oh_notice_filed',
+      'SEC/IARD firms with an Ohio notice filing',
+      OH_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'NoticeFiled RgltrCd=OH FILED',
+      'Ohio',
+      'SEC IAPD / IARD',
+      'artifacts/oh-inv-001-public-snapshot.json',
+      OH_PUBLIC_SNAPSHOT.asOf,
+      'SEC/IARD firms with an Ohio notice filing in the cited compilation.',
+      'Ohio state-RIA licensure or the 426 principal-office overlay.',
+      '/ohio',
+      'PUBLIC',
+      OH_PUBLIC_SNAPSHOT.federalNotice.sourceAsOf,
+      OH_PUBLIC_SNAPSHOT.federalNotice.retrievedAt,
     ),
     stateMeasure(
       'az_index_crd_mentions',

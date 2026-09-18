@@ -65,6 +65,9 @@ export type InvestorNetworkMetricsInput = {
   ncPrincipalOfficeFirms: number;
   ncStateRiaApproved: number;
   ncNoticeFiled: number;
+  ohPrincipalOfficeFirms: number;
+  ohStateRiaApproved: number;
+  ohNoticeFiled: number;
 };
 
 function metric(partial: Omit<InvestorNetworkMetric, 'unit'>): InvestorNetworkMetric {
@@ -127,7 +130,7 @@ export function assertGrainSafety(input: InvestorNetworkMetricsInput): void {
   if (input.disclosureEvents === input.item11YesRia + input.item11YesEra && input.disclosureEvents > 0) {
     throw new Error('disclosure events must not be equated to Item 11 yes indicators');
   }
-  for (const path of ['/new-jersey', '/california', '/texas', '/washington', '/arizona', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania', '/north-carolina']) {
+  for (const path of ['/new-jersey', '/california', '/texas', '/washington', '/arizona', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania', '/north-carolina', '/ohio']) {
     if (!input.publishedStateIntelligencePaths.includes(path)) {
       throw new Error(`state intelligence path missing: ${path}`);
     }
@@ -710,20 +713,42 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       ),
     }),
     metric({
+      key: 'oh_state_ria_roster',
+      label: 'Ohio state-registered investment-adviser firms',
+      value: input.ohStateRiaApproved,
+      valueState: 'KNOWN',
+      grain: 'oh_state_ria_roster',
+      denominator: 'IAPD state compilation APPROVED firms with registration jurisdiction = OH',
+      description:
+        'Ohio state-registered investment-adviser firms from IA_FIRM_STATE_Feed_09_17_2026. Not SEC RIA, not notice filing, not ERA, and not the 426 principal-office overlay.',
+      coverage: 'Ohio',
+      contributingSourceSystems: ['iapd_state_compilation'],
+      sourceAsOf: input.publishedAt,
+      generatedAt,
+      publicationStatus: 'PUBLIC',
+      trace: commonTrace(
+        'IAPD StateRgstn/Rgltr/@Cd=OH and status APPROVED, counted as distinct firm CRD.',
+        'Not SEC/IARD principal-office firms. Not federal-covered notice filings. Not state ERA reporting. Not IAR people.',
+        ['iapd_state_compilation'],
+        'Ohio',
+        'IA_FIRM_STATE_Feed_09_17_2026',
+      ),
+    }),
+    metric({
       key: 'published_state_intelligence_pages',
       label: 'Published state investment-intelligence pages',
       value: input.publishedStateIntelligencePaths.length,
       valueState: 'KNOWN',
       grain: 'published_state_intelligence_page',
       denominator: 'Indexable specialist state intelligence routes currently published',
-      description: 'Published specialist state intelligence pages including North Carolina. Not a count of advisers.',
+      description: 'Published specialist state intelligence pages including Ohio. Not a count of advisers.',
       coverage: input.publishedStateIntelligencePaths.join(', '),
       contributingSourceSystems: ['investor-state-intel'],
       sourceAsOf: newestDocumentedSourceAsOf,
       generatedAt,
       publicationStatus: 'PUBLIC',
       trace: commonTrace(
-        'Published /new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, and /north-carolina intelligence routes.',
+        'Published /new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, and /ohio intelligence routes.',
         'Not county pages. Not national roster rows. Florida is not published on this hub.',
         ['investor-state-intel'],
         input.publishedStateIntelligencePaths.join(', '),
@@ -897,6 +922,12 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION',
       statewideStateRiaUniverse: input.ncStateRiaApproved,
       noticeFiledFirms: input.ncNoticeFiled,
+    },
+    ohio: {
+      principalOfficeRosterFirms: input.ohPrincipalOfficeFirms,
+      stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION',
+      statewideStateRiaUniverse: input.ohStateRiaApproved,
+      noticeFiledFirms: input.ohNoticeFiled,
     },
     network: {
       publishedStateIntelligencePages: input.publishedStateIntelligencePaths.length,

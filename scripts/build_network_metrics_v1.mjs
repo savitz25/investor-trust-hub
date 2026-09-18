@@ -57,6 +57,9 @@ async function main() {
     ncPrincipalOfficeFirms: pub.ncPrincipalOfficeFirms,
     ncStateRiaApproved: pub.ncStateRiaApproved,
     ncNoticeFiled: pub.ncNoticeFiled,
+    ohPrincipalOfficeFirms: pub.ohPrincipalOfficeFirms,
+    ohStateRiaApproved: pub.ohStateRiaApproved,
+    ohNoticeFiled: pub.ohNoticeFiled,
   };
 
   if (input.riaFacts !== pub.riaFacts || input.eraFacts !== pub.eraFacts || input.rosterFirms !== pub.rosterFirms) {

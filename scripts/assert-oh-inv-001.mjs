@@ -1,0 +1,38 @@
+import assert from 'node:assert/strict';
+import { existsSync, readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { publicationMetricInputs } from './publication_metric_inputs.mjs';
+
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const snap = JSON.parse(readFileSync(join(root, 'artifacts/oh-inv-001-public-snapshot.json'), 'utf8'));
+const pub = publicationMetricInputs();
+const routes = readFileSync(join(root, 'packages/config/src/routes.ts'), 'utf8');
+const ui = readFileSync(join(root, 'apps/web/src/components/oh-state-intel.tsx'), 'utf8');
+
+assert.equal(snap.version, 'investor-oh-state-intel-v1');
+assert.equal(snap.route, '/ohio');
+assert.equal(snap.fingerprint, '5066d92b3b16cfc19c21edf722652dac764a13139e41335ebf46beb95eb6aa0b');
+assert(pub.publishedStateIntelligencePaths.includes('/ohio'), 'catalog includes /ohio');
+assert(!pub.indexablePaths.includes('/ohio/columbus'), 'no Columbus path');
+assert(!existsSync(join(root, 'apps/web/src/app/ohio/columbus')), 'no Columbus folder');
+assert(!existsSync(join(root, 'apps/web/src/app/ohio/cleveland')), 'no Cleveland folder');
+assert(routes.includes("href: '/ohio'"), 'STATE_DISCOVERY_ROUTES');
+assert.equal(snap.stateRia.approvedDistinctCrd, 784);
+assert.equal(snap.stateEra.activeDistinctCrd, 24);
+assert.equal(snap.federalNotice.noticeFiledDistinctCrd, 2733);
+assert.equal(snap.nationalOverlay.ohPrincipalOfficeSecIardFirms, 426);
+assert.notEqual(snap.stateRia.approvedDistinctCrd, snap.federalNotice.noticeFiledDistinctCrd);
+assert.equal(snap.expansionLedger.GRAPH_WRITES, 0);
+assert.equal(snap.enforcement.OH_ENFORCEMENT_EXACT_CRD_ATTACHMENTS, 0);
+assert.equal(snap.enforcement.noh_ne_final, true);
+assert.equal(snap.star.OH_STAR_IA_ROSTER_STATUS, 'OPEN_SEARCH_ONLY');
+assert.match(ui, /Trust Score/);
+assert.match(ui, /NOH is not a final finding/i);
+assert.doesNotMatch(ui, /best adviser|safest adviser/i);
+assert.doesNotMatch(ui, /\bDoBS\b|\bIDFPR\b|\bDFR\b|\bSOS\b/);
+assert.doesNotMatch(ui, /principal-office region NC|MainAddr=@State=NC|registration jurisdiction = NC/);
+assert.doesNotMatch(ui, /Register of NC/);
+assert.match(ui, /id="oh-title"/);
+assert.match(ui, /aria-labelledby="oh-title"/);
+console.log('OH-INV-001 publication assert: PASS');
