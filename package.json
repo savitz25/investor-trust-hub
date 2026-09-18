@@ -23,6 +23,7 @@
     "start": "npm run start -w @ith/web",
     "lint": "npm run lint -w @ith/web",
     "typecheck": "npm run typecheck --workspaces --if-present",
+    "test:pa-rel-001": "node --experimental-strip-types --test apps/web/src/lib/pa-rel-001.test.ts",
     "test": "vitest run",
     "check:inv-cap-001": "vitest run packages/domain/tests/investor-specialist-execution-v2.test.ts apps/web/tests/inv-cap-001-static.test.ts packages/domain/tests/investor-ask.test.ts",
     "check:th-search-001f": "vitest run apps/web/tests/th-search-001f.test.ts packages/domain/tests/investor-ask.test.ts packages/domain/tests/investor-specialist-execution-v2.test.ts",
