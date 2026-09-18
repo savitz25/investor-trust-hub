@@ -723,6 +723,41 @@ describe('TH-DISCOVERY-PARITY-001B: general city/county/state geography resoluti
     });
   });
 
+  describe('TH-DISCOVERY-PARITY-001B-REVIEW2 finding B follow-up: capitalization alone is only reliable evidence mid-sentence', () => {
+    // A Vercel re-review of the finding-B fix correctly pointed out that treating ANY capitalized
+    // token as sufficient evidence still lets a common-word city resolve wrongly whenever it is
+    // capitalized only because it opens the sentence, or the surrounding text is title-cased -- an
+    // ordinary English convention, not a deliberate signal that the word names a place. Both checks
+    // below are purely structural/positional (sentence position and the capitalized-word ratio of the
+    // whole text), never a per-word list.
+    it('does not read a common-word city as geography merely because it opens the sentence ("Mobile advisers are in high demand")', () => {
+      const parsed = interpretInvestorAskQuery('Mobile advisers are in high demand');
+      expect(parsed.query.geography).toBeUndefined();
+    });
+
+    it('does not read a common-word city as geography inside title-cased text ("Financial Advisers Serving Mobile Clients Nationwide")', () => {
+      const parsed = interpretInvestorAskQuery('Financial Advisers Serving Mobile Clients Nationwide');
+      expect(parsed.query.geography).toBeUndefined();
+    });
+
+    it('does not read "Reading" as geography when it opens a title-cased phrase ("Reading Financial Advisors Directory For Investors")', () => {
+      const parsed = interpretInvestorAskQuery('Reading Financial Advisors Directory For Investors');
+      expect(parsed.query.geography).toBeUndefined();
+    });
+
+    // Mid-sentence capitalization -- the ordinary, deliberate case -- must keep resolving with zero
+    // extra evidence, exactly as the finding-B fix intended (re-confirming no regression from the
+    // follow-up fix above).
+    it('still resolves ordinary mid-sentence capitalized bare cities with no extra evidence ("financial advisor Liberty", "wealth management firm Denver")', () => {
+      const liberty = expectNeverUnfilteredNationalDump('financial advisor Liberty');
+      expect(liberty.query.geography?.value).toBe('Liberty');
+      expect(liberty.query.geography?.state).toBe('MO');
+      const denver = expectNeverUnfilteredNationalDump('wealth management firm Denver');
+      expect(denver.query.geography?.value).toBe('Denver');
+      expect(denver.query.geography?.state).toBe('CO');
+    });
+  });
+
   describe('CRD/SEC and RIA/ERA semantics are unchanged by the broadening/geography fix', () => {
     it('a labeled CRD still resolves as an exact identifier lookup regardless of any location text', () => {
       const parsed = interpretInvestorAskQuery('Find CRD 105958 near Fort Worth.');

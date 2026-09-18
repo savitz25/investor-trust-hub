@@ -970,23 +970,25 @@ export function resolveUsPlaces(text: string): UsPlaceMatch[] {
   // Commerce, Industry, Paradise, and any other real US city that is also an ordinary English word).
   //
   // Evidence is either of:
-  //   (a) proper-noun capitalization on the matched token. Nobody writes "wealth management firm
-  //       Denver" and means the ordinary word "denver" -- capitalization is itself a deterministic
-  //       place-context signal, and it is what lets an unqualified, bare city mention like "Denver"
-  //       or "Austin" keep resolving with zero extra evidence, exactly as before.
-  //   (b) for a token that is NOT capitalized -- an unqualified, lowercase, ordinary-prose
-  //       appearance -- real disambiguating evidence is required: an explicit location preposition
-  //       immediately before it, or an explicit state name/code adjacent to it. A lowercase match
-  //       with neither is the ordinary-word reading ("financial advisers who value independence and
-  //       self-direction", "mobile financial advisers", "reading reports", "orange portfolios") and
-  //       must never silently become geography.
+  //   (a) proper-noun capitalization on the matched token, IF that capitalization is itself reliable
+  //       evidence -- see isReliablyCapitalized() below. Nobody writes "wealth management firm
+  //       Denver" and means the ordinary word "denver" -- mid-sentence capitalization is a
+  //       deterministic place-context signal, and it is what lets an unqualified, bare city mention
+  //       like "Denver" or "Austin" keep resolving with zero extra evidence, exactly as before.
+  //   (b) otherwise (not capitalized at all, or capitalized only because of sentence position rather
+  //       than as a deliberate proper noun) -- real disambiguating evidence is required: an explicit
+  //       location preposition immediately before it, or an explicit state name/code adjacent to it.
+  //       Neither present is the ordinary-word reading ("financial advisers who value independence
+  //       and self-direction", "mobile financial advisers", "reading reports", "orange portfolios",
+  //       or "Mobile financial advisers" simply because "Mobile" opens the sentence) and must never
+  //       silently become geography.
   // (County/metro/ZIP structural markers are handled upstream of this filter: a "<word> County"/
   // "<word> Parish" suffix already reclassifies the match to kind 'county', which this filter does
   // not gate at all -- the suffix itself is the location evidence.)
   return sorted.filter((match) => {
     if (match.kind !== 'city') return true;
     const firstToken = tokens[match.start];
-    if (firstToken?.capitalized) return true;
+    if (firstToken?.capitalized && isReliablyCapitalized(tokens, match.start)) return true;
     const precedingToken = tokens[match.start - 1];
     const precededByPreposition = !!precedingToken && CITY_EVIDENCE_PREPOSITIONS.has(precedingToken.norm);
     const adjacentState = sorted.some(
@@ -994,6 +996,25 @@ export function resolveUsPlaces(text: string): UsPlaceMatch[] {
     );
     return precededByPreposition || adjacentState;
   });
+}
+
+/**
+ * TH-DISCOVERY-PARITY-001B-REVIEW2: a Vercel follow-up finding correctly pointed out that treating
+ * ANY capitalized token as sufficient evidence still lets an ordinary common-word city (Mobile,
+ * Reading, Independence, Union, ...) resolve to the wrong place whenever it is capitalized only
+ * because it opens the sentence, or the surrounding text is title-cased -- neither of which is a
+ * deliberate signal that the word was meant as a place, unlike genuine, deliberate mid-sentence
+ * capitalization of a proper noun. Both checks below are purely structural/positional (no per-word
+ * list): a match at token index 0 has no preceding lowercase context to distinguish it from an
+ * ordinary sentence-initial capital, and a match where most of the surrounding text is also
+ * capitalized (a title/heading) has the same problem for every word in it, not just this one.
+ */
+function isReliablyCapitalized(tokens: Token[], matchStart: number): boolean {
+  if (matchStart === 0) return false;
+  if (tokens.length === 0) return true;
+  const capitalizedCount = tokens.reduce((n, t) => n + (t.capitalized ? 1 : 0), 0);
+  if (capitalizedCount / tokens.length > 0.6) return false;
+  return true;
 }
 
 /** Prepositions and phrasings that show the question asked about a location. */
