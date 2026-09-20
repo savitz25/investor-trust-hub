@@ -11,6 +11,8 @@ import {
   V1_SOURCE,
   formatRaum,
   interpretInvestorAskQuery,
+  normalizeFirmNamePresentation,
+  normalizedNameMatchSql,
   whyThisMatched,
   type CompensationMethodKey,
   type InvestorAskOverrides,
@@ -209,8 +211,22 @@ function filtersSql(q: InvestorResearchQuery, params: unknown[]): { where: strin
     clauses.push(`EXISTS (SELECT 1 FROM firm_identifiers sec WHERE sec.firm_id = f.id AND sec.identifier_type = 'sec_file_number' AND upper(sec.identifier_value) = upper($${params.length}))`);
   }
   if (q.nameQuery) {
-    params.push(`%${q.nameQuery.replace(/[\\%_]/g, '\\$&')}%`);
-    clauses.push(`(f.display_name ILIKE $${params.length} OR f.legal_name ILIKE $${params.length})`);
+    // TH-SEARCH-R1-019H (Sections 1 & 3): a consumer must not lose a real source-backed firm
+    // solely because of ordinary punctuation presentation ("CINCINNATI ASSET MANAGEMENT" vs.
+    // "CINCINNATI ASSET MANAGEMENT, INC" vs. "CINCINNATI ASSET MANAGEMENT INC."). Both sides of
+    // the LIKE are folded through the SAME normalizeFirmNamePresentation() semantics
+    // (case + whitespace + all ordinary punctuation collapsed to single spaces) so presentation
+    // differences alone never suppress a real match. This intentionally stays bounded: candidate
+    // matching is still an infix LIKE over the normalized token, not a token-only/bag-of-words
+    // search, so "Asset Management" is still only a broad candidate substring, never silently
+    // treated as one exact firm. No stored SQL function/schema change -- the transform is inlined.
+    const normalized = normalizeFirmNamePresentation(q.nameQuery);
+    if (normalized) {
+      params.push(`%${normalized}%`);
+      clauses.push(
+        `(${normalizedNameMatchSql('f.display_name')} LIKE $${params.length} OR ${normalizedNameMatchSql('f.legal_name')} LIKE $${params.length})`,
+      );
+    }
   }
   if (q.raum?.equalsZero) {
     clauses.push(`adv.raum_amount = 0`);
@@ -390,8 +406,12 @@ async function listFirms(parsed: ParsedInvestorAsk, pageSize = INVESTOR_ASK_PAGE
   const listParams = [...params];
   let nameOrder = '';
   if (parsed.query.nameQuery) {
-    listParams.push(parsed.query.nameQuery);
-    nameOrder = `CASE WHEN lower(f.legal_name) = lower($${listParams.length}) OR lower(f.display_name) = lower($${listParams.length}) THEN 0 ELSE 1 END, `;
+    // Same normalized semantics as the WHERE predicate above (Section 4: normalized exact/
+    // equivalent form first when applicable, then the existing stable deterministic order below,
+    // CRD tie-break via orderSql()'s default `f.display_name ASC, crd.identifier_value ASC`).
+    const normalized = normalizeFirmNamePresentation(parsed.query.nameQuery);
+    listParams.push(normalized);
+    nameOrder = `CASE WHEN ${normalizedNameMatchSql('f.legal_name')} = $${listParams.length} OR ${normalizedNameMatchSql('f.display_name')} = $${listParams.length} THEN 0 ELSE 1 END, `;
   }
   listParams.push(pageSize, offset);
   const needsDistinct = (parsed.query.compensationMethods?.length ?? 0) > 1;
@@ -622,7 +642,12 @@ export async function executeParsedInvestorAsk(parsed: ParsedInvestorAsk, pageSi
   let { rows, total } = await listFirms(candidates ? { ...parsed, query: { ...q, page: 1 } } : identityOnly, candidates ? 10 : boundedPageSize);
   let candidateSelection = false;
   if (candidates) {
-    const exact = rows.filter(r => [r.display_name, r.legal_name].some(n => n.trim().toLowerCase() === q.nameQuery!.trim().toLowerCase()));
+    // TH-SEARCH-R1-019H: exact-source-name auto-selection must use the same normalized
+    // presentation-equivalence as the SQL predicate/ordering above, or a punctuation-only
+    // difference between the query and the stored name (e.g. a trailing comma before "INC") would
+    // silently degrade a single-candidate exact match into an unnecessary candidate-selection step.
+    const normalizedQuery = normalizeFirmNamePresentation(q.nameQuery!);
+    const exact = rows.filter(r => [r.display_name, r.legal_name].some(n => normalizeFirmNamePresentation(n) === normalizedQuery));
     const selected = q.selectedCrd ? rows.find(r => r.crd === q.selectedCrd) : total <= 10 && exact.length === 1 ? exact[0] : undefined;
     if (q.selectedCrd && !selected) {
       return executeParsedInvestorAsk({ ...parsed, query: { ...q, mode: 'fail_closed', terminalState: 'INVALID_INPUT', failReason: 'That selection does not belong to this current firm-name candidate set. Search and select again.' } });
@@ -639,7 +664,14 @@ export async function executeParsedInvestorAsk(parsed: ParsedInvestorAsk, pageSi
     if (!q.identifier && q.geography?.type === 'principal_office_city' && (row.city?.toLowerCase() !== q.geography.value.toLowerCase() || row.region !== q.geography.state)) throw new Error('Source location contract mismatch');
     const card = toCard(row, q.identifier ? { ...parsed, query: { ...q, geography: undefined, registrationJurisdictions: undefined, registrationType: undefined, status: undefined, firmType: undefined, raum: undefined, compensationMethods: undefined } } : parsed, compensation.get(row.id) ?? []);
     if (q.nameQuery) {
-      const field = row.legal_name.toLowerCase().includes(q.nameQuery.toLowerCase()) ? 'legal name' : row.display_name.toLowerCase().includes(q.nameQuery.toLowerCase()) ? 'display name' : undefined;
+      // Same normalized presentation-equivalence as the SQL predicate: this integrity check must
+      // not throw for a row that only differs from the query by ordinary punctuation presentation.
+      const normalizedQuery = normalizeFirmNamePresentation(q.nameQuery);
+      const field = normalizeFirmNamePresentation(row.legal_name).includes(normalizedQuery)
+        ? 'legal name'
+        : normalizeFirmNamePresentation(row.display_name).includes(normalizedQuery)
+          ? 'display name'
+          : undefined;
       if (!field) throw new Error('Source name contract mismatch');
       card.whyMatched += ` Matched source ${field}: ${field === 'legal name' ? row.legal_name : row.display_name}.`;
     }

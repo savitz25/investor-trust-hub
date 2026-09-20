@@ -1,6 +1,31 @@
+import { FIRM_LEGAL_SUFFIX_WORDS, FIRM_NAME_CHAR_CLASS } from './firm-name-match';
 import type { InvestorAskOverrides, InvestorResearchQuery, ParsedInvestorAsk } from './investor-ask';
 import { REGION_NAMES } from './investor-home-intel';
 import { decideUsGeography, hasUnresolvedLocationSignal } from './us-geography';
+
+// TH-SEARCH-R1-019H: this sentence-level bare-name heuristic previously used its own bespoke
+// character class (`[\w&'.-]`, no comma) and required the FIRST character to be an uppercase
+// letter (`^[A-Z]`), independently of investor-ask.ts's own `simpleFirmName` character class
+// (which already allowed commas but required a letter, not a digit, first). Those two
+// independently-maintained shape rules is exactly the "second Investor parser" pattern this
+// ticket's Section 1 says not to build, and is the root cause both of native /ask losing
+// "CINCINNATI ASSET MANAGEMENT, INC" (comma not in this file's old char class) and of
+// numeric-leading real names ("1ST GLOBAL ...", "3 SIGMA ...", "180 DEGREE CAPITAL CORP") never
+// reaching a name search at all (old `^[A-Z]` anchor). This file keeps its own sentence-level
+// CONTENT heuristic (legal-suffix ending / short proper-noun phrase, and the negative-word
+// exclusions below) -- that decision ("does this whole sentence look like a deliberately-entered
+// bare name" vs. general NLP intent) is inherently context-specific to native /ask and is not part
+// of firm-name PRESENTATION semantics. What it now shares with every other name-shape check in
+// Investor is only the punctuation character class and the "digit-leading is allowed only with a
+// letter present" rule, both imported from firm-name-match.ts so they cannot drift again.
+// First character stays restricted to an UPPERCASE letter or a digit (never lowercase) -- this
+// file's existing convention that a bare unquoted sentence must look like a proper-noun / deliberate
+// name entry to be treated as one, unchanged from before this ticket except for adding the digit
+// alternative (Section 2). Loosening this to allow a lowercase first letter would regress ordinary
+// lowercase sentences ("financial adviser", "show me...") into being misread as bare names.
+const BARE_NAME_SHAPE = new RegExp(`^[A-Z0-9][${FIRM_NAME_CHAR_CLASS}]{0,79}$`);
+const PROPER_NOUN_PHRASE = new RegExp(`^[A-Z0-9][${FIRM_NAME_CHAR_CLASS.replace(' ', '')}]*(?:\\s+[A-Z][${FIRM_NAME_CHAR_CLASS.replace(' ', '')}]*){0,2}$`);
+const LEGAL_SUFFIX_ENDING = new RegExp(`\\b(?:${FIRM_LEGAL_SUFFIX_WORDS})\\.?$`, 'i');
 
 export type InvestorResearchIntent =
   | 'IDENTITY_BY_IDENTIFIER'
@@ -205,15 +230,19 @@ export function planInvestorResearch(raw: string, o: InvestorAskOverrides, core:
     if (name && /^(?:this|that|an?|the)\s+(?:firm|advis[eo]r)$/i.test(name.trim())) name = undefined;
   }
   if (!name && !task)
-    name = text.match(
-      /^(?:find|research|check|verify)\s+(.+?\b(?:capital|advisors?|advisers?|llc|inc|group|management)\b.*?)[?.]?$/i,
-    )?.[1];
+    name = text.match(new RegExp(`^(?:find|research|check|verify)\\s+(.+?\\b(?:${FIRM_LEGAL_SUFFIX_WORDS})\\b.*?)[?.]?$`, 'i'))?.[1];
   if (
     !name &&
     !task &&
     !q.identifier &&
-    /^[A-Z][\w&'.-]*(?:\s+[\w&'.-]+){0,7}$/.test(text) &&
-    (/\b(?:capital|advisors?|advisers?|llc|inc|group|management|partners|investments|financial)\.?$/i.test(text) || /^[A-Z][\w&'.-]*(?:\s+[A-Z][\w&'.-]*){0,2}$/.test(text)) &&
+    // TH-SEARCH-R1-019H: digit-leading is allowed here only when the sentence also contains a
+    // letter -- this keeps bare ambiguous digit strings ("123456", "2026", "1", "3", an unlabeled
+    // SEC-file shape like "801-11953") excluded exactly as before while letting a real
+    // digit-leading organization name ("1ST GLOBAL ...", "3 SIGMA ...", "180 DEGREE CAPITAL
+    // CORP") reach BARE_NAME_SHAPE. See firm-name-match.ts.
+    /[A-Za-z]/.test(text) &&
+    BARE_NAME_SHAPE.test(text) &&
+    (LEGAL_SUFFIX_ENDING.test(text) || PROPER_NOUN_PHRASE.test(text)) &&
     !/^(?:explain|tell|describe|help|learn|calculate|can|does|who|where)\b/i.test(text) &&
     !/\b(?:manage|pick|show|find|firms?|registered|rias?|eras?|portfolio|stocks?|what|how|in)\b/i.test(
       text,

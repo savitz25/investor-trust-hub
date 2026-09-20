@@ -4,6 +4,7 @@
  */
 
 import { COMPENSATION_METHOD_LABELS } from './adv-profile-intelligence';
+import { isOrganizationNameShape } from './firm-name-match';
 import { REGION_NAMES, V1_RIA_RAUM_BANDS, V1_SOURCE } from './investor-home-intel';
 import { planInvestorResearch, type InvestorResearchIntent, type InvestorCondition } from './investor-research-plan';
 import { decideUsGeography, isNationwideScope } from './us-geography';
@@ -1115,7 +1116,18 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
   // simpleFirmName search, which combined with investor-research-plan.ts's own bare-city geography
   // fix (Miami -> FL) to silently AND a real geography filter with a nonexistent literal firm
   // name, always returning zero rows even after that geography fix correctly applied.
-  const simpleFirmName = !firmType && !states.length && !raum && !compensation.length && !affiliation && /^[A-Za-z][A-Za-z0-9&.,' -]{1,79}$/.test(q) && !/\b(what|how|who|does|is|show|find|advis(?:er|or)s?|firm|fees?|ownership|disclosure)\b/i.test(q) ? q : undefined;
+  // TH-SEARCH-R1-019H: the shape test used to be `/^[A-Za-z][A-Za-z0-9&.,' -]{1,79}$/`, requiring
+  // the first character to be a letter. That silently excluded real, legitimately organization-
+  // shaped names beginning with a digit ("1ST GLOBAL", "3 SIGMA", "180 DEGREE CAPITAL CORP") from
+  // native bare-name discovery while the structured specialist identityName path (which passes the
+  // raw string straight through) had no such restriction -- a native/structured parity gap. Both
+  // paths now share isOrganizationNameShape() (firm-name-match.ts), which allows a digit-leading
+  // name only when the string also contains a letter, so bare ambiguous digit strings ("123456",
+  // "2026", "1", "3", an unlabeled SEC-file shape like "801-11953") remain excluded exactly as
+  // before -- BARE_DIGITS above already fail-closes pure 4-10 digit runs before this point is ever
+  // reached, and isOrganizationNameShape() additionally excludes any string of only digits/spaces/
+  // hyphens regardless of length.
+  const simpleFirmName = !firmType && !states.length && !raum && !compensation.length && !affiliation && isOrganizationNameShape(q) && !/\b(what|how|who|does|is|show|find|advis(?:er|or)s?|firm|fees?|ownership|disclosure)\b/i.test(q) ? q : undefined;
   const nameQuery = nameQuoted?.[1]?.trim() || named?.[1]?.trim() || simpleFirmName;
 
   const effectiveType: InvestorFirmType | undefined =
