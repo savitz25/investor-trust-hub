@@ -1,9 +1,21 @@
-# TH-SEARCH-R1-019H-P1 — normalized firm-name index preparation packet
+# TH-SEARCH-R1-019H-P1(-R1) — normalized firm-name index preparation packet
 
-**Preparation only. No Production DDL was executed to produce this packet.**
-Everything below is either a read-only fact captured from the real,
+**Preparation only. No Production DDL (`CREATE INDEX` / `DROP INDEX` /
+`ALTER INDEX` / `REINDEX`) was ever executed.** Read-only `--check` WAS run
+once against Production as part of this ticket's own required Section 9
+verification — see `P1-R1-PROD-READONLY-CHECK.md` — which is the one
+narrowly-scoped exception to "not executed" and is itself read-only.
+Everything else below is either a read-only fact captured from the real,
 connected database, or a prepared-but-unexecuted artifact requiring separate
 founder/owner authorization before `--apply` is ever run.
+
+**P1-R1 supersedes the original P1 packet.** A coordinator review of P1
+found two related fail-closed defects (proposed SQL's `IF NOT EXISTS` could
+silently no-op past a valid-but-wrong same-name index that preflight hadn't
+rejected; `--verify` reused the absence-requiring preflight instead of
+proving the live index's exact definition). Both are corrected here — see
+Sections 6/7/8/9/10 below, all rewritten for P1-R1, plus two more real bugs
+this ticket's own required live `--check` run found and fixed (`P1-R1-PROD-READONLY-CHECK.md`).
 
 ## 1. Starting state
 
@@ -49,15 +61,15 @@ This is not a decision based on size alone (the ticket's explicit caution): it i
 
 ## 6. Proposed indexes (Section H)
 
-Exactly two, minimum access paths, no speculative compound indexes:
+Exactly two, minimum access paths, no speculative compound indexes. **P1-R1: no `IF NOT EXISTS`** — a same-name object appearing between preflight and `CREATE` must fail the `CREATE` itself, never be silently skipped. Schema-qualified `public.firms`:
 
 ```sql
-CREATE INDEX CONCURRENTLY IF NOT EXISTS firms_display_name_normalized_trgm_v1_idx
-ON firms
+CREATE INDEX CONCURRENTLY firms_display_name_normalized_trgm_v1_idx
+ON public.firms
 USING gin ((btrim(regexp_replace(lower(display_name), '[^a-z0-9]+', ' ', 'g'))) gin_trgm_ops);
 
-CREATE INDEX CONCURRENTLY IF NOT EXISTS firms_legal_name_normalized_trgm_v1_idx
-ON firms
+CREATE INDEX CONCURRENTLY firms_legal_name_normalized_trgm_v1_idx
+ON public.firms
 USING gin ((btrim(regexp_replace(lower(legal_name), '[^a-z0-9]+', ' ', 'g'))) gin_trgm_ops);
 ```
 
@@ -69,16 +81,19 @@ Access method/opclass: GIN + `gin_trgm_ops` — identical to the existing raw tr
 
 ## 7/8/9. DDL safety, session/connection safety, pre-flight (Sections 7–9)
 
-All implemented in `scripts/th_search_r1_019h_p1_build_indexes.mjs` (not executed):
-- `CREATE INDEX CONCURRENTLY IF NOT EXISTS`, one statement at a time, never inside an explicit transaction (no `BEGIN`/`COMMIT` anywhere in the wrapper — verified by `test_th_search_r1_019h_p1_index_packet.ts`).
+All implemented in `scripts/th_search_r1_019h_p1_build_indexes.mjs`:
+- `CREATE INDEX CONCURRENTLY` with **no `IF NOT EXISTS`** (P1-R1), one statement at a time, never inside an explicit transaction (no `BEGIN`/`COMMIT` anywhere in the wrapper — verified by `test_th_search_r1_019h_p1_index_packet.ts`).
 - Refuses port `6543` (transaction-mode pooler); requires `5432` (session pooler or direct).
 - `--check` (default) is read-only and safe to run anytime; `--apply` requires `--i-understand-this-touches-production`; `--verify` is read-only.
-- Hash-locks the exact proposal file (`EXPECTED_SQL_SHA256`, Section I) — any edit to the SQL file, even whitespace, causes `--apply` to refuse rather than silently applying a changed proposal.
-- Statement allowlist: only `CREATE INDEX CONCURRENTLY IF NOT EXISTS ... ON firms USING gin (...)` is accepted; anything else (including `DROP`/`REINDEX`/`VACUUM`/`ANALYZE`/`ALTER TABLE`/`ALTER SYSTEM`/`CREATE EXTENSION`/`SET`) is refused before any connection is even made.
-- Preflight (`runPreflight`) proves every item in Section 9's list against the live catalog immediately before `--apply` proceeds, and fails closed (refuses to apply) if any blocker is found — including a leftover invalid same-named index (never auto-dropped) or a concurrent `CREATE INDEX` already in flight.
+- Hash-locks the exact proposal file (`EXPECTED_SQL_SHA256`, Section 8) — any edit to the SQL file, even whitespace, causes every mode to refuse before connecting.
+- Statement allowlist: only `CREATE INDEX CONCURRENTLY <name> ON public.firms USING gin (...)` (no `IF NOT EXISTS`) is accepted; anything else (including a reintroduced `IF NOT EXISTS`, or `DROP`/`REINDEX`/`VACUUM`/`ANALYZE`/`ALTER TABLE`/`ALTER SYSTEM`/`CREATE EXTENSION`/`SET`) is refused before any connection is even made.
+- **P1-R1: pre-apply collision rule (Section 2 of the ticket).** `--check`/`--apply` preflight now requires **both proposed index names to be completely ABSENT** — any existing object with either name, valid or invalid, ready or not, correct or incorrect, is an unconditional blocker (`PROPOSED_INDEX_ALREADY_EXISTS_REVIEW_REQUIRED`). A previous partial execution is a separate, human-reviewed recovery decision; this wrapper never auto-drops or auto-resumes it.
+- **P1-R1: one reusable strict definition validator** (`strictlyValidateIndex`) checks schema=`public`, table=`firms`, access method=`gin`, opclass=`gin_trgm_ops` exactly, `indisvalid`/`indisready`/`indislive` all true, no partial predicate, exactly one indexed expression, and the **exact canonical `pg_get_expr` deparse form** (including Postgres's own `::text` casts — verified empirically via `EXPLAIN (VERBOSE)` against the real database, never assumed) — no substring/approximate tolerance anywhere.
+- **P1-R1: post-create validation.** Immediately after each `CREATE INDEX CONCURRENTLY` returns, the strict validator runs against that specific index before the wrapper ever proceeds to the next one. If index 1 succeeds but strict validation fails, or if index 2's `CREATE` itself fails after index 1 succeeded, the wrapper stops immediately: no retry, no automatic drop, the receipt records the exact partial state, and any later execution requires a separately reviewed recovery decision.
+- **P1-R1: real `--verify` mode**, with the opposite requirement from preflight — it *requires* both proposed indexes to already exist, strictly validates each, and confirms the existing raw trigram indexes remain present and valid. It never calls the absence-requiring preflight/collision check.
 - Storage headroom: **not inferable from SQL**, recorded honestly in `P1-PROD-PREFLIGHT.md` as an owner precondition (Section R) rather than assumed.
 
-**This wrapper was never executed in this ticket** — not even `--check` — per the ticket's explicit instruction. It was syntax-checked only (`node --check`, no connection attempted). The equivalent read-only inventory in Sections 4–5 above and in `P1-PROD-PREFLIGHT.md` was produced by a separate, ad hoc read-only script, not by this deliverable wrapper.
+**`--check` (read-only) WAS run once against Production as this ticket's own required Section 9 verification — see `P1-R1-PROD-READONLY-CHECK.md`.** `--apply` was never run. That live run found and fixed two real bugs a purely mocked test suite could not have caught (a missing `pg_am` join, and an unparsed `name[]` array from Postgres that would have made the strict validator always fail even a correct index) — see that document for the full account.
 
 ## 10. Disposable/local rehearsal — genuinely unavailable in this environment
 
@@ -119,19 +134,34 @@ To be checked only after a future, separately-authorized owner actually runs `--
 
 ## 14. Tests / mutations (Section P)
 
-`scripts/test_th_search_r1_019h_p1_index_packet.ts` — 29 tests, all passing (verified via a scratchpad-only temporary vitest config pointed at this one file, since this repo's committed `vitest.config.ts` include-glob intentionally doesn't cover `scripts/*.ts`; the committed config was not modified). Covers: expression byte-for-byte lock against `normalizedNameMatchSql()` (plus a mutation guard proving a regex/flag drift would be caught), exactly 2 `CREATE INDEX CONCURRENTLY` statements and nothing else, zero `DROP`/`REINDEX`/`VACUUM`/`ANALYZE`/`ALTER`, zero data writes, no duplicate index names, wrapper hash-lock consistency, no explicit transaction wrapper, session-pooler-only refusal, fail-closed on an existing invalid proposed-name index and on an in-progress `CREATE INDEX`, one-at-a-time apply with per-index verification, no automatic retry/cleanup, and a credential-free receipt (host/port/database identity only, never the connection string). Does not modify or weaken any existing R1-019H test.
+`scripts/test_th_search_r1_019h_p1_index_packet.ts` — **48 tests**, all passing (verified via a scratchpad-only temporary vitest config pointed at this one file, since this repo's committed `vitest.config.ts` include-glob intentionally doesn't cover `scripts/*.ts`; the committed config was not modified). The wrapper's pure/DB-injectable functions are exported and imported directly by the test file (no real database connection; `main()` is guarded behind `pathToFileURL(process.argv[1]).href === import.meta.url` so importing the module for tests never triggers a connection attempt or argv parsing against the test runner's own argv).
+
+Static (structural) coverage, carried over and extended from P1: expression byte-for-byte lock against `normalizedNameMatchSql()` plus a mutation guard, exactly 2 `CREATE INDEX CONCURRENTLY` statements with **zero `IF NOT EXISTS`** anywhere (plus a regression test proving a reintroduced `IF NOT EXISTS` is rejected), zero `DROP`/`REINDEX`/`VACUUM`/`ANALYZE`/`ALTER`, zero data writes, no duplicate index names, wrapper hash-lock consistency (and a test that the new hash differs from the original P1 hash), no explicit transaction wrapper, session-pooler-only refusal, no automatic retry/cleanup at any stage (including no `DROP INDEX` anywhere in the wrapper's own logic), one-at-a-time apply with strict per-index validation before continuing, and a credential-free receipt.
+
+**New P1-R1 behavioral coverage (Section 7 A–L), exercised via a mock `client` object, not just grepped for:**
+- **A/B/C.** A valid-but-wrong, valid-and-correct, or invalid same-name proposed index → `checkProposedNamesAbsent` / full preflight blocked in all three cases identically (absence is required regardless of correctness).
+- **D.** `--verify` against a fully correct mock index → `PASS`.
+- **E/F/G.** `--verify` against a wrong expression, wrong opclass, or an unexpected partial predicate → `FAIL`, with the specific mismatch named.
+- **H.** `--verify` against `indisvalid`/`indisready`/`indislive` each individually false, a missing index, or a wrong schema → `FAIL` in every case; also confirms `--verify` fails if an existing raw trigram index is itself missing or invalid, and confirms structurally that `--verify` never calls the absence-requiring preflight.
+- **I/J.** Exactly 2 `CREATE INDEX CONCURRENTLY` statements, exactly 0 `IF NOT EXISTS`/`DROP`/`REINDEX`/`VACUUM`/`ANALYZE`/data writes.
+- **K.** No retry loop construct anywhere, no `DROP INDEX` anywhere in the wrapper's own logic, and a direct assertion that the `--apply` code path returns immediately after a strict-validation failure without attempting the next index.
+- **L.** Receipt writer never includes `DATABASE_URL`/password/secret/token-shaped fields; only host/port/database identity.
+
+Does not modify or weaken any existing R1-019H test.
 
 ## 15. Artifacts (Section Q)
 
 - `docs/qa/th-search-r1-019h/P1-NORMALIZED-INDEX-PACKET.md` (this file)
 - `docs/qa/th-search-r1-019h/PROPOSED-normalized-firm-name-indexes.sql`
 - `docs/qa/th-search-r1-019h/P1-PROD-PREFLIGHT.md`
+- `docs/qa/th-search-r1-019h/P1-R1-PROD-READONLY-CHECK.md` (new)
+- `docs/qa/th-search-r1-019h/receipts/p1r1-check-final.json` (new — the actual live `--check` receipt)
 - `scripts/th_search_r1_019h_p1_build_indexes.mjs`
 - `scripts/test_th_search_r1_019h_p1_index_packet.ts`
 
-SHA256 hashes:
-- Proposed SQL: `c2e518bc7c3494d18a8e74798092f399f756f65153056984ffa3000b99a30293`
-- Build wrapper: `b8a570277c1524c2904716c7352797aa64ae39bcddba94a43549d684e46896b4`
+**SHA256 hashes (P1-R1 — both changed from the original P1 packet; the old hashes are intentionally not preserved):**
+- Proposed SQL: `717890384c16dc0bde162710eddd4b77ca0dc0e676638b497fa9167b1202d12e` (was `c2e518bc7c3494d18a8e74798092f399f756f65153056984ffa3000b99a30293`)
+- Build wrapper: `a82323abf5af2af7dba15a831d8dc57438e3c3a4ce5a1c4c909991113f4cde8f` (was `b8a570277c1524c2904716c7352797aa64ae39bcddba94a43549d684e46896b4`)
 
 ## 16. Owner preconditions (Section R)
 

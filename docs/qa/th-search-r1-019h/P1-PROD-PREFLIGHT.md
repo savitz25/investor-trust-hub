@@ -2,7 +2,13 @@
 
 No DDL was executed to produce this document. Every fact below came from
 read-only `SELECT`/`EXPLAIN` queries against the real, connected Production
-database, run with `SET default_transaction_read_only = on`.
+database, run with `SET default_transaction_read_only = on`. This document's
+own facts (existing index inventory, `pg_trgm`, table size) are still
+accurate as of the P1-R1 correction pass — they were not re-derived by hand,
+they were re-confirmed live: the deliverable wrapper's own `--check` run
+(`P1-R1-PROD-READONLY-CHECK.md`) independently reports the same
+`existingRawTrgmIndexes` facts as this document, via its own SQL, and they
+agree.
 
 ## Connection identity
 

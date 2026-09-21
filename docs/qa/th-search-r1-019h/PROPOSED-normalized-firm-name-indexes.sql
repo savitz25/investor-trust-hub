@@ -1,4 +1,4 @@
--- TH-SEARCH-R1-019H-P1 -- proposed normalized firm-name indexes.
+-- TH-SEARCH-R1-019H-P1-R1 -- proposed normalized firm-name indexes.
 --
 -- PREPARATION ONLY. This file is not executed by anything in this ticket.
 -- Apply exactly once, ONE statement at a time, via the reviewed autocommit
@@ -6,6 +6,17 @@
 -- founder/owner authorization -- never via the repository's ordinary
 -- transactional migration runner, and never inside a transaction block
 -- (CREATE INDEX CONCURRENTLY cannot run inside one).
+--
+-- P1-R1 correction: deliberately NO "IF NOT EXISTS". A same-name object
+-- appearing between preflight and CREATE (e.g. a leftover partial-execution
+-- artifact) must cause the CREATE itself to fail loudly, never be silently
+-- skipped by IF NOT EXISTS while preflight had already treated a "valid but
+-- wrong" same-name index as an unrelated pass. The wrapper's pre-apply
+-- collision rule (Section 2) additionally requires BOTH proposed names to be
+-- completely ABSENT before --apply is ever attempted, regardless of the
+-- existing object's own validity -- so in the wrapper's own intended use,
+-- IF NOT EXISTS would never even have a chance to fire; removing it closes
+-- the gap for any future caller who runs this SQL by another path.
 --
 -- Expression matches packages/domain/src/firm-name-match.ts
 -- normalizedNameMatchSql() BYTE-FOR-BYTE:
@@ -37,10 +48,10 @@
 -- out of scope for this ticket -- see P1-NORMALIZED-INDEX-PACKET.md
 -- Section O (Retirement Policy).
 
-CREATE INDEX CONCURRENTLY IF NOT EXISTS firms_display_name_normalized_trgm_v1_idx
-ON firms
+CREATE INDEX CONCURRENTLY firms_display_name_normalized_trgm_v1_idx
+ON public.firms
 USING gin ((btrim(regexp_replace(lower(display_name), '[^a-z0-9]+', ' ', 'g'))) gin_trgm_ops);
 
-CREATE INDEX CONCURRENTLY IF NOT EXISTS firms_legal_name_normalized_trgm_v1_idx
-ON firms
+CREATE INDEX CONCURRENTLY firms_legal_name_normalized_trgm_v1_idx
+ON public.firms
 USING gin ((btrim(regexp_replace(lower(legal_name), '[^a-z0-9]+', ' ', 'g'))) gin_trgm_ops);

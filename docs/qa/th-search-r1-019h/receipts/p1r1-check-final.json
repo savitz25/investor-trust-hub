@@ -1,0 +1,62 @@
+{
+  "connection": {
+    "current_database": "postgres",
+    "current_user": "postgres",
+    "inet_server_port": 5432
+  },
+  "pgTrgmInstalled": true,
+  "tableExists": true,
+  "proposedIndexNameCollisions": {
+    "firms_display_name_normalized_trgm_v1_idx": [],
+    "firms_legal_name_normalized_trgm_v1_idx": []
+  },
+  "existingRawTrgmIndexes": {
+    "firms_display_name_trgm_idx": {
+      "index_name": "firms_display_name_trgm_idx",
+      "index_schema": "public",
+      "table_name": "firms",
+      "table_schema": "public",
+      "access_method": "gin",
+      "indisvalid": true,
+      "indisready": true,
+      "indislive": true,
+      "indnkeyatts": 1,
+      "indkey": "4",
+      "indexprs": null,
+      "indpred": null,
+      "opclasses": [
+        "gin_trgm_ops"
+      ],
+      "indexdef": "CREATE INDEX firms_display_name_trgm_idx ON public.firms USING gin (display_name gin_trgm_ops)"
+    },
+    "firms_legal_name_trgm_idx": {
+      "index_name": "firms_legal_name_trgm_idx",
+      "index_schema": "public",
+      "table_name": "firms",
+      "table_schema": "public",
+      "access_method": "gin",
+      "indisvalid": true,
+      "indisready": true,
+      "indislive": true,
+      "indnkeyatts": 1,
+      "indkey": "3",
+      "indexprs": null,
+      "indpred": null,
+      "opclasses": [
+        "gin_trgm_ops"
+      ],
+      "indexdef": "CREATE INDEX firms_legal_name_trgm_idx ON public.firms USING gin (legal_name gin_trgm_ops)"
+    }
+  },
+  "inProgressCreateIndex": [],
+  "longRunningTransactions": [],
+  "expressionParses_display_name": true,
+  "expressionParses_legal_name": true,
+  "blockers": [],
+  "connectionIdentity": {
+    "host": "aws-0-us-east-2.pooler.supabase.com",
+    "port": "5432",
+    "database": "postgres"
+  },
+  "mode": "check"
+}
