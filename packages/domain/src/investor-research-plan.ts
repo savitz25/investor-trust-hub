@@ -26,6 +26,20 @@ import { decideUsGeography, hasUnresolvedLocationSignal } from './us-geography';
 const BARE_NAME_SHAPE = new RegExp(`^[A-Z0-9][${FIRM_NAME_CHAR_CLASS}]{0,79}$`);
 const PROPER_NOUN_PHRASE = new RegExp(`^[A-Z0-9][${FIRM_NAME_CHAR_CLASS.replace(' ', '')}]*(?:\\s+[A-Z][${FIRM_NAME_CHAR_CLASS.replace(' ', '')}]*){0,2}$`);
 const LEGAL_SUFFIX_ENDING = new RegExp(`\\b(?:${FIRM_LEGAL_SUFFIX_WORDS})\\.?$`, 'i');
+// TH-SEARCH-R1-019H-R1: "advisor(s)"/"adviser(s)" is only treated as a generic descriptive-question
+// signal when it appears somewhere other than the name's own final word -- but a real firm's own
+// final word is very commonly a trailing legal-entity suffix ("... Advisors, LLC", "... Investment
+// Advisors, Inc."), not literally the last token in the string. Requiring literal end-of-string
+// wrongly reclassified those as FIRM_DISCOVERY (dropping the name filter entirely and serving the
+// unfiltered ~23.6k-row roster) instead of IDENTITY_BY_NAME. This grants "advisor(s)" the same
+// tolerance LEGAL_SUFFIX_ENDING already gives everywhere else in this file: a trailing legal-suffix
+// word (comma/space-separated, optional period) after it still counts as the name's own final word.
+// Two negative lookaheads, same as before this change: neither "immediately end-of-string" nor
+// "immediately a trailing legal-suffix word then end-of-string" counts as a generic mid-sentence use.
+const ADVISOR_GENERIC_MID_SENTENCE = new RegExp(
+  `\\badvis(?:er|or)s?\\b(?!\\.?$)(?![,\\s]+(?:${FIRM_LEGAL_SUFFIX_WORDS})\\.?$)`,
+  'i',
+);
 
 export type InvestorResearchIntent =
   | 'IDENTITY_BY_IDENTIFIER'
@@ -248,9 +262,10 @@ export function planInvestorResearch(raw: string, o: InvestorAskOverrides, core:
       text,
     ) &&
     // A brand name legitimately ends in "... Advisor(s)"/"... Adviser(s)" (e.g. "Vanguard Personal
-    // Advisor"). Only treat the word as a generic descriptive-question signal (and so exclude it
-    // from a literal name guess) when it appears somewhere other than as the final word.
-    !/\badvis(?:er|or)s?\b(?!\.?$)/i.test(text)
+    // Advisor"), optionally followed by its own trailing legal-suffix word (e.g. "... Investment
+    // Advisors, Inc."). Only treat the word as a generic descriptive-question signal (and so exclude
+    // it from a literal name guess) when it appears somewhere other than as the name's own final word.
+    !ADVISOR_GENERIC_MID_SENTENCE.test(text)
   )
     name = text;
   if (name && !quoted && !/\b(?:named|called|firm name)\b/i.test(text) && /^(?:(?:sec|state)[- ]registered\s+)?(?:investment\s+)?(?:advisers?|advisors?|ria\s+firms?|era\s+firms?)(?:\s+(?:in|based|registered|with)\b|$)/i.test(name)) name = undefined;
