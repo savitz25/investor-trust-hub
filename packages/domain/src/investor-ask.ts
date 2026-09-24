@@ -861,6 +861,46 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };
   }
+  if (/\b(atlanta|savannah)\b/i.test(q) && /investment adviser|financial adviser|adviser|broker/i.test(q)) {
+    const query = failClosed(
+      'InvestorTrustHub does not publish Atlanta or Savannah intelligence routes. Statewide Georgia research remains /georgia. Atlanta is geography, not a separate securities regime.',
+      ['Georgia investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:investment adviser(?:s)? in georgia|financial adviser(?:s)? in georgia|adviser registered in georgia|georgia investment adviser)\b/i.test(q) && !/\bcrd\b/i.test(q)) {
+    const query = failClosed(
+      'A Georgia investment-adviser question is not one population. The existing SEC/IARD roster has 364 firms with a Georgia principal office. That is not Georgia state registration and not a notice filing. Georgia state IA firms, IARs, broker-dealers, and agents were not acquired as rosters. Verify a firm on IAPD with an exact CRD. Use /georgia.',
+      ['Georgia investor research page.', 'Find CRD 105958.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\bbroker-?dealer(?:s)? in georgia\b/i.test(q)) {
+    const query = failClosed(
+      'Georgia broker-dealer firm and agent rosters were not acquired. A broker-dealer is not an investment adviser. BrokerCheck and CRD remain the identity systems. Use /georgia.',
+      ['Georgia investor research page.'],
+    );
+    push('Coverage', 'OPEN_SEARCH_ONLY');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\bgeorgia\b/i.test(q) && /\b(?:securities enforcement|disciplinary|cease-and-desist|cease and desist|securities order)\b/i.test(q)) {
+    const query = failClosed(
+      'The Georgia Securities Orders index lists 57 linked documents. Captions are not findings. Emergency, proposed, investigation, and consent status is taken only from the index caption. Exact profile attachments: 0. A printed CRD is not a profile join in this extract. Implementation and COVID relief orders are not discipline. Use /georgia.',
+      ['Georgia investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (/\b(?:best|safest|highest performing) (?:investment |financial )?advisers?(?: in)? georgia\b/i.test(q)) {
+    const query = failClosed(
+      'InvestorTrustHub does not rank advisers, score performance, or publish a Trust Score.',
+      ['Georgia investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
   if (/\b(columbus|cleveland|cincinnati|toledo|akron|dayton)\b/i.test(q) && /investment adviser|financial adviser|adviser/i.test(q)) {
     const query = failClosed(
       'InvestorTrustHub does not publish Columbus, Cleveland, Cincinnati, Toledo, Akron, or Dayton intelligence routes. Statewide Ohio research remains /ohio. Ranking is unsupported.',

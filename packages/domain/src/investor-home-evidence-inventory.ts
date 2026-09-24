@@ -1,6 +1,7 @@
 import networkMetrics from '../../../data/home/investor-network-metrics-v1.json';
 import NC_PUBLIC_SNAPSHOT from '../../../artifacts/nc-inv-001-public-snapshot.json';
 import OH_PUBLIC_SNAPSHOT from '../../../artifacts/oh-inv-001-public-snapshot.json';
+import GA_PUBLIC_SNAPSHOT from '../../../artifacts/ga-inv-001-public-snapshot.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -72,7 +73,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA';
   name: string;
   href: string;
   regulator: string;
@@ -655,6 +656,40 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
         label: 'SEC/IARD principal-office overlay',
         sourceAsOf: OH_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
         retrievedAt: OH_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+        snapshotAsOf: null,
+        generatedAt: null,
+      },
+    ],
+  },
+  {
+    code: 'GA',
+    name: 'Georgia',
+    href: GA_PUBLIC_SNAPSHOT.route,
+    regulator: 'Georgia Secretary of State Securities Division',
+    principalOfficeFirms: GA_PUBLIC_SNAPSHOT.nationalOverlay.gaPrincipalOfficeSecIardFirms,
+    rosterStatus: 'Georgia state IA, IAR, broker-dealer, and agent rosters were not acquired',
+    evidence: [
+      'SEC/IARD principal-office overlay',
+      'IAPD and BrokerCheck verification',
+      'Securities Orders index (unattached)',
+      'Implementation and relief orders kept out of enforcement',
+    ],
+    identityNote:
+      'A Georgia principal office is not Georgia registration. Exact CRD is required before an order can attach. IAR people are not IA firms.',
+    limitation:
+      'Do not add IA+IAR+broker-dealer+agent+orders. An index caption is not a finding. Name-only enforcement attachment is unsafe. Implementation orders are not discipline.',
+    sourceClocks: [
+      {
+        label: 'Securities Orders index',
+        sourceAsOf: null,
+        retrievedAt: GA_PUBLIC_SNAPSHOT.clocks.orders_index_retrieved_at,
+        snapshotAsOf: GA_PUBLIC_SNAPSHOT.asOf,
+        generatedAt: null,
+      },
+      {
+        label: 'SEC/IARD principal-office overlay',
+        sourceAsOf: GA_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+        retrievedAt: GA_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
         snapshotAsOf: null,
         generatedAt: null,
       },
