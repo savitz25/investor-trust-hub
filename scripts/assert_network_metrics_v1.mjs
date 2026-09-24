@@ -110,7 +110,13 @@ assert(byKey.oh_state_ria_roster.grain === "oh_state_ria_roster", "OH state RIA 
 assert(v1.ohio.stateRiaRosterCoverage === "ACQUIRED_IAPD_STATE_COMPILATION", "OH coverage remains acquired");
 assert(byKey.oh_state_ria_roster.value === 784, "OH state RIA metric");
 assert(byKey.oh_state_ria_roster.valueState === "KNOWN", "OH state RIA known");
-assert(byKey.published_state_intelligence_pages.value === 14, "state pages 14");
+assert(v1.massachusetts.principalOfficeRosterFirms === pub.maPrincipalOfficeFirms, "MA principal-office overlay");
+assert(v1.massachusetts.statewideStateRiaUniverse === pub.maStateRiaApproved, "MA state-RIA approved");
+assert(v1.massachusetts.noticeFiledFirms === pub.maNoticeFiled, "MA notice filed");
+assert(byKey.ma_state_ria_roster.grain === "ma_state_ria_roster", "MA state RIA grain key");
+assert(byKey.ma_state_ria_roster.value === 773, "MA state RIA metric");
+assert(byKey.ma_state_ria_roster.value !== pub.maNoticeFiled && byKey.ma_state_ria_roster.value !== pub.maPrincipalOfficeFirms, "MA lenses stay distinct");
+assert(byKey.published_state_intelligence_pages.value === 15, "state pages 15");
 assert(v1.florida.stateIntelligencePage === false, "no invented Florida page");
 assert(!pub.publishedStateIntelligencePaths.includes("/florida"), "no Florida route");
 assert(byKey.investment_advisory_firms.label === "Investment advisory firms", "consumer firm label");

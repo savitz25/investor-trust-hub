@@ -1,0 +1,3345 @@
+{
+ "version": "investor-ma-enforcement-index-v1",
+ "source": "https://www.sec.state.ma.us/divisions/securities/enforcement/enforcement-actions.htm",
+ "retrievedAt": "2026-09-24T16:58:59Z",
+ "announcements": [
+  {
+   "id": "ma-sd-2026-01",
+   "archive_year": 2026,
+   "headline_as_listed": "Galvin Fines TradeZero $750,000 over Cybersecurity and Automated Account Approval Failures",
+   "listing_date_as_listed": "Sept 14, 2026",
+   "listing_date": "2026-09-14",
+   "documents": [
+    {
+     "id": "ma-sd-2026-01-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order in the Matter of TradeZero America, Inc.",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/2024-0374-TradeZero-America-Inc-Consent-Order.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2026-02",
+   "archive_year": 2026,
+   "headline_as_listed": "Galvin Charges Croft School CEO with Fraud",
+   "listing_date_as_listed": "June 30, 2026",
+   "listing_date": "2026-06-30",
+   "documents": [
+    {
+     "id": "ma-sd-2026-02-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint in the Matter of Scott Given (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2026-0666"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Docket-No-E-2026-0666.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2026-0666"
+   ]
+  },
+  {
+   "id": "ma-sd-2026-03",
+   "archive_year": 2026,
+   "headline_as_listed": "Galvin Fines Fidelity $1.25 Million Over Data Breach Impacting Massachusetts Residents",
+   "listing_date_as_listed": "April 27, 2026",
+   "listing_date": "2026-04-27",
+   "documents": [
+    {
+     "id": "ma-sd-2026-03-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order in the Matter of Fidelity Brokerage Services, LLC (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2024-0373"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Docket-No-E-2024-0373.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2024-0373"
+   ]
+  },
+  {
+   "id": "ma-sd-2026-04",
+   "archive_year": 2026,
+   "headline_as_listed": "Galvin Fines Online Investment Adviser $500,000 Over Misleading Social Media Ads",
+   "listing_date_as_listed": "March 30, 2026",
+   "listing_date": "2026-03-30",
+   "documents": [
+    {
+     "id": "ma-sd-2026-04-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order in the Matter of Dub Advisors, LLC (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/2025-0072-Dub-Advisors-Consent-Order.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2026-05",
+   "archive_year": 2026,
+   "headline_as_listed": "Galvin Charges Worcester Pastor in Real Estate Securities Scheme that Defrauded Parishioners",
+   "listing_date_as_listed": "February 11, 2026",
+   "listing_date": "2026-02-11",
+   "documents": [
+    {
+     "id": "ma-sd-2026-05-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint in the Matter of Jose Encarnacion and Trinity Real Estate Investments & Development LLC (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2025-0187"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/26-02-11-Administrative-Complaint--E-2025-0187-_Final.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2025-0187"
+   ]
+  },
+  {
+   "id": "ma-sd-2025-01",
+   "archive_year": 2025,
+   "headline_as_listed": "Galvin Leads Nationwide Effort to Recover $19 Million for Brokerage Customers",
+   "listing_date_as_listed": "June 9, 2025",
+   "listing_date": "2025-06-09",
+   "documents": [
+    {
+     "id": "ma-sd-2025-01-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order in the Matter of Edward D. Jones & Co. (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/2025-0191_Edward_Jones.pdf"
+    },
+    {
+     "id": "ma-sd-2025-01-d2",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order in the Matter of LPL Financial (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/2025-0189_LPL.pdf"
+    },
+    {
+     "id": "ma-sd-2025-01-d3",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order in the Matter of RBC Capital Markets (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/2025-0190_RBC_Capital_Markets.pdf"
+    },
+    {
+     "id": "ma-sd-2025-01-d4",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order in the Matter of Stifel, Nicolaus & Company (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/2025-0192_Stifel.pdf"
+    },
+    {
+     "id": "ma-sd-2025-01-d5",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order in the Matter of TD Ameritrade (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/2023-0061_TD_Ameritrade.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2025-02",
+   "archive_year": 2025,
+   "headline_as_listed": "Galvin Orders Man who used Investor Funds for Personal Use to Return Money",
+   "listing_date_as_listed": "April 17, 2025",
+   "listing_date": "2025-04-17",
+   "documents": [
+    {
+     "id": "ma-sd-2025-02-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order in the Matter of Erez Capital LLC, Erez Master LLC, and Michael Benezra (PDF 26.5MB)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/2023-0106-Erez-Capital-LLC.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2025-03",
+   "archive_year": 2025,
+   "headline_as_listed": "Galvin Cracks Down on Student Loan Refinancer’s Fraudulent Ads",
+   "listing_date_as_listed": "February 3, 2025",
+   "listing_date": "2025-02-03",
+   "documents": [
+    {
+     "id": "ma-sd-2025-03-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order in the Matter of Yrefy, LLC and Yrefy SLP4, LLC. (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/consent-order_2-3-25.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2024-01",
+   "archive_year": 2024,
+   "headline_as_listed": "Galvin Fines Broker Dealer and Orders Restitution Regarding Agent’s Misappropriation of over $1 million in Customer Funds",
+   "listing_date_as_listed": "October 1, 2024",
+   "listing_date": "2024-10-01",
+   "documents": [
+    {
+     "id": "ma-sd-2024-01-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order in the Matter of United Planners’ Financial Services of America (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/consent-order_10-1-24.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2024-02",
+   "archive_year": 2024,
+   "headline_as_listed": "Galvin Fines Morgan Stanley Over Insider's Offloading of First Republic Shares",
+   "listing_date_as_listed": "September 6, 2024",
+   "listing_date": "2024-09-06",
+   "documents": [
+    {
+     "id": "ma-sd-2024-02-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order in the Matter of Morgan Stanley Smith Barney LLC, Respondent (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/9-5-24-morgan.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2024-03",
+   "archive_year": 2024,
+   "headline_as_listed": "Galvin Fines Business Development Company Regarding Sale of Unregistered Securities",
+   "listing_date_as_listed": "August 26, 2024",
+   "listing_date": "2024-08-26",
+   "documents": [
+    {
+     "id": "ma-sd-2024-03-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order in the Matter of Blue Owl Technology Income Corp. (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/consent-order_8-26-24.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2024-04",
+   "archive_year": 2024,
+   "headline_as_listed": "Galvin Orders Nationwide Crypto Firm to Pay Fine and Cease Offering Unregistered Securities",
+   "listing_date_as_listed": "March 12, 2024",
+   "listing_date": "2024-03-12",
+   "documents": [
+    {
+     "id": "ma-sd-2024-04-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order in the Matter of TradeStation Crypto, Inc. (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/3-11-24_tradestation-crypto-consent-order.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2024-05",
+   "archive_year": 2024,
+   "headline_as_listed": "Robinhood Agrees to Pay $7.5 Million Fine, Make Sweeping Changes to Gamification Practices",
+   "listing_date_as_listed": "January 18, 2024",
+   "listing_date": "2024-01-18",
+   "documents": [
+    {
+     "id": "ma-sd-2024-05-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order in the Matter of Robinhood Financial, LLC (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/RH-Consent-Order.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2024-06",
+   "archive_year": 2024,
+   "headline_as_listed": "Galvin Fines Purshe Kaplan Sterling $250,000 for Failure to Supervise Dually-Registered Agents",
+   "listing_date_as_listed": "January 4, 2024",
+   "listing_date": "2024-01-04",
+   "documents": [
+    {
+     "id": "ma-sd-2024-06-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order In the Matter of Purshe Kaplan Sterling Investments, Inc. (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2021-0014"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Consent-Order-No-E-2021-0014.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2021-0014"
+   ]
+  },
+  {
+   "id": "ma-sd-2023-01",
+   "archive_year": 2023,
+   "headline_as_listed": "Galvin Fines Webull $500,000 over Inadequate Compliance Measures",
+   "listing_date_as_listed": "November 9, 2023",
+   "listing_date": "2023-11-09",
+   "documents": [
+    {
+     "id": "ma-sd-2023-01-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2022-0058"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Webull_Consent_Order_E-2022-0058.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2022-0058"
+   ]
+  },
+  {
+   "id": "ma-sd-2023-02",
+   "archive_year": 2023,
+   "headline_as_listed": "Galvin Fines LPL for Improper Use of Electronic Signatures",
+   "listing_date_as_listed": "October 3, 2023",
+   "listing_date": "2023-10-03",
+   "documents": [
+    {
+     "id": "ma-sd-2023-02-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/consent-order-LP-10-03-23.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2023-03",
+   "archive_year": 2023,
+   "headline_as_listed": "Galvin Fines Fidelity $750,000 Over Rubber-Stamping of Options Applications",
+   "listing_date_as_listed": "October 2, 2023",
+   "listing_date": "2023-10-02",
+   "documents": [
+    {
+     "id": "ma-sd-2023-03-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-Fidelity-Consent-Order-10-02-23.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2023-04",
+   "archive_year": 2023,
+   "headline_as_listed": "Galvin Charges Florida Man who Misled Quincy Investor",
+   "listing_date_as_listed": "July 27, 2023",
+   "listing_date": "2023-07-27",
+   "documents": [
+    {
+     "id": "ma-sd-2023-04-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-Stonegate-Garcia-07-27-23.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2023-05",
+   "archive_year": 2023,
+   "headline_as_listed": "Galvin Leads Nationwide Effort to Recover $8.25 Million for Raymond James Brokerage Customers",
+   "listing_date_as_listed": "July 10, 2023",
+   "listing_date": "2023-07-10",
+   "documents": [
+    {
+     "id": "ma-sd-2023-05-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/consent-order-No-E20230041.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2023-06",
+   "archive_year": 2023,
+   "headline_as_listed": "Galvin Orders Restitution for Western Mass Ice Cream Company Investors",
+   "listing_date_as_listed": "June 7, 2023",
+   "listing_date": "2023-06-07",
+   "documents": [
+    {
+     "id": "ma-sd-2023-06-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2021-0082"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-Snows-Consent-Order_E-2021-0082.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2021-0082"
+   ]
+  },
+  {
+   "id": "ma-sd-2023-07",
+   "archive_year": 2023,
+   "headline_as_listed": "Secretary Galvin Levies $2.5 Million Fine Against Broker-Dealer Over Predatory Sales Practices",
+   "listing_date_as_listed": "May 1, 2023",
+   "listing_date": "2023-05-01",
+   "documents": [
+    {
+     "id": "ma-sd-2023-07-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/may-01-2023.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2023-08",
+   "archive_year": 2023,
+   "headline_as_listed": "Secretary Galvin Orders Full Restitution and Fines Ex-Broker Who Stole from Client",
+   "listing_date_as_listed": "March 22, 2023",
+   "listing_date": "2023-03-22",
+   "documents": [
+    {
+     "id": "ma-sd-2023-08-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/consent-order-msd-palky.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2023-09",
+   "archive_year": 2023,
+   "headline_as_listed": "Secretary Galvin Reaches Settlement with Unregistered Digital Asset Firm Nexo Capital",
+   "listing_date_as_listed": "February 6, 2023",
+   "listing_date": "2023-02-06",
+   "documents": [
+    {
+     "id": "ma-sd-2023-09-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/nexo-consent-order-signed.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2022-01",
+   "archive_year": 2022,
+   "headline_as_listed": "Secretary Galvin Bars Broker for Misleading Variable Annuity Sales",
+   "listing_date_as_listed": "December 26, 2022",
+   "listing_date": "2022-12-26",
+   "documents": [
+    {
+     "id": "ma-sd-2022-01-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent-order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2020-0018"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-Charles-Evan-Executed-Consent-Order-E-2020-0018.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2020-0018"
+   ]
+  },
+  {
+   "id": "ma-sd-2022-02",
+   "archive_year": 2022,
+   "headline_as_listed": "Secretary Galvin Charges Couple in Ponzi Scheme Targeting Massachusetts Haitian Community",
+   "listing_date_as_listed": "December 19, 2022",
+   "listing_date": "2022-12-19",
+   "documents": [
+    {
+     "id": "ma-sd-2022-02-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/haitian-targeted-ponzi.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2022-03",
+   "archive_year": 2022,
+   "headline_as_listed": "Secretary Galvin Takes Action to Recoup Investor Losses in Auto Financing Scheme",
+   "listing_date_as_listed": "November 21, 2022",
+   "listing_date": "2022-11-21",
+   "documents": [
+    {
+     "id": "ma-sd-2022-03-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/20221121144751308.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2022-04",
+   "archive_year": 2022,
+   "headline_as_listed": "Secretary Galvin Orders Full Restitution and Fines Unregistered Adviser for Role in Pension Scheme",
+   "listing_date_as_listed": "November 7, 2022",
+   "listing_date": "2022-11-07",
+   "documents": [
+    {
+     "id": "ma-sd-2022-04-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2022-0056"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Hynes-Consent-Order-E-2022-0056.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2022-0056"
+   ]
+  },
+  {
+   "id": "ma-sd-2022-05",
+   "archive_year": 2022,
+   "headline_as_listed": "Secretary Galvin Fines SEC-Registered Adviser Over Failure to Supervise Risky ETF Investments",
+   "listing_date_as_listed": "October 11, 2022",
+   "listing_date": "2022-10-11",
+   "documents": [
+    {
+     "id": "ma-sd-2022-05-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2022-0031"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Executed-Consent-Order-ONLY-E-2022-0031.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2022-0031"
+   ]
+  },
+  {
+   "id": "ma-sd-2022-06",
+   "archive_year": 2022,
+   "headline_as_listed": "Secretary Galvin Levies $250,000 Fine Against Mass Mutual Subsidiary and Charges Former Agent with Fraud",
+   "listing_date_as_listed": "August 16, 2022",
+   "listing_date": "2022-08-16",
+   "documents": [
+    {
+     "id": "ma-sd-2022-06-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2022-0027"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/../pdf-html/consent-order-mmlis-e-2022-0027.htm"
+    },
+    {
+     "id": "ma-sd-2022-06-d2",
+     "document_type": "ADMINISTRATIVE_COMPLAINT",
+     "document_link_text_as_listed": "Administrative Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2020-0018"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Administrative-Complaint-Charles-J-Evan-(E-2020-0018).pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2020-0018",
+    "E-2022-0027"
+   ]
+  },
+  {
+   "id": "ma-sd-2022-07",
+   "archive_year": 2022,
+   "headline_as_listed": "Secretary Galvin Orders Restitution in Unregistered Energy Offering",
+   "listing_date_as_listed": "August 8, 2022",
+   "listing_date": "2022-08-08",
+   "documents": [
+    {
+     "id": "ma-sd-2022-07-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2020-0021"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Consent-Order-No-E-2020-0021.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2020-0021"
+   ]
+  },
+  {
+   "id": "ma-sd-2022-08",
+   "archive_year": 2022,
+   "headline_as_listed": "Secretary Galvin Cracks Down on Scam Targeting Veterans & Service Members",
+   "listing_date_as_listed": "August 4, 2022",
+   "listing_date": "2022-08-04",
+   "documents": [
+    {
+     "id": "ma-sd-2022-08-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2021-0092"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/22-08-03-Complaint-Only-E-2021-0092.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2021-0092"
+   ]
+  },
+  {
+   "id": "ma-sd-2022-09",
+   "archive_year": 2022,
+   "headline_as_listed": "Secretary Galvin Charges Massachusetts Owner In Connection With CBD Fraud",
+   "listing_date_as_listed": "July 19, 2022",
+   "listing_date": "2022-07-19",
+   "documents": [
+    {
+     "id": "ma-sd-2022-09-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2019-0111"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Complaint-In-the-Matter-of-Thomas-W-Janes-et-al-E-2019-0111.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2019-0111"
+   ]
+  },
+  {
+   "id": "ma-sd-2022-10",
+   "archive_year": 2022,
+   "headline_as_listed": "Secretary Galvin Secures $6.25 Million Settlement From Vanguard",
+   "listing_date_as_listed": "July 6, 2022",
+   "listing_date": "2022-07-06",
+   "documents": [
+    {
+     "id": "ma-sd-2022-10-d1",
+     "document_type": "MEMORANDUM",
+     "document_link_text_as_listed": "Memorandum of Understanding (PDF)",
+     "role": "SUPPORTING",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-Vanguard-MOU.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2022-11",
+   "archive_year": 2022,
+   "headline_as_listed": "Secretary Galvin Fines North Shore Attorney and Orders Restitution in Connection with Misleading Representation to Senior",
+   "listing_date_as_listed": "May 24, 2022",
+   "listing_date": "2022-05-24",
+   "documents": [
+    {
+     "id": "ma-sd-2022-11-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2021-0108"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Signed-Consent-Order-E-2021-0108.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2021-0108"
+   ]
+  },
+  {
+   "id": "ma-sd-2022-12",
+   "archive_year": 2022,
+   "headline_as_listed": "Secretary Galvin Charges Unregistered Adviser for Using Fake Entity to Deceive Clients",
+   "listing_date_as_listed": "May 3, 2022",
+   "listing_date": "2022-05-03",
+   "documents": [
+    {
+     "id": "ma-sd-2022-12-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2022-0003"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Complaint-(No.-E-2022-0003).pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2022-0003"
+   ]
+  },
+  {
+   "id": "ma-sd-2022-13",
+   "archive_year": 2022,
+   "headline_as_listed": "Secretary Galvin Permanently Bans Real Estate Company from Selling Securities After Misleading Stock Offer",
+   "listing_date_as_listed": "April 19, 2022",
+   "listing_date": "2022-04-19",
+   "documents": [
+    {
+     "id": "ma-sd-2022-13-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2021-0104"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Consent-Order-(No.-E-2021-0104).pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2021-0104"
+   ]
+  },
+  {
+   "id": "ma-sd-2022-14",
+   "archive_year": 2022,
+   "headline_as_listed": "Secretary Galvin Fines Bitcoin Mining Company $1 Million, Warns Investors to be Wary of Bad Actors",
+   "listing_date_as_listed": "March 22, 2022",
+   "listing_date": "2022-03-22",
+   "documents": [
+    {
+     "id": "ma-sd-2022-14-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/20220322090340072.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2022-15",
+   "archive_year": 2022,
+   "headline_as_listed": "Secretary Galvin Settles Fraud and Other Claims Against Venture Capital Firm",
+   "listing_date_as_listed": "March 4, 2022",
+   "listing_date": "2022-03-04",
+   "documents": [
+    {
+     "id": "ma-sd-2022-15-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2020-0012"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Consent-Order-No-E-2020-0012.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2020-0012"
+   ]
+  },
+  {
+   "id": "ma-sd-2022-16",
+   "archive_year": 2022,
+   "headline_as_listed": "Secretary Galvin Charges PKS Investments Over Failure to Review Unsuitable Investments in Leveraged ETFs",
+   "listing_date_as_listed": "February 17, 2022",
+   "listing_date": "2022-02-17",
+   "documents": [
+    {
+     "id": "ma-sd-2022-16-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/PKS-Complaint.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2022-17",
+   "archive_year": 2022,
+   "headline_as_listed": "Secretary Galvin Charges Fidelity with Unethical and Dishonest Conduct in Options and Margin Approval Due Diligence",
+   "listing_date_as_listed": "January 26, 2022",
+   "listing_date": "2022-01-26",
+   "documents": [
+    {
+     "id": "ma-sd-2022-17-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2021-0030"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Complaint-No-E-2021-0030.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2021-0030"
+   ]
+  },
+  {
+   "id": "ma-sd-2021-01",
+   "archive_year": 2021,
+   "headline_as_listed": "Secretary Galvin Charges Six in Connection with Fraudulent Cannabis Capital Raise",
+   "listing_date_as_listed": "October 5, 2021",
+   "listing_date": "2021-10-05",
+   "documents": [
+    {
+     "id": "ma-sd-2021-01-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2021-0038"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Filed-Complaint-No-E-2021-0038.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2021-0038"
+   ]
+  },
+  {
+   "id": "ma-sd-2021-02",
+   "archive_year": 2021,
+   "headline_as_listed": "Secretary Galvin Orders Overhaul of MassMutual Social Media Policies and Registration of Agents",
+   "listing_date_as_listed": "September 16, 2021",
+   "listing_date": "2021-09-16",
+   "documents": [
+    {
+     "id": "ma-sd-2021-02-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2021-0004"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MMLIS-Consent-Order-E-2021-0004.pdf"
+    },
+    {
+     "id": "ma-sd-2021-02-d2",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/2021-09-15-R-2019-0096-Consent-Order-Signed.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2021-0004"
+   ]
+  },
+  {
+   "id": "ma-sd-2021-03",
+   "archive_year": 2021,
+   "headline_as_listed": "Secretary Galvin Charges Charles Schwab and Unregistered Investment Adviser over Dishonest & Unethical Fee Practices",
+   "listing_date_as_listed": "July 21, 2021",
+   "listing_date": "2021-07-21",
+   "documents": [
+    {
+     "id": "ma-sd-2021-03-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2021-0036"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-OConnell-Schwab-Administrative-Complaint-E-2021-0036.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2021-0036"
+   ]
+  },
+  {
+   "id": "ma-sd-2020-01",
+   "archive_year": 2020,
+   "headline_as_listed": "Secretary Galvin Charges Company with Sales of Fraudulent Securities to Seniors",
+   "listing_date_as_listed": "December 22, 2020",
+   "listing_date": "2020-12-22",
+   "documents": [
+    {
+     "id": "ma-sd-2020-01-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/2020-0050-Complaint-Only.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2020-02",
+   "archive_year": 2020,
+   "headline_as_listed": "Secretary Galvin Charges Robinhood over Gamification and Options Trading",
+   "listing_date_as_listed": "December 16, 2020",
+   "listing_date": "2020-12-16",
+   "documents": [
+    {
+     "id": "ma-sd-2020-02-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2020-0047"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-Robinhood-Financial-LLC-Complaint-E-2020-0047.pdf"
+    },
+    {
+     "id": "ma-sd-2020-02-d2",
+     "document_type": "AMENDED_COMPLAINT",
+     "document_link_text_as_listed": "Ammended Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2020-0047"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-Robinhood-Amended-Complaint-Docket No- E-2020-0047.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2020-0047"
+   ]
+  },
+  {
+   "id": "ma-sd-2020-03",
+   "archive_year": 2020,
+   "headline_as_listed": "Secretary Galvin Charges Local Man in $140,000 Investment Scam",
+   "listing_date_as_listed": "December 1, 2020",
+   "listing_date": "2020-12-01",
+   "documents": [
+    {
+     "id": "ma-sd-2020-03-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2017-0103"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-Sokol-Complaint-E-2017-0103.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2017-0103"
+   ]
+  },
+  {
+   "id": "ma-sd-2020-04",
+   "archive_year": 2020,
+   "headline_as_listed": "Secretary Galvin charges North Shore Broker-Dealer Agent and her husband with fraud",
+   "listing_date_as_listed": "September 18, 2020",
+   "listing_date": "2020-09-18",
+   "documents": [
+    {
+     "id": "ma-sd-2020-04-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2018-0132"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Administrative-Complaint-09_18_2020-Docket-No-E-2018-0132.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2018-0132"
+   ]
+  },
+  {
+   "id": "ma-sd-2020-05",
+   "archive_year": 2020,
+   "headline_as_listed": "Secretary Galvin Charges Ex-Broker with Unsuitable Sales of Illiquid Securities to Massachusetts Investors",
+   "listing_date_as_listed": "July 16, 2020",
+   "listing_date": "2020-07-16",
+   "documents": [
+    {
+     "id": "ma-sd-2020-05-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2017-0079"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/../pdf-html/msd-kulch-complaint-e-2017-0079.htm"
+    }
+   ],
+   "docket_numbers": [
+    "E-2017-0079"
+   ]
+  },
+  {
+   "id": "ma-sd-2020-06",
+   "archive_year": 2020,
+   "headline_as_listed": "Secretary Galvin Charges Forex Trader for False and Misleading Digital Ads",
+   "listing_date_as_listed": "July 14, 2020",
+   "listing_date": "2020-07-14",
+   "documents": [
+    {
+     "id": "ma-sd-2020-06-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2020-0041"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-Kenzley-Ramos-Complaint-E-2020-0041.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2020-0041"
+   ]
+  },
+  {
+   "id": "ma-sd-2020-07",
+   "archive_year": 2020,
+   "headline_as_listed": "Secretary Galvin Charges Penny Stock Trader for False and Misleading Digital Ads",
+   "listing_date_as_listed": "July 14, 2020",
+   "listing_date": "2020-07-14",
+   "documents": [
+    {
+     "id": "ma-sd-2020-07-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2020-0043"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/MSD-Mark-Baxter-Complaint-E-2020-0043.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2020-0043"
+   ]
+  },
+  {
+   "id": "ma-sd-2020-08",
+   "archive_year": 2020,
+   "headline_as_listed": "Secretary Galvin Brings Charges against GPB for Defrauding Massachusetts Investors",
+   "listing_date_as_listed": "May 27, 2020",
+   "listing_date": "2020-05-27",
+   "documents": [
+    {
+     "id": "ma-sd-2020-08-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2018-0100"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/2020-5-27-MSD-GPB-Complaint-E-2018-0100.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2018-0100"
+   ]
+  },
+  {
+   "id": "ma-sd-2020-09",
+   "archive_year": 2020,
+   "headline_as_listed": "Secretary Galvin Charges RBC with Failing to Supervise Unsuitable Trades",
+   "listing_date_as_listed": "May 19, 2020",
+   "listing_date": "2020-05-19",
+   "documents": [
+    {
+     "id": "ma-sd-2020-09-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2019-0117"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/2020-5-19-MSD-RBC-Complaint-E-2019-0117.pdf.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2019-0117"
+   ]
+  },
+  {
+   "id": "ma-sd-2020-10",
+   "archive_year": 2020,
+   "headline_as_listed": "Secretary Galvin Charges Sterling Man Over Millions in Unregistered Investment Sales",
+   "listing_date_as_listed": "February 6, 2020",
+   "listing_date": "2020-02-06",
+   "documents": [
+    {
+     "id": "ma-sd-2020-10-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/In-the-Matter-of-Ronald-Leger-Jr-et-al-2018-0069-Complaint-Only.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2019-01",
+   "archive_year": 2019,
+   "headline_as_listed": "Secretary Galvin Fines NEXT Financial Group $150,000 over Unsuitable Sales",
+   "listing_date_as_listed": "December 26, 2019",
+   "listing_date": "2019-12-26",
+   "documents": [
+    {
+     "id": "ma-sd-2019-01-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2017-0079"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-NEXT-Consent-Order-E-2017-0079.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2017-0079"
+   ]
+  },
+  {
+   "id": "ma-sd-2019-02",
+   "archive_year": 2019,
+   "headline_as_listed": "Secretary Galvin Charges Insurance Salesman Who Convinced Seniors to Liquidate Retirement Savings",
+   "listing_date_as_listed": "December 18, 2019",
+   "listing_date": "2019-12-18",
+   "documents": [
+    {
+     "id": "ma-sd-2019-02-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Complaint.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2019-03",
+   "archive_year": 2019,
+   "headline_as_listed": "Secretary Galvin Charges Company that Convinced Seniors to Liquidate Retirement Funds and Purchase Precious Metals",
+   "listing_date_as_listed": "December 3, 2019",
+   "listing_date": "2019-12-03",
+   "documents": [
+    {
+     "id": "ma-sd-2019-03-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2019-0080"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-TMTE-Complaint-E-2019-0080.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2019-0080"
+   ]
+  },
+  {
+   "id": "ma-sd-2019-04",
+   "archive_year": 2019,
+   "headline_as_listed": "Secretary Galvin Fines Morgan Stanley and Orders It to Pay Back Investors",
+   "listing_date_as_listed": null,
+   "listing_date": null,
+   "documents": [
+    {
+     "id": "ma-sd-2019-04-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2016-0041"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-MSSB-Consent-Order-E-2016-0041.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2016-0041"
+   ]
+  },
+  {
+   "id": "ma-sd-2019-05",
+   "archive_year": 2019,
+   "headline_as_listed": "Secretary Galvin Fines Wellesley Investment Adviser over Conflicts of Interest",
+   "listing_date_as_listed": "September 24, 2019",
+   "listing_date": "2019-09-24",
+   "documents": [
+    {
+     "id": "ma-sd-2019-05-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-SPG-Consent-Order-2019-09-24.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2019-06",
+   "archive_year": 2019,
+   "headline_as_listed": "Secretary Galvin Charges North Andover Man In Connection with Over $5 million in Unregistered Securities to 33 Investors",
+   "listing_date_as_listed": "September 17, 2019",
+   "listing_date": "2019-09-17",
+   "documents": [
+    {
+     "id": "ma-sd-2019-06-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/2019-09-17-Filed-Administrative-Complaint.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2019-07",
+   "archive_year": 2019,
+   "headline_as_listed": "Secretary Galvin Charges Former Agent who Sold Fraudulent Securities and Pocketed Proceeds",
+   "listing_date_as_listed": "September 11, 2019",
+   "listing_date": "2019-09-11",
+   "documents": [
+    {
+     "id": "ma-sd-2019-07-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2018-0125"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/190911-MSD-Complaint-Docket-No- E-2018-0125.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2018-0125"
+   ]
+  },
+  {
+   "id": "ma-sd-2019-08",
+   "archive_year": 2019,
+   "headline_as_listed": "Secretary Galvin Fines Wells Fargo $450,000 Over Unregistered Agents and Supervisors",
+   "listing_date_as_listed": "August 26, 2019",
+   "listing_date": "2019-08-26",
+   "documents": [
+    {
+     "id": "ma-sd-2019-08-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Wells-Fargo-Consent-Order-Docket-No-2018-0090-2019-08-26.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2019-09",
+   "archive_year": 2019,
+   "headline_as_listed": "Secretary Galvin Charges Florida Woman in Nationwide Cryptocurrency Scam",
+   "listing_date_as_listed": "July 11, 2019",
+   "listing_date": "2019-07-11",
+   "documents": [
+    {
+     "id": "ma-sd-2019-09-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2018-0147"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-Barrows-Complaint-E-2018-0147.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2018-0147"
+   ]
+  },
+  {
+   "id": "ma-sd-2019-10",
+   "archive_year": 2019,
+   "headline_as_listed": "Secretary Galvin Fines LPL Financial $1.1 Million Over Unregistered Agents and Late Filings",
+   "listing_date_as_listed": "June 26, 2019",
+   "listing_date": "2019-06-26",
+   "documents": [
+    {
+     "id": "ma-sd-2019-10-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Consent-Order-Only-6-26-19.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2019-11",
+   "archive_year": 2019,
+   "headline_as_listed": "Secretary Galvin Charges Holyoke Man in Connection with Marijuana Sweep",
+   "listing_date_as_listed": "June 19, 2019",
+   "listing_date": "2019-06-19",
+   "documents": [
+    {
+     "id": "ma-sd-2019-11-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2018-0094"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/190619-MSD-Complaint-Docket-No-E-2018-0094.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2018-0094"
+   ]
+  },
+  {
+   "id": "ma-sd-2019-12",
+   "archive_year": 2019,
+   "headline_as_listed": "Secretary Galvin Charges Boston Company with Scamming Employees in Nearly $10 Million Recruitment Scheme",
+   "listing_date_as_listed": "June 14, 2019",
+   "listing_date": "2019-06-14",
+   "documents": [
+    {
+     "id": "ma-sd-2019-12-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2015-0171"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Downing-Partners-Complaint-E-2015-0171-06-14-2019.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2015-0171"
+   ]
+  },
+  {
+   "id": "ma-sd-2019-13",
+   "archive_year": 2019,
+   "headline_as_listed": "Secretary Galvin Charges Illinois Man in Multi-State Real Estate Investment Scheme",
+   "listing_date_as_listed": "June 10, 2019",
+   "listing_date": "2019-06-10",
+   "documents": [
+    {
+     "id": "ma-sd-2019-13-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2019-0058"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Northridge-et-al-E-2019-0058.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2019-0058"
+   ]
+  },
+  {
+   "id": "ma-sd-2019-14",
+   "archive_year": 2019,
+   "headline_as_listed": "Secretary Galvin Charges Broker-Dealer Over Inappropriate Mutual Fund Sales That Drove Up Commissions",
+   "listing_date_as_listed": "May 7, 2019",
+   "listing_date": "2019-05-07",
+   "documents": [
+    {
+     "id": "ma-sd-2019-14-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2019-0050"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Signed-Complaint-E-2019-0050.pdf"
+    },
+    {
+     "id": "ma-sd-2019-14-d2",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2019-0050"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Janney-Consent-Order-E-2019-0050-2020-3-31.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2019-0050"
+   ]
+  },
+  {
+   "id": "ma-sd-2019-15",
+   "archive_year": 2019,
+   "headline_as_listed": "Secretary Galvin Charges Investment Adviser over Failed Medical Marijuana Scheme",
+   "listing_date_as_listed": "April 17, 2019",
+   "listing_date": "2019-04-17",
+   "documents": [
+    {
+     "id": "ma-sd-2019-15-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2017-0113"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Administrative-Complaint-E-2017-0113.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2017-0113"
+   ]
+  },
+  {
+   "id": "ma-sd-2019-16",
+   "archive_year": 2019,
+   "headline_as_listed": "Secretary Galvin Charges Local Advisers who Gambled Client Money Away on Risky Investments",
+   "listing_date_as_listed": "March 20, 2019",
+   "listing_date": "2019-03-20",
+   "documents": [
+    {
+     "id": "ma-sd-2019-16-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2017-0017"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-Oakdale-Complaint-E-2017-0017.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2017-0017"
+   ]
+  },
+  {
+   "id": "ma-sd-2019-17",
+   "archive_year": 2019,
+   "headline_as_listed": "Secretary Galvin Charges Investment Adviser with Misappropriating Funds from Massachusetts Retiree",
+   "listing_date_as_listed": "February 21, 2019",
+   "listing_date": "2019-02-21",
+   "documents": [
+    {
+     "id": "ma-sd-2019-17-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2018-0119"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Worthington-Complaint-E-2018-0119.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2018-0119"
+   ]
+  },
+  {
+   "id": "ma-sd-2019-18",
+   "archive_year": 2019,
+   "headline_as_listed": "Secretary Galvin Fines North Shore Investment Adviser over Real Estate Scheme",
+   "listing_date_as_listed": "February 19, 2019",
+   "listing_date": "2019-02-19",
+   "documents": [
+    {
+     "id": "ma-sd-2019-18-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2017-0105"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/../pdf-html/consent-order-e-2017-0105.htm"
+    }
+   ],
+   "docket_numbers": [
+    "E-2017-0105"
+   ]
+  },
+  {
+   "id": "ma-sd-2019-19",
+   "archive_year": 2019,
+   "headline_as_listed": "Secretary Galvin Charges Royal Alliance in Connection with Unsuitable Investment Advice",
+   "listing_date_as_listed": "January 22, 2019",
+   "listing_date": "2019-01-22",
+   "documents": [
+    {
+     "id": "ma-sd-2019-19-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2018-0093"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/E-2018-0093-Complaint.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2018-0093"
+   ]
+  },
+  {
+   "id": "ma-sd-2018-01",
+   "archive_year": 2018,
+   "headline_as_listed": "Secretary Galvin Fines Summit Equities over Handling of Customer Personal Information",
+   "listing_date_as_listed": "December 27, 2018",
+   "listing_date": "2018-12-27",
+   "documents": [
+    {
+     "id": "ma-sd-2018-01-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/R-2018-0083-Summit-Equities-Inc-Consent-Order-12-26-18-Final.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2018-02",
+   "archive_year": 2018,
+   "headline_as_listed": "Secretary Galvin Charges Cape Adviser With Running a Scheme Which Overcharged Clients",
+   "listing_date_as_listed": "December 19, 2018",
+   "listing_date": "2018-12-19",
+   "documents": [
+    {
+     "id": "ma-sd-2018-02-d1",
+     "document_type": "ADMINISTRATIVE_COMPLAINT",
+     "document_link_text_as_listed": "Administrative Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2018-0144"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Administrative-Complaint-Docket-E-2018-0144.pdf"
+    },
+    {
+     "id": "ma-sd-2018-02-d2",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Stifel-Consent-Order.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2018-0144"
+   ]
+  },
+  {
+   "id": "ma-sd-2018-03",
+   "archive_year": 2018,
+   "headline_as_listed": "Secretary Galvin Fines Metlife $1 Million, Orders Payments to be Made to Retirees",
+   "listing_date_as_listed": "December 18, 2018",
+   "listing_date": "2018-12-18",
+   "documents": [
+    {
+     "id": "ma-sd-2018-03-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/pdf-html/2018-12-18-Consent-Order-2017-0119.htm"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2018-04",
+   "archive_year": 2018,
+   "headline_as_listed": "Secretary Galvin Fines AirFox $100,000 for Unregistered Initial Coin Offering",
+   "listing_date_as_listed": "November 16, 2018",
+   "listing_date": "2018-11-16",
+   "documents": [
+    {
+     "id": "ma-sd-2018-04-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2017-0118"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-AirFox-CarrierEQ-Consent-Order-E-2017-0118.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2017-0118"
+   ]
+  },
+  {
+   "id": "ma-sd-2018-05",
+   "archive_year": 2018,
+   "headline_as_listed": "Secretary Galvin Orders SII to Offer Restitution in Connection with Non-Traded REITs",
+   "listing_date_as_listed": "September 7, 2018",
+   "listing_date": "2018-09-07",
+   "documents": [
+    {
+     "id": "ma-sd-2018-05-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/SSI-Consent-Order.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2018-06",
+   "archive_year": 2018,
+   "headline_as_listed": "Secretary Galvin Orders Broker-Dealer to Provide Restitution to Massachusetts Investor",
+   "listing_date_as_listed": "August 24, 2018",
+   "listing_date": "2018-08-24",
+   "documents": [
+    {
+     "id": "ma-sd-2018-06-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "CIG Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2017-0088"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/CIG-Consent-Order-E-2017-0088.pdf"
+    },
+    {
+     "id": "ma-sd-2018-06-d2",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Graham Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2017-0088"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Graham-Consent-Order-E-2017-0088.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2017-0088"
+   ]
+  },
+  {
+   "id": "ma-sd-2018-07",
+   "archive_year": 2018,
+   "headline_as_listed": "Secretary Galvin Charges Broker-Dealer with Making Short-Term Trades to Increase Commissions",
+   "listing_date_as_listed": "August 14, 2018",
+   "listing_date": "2018-08-14",
+   "documents": [
+    {
+     "id": "ma-sd-2018-07-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "CIG Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2017-0104"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-StockCross-Complaint-E-2017-0104.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2017-0104"
+   ]
+  },
+  {
+   "id": "ma-sd-2018-08",
+   "archive_year": 2018,
+   "headline_as_listed": "Secretary Galvin Brings Charges in Local Real Estate Scheme",
+   "listing_date_as_listed": "August 1, 2018",
+   "listing_date": "2018-08-01",
+   "documents": [
+    {
+     "id": "ma-sd-2018-08-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2018-0043"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Administrative-Complaint-E-2018-0043.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2018-0043"
+   ]
+  },
+  {
+   "id": "ma-sd-2018-09",
+   "archive_year": 2018,
+   "headline_as_listed": "Secretary Galvin Charges Easton Investment Adviser with Misleading Customers Regarding Disciplinary History",
+   "listing_date_as_listed": "July 24, 2018",
+   "listing_date": "2018-07-24",
+   "documents": [
+    {
+     "id": "ma-sd-2018-09-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2018-0003"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-GA-Repple-Complaint-(E-2018-0003).pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2018-0003"
+   ]
+  },
+  {
+   "id": "ma-sd-2018-10",
+   "archive_year": 2018,
+   "headline_as_listed": "Secretary Galvin Sanctions Broker Dealer Infinex Investments for Selling to Seniors on Bank Premises",
+   "listing_date_as_listed": "July 19, 2018",
+   "listing_date": "2018-07-19",
+   "documents": [
+    {
+     "id": "ma-sd-2018-10-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2017-0092"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Executed-Infinex-Consent-Order-E-2017-0092.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2017-0092"
+   ]
+  },
+  {
+   "id": "ma-sd-2018-11",
+   "archive_year": 2018,
+   "headline_as_listed": "Secretary Galvin Charges Lincoln Man with Defrauding Massachusetts Investors",
+   "listing_date_as_listed": "July 12, 2018",
+   "listing_date": "2018-07-12",
+   "documents": [
+    {
+     "id": "ma-sd-2018-11-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2018-0002"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Advent-Medical-Products-Inc-Complaint-E-2018-0002.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2018-0002"
+   ]
+  },
+  {
+   "id": "ma-sd-2018-12",
+   "archive_year": 2018,
+   "headline_as_listed": "Secretary Galvin Charges MetLife with Fraud in Connection with Failure to Make Pension Payments",
+   "listing_date_as_listed": "June 25, 2018",
+   "listing_date": "2018-06-25",
+   "documents": [
+    {
+     "id": "ma-sd-2018-12-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2017-0119"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MetLife-Complaint-E-2017-0119.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2017-0119"
+   ]
+  },
+  {
+   "id": "ma-sd-2018-13",
+   "archive_year": 2018,
+   "headline_as_listed": "Secretary Galvin Participates in Coordinated International Cryptocurrency Crackdown",
+   "listing_date_as_listed": "May 21, 2018",
+   "listing_date": "2018-05-21",
+   "documents": [
+    {
+     "id": "ma-sd-2018-13-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2018-0018"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-Blue-Vase-Consent-Order-E-2018-0018.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2018-0018"
+   ]
+  },
+  {
+   "id": "ma-sd-2018-14",
+   "archive_year": 2018,
+   "headline_as_listed": "Secretary Galvin Issues Orders in Connection with ICO Cryptocurrency Sweep",
+   "listing_date_as_listed": "March 27, 2018",
+   "listing_date": "2018-03-27",
+   "documents": [
+    {
+     "id": "ma-sd-2018-14-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "18moons Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2018-0010"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-18moons-Consent-Order-E-2018-0010.pdf"
+    },
+    {
+     "id": "ma-sd-2018-14-d2",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Across Platforms Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2018-0016"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-Across-Platforms-Consent-Order-E-2018-0016.pdf"
+    },
+    {
+     "id": "ma-sd-2018-14-d3",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Mattervest Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2018-0011"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-Mattervest-Consent-Order-E-2018-0011.pdf"
+    },
+    {
+     "id": "ma-sd-2018-14-d4",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Pink Ribbon Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2018-0029"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-PR-Consent-Order-E-2018-0029.pdf"
+    },
+    {
+     "id": "ma-sd-2018-14-d5",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Sparkco Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2018-0017"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-Sparkco-Consent-Order-E-2018-0017.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2018-0010",
+    "E-2018-0011",
+    "E-2018-0016",
+    "E-2018-0017",
+    "E-2018-0029"
+   ]
+  },
+  {
+   "id": "ma-sd-2018-15",
+   "archive_year": 2018,
+   "headline_as_listed": "Secretary Galvin Charges Peabody Private Equity Investment Fund with Ponzi Scheme",
+   "listing_date_as_listed": "March 15, 2018",
+   "listing_date": "2018-03-15",
+   "documents": [
+    {
+     "id": "ma-sd-2018-15-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2017-0108"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/E-2017-0108-Administrative-Complaint.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2017-0108"
+   ]
+  },
+  {
+   "id": "ma-sd-2018-16",
+   "archive_year": 2018,
+   "headline_as_listed": "Secretary Galvin Charges Scottrade, Inc. in Connection with the Fiduciary Rule",
+   "listing_date_as_listed": "February 15, 2018",
+   "listing_date": "2018-02-15",
+   "documents": [
+    {
+     "id": "ma-sd-2018-16-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2017-0045"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MSD-Scottrade-Administrative-Complaint-E-2017-0045.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2017-0045"
+   ]
+  },
+  {
+   "id": "ma-sd-2018-17",
+   "archive_year": 2018,
+   "headline_as_listed": "Secretary Galvin Charges North Shore Investment Adviser With Real Estate Scheme",
+   "listing_date_as_listed": "February 14, 2018",
+   "listing_date": "2018-02-14",
+   "documents": [
+    {
+     "id": "ma-sd-2018-17-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/../pdf-html/complaint-only-2017-0105.htm"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2018-18",
+   "archive_year": 2018,
+   "headline_as_listed": "Secretary Galvin Charges Brookline Man in Initial Coin Offering Cryptocurrency Scheme",
+   "listing_date_as_listed": "January 17, 2018",
+   "listing_date": "2018-01-17",
+   "documents": [
+    {
+     "id": "ma-sd-2018-18-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2017-0120"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Administrative-Complaint-E-2017-0120.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2017-0120"
+   ]
+  },
+  {
+   "id": "ma-sd-2017-01",
+   "archive_year": 2017,
+   "headline_as_listed": "Secretary Galvin Charges Milton Man in House-Flipping Scam",
+   "listing_date_as_listed": "December 12, 2017",
+   "listing_date": "2017-12-12",
+   "documents": [
+    {
+     "id": "ma-sd-2017-01-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2017-0066"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Administrative-Complaint-E-2017-0066.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2017-0066"
+   ]
+  },
+  {
+   "id": "ma-sd-2017-02",
+   "archive_year": 2017,
+   "headline_as_listed": "Secretary Galvin Charges Waltham Man with Fraud in Investment Advisory Activity",
+   "listing_date_as_listed": "October 19, 2017",
+   "listing_date": "2017-10-19",
+   "documents": [
+    {
+     "id": "ma-sd-2017-02-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/20171019092134087.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2017-03",
+   "archive_year": 2017,
+   "headline_as_listed": "Secretary Galvin Charges SII with Unethical Sales of Non-Traded REITs",
+   "listing_date_as_listed": "September 20, 2017",
+   "listing_date": "2017-09-20",
+   "documents": [
+    {
+     "id": "ma-sd-2017-03-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2016-0128"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/SII-Administrative-Complaint-E-2016-0128.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2016-0128"
+   ]
+  },
+  {
+   "id": "ma-sd-2017-04",
+   "archive_year": 2017,
+   "headline_as_listed": "Secretary Galvin Charges Allston Man with Fraud in Private Equity Fund",
+   "listing_date_as_listed": "June 8, 2017",
+   "listing_date": "2017-06-08",
+   "documents": [
+    {
+     "id": "ma-sd-2017-04-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2017-0040"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/RMA-Administrative-Complaint-E-2017-0040.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2017-0040"
+   ]
+  },
+  {
+   "id": "ma-sd-2017-05",
+   "archive_year": 2017,
+   "headline_as_listed": "Secretary Galvin Fines LPL $1 Million for Failed Supervision of Agents at Digital Federal Credit Union",
+   "listing_date_as_listed": "May 4, 2017",
+   "listing_date": "2017-05-04",
+   "documents": [
+    {
+     "id": "ma-sd-2017-05-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/LPL-Consent-Order-Docket-No-R-2016-0095.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2017-06",
+   "archive_year": 2017,
+   "headline_as_listed": "Secretary Galvin Settles Sales Contest Charges with Morgan Stanley",
+   "listing_date_as_listed": "April 10, 2017",
+   "listing_date": "2017-04-10",
+   "documents": [
+    {
+     "id": "ma-sd-2017-06-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [
+      "E-2016-0055"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/../pdf-html/executed-consent-order-docket-no-e-2016-0055.htm"
+    }
+   ],
+   "docket_numbers": [
+    "E-2016-0055"
+   ]
+  },
+  {
+   "id": "ma-sd-2017-07",
+   "archive_year": 2017,
+   "headline_as_listed": "Broker-Dealer Operating Out of Massachusetts Community Banks Fined $100,000, Ordered to Offer Restitution to Exploited Senior Citizens",
+   "listing_date_as_listed": "March 23, 2017",
+   "listing_date": "2017-03-23",
+   "documents": [
+    {
+     "id": "ma-sd-2017-07-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Investment Professionals Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/2017-03-22-Consent-Order.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2017-08",
+   "archive_year": 2017,
+   "headline_as_listed": "Secretary Galvin Settlement with LPL Financial LLC Provides $3.7 Million in Investor Relief, Fines and Disgorgement of Profits",
+   "listing_date_as_listed": "January 30, 2017",
+   "listing_date": "2017-01-30",
+   "documents": [
+    {
+     "id": "ma-sd-2017-08-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/../pdf-html/consent-order-1-27-2017_in-the-matter-of-lpl-financial-llc-docket-no-2016-0039.htm"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2017-09",
+   "archive_year": 2017,
+   "headline_as_listed": "Secretary Galvin Files Against Cambridge Hedge Fund Partnered with Toronto-Based Donville Kent Asset Management",
+   "listing_date_as_listed": "January 18, 2017",
+   "listing_date": "2017-01-18",
+   "documents": [
+    {
+     "id": "ma-sd-2017-09-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/MC2-complaint.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2016-01",
+   "archive_year": 2016,
+   "headline_as_listed": "Secretary Galvin Charges Roger Zullo and LPL Financial LLC in Fraudulent Annuity Sales to Seniors",
+   "listing_date_as_listed": "December 1, 2016",
+   "listing_date": "2016-12-01",
+   "documents": [
+    {
+     "id": "ma-sd-2016-01-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Roger Zullo and LPL Financial LLC Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Administrative-Complaint-December-1-2016_Redacted.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2016-02",
+   "archive_year": 2016,
+   "headline_as_listed": "Secretary Galvin Charges Walpole Man with Fraudulent Advising",
+   "listing_date_as_listed": "November 22, 2016",
+   "listing_date": "2016-11-22",
+   "documents": [
+    {
+     "id": "ma-sd-2016-02-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Massive Abundance, LLC Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Massive-Abundance-Filed-Complaint-11-22-2016.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2016-03",
+   "archive_year": 2016,
+   "headline_as_listed": "Secretary Galvin - Senior Bank Customers Exploited at Local Community Banks by Aggressive Sales Contests and Improper Sales",
+   "listing_date_as_listed": "November 15, 2016",
+   "listing_date": "2016-11-15",
+   "documents": [
+    {
+     "id": "ma-sd-2016-03-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Investment Professionals Complaint",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/../pdf-html/Filed-Complaint-11-15-2016.htm"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2016-04",
+   "archive_year": 2016,
+   "headline_as_listed": "Secretary Galvin Charges Hingham Man in Ponzi Scheme",
+   "listing_date_as_listed": "November 1, 2016",
+   "listing_date": "2016-11-01",
+   "documents": [
+    {
+     "id": "ma-sd-2016-04-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Eubiquity Capital Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Filed-Complaint-11-1-16.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2016-05",
+   "archive_year": 2016,
+   "headline_as_listed": "Secretary Galvin Targets Two Broker-Dealer Firms with History of Hiring Bad Brokers",
+   "listing_date_as_listed": "October 20, 2016",
+   "listing_date": "2016-10-20",
+   "documents": [
+    {
+     "id": "ma-sd-2016-05-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Spartan Capital Securities Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Spartan-10-20-16.pdf"
+    },
+    {
+     "id": "ma-sd-2016-05-d2",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Revere Securities Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Revere-10-20-16.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2016-06",
+   "archive_year": 2016,
+   "headline_as_listed": "Secretary Galvin Charges State Street Entity in Long-Term Overcharging",
+   "listing_date_as_listed": "April 20, 2016",
+   "listing_date": "2016-04-20",
+   "documents": [
+    {
+     "id": "ma-sd-2016-06-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/State-Street-Global-4-20-16.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2016-07",
+   "archive_year": 2016,
+   "headline_as_listed": "Secretary Galvin Charges Citizens Securities in Improper Sales to Elder Citizens Bank Customer",
+   "listing_date_as_listed": "January 7, 2016",
+   "listing_date": "2016-01-07",
+   "documents": [
+    {
+     "id": "ma-sd-2016-07-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/01-07-16-Citizens-Securities-Complaint.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2015-01",
+   "archive_year": 2015,
+   "headline_as_listed": "Secretary Galvin Charges Realty Capital Securites LLC with Proxy Voting Fraud and Seeks Revocation",
+   "listing_date_as_listed": "November 12, 2015",
+   "listing_date": "2015-11-12",
+   "documents": [
+    {
+     "id": "ma-sd-2015-01-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Realty-Capital-Complaint-11-12-15.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2015-02",
+   "archive_year": 2015,
+   "headline_as_listed": "Secretary Galvin Charges Fidelity Brokerage Services with Dishonest and Unethical Conduct Allowing Unregistered Investment Advisers to Conduct Business",
+   "listing_date_as_listed": "October 26, 2015",
+   "listing_date": "2015-10-26",
+   "documents": [
+    {
+     "id": "ma-sd-2015-02-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Fidelity Complaint",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/../pdf-html/fidelity-complaint-dkt-2015-0078_10-26-15.htm"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2015-03",
+   "archive_year": 2015,
+   "headline_as_listed": "Secretary Galvin Charges Securities America in Failure to Supervise Ads Aimed at Seniors",
+   "listing_date_as_listed": "July 8, 2015",
+   "listing_date": "2015-07-08",
+   "documents": [
+    {
+     "id": "ma-sd-2015-03-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Securities America Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Securities-America-Inc-Administrative-Complaint.pdf"
+    },
+    {
+     "id": "ma-sd-2015-03-d2",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Barry Graham Armstrong Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Barry-Graham-Armstrong-Administrative-Complaint.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2015-04",
+   "archive_year": 2015,
+   "headline_as_listed": "Secretary Galvin Charges Waltham Man with Securities Fraud",
+   "listing_date_as_listed": "June 30, 2015",
+   "listing_date": "2015-06-30",
+   "documents": [
+    {
+     "id": "ma-sd-2015-04-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Pierce Administrative Complaint.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2015-05",
+   "archive_year": 2015,
+   "headline_as_listed": "Secretary Galvin in Conjunction with the State of Alabama Charges Alabama Group in Ponzi Scheme Fraud on Massachusetts Investor",
+   "listing_date_as_listed": "June 10, 2015",
+   "listing_date": "2015-06-10",
+   "documents": [
+    {
+     "id": "ma-sd-2015-05-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [
+      "E-2014-0092"
+     ],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/E-2014-0092-Administrative-Complaint.pdf"
+    }
+   ],
+   "docket_numbers": [
+    "E-2014-0092"
+   ]
+  },
+  {
+   "id": "ma-sd-2015-06",
+   "archive_year": 2015,
+   "headline_as_listed": "Secretary Galvin Charges Uxbridge Man with Ponzi Scheme in Affinity Sale of Unregistered Securities",
+   "listing_date_as_listed": "June 2, 2015",
+   "listing_date": "2015-06-02",
+   "documents": [
+    {
+     "id": "ma-sd-2015-06-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/2015-06-02-erickson-complaint.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2015-07",
+   "archive_year": 2015,
+   "headline_as_listed": "Secretary Galvin Charges Plymouth Man and Firm for Acting as Unregistered Investment Advisers, Orders California Funds to Offer Refunds and Pay a Civil Penalty for Selling Unregistered Mortgage Loans",
+   "listing_date_as_listed": "May 4, 2015",
+   "listing_date": "2015-05-04",
+   "documents": [
+    {
+     "id": "ma-sd-2015-07-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Position Benefits-Nilosek Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Position_Benefits-Nilosek_Complaint.pdf"
+    },
+    {
+     "id": "ma-sd-2015-07-d2",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Woodbridge Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Woodbridge_Consent_Order.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2015-08",
+   "archive_year": 2015,
+   "headline_as_listed": "Secretary Galvin Settles Failure to Supervise Charge with Merrill Lynch for $2.5 Million",
+   "listing_date_as_listed": "March 23, 2015",
+   "listing_date": "2015-03-23",
+   "documents": [
+    {
+     "id": "ma-sd-2015-08-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/ML-consent-order.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2014-01",
+   "archive_year": 2014,
+   "headline_as_listed": "Secretary Galvin Charges Merrimack Valley Company and Principals in a Multi-Level Marketing Pyramid Scheme",
+   "listing_date_as_listed": "October 22, 2014",
+   "listing_date": "2014-10-22",
+   "documents": [
+    {
+     "id": "ma-sd-2014-01-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/../pdf-html/em__goldex-et-al-complaint-docket-no-2014-0056.htm"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2014-02",
+   "archive_year": 2014,
+   "headline_as_listed": "Secretary Galvin Charges Newton Couple with Fraud in Real Estate Investments",
+   "listing_date_as_listed": "October 8, 2014",
+   "listing_date": "2014-10-08",
+   "documents": [
+    {
+     "id": "ma-sd-2014-02-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/schwartz-complaint.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2014-03",
+   "archive_year": 2014,
+   "headline_as_listed": "Secretary Galvin Charges North Easton Man With Fraud In Elderly Relatives’ Account—Warns Investors Against Giving Access To Brokerage Accounts",
+   "listing_date_as_listed": "October 1, 2014",
+   "listing_date": "2014-10-01",
+   "documents": [
+    {
+     "id": "ma-sd-2014-03-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/../pdf-html/john_patrick_horan_and_horan_associates_inc_dkt_2014-0060_complaint.htm"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2014-04",
+   "archive_year": 2014,
+   "headline_as_listed": "Secretary Galvin Enters Settlement with Fidelity Co-operative Bank to Set up a $3.5 Million Fund for Massachusetts TelexFREE Victims",
+   "listing_date_as_listed": "September 22, 2014",
+   "listing_date": "2014-09-22",
+   "documents": [
+    {
+     "id": "ma-sd-2014-04-d1",
+     "document_type": "ORDER",
+     "document_link_text_as_listed": "Fidelity Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Fidelity_Consent_Order_9-22-14.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2014-05",
+   "archive_year": 2014,
+   "headline_as_listed": "Secretary Galvin Charges Boston Company And Two Principals With Fraudulent Sale Of Real Estate Investments To Seniors",
+   "listing_date_as_listed": "June 18, 2014",
+   "listing_date": "2014-06-18",
+   "documents": [
+    {
+     "id": "ma-sd-2014-05-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/../pdf-html/cabot_complaint_filed_6-18-14.htm"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2014-06",
+   "archive_year": 2014,
+   "headline_as_listed": "Secretary Galvin Charges Second Multi-Level Marketing Operation With Fraud In A Pyramid Scheme",
+   "listing_date_as_listed": "May 15, 2014",
+   "listing_date": "2014-05-15",
+   "documents": [
+    {
+     "id": "ma-sd-2014-06-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/../pdf-html/admin-complaint-wingsnetwork-2014-0037.htm"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2014-07",
+   "archive_year": 2014,
+   "headline_as_listed": "Secretary Galvin Charges Marlboro Firm with Fraud in Multi-Level Marketing Scheme Targeting Brazilian-Americans",
+   "listing_date_as_listed": "April 15, 2014",
+   "listing_date": "2014-04-15",
+   "documents": [
+    {
+     "id": "ma-sd-2014-07-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Administrative-Complaint-TelexFREE-4-15-14.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2014-08",
+   "archive_year": 2014,
+   "headline_as_listed": "Secretary Galvin Charges Somerset Man in Securities Scam",
+   "listing_date_as_listed": "February 7, 2014",
+   "listing_date": "2014-02-07",
+   "documents": [
+    {
+     "id": "ma-sd-2014-08-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/silvia-complaint-2-14.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2014-09",
+   "archive_year": 2014,
+   "headline_as_listed": "Secretary Galvin Moves to Bar East Longmeadow Investment Adviser for Fraudulent and Unethical Business Practices",
+   "listing_date_as_listed": "January 23, 2014",
+   "listing_date": "2014-01-23",
+   "documents": [
+    {
+     "id": "ma-sd-2014-09-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/2014-1-23-east-long-filed-complaint.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2014-10",
+   "archive_year": 2014,
+   "headline_as_listed": "Secretary Galvin Moves Against Rogue Broker-Dealer",
+   "listing_date_as_listed": "January 15, 2014",
+   "listing_date": "2014-01-15",
+   "documents": [
+    {
+     "id": "ma-sd-2014-10-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Administrative Complaint 1-15-14.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2013-01",
+   "archive_year": 2013,
+   "headline_as_listed": "Secretary Galvin Orders Halt to Multi-level Marketing Operation that Targeted Massachusetts Brazilian Community",
+   "listing_date_as_listed": "November 14, 2013",
+   "listing_date": "2013-11-14",
+   "documents": [
+    {
+     "id": "ma-sd-2013-01-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/world-capital-markets-consent-order.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2013-02",
+   "archive_year": 2013,
+   "headline_as_listed": "Secretary Galvin Fines Citigroup Unit $30 Million for Research Analyst Misconduct",
+   "listing_date_as_listed": "October 2, 2013",
+   "listing_date": "2013-10-02",
+   "documents": [
+    {
+     "id": "ma-sd-2013-02-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/../pdf-html/citigroup-consent-order.htm"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2013-03",
+   "archive_year": 2013,
+   "headline_as_listed": "Secretary Galvin Charges Peabody Man With Defrauding Senior Citizens",
+   "listing_date_as_listed": "September 16, 2013",
+   "listing_date": "2013-09-16",
+   "documents": [
+    {
+     "id": "ma-sd-2013-03-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/../pdf-html/seniorsbabiarz_complaint.htm"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2013-04",
+   "archive_year": 2013,
+   "headline_as_listed": "Secretary Galvin Settles With Five Independent Broker Dealers for Improper Sales of REITs - Returning Over $11 Million to Massachusetts Investors",
+   "listing_date_as_listed": "May 22, 2013",
+   "listing_date": "2013-05-22",
+   "documents": [
+    {
+     "id": "ma-sd-2013-04-d1",
+     "document_type": "ORDER",
+     "document_link_text_as_listed": "Ameriprise Financial Services Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/AmeripriseSignedConsentOrder.pdf"
+    },
+    {
+     "id": "ma-sd-2013-04-d2",
+     "document_type": "ORDER",
+     "document_link_text_as_listed": "Commonwealth Financial Services Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/CommonwealthFinancialNetworkSignedConsentOrder.pdf"
+    },
+    {
+     "id": "ma-sd-2013-04-d3",
+     "document_type": "ORDER",
+     "document_link_text_as_listed": "Lincoln Financial Advisors Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/LincolnSignedConsentOrder.pdf"
+    },
+    {
+     "id": "ma-sd-2013-04-d4",
+     "document_type": "ORDER",
+     "document_link_text_as_listed": "Securities America Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/SecuritiesAmericaSignedConsentOrder.pdf"
+    },
+    {
+     "id": "ma-sd-2013-04-d5",
+     "document_type": "ORDER",
+     "document_link_text_as_listed": "Royal Alliance Associates Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/RoyalAllianceSignedConsentOrder.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2013-05",
+   "archive_year": 2013,
+   "headline_as_listed": "Secretary Galvin Charges Malden Man in Affinity Fraud on Kenyan Community",
+   "listing_date_as_listed": "March 25, 2013",
+   "listing_date": "2013-03-25",
+   "documents": [
+    {
+     "id": "ma-sd-2013-05-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/ajabu-complaint.pdf"
+    },
+    {
+     "id": "ma-sd-2013-05-d2",
+     "document_type": "EXHIBITS",
+     "document_link_text_as_listed": "Exhibits (PDF)",
+     "role": "SUPPORTING",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/ajabu-exhibits.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2013-06",
+   "archive_year": 2013,
+   "headline_as_listed": "Secretary Galvin Fines Deutsche Bank Securities $17.5 Million for Conflicts in Marketing Collateralized Debt Obligations",
+   "listing_date_as_listed": "March 13, 2013",
+   "listing_date": "2013-03-13",
+   "documents": [
+    {
+     "id": "ma-sd-2013-06-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/db_consent.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2013-07",
+   "archive_year": 2013,
+   "headline_as_listed": "Secretary Galvin Orders LPL Financial to Return $2 Million to Investor Victims",
+   "listing_date_as_listed": "February 6, 2013",
+   "listing_date": "2013-02-06",
+   "documents": [
+    {
+     "id": "ma-sd-2013-07-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Consent-Order-Only-6-26-19.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2012-01",
+   "archive_year": 2012,
+   "headline_as_listed": "Secretary Galvin Fines Morgan Stanley $5 Million for Investment Banking’s Improper Influence Over Analysts in the Facebook IPO",
+   "listing_date_as_listed": "December 17, 2012",
+   "listing_date": "2012-12-17",
+   "documents": [
+    {
+     "id": "ma-sd-2012-01-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/../pdf-html/docket_no_2012-0042.htm"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2012-02",
+   "archive_year": 2012,
+   "headline_as_listed": "Secretary Galvin Fines Citigroup Unit $2 Million for Research Analysts' Improper Disclosures of Material Nonpublic Information Including the Facebook IPO",
+   "listing_date_as_listed": "October 26, 2012",
+   "listing_date": "2012-10-26",
+   "documents": [
+    {
+     "id": "ma-sd-2012-02-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/../pdf-html/citi_consent.htm"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2012-03",
+   "archive_year": 2012,
+   "headline_as_listed": "Secretary Galvin Charges Putnam Advisory With Fraud For Its Role In Two Mortgage-Backed CDOs",
+   "listing_date_as_listed": "October 17, 2012",
+   "listing_date": "2012-10-17",
+   "documents": [
+    {
+     "id": "ma-sd-2012-03-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Putnam-Complaint-10-17-2012.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2012-04",
+   "archive_year": 2012,
+   "headline_as_listed": "Secretary Galvin Charges Lowell Man in Crowdfunding Fraud",
+   "listing_date_as_listed": "August 9, 2012",
+   "listing_date": "2012-08-09",
+   "documents": [
+    {
+     "id": "ma-sd-2012-04-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/crowdfunding_Complaint.pdf"
+    },
+    {
+     "id": "ma-sd-2012-04-d2",
+     "document_type": "EXHIBITS",
+     "document_link_text_as_listed": "Exhibits (PDF)",
+     "role": "SUPPORTING",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/crowdfunding_Exhibits.pdf"
+    },
+    {
+     "id": "ma-sd-2012-04-d3",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/../pdf-html/crowdfunding_consent-order.htm"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2012-05",
+   "archive_year": 2012,
+   "headline_as_listed": "Secretary Galvin Charges Foxboro Man With Defrauding Senior Citizens With Bogus Investment Schemes",
+   "listing_date_as_listed": "July 31, 2012",
+   "listing_date": "2012-07-31",
+   "documents": [
+    {
+     "id": "ma-sd-2012-05-d1",
+     "document_type": "ADMINISTRATIVE_COMPLAINT",
+     "document_link_text_as_listed": "Administrative Complaint",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/../pdf-html/fox_complaint.htm"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2012-06",
+   "archive_year": 2012,
+   "headline_as_listed": "Secretary Galvin Charges Belmont Man In $10.4 Million Ponzi Scheme",
+   "listing_date_as_listed": "July 24, 2012",
+   "listing_date": "2012-07-24",
+   "documents": [
+    {
+     "id": "ma-sd-2012-06-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/../pdf-html/cranney_complaint.htm"
+    },
+    {
+     "id": "ma-sd-2012-06-d2",
+     "document_type": "EXHIBITS",
+     "document_link_text_as_listed": "Exhibits (PDF)",
+     "role": "SUPPORTING",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/cranney_exhibits.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2012-07",
+   "archive_year": 2012,
+   "headline_as_listed": "Secretary Galvin Charges Beverly Agent in Connection with Theft of Firm Assets",
+   "listing_date_as_listed": "June 20, 2012",
+   "listing_date": "2012-06-20",
+   "documents": [
+    {
+     "id": "ma-sd-2012-07-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/letourneau_complaint.pdf"
+    },
+    {
+     "id": "ma-sd-2012-07-d2",
+     "document_type": "CEASE_AND_DESIST_ORDER",
+     "document_link_text_as_listed": "Cease and Desist Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/letourneau_cd_order.pdf"
+    },
+    {
+     "id": "ma-sd-2012-07-d3",
+     "document_type": "SUSPENSION_ORDER",
+     "document_link_text_as_listed": "Suspension Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/letourneau_suspension_order.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2012-08",
+   "archive_year": 2012,
+   "headline_as_listed": "Secretary Galvin Charges Chelsea Man In Million-Dollar Investor Loss",
+   "listing_date_as_listed": "June 12, 2012",
+   "listing_date": "2012-06-12",
+   "documents": [
+    {
+     "id": "ma-sd-2012-08-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/../pdf-html/martel_complaint.htm"
+    },
+    {
+     "id": "ma-sd-2012-08-d2",
+     "document_type": "ORDER",
+     "document_link_text_as_listed": "Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/martel_order.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2012-09",
+   "archive_year": 2012,
+   "headline_as_listed": "Broker-Dealer Cited for Not Supervising Rogue Broker to Prevent Elder Financial Abuse; Elderly Woman’s Estate to Recover More Than $1 Million",
+   "listing_date_as_listed": "May 17, 2012",
+   "listing_date": "2012-05-17",
+   "documents": [
+    {
+     "id": "ma-sd-2012-09-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/beck_complaint.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2012-10",
+   "archive_year": 2012,
+   "headline_as_listed": "Royal Bank of Canada Subsidiary agrees to $2.9 Million restitution to MA investors who purchased inverse leveraged exchage traded funds",
+   "listing_date_as_listed": "May 2, 2012",
+   "listing_date": "2012-05-02",
+   "documents": [
+    {
+     "id": "ma-sd-2012-10-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint (PDF)",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/rcb__complaint.pdf"
+    },
+    {
+     "id": "ma-sd-2012-10-d2",
+     "document_type": "EXHIBITS",
+     "document_link_text_as_listed": "Exhibits (PDF)",
+     "role": "SUPPORTING",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/rbc_exhibits.pdf"
+    },
+    {
+     "id": "ma-sd-2012-10-d3",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/rbc_consent_order.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2012-11",
+   "archive_year": 2012,
+   "headline_as_listed": "Secretary Galvin Charges Grafton Investment Adviser Representative with Unregistered Activity",
+   "listing_date_as_listed": "March 28, 2012",
+   "listing_date": "2012-03-28",
+   "documents": [
+    {
+     "id": "ma-sd-2012-11-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/../pdf-html/grafton_complaint.htm"
+    },
+    {
+     "id": "ma-sd-2012-11-d2",
+     "document_type": "EXHIBITS",
+     "document_link_text_as_listed": "Exhibits (PDF)",
+     "role": "SUPPORTING",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/Grafton_Exhibits.pdf"
+    },
+    {
+     "id": "ma-sd-2012-11-d3",
+     "document_type": "EX_PARTE_ORDER_TO_CEASE_AND_DESIST",
+     "document_link_text_as_listed": "Ex Parte Order to Cease and Desist",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/../pdf-html/grafton_order.htm"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2012-12",
+   "archive_year": 2012,
+   "headline_as_listed": "Secretary Galvin Charges Western Massachusetts Wind Power Company with Selling Unregistered Securities; Warns that the Current Crowdfunding Legislation Must Not Preempt the States",
+   "listing_date_as_listed": "March 20, 2012",
+   "listing_date": "2012-03-20",
+   "documents": [
+    {
+     "id": "ma-sd-2012-12-d1",
+     "document_type": "COMPLAINT",
+     "document_link_text_as_listed": "Complaint",
+     "role": "ALLEGATIONS",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/../pdf-html/urban_power_complaint.htm"
+    },
+    {
+     "id": "ma-sd-2012-12-d2",
+     "document_type": "EXHIBITS",
+     "document_link_text_as_listed": "Exhibits 1-6 (PDF)",
+     "role": "SUPPORTING",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/urban_power_exhibits_1-6.pdf"
+    },
+    {
+     "id": "ma-sd-2012-12-d3",
+     "document_type": "EXHIBITS",
+     "document_link_text_as_listed": "Exhibits 7-10 (PDF)",
+     "role": "SUPPORTING",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/urban_power_exhibits_7-10.pdf"
+    },
+    {
+     "id": "ma-sd-2012-12-d4",
+     "document_type": "EXHIBITS",
+     "document_link_text_as_listed": "Exhibits 11 and 12 (PDF)",
+     "role": "SUPPORTING",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/urban_power_exhibits_11-12.pdf"
+    },
+    {
+     "id": "ma-sd-2012-12-d5",
+     "document_type": "EXHIBITS",
+     "document_link_text_as_listed": "Exhibits 13 and 14 (PDF)",
+     "role": "SUPPORTING",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/urban_power_exhibits_13-14.pdf"
+    },
+    {
+     "id": "ma-sd-2012-12-d6",
+     "document_type": "EXHIBITS",
+     "document_link_text_as_listed": "Exhibit 15 (PDF)",
+     "role": "SUPPORTING",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/urban_power_exhibit_15.pdf"
+    }
+   ],
+   "docket_numbers": []
+  },
+  {
+   "id": "ma-sd-2012-13",
+   "archive_year": 2012,
+   "headline_as_listed": "Secretary Galvin Fines State Street Global Advisors $5 Million For Role In Mortgage-Backed CDO",
+   "listing_date_as_listed": "February 28, 2012",
+   "listing_date": "2012-02-28",
+   "documents": [
+    {
+     "id": "ma-sd-2012-13-d1",
+     "document_type": "CONSENT_ORDER",
+     "document_link_text_as_listed": "Consent Order (PDF)",
+     "role": "ORDER_AS_LISTED",
+     "docket_numbers": [],
+     "crd_printed_in_listing": [],
+     "url": "https://www.sec.state.ma.us/divisions/securities/download/State_Street_Consent_Order.pdf"
+    }
+   ],
+   "docket_numbers": []
+  }
+ ]
+}

@@ -1,0 +1,169 @@
+{
+  "contract": "investor-ma-iapd-census-v1",
+  "ticket": "MA-INV-001",
+  "reuse": "OH-INV-001 parsers on the byte-identical accepted 2026-09-17 IAPD compilation (SHA-256 verified).",
+  "filterLogic": "Massachusetts selected by IAPD registration/notice jurisdiction fields (StateRgstn/Rgltr/@Cd, ERA/Rgltr/@Cd, NoticeFiled/States/@RgltrCd). Principal-office MainAddr/@State=MA is a separate overlay and is not a registration denominator.",
+  "state": {
+    "filename": "IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "authority": "IAPD (FINRA-held state compilation)",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "sourceAsOf": "2026-09-17",
+    "publishedAt": "2026-09-17",
+    "retrievedAt": "2026-09-17T15:15:00Z",
+    "bytes": 5080393,
+    "sha256": "5fa17c38ae2e812dbd4d58c359c4d624a54417e3f794a3287c3414ccfdaa6a02",
+    "grain": "Firm CRD; StateRgstn/Rgltr/@Cd=jurisdiction; @St=status; ERA/Rgltr/@Cd=jurisdiction. Not MainAddr/@State.",
+    "filter": "Rgltr/@Cd=OH (registration jurisdiction). Address is recorded only for overlap diagnostics.",
+    "firms_in_feed": 21861,
+    "ma_state_ia_registration_rows": 794,
+    "ma_state_ia_distinct_crd": 794,
+    "ma_state_ia_approved_distinct_crd": 773,
+    "ma_state_ia_current_distinct_crd": 783,
+    "ma_state_ia_termrequest_distinct_crd": 11,
+    "ma_state_era_registration_rows": 351,
+    "ma_state_era_distinct_crd": 351,
+    "ma_state_era_active_distinct_crd": 351,
+    "ia_era_overlap_distinct_crd": 0,
+    "status_ia": [
+      [
+        "APPROVED",
+        773
+      ],
+      [
+        "TERMREQUEST",
+        11
+      ],
+      [
+        "CONDREST",
+        10
+      ]
+    ],
+    "status_era": [
+      [
+        "ACTIVE",
+        351
+      ]
+    ],
+    "principal_office_ma_among_state_ia": 259,
+    "principal_office_not_ma_among_state_ia": 535,
+    "address_ma_without_ma_jurisdiction": 1
+  },
+  "sec": {
+    "filename": "IA_FIRM_SEC_Feed_09_17_2026.xml.gz",
+    "authority": "SEC / IAPD",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_SEC_Feed_09_17_2026.xml.gz",
+    "sourceAsOf": "2026-09-17",
+    "publishedAt": "2026-09-17",
+    "retrievedAt": "2026-09-17T15:15:00Z",
+    "bytes": 7301907,
+    "sha256": "f01d6b17a7ed631125e76d3c1e5965f178235273eea6699c15400473cb2f1f22",
+    "grain": "Firm CRD; NoticeFiled/States/@RgltrCd=jurisdiction; MainAddr/@State=principal office (separate overlay).",
+    "firms_in_feed": 23911,
+    "firm_types": [
+      [
+        "Registered",
+        17206
+      ],
+      [
+        "ERA",
+        6705
+      ]
+    ],
+    "ma_notice_rows": 3272,
+    "ma_notice_any_status_distinct_crd": 3272,
+    "ma_notice_filed_distinct_crd": 3272,
+    "ma_notice_era_any_status": 0,
+    "ma_notice_filed_firm_type": {
+      "Registered": 3272,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          3272
+        ]
+      ]
+    },
+    "notice_status": [
+      [
+        "FILED",
+        3272
+      ]
+    ],
+    "ma_principal_office_distinct_crd": 807,
+    "principal_and_notice_filed": 602,
+    "notice_filed_not_principal": 2670,
+    "principal_not_notice_filed": 205
+  },
+  "lenses": {
+    "state_ia_registration_rows": 794,
+    "state_ia_distinct_crd": 794,
+    "state_ia_approved_distinct_crd": 773,
+    "state_ia_current_distinct_crd": 783,
+    "state_ia_termrequest_distinct_crd": 11,
+    "state_ia_status_rows": [
+      [
+        "APPROVED",
+        773
+      ],
+      [
+        "TERMREQUEST",
+        11
+      ],
+      [
+        "CONDREST",
+        10
+      ]
+    ],
+    "state_era_registration_rows": 351,
+    "state_era_distinct_crd": 351,
+    "state_era_active_distinct_crd": 351,
+    "state_era_status_rows": [
+      [
+        "ACTIVE",
+        351
+      ]
+    ],
+    "notice_rows": 3272,
+    "notice_any_status_distinct_crd": 3272,
+    "notice_filed_distinct_crd": 3272,
+    "notice_status_rows": [
+      [
+        "FILED",
+        3272
+      ]
+    ],
+    "notice_filed_firm_type": {
+      "Registered": 3272,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          3272
+        ]
+      ]
+    },
+    "principal_office_sec_feed_distinct_crd": 807,
+    "principal_office_among_state_ia": 259,
+    "state_address_without_ma_jurisdiction": 1
+  },
+  "overlaps": {
+    "state_ia_and_state_era": 0,
+    "state_ia_approved_and_notice_filed": 6,
+    "state_ia_and_principal_office_sec_feed": 2,
+    "notice_filed_and_principal_office": 602,
+    "principal_office_not_notice_filed": 205,
+    "state_era_and_notice_filed": 0
+  },
+  "semanticGrainRules": {
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_SEC_RIA": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_NOTICE_FILING": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_STATE_ERA": true,
+    "PRINCIPAL_OFFICE_IS_NOT_REGISTRATION": true,
+    "REGISTRATION_ROW_IS_DISTINCT_GRAIN_FROM_DISTINCT_FIRM_CRD": true,
+    "LENSES_ARE_NEVER_SUMMED": true
+  }
+}

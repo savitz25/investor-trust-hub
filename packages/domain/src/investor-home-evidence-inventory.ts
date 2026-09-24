@@ -2,6 +2,7 @@ import networkMetrics from '../../../data/home/investor-network-metrics-v1.json'
 import NC_PUBLIC_SNAPSHOT from '../../../artifacts/nc-inv-001-public-snapshot.json';
 import OH_PUBLIC_SNAPSHOT from '../../../artifacts/oh-inv-001-public-snapshot.json';
 import GA_PUBLIC_SNAPSHOT from '../../../artifacts/ga-inv-001-public-snapshot.json';
+import MA_PUBLIC_SNAPSHOT from '../../../artifacts/ma-inv-001-public-snapshot.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -73,7 +74,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA';
   name: string;
   href: string;
   regulator: string;
@@ -690,6 +691,47 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
         label: 'SEC/IARD principal-office overlay',
         sourceAsOf: GA_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
         retrievedAt: GA_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+        snapshotAsOf: null,
+        generatedAt: null,
+      },
+    ],
+  },
+  {
+    code: 'MA',
+    name: 'Massachusetts',
+    href: MA_PUBLIC_SNAPSHOT.route,
+    regulator: 'Massachusetts Securities Division',
+    principalOfficeFirms: MA_PUBLIC_SNAPSHOT.nationalOverlay.maPrincipalOfficeSecIardFirms,
+    rosterStatus: `IAPD MA APPROVED state IA ${MA_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd.toLocaleString('en-US')} firm CRDs as of ${MA_PUBLIC_SNAPSHOT.stateRia.sourceAsOf}`,
+    evidence: [
+      'IAPD Massachusetts state-registered IA compilation',
+      'IAPD Massachusetts state ERA reporting',
+      'federal-covered notice filings',
+      'Securities Division enforcement archive 2012-2026 (unattached)',
+    ],
+    identityNote:
+      'IAPD jurisdiction=MA APPROVED is the state IA spine. A Massachusetts principal office is not registration. Exact CRD is required before an action can attach. IAR people are not IA firms.',
+    limitation:
+      'Do not add state IA+ERA+notice+principal office. A Division complaint is an allegation, not a finding. Document count is not matter count. Name-only enforcement attachment is unsafe.',
+    sourceClocks: [
+      {
+        label: 'IAPD state compilation',
+        sourceAsOf: MA_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+        retrievedAt: MA_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+        snapshotAsOf: MA_PUBLIC_SNAPSHOT.asOf,
+        generatedAt: null,
+      },
+      {
+        label: 'Securities Division enforcement archive',
+        sourceAsOf: null,
+        retrievedAt: MA_PUBLIC_SNAPSHOT.enforcement.retrievedAt,
+        snapshotAsOf: MA_PUBLIC_SNAPSHOT.asOf,
+        generatedAt: null,
+      },
+      {
+        label: 'SEC/IARD principal-office overlay',
+        sourceAsOf: MA_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+        retrievedAt: MA_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
         snapshotAsOf: null,
         generatedAt: null,
       },
@@ -1553,6 +1595,82 @@ export function buildInvestorHomepageEvidenceInventory(): InvestorHomepageEviden
       'PUBLIC',
       OH_PUBLIC_SNAPSHOT.federalNotice.sourceAsOf,
       OH_PUBLIC_SNAPSHOT.federalNotice.retrievedAt,
+    ),
+    stateMeasure(
+      'ma_hq_overlay',
+      'SEC/IARD firms with a Massachusetts principal office',
+      MA_PUBLIC_SNAPSHOT.nationalOverlay.maPrincipalOfficeSecIardFirms,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'SEC/IARD firm with MA principal office',
+      'Massachusetts',
+      'SEC IAPD / IARD',
+      'artifacts/ma-inv-001-public-snapshot.json',
+      MA_PUBLIC_SNAPSHOT.asOf,
+      'Federal roster firms reporting a MA principal office.',
+      'Massachusetts state-RIA roster, notice filing, ERA, or Securities Division authority.',
+      '/massachusetts',
+      'PUBLIC',
+      MA_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+      MA_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+    ),
+    stateMeasure(
+      'ma_state_roster',
+      'Massachusetts IAPD state-registered investment-adviser firms',
+      MA_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'IAPD state-compilation APPROVED firm with jurisdiction MA',
+      'Massachusetts',
+      'IAPD state compilation',
+      'artifacts/ma-inv-001-public-snapshot.json',
+      MA_PUBLIC_SNAPSHOT.asOf,
+      'Approved Massachusetts state-IA firms in IA_FIRM_STATE_Feed_09_17_2026.',
+      'CONDREST or TERMREQUEST rows, SEC principal-office overlay, federal notice filings, ERA reporting, or IAR people.',
+      '/massachusetts',
+      'PUBLIC',
+      MA_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+      MA_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+      'Exact firm CRD.',
+      'Filter is registration jurisdiction, not address.',
+    ),
+    stateMeasure(
+      'ma_notice_filed',
+      'SEC/IARD firms with a Massachusetts notice filing',
+      MA_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'NoticeFiled RgltrCd=MA FILED',
+      'Massachusetts',
+      'SEC IAPD / IARD',
+      'artifacts/ma-inv-001-public-snapshot.json',
+      MA_PUBLIC_SNAPSHOT.asOf,
+      'SEC/IARD firms with a Massachusetts notice filing in the cited compilation.',
+      'Massachusetts state-RIA registration or the 803 principal-office overlay.',
+      '/massachusetts',
+      'PUBLIC',
+      MA_PUBLIC_SNAPSHOT.federalNotice.sourceAsOf,
+      MA_PUBLIC_SNAPSHOT.federalNotice.retrievedAt,
+    ),
+    stateMeasure(
+      'ma_enforcement_documents',
+      'Massachusetts Securities Division enforcement archive documents',
+      MA_PUBLIC_SNAPSHOT.enforcement.observationRows,
+      'KNOWN',
+      'DISCLOSURE_REGULATORY',
+      'Securities Division archive document (unattached)',
+      'Massachusetts',
+      'Massachusetts Securities Division',
+      'artifacts/ma-inv-001-public-snapshot.json',
+      MA_PUBLIC_SNAPSHOT.asOf,
+      'Documents linked from the 2012-2026 public enforcement archive, each with its listed type.',
+      'Unique matters, findings (a complaint is an allegation), attached firm or person profiles, or pre-2012 actions.',
+      '/massachusetts',
+      'PUBLIC',
+      null,
+      MA_PUBLIC_SNAPSHOT.enforcement.retrievedAt,
+      'No name-only attachment. Exact CRD attachments: 0.',
+      'Pre-2012 actions are available only by contacting the Division.',
     ),
     stateMeasure(
       'az_index_crd_mentions',

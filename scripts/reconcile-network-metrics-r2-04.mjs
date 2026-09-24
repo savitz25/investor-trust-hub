@@ -22,7 +22,7 @@ export function validateInvestor(sources,census,home) {
  for(const m of home.compensation){assert.equal(m.reportedYes+m.reportedNo,m.eligibleDenominator);assert.equal(m.eligibleDenominator,n.riaFacts);assert.equal(m.notFiledByFormType,n.eraFacts);}
  for(const [code,s] of Object.entries(sources)) {
   const a=s.stateRia,e=s.enforcement,f=s.federalNotice;
-  assert.equal(a.distinctFirmCrd,a.approvedDistinctCrd+a.termrequestDistinctCrd,`${code} IA status remainder`);
+  assert.equal(a.distinctFirmCrd,a.approvedDistinctCrd+a.termrequestDistinctCrd+(a.condrestDistinctCrd??0),`${code} IA status remainder`);
   assert.equal(a.registrationRows,a.distinctFirmCrd,`${code} source rows vs distinct IDs changed; review deduplication`);
   assert.equal(s.stateEra.registrationRows,s.stateEra.distinctFirmCrd);
   assert.equal(s.stateEra.activeDistinctCrd,s.stateEra.distinctFirmCrd);
@@ -35,10 +35,10 @@ export function validateInvestor(sources,census,home) {
  }
 }
 export function reconcile(manifest,root,census) {
- const codes=["NJ","CA","TX","WA","AZ","CO","VA","NY","IL","OR","PA","NC","OH"];
+ const codes=["NJ","CA","TX","WA","AZ","CO","VA","NY","IL","OR","PA","NC","OH","MA"];
  const paths=Object.fromEntries(codes.map(c=>[c,`artifacts/${c.toLowerCase()}-inv-${c==="NJ"?"003":"001"}-public-snapshot.json`]));
  const all=Object.fromEntries(codes.map(c=>[c,read(root,paths[c])]));
- const sources=Object.fromEntries(["CO","VA","NY","IL","OR","PA","NC","OH"].map(c=>[c,all[c]]));
+ const sources=Object.fromEntries(["CO","VA","NY","IL","OR","PA","NC","OH","MA"].map(c=>[c,all[c]]));
  const home=read(root,"data/home/investor-home-census-r2-04.json");
  validateInvestor(sources,census,home);
  const states={}, measures=[];
@@ -57,6 +57,7 @@ export function reconcile(manifest,root,census) {
   add("stateRia.distinctFirmCrd","Distinct state IA CRDs (all source statuses)","state_ia_crd");
   add("stateRia.approvedDistinctCrd","Approved state IA CRDs","approved_state_ia_crd");
   add("stateRia.termrequestDistinctCrd","State IA CRDs with termination requested","state_ia_termrequest_crd");
+  if(s.stateRia.condrestDistinctCrd!==undefined) add("stateRia.condrestDistinctCrd","State IA CRDs with CONDREST status","state_ia_condrest_crd");
   add("stateEra.activeDistinctCrd","Active state ERA reporting CRDs","state_era_crd");
   add("federalNotice.noticeRows","Federal notice filing rows","federal_notice_filing");
   add("federalNotice.noticeFiledDistinctCrd","Distinct CRDs with a federal notice filing","federal_notice_crd");
@@ -68,7 +69,7 @@ export function reconcile(manifest,root,census) {
    add("enforcement.distinctCaseNumbers","Distinct regulatory case numbers","regulatory_case",s.enforcement.distinctCaseNumbers===null?"PUBLIC_RESEARCH_PATH":"STATE_SOURCE_LIVE");
   }
   state.exactStateIaNoticeBridges={count:s.federalNotice.overlapApprovedStateIa,crds:s.federalNotice.overlapApprovedStateIaCrds,method:s.federalNotice.overlapApprovedStateIaJoinMethod};
-  state.statusPartition={sourceRows:s.stateRia.registrationRows,distinctCrds:s.stateRia.distinctFirmCrd,approved:s.stateRia.approvedDistinctCrd,termrequest:s.stateRia.termrequestDistinctCrd,unexplainedDelta:0};
+  state.statusPartition={sourceRows:s.stateRia.registrationRows,distinctCrds:s.stateRia.distinctFirmCrd,approved:s.stateRia.approvedDistinctCrd,termrequest:s.stateRia.termrequestDistinctCrd,condrest:s.stateRia.condrestDistinctCrd??0,unexplainedDelta:0};
   state.exactAdverseProfileAttachments=s.enforcement.profileAttachments.length;
  }
  const officialClocks=[home.source.publishedAt];
