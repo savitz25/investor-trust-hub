@@ -8,7 +8,6 @@
   "firm_create": false,
   "firm_match": "NOT_EVALUATED_NO_LOCAL_FIRM_IDENTIFIER_EXTRACT",
   "compilation": {
-    "path": "C:\\Users\\makei\\investor-trust-hub-or-inv-001\\data\\raw\\sec\\form-adv\\iapd-compilation-2026-09-10",
     "state_feed": "IA_FIRM_STATE_Feed_09_10_2026.xml.gz",
     "sec_feed": "IA_FIRM_SEC_Feed_09_10_2026.xml.gz",
     "state_sha256": "eee21a08054418327869d201c3174c5b288b0afa3007974485a55ccd96181f6c",

@@ -6,7 +6,7 @@ import gzip
 from pathlib import Path
 from xml.etree.ElementTree import iterparse
 
-from .normalize import STATES, SourceRow
+from .normalize import STATES, SourceRow, proposed_source_dataset_id
 
 
 def _local(tag: str) -> str:
@@ -99,7 +99,7 @@ def _row(code, reg_class, info, status, status_date, source_as_of, retrieved_at,
         business_name=(info.attrib.get("BusNm") if info is not None else "") or "",
         status=status or "",
         status_date=status_date or "",
-        source_dataset_id=f"iapd_{reg_class}_{code.lower()}_2026_09_10",
+        source_dataset_id=proposed_source_dataset_id(code, reg_class),
         source_as_of=source_as_of,
         retrieved_at=retrieved_at,
     )

@@ -19,9 +19,6 @@ sys.path.insert(0, str(ROOT / "services" / "ingestion" / "src"))
 from ith_ingestion.iapd_state_ia.normalize import normalize_observations  # noqa: E402
 from ith_ingestion.iapd_state_ia.parse import parse_compilation  # noqa: E402
 
-DEFAULT_COMPILATION = Path(
-    r"C:\Users\makei\investor-trust-hub-or-inv-001\data\raw\sec\form-adv\iapd-compilation-2026-09-10"
-)
 STATE_FEED = "IA_FIRM_STATE_Feed_09_10_2026.xml.gz"
 SEC_FEED = "IA_FIRM_SEC_Feed_09_10_2026.xml.gz"
 SOURCE_AS_OF = "2026-09-10"
@@ -40,7 +37,11 @@ def sha256_file(path: Path) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--compilation", type=Path, default=DEFAULT_COMPILATION)
+    parser.add_argument(
+        "--compilation",
+        type=Path,
+        help="Directory that already contains the acquired IA_FIRM_STATE and IA_FIRM_SEC gzip files. Required. Not searched for and not downloaded.",
+    )
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--check", action="store_true")
     parser.add_argument("--apply", action="store_true")
@@ -51,6 +52,12 @@ def main() -> int:
         return 2
     if not (args.dry_run or args.check):
         print("Pass --dry-run or --check. --apply is refused.", file=sys.stderr)
+        return 2
+    if args.compilation is None:
+        print(
+            "REFUSED: --compilation is required. Pass the directory that already holds the acquired feeds. Nothing is downloaded or auto-discovered.",
+            file=sys.stderr,
+        )
         return 2
 
     state_feed = args.compilation / STATE_FEED
@@ -85,7 +92,6 @@ def main() -> int:
         "firm_create": False,
         "firm_match": "NOT_EVALUATED_NO_LOCAL_FIRM_IDENTIFIER_EXTRACT",
         "compilation": {
-            "path": str(args.compilation),
             "state_feed": STATE_FEED,
             "sec_feed": SEC_FEED,
             "state_sha256": sha256_file(state_feed),

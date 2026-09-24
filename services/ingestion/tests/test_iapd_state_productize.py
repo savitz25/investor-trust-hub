@@ -1,6 +1,13 @@
 """Fail-closed cases for OR/AZ/WA IAPD state-IA productization. No database."""
 
-from ith_ingestion.iapd_state_ia.normalize import SourceRow, normalize_observations
+import subprocess
+import sys
+from pathlib import Path
+
+from ith_ingestion.iapd_state_ia.normalize import CLASSES, STATES, SourceRow, normalize_observations, proposed_source_dataset_id
+
+REPO = Path(__file__).resolve().parents[3]
+SCRIPT = REPO / "scripts" / "iapd_state_ia_productize.py"
 
 META = {
     "source_dataset_id": "iapd_state_ia_or_2026_09_10",
@@ -106,6 +113,39 @@ def test_second_run_is_a_no_op():
     second = normalize_observations([row(), row(jurisdiction="WA", status="APPROVED")], existing_firm_crds={"159378"})
     assert [obs.fingerprint for obs in first.observations] == [obs.fingerprint for obs in second.observations]
     assert first.by_state == second.by_state
+
+
+def test_compilation_flag_is_required_and_has_no_machine_default():
+    text = SCRIPT.read_text(encoding="utf-8")
+    assert "C:\\Users" not in text
+    assert "investor-trust-hub-or-inv-001" not in text
+    missing = subprocess.run([sys.executable, str(SCRIPT), "--check"], capture_output=True, text=True)
+    assert missing.returncode == 2
+    assert "--compilation is required" in missing.stderr
+    refused = subprocess.run([sys.executable, str(SCRIPT), "--apply"], capture_output=True, text=True)
+    assert refused.returncode == 2
+    assert "REFUSED" in refused.stderr
+
+
+def test_proposed_dataset_ids_are_not_in_the_applied_registry():
+    applied = []
+    for folder in (REPO / "database" / "migrations", REPO / "database" / "seed"):
+        for path in folder.glob("*.sql"):
+            applied.append(path.read_text(encoding="utf-8"))
+    applied_sql = "\n".join(applied)
+    proposal = (REPO / "database" / "proposals" / "UNAPPLIED_iapd_state_jurisdiction_datasets.sql").read_text(encoding="utf-8")
+    assert "DO NOT" in proposal or "UNAPPLIED" in proposal
+    assert "ON CONFLICT (id) DO UPDATE" in proposal
+    assert proposal.count("('iapd_") == 9
+    for state in STATES:
+        for reg_class in CLASSES:
+            dataset_id = proposed_source_dataset_id(state, reg_class)
+            assert dataset_id not in applied_sql
+            assert dataset_id in proposal
+    assert "('sec_ia_ria'" not in proposal
+    assert "('sec_ia_era'" not in proposal
+    assert "('sec_ia_iapd_compilation'" not in proposal
+    assert "'iapd'" in proposal
 
 
 def test_firm_match_not_evaluated_when_no_extract():

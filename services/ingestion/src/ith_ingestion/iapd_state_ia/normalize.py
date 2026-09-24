@@ -22,6 +22,10 @@ KNOWN_STATUSES = {
     "notice_filing": frozenset({"FILED"}),
 }
 
+def proposed_source_dataset_id(jurisdiction: str, registration_class: str) -> str:
+    return f"iapd_{registration_class}_{jurisdiction.lower()}_2026_09_10"
+
+
 CLASS_LABEL = {
     "state_ia": "state-registered investment adviser firm",
     "state_era": "exempt reporting adviser",
