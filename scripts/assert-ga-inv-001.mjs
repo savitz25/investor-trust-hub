@@ -14,7 +14,7 @@ assert.equal(snap.version, 'investor-ga-state-intel-v1');
 assert.equal(snap.route, '/georgia');
 assert.equal(snap.fingerprint, 'f1c44afc81eb7be3d774c91fb3928e01a4a6542511ea5dde0d079b79f41dbea6');
 assert(pub.publishedStateIntelligencePaths.includes('/georgia'), 'catalog includes /georgia');
-assert.equal(pub.publishedStateIntelligencePaths.length, 14);
+assert.equal(pub.publishedStateIntelligencePaths.length, 15);
 assert(!existsSync(join(root, 'apps/web/src/app/georgia/atlanta')), 'no Atlanta folder');
 assert(routes.includes("href: '/georgia'"), 'STATE_DISCOVERY_ROUTES');
 assert.equal(snap.nationalOverlay.gaPrincipalOfficeSecIardFirms, 364);

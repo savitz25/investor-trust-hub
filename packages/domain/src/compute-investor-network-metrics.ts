@@ -68,6 +68,9 @@ export type InvestorNetworkMetricsInput = {
   ohPrincipalOfficeFirms: number;
   ohStateRiaApproved: number;
   ohNoticeFiled: number;
+  maPrincipalOfficeFirms: number;
+  maStateRiaApproved: number;
+  maNoticeFiled: number;
 };
 
 function metric(partial: Omit<InvestorNetworkMetric, 'unit'>): InvestorNetworkMetric {
@@ -130,7 +133,7 @@ export function assertGrainSafety(input: InvestorNetworkMetricsInput): void {
   if (input.disclosureEvents === input.item11YesRia + input.item11YesEra && input.disclosureEvents > 0) {
     throw new Error('disclosure events must not be equated to Item 11 yes indicators');
   }
-  for (const path of ['/new-jersey', '/california', '/texas', '/washington', '/arizona', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania', '/north-carolina', '/ohio', '/georgia']) {
+  for (const path of ['/new-jersey', '/california', '/texas', '/washington', '/arizona', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania', '/north-carolina', '/ohio', '/georgia', '/massachusetts']) {
     if (!input.publishedStateIntelligencePaths.includes(path)) {
       throw new Error(`state intelligence path missing: ${path}`);
     }
@@ -735,6 +738,28 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       ),
     }),
     metric({
+      key: 'ma_state_ria_roster',
+      label: 'Massachusetts state-registered investment-adviser firms',
+      value: input.maStateRiaApproved,
+      valueState: 'KNOWN',
+      grain: 'ma_state_ria_roster',
+      denominator: 'IAPD state compilation APPROVED firms with registration jurisdiction = MA',
+      description:
+        'Massachusetts state-registered investment-adviser firms from IA_FIRM_STATE_Feed_09_17_2026. Not SEC RIA, not notice filing, not ERA, not CONDREST or TERMREQUEST rows, and not the 803 principal-office overlay.',
+      coverage: 'Massachusetts',
+      contributingSourceSystems: ['iapd_state_compilation'],
+      sourceAsOf: input.publishedAt,
+      generatedAt,
+      publicationStatus: 'PUBLIC',
+      trace: commonTrace(
+        'IAPD StateRgstn/Rgltr/@Cd=MA and status APPROVED, counted as distinct firm CRD.',
+        'Not SEC/IARD principal-office firms. Not federal-covered notice filings. Not state ERA reporting. Not IAR people. Not broker-dealers or agents.',
+        ['iapd_state_compilation'],
+        'Massachusetts',
+        'IA_FIRM_STATE_Feed_09_17_2026',
+      ),
+    }),
+    metric({
       key: 'published_state_intelligence_pages',
       label: 'Published state investment-intelligence pages',
       value: input.publishedStateIntelligencePaths.length,
@@ -748,7 +773,7 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       generatedAt,
       publicationStatus: 'PUBLIC',
       trace: commonTrace(
-        'Published /new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, and /georgia intelligence routes.',
+        'Published /new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, /georgia, and /massachusetts intelligence routes.',
         'Not county pages. Not national roster rows. Florida is not published on this hub.',
         ['investor-state-intel'],
         input.publishedStateIntelligencePaths.join(', '),
@@ -928,6 +953,12 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION',
       statewideStateRiaUniverse: input.ohStateRiaApproved,
       noticeFiledFirms: input.ohNoticeFiled,
+    },
+    massachusetts: {
+      principalOfficeRosterFirms: input.maPrincipalOfficeFirms,
+      stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION',
+      statewideStateRiaUniverse: input.maStateRiaApproved,
+      noticeFiledFirms: input.maNoticeFiled,
     },
     network: {
       publishedStateIntelligencePages: input.publishedStateIntelligencePaths.length,

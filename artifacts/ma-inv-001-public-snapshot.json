@@ -1,0 +1,391 @@
+{
+  "version": "investor-ma-state-intel-v1",
+  "ticket": "MA-INV-001",
+  "state": "Massachusetts",
+  "generatedFrom": {
+    "nationalRoster": "packages/domain/src/investor-home-intel.ts V1_ROSTER_PRINCIPAL_OFFICE_STATES",
+    "iapdStateCensus": "data/massachusetts/ma-inv-001/iapd-ma-census.json",
+    "enforcementArchive": "data/massachusetts/ma-inv-001/enforcement-archive-main.html"
+  },
+  "asOf": "2026-09-17",
+  "generatedAt": "2026-09-24T17:12:05Z",
+  "publicationGate": "ON",
+  "publicEligibility": "state_page",
+  "route": "/massachusetts",
+  "no_trust_score": true,
+  "no_ranking": true,
+  "no_investment_advice": true,
+  "no_boston_page": true,
+  "no_worcester_page": true,
+  "claimEligibilityBroadened": false,
+  "clocks": {
+    "iapd_sourceAsOf": "2026-09-17",
+    "iapd_accepted_retrievedAt": "2026-09-17T15:15:00Z",
+    "iapd_reverified_sha256_on": "2026-09-24",
+    "v1_roster_sourceAsOf": "2026-08-27",
+    "enforcement_archive_retrievedAt": "2026-09-24T16:58:59Z",
+    "enforcement_latest_listing_date": "2026-09-14",
+    "snapshotAsOf": "2026-09-24",
+    "generatedAt": "2026-09-24T17:12:05Z",
+    "no_universal_massachusetts_investor_clock": true
+  },
+  "nationalOverlay": {
+    "maPrincipalOfficeSecIardFirms": 803,
+    "grain": "SEC IARD roster firm with principal-office region = MA",
+    "source": "IA_FIRM_SEC_Feed_08_27_2026 (reconciled V1 roster geography)",
+    "sourceAsOf": "2026-08-27",
+    "retrievedAt": "2026-08-28",
+    "rawCompilationMainAddrMa": 807,
+    "rawCompilationSource": "IA_FIRM_SEC_Feed_09_17_2026 MainAddr/@State=MA",
+    "searchHref": "/firms?state=MA",
+    "label": "SEC/IARD roster firms with a Massachusetts principal office",
+    "caveat": "A Massachusetts principal office is not Massachusetts state IA registration and is not a notice filing. These firms already exist in the federal graph."
+  },
+  "stateRia": {
+    "STATE_RIA_BULK_ROSTER": "ACQUIRED_IAPD_STATE_COMPILATION",
+    "registrationRows": 794,
+    "distinctFirmCrd": 794,
+    "approvedDistinctCrd": 773,
+    "condrestDistinctCrd": 10,
+    "termrequestDistinctCrd": 11,
+    "currentDistinctCrd": 783,
+    "statusRows": {
+      "APPROVED": 773,
+      "CONDREST": 10,
+      "TERMREQUEST": 11
+    },
+    "principalOfficeMaAmongStateIa": 259,
+    "filter": "StateRgstn/Rgltr/@Cd=MA (registration jurisdiction). Not MainAddr/@State.",
+    "source": "IA_FIRM_STATE_Feed_09_17_2026",
+    "sourceAsOf": "2026-09-17",
+    "retrievedAt": "2026-09-17T15:15:00Z",
+    "officialUrl": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "verifyUrl": "https://adviserinfo.sec.gov/",
+    "label": "IAPD Massachusetts state-registered investment-adviser firms (APPROVED)",
+    "caveat": "Massachusetts state IA registration is not SEC registration, not a federal notice filing, not ERA, and not a principal office. CONDREST and TERMREQUEST rows are reported separately; verify current status on IAPD."
+  },
+  "stateEra": {
+    "STATE_ERA_REPORTING": "ACQUIRED_IAPD_STATE_COMPILATION",
+    "registrationRows": 351,
+    "distinctFirmCrd": 351,
+    "activeDistinctCrd": 351,
+    "overlapWithStateIa": 0,
+    "filter": "ERA/Rgltr/@Cd=MA",
+    "source": "IA_FIRM_STATE_Feed_09_17_2026",
+    "sourceAsOf": "2026-09-17",
+    "label": "Massachusetts state ERA reporting firms",
+    "caveat": "An exempt reporting adviser is not a Massachusetts state-registered IA and not an SEC RIA."
+  },
+  "federalNotice": {
+    "FEDERAL_COVERED_NOTICE_ROSTER": "ACQUIRED_IAPD_SEC_COMPILATION",
+    "noticeRows": 3272,
+    "noticeFiledDistinctCrd": 3272,
+    "noticeStatus": "FILED",
+    "noticeFiledFirmType": {
+      "Registered": 3272,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0
+    },
+    "filter": "NoticeFiled/States/@RgltrCd=MA",
+    "source": "IA_FIRM_SEC_Feed_09_17_2026",
+    "sourceAsOf": "2026-09-17",
+    "retrievedAt": "2026-09-17T15:15:00Z",
+    "overlapApprovedStateIa": 6,
+    "overlapApprovedStateIaCrds": [
+      "116346",
+      "121355",
+      "125071",
+      "144340",
+      "14553",
+      "226513"
+    ],
+    "overlapApprovedStateIaJoinMethod": "exact firm CRD set intersection of APPROVED StateRgstn/Rgltr/@Cd=MA and NoticeFiled/States/@RgltrCd=MA St=FILED",
+    "overlapEraNotice": 0,
+    "label": "SEC-registered advisers with a Massachusetts notice filing",
+    "caveat": "A notice filing is not Massachusetts state IA registration."
+  },
+  "reconciliation": {
+    "MA_STATE_IA_NOTICE_OVERLAP": 6,
+    "MA_STATE_IA_ERA_OVERLAP": 0,
+    "MA_ERA_NOTICE_OVERLAP": 0,
+    "MA_PRINCIPAL_OFFICE_STATE_IA_OVERLAP": 2,
+    "MA_PRINCIPAL_OFFICE_NOTICE_OVERLAP": 602,
+    "MA_PRINCIPAL_OFFICE_OVERLAY": 803,
+    "joinMethod": "exact firm CRD",
+    "clockNote": "IAPD compilations 2026-09-17; the V1 principal-office overlay is the 2026-08-27 roster geography. The difference is a clock difference, not enforcement.",
+    "do_not_sum": true
+  },
+  "enforcement": {
+    "MA_SECURITIES_ARCHIVE_STATUS": "ACQUIRED_PUBLIC_ARCHIVE_2012_2026",
+    "coverage": "KNOWN",
+    "source": "https://www.sec.state.ma.us/divisions/securities/enforcement/enforcement-actions.htm",
+    "retrievedAt": "2026-09-24T16:58:59Z",
+    "sourceAsOf": null,
+    "archiveYears": [
+      2012,
+      2026
+    ],
+    "latestListingDate": "2026-09-14",
+    "earliestListingDate": "2012-02-28",
+    "announcementsByYear": {
+      "2012": 13,
+      "2013": 7,
+      "2014": 10,
+      "2015": 8,
+      "2016": 7,
+      "2017": 9,
+      "2018": 18,
+      "2019": 19,
+      "2020": 10,
+      "2021": 3,
+      "2022": 17,
+      "2023": 9,
+      "2024": 6,
+      "2025": 3,
+      "2026": 5
+    },
+    "announcements": 144,
+    "announcementsWithoutListedDate": 1,
+    "observationRows": 181,
+    "documentTypes": {
+      "ADMINISTRATIVE_COMPLAINT": 3,
+      "AMENDED_COMPLAINT": 1,
+      "CEASE_AND_DESIST_ORDER": 1,
+      "COMPLAINT": 81,
+      "CONSENT_ORDER": 75,
+      "EXHIBITS": 10,
+      "EX_PARTE_ORDER_TO_CEASE_AND_DESIST": 1,
+      "MEMORANDUM": 1,
+      "ORDER": 7,
+      "SUSPENSION_ORDER": 1
+    },
+    "allegationDocuments": 85,
+    "orderDocumentsAsListed": 85,
+    "supportingDocuments": 11,
+    "distinctCaseNumbers": 65,
+    "announcementsWithPrintedDocket": 62,
+    "announcementsWithoutPrintedDocket": 82,
+    "docketsOnMoreThanOneAnnouncement": [
+      "E-2017-0079",
+      "E-2020-0018"
+    ],
+    "uniqueMatters": null,
+    "uniqueMattersNote": "Only printed docket numbers are deduplicated. Announcements without a printed docket are not merged, so a unique-matter count is not claimed.",
+    "documentCountIsNotMatterCount": true,
+    "complaintIsAllegationNotFinding": true,
+    "orderTypeKeptAsListed": true,
+    "reliefNotParsed": true,
+    "pdfsParsed": 0,
+    "linkedDocumentRetrieval": "NOT_ACQUIRED: document downloads returned HTTP 403 to automated retrieval and the site then throttled the listing; no PDF was parsed and no OCR was attempted.",
+    "crdPrintedInListing": 0,
+    "MA_ENFORCEMENT_EXACT_CRD_ATTACHMENTS": 0,
+    "nameOnly": "UNSAFE",
+    "profileAttachments": [],
+    "standaloneEvents": 144,
+    "pre2012": "REQUEST_ONLY",
+    "pre2012Statement": "Contact the Securities Division for actions prior to 2012.",
+    "pre2012ContactUrl": "https://www.sec.state.ma.us/divisions/about-us/contact-us.htm#securities",
+    "recent": [
+      {
+        "id": "ma-sd-2026-01",
+        "headline": "Galvin Fines TradeZero $750,000 over Cybersecurity and Automated Account Approval Failures",
+        "listingDate": "2026-09-14",
+        "documents": [
+          {
+            "type": "CONSENT_ORDER",
+            "label": "Consent Order in the Matter of TradeZero America, Inc.",
+            "url": "https://www.sec.state.ma.us/divisions/securities/download/2024-0374-TradeZero-America-Inc-Consent-Order.pdf"
+          }
+        ]
+      },
+      {
+        "id": "ma-sd-2026-02",
+        "headline": "Galvin Charges Croft School CEO with Fraud",
+        "listingDate": "2026-06-30",
+        "documents": [
+          {
+            "type": "COMPLAINT",
+            "label": "Complaint in the Matter of Scott Given (PDF)",
+            "url": "https://www.sec.state.ma.us/divisions/securities/download/Docket-No-E-2026-0666.pdf"
+          }
+        ]
+      },
+      {
+        "id": "ma-sd-2026-03",
+        "headline": "Galvin Fines Fidelity $1.25 Million Over Data Breach Impacting Massachusetts Residents",
+        "listingDate": "2026-04-27",
+        "documents": [
+          {
+            "type": "CONSENT_ORDER",
+            "label": "Consent Order in the Matter of Fidelity Brokerage Services, LLC (PDF)",
+            "url": "https://www.sec.state.ma.us/divisions/securities/download/Docket-No-E-2024-0373.pdf"
+          }
+        ]
+      },
+      {
+        "id": "ma-sd-2026-04",
+        "headline": "Galvin Fines Online Investment Adviser $500,000 Over Misleading Social Media Ads",
+        "listingDate": "2026-03-30",
+        "documents": [
+          {
+            "type": "CONSENT_ORDER",
+            "label": "Consent Order in the Matter of Dub Advisors, LLC (PDF)",
+            "url": "https://www.sec.state.ma.us/divisions/securities/download/2025-0072-Dub-Advisors-Consent-Order.pdf"
+          }
+        ]
+      },
+      {
+        "id": "ma-sd-2026-05",
+        "headline": "Galvin Charges Worcester Pastor in Real Estate Securities Scheme that Defrauded Parishioners",
+        "listingDate": "2026-02-11",
+        "documents": [
+          {
+            "type": "COMPLAINT",
+            "label": "Complaint in the Matter of Jose Encarnacion and Trinity Real Estate Investments & Development LLC (PDF)",
+            "url": "https://www.sec.state.ma.us/divisions/securities/download/26-02-11-Administrative-Complaint--E-2025-0187-_Final.pdf"
+          }
+        ]
+      },
+      {
+        "id": "ma-sd-2025-01",
+        "headline": "Galvin Leads Nationwide Effort to Recover $19 Million for Brokerage Customers",
+        "listingDate": "2025-06-09",
+        "documents": [
+          {
+            "type": "CONSENT_ORDER",
+            "label": "Consent Order in the Matter of Edward D. Jones & Co. (PDF)",
+            "url": "https://www.sec.state.ma.us/divisions/securities/download/2025-0191_Edward_Jones.pdf"
+          },
+          {
+            "type": "CONSENT_ORDER",
+            "label": "Consent Order in the Matter of LPL Financial (PDF)",
+            "url": "https://www.sec.state.ma.us/divisions/securities/download/2025-0189_LPL.pdf"
+          },
+          {
+            "type": "CONSENT_ORDER",
+            "label": "Consent Order in the Matter of RBC Capital Markets (PDF)",
+            "url": "https://www.sec.state.ma.us/divisions/securities/download/2025-0190_RBC_Capital_Markets.pdf"
+          },
+          {
+            "type": "CONSENT_ORDER",
+            "label": "Consent Order in the Matter of Stifel, Nicolaus & Company (PDF)",
+            "url": "https://www.sec.state.ma.us/divisions/securities/download/2025-0192_Stifel.pdf"
+          },
+          {
+            "type": "CONSENT_ORDER",
+            "label": "Consent Order in the Matter of TD Ameritrade (PDF)",
+            "url": "https://www.sec.state.ma.us/divisions/securities/download/2023-0061_TD_Ameritrade.pdf"
+          }
+        ]
+      },
+      {
+        "id": "ma-sd-2025-02",
+        "headline": "Galvin Orders Man who used Investor Funds for Personal Use to Return Money",
+        "listingDate": "2025-04-17",
+        "documents": [
+          {
+            "type": "CONSENT_ORDER",
+            "label": "Consent Order in the Matter of Erez Capital LLC, Erez Master LLC, and Michael Benezra (PDF 26.5MB)",
+            "url": "https://www.sec.state.ma.us/divisions/securities/download/2023-0106-Erez-Capital-LLC.pdf"
+          }
+        ]
+      },
+      {
+        "id": "ma-sd-2025-03",
+        "headline": "Galvin Cracks Down on Student Loan Refinancer’s Fraudulent Ads",
+        "listingDate": "2025-02-03",
+        "documents": [
+          {
+            "type": "CONSENT_ORDER",
+            "label": "Consent Order in the Matter of Yrefy, LLC and Yrefy SLP4, LLC. (PDF)",
+            "url": "https://www.sec.state.ma.us/divisions/securities/download/consent-order_2-3-25.pdf"
+          }
+        ]
+      }
+    ]
+  },
+  "records": {
+    "MA_REGISTRATION_RECORDS_CAPABILITY": "KNOWN",
+    "classes": [
+      "broker-dealer",
+      "agent",
+      "investment adviser",
+      "investment adviser representative"
+    ],
+    "channel": "Securities Division (RICE section) answers registration-status and disciplinary-history questions on request",
+    "sourceUrl": "https://www.sec.state.ma.us/divisions/securities/rice/rice-mission-statement.htm",
+    "bulkRoster": "NOT_ACQUIRED"
+  },
+  "complaints": {
+    "MA_SECURITIES_COMPLAINT_ROWS": null,
+    "intake": "KNOWN",
+    "providerLevelComplaints": "NOT_ACQUIRED",
+    "complaintOutcomes": "NOT_ACQUIRED / REQUEST_ONLY",
+    "sourceUrl": "https://www.sec.state.ma.us/divisions/securities/enforcement/enforcement-overview.htm",
+    "complaint_ne_enforcement": true,
+    "division_complaint_document_ne_investor_complaint": true
+  },
+  "iar": {
+    "MA_IAR_REGISTRATION_CAPABILITY": "KNOWN",
+    "MA_IAR_ROWS": null,
+    "MA_IAR_PERSON_DIRECTORY": "NOT_PUBLISHED",
+    "grain": "person CRD (not firm CRD)",
+    "verifyUrl": "https://adviserinfo.sec.gov/",
+    "caveat": "An IAR is a person. IAR registrations are never added to firm counts, and no person profiles are created."
+  },
+  "brokerDealer": {
+    "MA_BD_VERIFICATION": "KNOWN",
+    "MA_AGENT_VERIFICATION": "KNOWN",
+    "MA_DEALER_ROWS": null,
+    "MA_AGENT_ROWS": null,
+    "stateOnlyBulk": "NOT_ACQUIRED",
+    "bd_ne_ia": true,
+    "agent_ne_iar": true,
+    "verifyUrl": "https://brokercheck.finra.org/"
+  },
+  "offerings": {
+    "status": "DEFERRED",
+    "note": "Securities offering registrations are not provider identity and were not ingested."
+  },
+  "divisionFramework": {
+    "regulator": "Massachusetts Secretary of the Commonwealth, Securities Division",
+    "officialHomeUrl": "https://www.sec.state.ma.us/divisions/securities/securities.htm",
+    "enforcementArchiveUrl": "https://www.sec.state.ma.us/divisions/securities/enforcement/enforcement-actions.htm",
+    "statute": "Massachusetts Uniform Securities Act (M.G.L. c. 110A)",
+    "infrastructure": "IARD for investment advisers and representatives; CRD/BrokerCheck for broker-dealers and agents. Infrastructure is not the regulator.",
+    "contactUrl": "https://www.sec.state.ma.us/divisions/about-us/contact-us.htm#securities"
+  },
+  "capabilities": {
+    "state_ia_compilation": "KNOWN",
+    "state_era": "KNOWN",
+    "federal_notice_filing": "KNOWN",
+    "principal_office_overlay": "KNOWN",
+    "iar_verification": "KNOWN",
+    "iar_person_population": "NOT_ACQUIRED",
+    "bd_verification": "KNOWN",
+    "agent_verification": "KNOWN",
+    "state_bd_agent_bulk": "NOT_ACQUIRED",
+    "enforcement_archive_2012_2026": "KNOWN",
+    "enforcement_unique_matters": "PARTIAL",
+    "enforcement_pre_2012": "REQUEST_ONLY",
+    "enforcement_exact_crd_attachments": "NOT_ACQUIRED",
+    "registration_disciplinary_records": "KNOWN",
+    "provider_complaints": "NOT_ACQUIRED",
+    "complaint_outcomes": "REQUEST_ONLY",
+    "offerings": "NOT_ACQUIRED",
+    "name_only_adverse_attachment": "UNSUPPORTED",
+    "combined_investment_professional_count": "UNSUPPORTED",
+    "local_city_pages": "UNSUPPORTED"
+  },
+  "expansionLedger": {
+    "NET_NEW_STATE_RESEARCH_IDENTITIES": 773,
+    "NET_NEW_CANONICAL_ORGANIZATIONS": 0,
+    "NET_NEW_PUBLIC_INVESTOR_PROFILES": 0,
+    "EXISTING_ORGANIZATIONS_ENRICHED": 0,
+    "GRAPH_WRITES": 0,
+    "CLAIM_ELIGIBILITY_BROADENED": false,
+    "EXACT_PROFILE_ATTACHMENTS": 0
+  },
+  "fingerprint": "014fb959166d135153618b9781fd099322e0f1d4eec38d3bd3470dd282ee1930"
+}

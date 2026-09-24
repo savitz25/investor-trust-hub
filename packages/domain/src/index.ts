@@ -38,3 +38,4 @@ export * from './pa-public-intel';
 export * from './nc-public-intel';
 export * from './oh-public-intel';
 export * from './ga-public-intel';
+export * from './ma-public-intel';

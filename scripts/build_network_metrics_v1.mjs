@@ -60,6 +60,9 @@ async function main() {
     ohPrincipalOfficeFirms: pub.ohPrincipalOfficeFirms,
     ohStateRiaApproved: pub.ohStateRiaApproved,
     ohNoticeFiled: pub.ohNoticeFiled,
+    maPrincipalOfficeFirms: pub.maPrincipalOfficeFirms,
+    maStateRiaApproved: pub.maStateRiaApproved,
+    maNoticeFiled: pub.maNoticeFiled,
   };
 
   if (input.riaFacts !== pub.riaFacts || input.eraFacts !== pub.eraFacts || input.rosterFirms !== pub.rosterFirms) {

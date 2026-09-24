@@ -1,0 +1,13 @@
+{
+  "ticket": "MA-INV-001",
+  "regulator": "Massachusetts Secretary of the Commonwealth, Securities Division",
+  "url": "https://www.sec.state.ma.us/divisions/securities/enforcement/enforcement-actions.htm",
+  "retrieved_at": "2026-09-24T16:58:59Z",
+  "http_status": 200,
+  "retrieval_method": "Headless Chromium page load (the site returns a bot redirect to direct HTTP clients). The committed file is the page <main> element verbatim.",
+  "full_page_sha256": "30d4d926c599239c06d3cff29c668c1205cdea5834a940abaa8130324e88c8cb",
+  "main_sha256": "186dd20faed16947b560bc6a06263682db4cecdb113acaa8734ced13f63c3b06",
+  "pre_2012_statement": "Contact the Securities Division for actions prior to 2012.",
+  "pre_2012_contact_url": "https://www.sec.state.ma.us/divisions/about-us/contact-us.htm#securities",
+  "linked_documents_retrieval": "NOT_ACQUIRED: document downloads returned HTTP 403 to automated retrieval and the site then throttled the listing; no PDF was parsed and no OCR was attempted."
+}

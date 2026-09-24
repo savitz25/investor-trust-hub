@@ -7,6 +7,7 @@ import { COMPENSATION_METHOD_LABELS } from './adv-profile-intelligence';
 import { REGION_NAMES, V1_RIA_RAUM_BANDS, V1_SOURCE } from './investor-home-intel';
 import { planInvestorResearch, type InvestorResearchIntent, type InvestorCondition } from './investor-research-plan';
 import { decideUsGeography, isNationwideScope } from './us-geography';
+import { MA_PUBLIC_SNAPSHOT } from './ma-public-snapshot';
 export type { InvestorResearchIntent, InvestorCondition } from './investor-research-plan';
 
 export const INVESTOR_ASK_CONTRACT = 'investor-ask-v1' as const;
@@ -905,6 +906,92 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     const query = failClosed(
       'InvestorTrustHub does not publish Columbus, Cleveland, Cincinnati, Toledo, Akron, or Dayton intelligence routes. Statewide Ohio research remains /ohio. Ranking is unsupported.',
       ['Ohio investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  // MA-INV-001: Massachusetts lenses come from the accepted IAPD compilation; exact CRD / SEC identifiers
+  // are resolved by the research plan before this core runs, so these branches never intercept them.
+  if (/\b(boston|worcester)\b/i.test(q) && /investment adviser|financial adviser|adviser|advisor|broker|\bria\b/i.test(q)) {
+    const query = failClosed(
+      'InvestorTrustHub does not publish Boston or Worcester intelligence routes. A city is geography, not a separate securities regime, and a principal-office address is not Massachusetts registration. Statewide Massachusetts research remains /massachusetts.',
+      ['Massachusetts investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  const maAsked = /\bmassachusetts\b/i.test(q) || /\bMA\b/.test(q);
+  if (maAsked && /\b(?:enforcement|disciplin\w*|consent orders?|cease[- ]and[- ]desist|complaints?|securities orders?|sanctions?|fined?|penalt\w*)\b/i.test(q)) {
+    const e = MA_PUBLIC_SNAPSHOT.enforcement;
+    const query = failClosed(
+      `The Massachusetts Securities Division enforcement archive lists ${e.announcements} announcements from ${e.archiveYears[0]} to ${e.archiveYears[1]} linking ${e.observationRows} documents: ${e.documentTypes.COMPLAINT} Complaints, ${e.documentTypes.CONSENT_ORDER} Consent Orders and other listed types. A Division complaint states allegations; it is not a finding. Orders keep their listed type. Document count is not matter count (${e.distinctCaseNumbers} printed dockets). Nothing is attached to a firm by name; exact CRD attachments: ${e.MA_ENFORCEMENT_EXACT_CRD_ATTACHMENTS}. Actions before 2012 are available by contacting the Division. Investor complaints are taken by the Division's Enforcement Section; no provider-level complaint dataset exists, and a complaint is not an enforcement order. Use /massachusetts.`,
+      ['Massachusetts investor research page.', 'Find CRD 105958.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (maAsked && /\b(?:investment adviser representatives?|iars?|adviser representatives?)\b/i.test(q)) {
+    const query = failClosed(
+      'A Massachusetts investment adviser representative is a person registered through IARD/CRD, not a firm. Person CRD is not firm CRD. A Massachusetts representative directory is not published, and representatives are never added to firm counts. Verify a person on IAPD. Use /massachusetts.',
+      ['Massachusetts investor research page.'],
+    );
+    push('Coverage', 'OPEN_SEARCH_ONLY');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (maAsked && /\b(?:broker[- ]?dealers?|brokers?|securities agents?|agents?|brokercheck|finra)\b/i.test(q)) {
+    const query = failClosed(
+      'Massachusetts broker-dealers and agents are verified through CRD and BrokerCheck; the Securities Division is the regulator and can provide registration status and disciplinary records on request. A Massachusetts-only broker-dealer or agent bulk roster was not acquired. A broker-dealer is not an investment adviser, and an agent is a person, not a firm. Use /massachusetts.',
+      ['Massachusetts investor research page.'],
+    );
+    push('Coverage', 'OPEN_SEARCH_ONLY');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (maAsked && /\b(?:era|exempt reporting advis[eo]rs?)\b/i.test(q)) {
+    const query = failClosed(
+      `IAPD lists ${MA_PUBLIC_SNAPSHOT.stateEra.activeDistinctCrd} exempt reporting advisers reporting to Massachusetts (ERA/Rgltr/@Cd=MA, 2026-09-17 compilation). An ERA is not a Massachusetts state-registered adviser and not an SEC RIA. Use /massachusetts.`,
+      ['Massachusetts investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (maAsked && /\b(?:notice[- ]fil\w*|federal[- ]covered|sec[- ]registered)\b/i.test(q)) {
+    const query = failClosed(
+      `IAPD lists ${MA_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd.toLocaleString('en-US')} SEC-registered advisers with a Massachusetts notice filing (NoticeFiled/States/@RgltrCd=MA, FILED, 2026-09-17). A notice filing is not Massachusetts state IA registration and not a Massachusetts office. Use /massachusetts.`,
+      ['Massachusetts investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (maAsked && /\b(?:headquarter\w*|principal office|main office|based in|located in)\b/i.test(q)) {
+    const query = failClosed(
+      `The SEC/IARD roster has ${MA_PUBLIC_SNAPSHOT.nationalOverlay.maPrincipalOfficeSecIardFirms} firms with a Massachusetts principal office (2026-08-27 roster geography). A principal office is not Massachusetts state registration and not a notice filing. Research them at /firms?state=MA; statewide lenses are on /massachusetts.`,
+      ['Massachusetts investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (maAsked && /\bis .+ registered in (?:massachusetts|MA)\b/i.test(q)) {
+    const query = failClosed(
+      'Current Massachusetts registration is verified on IAPD with an exact firm CRD or SEC file number. Name-only matching is unsafe. A Massachusetts principal office is not Massachusetts state registration. Use /massachusetts.',
+      ['Massachusetts investor research page.', 'Find CRD 105958.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (maAsked && /\b(?:offerings?|securities registrations?)\b/i.test(q)) {
+    const query = failClosed(
+      'Massachusetts securities offering registrations were not acquired; they are not provider identity. Use /massachusetts for adviser lenses and the enforcement archive.',
+      ['Massachusetts investor research page.'],
+    );
+    push('Coverage', 'NOT_ACQUIRED');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (maAsked && /\b(?:investment advis[eo]rs?|rias?|registered advis[eo]rs?|state[- ]registered|advis[eo]rs?|investment advisory firms?)\b/i.test(q)) {
+    const ia = MA_PUBLIC_SNAPSHOT.stateRia;
+    const query = failClosed(
+      `IAPD shows ${ia.approvedDistinctCrd} APPROVED Massachusetts state-registered investment-adviser firm CRDs on the 2026-09-17 compilation (StateRgstn/Rgltr/@Cd=MA); ${ia.condrestDistinctCrd} more are CONDREST and ${ia.termrequestDistinctCrd} have termination requested. That is not ERA (${MA_PUBLIC_SNAPSHOT.stateEra.activeDistinctCrd}), not SEC-registered notice filers (${MA_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd.toLocaleString('en-US')}), not principal-office firms (${MA_PUBLIC_SNAPSHOT.nationalOverlay.maPrincipalOfficeSecIardFirms}), and not IAR people. Do not add the classes. Use /massachusetts.`,
+      ['Massachusetts investor research page.', 'Find CRD 105958.'],
     );
     push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };
