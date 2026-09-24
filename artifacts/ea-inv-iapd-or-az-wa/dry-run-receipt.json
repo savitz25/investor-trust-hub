@@ -1,0 +1,188 @@
+{
+  "ticket": "EA-INV-IAPD-OR-AZ-WA-PRODUCTIZE-PREP",
+  "mode": "dry-run",
+  "production_ingest": false,
+  "production_db_mutation": false,
+  "public_eligibility": "internal_only",
+  "destination": "state_registration_observations",
+  "firm_create": false,
+  "firm_match": "NOT_EVALUATED_NO_LOCAL_FIRM_IDENTIFIER_EXTRACT",
+  "compilation": {
+    "path": "C:\\Users\\makei\\investor-trust-hub-or-inv-001\\data\\raw\\sec\\form-adv\\iapd-compilation-2026-09-10",
+    "state_feed": "IA_FIRM_STATE_Feed_09_10_2026.xml.gz",
+    "sec_feed": "IA_FIRM_SEC_Feed_09_10_2026.xml.gz",
+    "state_sha256": "eee21a08054418327869d201c3174c5b288b0afa3007974485a55ccd96181f6c",
+    "sec_sha256": "dd8c86eb487b569d0c8b2a2ca072da7f46b9fcf8073f9bc2c3044cad9238bd24",
+    "source_as_of": "2026-09-10",
+    "retrieved_at": "2026-09-16T18:30:00Z"
+  },
+  "expected_reference_approved_state_ia": {
+    "OR": 337,
+    "AZ": 678,
+    "WA": 600
+  },
+  "reference_note": "337/678/600 are Evidence Activation references. They are not forced.",
+  "committed_oregon_census_approved_distinct_crd": 335,
+  "state_ia_status_counts": {
+    "OR": {
+      "APPROVED": 335,
+      "TERMREQUEST": 5
+    },
+    "AZ": {
+      "APPROVED": 676,
+      "TERMREQUEST": 8
+    },
+    "WA": {
+      "APPROVED": 600,
+      "TERMREQUEST": 5
+    }
+  },
+  "approved_state_ia_ready_internal": {
+    "OR": 335,
+    "AZ": 676,
+    "WA": 600
+  },
+  "drift_vs_expected_reference": {
+    "OR": -2,
+    "AZ": -2,
+    "WA": 0
+  },
+  "idempotent_second_run": true,
+  "ledger": {
+    "by_state": {
+      "OR": {
+        "raw_rows": 2628,
+        "classes": {
+          "state_ia": {
+            "raw_rows": 340,
+            "unique_crd": 340,
+            "duplicate_collapsed": 0,
+            "ready_internal": 340,
+            "review_required": 0,
+            "duplicate_extra_rows": 0
+          },
+          "state_era": {
+            "raw_rows": 26,
+            "unique_crd": 26,
+            "duplicate_collapsed": 0,
+            "ready_internal": 26,
+            "review_required": 0,
+            "duplicate_extra_rows": 0
+          },
+          "notice_filing": {
+            "raw_rows": 2262,
+            "unique_crd": 2262,
+            "duplicate_collapsed": 0,
+            "ready_internal": 2262,
+            "review_required": 0,
+            "duplicate_extra_rows": 0
+          }
+        },
+        "unique_crd_any_class": 2622,
+        "duplicates_collapsed": 0,
+        "collisions": 0,
+        "review_required": 0,
+        "excluded": 0,
+        "ready_for_productization": 2628,
+        "exact_existing_firm_matches": null,
+        "unmatched": null,
+        "firm_match_not_evaluated": 2628,
+        "expected_destination_writes": 2628,
+        "expected_no_ops_on_second_run": 2628,
+        "public_eligibility": "internal_only"
+      },
+      "AZ": {
+        "raw_rows": 4039,
+        "classes": {
+          "state_ia": {
+            "raw_rows": 684,
+            "unique_crd": 684,
+            "duplicate_collapsed": 0,
+            "ready_internal": 684,
+            "review_required": 0,
+            "duplicate_extra_rows": 0
+          },
+          "state_era": {
+            "raw_rows": 47,
+            "unique_crd": 47,
+            "duplicate_collapsed": 0,
+            "ready_internal": 47,
+            "review_required": 0,
+            "duplicate_extra_rows": 0
+          },
+          "notice_filing": {
+            "raw_rows": 3308,
+            "unique_crd": 3308,
+            "duplicate_collapsed": 0,
+            "ready_internal": 3308,
+            "review_required": 0,
+            "duplicate_extra_rows": 0
+          }
+        },
+        "unique_crd_any_class": 4026,
+        "duplicates_collapsed": 0,
+        "collisions": 0,
+        "review_required": 0,
+        "excluded": 0,
+        "ready_for_productization": 4039,
+        "exact_existing_firm_matches": null,
+        "unmatched": null,
+        "firm_match_not_evaluated": 4039,
+        "expected_destination_writes": 4039,
+        "expected_no_ops_on_second_run": 4039,
+        "public_eligibility": "internal_only"
+      },
+      "WA": {
+        "raw_rows": 3796,
+        "classes": {
+          "state_ia": {
+            "raw_rows": 607,
+            "unique_crd": 607,
+            "duplicate_collapsed": 0,
+            "ready_internal": 605,
+            "review_required": 0,
+            "duplicate_extra_rows": 0
+          },
+          "state_era": {
+            "raw_rows": 183,
+            "unique_crd": 183,
+            "duplicate_collapsed": 0,
+            "ready_internal": 183,
+            "review_required": 0,
+            "duplicate_extra_rows": 0
+          },
+          "notice_filing": {
+            "raw_rows": 3006,
+            "unique_crd": 3006,
+            "duplicate_collapsed": 0,
+            "ready_internal": 3006,
+            "review_required": 0,
+            "duplicate_extra_rows": 0
+          }
+        },
+        "unique_crd_any_class": 3792,
+        "duplicates_collapsed": 0,
+        "collisions": 0,
+        "review_required": 2,
+        "excluded": 2,
+        "ready_for_productization": 3794,
+        "exact_existing_firm_matches": null,
+        "unmatched": null,
+        "firm_match_not_evaluated": 3794,
+        "expected_destination_writes": 3794,
+        "expected_no_ops_on_second_run": 3794,
+        "public_eligibility": "internal_only"
+      }
+    },
+    "cross_state": {
+      "label": "convenience sum of three state feeds, not one Investor identity count",
+      "raw_rows": 10463,
+      "ready_internal_observations": 10461
+    },
+    "ready_observation_count": 10461,
+    "excluded_count": 2,
+    "excluded_reasons": {
+      "unknown_status": 2
+    }
+  }
+}
