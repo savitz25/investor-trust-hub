@@ -110,7 +110,7 @@ assert(byKey.oh_state_ria_roster.grain === "oh_state_ria_roster", "OH state RIA 
 assert(v1.ohio.stateRiaRosterCoverage === "ACQUIRED_IAPD_STATE_COMPILATION", "OH coverage remains acquired");
 assert(byKey.oh_state_ria_roster.value === 784, "OH state RIA metric");
 assert(byKey.oh_state_ria_roster.valueState === "KNOWN", "OH state RIA known");
-assert(byKey.published_state_intelligence_pages.value === 13, "state pages 13");
+assert(byKey.published_state_intelligence_pages.value === 14, "state pages 14");
 assert(v1.florida.stateIntelligencePage === false, "no invented Florida page");
 assert(!pub.publishedStateIntelligencePaths.includes("/florida"), "no Florida route");
 assert(byKey.investment_advisory_firms.label === "Investment advisory firms", "consumer firm label");

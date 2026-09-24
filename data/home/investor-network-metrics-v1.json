@@ -1,9 +1,9 @@
 {
   "schemaVersion": "investor-network-metrics-v1",
-  "generatedAt": "2026-09-18T15:14:08.780Z",
+  "generatedAt": "2026-09-24T04:14:17.555Z",
   "newestDocumentedSourceAsOf": "2026-09-17",
   "newestDocumentedSourceAsOfNote": "Newest explicitly named sourceAsOf/sourceDate in accepted inputs; snapshot, retrieval and build dates excluded. Not a network-wide freshness guarantee.",
-  "sourceFingerprint": "e25570b25fc5da2fd6cc42680b0160775543fa0b6a92d5317b433061fd8d1203",
+  "sourceFingerprint": "40ee94f08e09b3401af53dd9c975205c317ceb6c474c1ae36af27b21feecc2d8",
   "source": {
     "dataset": "iapd_sec_compilation",
     "releaseLabel": "IA_FIRM_SEC_Feed_08_27_2026",
@@ -132,7 +132,7 @@
     "noticeFiledFirms": 2733
   },
   "network": {
-    "publishedStateIntelligencePages": 13,
+    "publishedStateIntelligencePages": 14,
     "publishedStateIntelligencePaths": [
       "/new-jersey",
       "/california",
@@ -146,7 +146,8 @@
       "/oregon",
       "/pennsylvania",
       "/north-carolina",
-      "/ohio"
+      "/ohio",
+      "/georgia"
     ]
   },
   "rejectedTotals": [
@@ -199,7 +200,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One current form_adv_firm_facts row per CRD in the monthly RIA+ERA pair.",
@@ -210,7 +211,7 @@
         ],
         "geographicCoverage": "National SEC IARD roster; principal office is not service territory",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 published 2026-08-27; retrieved 2026-08-28",
-        "generationDate": "2026-09-18",
+        "generationDate": "2026-09-24",
         "currentActiveRule": "dataset_kind is ria XOR era; 17,018 + 6,604 = 23,622"
       }
     },
@@ -229,7 +230,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "RIA facts (registered + pending).",
@@ -239,7 +240,7 @@
         ],
         "geographicCoverage": "National",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-18"
+        "generationDate": "2026-09-24"
       }
     },
     {
@@ -257,7 +258,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "ERA facts with reporting status.",
@@ -267,7 +268,7 @@
         ],
         "geographicCoverage": "National",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-18"
+        "generationDate": "2026-09-24"
       }
     },
     {
@@ -284,7 +285,7 @@
         "search_documents"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Indexable firm search documents on official firms.",
@@ -294,7 +295,7 @@
         ],
         "geographicCoverage": "National Wave-1 gate",
         "sourceDates": "Publication gate on IA_FIRM_SEC_Feed_08_27_2026",
-        "generationDate": "2026-09-18"
+        "generationDate": "2026-09-24"
       }
     },
     {
@@ -311,7 +312,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One form_adv_filings row.",
@@ -321,7 +322,7 @@
         ],
         "geographicCoverage": "National filing history as stored",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-18"
+        "generationDate": "2026-09-24"
       }
     },
     {
@@ -338,7 +339,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One normalized Item observation row.",
@@ -348,7 +349,7 @@
         ],
         "geographicCoverage": "National extract",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-18"
+        "generationDate": "2026-09-24"
       }
     },
     {
@@ -365,7 +366,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "RIA facts with a non-null RAUM amount. Zero is a reported value.",
@@ -375,7 +376,7 @@
         ],
         "geographicCoverage": "National RIA file",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-18"
+        "generationDate": "2026-09-24"
       }
     },
     {
@@ -392,7 +393,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "PUBLIC_PARTIAL",
       "trace": {
         "counts": "Facts with disclosure_indicator Y (RIA and ERA kept visible in Trace).",
@@ -402,7 +403,7 @@
         ],
         "geographicCoverage": "National",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-18"
+        "generationDate": "2026-09-24"
       }
     },
     {
@@ -419,7 +420,7 @@
         "disclosure_events"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "INTERNAL",
       "trace": {
         "counts": "disclosure_events rows.",
@@ -429,7 +430,7 @@
         ],
         "geographicCoverage": "National table as stored",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-18"
+        "generationDate": "2026-09-24"
       }
     },
     {
@@ -446,7 +447,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One owner/control entity observation.",
@@ -456,7 +457,7 @@
         ],
         "geographicCoverage": "National extract",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-18"
+        "generationDate": "2026-09-24"
       }
     },
     {
@@ -473,7 +474,7 @@
         "nj_bos"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "Nothing numeric is published for the complete NJ state-RIA universe.",
@@ -483,7 +484,7 @@
         ],
         "geographicCoverage": "New Jersey",
         "sourceDates": "NJ-INV snapshot as_of 2026-09-02",
-        "generationDate": "2026-09-18",
+        "generationDate": "2026-09-24",
         "whyUnknown": "A complete current New Jersey state-registered investment adviser roster remains an official records request. UNKNOWN must never render as zero."
       },
       "snapshotAsOf": "2026-09-02",
@@ -503,7 +504,7 @@
         "ca_dfpi"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "Nothing numeric is published for the complete CA state-RIA universe.",
@@ -513,7 +514,7 @@
         ],
         "geographicCoverage": "California",
         "sourceDates": "CA-INV snapshot as_of 2026-09-03",
-        "generationDate": "2026-09-18",
+        "generationDate": "2026-09-24",
         "whyUnknown": "Public DFPI verification is search-only. Do not estimate the missing state roster from SEC principal-office geography."
       },
       "snapshotAsOf": "2026-09-03",
@@ -533,7 +534,7 @@
         "tx_ssb"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "Nothing numeric is published for the complete TX state-RIA universe.",
@@ -543,7 +544,7 @@
         ],
         "geographicCoverage": "Texas",
         "sourceDates": "TX-INV snapshot as_of 2026-09-04",
-        "generationDate": "2026-09-18",
+        "generationDate": "2026-09-24",
         "whyUnknown": "Public SSB verification is search-only. Do not estimate the missing state roster from SEC principal-office geography. Missing is not zero."
       },
       "snapshotAsOf": "2026-09-04",
@@ -563,7 +564,7 @@
         "wa_dfi"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "Nothing numeric is published for the complete WA state-RIA universe.",
@@ -573,7 +574,7 @@
         ],
         "geographicCoverage": "Washington",
         "sourceDates": "WA-INV snapshot as_of 2026-09-04",
-        "generationDate": "2026-09-18",
+        "generationDate": "2026-09-24",
         "whyUnknown": "Public DFI verification is search-only. Do not estimate the missing state roster from SEC principal-office geography or from the 2024 year-end aggregate. Missing is not zero."
       },
       "snapshotAsOf": "2026-09-04",
@@ -593,7 +594,7 @@
         "az_acc"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "Nothing numeric is published for the complete AZ state-IA universe.",
@@ -603,7 +604,7 @@
         ],
         "geographicCoverage": "Arizona",
         "sourceDates": "AZ-INV snapshot as_of 2026-09-04",
-        "generationDate": "2026-09-18",
+        "generationDate": "2026-09-24",
         "whyUnknown": "ACC can provide a CSV by public-records request. The request was not filed. Do not estimate the missing state roster from SEC principal-office geography. UNKNOWN must never render as zero."
       },
       "snapshotAsOf": "2026-09-04",
@@ -623,7 +624,7 @@
         "iapd_state_compilation"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "IAPD StateRgstn/Rgltr/@Cd=CO and status APPROVED, counted as distinct firm CRD.",
@@ -633,7 +634,7 @@
         ],
         "geographicCoverage": "Colorado",
         "sourceDates": "IA_FIRM_STATE_Feed_08_27_2026",
-        "generationDate": "2026-09-18"
+        "generationDate": "2026-09-24"
       },
       "snapshotAsOf": "2026-08-27",
       "retrievedAt": "2026-08-28"
@@ -652,7 +653,7 @@
         "iapd_state_compilation"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "IAPD StateRgstn/Rgltr/@Cd=VA and status APPROVED, counted as distinct firm CRD.",
@@ -662,7 +663,7 @@
         ],
         "geographicCoverage": "Virginia",
         "sourceDates": "IA_FIRM_STATE_Feed_08_27_2026",
-        "generationDate": "2026-09-18"
+        "generationDate": "2026-09-24"
       },
       "snapshotAsOf": "2026-08-27",
       "retrievedAt": "2026-08-28"
@@ -681,7 +682,7 @@
         "iapd_state_compilation"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "IAPD StateRgstn/Rgltr/@Cd=NY and status APPROVED, counted as distinct firm CRD.",
@@ -691,7 +692,7 @@
         ],
         "geographicCoverage": "New York",
         "sourceDates": "IA_FIRM_STATE_Feed_08_27_2026",
-        "generationDate": "2026-09-18"
+        "generationDate": "2026-09-24"
       },
       "snapshotAsOf": "2026-08-27",
       "retrievedAt": "2026-08-28"
@@ -710,7 +711,7 @@
         "iapd_state_compilation"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "IAPD StateRgstn/Rgltr/@Cd=IL and status APPROVED, counted as distinct firm CRD.",
@@ -720,7 +721,7 @@
         ],
         "geographicCoverage": "Illinois",
         "sourceDates": "IA_FIRM_STATE_Feed_08_27_2026",
-        "generationDate": "2026-09-18"
+        "generationDate": "2026-09-24"
       },
       "snapshotAsOf": "2026-08-27",
       "retrievedAt": "2026-08-28"
@@ -739,7 +740,7 @@
         "iapd_state_compilation"
       ],
       "sourceAsOf": "2026-09-10",
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "IAPD StateRgstn/Rgltr/@Cd=OR and status APPROVED, counted as distinct firm CRD.",
@@ -749,7 +750,7 @@
         ],
         "geographicCoverage": "Oregon",
         "sourceDates": "IA_FIRM_STATE_Feed_09_10_2026",
-        "generationDate": "2026-09-18"
+        "generationDate": "2026-09-24"
       },
       "snapshotAsOf": "2026-09-10",
       "retrievedAt": "2026-09-16T18:30:00Z"
@@ -768,7 +769,7 @@
         "iapd_state_compilation"
       ],
       "sourceAsOf": "2026-09-17",
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "IAPD StateRgstn/Rgltr/@Cd=PA and status APPROVED, counted as distinct firm CRD.",
@@ -778,7 +779,7 @@
         ],
         "geographicCoverage": "Pennsylvania",
         "sourceDates": "IA_FIRM_STATE_Feed_09_17_2026",
-        "generationDate": "2026-09-18"
+        "generationDate": "2026-09-24"
       },
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T15:15:00Z"
@@ -797,7 +798,7 @@
         "iapd_state_compilation"
       ],
       "sourceAsOf": "2026-09-17",
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "IAPD StateRgstn/Rgltr/@Cd=NC and status APPROVED, counted as distinct firm CRD.",
@@ -807,7 +808,7 @@
         ],
         "geographicCoverage": "North Carolina",
         "sourceDates": "IA_FIRM_STATE_Feed_09_17_2026",
-        "generationDate": "2026-09-18"
+        "generationDate": "2026-09-24"
       },
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T15:15:00Z"
@@ -826,7 +827,7 @@
         "iapd_state_compilation"
       ],
       "sourceAsOf": "2026-09-17",
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "IAPD StateRgstn/Rgltr/@Cd=OH and status APPROVED, counted as distinct firm CRD.",
@@ -836,7 +837,7 @@
         ],
         "geographicCoverage": "Ohio",
         "sourceDates": "IA_FIRM_STATE_Feed_09_17_2026",
-        "generationDate": "2026-09-18"
+        "generationDate": "2026-09-24"
       },
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T15:15:00Z"
@@ -845,29 +846,29 @@
       "unit": "count",
       "key": "published_state_intelligence_pages",
       "label": "Published state investment-intelligence pages",
-      "value": 13,
+      "value": 14,
       "valueState": "KNOWN",
       "grain": "published_state_intelligence_page",
       "denominator": "Indexable specialist state intelligence routes currently published",
       "description": "Published specialist state intelligence pages including Ohio. Not a count of advisers.",
-      "coverage": "/new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio",
+      "coverage": "/new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, /georgia",
       "contributingSourceSystems": [
         "investor-state-intel"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-18T15:14:08.780Z",
+      "generatedAt": "2026-09-24T04:14:17.555Z",
       "publicationStatus": "PUBLIC",
       "trace": {
-        "counts": "Published /new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, and /ohio intelligence routes.",
+        "counts": "Published /new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, and /georgia intelligence routes.",
         "doesNotCount": "Not county pages. Not national roster rows. Florida is not published on this hub.",
         "contributingSourceSystems": [
           "investor-state-intel"
         ],
-        "geographicCoverage": "/new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio",
+        "geographicCoverage": "/new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, /georgia",
         "sourceDates": "Publication gates in specialist catalogs",
-        "generationDate": "2026-09-18"
+        "generationDate": "2026-09-24"
       },
-      "snapshotAsOf": "2026-09-18T15:14:08.780Z"
+      "snapshotAsOf": "2026-09-24T04:14:17.555Z"
     }
   ],
   "contractRevision": "ATH-METRICS-R2-04",
@@ -7156,7 +7157,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "State IA source registration rows (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7174,7 +7175,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Distinct state IA CRDs (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7192,7 +7193,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Approved state IA CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7210,7 +7211,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "State IA CRDs with termination requested",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7228,7 +7229,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": null,
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Active state ERA reporting CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7246,7 +7247,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Federal notice filing rows",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7264,7 +7265,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Distinct CRDs with a federal notice filing",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7282,7 +7283,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "SEC/IARD principal-office overlay",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7300,7 +7301,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Exact state IA / federal notice CRD bridges",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7318,7 +7319,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": "2026-09-09",
         "retrievedAt": "2026-09-09",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Sanctions narrative observations (unattached)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7336,7 +7337,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "State IA source registration rows (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7354,7 +7355,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Distinct state IA CRDs (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7372,7 +7373,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Approved state IA CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7390,7 +7391,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "State IA CRDs with termination requested",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7408,7 +7409,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": null,
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Active state ERA reporting CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7426,7 +7427,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Federal notice filing rows",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7444,7 +7445,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Distinct CRDs with a federal notice filing",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7462,7 +7463,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "SEC/IARD principal-office overlay",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7480,7 +7481,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Exact state IA / federal notice CRD bridges",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7498,7 +7499,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-10",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Regulatory activity observations (unattached)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7516,7 +7517,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-10",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Distinct regulatory case numbers",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7534,7 +7535,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "State IA source registration rows (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7552,7 +7553,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Distinct state IA CRDs (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7570,7 +7571,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Approved state IA CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7588,7 +7589,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "State IA CRDs with termination requested",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7606,7 +7607,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": null,
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Active state ERA reporting CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7624,7 +7625,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Federal notice filing rows",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7642,7 +7643,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Distinct CRDs with a federal notice filing",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7660,7 +7661,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "SEC/IARD principal-office overlay",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7678,7 +7679,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Exact state IA / federal notice CRD bridges",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7696,7 +7697,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-10",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Regulatory activity observations (unattached)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC_UNKNOWN",
@@ -7714,7 +7715,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-10",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Distinct regulatory case numbers",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC_UNKNOWN",
@@ -7732,7 +7733,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "State IA source registration rows (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7750,7 +7751,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Distinct state IA CRDs (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7768,7 +7769,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Approved state IA CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7786,7 +7787,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "State IA CRDs with termination requested",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7804,7 +7805,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": null,
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Active state ERA reporting CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7822,7 +7823,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Federal notice filing rows",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7840,7 +7841,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Distinct CRDs with a federal notice filing",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7858,7 +7859,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "SEC/IARD principal-office overlay",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7876,7 +7877,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Exact state IA / federal notice CRD bridges",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7894,7 +7895,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": "2026-09-12",
         "retrievedAt": "2026-09-12",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Regulatory activity observations (unattached)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC_UNKNOWN",
@@ -7912,7 +7913,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": "2026-09-12",
         "retrievedAt": "2026-09-12",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Distinct regulatory case numbers",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC_UNKNOWN",
@@ -7930,7 +7931,7 @@
         "sourceAsOf": "2026-09-10",
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-16T18:30:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "State IA source registration rows (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7948,7 +7949,7 @@
         "sourceAsOf": "2026-09-10",
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-16T18:30:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Distinct state IA CRDs (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7966,7 +7967,7 @@
         "sourceAsOf": "2026-09-10",
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-16T18:30:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Approved state IA CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7984,7 +7985,7 @@
         "sourceAsOf": "2026-09-10",
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-16T18:30:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "State IA CRDs with termination requested",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8002,7 +8003,7 @@
         "sourceAsOf": "2026-09-10",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-16T18:30:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Active state ERA reporting CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8020,7 +8021,7 @@
         "sourceAsOf": "2026-09-10",
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-16T18:30:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Federal notice filing rows",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8038,7 +8039,7 @@
         "sourceAsOf": "2026-09-10",
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-16T18:30:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Distinct CRDs with a federal notice filing",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8056,7 +8057,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "SEC/IARD principal-office overlay",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8074,7 +8075,7 @@
         "sourceAsOf": "2026-09-10",
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-16T18:30:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Exact state IA / federal notice CRD bridges",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8092,7 +8093,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": "2026-09-16",
         "retrievedAt": "2026-09-16",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Regulatory activity observations (unattached)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8110,7 +8111,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": "2026-09-16",
         "retrievedAt": "2026-09-16",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Distinct regulatory case numbers",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8128,7 +8129,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "State IA source registration rows (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8146,7 +8147,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Distinct state IA CRDs (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8164,7 +8165,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Approved state IA CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8182,7 +8183,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "State IA CRDs with termination requested",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8200,7 +8201,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Active state ERA reporting CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8218,7 +8219,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Federal notice filing rows",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8236,7 +8237,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Distinct CRDs with a federal notice filing",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8254,7 +8255,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "SEC/IARD principal-office overlay",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8272,7 +8273,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Exact state IA / federal notice CRD bridges",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8290,7 +8291,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T15:15:44Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Regulatory activity observations (unattached)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8308,7 +8309,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T15:15:44Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Distinct regulatory case numbers",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC_UNKNOWN",
@@ -8326,7 +8327,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "State IA source registration rows (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8344,7 +8345,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Distinct state IA CRDs (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8362,7 +8363,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Approved state IA CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8380,7 +8381,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "State IA CRDs with termination requested",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8398,7 +8399,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": null,
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Active state ERA reporting CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8416,7 +8417,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Federal notice filing rows",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8434,7 +8435,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Distinct CRDs with a federal notice filing",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8452,7 +8453,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": null,
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "SEC/IARD principal-office overlay",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8470,7 +8471,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Exact state IA / federal notice CRD bridges",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8488,7 +8489,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": null,
         "retrievedAt": null,
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Regulatory activity observations (unattached)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8506,7 +8507,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": null,
         "retrievedAt": null,
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Distinct regulatory case numbers",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC_UNKNOWN",
@@ -8524,7 +8525,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "State IA source registration rows (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8542,7 +8543,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Distinct state IA CRDs (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8560,7 +8561,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Approved state IA CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8578,7 +8579,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "State IA CRDs with termination requested",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8596,7 +8597,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": null,
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Active state ERA reporting CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8614,7 +8615,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Federal notice filing rows",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8632,7 +8633,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Distinct CRDs with a federal notice filing",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8650,7 +8651,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": null,
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "SEC/IARD principal-office overlay",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8668,7 +8669,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Exact state IA / federal notice CRD bridges",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8686,7 +8687,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": null,
         "retrievedAt": null,
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Regulatory activity observations (unattached)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC_UNKNOWN",
@@ -8704,7 +8705,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": null,
         "retrievedAt": null,
-        "generatedAt": "2026-09-18T15:14:08.780Z",
+        "generatedAt": "2026-09-24T04:14:17.555Z",
         "counts": "Distinct regulatory case numbers",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC_UNKNOWN",
@@ -8738,7 +8739,7 @@
     "artifacts/pa-inv-001-public-snapshot.json": "3094097f529bcd508c91b493f9f7e42bad4a6dc63d638f269926ab6af6aadb90",
     "artifacts/nc-inv-001-public-snapshot.json": "3d0996bbcd8b63b1f0d0c39270084c60d478e7a8bf8ad4702391b48aa611ed09",
     "artifacts/oh-inv-001-public-snapshot.json": "6b7dbd2c8ef9f90548660c3dd3d4f54cc5871066e97ccc4a3b598ca2bebf6903",
-    "packages/config/src/routes.ts": "5be7faacb7315fb106b713a7ea7bf49f0db4951d0498d6e29b2b7f38285b81ca",
+    "packages/config/src/routes.ts": "2433e251489c692b493ebf6f6423f8f35aed99f11a543258aba8d8ac72aa48af",
     "scripts/publication_metric_inputs.mjs": "bff2927b7bf26d744f9e8cfca232f2e0d10e561fb31fec707213f2529ec7941e",
     "scripts/build_network_metrics_v1.mjs": "967aa2755cf7e0ab65ccc1935e8cb33ebde3efe3f71beec93e797c30c26a072a",
     "scripts/reconcile-network-metrics-r2-04.mjs": "4821b21b5c7f93b77c671e0142beb3894673a72a0d649482a20d77ba09048606"
