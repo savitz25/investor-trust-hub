@@ -143,9 +143,18 @@ function fixtureDb() {
     if (state) rows = rows.filter((r) => r.region === state);
     const crd = param(/crd.identifier_value = \$(\d+)/);
     if (crd) rows = rows.filter((r) => r.crd === crd);
-    const name = param(/f.display_name ILIKE \$(\d+)/);
-    if (name)
-      rows = rows.filter((r) => r.display_name.toLowerCase().includes(name.slice(1, -1).toLowerCase()));
+    // TH-SEARCH-R1-019H: the real predicate now normalizes punctuation on both sides via
+    // btrim(regexp_replace(lower(...), '[^a-z0-9]+', ' ', 'g')) LIKE $n instead of a raw ILIKE, so
+    // the fixture mock replicates that same normalization to keep asserting real row-filtering
+    // behavior instead of silently matching everything once the old ILIKE pattern stopped appearing.
+    const normalize = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+    const name = param(/btrim\(regexp_replace\(lower\(f\.display_name\)[\s\S]*?LIKE \$(\d+)/);
+    if (name) {
+      const needle = normalize(name.slice(1, -1));
+      rows = rows.filter(
+        (r) => normalize(r.display_name).includes(needle) || normalize(r.legal_name).includes(needle),
+      );
+    }
     if (sql.includes("adv.dataset_kind = 'ria'")) rows = rows.filter((r) => r.dataset_kind === 'ria');
     if (sql.includes("adv.dataset_kind = 'era'")) rows = rows.filter((r) => r.dataset_kind === 'era');
     if (sql.includes('count(')) return { rows: [{ n: rows.length }] };
@@ -166,8 +175,13 @@ describe('R1-012 typed plan and production source predicates', () => {
   it('structured unspecified evidence cannot bypass identity requirement',async()=>{fixtureDb();const p=structuredRequestToParsed(specialistExecutionRequestSchema.parse({queryType:'evidence',requestedEvidence:['disclosures']}));const r=await executeParsedInvestorAsk(p);expect(r.terminalState).toBe('NEEDS_CLARIFICATION');expect(db.query).not.toHaveBeenCalled();});
   it('city counts execute the same full compound cohort before pagination',async()=>{fixtureDb();const r=await executeInvestorAsk('How many investment advisers in Austin Texas?');expect(r.counts.map(c=>c.value)).toEqual([1,1]);expect(db.query.mock.calls.every(([s])=>s.includes('lower(b.city)')&&s.includes('b.region ='))).toBe(true);});
   it('held profiles and separate identities remain separate',async()=>{fixtureDb();const r=await executeInvestorAsk('research "Alpha Advisors"');expect(r.results).toHaveLength(2);expect(r.results.find(r=>r.crd==='105')?.href).toBeNull();expect(new Set(r.results.map(r=>r.crd)).size).toBe(2);});
-  it('name predicates and exact-name relevance precede the limit',async()=>{fixtureDb();await executeInvestorAsk('show me Form ADV for Alpha');const s=db.query.mock.calls.find(([s])=>s.includes('LIMIT'))![0];expect(s).toMatch(/WHERE[\s\S]*ILIKE[\s\S]*ORDER BY CASE WHEN lower\(f.legal_name\)[\s\S]*LIMIT/);});
-  it('SQL wildcard characters remain bound and escaped',async()=>{fixtureDb();await executeInvestorAsk('research "Alpha_% LLC"');const call=db.query.mock.calls.find(([s])=>s.includes('WHERE'))!;expect(call[0]).not.toContain('Alpha_%');expect(call[1]).toContain('%Alpha\\_\\% LLC%');});
+  // TH-SEARCH-R1-019H: name matching now normalizes punctuation on both sides of the predicate
+  // (btrim(regexp_replace(lower(...), '[^a-z0-9]+', ' ', 'g')) LIKE $n) instead of a raw
+  // punctuation-sensitive ILIKE, so a real source-backed firm is not lost solely because the query
+  // and the stored name differ only in comma/period/ampersand/legal-suffix punctuation presentation
+  // (Sections 1 & 3). The match-before-pagination and exact-name-first-ordering shape is unchanged.
+  it('name predicates and normalized exact-name relevance precede the limit',async()=>{fixtureDb();await executeInvestorAsk('show me Form ADV for Alpha');const s=db.query.mock.calls.find(([s])=>s.includes('LIMIT'))![0];expect(s).toMatch(/WHERE[\s\S]*regexp_replace\(lower\(f\.display_name\)[\s\S]*LIKE[\s\S]*ORDER BY CASE WHEN[\s\S]*regexp_replace\(lower\(f\.legal_name\)[\s\S]*LIMIT/);});
+  it('SQL wildcard/punctuation characters remain bound (no raw string concatenation) and are folded, not literally interpreted',async()=>{fixtureDb();await executeInvestorAsk('research "Alpha_% LLC"');const call=db.query.mock.calls.find(([s])=>s.includes('WHERE'))!;expect(call[0]).not.toContain('Alpha_%');expect(call[0]).not.toContain('Alpha');expect(call[1]).toContain('%alpha llc%');});
   it('exact identity retains unsupported additional registration condition without substitution',async()=>{fixtureDb();const r=await executeInvestorAsk('CRD 105958 registered in Wyoming');expect(r.results.map(r=>r.crd)).toEqual(['105958']);expect(r.parsed.query.conditions).toContainEqual(expect.objectContaining({kind:'registration_jurisdiction',requested:'WY',outcome:'NEEDS_CLARIFICATION'}));expect(r.results[0]?.whyMatched).not.toContain('Wyoming');});
   it.each([
     'manage my portfolio',

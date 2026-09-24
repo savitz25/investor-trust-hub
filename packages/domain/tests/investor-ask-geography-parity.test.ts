@@ -316,6 +316,39 @@ describe('TH-DISCOVERY-PARITY-001B: general city/county/state geography resoluti
       expect(parsed.query.nameQuery).toBe('Vanguard Personal Advisor');
       expect(parsed.query.geography).toBeUndefined();
     });
+
+    // TH-SEARCH-R1-019H-R1: real-data holdout regression. "Advisor(s)" is only exempted from the
+    // generic-descriptive-question signal when it is the name's own final word -- but a real firm's
+    // final word is very commonly a trailing legal-suffix word after "Advisors" ("..., LLC",
+    // "..., Inc."), not literally the last token. Before this fix both real firm names below were
+    // misclassified as FIRM_DISCOVERY, silently dropping the name filter and serving the entire
+    // ~23.6k-row unfiltered roster instead of the one matching firm.
+    it('"1620 Investment Advisors, Inc." resolves as an exact firm-name lookup, not an unfiltered roster dump', () => {
+      const parsed = expectNeverUnfilteredNationalDump('1620 Investment Advisors, Inc.');
+      expect(parsed.query.mode).toBe('entity');
+      expect(parsed.query.nameQuery).toBe('1620 Investment Advisors, Inc.');
+    });
+
+    it('"Anchor & Oak Wealth Advisors, LLC" resolves as an exact firm-name lookup, not an unfiltered roster dump', () => {
+      const parsed = expectNeverUnfilteredNationalDump('Anchor & Oak Wealth Advisors, LLC');
+      expect(parsed.query.mode).toBe('entity');
+      expect(parsed.query.nameQuery).toBe('Anchor & Oak Wealth Advisors, LLC');
+    });
+
+    // Mutation guard: a real generic question must still never be misread as a literal firm name
+    // just because this fix widened the trailing-suffix tolerance after "advisor(s)".
+    it('"investment advisers in Texas" still resolves as a category + geography question, not a literal name', () => {
+      const parsed = interpretInvestorAskQuery('investment advisers in Texas');
+      expect(parsed.query.nameQuery).toBeUndefined();
+      expect(parsed.query.geography?.value).toBe('TX');
+    });
+
+    it('a trailing legal-suffix word after "advisors" only exempts it when that word is itself the final token', () => {
+      // "group" is a recognized trailing legal-suffix word, but here it is not the sentence's own
+      // final token (more text follows) -- this must still be excluded as a generic mid-sentence use.
+      const parsed = interpretInvestorAskQuery('wealth advisors group profile');
+      expect(parsed.query.nameQuery).toBeUndefined();
+    });
   });
 
   describe('count mode benefits from the same general geography resolution', () => {

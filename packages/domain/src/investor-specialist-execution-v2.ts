@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { COMPENSATION_METHOD_LABELS } from './adv-profile-intelligence';
+import { AMBIGUOUS_IDENTIFIER_REASON, isOrganizationNameShape } from './firm-name-match';
 import {
   type CompensationMethodKey,
   type InvestorFirmType,
@@ -120,17 +121,33 @@ function mapFirmType(entityClass: SpecialistExecutionRequest['entityClass']): In
 
 export function structuredRequestToParsed(request: SpecialistExecutionRequest): ParsedInvestorAsk {
   const geography = resolvePrincipalOfficeGeography(request.geography);
+  // TH-SEARCH-R1-019H (Section 7 -- identifier precedence / native-structured parity): identityName
+  // used to be passed straight through with no shape check at all, so a bare/ambiguous
+  // identifier-shaped value ("123456", an unlabeled SEC-file shape like "801-11953") silently
+  // became an unbounded ILIKE name search here even though the identical raw string submitted to
+  // native /ask fails closed with an ambiguous-identifier reason. Both paths now run the same
+  // isOrganizationNameShape() primitive (firm-name-match.ts) so they classify identically -- name
+  // normalization must never run ahead of exact labeled identifier parsing on either path.
+  const identityAmbiguous =
+    request.queryType === 'identity' &&
+    request.identityName !== undefined &&
+    !isOrganizationNameShape(request.identityName);
   const query: InvestorResearchQuery = {
-    mode: request.queryType === 'identifier' ? 'identifier' : 'entity', page: request.page,
+    mode: request.queryType === 'identifier' ? 'identifier' : identityAmbiguous ? 'fail_closed' : 'entity',
+    page: request.page,
     firmType: mapFirmType(request.entityClass), geography,
     identifier: request.identifier ? { type: 'crd', value: request.identifier.value } : undefined,
-    nameQuery: request.identityName,
+    nameQuery: identityAmbiguous ? undefined : request.identityName,
     raum: request.filters?.minimumRaum !== undefined || request.filters?.maximumRaum !== undefined
       ? { min: request.filters.minimumRaum, maxExclusive: request.filters.maximumRaum } : undefined,
     compensationMethods: request.filters?.compensationMethods, compensationMatch: 'all',
     status: request.filters?.registrationType?.[0], evidenceFamilies: request.requestedEvidence,
     sort: request.queryType === 'identifier' ? 'crd' : 'name',
   };
+  if (identityAmbiguous) {
+    query.terminalState = 'NEEDS_CLARIFICATION';
+    query.failReason = AMBIGUOUS_IDENTIFIER_REASON;
+  }
   if(request.queryType==='evidence') {
     query.intent=request.requestedEvidence?.some(e=>/disclosure/i.test(e))?'DISCLOSURE_RESEARCH':'FORM_ADV_RESEARCH';
     if(!query.identifier&&!query.nameQuery){query.mode='fail_closed';query.terminalState='NEEDS_CLARIFICATION';query.failReason='An exact firm identifier or name is required before firm evidence can be attached.';}
