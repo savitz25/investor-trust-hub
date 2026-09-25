@@ -63,6 +63,9 @@ async function main() {
     maPrincipalOfficeFirms: pub.maPrincipalOfficeFirms,
     maStateRiaApproved: pub.maStateRiaApproved,
     maNoticeFiled: pub.maNoticeFiled,
+    tnPrincipalOfficeFirms: pub.tnPrincipalOfficeFirms,
+    tnStateRiaApproved: pub.tnStateRiaApproved,
+    tnNoticeFiled: pub.tnNoticeFiled,
   };
 
   if (input.riaFacts !== pub.riaFacts || input.eraFacts !== pub.eraFacts || input.rosterFirms !== pub.rosterFirms) {

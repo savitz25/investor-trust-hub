@@ -3,6 +3,7 @@ import NC_PUBLIC_SNAPSHOT from '../../../artifacts/nc-inv-001-public-snapshot.js
 import OH_PUBLIC_SNAPSHOT from '../../../artifacts/oh-inv-001-public-snapshot.json';
 import GA_PUBLIC_SNAPSHOT from '../../../artifacts/ga-inv-001-public-snapshot.json';
 import MA_PUBLIC_SNAPSHOT from '../../../artifacts/ma-inv-001-public-snapshot.json';
+import TN_PUBLIC_SNAPSHOT from '../../../artifacts/tn-inv-001-public-snapshot.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -74,7 +75,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN';
   name: string;
   href: string;
   regulator: string;
@@ -732,6 +733,47 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
         label: 'SEC/IARD principal-office overlay',
         sourceAsOf: MA_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
         retrievedAt: MA_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+        snapshotAsOf: null,
+        generatedAt: null,
+      },
+    ],
+  },
+  {
+    code: 'TN',
+    name: 'Tennessee',
+    href: TN_PUBLIC_SNAPSHOT.route,
+    regulator: 'Tennessee Securities Division',
+    principalOfficeFirms: TN_PUBLIC_SNAPSHOT.nationalOverlay.tnPrincipalOfficeSecIardFirms,
+    rosterStatus: `IAPD TN APPROVED state IA ${TN_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd.toLocaleString('en-US')} firm CRDs as of ${TN_PUBLIC_SNAPSHOT.stateRia.sourceAsOf}`,
+    evidence: [
+      'IAPD Tennessee state-registered IA compilation',
+      'IAPD Tennessee state ERA reporting',
+      'federal-covered notice filings',
+      'Securities Division Consent and Cease and Desist Order archives (separate)',
+    ],
+    identityNote:
+      'IAPD jurisdiction=TN APPROVED is the state IA spine. A Tennessee principal office is not registration. An order links to a firm only through an exact firm CRD printed in the order. IAR people are not IA firms.',
+    limitation:
+      'Do not add state IA+ERA+notice+principal office. Consent Orders and Cease and Desist Orders stay separate. A listing is not a matter. Name-only enforcement attachment is unsafe.',
+    sourceClocks: [
+      {
+        label: 'IAPD state compilation',
+        sourceAsOf: TN_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+        retrievedAt: TN_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+        snapshotAsOf: TN_PUBLIC_SNAPSHOT.asOf,
+        generatedAt: null,
+      },
+      {
+        label: 'Securities Division order archives',
+        sourceAsOf: null,
+        retrievedAt: TN_PUBLIC_SNAPSHOT.enforcement.retrievedAt,
+        snapshotAsOf: TN_PUBLIC_SNAPSHOT.asOf,
+        generatedAt: null,
+      },
+      {
+        label: 'SEC/IARD principal-office overlay',
+        sourceAsOf: TN_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+        retrievedAt: TN_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
         snapshotAsOf: null,
         generatedAt: null,
       },
@@ -1671,6 +1713,102 @@ export function buildInvestorHomepageEvidenceInventory(): InvestorHomepageEviden
       MA_PUBLIC_SNAPSHOT.enforcement.retrievedAt,
       'No name-only attachment. Exact CRD attachments: 0.',
       'Pre-2012 actions are available only by contacting the Division.',
+    ),
+    stateMeasure(
+      'tn_hq_overlay',
+      'SEC/IARD firms with a Tennessee principal office',
+      TN_PUBLIC_SNAPSHOT.nationalOverlay.tnPrincipalOfficeSecIardFirms,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'SEC/IARD firm with TN principal office',
+      'Tennessee',
+      'SEC IAPD / IARD',
+      'artifacts/tn-inv-001-public-snapshot.json',
+      TN_PUBLIC_SNAPSHOT.asOf,
+      'Federal roster firms reporting a TN principal office.',
+      'Tennessee state-RIA roster, notice filing, ERA, or Securities Division authority.',
+      '/tennessee',
+      'PUBLIC',
+      TN_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+      TN_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+    ),
+    stateMeasure(
+      'tn_state_roster',
+      'Tennessee IAPD state-registered investment-adviser firms',
+      TN_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'IAPD state-compilation APPROVED firm with jurisdiction TN',
+      'Tennessee',
+      'IAPD state compilation',
+      'artifacts/tn-inv-001-public-snapshot.json',
+      TN_PUBLIC_SNAPSHOT.asOf,
+      'Approved Tennessee state-IA firms in IA_FIRM_STATE_Feed_09_17_2026.',
+      'TERMREQUEST rows, SEC principal-office overlay, federal notice filings, ERA reporting, or IAR people.',
+      '/tennessee',
+      'PUBLIC',
+      TN_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+      TN_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+      'Exact firm CRD.',
+      'Filter is registration jurisdiction, not address.',
+    ),
+    stateMeasure(
+      'tn_notice_filed',
+      'SEC/IARD firms with a Tennessee notice filing',
+      TN_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'NoticeFiled RgltrCd=TN FILED',
+      'Tennessee',
+      'SEC IAPD / IARD',
+      'artifacts/tn-inv-001-public-snapshot.json',
+      TN_PUBLIC_SNAPSHOT.asOf,
+      'SEC/IARD firms with a Tennessee notice filing in the cited compilation.',
+      'Tennessee state-RIA registration or the 264 principal-office overlay.',
+      '/tennessee',
+      'PUBLIC',
+      TN_PUBLIC_SNAPSHOT.federalNotice.sourceAsOf,
+      TN_PUBLIC_SNAPSHOT.federalNotice.retrievedAt,
+    ),
+    stateMeasure(
+      'tn_consent_orders',
+      'Tennessee Securities Division Consent Order listings',
+      TN_PUBLIC_SNAPSHOT.enforcement.consentOrders.listings,
+      'KNOWN',
+      'DISCLOSURE_REGULATORY',
+      'Consent Order listing on the Division archive',
+      'Tennessee',
+      'Tennessee Securities Division',
+      'artifacts/tn-inv-001-public-snapshot.json',
+      TN_PUBLIC_SNAPSHOT.asOf,
+      'Consent Order listings on the public archive (1998-2026), each kept as listed.',
+      'Cease and Desist Orders, unique matters, attached profiles, or name-only matches.',
+      '/tennessee',
+      'PUBLIC',
+      null,
+      TN_PUBLIC_SNAPSHOT.enforcement.retrievedAt,
+      'Exact firm CRD links only; no name-only attachment.',
+      'Listings are not matters.',
+    ),
+    stateMeasure(
+      'tn_cease_and_desist_orders',
+      'Tennessee Securities Division Cease and Desist Order listings',
+      TN_PUBLIC_SNAPSHOT.enforcement.ceaseAndDesistOrders.listings,
+      'KNOWN',
+      'DISCLOSURE_REGULATORY',
+      'Cease and Desist Order listing on the Division archive',
+      'Tennessee',
+      'Tennessee Securities Division',
+      'artifacts/tn-inv-001-public-snapshot.json',
+      TN_PUBLIC_SNAPSHOT.asOf,
+      'Cease and Desist Order listings on the public archive (1998-2026), each kept as listed.',
+      'Consent Orders, findings beyond what each order states, attached profiles, or name-only matches.',
+      '/tennessee',
+      'PUBLIC',
+      null,
+      TN_PUBLIC_SNAPSHOT.enforcement.retrievedAt,
+      'No name-only attachment.',
+      'Listings are not matters.',
     ),
     stateMeasure(
       'az_index_crd_mentions',

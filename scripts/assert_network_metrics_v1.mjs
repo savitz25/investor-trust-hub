@@ -116,7 +116,13 @@ assert(v1.massachusetts.noticeFiledFirms === pub.maNoticeFiled, "MA notice filed
 assert(byKey.ma_state_ria_roster.grain === "ma_state_ria_roster", "MA state RIA grain key");
 assert(byKey.ma_state_ria_roster.value === 773, "MA state RIA metric");
 assert(byKey.ma_state_ria_roster.value !== pub.maNoticeFiled && byKey.ma_state_ria_roster.value !== pub.maPrincipalOfficeFirms, "MA lenses stay distinct");
-assert(byKey.published_state_intelligence_pages.value === 15, "state pages 15");
+assert(v1.tennessee.principalOfficeRosterFirms === pub.tnPrincipalOfficeFirms, "TN principal-office overlay");
+assert(v1.tennessee.statewideStateRiaUniverse === pub.tnStateRiaApproved, "TN state-RIA approved");
+assert(v1.tennessee.noticeFiledFirms === pub.tnNoticeFiled, "TN notice filed");
+assert(byKey.tn_state_ria_roster.grain === "tn_state_ria_roster", "TN state RIA grain key");
+assert(byKey.tn_state_ria_roster.value === 327, "TN state RIA metric");
+assert(byKey.tn_state_ria_roster.value !== pub.tnNoticeFiled && byKey.tn_state_ria_roster.value !== pub.tnPrincipalOfficeFirms, "TN lenses stay distinct");
+assert(byKey.published_state_intelligence_pages.value === 16, "state pages 16");
 assert(v1.florida.stateIntelligencePage === false, "no invented Florida page");
 assert(!pub.publishedStateIntelligencePaths.includes("/florida"), "no Florida route");
 assert(byKey.investment_advisory_firms.label === "Investment advisory firms", "consumer firm label");

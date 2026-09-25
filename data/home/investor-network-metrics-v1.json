@@ -1,9 +1,9 @@
 {
   "schemaVersion": "investor-network-metrics-v1",
-  "generatedAt": "2026-09-24T17:16:12.195Z",
+  "generatedAt": "2026-09-25T12:42:48.175Z",
   "newestDocumentedSourceAsOf": "2026-09-17",
   "newestDocumentedSourceAsOfNote": "Newest explicitly named sourceAsOf/sourceDate in accepted inputs; snapshot, retrieval and build dates excluded. Not a network-wide freshness guarantee.",
-  "sourceFingerprint": "ed6a5670aed7892b2b7a4b10937dd5164590fb6fd13a9bcbc3d440416c43a8b9",
+  "sourceFingerprint": "1d31945223eca3d55e4756f16fa8ae253c09665a366c9e498d873661c245e089",
   "source": {
     "dataset": "iapd_sec_compilation",
     "releaseLabel": "IA_FIRM_SEC_Feed_08_27_2026",
@@ -137,8 +137,14 @@
     "statewideStateRiaUniverse": 773,
     "noticeFiledFirms": 3272
   },
+  "tennessee": {
+    "principalOfficeRosterFirms": 264,
+    "stateRiaRosterCoverage": "ACQUIRED_IAPD_STATE_COMPILATION",
+    "statewideStateRiaUniverse": 327,
+    "noticeFiledFirms": 2685
+  },
   "network": {
-    "publishedStateIntelligencePages": 15,
+    "publishedStateIntelligencePages": 16,
     "publishedStateIntelligencePaths": [
       "/new-jersey",
       "/california",
@@ -154,7 +160,8 @@
       "/north-carolina",
       "/ohio",
       "/georgia",
-      "/massachusetts"
+      "/massachusetts",
+      "/tennessee"
     ]
   },
   "rejectedTotals": [
@@ -207,7 +214,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One current form_adv_firm_facts row per CRD in the monthly RIA+ERA pair.",
@@ -218,7 +225,7 @@
         ],
         "geographicCoverage": "National SEC IARD roster; principal office is not service territory",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 published 2026-08-27; retrieved 2026-08-28",
-        "generationDate": "2026-09-24",
+        "generationDate": "2026-09-25",
         "currentActiveRule": "dataset_kind is ria XOR era; 17,018 + 6,604 = 23,622"
       }
     },
@@ -237,7 +244,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "RIA facts (registered + pending).",
@@ -247,7 +254,7 @@
         ],
         "geographicCoverage": "National",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-24"
+        "generationDate": "2026-09-25"
       }
     },
     {
@@ -265,7 +272,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "ERA facts with reporting status.",
@@ -275,7 +282,7 @@
         ],
         "geographicCoverage": "National",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-24"
+        "generationDate": "2026-09-25"
       }
     },
     {
@@ -292,7 +299,7 @@
         "search_documents"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "Indexable firm search documents on official firms.",
@@ -302,7 +309,7 @@
         ],
         "geographicCoverage": "National Wave-1 gate",
         "sourceDates": "Publication gate on IA_FIRM_SEC_Feed_08_27_2026",
-        "generationDate": "2026-09-24"
+        "generationDate": "2026-09-25"
       }
     },
     {
@@ -319,7 +326,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One form_adv_filings row.",
@@ -329,7 +336,7 @@
         ],
         "geographicCoverage": "National filing history as stored",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-24"
+        "generationDate": "2026-09-25"
       }
     },
     {
@@ -346,7 +353,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One normalized Item observation row.",
@@ -356,7 +363,7 @@
         ],
         "geographicCoverage": "National extract",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-24"
+        "generationDate": "2026-09-25"
       }
     },
     {
@@ -373,7 +380,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "RIA facts with a non-null RAUM amount. Zero is a reported value.",
@@ -383,7 +390,7 @@
         ],
         "geographicCoverage": "National RIA file",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-24"
+        "generationDate": "2026-09-25"
       }
     },
     {
@@ -400,7 +407,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC_PARTIAL",
       "trace": {
         "counts": "Facts with disclosure_indicator Y (RIA and ERA kept visible in Trace).",
@@ -410,7 +417,7 @@
         ],
         "geographicCoverage": "National",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-24"
+        "generationDate": "2026-09-25"
       }
     },
     {
@@ -427,7 +434,7 @@
         "disclosure_events"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "INTERNAL",
       "trace": {
         "counts": "disclosure_events rows.",
@@ -437,7 +444,7 @@
         ],
         "geographicCoverage": "National table as stored",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-24"
+        "generationDate": "2026-09-25"
       }
     },
     {
@@ -454,7 +461,7 @@
         "form_adv"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One owner/control entity observation.",
@@ -464,7 +471,7 @@
         ],
         "geographicCoverage": "National extract",
         "sourceDates": "IA_FIRM_SEC_Feed_08_27_2026 2026-08-27",
-        "generationDate": "2026-09-24"
+        "generationDate": "2026-09-25"
       }
     },
     {
@@ -481,7 +488,7 @@
         "nj_bos"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "Nothing numeric is published for the complete NJ state-RIA universe.",
@@ -491,7 +498,7 @@
         ],
         "geographicCoverage": "New Jersey",
         "sourceDates": "NJ-INV snapshot as_of 2026-09-02",
-        "generationDate": "2026-09-24",
+        "generationDate": "2026-09-25",
         "whyUnknown": "A complete current New Jersey state-registered investment adviser roster remains an official records request. UNKNOWN must never render as zero."
       },
       "snapshotAsOf": "2026-09-02",
@@ -511,7 +518,7 @@
         "ca_dfpi"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "Nothing numeric is published for the complete CA state-RIA universe.",
@@ -521,7 +528,7 @@
         ],
         "geographicCoverage": "California",
         "sourceDates": "CA-INV snapshot as_of 2026-09-03",
-        "generationDate": "2026-09-24",
+        "generationDate": "2026-09-25",
         "whyUnknown": "Public DFPI verification is search-only. Do not estimate the missing state roster from SEC principal-office geography."
       },
       "snapshotAsOf": "2026-09-03",
@@ -541,7 +548,7 @@
         "tx_ssb"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "Nothing numeric is published for the complete TX state-RIA universe.",
@@ -551,7 +558,7 @@
         ],
         "geographicCoverage": "Texas",
         "sourceDates": "TX-INV snapshot as_of 2026-09-04",
-        "generationDate": "2026-09-24",
+        "generationDate": "2026-09-25",
         "whyUnknown": "Public SSB verification is search-only. Do not estimate the missing state roster from SEC principal-office geography. Missing is not zero."
       },
       "snapshotAsOf": "2026-09-04",
@@ -571,7 +578,7 @@
         "wa_dfi"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "Nothing numeric is published for the complete WA state-RIA universe.",
@@ -581,7 +588,7 @@
         ],
         "geographicCoverage": "Washington",
         "sourceDates": "WA-INV snapshot as_of 2026-09-04",
-        "generationDate": "2026-09-24",
+        "generationDate": "2026-09-25",
         "whyUnknown": "Public DFI verification is search-only. Do not estimate the missing state roster from SEC principal-office geography or from the 2024 year-end aggregate. Missing is not zero."
       },
       "snapshotAsOf": "2026-09-04",
@@ -601,7 +608,7 @@
         "az_acc"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC_UNKNOWN",
       "trace": {
         "counts": "Nothing numeric is published for the complete AZ state-IA universe.",
@@ -611,7 +618,7 @@
         ],
         "geographicCoverage": "Arizona",
         "sourceDates": "AZ-INV snapshot as_of 2026-09-04",
-        "generationDate": "2026-09-24",
+        "generationDate": "2026-09-25",
         "whyUnknown": "ACC can provide a CSV by public-records request. The request was not filed. Do not estimate the missing state roster from SEC principal-office geography. UNKNOWN must never render as zero."
       },
       "snapshotAsOf": "2026-09-04",
@@ -631,7 +638,7 @@
         "iapd_state_compilation"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "IAPD StateRgstn/Rgltr/@Cd=CO and status APPROVED, counted as distinct firm CRD.",
@@ -641,7 +648,7 @@
         ],
         "geographicCoverage": "Colorado",
         "sourceDates": "IA_FIRM_STATE_Feed_08_27_2026",
-        "generationDate": "2026-09-24"
+        "generationDate": "2026-09-25"
       },
       "snapshotAsOf": "2026-08-27",
       "retrievedAt": "2026-08-28"
@@ -660,7 +667,7 @@
         "iapd_state_compilation"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "IAPD StateRgstn/Rgltr/@Cd=VA and status APPROVED, counted as distinct firm CRD.",
@@ -670,7 +677,7 @@
         ],
         "geographicCoverage": "Virginia",
         "sourceDates": "IA_FIRM_STATE_Feed_08_27_2026",
-        "generationDate": "2026-09-24"
+        "generationDate": "2026-09-25"
       },
       "snapshotAsOf": "2026-08-27",
       "retrievedAt": "2026-08-28"
@@ -689,7 +696,7 @@
         "iapd_state_compilation"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "IAPD StateRgstn/Rgltr/@Cd=NY and status APPROVED, counted as distinct firm CRD.",
@@ -699,7 +706,7 @@
         ],
         "geographicCoverage": "New York",
         "sourceDates": "IA_FIRM_STATE_Feed_08_27_2026",
-        "generationDate": "2026-09-24"
+        "generationDate": "2026-09-25"
       },
       "snapshotAsOf": "2026-08-27",
       "retrievedAt": "2026-08-28"
@@ -718,7 +725,7 @@
         "iapd_state_compilation"
       ],
       "sourceAsOf": "2026-08-27",
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "IAPD StateRgstn/Rgltr/@Cd=IL and status APPROVED, counted as distinct firm CRD.",
@@ -728,7 +735,7 @@
         ],
         "geographicCoverage": "Illinois",
         "sourceDates": "IA_FIRM_STATE_Feed_08_27_2026",
-        "generationDate": "2026-09-24"
+        "generationDate": "2026-09-25"
       },
       "snapshotAsOf": "2026-08-27",
       "retrievedAt": "2026-08-28"
@@ -747,7 +754,7 @@
         "iapd_state_compilation"
       ],
       "sourceAsOf": "2026-09-10",
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "IAPD StateRgstn/Rgltr/@Cd=OR and status APPROVED, counted as distinct firm CRD.",
@@ -757,7 +764,7 @@
         ],
         "geographicCoverage": "Oregon",
         "sourceDates": "IA_FIRM_STATE_Feed_09_10_2026",
-        "generationDate": "2026-09-24"
+        "generationDate": "2026-09-25"
       },
       "snapshotAsOf": "2026-09-10",
       "retrievedAt": "2026-09-16T18:30:00Z"
@@ -776,7 +783,7 @@
         "iapd_state_compilation"
       ],
       "sourceAsOf": "2026-09-17",
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "IAPD StateRgstn/Rgltr/@Cd=PA and status APPROVED, counted as distinct firm CRD.",
@@ -786,7 +793,7 @@
         ],
         "geographicCoverage": "Pennsylvania",
         "sourceDates": "IA_FIRM_STATE_Feed_09_17_2026",
-        "generationDate": "2026-09-24"
+        "generationDate": "2026-09-25"
       },
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T15:15:00Z"
@@ -805,7 +812,7 @@
         "iapd_state_compilation"
       ],
       "sourceAsOf": "2026-09-17",
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "IAPD StateRgstn/Rgltr/@Cd=NC and status APPROVED, counted as distinct firm CRD.",
@@ -815,7 +822,7 @@
         ],
         "geographicCoverage": "North Carolina",
         "sourceDates": "IA_FIRM_STATE_Feed_09_17_2026",
-        "generationDate": "2026-09-24"
+        "generationDate": "2026-09-25"
       },
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T15:15:00Z"
@@ -834,7 +841,7 @@
         "iapd_state_compilation"
       ],
       "sourceAsOf": "2026-09-17",
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "IAPD StateRgstn/Rgltr/@Cd=OH and status APPROVED, counted as distinct firm CRD.",
@@ -844,7 +851,7 @@
         ],
         "geographicCoverage": "Ohio",
         "sourceDates": "IA_FIRM_STATE_Feed_09_17_2026",
-        "generationDate": "2026-09-24"
+        "generationDate": "2026-09-25"
       },
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T15:15:00Z"
@@ -863,7 +870,7 @@
         "iapd_state_compilation"
       ],
       "sourceAsOf": "2026-09-17",
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "IAPD StateRgstn/Rgltr/@Cd=MA and status APPROVED, counted as distinct firm CRD.",
@@ -873,7 +880,36 @@
         ],
         "geographicCoverage": "Massachusetts",
         "sourceDates": "IA_FIRM_STATE_Feed_09_17_2026",
-        "generationDate": "2026-09-24"
+        "generationDate": "2026-09-25"
+      },
+      "snapshotAsOf": "2026-09-17",
+      "retrievedAt": "2026-09-17T15:15:00Z"
+    },
+    {
+      "unit": "count",
+      "key": "tn_state_ria_roster",
+      "label": "Tennessee state-registered investment-adviser firms",
+      "value": 327,
+      "valueState": "KNOWN",
+      "grain": "tn_state_ria_roster",
+      "denominator": "IAPD state compilation APPROVED firms with registration jurisdiction = TN",
+      "description": "Tennessee state-registered investment-adviser firms from IA_FIRM_STATE_Feed_09_17_2026. Not SEC RIA, not notice filing, not ERA, not TERMREQUEST rows, and not the 264 principal-office overlay.",
+      "coverage": "Tennessee",
+      "contributingSourceSystems": [
+        "iapd_state_compilation"
+      ],
+      "sourceAsOf": "2026-09-17",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
+      "publicationStatus": "PUBLIC",
+      "trace": {
+        "counts": "IAPD StateRgstn/Rgltr/@Cd=TN and status APPROVED, counted as distinct firm CRD.",
+        "doesNotCount": "Not SEC/IARD principal-office firms. Not federal-covered notice filings. Not state ERA reporting. Not IAR people. Not broker-dealers or agents.",
+        "contributingSourceSystems": [
+          "iapd_state_compilation"
+        ],
+        "geographicCoverage": "Tennessee",
+        "sourceDates": "IA_FIRM_STATE_Feed_09_17_2026",
+        "generationDate": "2026-09-25"
       },
       "snapshotAsOf": "2026-09-17",
       "retrievedAt": "2026-09-17T15:15:00Z"
@@ -882,29 +918,29 @@
       "unit": "count",
       "key": "published_state_intelligence_pages",
       "label": "Published state investment-intelligence pages",
-      "value": 15,
+      "value": 16,
       "valueState": "KNOWN",
       "grain": "published_state_intelligence_page",
       "denominator": "Indexable specialist state intelligence routes currently published",
       "description": "Published specialist state intelligence pages including Ohio. Not a count of advisers.",
-      "coverage": "/new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, /georgia, /massachusetts",
+      "coverage": "/new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, /georgia, /massachusetts, /tennessee",
       "contributingSourceSystems": [
         "investor-state-intel"
       ],
       "sourceAsOf": null,
-      "generatedAt": "2026-09-24T17:16:12.195Z",
+      "generatedAt": "2026-09-25T12:42:48.175Z",
       "publicationStatus": "PUBLIC",
       "trace": {
-        "counts": "Published /new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, /georgia, and /massachusetts intelligence routes.",
+        "counts": "Published /new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, /georgia, /massachusetts, and /tennessee intelligence routes.",
         "doesNotCount": "Not county pages. Not national roster rows. Florida is not published on this hub.",
         "contributingSourceSystems": [
           "investor-state-intel"
         ],
-        "geographicCoverage": "/new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, /georgia, /massachusetts",
+        "geographicCoverage": "/new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, /georgia, /massachusetts, /tennessee",
         "sourceDates": "Publication gates in specialist catalogs",
-        "generationDate": "2026-09-24"
+        "generationDate": "2026-09-25"
       },
-      "snapshotAsOf": "2026-09-24T17:16:12.195Z"
+      "snapshotAsOf": "2026-09-25T12:42:48.175Z"
     }
   ],
   "contractRevision": "ATH-METRICS-R2-04",
@@ -6320,6 +6356,1462 @@
         "EXACT_PROFILE_ATTACHMENTS": 0
       },
       "fingerprint": "014fb959166d135153618b9781fd099322e0f1d4eec38d3bd3470dd282ee1930"
+    },
+    "TN": {
+      "version": "investor-tn-state-intel-v1",
+      "ticket": "TN-INV-001",
+      "state": "Tennessee",
+      "generatedFrom": {
+        "nationalRoster": "packages/domain/src/investor-home-intel.ts V1_ROSTER_PRINCIPAL_OFFICE_STATES",
+        "iapdStateCensus": "data/tennessee/tn-inv-001/iapd-tn-census.json",
+        "enforcementArchives": "data/tennessee/tn-inv-001/*-archive.html",
+        "orderIdentifiers": "data/tennessee/tn-inv-001/order-document-identifiers.json"
+      },
+      "asOf": "2026-09-17",
+      "generatedAt": "2026-09-25T12:39:27Z",
+      "publicationGate": "ON",
+      "publicEligibility": "state_page",
+      "route": "/tennessee",
+      "no_trust_score": true,
+      "no_ranking": true,
+      "no_investment_advice": true,
+      "no_nashville_page": true,
+      "no_memphis_page": true,
+      "claimEligibilityBroadened": false,
+      "clocks": {
+        "iapd_sourceAsOf": "2026-09-17",
+        "iapd_accepted_retrievedAt": "2026-09-17T15:15:00Z",
+        "iapd_reverified_sha256_on": "2026-09-25",
+        "v1_roster_sourceAsOf": "2026-08-27",
+        "enforcement_archive_retrievedAt": "2026-09-25T12:30:07+00:00",
+        "enforcement_latest_order_date": "2026-09-21",
+        "order_identifier_pass_extractedAt": "2026-09-25T12:37:54Z",
+        "snapshotAsOf": "2026-09-25",
+        "generatedAt": "2026-09-25T12:39:27Z",
+        "no_universal_tennessee_investor_clock": true,
+        "retrieval_is_not_registration_effective_date": true
+      },
+      "nationalOverlay": {
+        "tnPrincipalOfficeSecIardFirms": 264,
+        "grain": "SEC IARD roster firm with principal-office region = TN",
+        "source": "IA_FIRM_SEC_Feed_08_27_2026 (reconciled V1 roster geography)",
+        "sourceAsOf": "2026-08-27",
+        "retrievedAt": "2026-08-28",
+        "rawCompilationMainAddrTn": 266,
+        "rawCompilationSource": "IA_FIRM_SEC_Feed_09_17_2026 MainAddr/@State=TN",
+        "searchHref": "/firms?state=TN",
+        "label": "SEC/IARD roster firms with a Tennessee principal office",
+        "caveat": "A Tennessee principal office is not Tennessee state IA registration and is not a notice filing. These firms already exist in the federal graph."
+      },
+      "stateRia": {
+        "STATE_RIA_BULK_ROSTER": "ACQUIRED_IAPD_STATE_COMPILATION",
+        "registrationRows": 328,
+        "distinctFirmCrd": 328,
+        "approvedDistinctCrd": 327,
+        "condrestDistinctCrd": 0,
+        "termrequestDistinctCrd": 1,
+        "currentDistinctCrd": 327,
+        "statusRows": {
+          "APPROVED": 327,
+          "TERMREQUEST": 1
+        },
+        "principalOfficeTnAmongStateIa": 122,
+        "filter": "StateRgstn/Rgltr/@Cd=TN (registration jurisdiction). Not MainAddr/@State.",
+        "source": "IA_FIRM_STATE_Feed_09_17_2026",
+        "sourceAsOf": "2026-09-17",
+        "retrievedAt": "2026-09-17T15:15:00Z",
+        "officialUrl": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+        "verifyUrl": "https://adviserinfo.sec.gov/",
+        "label": "IAPD Tennessee state-registered investment-adviser firms (APPROVED)",
+        "caveat": "Tennessee state IA registration is not SEC registration, not a federal notice filing, not ERA, and not a principal office. TERMREQUEST rows are reported separately; verify current status on IAPD."
+      },
+      "stateEra": {
+        "STATE_ERA_REPORTING": "ACQUIRED_IAPD_STATE_COMPILATION",
+        "registrationRows": 38,
+        "distinctFirmCrd": 38,
+        "activeDistinctCrd": 38,
+        "overlapWithStateIa": 0,
+        "filter": "ERA/Rgltr/@Cd=TN",
+        "source": "IA_FIRM_STATE_Feed_09_17_2026",
+        "sourceAsOf": "2026-09-17",
+        "label": "Tennessee state ERA reporting firms",
+        "caveat": "An exempt reporting adviser is not a Tennessee state-registered IA and not an SEC RIA."
+      },
+      "federalNotice": {
+        "FEDERAL_COVERED_NOTICE_ROSTER": "ACQUIRED_IAPD_SEC_COMPILATION",
+        "noticeRows": 2685,
+        "noticeFiledDistinctCrd": 2685,
+        "noticeStatus": "FILED",
+        "noticeFiledFirmType": {
+          "Registered": 2685,
+          "ERA": 0,
+          "other": 0,
+          "blank": 0
+        },
+        "filter": "NoticeFiled/States/@RgltrCd=TN",
+        "source": "IA_FIRM_SEC_Feed_09_17_2026",
+        "sourceAsOf": "2026-09-17",
+        "retrievedAt": "2026-09-17T15:15:00Z",
+        "overlapApprovedStateIa": 3,
+        "overlapApprovedStateIaCrds": [
+          "149172",
+          "332005",
+          "334134"
+        ],
+        "overlapApprovedStateIaJoinMethod": "exact firm CRD set intersection of APPROVED StateRgstn/Rgltr/@Cd=TN and NoticeFiled/States/@RgltrCd=TN St=FILED",
+        "overlapEraNotice": 0,
+        "noticeFiledWithTnPrincipalOffice": 224,
+        "label": "SEC-registered advisers with a Tennessee notice filing",
+        "caveat": "A notice filing is not Tennessee state IA registration."
+      },
+      "reconciliation": {
+        "TN_STATE_IA_NOTICE_OVERLAP": 3,
+        "TN_STATE_IA_ERA_OVERLAP": 0,
+        "TN_ERA_NOTICE_OVERLAP": 0,
+        "TN_PRINCIPAL_OFFICE_STATE_IA_OVERLAP_SEC_FEED": 2,
+        "TN_STATE_IA_WITH_TN_MAIN_ADDRESS": 122,
+        "TN_PRINCIPAL_OFFICE_NOTICE_OVERLAP": 224,
+        "TN_PRINCIPAL_OFFICE_NOT_NOTICE_FILED": 42,
+        "TN_PRINCIPAL_OFFICE_OVERLAY": 264,
+        "joinMethod": "exact firm CRD",
+        "clockNote": "IAPD compilations 2026-09-17; the V1 principal-office overlay is the 2026-08-27 roster geography. The difference is a clock difference, not enforcement.",
+        "do_not_sum": true
+      },
+      "enforcement": {
+        "TN_SECURITIES_ORDER_ARCHIVES_STATUS": "ACQUIRED_COMPLETE_PUBLIC_INDEX",
+        "coverage": "KNOWN",
+        "source": "https://www.tn.gov/commerce/securities/investors/enforcement-actions.html",
+        "archivePages": {
+          "CONSENT_ORDER": "https://www.tn.gov/commerce/securities/investors/enforcement-actions/consent-orders.html",
+          "CEASE_AND_DESIST_ORDER": "https://www.tn.gov/commerce/securities/investors/enforcement-actions/cease-and-desist-orders.html",
+          "FINAL_ADMINISTRATIVE_ORDER": "https://www.tn.gov/commerce/securities/investors/enforcement-actions/final-administrative-orders.html",
+          "INITIAL_ORDER": "https://www.tn.gov/commerce/securities/investors/enforcement-actions/initial-orders.html"
+        },
+        "retrievedAt": "2026-09-25T12:30:07+00:00",
+        "sourceAsOf": null,
+        "consentOrders": {
+          "listings": 273,
+          "documents": 282,
+          "listingsWithMoreThanOneDocument": 9,
+          "listingsWithoutParsedDate": 1,
+          "yearsListed": [
+            1998,
+            2026
+          ],
+          "earliestOrderDate": "1998-02-13",
+          "latestOrderDate": "2026-09-21",
+          "listingsByYear": {
+            "1998": 4,
+            "1999": 9,
+            "2000": 8,
+            "2001": 4,
+            "2002": 5,
+            "2003": 20,
+            "2004": 15,
+            "2005": 16,
+            "2006": 8,
+            "2007": 3,
+            "2008": 5,
+            "2009": 9,
+            "2010": 14,
+            "2011": 4,
+            "2012": 6,
+            "2013": 4,
+            "2014": 2,
+            "2016": 7,
+            "2017": 5,
+            "2018": 3,
+            "2019": 11,
+            "2020": 16,
+            "2021": 14,
+            "2022": 15,
+            "2023": 11,
+            "2024": 15,
+            "2025": 23,
+            "2026": 17
+          },
+          "listingsSince2012": 149,
+          "documentsSince2012": 157
+        },
+        "ceaseAndDesistOrders": {
+          "listings": 52,
+          "documents": 55,
+          "listingsWithMoreThanOneDocument": 3,
+          "listingsWithoutParsedDate": 0,
+          "yearsListed": [
+            1998,
+            2026
+          ],
+          "earliestOrderDate": "1998-03-30",
+          "latestOrderDate": "2026-07-16",
+          "listingsByYear": {
+            "1998": 3,
+            "1999": 2,
+            "2000": 5,
+            "2002": 2,
+            "2003": 12,
+            "2004": 3,
+            "2009": 1,
+            "2010": 1,
+            "2011": 1,
+            "2012": 1,
+            "2013": 1,
+            "2015": 1,
+            "2016": 1,
+            "2017": 4,
+            "2019": 1,
+            "2020": 2,
+            "2021": 1,
+            "2022": 2,
+            "2024": 2,
+            "2025": 2,
+            "2026": 4
+          },
+          "listingsSince2012": 22,
+          "documentsSince2012": 25
+        },
+        "finalAdministrativeOrders": {
+          "listings": 79,
+          "documents": 79,
+          "listingsWithMoreThanOneDocument": 0,
+          "listingsWithoutParsedDate": 1,
+          "yearsListed": [
+            1999,
+            2025
+          ],
+          "earliestOrderDate": "1999-05-06",
+          "latestOrderDate": "2025-02-27",
+          "listingsByYear": {
+            "1999": 5,
+            "2000": 3,
+            "2001": 5,
+            "2003": 3,
+            "2004": 2,
+            "2008": 1,
+            "2010": 1,
+            "2011": 1,
+            "2013": 1,
+            "2014": 1,
+            "2016": 9,
+            "2017": 11,
+            "2018": 5,
+            "2019": 3,
+            "2020": 6,
+            "2021": 7,
+            "2022": 5,
+            "2023": 4,
+            "2024": 4,
+            "2025": 2
+          },
+          "listingsSince2012": 58,
+          "documentsSince2012": 58
+        },
+        "initialOrders": {
+          "listings": 1,
+          "documents": 1,
+          "listingsWithMoreThanOneDocument": 0,
+          "listingsWithoutParsedDate": 0,
+          "yearsListed": [
+            2026,
+            2026
+          ],
+          "earliestOrderDate": "2026-02-17",
+          "latestOrderDate": "2026-02-17",
+          "listingsByYear": {
+            "2026": 1
+          },
+          "listingsSince2012": 1,
+          "documentsSince2012": 1
+        },
+        "observationRows": 405,
+        "observationGrain": "order listing on a Division archive page (alternate copies of the same order are documents of one listing)",
+        "distinctCaseNumbers": null,
+        "distinctCaseNumbersNote": "The archive index prints no docket or matter number, so no case count is claimed.",
+        "uniqueMatters": null,
+        "archivesKeptSeparate": true,
+        "orderTypeKeptAsListed": true,
+        "listingCountIsNotMatterCount": true,
+        "ceaseAndDesistIsNotAFindingUnlessTheOrderSaysSo": true,
+        "reliefNotParsed": true,
+        "publicCoverage": "Complete public index as listed (1998-2026). The preferred research window is 2012-2026; earlier listings are kept as published.",
+        "pre1998": "REQUEST_ONLY",
+        "identifierPass": {
+          "window": [
+            2024,
+            2026
+          ],
+          "archives": [
+            "CONSENT_ORDER",
+            "CEASE_AND_DESIST_ORDER"
+          ],
+          "listingsRead": 63,
+          "documentsRetrieved": 63,
+          "imageOnlyNotOcrd": 11,
+          "listingsWithAnyCrdPrinted": 29,
+          "crdPrintedTotal": 36,
+          "crdPrintedNotInIapdFirmFeeds": 32,
+          "iapdFirmCrdsPrinted": 4,
+          "iapdFirmCrdsPrintedNotRespondent": 1,
+          "secFileNumbersPrinted": 0,
+          "method": "first listed document per listing; printed CRD / SEC file numbers only; no OCR. Only CRDs that are firm CRDs in the accepted 2026-09-17 IAPD compilation are written; other printed CRDs (people, broker-dealers outside the IA feeds, withdrawn firms) are counted, not listed.",
+          "extractedAt": "2026-09-25T12:37:54Z",
+          "personCrdsPublished": false
+        },
+        "TN_ENFORCEMENT_EXACT_CRD_LINKS": 3,
+        "exactCrdLinks": [
+          {
+            "listingId": "tn-sd-co-2024-001",
+            "archive": "CONSENT_ORDER",
+            "orderDate": "2024-12-27",
+            "crd": "250",
+            "iapdFeeds": [
+              "SEC"
+            ]
+          },
+          {
+            "listingId": "tn-sd-co-2024-010",
+            "archive": "CONSENT_ORDER",
+            "orderDate": "2024-04-16",
+            "crd": "141882",
+            "iapdFeeds": [
+              "STATE"
+            ]
+          },
+          {
+            "listingId": "tn-sd-co-2024-012",
+            "archive": "CONSENT_ORDER",
+            "orderDate": "2024-02-28",
+            "crd": "705",
+            "iapdFeeds": [
+              "SEC"
+            ]
+          }
+        ],
+        "exactCrdLinkRule": "firm CRD printed in the order AND present in the accepted 2026-09-17 IAPD firm feeds AND the IAPD firm name appears in the listed caption (guard only, never a join key)",
+        "nameOnly": "UNSAFE",
+        "profileAttachments": [],
+        "profileAttachmentsNote": "Exact CRD links are shown on /tennessee as event evidence; no firm profile is written.",
+        "standaloneEvents": 402,
+        "recent": [
+          {
+            "id": "tn-sd-co-2026-001",
+            "archive": "CONSENT_ORDER",
+            "caption": "Bigham Wealth Advisory, LLC & Russell Bigham",
+            "orderDate": "2026-09-21",
+            "dateAsListed": "September 21, 2026",
+            "documents": [
+              {
+                "label": "Bigham Wealth Advisory, LLC & Russell Bigham",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Bigham%20Wealth%20Consent%20Order%20for%20Division.pdf"
+              },
+              {
+                "label": "Bigham Wealth Advisory, LLC & Russell Bigham",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Bigham%20Wealth%20Consent%20Order%20Entered%20Executed.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2026-002",
+            "archive": "CONSENT_ORDER",
+            "caption": "Trendz Advisors, Inc. & Donald Taylor",
+            "orderDate": "2026-09-09",
+            "dateAsListed": "September 9, 2026",
+            "documents": [
+              {
+                "label": "Trendz Advisors, Inc. & Donald Taylor",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Consent%20Order%20Trendz_Unsigned%20Word%20Version.pdf"
+              },
+              {
+                "label": "Trendz Advisors, Inc. & Donald Taylor",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Trendz%20Consent%20Order%20to%20Send.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2026-003",
+            "archive": "CONSENT_ORDER",
+            "caption": "Eric T. Daniel",
+            "orderDate": "2026-07-27",
+            "dateAsListed": "July 27, 2026",
+            "documents": [
+              {
+                "label": "Eric T. Daniel",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Order%20for%20CD-%20Eric%20Daniels.pdf"
+              },
+              {
+                "label": "Eric T. Daniels",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/CD%20Order%20E.%20Daniels%20(signed).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2026-004",
+            "archive": "CONSENT_ORDER",
+            "caption": "Daryl L. Moore & The Alliance Equity Group, LLC",
+            "orderDate": "2026-07-01",
+            "dateAsListed": "July 1, 2026",
+            "documents": [
+              {
+                "label": "Daryl L. Moore & The Alliance Equity Group, LLC",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Order%20Daryl%20Moore%20and%20Alliance%20CD.pdf"
+              },
+              {
+                "label": "Daryl L Moore & The Alliance Equity Group, LLC",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Daryl%20Moore%20and%20Alliance%20CD%20Petition%20%20Order%20(SIGNED).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2026-005",
+            "archive": "CONSENT_ORDER",
+            "caption": "Shante Davis, Unlocking Wealth$, LLC d/b/a Wealthshare",
+            "orderDate": "2026-07-16",
+            "dateAsListed": "July 16, 2026",
+            "documents": [
+              {
+                "label": "Shante Davis, Unlocking Wealth$, LLC d/b/a Wealthshare",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Davis%20Consent%20Order%20(proposed).pdf"
+              },
+              {
+                "label": "Shante Davis; Unlocking Wealth$, LLC d/b/a Wealthshare",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/JM%20Shante%20Davis%20WealthShare%20consent%20order-%20ratification%20(signed).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2026-006",
+            "archive": "CONSENT_ORDER",
+            "caption": "RocketTrader, Inc d/b/a Quants Compete & Matthew Jones",
+            "orderDate": "2026-06-15",
+            "dateAsListed": "June 15, 2026",
+            "documents": [
+              {
+                "label": "RocketTrader, Inc d/b/a Quants Compete & Matthew Jones",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/6.2.26%20Quants%20%20Proposed%20Consent%20Order_Respondent.docx"
+              },
+              {
+                "label": "RocketTrader, Inc d/b/a Quants Compete & Matthew Jones",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/6.15.26%20Rockettrader%20Consent%20Order%20-%20Fully%20executed.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2026-007",
+            "archive": "CONSENT_ORDER",
+            "caption": "Kimberly B. Phillips, Daniel L. Earley & Phillips Capital Group",
+            "orderDate": "2026-05-22",
+            "dateAsListed": "May 22, 2026",
+            "documents": [
+              {
+                "label": "Kimberly B. Phillips, Daniel L. Earley & Phillips Capital Group",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Phillips%20Capital-%20%20Consent%20Order%20unsigned.pdf"
+              },
+              {
+                "label": "Kimberly B. Phillips, Daniel L. Earley & Phillips Capital Group",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Phillips%20Capital%20Consent%20Order%20Final%20(SIGNED).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2026-008",
+            "archive": "CONSENT_ORDER",
+            "caption": "Boulevard Money, LLC & William \"Michael\" Jones",
+            "orderDate": "2026-05-22",
+            "dateAsListed": "May 22, 2026",
+            "documents": [
+              {
+                "label": "Boulevard Money, LLC & William \"Michael\" Jones",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Boulevard%20Money%20Proposed%20Consent%20Order.pdf"
+              },
+              {
+                "label": "Boulevard Money, LLC & William \"Michael\" Jones",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/5.7.26%20Boulvard%20Money%20Proposed%20Consent%20Order%20(SIGNED).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2026-009",
+            "archive": "CONSENT_ORDER",
+            "caption": "Perry C. Santillo, Jr., Perry C. Santillo, Jr. d/b/a Lucian Development, LLC & First National Solutions, LLC",
+            "orderDate": "2026-04-20",
+            "dateAsListed": "April 20, 2026",
+            "documents": [
+              {
+                "label": "Perry C. Santillo, Jr., Perry C. Santillo, Jr. d/b/a Lucian Development, LLC & First National Solutions, LLC",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Perry_First-Nationle-Solutions-LLC_Signed.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2026-010",
+            "archive": "CONSENT_ORDER",
+            "caption": "J ordan Paul McLendon",
+            "orderDate": "2026-04-07",
+            "dateAsListed": "April 7, 2026",
+            "documents": [
+              {
+                "label": "ordan Paul McLendon",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/McLendon%20Jordan%20-%20Consent%20Order.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2026-011",
+            "archive": "CONSENT_ORDER",
+            "caption": "Defining Wealth Partners, LLC & Jacob Gardner",
+            "orderDate": "2026-02-25",
+            "dateAsListed": "February 25, 2026",
+            "documents": [
+              {
+                "label": "Defining Wealth Partners, LLC & Jacob Gardner",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Defining%20Wealth%20Partners%20Consent%20Order%20JM(Signed).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2026-012",
+            "archive": "CONSENT_ORDER",
+            "caption": "Allen & Associates Investment Management, LLC & Brandon Keith Allen",
+            "orderDate": "2026-03-16",
+            "dateAsListed": "March 16, 2026",
+            "documents": [
+              {
+                "label": "Allen & Associates Investment Management, LLC & Brandon Keith Allen",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Pages%20from%203.4.26%20Allen%20and%20Associates%20FINAL%20JM(Signed).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2026-013",
+            "archive": "CONSENT_ORDER",
+            "caption": "Rooks Wealth Advisors, LLC, Larry Rooks & Bradley Rooks",
+            "orderDate": "2026-03-16",
+            "dateAsListed": "March 16, 2026",
+            "documents": [
+              {
+                "label": "Rooks Wealth Advisors, LLC, Larry Rooks & Bradley Rooks",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Rooks%20Consent%20Order%20Entered%20and%20Executed.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2026-014",
+            "archive": "CONSENT_ORDER",
+            "caption": "Defining Wealth Partners LLC and Jacob Gardner",
+            "orderDate": "2026-02-25",
+            "dateAsListed": "February 25, 2026",
+            "documents": [
+              {
+                "label": "Defining Wealth Partners LLC and Jacob Gardner",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/DefiningWealth.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2026-015",
+            "archive": "CONSENT_ORDER",
+            "caption": "Derrik Jacob Hubbard, dba The Stewardship Solution and Derrik Jacob Hubbard",
+            "orderDate": "2026-02-24",
+            "dateAsListed": "February 24, 2026",
+            "documents": [
+              {
+                "label": "Derrik Jacob Hubbard, dba The Stewardship Solution and Derrik Jacob Hubbard",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Hubbard.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2026-016",
+            "archive": "CONSENT_ORDER",
+            "caption": "Imagine Financial Security, LLC & Kevin Lao",
+            "orderDate": "2026-01-16",
+            "dateAsListed": "January 16, 2026",
+            "documents": [
+              {
+                "label": "Imagine Financial Security, LLC & Kevin Lao",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/1.14.26%20FINAL%20JM%20Imagine%20Financial%20(1)(Signed).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2026-017",
+            "archive": "CONSENT_ORDER",
+            "caption": "Carty, Harding, & Hearn, Inc. (f/k/a Carty & Company, Inc.",
+            "orderDate": "2026-01-07",
+            "dateAsListed": "January 7, 2026",
+            "documents": [
+              {
+                "label": "Carty, Harding, & Hearn, Inc. (f/k/a Carty & Company, Inc.",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Carty%2c%20Harding%20Hearn%2c%20Inc.%20-%20Consent%20Order.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2025-001",
+            "archive": "CONSENT_ORDER",
+            "caption": "Heritage Wealth Management, LLC & Jeffery Jackson",
+            "orderDate": "2025-12-04",
+            "dateAsListed": "December 4, 2025",
+            "documents": [
+              {
+                "label": "Heritage Wealth Management, LLC & Jeffery Jackson",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/JM%20Final%20Heritage%20Wealth%2012.2.25signed).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2025-002",
+            "archive": "CONSENT_ORDER",
+            "caption": "Stellar Assets, LLC & John Andrew Wright",
+            "orderDate": "2025-12-02",
+            "dateAsListed": "December 2, 2025",
+            "documents": [
+              {
+                "label": "Stellar Assets, LLC & John Andrew Wright",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/JM%20-%20Stellar%20Assets%20LLC%20(Signed).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2025-003",
+            "archive": "CONSENT_ORDER",
+            "caption": "Catamount Strategic Advisors, LLC & Cobb Sadler",
+            "orderDate": "2025-11-13",
+            "dateAsListed": "November 13, 2025",
+            "documents": [
+              {
+                "label": "Catamount Strategic Advisors, LLC & Cobb Sadler",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/JM%20Final%20Catamount%2011.6.25(Signed).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2025-004",
+            "archive": "CONSENT_ORDER",
+            "caption": "True Bullion, LLC d/b/a Gold Silver International Exchange, d/b/a GSI Exchange & Anthony Allen Anderson",
+            "orderDate": "2025-10-22",
+            "dateAsListed": "October 22, 2025",
+            "documents": [
+              {
+                "label": "True Bullion, LLC d/b/a Gold Silver International Exchange, d/b/a GSI Exchange & Anthony Allen Anderson",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/GSI.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2025-005",
+            "archive": "CONSENT_ORDER",
+            "caption": "Optional Financial Strategies Inc. & Joel Alexander Minner",
+            "orderDate": "2025-10-21",
+            "dateAsListed": "October 21, 2025",
+            "documents": [
+              {
+                "label": "Optional Financial Strategies Inc. & Joel Alexander Minner",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Optional%20Financial%20Strategies%20Inc.%20and%20Joel%20Alexander%20Minner.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2025-006",
+            "archive": "CONSENT_ORDER",
+            "caption": "SMEAC Financial, LLC & Blake Jackson Cate, Jr.",
+            "orderDate": "2025-09-25",
+            "dateAsListed": "September 25, 2025",
+            "documents": [
+              {
+                "label": "SMEAC Financial, LLC & Blake Jackson Cate, Jr.",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/JM%20Final%20SMEAC_CAT_8.20.25%20(Signed).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2025-007",
+            "archive": "CONSENT_ORDER",
+            "caption": "Grogan Advisory Service, LLC & Larry N. Grogan",
+            "orderDate": "2025-09-09",
+            "dateAsListed": "September 9, 2025",
+            "documents": [
+              {
+                "label": "Grogan Advisory Service, LLC & Larry N. Grogan",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/JM%20Final%20Grogan_CAT_draft%209.3.25%20(SIgned).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2025-008",
+            "archive": "CONSENT_ORDER",
+            "caption": "Lattice Wealth Management Advisors, LLC & Kevin Laman",
+            "orderDate": "2025-08-22",
+            "dateAsListed": "August 22, 2025",
+            "documents": [
+              {
+                "label": "Lattice Wealth Management Advisors, LLC & Kevin Laman",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Final%20Lattice%20Wealth_CAT_8.22.25(Signed).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2025-009",
+            "archive": "CONSENT_ORDER",
+            "caption": "Vanguard Marketing Corporation & The Vanguard Group, Inc.",
+            "orderDate": "2025-08-12",
+            "dateAsListed": "August 12, 2025",
+            "documents": [
+              {
+                "label": "Vanguard Marketing Corporation & The Vanguard Group, Inc.",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Vanguard-ratification(Signed).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2025-010",
+            "archive": "CONSENT_ORDER",
+            "caption": "Kennedy Wealth Management & Derek Kennedy",
+            "orderDate": "2025-08-12",
+            "dateAsListed": "August 12, 2025",
+            "documents": [
+              {
+                "label": "Kennedy Wealth Management & Derek Kennedy",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/JM%20Final%20Kennedy%20Wealth_CAT_draft%208.7.25%20(1Signed).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2025-011",
+            "archive": "CONSENT_ORDER",
+            "caption": "Benson Wealth Management, Inc. & Barrett Benson",
+            "orderDate": "2025-08-10",
+            "dateAsListed": "August 10, 2025",
+            "documents": [
+              {
+                "label": "Benson Wealth Management, Inc. & Barrett Benson",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/8.4.25%20JM%20Final%20Benson%20Wealth_CAT(Signed).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2025-012",
+            "archive": "CONSENT_ORDER",
+            "caption": "Miller Wealth Sports & Entertainment, LLC & Dustin Miller",
+            "orderDate": "2025-07-16",
+            "dateAsListed": "July 16, 2025",
+            "documents": [
+              {
+                "label": "Miller Wealth Sports & Entertainment, LLC & Dustin Miller",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/7.16.25%20Final%20Miller%20-%20signed%20and%20executed.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2025-013",
+            "archive": "CONSENT_ORDER",
+            "caption": "Advipartners, LLC & Michael Davis",
+            "orderDate": "2025-06-24",
+            "dateAsListed": "June 24, 2025",
+            "documents": [
+              {
+                "label": "Advipartners, LLC & Michael Davis",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Advipartner%20Executed%20Consent%20Order%20to%20Send.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2025-014",
+            "archive": "CONSENT_ORDER",
+            "caption": "Strategic Wealth Investments, LLC & Patrick Carmichael",
+            "orderDate": "2025-05-19",
+            "dateAsListed": "May 19, 2025",
+            "documents": [
+              {
+                "label": "Strategic Wealth Investments, LLC & Patrick Carmichael",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Strategic%20Wealth%20Executed%20Consent%20Order%20to%20Send.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2025-015",
+            "archive": "CONSENT_ORDER",
+            "caption": "Hill Place Advisors, LLC & Janet Vidnovic",
+            "orderDate": "2025-05-22",
+            "dateAsListed": "May 22, 2025",
+            "documents": [
+              {
+                "label": "Hill Place Advisors, LLC & Janet Vidnovic",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Securities%20Consent%20Order%20JM%20Hill%20Place.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2025-016",
+            "archive": "CONSENT_ORDER",
+            "caption": "Vested Wealth, Inc. & Ember Martin",
+            "orderDate": "2025-04-28",
+            "dateAsListed": "April 28, 2025",
+            "documents": [
+              {
+                "label": "Vested Wealth, Inc. & Ember Martin",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/4.28.25%20SECURITIES%20-%20Final%20Vested%20Wealth(Signed).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2025-017",
+            "archive": "CONSENT_ORDER",
+            "caption": "A&G Financial Management LLC, & Vincent Giannattasio",
+            "orderDate": "2025-04-24",
+            "dateAsListed": "April 24, 2025",
+            "documents": [
+              {
+                "label": "A&G Financial Management LLC, & Vincent Giannattasio",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/AG%20Financial.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2025-018",
+            "archive": "CONSENT_ORDER",
+            "caption": "Chris A. Clark Insurance Services, LLC & Christopher Clark",
+            "orderDate": "2025-04-14",
+            "dateAsListed": "April 14, 2025",
+            "documents": [
+              {
+                "label": "Chris A. Clark Insurance Services, LLC & Christopher Clark",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/4.24.25%20Final%20Christopher%20Clark%20(Signed).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2025-019",
+            "archive": "CONSENT_ORDER",
+            "caption": "Miser Asset Management, LLC & Derek Alan Miser",
+            "orderDate": "2025-04-10",
+            "dateAsListed": "April 10, 2025",
+            "documents": [
+              {
+                "label": "Miser Asset Management, LLC & Derek Alan Miser",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Miser%20Asset%20Management%20to%20Send.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2025-020",
+            "archive": "CONSENT_ORDER",
+            "caption": "Roman Wealth Management, LLC & Angelo Edward Roman",
+            "orderDate": "2025-03-31",
+            "dateAsListed": "March 31, 2025",
+            "documents": [
+              {
+                "label": "Roman Wealth Management, LLC & Angelo Edward Roman",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/3.21.25%20SECURITIES%20JM%20-%20Final%20Roman%20Wealth(Signed)%20corrected%20CRD%20number.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2025-021",
+            "archive": "CONSENT_ORDER",
+            "caption": "Summit Premium Plus Fund, LP",
+            "orderDate": "2025-03-17",
+            "dateAsListed": "March 17, 2025",
+            "documents": [
+              {
+                "label": "Summit Premium Plus Fund, LP",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/2.28.25_SCC%20Capital%20LLC%20JM%20-%20Final_(Signed).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2025-022",
+            "archive": "CONSENT_ORDER",
+            "caption": "Masterworks.IO, LLC, et al .",
+            "orderDate": "2025-03-11",
+            "dateAsListed": "March 11, 2025",
+            "documents": [
+              {
+                "label": "Masterworks.IO, LLC, et al",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/3.7.25%20SECURITIES%20JM%20-%20Masterworks1.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2025-023",
+            "archive": "CONSENT_ORDER",
+            "caption": "Andrew Poe Borden, Stephen Dominic Longo & Solytix Capital, LLC",
+            "orderDate": "2025-03-04",
+            "dateAsListed": "March 4, 2025",
+            "documents": [
+              {
+                "label": "Andrew Poe Borden, Stephen Dominic Longo & Solytix Capital, LLC",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Solytix%20Consent%20Order%20Entered%20and%20Executed.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2024-001",
+            "archive": "CONSENT_ORDER",
+            "caption": "Edward D. Jones & Co., L.P.",
+            "orderDate": "2024-12-27",
+            "dateAsListed": "December 27, 2024",
+            "documents": [
+              {
+                "label": "Edward D. Jones & Co., L.P.",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Edward%20Jones%20Consent%20Order%20Entered%20and%20Executed.pdf"
+              }
+            ],
+            "exactFirmCrds": [
+              "250"
+            ]
+          },
+          {
+            "id": "tn-sd-co-2024-002",
+            "archive": "CONSENT_ORDER",
+            "caption": "Kay Oldham, Abner Bruce Oldham & Abner Bruce Oldham d/b/a Capital Perspectives Investment Management",
+            "orderDate": "2024-11-26",
+            "dateAsListed": "November 26, 2024",
+            "documents": [
+              {
+                "label": "Kay Oldham, Abner Bruce Oldham & Abner Bruce Oldham d/b/a Capital Perspectives Investment Management",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Oldham%20Consent%20Order%20Entered%20and%20Executed.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2024-003",
+            "archive": "CONSENT_ORDER",
+            "caption": "Flood, Bumstead, McCready * McCarthy, Inc., & Roger W. Dunaways, III",
+            "orderDate": "2024-10-28",
+            "dateAsListed": "October 28, 2024",
+            "documents": [
+              {
+                "label": "Flood, Bumstead, McCready * McCarthy, Inc., & Roger W. Dunaways, III",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/10.23.%2024.%20JM%20Flood%20Bumstead%20McCready%20McCarthy%20Inc%20(Signed).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2024-004",
+            "archive": "CONSENT_ORDER",
+            "caption": "Samuel Haddix",
+            "orderDate": "2024-08-14",
+            "dateAsListed": "August 14, 2024",
+            "documents": [
+              {
+                "label": "Samuel Haddix",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Samuel%20Haddix%20Ratify%20Voluntary%20Consent%20Order(Signed).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2024-005",
+            "archive": "CONSENT_ORDER",
+            "caption": "Caelian Capital Strategies, LLC, f/k/a Thomas Wilson & Co., David W. Hill and John F Thomas",
+            "orderDate": "2024-07-31",
+            "dateAsListed": "July 31, 2024",
+            "documents": [
+              {
+                "label": "Caelian Capital Strategies, LLC, f/k/a Thomas Wilson & Co., David W. Hill and John F Thomas",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/8.4.24%20Final%20Caelian%20Proposed%20Consent%20Order_send.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2024-006",
+            "archive": "CONSENT_ORDER",
+            "caption": "Payward Interactive, Inc. (Formerly known as Tradestation Crypto. Inc.)",
+            "orderDate": "2024-07-15",
+            "dateAsListed": "July 15, 2024",
+            "documents": [
+              {
+                "label": "Payward Interactive, Inc. (Formerly known as Tradestation Crypto. Inc.)",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Tradestation%20-%20Ratified%20Consent%20Order.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2024-007",
+            "archive": "CONSENT_ORDER",
+            "caption": "WLH Management Co., Inc, & William Louis, Jr .",
+            "orderDate": "2024-07-25",
+            "dateAsListed": "July 25, 2024",
+            "documents": [
+              {
+                "label": "WLH Management Co., Inc, & William Louis, Jr",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/WLH%20Management%20JM%20Final%20Consent%20Order%20-%207.25(Signed).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2024-008",
+            "archive": "CONSENT_ORDER",
+            "caption": "MoneyPro Wealth Management, LLC & Robert Gordon Bailey, Jr.",
+            "orderDate": "2024-07-17",
+            "dateAsListed": "July 17, 2024",
+            "documents": [
+              {
+                "label": "MoneyPro Wealth Management, LLC & Robert Gordon Bailey, Jr.",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Moneypro%20Consent%20Order%20Entered%20and%20Executed.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2024-009",
+            "archive": "CONSENT_ORDER",
+            "caption": "Jeffery Ryan Griswold",
+            "orderDate": "2024-07-02",
+            "dateAsListed": "July 2, 2024",
+            "documents": [
+              {
+                "label": "Jeffery Ryan Griswold",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/finaladminorders/Entered%20Jeffrey%20Griswold%20Consent%20Order.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2024-010",
+            "archive": "CONSENT_ORDER",
+            "caption": "John A. Poole-Financial Advisor & John A. Poole, Jr.",
+            "orderDate": "2024-04-16",
+            "dateAsListed": "April 16, 2024",
+            "documents": [
+              {
+                "label": "John A. Poole-Financial Advisor & John A. Poole, Jr.",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/executed%204.16_4.4.23%20routing%20Securities%20Consent%20Order%20Final%20JM%20-%20John%20A.%20Poole-Financial%20Advisor-tg%20edits(Signed)%20(002).pdf"
+              }
+            ],
+            "exactFirmCrds": [
+              "141882"
+            ]
+          },
+          {
+            "id": "tn-sd-co-2024-011",
+            "archive": "CONSENT_ORDER",
+            "caption": "Star Credit Holdings, LLC, Satori Credit Solutions, LLC, Numisme, LLC, Ali Raza Galani, Misam Abidi, & Anisha Abidi, & Bank of America National Association and Coinbase Inc.",
+            "orderDate": "2024-03-22",
+            "dateAsListed": "March 22, 2024",
+            "documents": [
+              {
+                "label": "Star Credit Holdings, LLC, Satori Credit Solutions, LLC, Numisme, LLC, Ali Raza Galani, Misam Abidi, & Anisha Abidi, & Bank of America National Association and Coinbase Inc.",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Abidi%20Temporary%20Injunction.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2024-012",
+            "archive": "CONSENT_ORDER",
+            "caption": "Raymond James & Associates, Inc. & Raymond James Financial Services, Inc .",
+            "orderDate": "2024-02-28",
+            "dateAsListed": "February 28, 2024",
+            "documents": [
+              {
+                "label": "Raymond James & Associates, Inc. & Raymond James Financial Services, Inc",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Raymond%20James%20Consent%20Order%20Entered%20and%20Executed.pdf"
+              }
+            ],
+            "exactFirmCrds": [
+              "705"
+            ]
+          },
+          {
+            "id": "tn-sd-co-2024-013",
+            "archive": "CONSENT_ORDER",
+            "caption": "Robert S. Robbins & Robbins Captila Management, Inc.",
+            "orderDate": "2024-02-19",
+            "dateAsListed": "February 19, 2024",
+            "documents": [
+              {
+                "label": "Robert S. Robbins & Robbins Captila Management, Inc.",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Robbins%20Consent%20Order%20Entered%20and%20Executed.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2024-014",
+            "archive": "CONSENT_ORDER",
+            "caption": "Blue Owl Credit Income Corp., f/k/a Owl Rock Core Income Corp.",
+            "orderDate": "2024-01-08",
+            "dateAsListed": "January 8, 2024",
+            "documents": [
+              {
+                "label": "Blue Owl Credit Income Corp., f/k/a Owl Rock Core Income Corp.",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Blue%20Owl%20Credit%20Consent%20Order%20Executed.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-co-2024-015",
+            "archive": "CONSENT_ORDER",
+            "caption": "Blue Owl Technology Income Corp., f/k/a Owl Rock Technology Income Corp.",
+            "orderDate": "2024-01-08",
+            "dateAsListed": "January 8, 2024",
+            "documents": [
+              {
+                "label": "Blue Owl Technology Income Corp., f/k/a Owl Rock Technology Income Corp.",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Blue%20Owl%20Tech%20Consent%20Order%20Executed.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-cd-2026-001",
+            "archive": "CEASE_AND_DESIST_ORDER",
+            "caption": "Aras Business Group, LLC",
+            "orderDate": "2026-07-16",
+            "dateAsListed": "July 16, 2026",
+            "documents": [
+              {
+                "label": "Aras Business Group, LLC",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/ARAS%20Order%20for%20CD.pdf"
+              },
+              {
+                "label": "Aras Business Group, LLC",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/ARAS%20CD%20Petition%20and%20Order%20signed.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-cd-2026-002",
+            "archive": "CEASE_AND_DESIST_ORDER",
+            "caption": "Hypercoin Trade, LTD & Rose Ann Parker",
+            "orderDate": "2026-07-01",
+            "dateAsListed": "July 1, 2026",
+            "documents": [
+              {
+                "label": "Hypercoin Trade, LTD & Rose Ann Parker",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Hypercoin%20Order%20for%20CD.pdf"
+              },
+              {
+                "label": "Hypercoin Trade, LTD & Rose Ann Parker",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Hypercoin%20-%20CD%20Petition%20Order%20(Signed).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-cd-2026-003",
+            "archive": "CEASE_AND_DESIST_ORDER",
+            "caption": "Red Rock Securities, LLC, Sean Kelly & Anthony Spencer",
+            "orderDate": "2026-06-14",
+            "dateAsListed": "June 14, 2026",
+            "documents": [
+              {
+                "label": "Red Rock Securities, LLC, Sean Kelly & Anthony Spencer",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/CD%20-%20Red%20Rock.pdf"
+              },
+              {
+                "label": "Red Rock Securities LLC, Sean Kelly, & Anthony Spencer",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Red%20Rock%20CD%20(signed).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-cd-2026-004",
+            "archive": "CEASE_AND_DESIST_ORDER",
+            "caption": "Graystream Capital, LLC",
+            "orderDate": "2026-04-10",
+            "dateAsListed": "April 10, 2026",
+            "documents": [
+              {
+                "label": "Graystream Capital, LLC -",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Ex%20Parte%20Order%20Graystream%20Capital.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-cd-2025-001",
+            "archive": "CEASE_AND_DESIST_ORDER",
+            "caption": "J.D. Frost & Company, PLLC, Croft Enterprises, LLC, Rhino Onward International, LLC, Jonathan David Frost, and Paul Thomas Croft",
+            "orderDate": "2025-03-24",
+            "dateAsListed": "March 24, 2025",
+            "documents": [
+              {
+                "label": "J.D. Frost & Company, PLLC, Croft Enterprises, LLC, Rhino Onward International, LLC, Jonathan David Frost, and Paul Thomas Croft",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Croft%20and%20Frost%20-%20signed%20order.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-cd-2025-002",
+            "archive": "CEASE_AND_DESIST_ORDER",
+            "caption": "Travis Kip Bieberitz, Blue Sky Wealth Solutions, & TMB Group a/k/a TMB Consulting",
+            "orderDate": "2025-01-21",
+            "dateAsListed": "January 21, 2025",
+            "documents": [
+              {
+                "label": "Travis Kip Bieberitz, Blue Sky Wealth Solutions, & TMB Group a/k/a TMB Consulting",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/ceasedesistorders/Amended%20Bieberitz%20Cease%20and%20Desist%20Order.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-cd-2024-001",
+            "archive": "CEASE_AND_DESIST_ORDER",
+            "caption": "AtomicHubPro.com, Neftyblockspro.top & Sunshines Trading, Inc.",
+            "orderDate": "2024-07-24",
+            "dateAsListed": "July 24, 2024",
+            "documents": [
+              {
+                "label": "AtomicHubPro.com, Neftyblockspro.top & Sunshines Trading, Inc.",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/ceasedesistorders/AtomicPro%20Cease%20and%20Desist.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-cd-2024-002",
+            "archive": "CEASE_AND_DESIST_ORDER",
+            "caption": "Alan Cosens & Passive Profit Machines",
+            "orderDate": "2024-04-29",
+            "dateAsListed": "April 29, 2024",
+            "documents": [
+              {
+                "label": "Alan Cosens & Passive Profit Machines",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/ceasedesistorders/Alan%20Cosens%20PPM%20Order%20(Signed).pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-fao-2025-001",
+            "archive": "FINAL_ADMINISTRATIVE_ORDER",
+            "caption": "Timothy Fleming Jefferson",
+            "orderDate": "2025-02-27",
+            "dateAsListed": "February 27, 2025",
+            "documents": [
+              {
+                "label": "Timothy Fleming Jefferson",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Order%20%20-%20TSDvsTimothyJefferson.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-fao-2025-002",
+            "archive": "FINAL_ADMINISTRATIVE_ORDER",
+            "caption": "Lexington Investment Consulting, LLC & Dale E. Veitch",
+            "orderDate": "2025-02-25",
+            "dateAsListed": "February 25, 2025",
+            "documents": [
+              {
+                "label": "Lexington Investment Consulting, LLC & Dale E. Veitch",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/finaladminorders/12.06-244279J%20Veitch%20Agreed%20Order%20Incoming.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-fao-2024-001",
+            "archive": "FINAL_ADMINISTRATIVE_ORDER",
+            "caption": "Stephen Fry",
+            "orderDate": "2024-07-25",
+            "dateAsListed": "July 25, 2024",
+            "documents": [
+              {
+                "label": "Stephen Fry",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/finaladminorders/Stephen%20Fry.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-fao-2024-002",
+            "archive": "FINAL_ADMINISTRATIVE_ORDER",
+            "caption": "Jason Newman d/b/a Somerset Crest, Inc .",
+            "orderDate": "2024-07-22",
+            "dateAsListed": "July 22, 2024",
+            "documents": [
+              {
+                "label": "Jason Newman d/b/a Somerset Crest, Inc",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/finaladminorders/Final%20Newman%20Order%20Executed%20and%20dated.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-fao-2024-003",
+            "archive": "FINAL_ADMINISTRATIVE_ORDER",
+            "caption": "Stephen James Vogel & Corvus Capital Management, LLC",
+            "orderDate": "2024-07-17",
+            "dateAsListed": "July 17, 2024",
+            "documents": [
+              {
+                "label": "Stephen James Vogel & Corvus Capital Management, LLC",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/finaladminorders/Corvus.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-fao-2024-004",
+            "archive": "FINAL_ADMINISTRATIVE_ORDER",
+            "caption": "Richard Randall Fritts",
+            "orderDate": "2024-01-03",
+            "dateAsListed": "January 3, 2024",
+            "documents": [
+              {
+                "label": "Richard Randall Fritts",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/finaladminorders/12.06-234193J%20Fritts%20Agreed%20Order%20Dismiss%20CIGen.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          },
+          {
+            "id": "tn-sd-io-2026-001",
+            "archive": "INITIAL_ORDER",
+            "caption": "Wesley Spaulding Brown",
+            "orderDate": "2026-02-17",
+            "dateAsListed": "February 17, 2026",
+            "documents": [
+              {
+                "label": "Wesley Spaulding Brown",
+                "url": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/initialorders/12.06%20%E2%80%93%20243354J%20Brown%20Init.Order.pdf"
+              }
+            ],
+            "exactFirmCrds": []
+          }
+        ]
+      },
+      "records": {
+        "TN_REGISTRATION_RECORDS_CAPABILITY": "KNOWN",
+        "classes": [
+          "broker-dealer",
+          "agent",
+          "investment adviser",
+          "investment adviser representative"
+        ],
+        "channel": "Securities Division Investment Adviser/Broker-Dealer Check points to IAPD and BrokerCheck; public records requests go to the Department of Commerce & Insurance",
+        "sourceUrl": "https://www.tn.gov/commerce/securities/industry-professionals/investment-adviser-broker-dealer-check.html",
+        "bulkRoster": "NOT_ACQUIRED",
+        "paidRequestsSubmitted": 0
+      },
+      "complaints": {
+        "TN_SECURITIES_COMPLAINT_ROWS": null,
+        "intake": "KNOWN",
+        "providerLevelComplaints": "NOT_ACQUIRED",
+        "complaintOutcomes": "NOT_ACQUIRED / REQUEST_ONLY",
+        "sourceUrl": "https://www.tn.gov/commerce/securities/investors/file-a-complaint/investments-complaint.html",
+        "complaint_ne_enforcement": true,
+        "notDerivedFromOrderArchives": true
+      },
+      "iar": {
+        "TN_IAR_REGISTRATION_CAPABILITY": "KNOWN",
+        "TN_IAR_ROWS": null,
+        "TN_IAR_PERSON_DIRECTORY": "NOT_PUBLISHED",
+        "grain": "person CRD (not firm CRD); Form U4 through Web CRD/IARD",
+        "verifyUrl": "https://adviserinfo.sec.gov/",
+        "caveat": "An IAR is a person. IAR registrations are never added to firm counts, and no person profiles are created."
+      },
+      "brokerDealer": {
+        "TN_BD_VERIFICATION": "KNOWN",
+        "TN_AGENT_VERIFICATION": "KNOWN",
+        "TN_DEALER_ROWS": null,
+        "TN_AGENT_ROWS": null,
+        "stateOnlyBulk": "NOT_ACQUIRED",
+        "bd_ne_ia": true,
+        "agent_ne_iar": true,
+        "verifyUrl": "https://brokercheck.finra.org/"
+      },
+      "offerings": {
+        "status": "DEFERRED",
+        "note": "Securities offering registrations and exemptions are not provider identity and were not ingested."
+      },
+      "divisionFramework": {
+        "regulator": "Tennessee Department of Commerce & Insurance, Securities Division",
+        "officialHomeUrl": "https://www.tn.gov/commerce/securities.html",
+        "enforcementArchiveUrl": "https://www.tn.gov/commerce/securities/investors/enforcement-actions.html",
+        "statute": "Tennessee Securities Act of 1983 (Tenn. Code Ann. Title 48, Chapter 1)",
+        "infrastructure": "IARD for investment advisers and representatives; CRD/BrokerCheck for broker-dealers and agents. Infrastructure is not the regulator."
+      },
+      "capabilities": {
+        "state_ia_compilation": "KNOWN",
+        "state_era": "KNOWN",
+        "federal_notice_filing": "KNOWN",
+        "principal_office_overlay": "KNOWN",
+        "iar_verification": "KNOWN",
+        "iar_person_population": "NOT_ACQUIRED",
+        "bd_verification": "KNOWN",
+        "agent_verification": "KNOWN",
+        "state_bd_agent_bulk": "NOT_ACQUIRED",
+        "consent_order_index": "KNOWN",
+        "cease_and_desist_order_index": "KNOWN",
+        "final_administrative_order_index": "KNOWN",
+        "initial_order_index": "KNOWN",
+        "order_document_identifiers_2024_2026": "PARTIAL",
+        "order_document_identifiers_pre_2024": "NOT_ACQUIRED",
+        "enforcement_unique_matters": "UNKNOWN",
+        "enforcement_exact_crd_links": "PARTIAL",
+        "registration_disciplinary_records": "KNOWN",
+        "provider_complaints": "NOT_ACQUIRED",
+        "complaint_outcomes": "REQUEST_ONLY",
+        "offerings": "NOT_ACQUIRED",
+        "name_only_adverse_attachment": "UNSUPPORTED",
+        "combined_investment_professional_count": "UNSUPPORTED",
+        "local_city_pages": "UNSUPPORTED"
+      },
+      "expansionLedger": {
+        "NET_NEW_STATE_RESEARCH_IDENTITIES": 327,
+        "NET_NEW_CANONICAL_ORGANIZATIONS": 0,
+        "NET_NEW_PUBLIC_INVESTOR_PROFILES": 0,
+        "EXISTING_ORGANIZATIONS_ENRICHED": 0,
+        "GRAPH_WRITES": 0,
+        "CLAIM_ELIGIBILITY_BROADENED": false,
+        "EXACT_PROFILE_ATTACHMENTS": 0
+      },
+      "fingerprint": "a2332c25eb07803d5e126c0a1935c3e8e0d9268d2fd9f3790e90fce65545f54e"
     }
   },
   "reconciliation": {
@@ -7723,6 +9215,149 @@
           "unexplainedDelta": 0
         },
         "exactAdverseProfileAttachments": 0
+      },
+      "TN": {
+        "status": "STATE_SOURCE_LIVE",
+        "scope": "IARD-derived state registration intelligence; not a separately acquired state-agency roster",
+        "specialistComplete": null,
+        "sourceArtifact": "artifacts/tn-inv-001-public-snapshot.json",
+        "identityImpact": {
+          "NET_NEW_STATE_RESEARCH_IDENTITIES": 327,
+          "NET_NEW_CANONICAL_ORGANIZATIONS": 0,
+          "NET_NEW_PUBLIC_INVESTOR_PROFILES": 0,
+          "EXISTING_ORGANIZATIONS_ENRICHED": 0,
+          "GRAPH_WRITES": 0,
+          "CLAIM_ELIGIBILITY_BROADENED": false,
+          "EXACT_PROFILE_ATTACHMENTS": 0
+        },
+        "capabilities": {
+          "stateRia.registrationRows": {
+            "status": "STATE_SOURCE_LIVE",
+            "count": 328,
+            "grain": "state_ia_registration_row",
+            "sourceField": "stateRia.registrationRows",
+            "sourceAsOf": "2026-09-17",
+            "snapshotAsOf": null,
+            "retrievedAt": "2026-09-17T15:15:00Z"
+          },
+          "stateRia.distinctFirmCrd": {
+            "status": "STATE_SOURCE_LIVE",
+            "count": 328,
+            "grain": "state_ia_crd",
+            "sourceField": "stateRia.distinctFirmCrd",
+            "sourceAsOf": "2026-09-17",
+            "snapshotAsOf": null,
+            "retrievedAt": "2026-09-17T15:15:00Z"
+          },
+          "stateRia.approvedDistinctCrd": {
+            "status": "STATE_SOURCE_LIVE",
+            "count": 327,
+            "grain": "approved_state_ia_crd",
+            "sourceField": "stateRia.approvedDistinctCrd",
+            "sourceAsOf": "2026-09-17",
+            "snapshotAsOf": null,
+            "retrievedAt": "2026-09-17T15:15:00Z"
+          },
+          "stateRia.termrequestDistinctCrd": {
+            "status": "STATE_SOURCE_LIVE",
+            "count": 1,
+            "grain": "state_ia_termrequest_crd",
+            "sourceField": "stateRia.termrequestDistinctCrd",
+            "sourceAsOf": "2026-09-17",
+            "snapshotAsOf": null,
+            "retrievedAt": "2026-09-17T15:15:00Z"
+          },
+          "stateRia.condrestDistinctCrd": {
+            "status": "STATE_SOURCE_LIVE",
+            "count": 0,
+            "grain": "state_ia_condrest_crd",
+            "sourceField": "stateRia.condrestDistinctCrd",
+            "sourceAsOf": "2026-09-17",
+            "snapshotAsOf": null,
+            "retrievedAt": "2026-09-17T15:15:00Z"
+          },
+          "stateEra.activeDistinctCrd": {
+            "status": "STATE_SOURCE_LIVE",
+            "count": 38,
+            "grain": "state_era_crd",
+            "sourceField": "stateEra.activeDistinctCrd",
+            "sourceAsOf": "2026-09-17",
+            "snapshotAsOf": null,
+            "retrievedAt": null
+          },
+          "federalNotice.noticeRows": {
+            "status": "STATE_SOURCE_LIVE",
+            "count": 2685,
+            "grain": "federal_notice_filing",
+            "sourceField": "federalNotice.noticeRows",
+            "sourceAsOf": "2026-09-17",
+            "snapshotAsOf": null,
+            "retrievedAt": "2026-09-17T15:15:00Z"
+          },
+          "federalNotice.noticeFiledDistinctCrd": {
+            "status": "STATE_SOURCE_LIVE",
+            "count": 2685,
+            "grain": "federal_notice_crd",
+            "sourceField": "federalNotice.noticeFiledDistinctCrd",
+            "sourceAsOf": "2026-09-17",
+            "snapshotAsOf": null,
+            "retrievedAt": "2026-09-17T15:15:00Z"
+          },
+          "nationalOverlay.tnPrincipalOfficeSecIardFirms": {
+            "status": "FEDERAL_BASELINE",
+            "count": 264,
+            "grain": "principal_office_overlay",
+            "sourceField": "nationalOverlay.tnPrincipalOfficeSecIardFirms",
+            "sourceAsOf": "2026-08-27",
+            "snapshotAsOf": null,
+            "retrievedAt": "2026-08-28"
+          },
+          "federalNotice.overlapApprovedStateIa": {
+            "status": "STATE_SOURCE_LIVE",
+            "count": 3,
+            "grain": "exact_crd_bridge",
+            "sourceField": "federalNotice.overlapApprovedStateIa",
+            "sourceAsOf": "2026-09-17",
+            "snapshotAsOf": null,
+            "retrievedAt": "2026-09-17T15:15:00Z"
+          },
+          "enforcement.observationRows": {
+            "status": "STATE_SOURCE_LIVE",
+            "count": 405,
+            "grain": "regulatory_activity_observation",
+            "sourceField": "enforcement.observationRows",
+            "sourceAsOf": null,
+            "snapshotAsOf": null,
+            "retrievedAt": "2026-09-25T12:30:07+00:00"
+          },
+          "enforcement.distinctCaseNumbers": {
+            "status": "PUBLIC_RESEARCH_PATH",
+            "count": null,
+            "grain": "regulatory_case",
+            "sourceField": "enforcement.distinctCaseNumbers",
+            "sourceAsOf": null,
+            "snapshotAsOf": null,
+            "retrievedAt": "2026-09-25T12:30:07+00:00"
+          }
+        },
+        "exactStateIaNoticeBridges": {
+          "count": 3,
+          "crds": [
+            "149172",
+            "332005",
+            "334134"
+          ],
+          "method": "exact firm CRD set intersection of APPROVED StateRgstn/Rgltr/@Cd=TN and NoticeFiled/States/@RgltrCd=TN St=FILED"
+        },
+        "statusPartition": {
+          "sourceRows": 328,
+          "distinctCrds": 328,
+          "approved": 327,
+          "termrequest": 1,
+          "condrest": 0,
+          "unexplainedDelta": 0
+        },
+        "exactAdverseProfileAttachments": 0
       }
     },
     "measures": [
@@ -7738,7 +9373,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "State IA source registration rows (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7756,7 +9391,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct state IA CRDs (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7774,7 +9409,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Approved state IA CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7792,7 +9427,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "State IA CRDs with termination requested",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7810,7 +9445,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": null,
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Active state ERA reporting CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7828,7 +9463,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Federal notice filing rows",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7846,7 +9481,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct CRDs with a federal notice filing",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7864,7 +9499,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "SEC/IARD principal-office overlay",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7882,7 +9517,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Exact state IA / federal notice CRD bridges",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7900,7 +9535,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": "2026-09-09",
         "retrievedAt": "2026-09-09",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Sanctions narrative observations (unattached)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7918,7 +9553,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "State IA source registration rows (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7936,7 +9571,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct state IA CRDs (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7954,7 +9589,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Approved state IA CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7972,7 +9607,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "State IA CRDs with termination requested",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -7990,7 +9625,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": null,
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Active state ERA reporting CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8008,7 +9643,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Federal notice filing rows",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8026,7 +9661,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct CRDs with a federal notice filing",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8044,7 +9679,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "SEC/IARD principal-office overlay",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8062,7 +9697,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Exact state IA / federal notice CRD bridges",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8080,7 +9715,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-10",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Regulatory activity observations (unattached)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8098,7 +9733,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-10",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct regulatory case numbers",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8116,7 +9751,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "State IA source registration rows (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8134,7 +9769,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct state IA CRDs (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8152,7 +9787,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Approved state IA CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8170,7 +9805,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "State IA CRDs with termination requested",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8188,7 +9823,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": null,
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Active state ERA reporting CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8206,7 +9841,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Federal notice filing rows",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8224,7 +9859,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct CRDs with a federal notice filing",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8242,7 +9877,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "SEC/IARD principal-office overlay",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8260,7 +9895,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Exact state IA / federal notice CRD bridges",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8278,7 +9913,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-10",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Regulatory activity observations (unattached)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC_UNKNOWN",
@@ -8296,7 +9931,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-10",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct regulatory case numbers",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC_UNKNOWN",
@@ -8314,7 +9949,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "State IA source registration rows (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8332,7 +9967,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct state IA CRDs (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8350,7 +9985,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Approved state IA CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8368,7 +10003,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "State IA CRDs with termination requested",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8386,7 +10021,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": null,
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Active state ERA reporting CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8404,7 +10039,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Federal notice filing rows",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8422,7 +10057,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct CRDs with a federal notice filing",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8440,7 +10075,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "SEC/IARD principal-office overlay",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8458,7 +10093,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Exact state IA / federal notice CRD bridges",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8476,7 +10111,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": "2026-09-12",
         "retrievedAt": "2026-09-12",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Regulatory activity observations (unattached)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC_UNKNOWN",
@@ -8494,7 +10129,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": "2026-09-12",
         "retrievedAt": "2026-09-12",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct regulatory case numbers",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC_UNKNOWN",
@@ -8512,7 +10147,7 @@
         "sourceAsOf": "2026-09-10",
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-16T18:30:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "State IA source registration rows (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8530,7 +10165,7 @@
         "sourceAsOf": "2026-09-10",
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-16T18:30:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct state IA CRDs (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8548,7 +10183,7 @@
         "sourceAsOf": "2026-09-10",
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-16T18:30:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Approved state IA CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8566,7 +10201,7 @@
         "sourceAsOf": "2026-09-10",
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-16T18:30:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "State IA CRDs with termination requested",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8584,7 +10219,7 @@
         "sourceAsOf": "2026-09-10",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-16T18:30:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Active state ERA reporting CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8602,7 +10237,7 @@
         "sourceAsOf": "2026-09-10",
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-16T18:30:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Federal notice filing rows",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8620,7 +10255,7 @@
         "sourceAsOf": "2026-09-10",
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-16T18:30:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct CRDs with a federal notice filing",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8638,7 +10273,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "SEC/IARD principal-office overlay",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8656,7 +10291,7 @@
         "sourceAsOf": "2026-09-10",
         "snapshotAsOf": "2026-09-10",
         "retrievedAt": "2026-09-16T18:30:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Exact state IA / federal notice CRD bridges",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8674,7 +10309,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": "2026-09-16",
         "retrievedAt": "2026-09-16",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Regulatory activity observations (unattached)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8692,7 +10327,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": "2026-09-16",
         "retrievedAt": "2026-09-16",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct regulatory case numbers",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8710,7 +10345,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "State IA source registration rows (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8728,7 +10363,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct state IA CRDs (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8746,7 +10381,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Approved state IA CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8764,7 +10399,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "State IA CRDs with termination requested",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8782,7 +10417,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Active state ERA reporting CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8800,7 +10435,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Federal notice filing rows",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8818,7 +10453,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct CRDs with a federal notice filing",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8836,7 +10471,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": "2026-08-27",
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "SEC/IARD principal-office overlay",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8854,7 +10489,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Exact state IA / federal notice CRD bridges",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8872,7 +10507,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T15:15:44Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Regulatory activity observations (unattached)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8890,7 +10525,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": "2026-09-17",
         "retrievedAt": "2026-09-17T15:15:44Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct regulatory case numbers",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC_UNKNOWN",
@@ -8908,7 +10543,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "State IA source registration rows (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8926,7 +10561,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct state IA CRDs (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8944,7 +10579,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Approved state IA CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8962,7 +10597,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "State IA CRDs with termination requested",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8980,7 +10615,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": null,
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Active state ERA reporting CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -8998,7 +10633,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Federal notice filing rows",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9016,7 +10651,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct CRDs with a federal notice filing",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9034,7 +10669,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": null,
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "SEC/IARD principal-office overlay",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9052,7 +10687,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Exact state IA / federal notice CRD bridges",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9070,7 +10705,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": null,
         "retrievedAt": null,
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Regulatory activity observations (unattached)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9088,7 +10723,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": null,
         "retrievedAt": null,
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct regulatory case numbers",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC_UNKNOWN",
@@ -9106,7 +10741,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "State IA source registration rows (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9124,7 +10759,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct state IA CRDs (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9142,7 +10777,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Approved state IA CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9160,7 +10795,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "State IA CRDs with termination requested",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9178,7 +10813,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": null,
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Active state ERA reporting CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9196,7 +10831,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Federal notice filing rows",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9214,7 +10849,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct CRDs with a federal notice filing",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9232,7 +10867,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": null,
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "SEC/IARD principal-office overlay",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9250,7 +10885,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Exact state IA / federal notice CRD bridges",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9268,7 +10903,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": null,
         "retrievedAt": null,
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Regulatory activity observations (unattached)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC_UNKNOWN",
@@ -9286,7 +10921,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": null,
         "retrievedAt": null,
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct regulatory case numbers",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC_UNKNOWN",
@@ -9304,7 +10939,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "State IA source registration rows (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9322,7 +10957,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct state IA CRDs (all source statuses)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9340,7 +10975,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Approved state IA CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9358,7 +10993,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "State IA CRDs with termination requested",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9376,7 +11011,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "State IA CRDs with CONDREST status",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9394,7 +11029,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": null,
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Active state ERA reporting CRDs",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9412,7 +11047,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Federal notice filing rows",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9430,7 +11065,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct CRDs with a federal notice filing",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9448,7 +11083,7 @@
         "sourceAsOf": "2026-08-27",
         "snapshotAsOf": null,
         "retrievedAt": "2026-08-28",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "SEC/IARD principal-office overlay",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9466,7 +11101,7 @@
         "sourceAsOf": "2026-09-17",
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-17T15:15:00Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Exact state IA / federal notice CRD bridges",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9484,7 +11119,7 @@
         "sourceAsOf": null,
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-24T16:58:59Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Regulatory activity observations (unattached)",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
@@ -9502,11 +11137,227 @@
         "sourceAsOf": null,
         "snapshotAsOf": null,
         "retrievedAt": "2026-09-24T16:58:59Z",
-        "generatedAt": "2026-09-24T17:16:12.195Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
         "counts": "Distinct regulatory case numbers",
         "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
         "publicationStatus": "PUBLIC",
         "destination": "/massachusetts"
+      },
+      {
+        "key": "tn_stateRia_registrationRows",
+        "label": "Tennessee: State IA source registration rows (all source statuses)",
+        "value": 328,
+        "valueState": "KNOWN",
+        "grain": "state_ia_registration_row",
+        "capabilityStatus": "STATE_SOURCE_LIVE",
+        "sourceArtifact": "artifacts/tn-inv-001-public-snapshot.json",
+        "sourceField": "stateRia.registrationRows",
+        "sourceAsOf": "2026-09-17",
+        "snapshotAsOf": null,
+        "retrievedAt": "2026-09-17T15:15:00Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
+        "counts": "State IA source registration rows (all source statuses)",
+        "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
+        "publicationStatus": "PUBLIC",
+        "destination": "/tennessee"
+      },
+      {
+        "key": "tn_stateRia_distinctFirmCrd",
+        "label": "Tennessee: Distinct state IA CRDs (all source statuses)",
+        "value": 328,
+        "valueState": "KNOWN",
+        "grain": "state_ia_crd",
+        "capabilityStatus": "STATE_SOURCE_LIVE",
+        "sourceArtifact": "artifacts/tn-inv-001-public-snapshot.json",
+        "sourceField": "stateRia.distinctFirmCrd",
+        "sourceAsOf": "2026-09-17",
+        "snapshotAsOf": null,
+        "retrievedAt": "2026-09-17T15:15:00Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
+        "counts": "Distinct state IA CRDs (all source statuses)",
+        "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
+        "publicationStatus": "PUBLIC",
+        "destination": "/tennessee"
+      },
+      {
+        "key": "tn_stateRia_approvedDistinctCrd",
+        "label": "Tennessee: Approved state IA CRDs",
+        "value": 327,
+        "valueState": "KNOWN",
+        "grain": "approved_state_ia_crd",
+        "capabilityStatus": "STATE_SOURCE_LIVE",
+        "sourceArtifact": "artifacts/tn-inv-001-public-snapshot.json",
+        "sourceField": "stateRia.approvedDistinctCrd",
+        "sourceAsOf": "2026-09-17",
+        "snapshotAsOf": null,
+        "retrievedAt": "2026-09-17T15:15:00Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
+        "counts": "Approved state IA CRDs",
+        "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
+        "publicationStatus": "PUBLIC",
+        "destination": "/tennessee"
+      },
+      {
+        "key": "tn_stateRia_termrequestDistinctCrd",
+        "label": "Tennessee: State IA CRDs with termination requested",
+        "value": 1,
+        "valueState": "KNOWN",
+        "grain": "state_ia_termrequest_crd",
+        "capabilityStatus": "STATE_SOURCE_LIVE",
+        "sourceArtifact": "artifacts/tn-inv-001-public-snapshot.json",
+        "sourceField": "stateRia.termrequestDistinctCrd",
+        "sourceAsOf": "2026-09-17",
+        "snapshotAsOf": null,
+        "retrievedAt": "2026-09-17T15:15:00Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
+        "counts": "State IA CRDs with termination requested",
+        "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
+        "publicationStatus": "PUBLIC",
+        "destination": "/tennessee"
+      },
+      {
+        "key": "tn_stateRia_condrestDistinctCrd",
+        "label": "Tennessee: State IA CRDs with CONDREST status",
+        "value": 0,
+        "valueState": "KNOWN",
+        "grain": "state_ia_condrest_crd",
+        "capabilityStatus": "STATE_SOURCE_LIVE",
+        "sourceArtifact": "artifacts/tn-inv-001-public-snapshot.json",
+        "sourceField": "stateRia.condrestDistinctCrd",
+        "sourceAsOf": "2026-09-17",
+        "snapshotAsOf": null,
+        "retrievedAt": "2026-09-17T15:15:00Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
+        "counts": "State IA CRDs with CONDREST status",
+        "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
+        "publicationStatus": "PUBLIC",
+        "destination": "/tennessee"
+      },
+      {
+        "key": "tn_stateEra_activeDistinctCrd",
+        "label": "Tennessee: Active state ERA reporting CRDs",
+        "value": 38,
+        "valueState": "KNOWN",
+        "grain": "state_era_crd",
+        "capabilityStatus": "STATE_SOURCE_LIVE",
+        "sourceArtifact": "artifacts/tn-inv-001-public-snapshot.json",
+        "sourceField": "stateEra.activeDistinctCrd",
+        "sourceAsOf": "2026-09-17",
+        "snapshotAsOf": null,
+        "retrievedAt": null,
+        "generatedAt": "2026-09-25T12:42:48.175Z",
+        "counts": "Active state ERA reporting CRDs",
+        "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
+        "publicationStatus": "PUBLIC",
+        "destination": "/tennessee"
+      },
+      {
+        "key": "tn_federalNotice_noticeRows",
+        "label": "Tennessee: Federal notice filing rows",
+        "value": 2685,
+        "valueState": "KNOWN",
+        "grain": "federal_notice_filing",
+        "capabilityStatus": "STATE_SOURCE_LIVE",
+        "sourceArtifact": "artifacts/tn-inv-001-public-snapshot.json",
+        "sourceField": "federalNotice.noticeRows",
+        "sourceAsOf": "2026-09-17",
+        "snapshotAsOf": null,
+        "retrievedAt": "2026-09-17T15:15:00Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
+        "counts": "Federal notice filing rows",
+        "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
+        "publicationStatus": "PUBLIC",
+        "destination": "/tennessee"
+      },
+      {
+        "key": "tn_federalNotice_noticeFiledDistinctCrd",
+        "label": "Tennessee: Distinct CRDs with a federal notice filing",
+        "value": 2685,
+        "valueState": "KNOWN",
+        "grain": "federal_notice_crd",
+        "capabilityStatus": "STATE_SOURCE_LIVE",
+        "sourceArtifact": "artifacts/tn-inv-001-public-snapshot.json",
+        "sourceField": "federalNotice.noticeFiledDistinctCrd",
+        "sourceAsOf": "2026-09-17",
+        "snapshotAsOf": null,
+        "retrievedAt": "2026-09-17T15:15:00Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
+        "counts": "Distinct CRDs with a federal notice filing",
+        "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
+        "publicationStatus": "PUBLIC",
+        "destination": "/tennessee"
+      },
+      {
+        "key": "tn_nationalOverlay_tnPrincipalOfficeSecIardFirms",
+        "label": "Tennessee: SEC/IARD principal-office overlay",
+        "value": 264,
+        "valueState": "KNOWN",
+        "grain": "principal_office_overlay",
+        "capabilityStatus": "FEDERAL_BASELINE",
+        "sourceArtifact": "artifacts/tn-inv-001-public-snapshot.json",
+        "sourceField": "nationalOverlay.tnPrincipalOfficeSecIardFirms",
+        "sourceAsOf": "2026-08-27",
+        "snapshotAsOf": null,
+        "retrievedAt": "2026-08-28",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
+        "counts": "SEC/IARD principal-office overlay",
+        "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
+        "publicationStatus": "PUBLIC",
+        "destination": "/tennessee"
+      },
+      {
+        "key": "tn_federalNotice_overlapApprovedStateIa",
+        "label": "Tennessee: Exact state IA / federal notice CRD bridges",
+        "value": 3,
+        "valueState": "KNOWN",
+        "grain": "exact_crd_bridge",
+        "capabilityStatus": "STATE_SOURCE_LIVE",
+        "sourceArtifact": "artifacts/tn-inv-001-public-snapshot.json",
+        "sourceField": "federalNotice.overlapApprovedStateIa",
+        "sourceAsOf": "2026-09-17",
+        "snapshotAsOf": null,
+        "retrievedAt": "2026-09-17T15:15:00Z",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
+        "counts": "Exact state IA / federal notice CRD bridges",
+        "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
+        "publicationStatus": "PUBLIC",
+        "destination": "/tennessee"
+      },
+      {
+        "key": "tn_enforcement_observationRows",
+        "label": "Tennessee: Regulatory activity observations (unattached)",
+        "value": 405,
+        "valueState": "KNOWN",
+        "grain": "regulatory_activity_observation",
+        "capabilityStatus": "STATE_SOURCE_LIVE",
+        "sourceArtifact": "artifacts/tn-inv-001-public-snapshot.json",
+        "sourceField": "enforcement.observationRows",
+        "sourceAsOf": null,
+        "snapshotAsOf": null,
+        "retrievedAt": "2026-09-25T12:30:07+00:00",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
+        "counts": "Regulatory activity observations (unattached)",
+        "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
+        "publicationStatus": "PUBLIC",
+        "destination": "/tennessee"
+      },
+      {
+        "key": "tn_enforcement_distinctCaseNumbers",
+        "label": "Tennessee: Distinct regulatory case numbers",
+        "value": null,
+        "valueState": "UNKNOWN",
+        "grain": "regulatory_case",
+        "capabilityStatus": "PUBLIC_RESEARCH_PATH",
+        "sourceArtifact": "artifacts/tn-inv-001-public-snapshot.json",
+        "sourceField": "enforcement.distinctCaseNumbers",
+        "sourceAsOf": null,
+        "snapshotAsOf": null,
+        "retrievedAt": "2026-09-25T12:30:07+00:00",
+        "generatedAt": "2026-09-25T12:42:48.175Z",
+        "counts": "Distinct regulatory case numbers",
+        "doesNotCount": "Additional canonical firms, a combined adviser denominator, or adverse profile attachments",
+        "publicationStatus": "PUBLIC_UNKNOWN",
+        "destination": "/tennessee"
       }
     ],
     "identity": {
@@ -9537,9 +11388,10 @@
     "artifacts/nc-inv-001-public-snapshot.json": "3d0996bbcd8b63b1f0d0c39270084c60d478e7a8bf8ad4702391b48aa611ed09",
     "artifacts/oh-inv-001-public-snapshot.json": "6b7dbd2c8ef9f90548660c3dd3d4f54cc5871066e97ccc4a3b598ca2bebf6903",
     "artifacts/ma-inv-001-public-snapshot.json": "43e519ccd230a3bc0246d9aaff66302e0f92b5f7b75949a58a4af5fd6d1f2567",
-    "packages/config/src/routes.ts": "d0eab6544fb3b10faeaa84b9e7da5507fc94260e50535c65bab61c52893245e7",
-    "scripts/publication_metric_inputs.mjs": "bf5db87e09e69bce7da091332e1605e66b98db6701ae9e978a3ba2ec9c31e666",
-    "scripts/build_network_metrics_v1.mjs": "7db0562e2e1985de1c9ec1f44efe92a0b1e74db3fbf8ca4f519eda6b78d51fc4",
-    "scripts/reconcile-network-metrics-r2-04.mjs": "c10a7061f9cfd2c296acf1a55ebc69b9dae36ae1504d80397d41d99a451e30e3"
+    "artifacts/tn-inv-001-public-snapshot.json": "965684b92d186656d085626d541d85fc02ff06b8d9129e30b38613686421e4c8",
+    "packages/config/src/routes.ts": "4c1216af3d589e8da5df9b1ab0e022cc3ae7a5d274be05e474f16c6bca80f8dc",
+    "scripts/publication_metric_inputs.mjs": "26e66985642b9074ef8ffd7fbc5d5f37f86fee34541ff67f28cd126ec965a68b",
+    "scripts/build_network_metrics_v1.mjs": "db15da48516e661150cc4ba8d7dc17ff3f81ab071b8a5eaffa18842a36630194",
+    "scripts/reconcile-network-metrics-r2-04.mjs": "462732afa1a1cfe26cf7fd52972754c3d5c669af25859057d28cf1b2e91174ff"
   }
 }

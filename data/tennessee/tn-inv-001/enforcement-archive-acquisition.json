@@ -1,0 +1,38 @@
+{
+ "consent-orders": {
+  "url": "https://www.tn.gov/commerce/securities/investors/enforcement-actions/consent-orders.html",
+  "status": 200,
+  "bytes": 120690,
+  "retrievedAt": "2026-09-25T12:29:51+00:00",
+  "page_sha256": "613714d89f776b86842cf9699e8c89ea223535d4b7bd3d9eb3d60c584a7e06e6",
+  "article_sha256": "95d96eea1a4774212a84d713b28c0e6483b37093304b487ba7a967f56f2ac75b",
+  "committed_file": "consent-orders-archive.html"
+ },
+ "cease-and-desist-orders": {
+  "url": "https://www.tn.gov/commerce/securities/investors/enforcement-actions/cease-and-desist-orders.html",
+  "status": 200,
+  "bytes": 77569,
+  "retrievedAt": "2026-09-25T12:29:57+00:00",
+  "page_sha256": "5ff0eb0d942bce93ba92b8aed6edc34b5b3c2f93c39f43c8da28d9823290af37",
+  "article_sha256": "2e0f9cd0244418c303dc80be825cbf9aee0121dfcb705b91adca072d4986454b",
+  "committed_file": "cease-and-desist-orders-archive.html"
+ },
+ "final-administrative-orders": {
+  "url": "https://www.tn.gov/commerce/securities/investors/enforcement-actions/final-administrative-orders.html",
+  "status": 200,
+  "bytes": 78373,
+  "retrievedAt": "2026-09-25T12:30:02+00:00",
+  "page_sha256": "9ca1ac9eb35f0a37fb923ccf38b0d916e66b2f2b5abf2877d39078b73da14282",
+  "article_sha256": "b2a52e10efd1450492e8b3a2344c34ae94652f0285c2701a3a00fb8ba1273094",
+  "committed_file": "final-administrative-orders-archive.html"
+ },
+ "initial-orders": {
+  "url": "https://www.tn.gov/commerce/securities/investors/enforcement-actions/initial-orders.html",
+  "status": 200,
+  "bytes": 60297,
+  "retrievedAt": "2026-09-25T12:30:07+00:00",
+  "page_sha256": "24a2e67907aaa5df7f606aed0203c46386b8cc557dada97189497ef6799823a2",
+  "article_sha256": "d8edf4f33dcc13a23bebcf2e48b89b5022924f1435f1d1b4bbdb56320097d98d",
+  "committed_file": "initial-orders-archive.html"
+ }
+}
