@@ -43,6 +43,7 @@ export type MetricGrain =
   | 'nc_state_ria_roster'
   | 'oh_state_ria_roster'
   | 'ma_state_ria_roster'
+  | 'tn_state_ria_roster'
   | 'form_adv_withdrawal'
   | 'form_adv_successor_link';
 
@@ -267,6 +268,12 @@ export type InvestorNetworkMetricsV1 = {
     noticeFiledFirms: number;
   };
   massachusetts: {
+    principalOfficeRosterFirms: number;
+    stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION';
+    statewideStateRiaUniverse: number;
+    noticeFiledFirms: number;
+  };
+  tennessee: {
     principalOfficeRosterFirms: number;
     stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION';
     statewideStateRiaUniverse: number;

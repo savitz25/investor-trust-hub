@@ -71,6 +71,9 @@ export type InvestorNetworkMetricsInput = {
   maPrincipalOfficeFirms: number;
   maStateRiaApproved: number;
   maNoticeFiled: number;
+  tnPrincipalOfficeFirms: number;
+  tnStateRiaApproved: number;
+  tnNoticeFiled: number;
 };
 
 function metric(partial: Omit<InvestorNetworkMetric, 'unit'>): InvestorNetworkMetric {
@@ -133,7 +136,7 @@ export function assertGrainSafety(input: InvestorNetworkMetricsInput): void {
   if (input.disclosureEvents === input.item11YesRia + input.item11YesEra && input.disclosureEvents > 0) {
     throw new Error('disclosure events must not be equated to Item 11 yes indicators');
   }
-  for (const path of ['/new-jersey', '/california', '/texas', '/washington', '/arizona', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania', '/north-carolina', '/ohio', '/georgia', '/massachusetts']) {
+  for (const path of ['/new-jersey', '/california', '/texas', '/washington', '/arizona', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania', '/north-carolina', '/ohio', '/georgia', '/massachusetts', '/tennessee']) {
     if (!input.publishedStateIntelligencePaths.includes(path)) {
       throw new Error(`state intelligence path missing: ${path}`);
     }
@@ -760,6 +763,28 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       ),
     }),
     metric({
+      key: 'tn_state_ria_roster',
+      label: 'Tennessee state-registered investment-adviser firms',
+      value: input.tnStateRiaApproved,
+      valueState: 'KNOWN',
+      grain: 'tn_state_ria_roster',
+      denominator: 'IAPD state compilation APPROVED firms with registration jurisdiction = TN',
+      description:
+        'Tennessee state-registered investment-adviser firms from IA_FIRM_STATE_Feed_09_17_2026. Not SEC RIA, not notice filing, not ERA, not TERMREQUEST rows, and not the 264 principal-office overlay.',
+      coverage: 'Tennessee',
+      contributingSourceSystems: ['iapd_state_compilation'],
+      sourceAsOf: input.publishedAt,
+      generatedAt,
+      publicationStatus: 'PUBLIC',
+      trace: commonTrace(
+        'IAPD StateRgstn/Rgltr/@Cd=TN and status APPROVED, counted as distinct firm CRD.',
+        'Not SEC/IARD principal-office firms. Not federal-covered notice filings. Not state ERA reporting. Not IAR people. Not broker-dealers or agents.',
+        ['iapd_state_compilation'],
+        'Tennessee',
+        'IA_FIRM_STATE_Feed_09_17_2026',
+      ),
+    }),
+    metric({
       key: 'published_state_intelligence_pages',
       label: 'Published state investment-intelligence pages',
       value: input.publishedStateIntelligencePaths.length,
@@ -773,7 +798,7 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       generatedAt,
       publicationStatus: 'PUBLIC',
       trace: commonTrace(
-        'Published /new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, /georgia, and /massachusetts intelligence routes.',
+        'Published /new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, /georgia, /massachusetts, and /tennessee intelligence routes.',
         'Not county pages. Not national roster rows. Florida is not published on this hub.',
         ['investor-state-intel'],
         input.publishedStateIntelligencePaths.join(', '),
@@ -959,6 +984,12 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION',
       statewideStateRiaUniverse: input.maStateRiaApproved,
       noticeFiledFirms: input.maNoticeFiled,
+    },
+    tennessee: {
+      principalOfficeRosterFirms: input.tnPrincipalOfficeFirms,
+      stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION',
+      statewideStateRiaUniverse: input.tnStateRiaApproved,
+      noticeFiledFirms: input.tnNoticeFiled,
     },
     network: {
       publishedStateIntelligencePages: input.publishedStateIntelligencePaths.length,

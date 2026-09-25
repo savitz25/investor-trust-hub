@@ -1,0 +1,1075 @@
+{
+ "version": "investor-tn-order-identifiers-v1",
+ "window": [
+  2024,
+  2026
+ ],
+ "archives": [
+  "consent-orders",
+  "cease-and-desist-orders"
+ ],
+ "method": "first listed document per listing; printed CRD / SEC file numbers only; no OCR. Only CRDs that are firm CRDs in the accepted 2026-09-17 IAPD compilation are written; other printed CRDs (people, broker-dealers outside the IA feeds, withdrawn firms) are counted, not listed.",
+ "extractedAt": "2026-09-25T12:37:54Z",
+ "documents": [
+  {
+   "listingId": "tn-sd-co-2026-001",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Bigham%20Wealth%20Consent%20Order%20for%20Division.pdf",
+   "retrieved": true,
+   "sha256": "dc8fd105253ee7c4c49bf38e84e0034a58c8b8c83c2151196da7865bc1c649ce",
+   "bytes": 183720,
+   "pages": 9,
+   "textChars": 15392,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "crdPrintedCount": 1,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2026-002",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Consent%20Order%20Trendz_Unsigned%20Word%20Version.pdf",
+   "retrieved": true,
+   "sha256": "e780143638319b5f376e9f7618f4a83262b2d6330e3d7bcc39cc2c5eaad485c6",
+   "bytes": 180128,
+   "pages": 9,
+   "textChars": 14308,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "23-00324"
+   ],
+   "crdPrintedCount": 1,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2026-003",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Order%20for%20CD-%20Eric%20Daniels.pdf",
+   "retrieved": true,
+   "sha256": "69af848bee96815cca6fd0619fdd8ea481ba7fd1cbccc35f08725cd6dd93e70a",
+   "bytes": 312848,
+   "pages": 14,
+   "textChars": 27482,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "52-102"
+   ],
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2026-004",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Order%20Daryl%20Moore%20and%20Alliance%20CD.pdf",
+   "retrieved": true,
+   "sha256": "b82c72d16805f2c3afcfde75c5d189f625cf9709ab8d75ae01ad29c0e3a7c389",
+   "bytes": 250145,
+   "pages": 13,
+   "textChars": 25281,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "52-102"
+   ],
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2026-005",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Davis%20Consent%20Order%20(proposed).pdf",
+   "retrieved": true,
+   "sha256": "47d01c16e9344feff56b8dfdbffeabce3159c833b9511cf0ada61d04d4c5f8a0",
+   "bytes": 279709,
+   "pages": 24,
+   "textChars": 43302,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2026-006",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/6.2.26%20Quants%20%20Proposed%20Consent%20Order_Respondent.docx",
+   "retrieved": true,
+   "sha256": "eeac71a9aeba4e5f256eec9afd38a59702afd5166f3772672c01599372d7019c",
+   "bytes": 92557,
+   "parseError": "PdfminerException",
+   "imageOnlyNotOcrd": true,
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2026-007",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Phillips%20Capital-%20%20Consent%20Order%20unsigned.pdf",
+   "retrieved": true,
+   "sha256": "cc31ef7158140a175a087722779d6ee7c5baa6a796a4ac33d29dd601dfab84f3",
+   "bytes": 227797,
+   "pages": 8,
+   "textChars": 13052,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "12.06-243176J",
+    "21-01277"
+   ],
+   "crdPrintedCount": 1,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2026-008",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Boulevard%20Money%20Proposed%20Consent%20Order.pdf",
+   "retrieved": true,
+   "sha256": "ac56065ee4496b60c705c4580229ecade39117c4a54ccbc52d302405a109a1ee",
+   "bytes": 174884,
+   "pages": 8,
+   "textChars": 11479,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "crdPrintedCount": 1,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2026-009",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Perry_First-Nationle-Solutions-LLC_Signed.pdf",
+   "retrieved": true,
+   "sha256": "276cffc1b2e26fa2c4795ed2ecfd1bb76763afaeab34f2a6def5b85d7809b020",
+   "bytes": 771880,
+   "pages": 10,
+   "textChars": 437,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2026-010",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/McLendon%20Jordan%20-%20Consent%20Order.pdf",
+   "retrieved": true,
+   "sha256": "450d97f4f6c939a5884389f4caa0179306379936688723284cfad713c759b392",
+   "bytes": 325445,
+   "pages": 8,
+   "textChars": 13361,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2026-011",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Defining%20Wealth%20Partners%20Consent%20Order%20JM(Signed).pdf",
+   "retrieved": true,
+   "sha256": "cfb7726df2049e125c9a7acd231f3000927bfaad187d6765688e537f24a1c37e",
+   "bytes": 721314,
+   "pages": 9,
+   "textChars": 13637,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "25-0186"
+   ],
+   "crdPrintedCount": 1,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2026-012",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Pages%20from%203.4.26%20Allen%20and%20Associates%20FINAL%20JM(Signed).pdf",
+   "retrieved": true,
+   "sha256": "a23b87654089bc73d703da3ee88eacf4a1c7f0ef227deb5602e1b574cc191e6b",
+   "bytes": 573682,
+   "pages": 9,
+   "textChars": 13804,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "48-208"
+   ],
+   "crdPrintedCount": 1,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2026-013",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Rooks%20Consent%20Order%20Entered%20and%20Executed.pdf",
+   "retrieved": true,
+   "sha256": "a03f4571a14b8736e0f9ee88e825fe6d0cb41dce4b72175890abd20183027844",
+   "bytes": 2947478,
+   "pages": 10,
+   "textChars": 14136,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "23-01280"
+   ],
+   "crdPrintedCount": 2,
+   "crdPrintedNotInIapdFirmFeeds": 2,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2026-014",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/DefiningWealth.pdf",
+   "retrieved": true,
+   "sha256": "c2b036ebd51fc503f2ef9f1d4b00b94dbabc6a5d1bc712cdad64e58ce900108f",
+   "bytes": 531914,
+   "pages": 8,
+   "textChars": 12365,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "25-0186"
+   ],
+   "crdPrintedCount": 1,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2026-015",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Hubbard.pdf",
+   "retrieved": true,
+   "sha256": "4632dba2bbe32562b197e3ed6129eb1f95311d4cd6e87004e4791c25606eb985",
+   "bytes": 528621,
+   "pages": 10,
+   "textChars": 17259,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "crdPrintedCount": 1,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2026-016",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/1.14.26%20FINAL%20JM%20Imagine%20Financial%20(1)(Signed).pdf",
+   "retrieved": true,
+   "sha256": "e5087501d15362fd99253035970e5767252c0e453563faf200f5366a3a70b065",
+   "bytes": 4203869,
+   "pages": 8,
+   "textChars": 829,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2026-017",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Carty%2c%20Harding%20Hearn%2c%20Inc.%20-%20Consent%20Order.pdf",
+   "retrieved": true,
+   "sha256": "0d08374bbb46de224e522aeb74dcac9aa02255a229ea48d4c152545eb347751f",
+   "bytes": 275209,
+   "pages": 11,
+   "textChars": 19529,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "22-00571"
+   ],
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2025-001",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/JM%20Final%20Heritage%20Wealth%2012.2.25signed).pdf",
+   "retrieved": true,
+   "sha256": "28b93735d066fc7e339e62a75185b9f0e1a6b1707441821791039075b68fac19",
+   "bytes": 12863637,
+   "pages": 87,
+   "textChars": 116060,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "21-01281"
+   ],
+   "crdPrintedCount": 2,
+   "crdPrintedNotInIapdFirmFeeds": 2,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2025-002",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/JM%20-%20Stellar%20Assets%20LLC%20(Signed).pdf",
+   "retrieved": true,
+   "sha256": "5e85c2bfdf3e46c826121d597e4852ebb446f4387dd49f78bac97d47285d8b71",
+   "bytes": 2850601,
+   "pages": 16,
+   "textChars": 12760,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "crdPrintedCount": 1,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2025-003",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/JM%20Final%20Catamount%2011.6.25(Signed).pdf",
+   "retrieved": true,
+   "sha256": "cff637294f9b0670c52cbcea43c503be0e2ae5e1e852297f5e6dd66d7a3371d5",
+   "bytes": 440515,
+   "pages": 18,
+   "textChars": 29739,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "crdPrintedCount": 1,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2025-004",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/GSI.pdf",
+   "retrieved": true,
+   "sha256": "316a8f79905faa0a3226e6369320b9daa944d00304b4d86515e74b2033702464",
+   "bytes": 566485,
+   "pages": 14,
+   "textChars": 0,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "imageOnlyNotOcrd": true,
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2025-005",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Optional%20Financial%20Strategies%20Inc.%20and%20Joel%20Alexander%20Minner.pdf",
+   "retrieved": true,
+   "sha256": "d1833c2a6be58f1e8c040871c9e4ddd5a042b956ba930f08ec673583676f98f1",
+   "bytes": 377850,
+   "pages": 9,
+   "textChars": 0,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "imageOnlyNotOcrd": true,
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2025-006",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/JM%20Final%20SMEAC_CAT_8.20.25%20(Signed).pdf",
+   "retrieved": true,
+   "sha256": "32eb3fce071cec5637f8cb564b4bdf32cf9a875cd798c3b306ca37f45eaf6219",
+   "bytes": 341535,
+   "pages": 11,
+   "textChars": 16729,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "crdPrintedCount": 1,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2025-007",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/JM%20Final%20Grogan_CAT_draft%209.3.25%20(SIgned).pdf",
+   "retrieved": true,
+   "sha256": "795f59d9a2e243d910fa19095f10215161c2c490df32b4a1c30a2c1b0630342f",
+   "bytes": 283278,
+   "pages": 11,
+   "textChars": 18471,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "23-01695"
+   ],
+   "crdPrintedCount": 1,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2025-008",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Final%20Lattice%20Wealth_CAT_8.22.25(Signed).pdf",
+   "retrieved": true,
+   "sha256": "4a7999a8915291ad4595459ab30641385f81946419cad1ef4b622700f4d56287",
+   "bytes": 333956,
+   "pages": 9,
+   "textChars": 159,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "imageOnlyNotOcrd": true,
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2025-009",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Vanguard-ratification(Signed).pdf",
+   "retrieved": true,
+   "sha256": "7c4301e701c36b3940b554cc00ee57b66cc03a09aaec1e5a3de8b5e758aaf7c8",
+   "bytes": 1868313,
+   "pages": 16,
+   "textChars": 195016,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2025-010",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/JM%20Final%20Kennedy%20Wealth_CAT_draft%208.7.25%20(1Signed).pdf",
+   "retrieved": true,
+   "sha256": "cda8833c71e48d14f4db8d91bb9e91ad103c9c5f96ae8b7fb230fc9a49bbbb98",
+   "bytes": 2094908,
+   "pages": 8,
+   "textChars": 13020,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "crdPrintedCount": 1,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2025-011",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/8.4.25%20JM%20Final%20Benson%20Wealth_CAT(Signed).pdf",
+   "retrieved": true,
+   "sha256": "5f2169df4e6a7e01a22d81053e61d47dd215b614000433ebb2bb32675bfd8c4e",
+   "bytes": 2138471,
+   "pages": 10,
+   "textChars": 16056,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "24-01617"
+   ],
+   "crdPrintedCount": 1,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2025-012",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/7.16.25%20Final%20Miller%20-%20signed%20and%20executed.pdf",
+   "retrieved": true,
+   "sha256": "2beb64a996ca8136512f270b7272d07fdb8cb2ea2eebe8ee1683087e42ad81a7",
+   "bytes": 1247903,
+   "pages": 8,
+   "textChars": 148,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "imageOnlyNotOcrd": true,
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2025-013",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Advipartner%20Executed%20Consent%20Order%20to%20Send.pdf",
+   "retrieved": true,
+   "sha256": "461e044f8fe01e359fed0e15686a9064aad33f3401b681182fae60bbcbc29155",
+   "bytes": 633476,
+   "pages": 8,
+   "textChars": 3150,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "24-01567"
+   ],
+   "crdPrintedCount": 1,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2025-014",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Strategic%20Wealth%20Executed%20Consent%20Order%20to%20Send.pdf",
+   "retrieved": true,
+   "sha256": "58e68b199ed47b9ffe34c2a9b78ec24189a4e6bd6764d92649bb7f94d453ed6e",
+   "bytes": 2950618,
+   "pages": 10,
+   "textChars": 1169,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2025-015",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Securities%20Consent%20Order%20JM%20Hill%20Place.pdf",
+   "retrieved": true,
+   "sha256": "4cf61e2a5de3cf8d8007c3e2873bd982a7f0e105632ef7768cbf569908b82109",
+   "bytes": 268382,
+   "pages": 10,
+   "textChars": 14081,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "24-01182"
+   ],
+   "crdPrintedCount": 1,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2025-016",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/4.28.25%20SECURITIES%20-%20Final%20Vested%20Wealth(Signed).pdf",
+   "retrieved": true,
+   "sha256": "878510cea0e018d3c38eb73d9773178d3a8d03901211937906f96861b35a55b2",
+   "bytes": 1156051,
+   "pages": 8,
+   "textChars": 149,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "imageOnlyNotOcrd": true,
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2025-017",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/AG%20Financial.pdf",
+   "retrieved": true,
+   "sha256": "9a853bf7e4ce297804c3d9af10b9715d38609eaa24f7ae889bd9f204fa45241f",
+   "bytes": 272564,
+   "pages": 9,
+   "textChars": 13891,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "24-02002"
+   ],
+   "crdPrintedCount": 1,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2025-018",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/4.24.25%20Final%20Christopher%20Clark%20(Signed).pdf",
+   "retrieved": true,
+   "sha256": "15a1f737de7daed92944004324578a36f2ece3c6f5162d145d2ea01eb7f5e30a",
+   "bytes": 195703,
+   "pages": 8,
+   "textChars": 146,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "imageOnlyNotOcrd": true,
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2025-019",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Miser%20Asset%20Management%20to%20Send.pdf",
+   "retrieved": true,
+   "sha256": "eceea0d4c2dd841732f98269bfd624a58113b5dc78d1b0fdbca4199235d38c60",
+   "bytes": 696190,
+   "pages": 10,
+   "textChars": 100,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "imageOnlyNotOcrd": true,
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2025-020",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/3.21.25%20SECURITIES%20JM%20-%20Final%20Roman%20Wealth(Signed)%20corrected%20CRD%20number.pdf",
+   "retrieved": true,
+   "sha256": "597a75577856662e569f209cc9e518cb7b4d085a86595786097825421c51aa94",
+   "bytes": 919930,
+   "pages": 11,
+   "textChars": 1364,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "24-01290"
+   ],
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2025-021",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/2.28.25_SCC%20Capital%20LLC%20JM%20-%20Final_(Signed).pdf",
+   "retrieved": true,
+   "sha256": "de1aee35c0bd0c0de99d9a6a4024dc30dbcfdb3e076573b52b51b6fdcf73ff8d",
+   "bytes": 597241,
+   "pages": 8,
+   "textChars": 139,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "imageOnlyNotOcrd": true,
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2025-022",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/3.7.25%20SECURITIES%20JM%20-%20Masterworks1.pdf",
+   "retrieved": true,
+   "sha256": "4e0480b2533d18fe5526fad19cd21e44d459a6c5cdc598d94f469ebb5ff2ee4c",
+   "bytes": 590568,
+   "pages": 13,
+   "textChars": 142951,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2025-023",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Solytix%20Consent%20Order%20Entered%20and%20Executed.pdf",
+   "retrieved": true,
+   "sha256": "c0821041ae739ce253ee09c70ec38739c85a49e62452509b5cd5c113f3357019",
+   "bytes": 1181035,
+   "pages": 16,
+   "textChars": 24641,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "23-00754"
+   ],
+   "crdPrintedCount": 2,
+   "crdPrintedNotInIapdFirmFeeds": 2,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2024-001",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Edward%20Jones%20Consent%20Order%20Entered%20and%20Executed.pdf",
+   "retrieved": true,
+   "sha256": "5149ccabd2c91e77f1dc434f62ef179f633fc56f34c620f80372d4c0ab8026f8",
+   "bytes": 1639957,
+   "pages": 12,
+   "textChars": 21363,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "23-01039"
+   ],
+   "crdPrintedCount": 1,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": [
+    {
+     "crd": "250",
+     "iapdFeeds": [
+      "SEC"
+     ],
+     "iapdNameInCaption": true
+    }
+   ]
+  },
+  {
+   "listingId": "tn-sd-co-2024-002",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Oldham%20Consent%20Order%20Entered%20and%20Executed.pdf",
+   "retrieved": true,
+   "sha256": "4b3d3a89e7184ce179810ac69ecee9c5d3f0947b19ac8788e97abc4e801cbd5a",
+   "bytes": 707566,
+   "pages": 11,
+   "textChars": 1950,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2024-003",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/10.23.%2024.%20JM%20Flood%20Bumstead%20McCready%20McCarthy%20Inc%20(Signed).pdf",
+   "retrieved": true,
+   "sha256": "5da6c9e5865a3298ce4913f26495fca540708ffcddaed7f7b3e8b4539767c5fe",
+   "bytes": 445595,
+   "pages": 13,
+   "textChars": 15997,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "23-01420"
+   ],
+   "crdPrintedCount": 1,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2024-004",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Samuel%20Haddix%20Ratify%20Voluntary%20Consent%20Order(Signed).pdf",
+   "retrieved": true,
+   "sha256": "9210c805f9c0abc251e6b97c7c9ab010ce5e7612562101e7099024e1d9d97ac0",
+   "bytes": 2001072,
+   "pages": 8,
+   "textChars": 139,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "imageOnlyNotOcrd": true,
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2024-005",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/8.4.24%20Final%20Caelian%20Proposed%20Consent%20Order_send.pdf",
+   "retrieved": true,
+   "sha256": "1087735f9c433394f72b66be8e6d25f4b611ab8d0ed08c4b8d1b07417c8640ff",
+   "bytes": 665104,
+   "pages": 15,
+   "textChars": 22367,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "24-00598"
+   ],
+   "crdPrintedCount": 2,
+   "crdPrintedNotInIapdFirmFeeds": 2,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2024-006",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Tradestation%20-%20Ratified%20Consent%20Order.pdf",
+   "retrieved": true,
+   "sha256": "ec186ce07197743c24b0d8615567653a407311c22dfbc3b73439a4086e209a41",
+   "bytes": 1145902,
+   "pages": 15,
+   "textChars": 24884,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "24-00335"
+   ],
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2024-007",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/WLH%20Management%20JM%20Final%20Consent%20Order%20-%207.25(Signed).pdf",
+   "retrieved": true,
+   "sha256": "237d454bd4f7ef364f91c17cd320c2b5613c63ea9a8c94940be7d8b1e4a052dc",
+   "bytes": 241210,
+   "pages": 8,
+   "textChars": 11787,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "23-01695"
+   ],
+   "crdPrintedCount": 1,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2024-008",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Moneypro%20Consent%20Order%20Entered%20and%20Executed.pdf",
+   "retrieved": true,
+   "sha256": "7175d41042e197f4a84d8050ccfc1458ab6bf4685bc00c3fe7dbf7287e36e0db",
+   "bytes": 437247,
+   "pages": 9,
+   "textChars": 15169,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "24-00986"
+   ],
+   "crdPrintedCount": 1,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2024-009",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/finaladminorders/Entered%20Jeffrey%20Griswold%20Consent%20Order.pdf",
+   "retrieved": true,
+   "sha256": "2faafc175386dd13c80a564a191ab28ad91d0abac4c24ab3fe2f7cf370a29ae6",
+   "bytes": 381576,
+   "pages": 11,
+   "textChars": 17737,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "24-00980"
+   ],
+   "crdPrintedCount": 2,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": [
+    {
+     "crd": "309098",
+     "iapdFeeds": [
+      "SEC"
+     ],
+     "iapdNameInCaption": false
+    }
+   ]
+  },
+  {
+   "listingId": "tn-sd-co-2024-010",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/executed%204.16_4.4.23%20routing%20Securities%20Consent%20Order%20Final%20JM%20-%20John%20A.%20Poole-Financial%20Advisor-tg%20edits(Signed)%20(002).pdf",
+   "retrieved": true,
+   "sha256": "b2a4ef09c5c12cf376b9207b97e78302ed6ee69a54dcfa9ce60a39165f2a42b0",
+   "bytes": 244915,
+   "pages": 8,
+   "textChars": 12668,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "23-01285"
+   ],
+   "crdPrintedCount": 2,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": [
+    {
+     "crd": "141882",
+     "iapdFeeds": [
+      "STATE"
+     ],
+     "iapdNameInCaption": true
+    }
+   ]
+  },
+  {
+   "listingId": "tn-sd-co-2024-011",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Abidi%20Temporary%20Injunction.pdf",
+   "retrieved": true,
+   "sha256": "b0bc37b69626fc09b19da90699d11baf01b58826f110e7a16e0e23fa93e902ed",
+   "bytes": 4246394,
+   "pages": 13,
+   "textChars": 1884,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "18-108"
+   ],
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2024-012",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Raymond%20James%20Consent%20Order%20Entered%20and%20Executed.pdf",
+   "retrieved": true,
+   "sha256": "b4b4ed29a7a4c99c4da427226877acd24686f2322b59d48c0f0ec47f2193f9a1",
+   "bytes": 439964,
+   "pages": 13,
+   "textChars": 21765,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "23-01038"
+   ],
+   "crdPrintedCount": 2,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": [
+    {
+     "crd": "705",
+     "iapdFeeds": [
+      "SEC"
+     ],
+     "iapdNameInCaption": true
+    }
+   ]
+  },
+  {
+   "listingId": "tn-sd-co-2024-013",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Robbins%20Consent%20Order%20Entered%20and%20Executed.pdf",
+   "retrieved": true,
+   "sha256": "ed1ccda8b0d73e8f3229d2029c598c8fba288e9e331785eadc7380af27ba6137",
+   "bytes": 556085,
+   "pages": 10,
+   "textChars": 16149,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "22-01196"
+   ],
+   "crdPrintedCount": 1,
+   "crdPrintedNotInIapdFirmFeeds": 1,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2024-014",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Blue%20Owl%20Credit%20Consent%20Order%20Executed.pdf",
+   "retrieved": true,
+   "sha256": "9fa9af339f7cfb0a8399be6b99f486290e6d6af20f4e604f66d7e3b75ed8d3eb",
+   "bytes": 2906578,
+   "pages": 8,
+   "textChars": 1969,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-co-2024-015",
+   "archive": "CONSENT_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/consentorders/Blue%20Owl%20Tech%20Consent%20Order%20Executed.pdf",
+   "retrieved": true,
+   "sha256": "cd0fb1c8d72c4e75542147164f6ca682289b3d32733a982d31b69b0229f63e2d",
+   "bytes": 3149320,
+   "pages": 8,
+   "textChars": 91,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [],
+   "imageOnlyNotOcrd": true,
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-cd-2026-001",
+   "archive": "CEASE_AND_DESIST_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/ARAS%20Order%20for%20CD.pdf",
+   "retrieved": true,
+   "sha256": "2041e69051d11dff6fd224ba2a80a434746c9fecfe177ceba4e8b4761cd45a12",
+   "bytes": 301258,
+   "pages": 14,
+   "textChars": 26003,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "52-102"
+   ],
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-cd-2026-002",
+   "archive": "CEASE_AND_DESIST_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Hypercoin%20Order%20for%20CD.pdf",
+   "retrieved": true,
+   "sha256": "f5e9bbe2f65e9af7cd565cacd0c6faa1cc332dd12e18ede718ac72a76aecde12",
+   "bytes": 285679,
+   "pages": 14,
+   "textChars": 27324,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "52-102"
+   ],
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-cd-2026-003",
+   "archive": "CEASE_AND_DESIST_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/CD%20-%20Red%20Rock.pdf",
+   "retrieved": true,
+   "sha256": "565ff48320a779e12ae3231f2bfd26a8563cdf04fdf104e981e0194c5951844d",
+   "bytes": 287149,
+   "pages": 18,
+   "textChars": 34195,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "52-102"
+   ],
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-cd-2026-004",
+   "archive": "CEASE_AND_DESIST_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Ex%20Parte%20Order%20Graystream%20Capital.pdf",
+   "retrieved": true,
+   "sha256": "3b4ce29e70c85db34efc6688713859bedb3aa2b6061338c73369a7f76060bc70",
+   "bytes": 260255,
+   "pages": 12,
+   "textChars": 22565,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "52-102"
+   ],
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-cd-2025-001",
+   "archive": "CEASE_AND_DESIST_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/Croft%20and%20Frost%20-%20signed%20order.pdf",
+   "retrieved": true,
+   "sha256": "b52cf20a6573fb4168f50962319fbf2c292e92e1f7eb6b6a9148d7a814eb7355",
+   "bytes": 375264,
+   "pages": 16,
+   "textChars": 29936,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "24-00555",
+    "52-102"
+   ],
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-cd-2025-002",
+   "archive": "CEASE_AND_DESIST_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/ceasedesistorders/Amended%20Bieberitz%20Cease%20and%20Desist%20Order.pdf",
+   "retrieved": true,
+   "sha256": "af240c3fd6ae3ca46c2dcb265b68e030499ec6b1998f5cca097c0d945b1d457c",
+   "bytes": 1061763,
+   "pages": 15,
+   "textChars": 25111,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "24-00838",
+    "52-102"
+   ],
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-cd-2024-001",
+   "archive": "CEASE_AND_DESIST_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/ceasedesistorders/AtomicPro%20Cease%20and%20Desist.pdf",
+   "retrieved": true,
+   "sha256": "b815a3510ad2c6191b4f91525321b60c6be56bfd9822b06ace5c107d1c882769",
+   "bytes": 4164295,
+   "pages": 26,
+   "textChars": 38819,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "52-102"
+   ],
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  },
+  {
+   "listingId": "tn-sd-cd-2024-002",
+   "archive": "CEASE_AND_DESIST_ORDER",
+   "documentUrl": "https://www.tn.gov/content/dam/tn/commerce/documents/securities/ceasedesistorders/Alan%20Cosens%20PPM%20Order%20(Signed).pdf",
+   "retrieved": true,
+   "sha256": "d2d7710678a003dd2e48ba7bb668bbf201c6997fb69de4ec78f7a4c240d297a1",
+   "bytes": 338137,
+   "pages": 16,
+   "textChars": 29564,
+   "secFileNumbersPrinted": [],
+   "docketLikePrinted": [
+    "52-102"
+   ],
+   "crdPrintedCount": 0,
+   "crdPrintedNotInIapdFirmFeeds": 0,
+   "iapdFirmCrdsPrinted": []
+  }
+ ]
+}

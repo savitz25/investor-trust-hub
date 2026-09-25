@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import {count,validateInvestor} from './reconcile-network-metrics-r2-04.mjs';
 const read=p=>JSON.parse(readFileSync(new URL('../'+p,import.meta.url),'utf8'));
 const m=read('data/home/investor-network-metrics-v1.json'), census=read('data/home/investor-national-census-r2-04.json'),home=m.homepageInputs;
-const sources=Object.fromEntries(['CO','VA','NY','IL','OR','PA','NC','OH','MA'].map(c=>[c,m.acceptedStateSnapshots[c]]));
+const sources=Object.fromEntries(['CO','VA','NY','IL','OR','PA','NC','OH','MA','TN'].map(c=>[c,m.acceptedStateSnapshots[c]]));
 const clone=x=>structuredClone(x);
 test('canonical firm spine reconciles; registrations, office overlays and evidence cannot inflate it',()=>{
  validateInvestor(sources,census,home);
@@ -14,7 +14,7 @@ test('canonical firm spine reconciles; registrations, office overlays and eviden
  const changed=clone(sources);changed.IL.expansionLedger.NET_NEW_CANONICAL_ORGANIZATIONS=1;assert.throws(()=>validateInvestor(changed,census,home));
 });
 test('state IA / ERA / notice / office classes export independently, with exact overlap evidence',()=>{
- const expected={CO:[740,209,3673,589,6],VA:[697,107,3289,339,4],NY:[1297,327,5856,3152,27],IL:[855,55,3560,793,1],OR:[335,26,2262,167,3],PA:[864,99,3411,623,5],NC:[701,33,3704,325,4],OH:[784,24,2733,426,25],MA:[773,351,3272,803,6]};
+ const expected={CO:[740,209,3673,589,6],VA:[697,107,3289,339,4],NY:[1297,327,5856,3152,27],IL:[855,55,3560,793,1],OR:[335,26,2262,167,3],PA:[864,99,3411,623,5],NC:[701,33,3704,325,4],OH:[784,24,2733,426,25],MA:[773,351,3272,803,6],TN:[327,38,2685,264,3]};
  for(const [c,s] of Object.entries(sources)) {
   assert.deepEqual([s.stateRia.approvedDistinctCrd,s.stateEra.activeDistinctCrd,s.federalNotice.noticeRows,s.nationalOverlay[`${c.toLowerCase()}PrincipalOfficeSecIardFirms`],s.federalNotice.overlapApprovedStateIa],expected[c]);
   assert.equal(m.reconciliation.states[c].statusPartition.unexplainedDelta,0);
@@ -22,6 +22,8 @@ test('state IA / ERA / notice / office classes export independently, with exact 
  }
  assert.deepEqual(sources.IL.federalNotice.overlapApprovedStateIaCrds,['290683']);
  assert.equal(m.reconciliation.states.MA.statusPartition.condrest,10);
+ assert.deepEqual(sources.TN.federalNotice.overlapApprovedStateIaCrds,['149172','332005','334134']);
+ assert.equal(m.reconciliation.states.TN.statusPartition.termrequest,1);
  assert.equal(sources.MA.stateRia.approvedDistinctCrd+sources.MA.stateRia.condrestDistinctCrd+sources.MA.stateRia.termrequestDistinctCrd,sources.MA.stateRia.distinctFirmCrd);
 });
 test('exact identifier bridge and adverse attachment are different permissions; name-only activity stays unattached',()=>{

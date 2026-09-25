@@ -8,6 +8,7 @@ import { REGION_NAMES, V1_RIA_RAUM_BANDS, V1_SOURCE } from './investor-home-inte
 import { planInvestorResearch, type InvestorResearchIntent, type InvestorCondition } from './investor-research-plan';
 import { decideUsGeography, isNationwideScope } from './us-geography';
 import { MA_PUBLIC_SNAPSHOT } from './ma-public-snapshot';
+import { TN_PUBLIC_SNAPSHOT } from './tn-public-snapshot';
 export type { InvestorResearchIntent, InvestorCondition } from './investor-research-plan';
 
 export const INVESTOR_ASK_CONTRACT = 'investor-ask-v1' as const;
@@ -992,6 +993,97 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     const query = failClosed(
       `IAPD shows ${ia.approvedDistinctCrd} APPROVED Massachusetts state-registered investment-adviser firm CRDs on the 2026-09-17 compilation (StateRgstn/Rgltr/@Cd=MA); ${ia.condrestDistinctCrd} more are CONDREST and ${ia.termrequestDistinctCrd} have termination requested. That is not ERA (${MA_PUBLIC_SNAPSHOT.stateEra.activeDistinctCrd}), not SEC-registered notice filers (${MA_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd.toLocaleString('en-US')}), not principal-office firms (${MA_PUBLIC_SNAPSHOT.nationalOverlay.maPrincipalOfficeSecIardFirms}), and not IAR people. Do not add the classes. Use /massachusetts.`,
       ['Massachusetts investor research page.', 'Find CRD 105958.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  // TN-INV-001: Tennessee lenses come from the accepted IAPD compilation and the Securities Division order
+  // archives. Exact CRD / SEC identifiers are resolved by the research plan before this core runs.
+  if (/\b(nashville|memphis|knoxville|chattanooga)\b/i.test(q) && /investment adviser|financial adviser|adviser|advisor|broker|\bria\b/i.test(q)) {
+    const po = TN_PUBLIC_SNAPSHOT.nationalOverlay.tnPrincipalOfficeSecIardFirms;
+    const query = failClosed(
+      `InvestorTrustHub does not publish Nashville, Memphis, Knoxville, or Chattanooga intelligence routes. A city is geography, not a separate securities regime, and a principal-office address is not Tennessee registration. Statewide, the SEC/IARD roster has ${po} firms with a Tennessee principal office; research them at /firms?state=TN. Statewide Tennessee research remains /tennessee.`,
+      ['Tennessee investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  const tnAsked = /\btennessee\b/i.test(q) || /\bTN\b/.test(q);
+  if (tnAsked && /\b(?:enforcement|disciplin\w*|consent orders?|cease[- ]and[- ]desist|c&d|orders?|complaints?|sanctions?|fined?|penalt\w*)\b/i.test(q)) {
+    const e = TN_PUBLIC_SNAPSHOT.enforcement;
+    const n = (v: number) => v.toLocaleString('en-US');
+    const complaintOnly = /\bcomplaints?\b/i.test(q) && !/\b(?:enforcement|disciplin\w*|orders?|cease|consent)\b/i.test(q);
+    const query = failClosed(
+      complaintOnly
+        ? 'The Tennessee Securities Division takes investor complaints through its Securities / Investments complaint form. No provider-level complaint dataset is published, so there is no complaint count, and complaint outcomes are not public in bulk. A complaint is not an enforcement order, and complaint counts are not derived from the order archives. Division orders are on /tennessee.'
+        : `The Tennessee Securities Division publishes separate order archives: ${n(e.consentOrders.listings)} Consent Order listings and ${n(e.ceaseAndDesistOrders.listings)} Cease and Desist Order listings (${e.consentOrders.listingsSince2012} and ${e.ceaseAndDesistOrders.listingsSince2012} since 2012), plus ${e.finalAdministrativeOrders.listings} Final Administrative Orders and ${e.initialOrders.listings} Initial Order. Each keeps its own order type; they are not one violation count, and a listing is not a unique matter. A cease and desist order is not a finding beyond what the order states. ${e.TN_ENFORCEMENT_EXACT_CRD_LINKS} recent orders print a firm CRD that exactly matches an IAPD firm; nothing is attached to a firm by name. Investor complaints are separate from orders. Use /tennessee.`,
+      ['Tennessee investor research page.', 'Find CRD 105958.'],
+    );
+    push('Coverage', complaintOnly ? 'NOT_ACQUIRED' : 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (tnAsked && /\b(?:investment adviser representatives?|iars?|adviser representatives?)\b/i.test(q)) {
+    const query = failClosed(
+      'A Tennessee investment adviser representative is a person registered on Form U4 through Web CRD/IARD, not a firm. Person CRD is not firm CRD. A Tennessee representative directory is not published, and representatives are never added to firm counts. Verify a person on IAPD. Use /tennessee.',
+      ['Tennessee investor research page.'],
+    );
+    push('Coverage', 'OPEN_SEARCH_ONLY');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (tnAsked && /\b(?:broker[- ]?dealers?|brokers?|securities agents?|agents?|brokercheck|finra)\b/i.test(q)) {
+    const query = failClosed(
+      'Tennessee broker-dealers and agents are verified through CRD and BrokerCheck; the Securities Division is the regulator. A Tennessee-only broker-dealer or agent bulk roster was not acquired. A broker-dealer is not an investment adviser, and an agent is a person, not a firm. Use /tennessee.',
+      ['Tennessee investor research page.'],
+    );
+    push('Coverage', 'OPEN_SEARCH_ONLY');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (tnAsked && /\b(?:era|exempt reporting advis[eo]rs?)\b/i.test(q)) {
+    const query = failClosed(
+      `IAPD lists ${TN_PUBLIC_SNAPSHOT.stateEra.activeDistinctCrd} exempt reporting advisers reporting to Tennessee (ERA/Rgltr/@Cd=TN, 2026-09-17 compilation). An ERA is not a Tennessee state-registered adviser and not an SEC RIA. Use /tennessee.`,
+      ['Tennessee investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (tnAsked && /\b(?:notice[- ]fil\w*|federal[- ]covered|sec[- ]registered|sec advis[eo]rs?)\b/i.test(q)) {
+    const query = failClosed(
+      `IAPD lists ${TN_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd.toLocaleString('en-US')} SEC-registered advisers with a Tennessee notice filing (NoticeFiled/States/@RgltrCd=TN, FILED, 2026-09-17). A notice filing is not Tennessee state IA registration and not a Tennessee office. Use /tennessee.`,
+      ['Tennessee investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (tnAsked && /\b(?:headquarter\w*|principal office|main office|based in|located in)\b/i.test(q)) {
+    const query = failClosed(
+      `The SEC/IARD roster has ${TN_PUBLIC_SNAPSHOT.nationalOverlay.tnPrincipalOfficeSecIardFirms} firms with a Tennessee principal office (2026-08-27 roster geography). A principal office is not Tennessee state registration and not a notice filing. Research them at /firms?state=TN; statewide lenses are on /tennessee.`,
+      ['Tennessee investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (tnAsked && /\bis .+ registered in (?:tennessee|TN)\b/i.test(q)) {
+    const query = failClosed(
+      'Current Tennessee registration is verified on IAPD with an exact firm CRD or SEC file number. Name-only matching is unsafe. A Tennessee principal office is not Tennessee state registration. Use /tennessee.',
+      ['Tennessee investor research page.', 'Find CRD 105958.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (tnAsked && /\b(?:offerings?|securities registrations?)\b/i.test(q)) {
+    const query = failClosed(
+      'Tennessee securities offering registrations and exemptions were not acquired; they are not provider identity. Use /tennessee for adviser lenses and the Division order archives.',
+      ['Tennessee investor research page.'],
+    );
+    push('Coverage', 'NOT_ACQUIRED');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (tnAsked && /\b(?:investment advis[eo]rs?|rias?|registered advis[eo]rs?|state[- ]registered|advis[eo]rs?|investment advisory firms?)\b/i.test(q)) {
+    const ia = TN_PUBLIC_SNAPSHOT.stateRia;
+    const query = failClosed(
+      `IAPD shows ${ia.approvedDistinctCrd} APPROVED Tennessee state-registered investment-adviser firm CRDs on the 2026-09-17 compilation (StateRgstn/Rgltr/@Cd=TN); ${ia.termrequestDistinctCrd} more has termination requested. That is not ERA (${TN_PUBLIC_SNAPSHOT.stateEra.activeDistinctCrd}), not SEC-registered notice filers (${TN_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd.toLocaleString('en-US')}), not principal-office firms (${TN_PUBLIC_SNAPSHOT.nationalOverlay.tnPrincipalOfficeSecIardFirms}), and not IAR people. Do not add the classes. Use /tennessee.`,
+      ['Tennessee investor research page.', 'Find CRD 105958.'],
     );
     push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };
