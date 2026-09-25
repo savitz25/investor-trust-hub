@@ -16,7 +16,7 @@ assert.equal(snap.version, 'investor-tn-state-intel-v1');
 assert.equal(snap.route, '/tennessee');
 assert.equal(snap.fingerprint, 'a2332c25eb07803d5e126c0a1935c3e8e0d9268d2fd9f3790e90fce65545f54e');
 assert(pub.publishedStateIntelligencePaths.includes('/tennessee'), 'catalog includes /tennessee');
-assert.equal(pub.publishedStateIntelligencePaths.length, 16);
+assert.equal(pub.publishedStateIntelligencePaths.length, 17);
 assert(!existsSync(join(root, 'apps/web/src/app/tennessee/boston')), 'no Boston folder');
 assert(routes.includes("href: '/tennessee'"), 'STATE_DISCOVERY_ROUTES');
 assert.equal(snap.stateRia.approvedDistinctCrd, 327);

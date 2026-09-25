@@ -1,0 +1,276 @@
+{
+  "version": "investor-nv-state-intel-v1",
+  "ticket": "NV-INV-001",
+  "state": "Nevada",
+  "generatedFrom": {
+    "nationalRoster": "data/home/investor-network-metrics-v1.json homepageInputs.principalOfficeStates",
+    "iapdStateCensus": "data/nevada/nv-inv-001/iapd-nv-census.json",
+    "statute": "data/nevada/nv-inv-001/nrs-90-framework.json",
+    "divisionAccess": "data/nevada/nv-inv-001/securities-division-access.json"
+  },
+  "asOf": null,
+  "generatedAt": "2026-09-25T19:01:50Z",
+  "publicationGate": "ON",
+  "publicEligibility": "state_page",
+  "route": "/nevada",
+  "no_trust_score": true,
+  "no_ranking": true,
+  "no_investment_advice": true,
+  "no_las_vegas_page": true,
+  "no_reno_page": true,
+  "no_henderson_page": true,
+  "claimEligibilityBroadened": false,
+  "clocks": {
+    "iapd_state_sourceAsOf": "2026-09-17",
+    "iapd_state_accepted_retrievedAt": "2026-09-17T15:15:00Z",
+    "iapd_state_reverified_sha256_on": "2026-09-25",
+    "iapd_sec_sourceAsOf": "2026-09-18",
+    "iapd_sec_retrievedAt": "2026-09-25T18:53:55Z",
+    "iapd_sec_accepted_09_17_unavailable": true,
+    "v1_roster_sourceAsOf": "2026-08-27",
+    "nrs_retrievedAt": "2026-09-25T18:56:13Z",
+    "division_site_checkedAt": "2026-09-25T18:55:00Z",
+    "enforcement_latest_order_date": null,
+    "snapshotAsOf": "2026-09-25",
+    "generatedAt": "2026-09-25T19:01:50Z",
+    "no_universal_nevada_investor_clock": true,
+    "retrieval_is_not_registration_effective_date": true
+  },
+  "nationalOverlay": {
+    "nvPrincipalOfficeSecIardFirms": 99,
+    "grain": "SEC IARD roster firm with principal-office region = NV",
+    "source": "IA_FIRM_SEC_Feed_08_27_2026 (reconciled V1 roster geography)",
+    "sourceAsOf": "2026-08-27",
+    "retrievedAt": "2026-08-28",
+    "rawCompilationMainAddrNv": 102,
+    "rawCompilationSource": "IA_FIRM_SEC_Feed_09_18_2026 MainAddr/@State=NV",
+    "searchHref": "/firms?state=NV",
+    "label": "SEC/IARD roster firms with a Nevada principal office",
+    "caveat": "A Nevada principal office is not Nevada state IA licensing and is not a notice filing. These firms already exist in the federal graph."
+  },
+  "stateRia": {
+    "STATE_RIA_BULK_ROSTER": "ACQUIRED_IAPD_STATE_COMPILATION",
+    "registrationRows": 281,
+    "distinctFirmCrd": 281,
+    "approvedDistinctCrd": 271,
+    "condrestDistinctCrd": 0,
+    "termrequestDistinctCrd": 10,
+    "currentDistinctCrd": 271,
+    "statusRows": {
+      "APPROVED": 271,
+      "TERMREQUEST": 10
+    },
+    "principalOfficeNvAmongStateIa": 82,
+    "filter": "StateRgstn/Rgltr/@Cd=NV (registration jurisdiction). Not MainAddr/@State.",
+    "source": "IA_FIRM_STATE_Feed_09_17_2026",
+    "sourceAsOf": "2026-09-17",
+    "retrievedAt": "2026-09-17T15:15:00Z",
+    "officialUrl": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "verifyUrl": "https://adviserinfo.sec.gov/",
+    "statuteTerm": "licensed (NRS 90.330)",
+    "label": "IAPD Nevada state investment-adviser firms (APPROVED)",
+    "caveat": "Nevada state IA licensing is not SEC registration, not a federal notice filing, not ERA, and not a principal office. TERMREQUEST rows are reported separately; verify current status on IAPD. APPROVED is the IAPD status text, not an endorsement."
+  },
+  "stateEra": {
+    "STATE_ERA_REPORTING": "ACQUIRED_IAPD_STATE_COMPILATION",
+    "registrationRows": 83,
+    "distinctFirmCrd": 83,
+    "activeDistinctCrd": 83,
+    "statusRows": {
+      "ACTIVE": 83
+    },
+    "overlapWithStateIa": 0,
+    "filter": "ERA/Rgltr/@Cd=NV",
+    "source": "IA_FIRM_STATE_Feed_09_17_2026",
+    "sourceAsOf": "2026-09-17",
+    "statute": "NRS 90.345 exempts certain private-fund advisers from licensing",
+    "label": "Nevada exempt reporting adviser (ERA) firms",
+    "caveat": "An exempt reporting adviser is not a Nevada-licensed IA and not an SEC RIA."
+  },
+  "federalNotice": {
+    "FEDERAL_COVERED_NOTICE_ROSTER": "ACQUIRED_IAPD_SEC_COMPILATION",
+    "noticeRows": 1982,
+    "noticeFiledDistinctCrd": 1982,
+    "noticeStatus": "FILED",
+    "noticeFiledFirmType": {
+      "Registered": 1982,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0
+    },
+    "filter": "NoticeFiled/States/@RgltrCd=NV",
+    "source": "IA_FIRM_SEC_Feed_09_18_2026",
+    "sourceAsOf": "2026-09-18",
+    "retrievedAt": "2026-09-25T18:53:55Z",
+    "officialUrl": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_SEC_Feed_09_18_2026.xml.gz",
+    "acceptedFeedNote": "The accepted IA_FIRM_SEC_Feed_09_17_2026 is no longer served by IAPD; the 2026-09-18 feed is the oldest one still published. Its SHA-256 is recorded in the census.",
+    "noticeFiledWithNvPrincipalOffice": 74,
+    "overlapApprovedStateIa": 3,
+    "overlapApprovedStateIaCrds": [
+      "226560",
+      "281027",
+      "314950"
+    ],
+    "overlapApprovedStateIaJoinMethod": "exact firm CRD set intersection of APPROVED StateRgstn/Rgltr/@Cd=NV (2026-09-17 STATE feed) and NoticeFiled/States/@RgltrCd=NV St=FILED (2026-09-18 SEC feed); cross-clock by one day",
+    "overlapCrossClock": true,
+    "label": "SEC-registered advisers with a Nevada notice filing",
+    "caveat": "A notice filing is not Nevada state IA licensing."
+  },
+  "reconciliation": {
+    "NV_STATE_IA_ERA_OVERLAP": 0,
+    "NV_STATE_IA_WITH_NV_MAIN_ADDRESS": 82,
+    "NV_PRINCIPAL_OFFICE_NOTICE_OVERLAP": 74,
+    "NV_PRINCIPAL_OFFICE_NOT_NOTICE_FILED": 28,
+    "NV_PRINCIPAL_OFFICE_OVERLAY": 99,
+    "crossClock": {
+      "NV_STATE_IA_NOTICE_OVERLAP": 3,
+      "NV_ERA_NOTICE_OVERLAP": 0,
+      "NV_PRINCIPAL_OFFICE_STATE_IA_OVERLAP_SEC_FEED": 1,
+      "note": "State feed 2026-09-17 x SEC feed 2026-09-18. Diagnostics only; never published as a count."
+    },
+    "joinMethod": "exact firm CRD",
+    "clockNote": "IAPD STATE compilation 2026-09-17; IAPD SEC compilation 2026-09-18; the V1 principal-office overlay is the 2026-08-27 roster geography. Differences are clock differences, not enforcement.",
+    "do_not_sum": true
+  },
+  "enforcement": {
+    "NV_SECURITIES_ORDER_INDEX_STATUS": "NOT_ACQUIRED_BOT_DEFENSE",
+    "capability": "KNOWN",
+    "capabilityBasis": "NRS 90.620 (investigations and subpoenas) and NRS 90.630 (enforcement orders)",
+    "acquiredActions": "NOT_ACQUIRED",
+    "listings": null,
+    "observationRows": null,
+    "distinctCaseNumbers": null,
+    "uniqueMatters": null,
+    "sourceTypesToPreserve": [
+      "Consent Order",
+      "Summary Order to Cease and Desist",
+      "Administrative Order",
+      "Other source-defined action"
+    ],
+    "divisionHome": "https://www.nvsos.gov/sos/licensing/securities",
+    "accessResult": "REJECTED_BY_BOT_DEFENSE",
+    "accessCheckedAt": "2026-09-25T18:55:00Z",
+    "accessDetail": "Every page answered with an Imperva Incapsula 'Request unsuccessful' interstitial (about 1 KB, NOINDEX) to a plain HTTP client, and a normal Chrome session received the same interstitial. No bypass, alternate fetcher, cache or mirror was used.",
+    "otherRegulatorsSubstituted": false,
+    "notSubstituted": [
+      "Nevada Financial Institutions Division",
+      "Nevada Gaming Control Board",
+      "Nevada Mortgage Lending Division",
+      "Nevada Attorney General consumer cases"
+    ],
+    "nameOnly": "UNSAFE",
+    "exactCrdLinks": [],
+    "NV_ENFORCEMENT_EXACT_CRD_LINKS": 0,
+    "profileAttachments": [],
+    "registrationDisclosures": "IAPD and BrokerCheck show regulatory disclosures, including state actions, on each firm or person record; they were not bulk-read."
+  },
+  "complaints": {
+    "NV_SECURITIES_COMPLAINT_ROWS": null,
+    "intake": "KNOWN",
+    "intakeBasis": "The Securities Division investigates investor complaints (NRS 90.620 investigations); the intake page sits behind the same bot defense and was not read.",
+    "providerLevelComplaints": "NOT_ACQUIRED",
+    "complaintOutcomes": "NOT_ACQUIRED / REQUEST_ONLY",
+    "complaint_ne_enforcement": true
+  },
+  "iar": {
+    "NV_IAR_REGISTRATION_CAPABILITY": "KNOWN",
+    "NV_IAR_ROWS": null,
+    "NV_IAR_PERSON_DIRECTORY": "NOT_PUBLISHED",
+    "statute": "NRS 90.330 licenses representatives of investment advisers separately from advisers",
+    "grain": "person CRD (not firm CRD); Form U4 through Web CRD/IARD",
+    "verifyUrl": "https://adviserinfo.sec.gov/",
+    "caveat": "An IAR is a person. IAR licences are never added to firm counts, and no person profiles are created."
+  },
+  "brokerDealer": {
+    "NV_BD_VERIFICATION": "KNOWN",
+    "NV_SALES_REP_VERIFICATION": "KNOWN",
+    "NV_DEALER_ROWS": null,
+    "NV_SALES_REP_ROWS": null,
+    "stateOnlyBulk": "NOT_ACQUIRED",
+    "statute": "NRS 90.310 licenses broker-dealers and sales representatives",
+    "bd_ne_ia": true,
+    "sales_rep_ne_iar": true,
+    "verifyUrl": "https://brokercheck.finra.org/"
+  },
+  "otherClasses": {
+    "transferAgents": "OUT_OF_SCOPE (NRS 90.310 separate class; never counted with advisers or broker-dealers)",
+    "athleteAgents": "OUT_OF_SCOPE (separate regulatory class)"
+  },
+  "offerings": {
+    "status": "DEFERRED",
+    "note": "Securities offering registrations, exemptions and crowdfunding are not provider identity and were not ingested."
+  },
+  "divisionFramework": {
+    "regulator": "Nevada Secretary of State, Securities Division",
+    "administrator": "the Deputy of Securities appointed pursuant to NRS 225.060 (NRS 90.215)",
+    "division": "the Securities Division of the Office of the Secretary of State (NRS 90.230)",
+    "officialHomeUrl": "https://www.nvsos.gov/sos/licensing/securities",
+    "statute": "Nevada Uniform Securities Act (NRS Chapter 90)",
+    "statuteUrl": "https://www.leg.state.nv.us/nrs/NRS-090.html",
+    "statuteRetrievedAt": "2026-09-25T18:56:13Z",
+    "sections": [
+      {
+        "nrs": "90.215",
+        "heading": "“Administrator” defined."
+      },
+      {
+        "nrs": "90.230",
+        "heading": "“Division” defined."
+      },
+      {
+        "nrs": "90.310",
+        "heading": "Licensing of broker-dealers, sales representatives and transfer agents."
+      },
+      {
+        "nrs": "90.330",
+        "heading": "Licensing of investment advisers and representatives of investment advisers."
+      },
+      {
+        "nrs": "90.345",
+        "heading": "Investment advisers to certain private funds exempt from licensing."
+      },
+      {
+        "nrs": "90.620",
+        "heading": "Investigations and subpoenas."
+      },
+      {
+        "nrs": "90.630",
+        "heading": "Enforcement."
+      }
+    ],
+    "infrastructure": "IARD for investment advisers and representatives; CRD/BrokerCheck for broker-dealers and sales representatives. FINRA operates the systems; it is not the Nevada regulator."
+  },
+  "capabilities": {
+    "state_ia_compilation": "KNOWN",
+    "state_era": "KNOWN",
+    "federal_notice_filing": "KNOWN",
+    "principal_office_overlay": "KNOWN",
+    "iar_verification": "KNOWN",
+    "iar_person_population": "NOT_ACQUIRED",
+    "bd_verification": "KNOWN",
+    "sales_rep_verification": "KNOWN",
+    "state_bd_sales_rep_bulk": "NOT_ACQUIRED",
+    "enforcement_capability": "KNOWN",
+    "enforcement_actions": "NOT_ACQUIRED",
+    "enforcement_unique_matters": "UNKNOWN",
+    "enforcement_exact_crd_links": "NOT_ACQUIRED",
+    "registration_disciplinary_records": "KNOWN",
+    "complaint_intake": "KNOWN",
+    "provider_complaints": "NOT_ACQUIRED",
+    "complaint_outcomes": "REQUEST_ONLY",
+    "offerings": "NOT_ACQUIRED",
+    "name_only_adverse_attachment": "UNSUPPORTED",
+    "combined_investment_professional_count": "UNSUPPORTED",
+    "local_city_pages": "UNSUPPORTED"
+  },
+  "expansionLedger": {
+    "NET_NEW_STATE_RESEARCH_IDENTITIES": 271,
+    "NET_NEW_CANONICAL_ORGANIZATIONS": 0,
+    "NET_NEW_PUBLIC_INVESTOR_PROFILES": 0,
+    "EXISTING_ORGANIZATIONS_ENRICHED": 0,
+    "GRAPH_WRITES": 0,
+    "CLAIM_ELIGIBILITY_BROADENED": false,
+    "EXACT_PROFILE_ATTACHMENTS": 0
+  },
+  "fingerprint": "951496e8f1ef02f7b2777455e965b0768c0a89c610dbe8d2a3b4ed192661f6f6"
+}

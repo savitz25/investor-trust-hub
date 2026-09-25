@@ -1,0 +1,26 @@
+{
+  "contract": "investor-nv-securities-division-access-v1",
+  "ticket": "NV-INV-001",
+  "checkedAt": "2026-09-25T18:55:00Z",
+  "host": "www.nvsos.gov",
+  "pagesTried": [
+    "https://www.nvsos.gov/sos/licensing/securities",
+    "https://www.nvsos.gov/sos/licensing/securities/enforcement",
+    "https://www.nvsos.gov/sos/licensing/securities/enforcement-actions",
+    "https://www.nvsos.gov/sos/licensing/securities/administrative-orders",
+    "https://www.nvsos.gov/sos/licensing/securities/investor-alerts",
+    "https://www.nvsos.gov/"
+  ],
+  "result": "REJECTED_BY_BOT_DEFENSE",
+  "detail": "Every page answered with an Imperva Incapsula 'Request unsuccessful' interstitial (about 1 KB, NOINDEX) to a plain HTTP client, and a normal Chrome session received the same interstitial. No bypass, alternate fetcher, cache or mirror was used.",
+  "searchIndexObservation": "A web search lists Securities Division news releases about cease-and-desist and consent orders on www.nvsos.gov/Home/Components/News/News/<id>. They sit behind the same bot defense and were not read.",
+  "enforcementListingsAcquired": 0,
+  "otherRegulatorsSubstituted": false,
+  "notSubstituted": [
+    "Nevada Financial Institutions Division",
+    "Nevada Gaming Control Board",
+    "Nevada Mortgage Lending Division",
+    "Nevada Attorney General consumer cases"
+  ],
+  "upgradePath": "A Founder manual save of the Securities Division enforcement pages into data/raw/nevada/nv-inv-001/, then a bounded index pass."
+}

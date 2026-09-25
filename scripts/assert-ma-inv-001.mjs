@@ -16,7 +16,7 @@ assert.equal(snap.version, 'investor-ma-state-intel-v1');
 assert.equal(snap.route, '/massachusetts');
 assert.equal(snap.fingerprint, '014fb959166d135153618b9781fd099322e0f1d4eec38d3bd3470dd282ee1930');
 assert(pub.publishedStateIntelligencePaths.includes('/massachusetts'), 'catalog includes /massachusetts');
-assert.equal(pub.publishedStateIntelligencePaths.length, 16);
+assert.equal(pub.publishedStateIntelligencePaths.length, 17);
 assert(!existsSync(join(root, 'apps/web/src/app/massachusetts/boston')), 'no Boston folder');
 assert(routes.includes("href: '/massachusetts'"), 'STATE_DISCOVERY_ROUTES');
 assert.equal(snap.stateRia.approvedDistinctCrd, 773);

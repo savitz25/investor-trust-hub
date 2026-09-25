@@ -40,3 +40,4 @@ export * from './oh-public-intel';
 export * from './ga-public-intel';
 export * from './ma-public-intel';
 export * from './tn-public-intel';
+export * from './nv-public-intel';
