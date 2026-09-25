@@ -66,6 +66,9 @@ async function main() {
     tnPrincipalOfficeFirms: pub.tnPrincipalOfficeFirms,
     tnStateRiaApproved: pub.tnStateRiaApproved,
     tnNoticeFiled: pub.tnNoticeFiled,
+    nvPrincipalOfficeFirms: pub.nvPrincipalOfficeFirms,
+    nvStateRiaApproved: pub.nvStateRiaApproved,
+    nvNoticeFiled: pub.nvNoticeFiled,
   };
 
   if (input.riaFacts !== pub.riaFacts || input.eraFacts !== pub.eraFacts || input.rosterFirms !== pub.rosterFirms) {

@@ -4,6 +4,7 @@ import OH_PUBLIC_SNAPSHOT from '../../../artifacts/oh-inv-001-public-snapshot.js
 import GA_PUBLIC_SNAPSHOT from '../../../artifacts/ga-inv-001-public-snapshot.json';
 import MA_PUBLIC_SNAPSHOT from '../../../artifacts/ma-inv-001-public-snapshot.json';
 import TN_PUBLIC_SNAPSHOT from '../../../artifacts/tn-inv-001-public-snapshot.json';
+import NV_PUBLIC_SNAPSHOT from '../../../artifacts/nv-inv-001-public-snapshot.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -75,7 +76,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV';
   name: string;
   href: string;
   regulator: string;
@@ -774,6 +775,47 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
         label: 'SEC/IARD principal-office overlay',
         sourceAsOf: TN_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
         retrievedAt: TN_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+        snapshotAsOf: null,
+        generatedAt: null,
+      },
+    ],
+  },
+  {
+    code: 'NV',
+    name: 'Nevada',
+    href: NV_PUBLIC_SNAPSHOT.route,
+    regulator: 'Nevada Secretary of State Securities Division',
+    principalOfficeFirms: NV_PUBLIC_SNAPSHOT.nationalOverlay.nvPrincipalOfficeSecIardFirms,
+    rosterStatus: `IAPD NV APPROVED state IA ${NV_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd.toLocaleString('en-US')} firm CRDs as of ${NV_PUBLIC_SNAPSHOT.stateRia.sourceAsOf}`,
+    evidence: [
+      'IAPD Nevada state IA compilation',
+      'IAPD Nevada state ERA reporting',
+      'federal-covered notice filings',
+      'NRS Chapter 90 Securities Division framework',
+    ],
+    identityNote:
+      'IAPD jurisdiction=NV APPROVED is the state IA spine (NRS 90.330 licensing). A Nevada principal office is not licensing. IAR people are not IA firms. No Securities Division order was acquired, so nothing is attached.',
+    limitation:
+      'Do not add state IA+ERA+notice+principal office. State IA/ERA (2026-09-17) and notice (2026-09-18) are different source dates. Securities Division orders: NOT_ACQUIRED (site bot defense). Name-only enforcement attachment is unsafe.',
+    sourceClocks: [
+      {
+        label: 'IAPD state compilation',
+        sourceAsOf: NV_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+        retrievedAt: NV_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+        snapshotAsOf: NV_PUBLIC_SNAPSHOT.clocks.snapshotAsOf,
+        generatedAt: null,
+      },
+      {
+        label: 'IAPD SEC compilation (notice filings)',
+        sourceAsOf: NV_PUBLIC_SNAPSHOT.federalNotice.sourceAsOf,
+        retrievedAt: NV_PUBLIC_SNAPSHOT.federalNotice.retrievedAt,
+        snapshotAsOf: NV_PUBLIC_SNAPSHOT.clocks.snapshotAsOf,
+        generatedAt: null,
+      },
+      {
+        label: 'SEC/IARD principal-office overlay',
+        sourceAsOf: NV_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+        retrievedAt: NV_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
         snapshotAsOf: null,
         generatedAt: null,
       },
@@ -1809,6 +1851,62 @@ export function buildInvestorHomepageEvidenceInventory(): InvestorHomepageEviden
       TN_PUBLIC_SNAPSHOT.enforcement.retrievedAt,
       'No name-only attachment.',
       'Listings are not matters.',
+    ),
+    stateMeasure(
+      'nv_hq_overlay',
+      'SEC/IARD firms with a Nevada principal office',
+      NV_PUBLIC_SNAPSHOT.nationalOverlay.nvPrincipalOfficeSecIardFirms,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'SEC/IARD firm with NV principal office',
+      'Nevada',
+      'SEC IAPD / IARD',
+      'artifacts/nv-inv-001-public-snapshot.json',
+      NV_PUBLIC_SNAPSHOT.clocks.snapshotAsOf,
+      'Federal roster firms reporting a NV principal office.',
+      'Nevada state IA licensing, notice filing, ERA, or Securities Division authority.',
+      '/nevada',
+      'PUBLIC',
+      NV_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+      NV_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+    ),
+    stateMeasure(
+      'nv_state_roster',
+      'Nevada IAPD state investment-adviser firms',
+      NV_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'IAPD state-compilation APPROVED firm with jurisdiction NV',
+      'Nevada',
+      'IAPD state compilation',
+      'artifacts/nv-inv-001-public-snapshot.json',
+      NV_PUBLIC_SNAPSHOT.clocks.snapshotAsOf,
+      'Approved Nevada state-IA firms in IA_FIRM_STATE_Feed_09_17_2026.',
+      'TERMREQUEST rows, SEC principal-office overlay, federal notice filings, ERA reporting, or IAR people.',
+      '/nevada',
+      'PUBLIC',
+      NV_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+      NV_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+      'Exact firm CRD.',
+      'Filter is registration jurisdiction, not address.',
+    ),
+    stateMeasure(
+      'nv_notice_filed',
+      'SEC/IARD firms with a Nevada notice filing',
+      NV_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'NoticeFiled RgltrCd=NV FILED',
+      'Nevada',
+      'SEC IAPD / IARD',
+      'artifacts/nv-inv-001-public-snapshot.json',
+      NV_PUBLIC_SNAPSHOT.clocks.snapshotAsOf,
+      'SEC/IARD firms with a Nevada notice filing in the 2026-09-18 SEC compilation.',
+      'Nevada state IA licensing or the 99 principal-office overlay.',
+      '/nevada',
+      'PUBLIC',
+      NV_PUBLIC_SNAPSHOT.federalNotice.sourceAsOf,
+      NV_PUBLIC_SNAPSHOT.federalNotice.retrievedAt,
     ),
     stateMeasure(
       'az_index_crd_mentions',

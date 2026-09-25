@@ -41,6 +41,7 @@ export const STATE_DISCOVERY_ROUTES = [
   { href: '/georgia', label: 'Georgia' },
   { href: '/massachusetts', label: 'Massachusetts' },
   { href: '/tennessee', label: 'Tennessee' },
+  { href: '/nevada', label: 'Nevada' },
 ] as const;
 
 export const INDEXABLE_PATHS = [
@@ -67,6 +68,7 @@ export const INDEXABLE_PATHS = [
   '/georgia',
   '/massachusetts',
   '/tennessee',
+  '/nevada',
   '/disclaimer',
   '/privacy',
   '/terms',

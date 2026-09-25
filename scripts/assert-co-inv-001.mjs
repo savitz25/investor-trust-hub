@@ -28,10 +28,10 @@ assert(typeof snap.fingerprint === 'string' && snap.fingerprint.length === 64, '
 assert(intel.includes(snap.fingerprint), 'intel fingerprint matches snapshot');
 assert(snap.route === '/colorado', 'route');
 assert(pub.publishedStateIntelligencePaths.includes('/colorado'), 'catalog includes /colorado');
-assert(pub.publishedStateIntelligencePaths.length === 16, 'state pages 15 → 16');
+assert(pub.publishedStateIntelligencePaths.length === 17, 'state pages 16 → 17');
 assert(
   JSON.stringify(pub.publishedStateIntelligencePaths) ===
-    JSON.stringify(['/new-jersey', '/california', '/texas', '/washington', '/arizona', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania', '/north-carolina', '/ohio', '/georgia', '/massachusetts', '/tennessee']),
+    JSON.stringify(['/new-jersey', '/california', '/texas', '/washington', '/arizona', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania', '/north-carolina', '/ohio', '/georgia', '/massachusetts', '/tennessee', '/nevada']),
   'prior routes plus Georgia',
 );
 assert(!pub.publishedStateIntelligencePaths.includes('/florida'), 'no Florida');

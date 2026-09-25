@@ -9,6 +9,7 @@ import { planInvestorResearch, type InvestorResearchIntent, type InvestorConditi
 import { decideUsGeography, isNationwideScope } from './us-geography';
 import { MA_PUBLIC_SNAPSHOT } from './ma-public-snapshot';
 import { TN_PUBLIC_SNAPSHOT } from './tn-public-snapshot';
+import { NV_PUBLIC_SNAPSHOT } from './nv-public-snapshot';
 export type { InvestorResearchIntent, InvestorCondition } from './investor-research-plan';
 
 export const INVESTOR_ASK_CONTRACT = 'investor-ask-v1' as const;
@@ -1084,6 +1085,98 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     const query = failClosed(
       `IAPD shows ${ia.approvedDistinctCrd} APPROVED Tennessee state-registered investment-adviser firm CRDs on the 2026-09-17 compilation (StateRgstn/Rgltr/@Cd=TN); ${ia.termrequestDistinctCrd} more has termination requested. That is not ERA (${TN_PUBLIC_SNAPSHOT.stateEra.activeDistinctCrd}), not SEC-registered notice filers (${TN_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd.toLocaleString('en-US')}), not principal-office firms (${TN_PUBLIC_SNAPSHOT.nationalOverlay.tnPrincipalOfficeSecIardFirms}), and not IAR people. Do not add the classes. Use /tennessee.`,
       ['Tennessee investor research page.', 'Find CRD 105958.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  // NV-INV-001: Nevada lenses come from the IAPD compilations (STATE 2026-09-17, SEC 2026-09-18). The Securities
+  // Division site rejects automated access, so no order is acquired or attached. Exact CRD / SEC identifiers are
+  // resolved by the research plan before this core runs.
+  const nvCity = /\b(las vegas|north las vegas|reno|henderson|sparks|carson city)\b/i.exec(q);
+  const otherStateNamed = /\b(kentucky|north carolina|texas|tennessee|louisiana|minnesota|KY|NC|TX|TN|LA|MN)\b/.test(q) || /\b(kentucky|north carolina|texas|tennessee|louisiana|minnesota)\b/i.test(q);
+  if (nvCity && !otherStateNamed && /investment adviser|financial adviser|adviser|advisor|broker|\bria\b/i.test(q)) {
+    const po = NV_PUBLIC_SNAPSHOT.nationalOverlay.nvPrincipalOfficeSecIardFirms;
+    const query = failClosed(
+      `InvestorTrustHub does not publish Las Vegas, Reno, Henderson, or other Nevada city intelligence routes. A city is geography, not a separate securities regime, and a principal-office address is not Nevada licensing. Statewide, the SEC/IARD roster has ${po} firms with a Nevada principal office; research them at /firms?state=NV. Statewide Nevada research remains /nevada.`,
+      ['Nevada investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  const nvAsked = /\bnevada\b/i.test(q) || /\bNV\b/.test(q);
+  if (nvAsked && /\b(?:enforcement|disciplin\w*|consent orders?|cease[- ]and[- ]desist|c&d|orders?|complaints?|sanctions?|fined?|penalt\w*)\b/i.test(q)) {
+    const complaintOnly = /\bcomplaints?\b/i.test(q) && !/\b(?:enforcement|disciplin\w*|orders?|cease|consent)\b/i.test(q);
+    const query = failClosed(
+      complaintOnly
+        ? 'The Nevada Secretary of State Securities Division investigates written investor complaints. No provider-level complaint dataset is published, so there is no complaint count, and complaint outcomes are not public in bulk. A complaint is not an enforcement order. Use /nevada.'
+        : 'The Nevada Secretary of State Securities Division is the regulator; NRS 90.620 and 90.630 give it investigation and order powers (consent orders, summary orders to cease and desist, administrative orders). Its website rejected automated access and a normal browser session, so no Nevada order listing was acquired: there is no Nevada order count and nothing is attached to any firm or person. Other Nevada regulators are not substituted. Regulatory disclosures, including state actions, appear on each record on IAPD and BrokerCheck; verify with an exact CRD. Use /nevada.',
+      ['Nevada investor research page.', 'Find CRD 105958.'],
+    );
+    push('Coverage', 'NOT_ACQUIRED');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (nvAsked && /\b(?:investment adviser representatives?|iars?|adviser representatives?)\b/i.test(q)) {
+    const query = failClosed(
+      'A Nevada investment adviser representative is a person licensed under NRS 90.330 through Web CRD/IARD (Form U4), not a firm. Person CRD is not firm CRD. A Nevada representative directory is not published, and representatives are never added to firm counts. Verify a person on IAPD. Use /nevada.',
+      ['Nevada investor research page.'],
+    );
+    push('Coverage', 'OPEN_SEARCH_ONLY');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (nvAsked && /\b(?:broker[- ]?dealers?|brokers?|securities representatives?|sales representatives?|securities agents?|agents?|brokercheck|finra)\b/i.test(q)) {
+    const query = failClosed(
+      'Nevada broker-dealers and sales representatives are licensed under NRS 90.310 and verified through CRD and BrokerCheck; the Securities Division is the regulator and FINRA operates the system. A Nevada-only broker-dealer or sales-representative bulk roster was not acquired. A broker-dealer is not an investment adviser, and a sales representative is a person, not a firm. Use /nevada.',
+      ['Nevada investor research page.'],
+    );
+    push('Coverage', 'OPEN_SEARCH_ONLY');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (nvAsked && /\b(?:era|exempt reporting advis[eo]rs?)\b/i.test(q)) {
+    const query = failClosed(
+      `IAPD lists ${NV_PUBLIC_SNAPSHOT.stateEra.activeDistinctCrd} exempt reporting advisers reporting to Nevada (ERA/Rgltr/@Cd=NV, 2026-09-17 compilation). An ERA is not a Nevada-licensed adviser and not an SEC RIA. Use /nevada.`,
+      ['Nevada investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (nvAsked && /\b(?:notice[- ]fil\w*|federal[- ]covered|sec[- ]registered|sec advis[eo]rs?)\b/i.test(q)) {
+    const query = failClosed(
+      `IAPD lists ${NV_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd.toLocaleString('en-US')} SEC-registered advisers with a Nevada notice filing (NoticeFiled/States/@RgltrCd=NV, FILED, 2026-09-18 compilation). A notice filing is not Nevada state IA licensing and not a Nevada office. Use /nevada.`,
+      ['Nevada investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (nvAsked && /\b(?:headquarter\w*|principal office|main office|based in|located in)\b/i.test(q)) {
+    const query = failClosed(
+      `The SEC/IARD roster has ${NV_PUBLIC_SNAPSHOT.nationalOverlay.nvPrincipalOfficeSecIardFirms} firms with a Nevada principal office (2026-08-27 roster geography). A principal office is not Nevada state licensing and not a notice filing. Research them at /firms?state=NV; statewide lenses are on /nevada.`,
+      ['Nevada investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (nvAsked && /\bis .+ (?:registered|licensed) in (?:nevada|NV)\b/i.test(q)) {
+    const query = failClosed(
+      'Current Nevada licensing is verified on IAPD with an exact firm CRD or SEC file number. Name-only matching is unsafe. A Nevada principal office is not Nevada state licensing. Use /nevada.',
+      ['Nevada investor research page.', 'Find CRD 105958.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (nvAsked && /\b(?:offerings?|securities registrations?|crowdfunding|transfer agents?|athlete agents?)\b/i.test(q)) {
+    const query = failClosed(
+      'Nevada securities offering registrations and exemptions, transfer agents and athlete agents are separate Securities Division classes. They were not acquired and are never counted with advisers or broker-dealers. Use /nevada for adviser lenses.',
+      ['Nevada investor research page.'],
+    );
+    push('Coverage', 'NOT_ACQUIRED');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (nvAsked && /\b(?:investment advis[eo]rs?|rias?|registered advis[eo]rs?|state[- ]registered|advis[eo]rs?|investment advisory firms?)\b/i.test(q)) {
+    const ia = NV_PUBLIC_SNAPSHOT.stateRia;
+    const query = failClosed(
+      `IAPD shows ${ia.approvedDistinctCrd} APPROVED Nevada state investment-adviser firm CRDs on the 2026-09-17 compilation (StateRgstn/Rgltr/@Cd=NV; Nevada law calls this licensing); ${ia.termrequestDistinctCrd} more have termination requested. That is not ERA (${NV_PUBLIC_SNAPSHOT.stateEra.activeDistinctCrd}), not SEC-registered notice filers (${NV_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd.toLocaleString('en-US')}), not principal-office firms (${NV_PUBLIC_SNAPSHOT.nationalOverlay.nvPrincipalOfficeSecIardFirms}), and not IAR people. Do not add the classes. Use /nevada.`,
+      ['Nevada investor research page.', 'Find CRD 105958.'],
     );
     push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };

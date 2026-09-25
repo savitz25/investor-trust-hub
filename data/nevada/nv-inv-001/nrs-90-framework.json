@@ -1,0 +1,53 @@
+{
+  "contract": "investor-nv-nrs90-framework-v1",
+  "ticket": "NV-INV-001",
+  "source": {
+    "title": "NRS Chapter 90 — Securities (Uniform Securities Act)",
+    "publisher": "Nevada Legislature, Legislative Counsel Bureau",
+    "url": "https://www.leg.state.nv.us/nrs/NRS-090.html",
+    "retrievedAt": "2026-09-25T18:56:13Z",
+    "sha256": "9d9ecee38688fa796a99051cc5acc88e260dd2b1c169c359bb4a514cc7867213",
+    "bytes": 342651
+  },
+  "definitions": {
+    "Administrator": "the Deputy of Securities appointed pursuant to NRS 225.060 (NRS 90.215)",
+    "Division": "the Securities Division of the Office of the Secretary of State (NRS 90.230)"
+  },
+  "sections": [
+    {
+      "nrs": "90.215",
+      "heading": "“Administrator” defined."
+    },
+    {
+      "nrs": "90.230",
+      "heading": "“Division” defined."
+    },
+    {
+      "nrs": "90.310",
+      "heading": "Licensing of broker-dealers, sales representatives and transfer agents."
+    },
+    {
+      "nrs": "90.330",
+      "heading": "Licensing of investment advisers and representatives of investment advisers."
+    },
+    {
+      "nrs": "90.345",
+      "heading": "Investment advisers to certain private funds exempt from licensing."
+    },
+    {
+      "nrs": "90.620",
+      "heading": "Investigations and subpoenas."
+    },
+    {
+      "nrs": "90.630",
+      "heading": "Enforcement."
+    }
+  ],
+  "readings": {
+    "licensing_term": "NRS 90.310 and 90.330 say 'licensed'; the IAPD STATE feed records the same credential as StateRgstn with status APPROVED. The page quotes both and does not convert either into an endorsement.",
+    "iar_is_person": "NRS 90.330 licenses investment advisers and representatives of investment advisers separately.",
+    "bd_and_sales_rep": "NRS 90.310 licenses broker-dealers and sales representatives; transfer agents are a separate class in the same section.",
+    "private_fund_exemption": "NRS 90.345 exempts certain private-fund advisers from licensing; ERA reporting is not licensing.",
+    "enforcement_powers": "NRS 90.620 (investigations and subpoenas) and NRS 90.630 (enforcement orders) are the Administrator's powers. A power is not an acquired action."
+  }
+}

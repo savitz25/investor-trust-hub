@@ -1,0 +1,175 @@
+{
+  "contract": "investor-nv-iapd-census-v1",
+  "ticket": "NV-INV-001",
+  "reuse": "OH-INV-001 parsers. IA_FIRM_STATE: the byte-identical accepted 2026-09-17 feed (SHA-256 verified). IA_FIRM_SEC: the accepted 2026-09-17 feed is no longer served by IAPD, so the 2026-09-18 feed (SHA-256 recorded) carries the notice and principal-office lenses on its own clock.",
+  "filterLogic": "Nevada selected by IAPD registration/notice jurisdiction fields (StateRgstn/Rgltr/@Cd, ERA/Rgltr/@Cd, NoticeFiled/States/@RgltrCd). Principal-office MainAddr/@State=NV is a separate overlay and is not a registration denominator.",
+  "clocks": {
+    "state_ia_and_era": "2026-09-17",
+    "notice_and_principal_office": "2026-09-18",
+    "unified": null
+  },
+  "state": {
+    "filename": "IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "authority": "IAPD (FINRA-held state compilation)",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "sourceAsOf": "2026-09-17",
+    "publishedAt": "2026-09-17",
+    "retrievedAt": "2026-09-17T15:15:00Z",
+    "bytes": 5080393,
+    "sha256": "5fa17c38ae2e812dbd4d58c359c4d624a54417e3f794a3287c3414ccfdaa6a02",
+    "grain": "Firm CRD; StateRgstn/Rgltr/@Cd=jurisdiction; @St=status; ERA/Rgltr/@Cd=jurisdiction. Not MainAddr/@State.",
+    "filter": "Rgltr/@Cd=NV (registration jurisdiction). Address is recorded only for overlap diagnostics.",
+    "firms_in_feed": 21861,
+    "nv_state_ia_registration_rows": 281,
+    "nv_state_ia_distinct_crd": 281,
+    "nv_state_ia_approved_distinct_crd": 271,
+    "nv_state_ia_current_distinct_crd": 271,
+    "nv_state_ia_termrequest_distinct_crd": 10,
+    "nv_state_era_registration_rows": 83,
+    "nv_state_era_distinct_crd": 83,
+    "nv_state_era_active_distinct_crd": 83,
+    "ia_era_overlap_distinct_crd": 0,
+    "status_ia": [
+      [
+        "APPROVED",
+        271
+      ],
+      [
+        "TERMREQUEST",
+        10
+      ]
+    ],
+    "status_era": [
+      [
+        "ACTIVE",
+        83
+      ]
+    ],
+    "principal_office_nv_among_state_ia": 82,
+    "principal_office_not_nv_among_state_ia": 199,
+    "address_nv_without_nv_jurisdiction": 4
+  },
+  "sec": {
+    "filename": "IA_FIRM_SEC_Feed_09_18_2026.xml.gz",
+    "authority": "SEC / IAPD",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_SEC_Feed_09_18_2026.xml.gz",
+    "sourceAsOf": "2026-09-18",
+    "publishedAt": "2026-09-18",
+    "retrievedAt": "2026-09-25T18:53:55Z",
+    "bytes": 7300297,
+    "sha256": "de4c1d4c8f2fd2e301413e955b13ccc3aa9b01be7a43f23d7937c126af132f34",
+    "grain": "Firm CRD; NoticeFiled/States/@RgltrCd=jurisdiction; MainAddr/@State=principal office (separate overlay).",
+    "firms_in_feed": 23918,
+    "firm_types": [
+      [
+        "Registered",
+        17210
+      ],
+      [
+        "ERA",
+        6708
+      ]
+    ],
+    "nv_notice_rows": 1982,
+    "nv_notice_any_status_distinct_crd": 1982,
+    "nv_notice_filed_distinct_crd": 1982,
+    "nv_notice_era_any_status": 0,
+    "nv_notice_filed_firm_type": {
+      "Registered": 1982,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          1982
+        ]
+      ]
+    },
+    "notice_status": [
+      [
+        "FILED",
+        1982
+      ]
+    ],
+    "nv_principal_office_distinct_crd": 102,
+    "principal_and_notice_filed": 74,
+    "notice_filed_not_principal": 1908,
+    "principal_not_notice_filed": 28,
+    "lastModified": "2026-09-18T09:28:00Z",
+    "acceptedFeedUnavailable": {
+      "filename": "IA_FIRM_SEC_Feed_09_17_2026.xml.gz",
+      "sha256": "f01d6b17a7ed631125e76d3c1e5965f178235273eea6699c15400473cb2f1f22",
+      "result": "HTTP 403 AccessDenied on 2026-09-25; not retrievable from IAPD. Oldest SEC feed still served: 2026-09-18."
+    }
+  },
+  "lenses": {
+    "state_ia_registration_rows": 281,
+    "state_ia_distinct_crd": 281,
+    "state_ia_approved_distinct_crd": 271,
+    "state_ia_current_distinct_crd": 271,
+    "state_ia_termrequest_distinct_crd": 10,
+    "state_ia_status_rows": [
+      [
+        "APPROVED",
+        271
+      ],
+      [
+        "TERMREQUEST",
+        10
+      ]
+    ],
+    "state_era_registration_rows": 83,
+    "state_era_distinct_crd": 83,
+    "state_era_active_distinct_crd": 83,
+    "state_era_status_rows": [
+      [
+        "ACTIVE",
+        83
+      ]
+    ],
+    "notice_rows": 1982,
+    "notice_any_status_distinct_crd": 1982,
+    "notice_filed_distinct_crd": 1982,
+    "notice_status_rows": [
+      [
+        "FILED",
+        1982
+      ]
+    ],
+    "notice_filed_firm_type": {
+      "Registered": 1982,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          1982
+        ]
+      ]
+    },
+    "principal_office_sec_feed_distinct_crd": 102,
+    "principal_office_among_state_ia": 82,
+    "state_address_without_nv_jurisdiction": 4
+  },
+  "overlaps": {
+    "state_ia_and_state_era": 0,
+    "notice_filed_and_principal_office": 74,
+    "principal_office_not_notice_filed": 28
+  },
+  "crossClockDiagnostics": {
+    "note": "State feed 2026-09-17 x SEC feed 2026-09-18. Diagnostics only; never published as a count.",
+    "state_ia_approved_and_notice_filed": 3,
+    "state_ia_and_principal_office_sec_feed": 1,
+    "state_era_and_notice_filed": 0
+  },
+  "semanticGrainRules": {
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_SEC_RIA": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_NOTICE_FILING": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_STATE_ERA": true,
+    "PRINCIPAL_OFFICE_IS_NOT_REGISTRATION": true,
+    "REGISTRATION_ROW_IS_DISTINCT_GRAIN_FROM_DISTINCT_FIRM_CRD": true,
+    "LENSES_ARE_NEVER_SUMMED": true
+  }
+}
