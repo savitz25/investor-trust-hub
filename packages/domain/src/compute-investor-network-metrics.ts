@@ -77,6 +77,9 @@ export type InvestorNetworkMetricsInput = {
   nvPrincipalOfficeFirms: number;
   nvStateRiaApproved: number;
   nvNoticeFiled: number;
+  mnPrincipalOfficeFirms: number;
+  mnStateRiaApproved: number;
+  mnNoticeFiled: number;
 };
 
 function metric(partial: Omit<InvestorNetworkMetric, 'unit'>): InvestorNetworkMetric {
@@ -139,7 +142,7 @@ export function assertGrainSafety(input: InvestorNetworkMetricsInput): void {
   if (input.disclosureEvents === input.item11YesRia + input.item11YesEra && input.disclosureEvents > 0) {
     throw new Error('disclosure events must not be equated to Item 11 yes indicators');
   }
-  for (const path of ['/new-jersey', '/california', '/texas', '/washington', '/arizona', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania', '/north-carolina', '/ohio', '/georgia', '/massachusetts', '/tennessee', '/nevada']) {
+  for (const path of ['/new-jersey', '/california', '/texas', '/washington', '/arizona', '/colorado', '/virginia', '/new-york', '/illinois', '/oregon', '/pennsylvania', '/north-carolina', '/ohio', '/georgia', '/massachusetts', '/tennessee', '/nevada', '/minnesota']) {
     if (!input.publishedStateIntelligencePaths.includes(path)) {
       throw new Error(`state intelligence path missing: ${path}`);
     }
@@ -810,6 +813,28 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       ),
     }),
     metric({
+      key: 'mn_state_ria_roster',
+      label: 'Minnesota state investment-adviser firms',
+      value: input.mnStateRiaApproved,
+      valueState: 'KNOWN',
+      grain: 'mn_state_ria_roster',
+      denominator: 'IAPD state compilation APPROVED firms with registration jurisdiction = MN',
+      description:
+        'Minnesota state investment-adviser firms from IA_FIRM_STATE_Feed_09_17_2026 (Minn. Stat. 80A.58 registration). Not SEC RIA, not notice filing, not ERA, not TERMREQUEST rows, and not the 293 principal-office overlay.',
+      coverage: 'Minnesota',
+      contributingSourceSystems: ['iapd_state_compilation'],
+      sourceAsOf: input.publishedAt,
+      generatedAt,
+      publicationStatus: 'PUBLIC',
+      trace: commonTrace(
+        'IAPD StateRgstn/Rgltr/@Cd=MN and status APPROVED, counted as distinct firm CRD.',
+        'Not SEC/IARD principal-office firms. Not federal-covered notice filings. Not state ERA reporting. Not IAR people. Not broker-dealers or agents.',
+        ['iapd_state_compilation'],
+        'Minnesota',
+        'IA_FIRM_STATE_Feed_09_17_2026',
+      ),
+    }),
+    metric({
       key: 'published_state_intelligence_pages',
       label: 'Published state investment-intelligence pages',
       value: input.publishedStateIntelligencePaths.length,
@@ -823,7 +848,7 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       generatedAt,
       publicationStatus: 'PUBLIC',
       trace: commonTrace(
-        'Published /new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, /georgia, /massachusetts, /tennessee, and /nevada intelligence routes.',
+        'Published /new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, /georgia, /massachusetts, /tennessee, /nevada, and /minnesota intelligence routes.',
         'Not county pages. Not national roster rows. Florida is not published on this hub.',
         ['investor-state-intel'],
         input.publishedStateIntelligencePaths.join(', '),
@@ -1021,6 +1046,12 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION',
       statewideStateRiaUniverse: input.nvStateRiaApproved,
       noticeFiledFirms: input.nvNoticeFiled,
+    },
+    minnesota: {
+      principalOfficeRosterFirms: input.mnPrincipalOfficeFirms,
+      stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION',
+      statewideStateRiaUniverse: input.mnStateRiaApproved,
+      noticeFiledFirms: input.mnNoticeFiled,
     },
     network: {
       publishedStateIntelligencePages: input.publishedStateIntelligencePaths.length,

@@ -45,6 +45,7 @@ export type MetricGrain =
   | 'ma_state_ria_roster'
   | 'tn_state_ria_roster'
   | 'nv_state_ria_roster'
+  | 'mn_state_ria_roster'
   | 'form_adv_withdrawal'
   | 'form_adv_successor_link';
 
@@ -281,6 +282,12 @@ export type InvestorNetworkMetricsV1 = {
     noticeFiledFirms: number;
   };
   nevada: {
+    principalOfficeRosterFirms: number;
+    stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION';
+    statewideStateRiaUniverse: number;
+    noticeFiledFirms: number;
+  };
+  minnesota: {
     principalOfficeRosterFirms: number;
     stateRiaRosterCoverage: 'ACQUIRED_IAPD_STATE_COMPILATION';
     statewideStateRiaUniverse: number;

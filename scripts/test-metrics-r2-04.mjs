@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import {count,validateInvestor} from './reconcile-network-metrics-r2-04.mjs';
 const read=p=>JSON.parse(readFileSync(new URL('../'+p,import.meta.url),'utf8'));
 const m=read('data/home/investor-network-metrics-v1.json'), census=read('data/home/investor-national-census-r2-04.json'),home=m.homepageInputs;
-const sources=Object.fromEntries(['CO','VA','NY','IL','OR','PA','NC','OH','MA','TN','NV'].map(c=>[c,m.acceptedStateSnapshots[c]]));
+const sources=Object.fromEntries(['CO','VA','NY','IL','OR','PA','NC','OH','MA','TN','NV','MN'].map(c=>[c,m.acceptedStateSnapshots[c]]));
 const clone=x=>structuredClone(x);
 test('canonical firm spine reconciles; registrations, office overlays and evidence cannot inflate it',()=>{
  validateInvestor(sources,census,home);
@@ -14,7 +14,7 @@ test('canonical firm spine reconciles; registrations, office overlays and eviden
  const changed=clone(sources);changed.IL.expansionLedger.NET_NEW_CANONICAL_ORGANIZATIONS=1;assert.throws(()=>validateInvestor(changed,census,home));
 });
 test('state IA / ERA / notice / office classes export independently, with exact overlap evidence',()=>{
- const expected={CO:[740,209,3673,589,6],VA:[697,107,3289,339,4],NY:[1297,327,5856,3152,27],IL:[855,55,3560,793,1],OR:[335,26,2262,167,3],PA:[864,99,3411,623,5],NC:[701,33,3704,325,4],OH:[784,24,2733,426,25],MA:[773,351,3272,803,6],TN:[327,38,2685,264,3],NV:[271,83,1982,99,3]};
+ const expected={CO:[740,209,3673,589,6],VA:[697,107,3289,339,4],NY:[1297,327,5856,3152,27],IL:[855,55,3560,793,1],OR:[335,26,2262,167,3],PA:[864,99,3411,623,5],NC:[701,33,3704,325,4],OH:[784,24,2733,426,25],MA:[773,351,3272,803,6],TN:[327,38,2685,264,3],NV:[271,83,1982,99,3],MN:[333,53,2075,293,5]};
  for(const [c,s] of Object.entries(sources)) {
   assert.deepEqual([s.stateRia.approvedDistinctCrd,s.stateEra.activeDistinctCrd,s.federalNotice.noticeRows,s.nationalOverlay[`${c.toLowerCase()}PrincipalOfficeSecIardFirms`],s.federalNotice.overlapApprovedStateIa],expected[c]);
   assert.equal(m.reconciliation.states[c].statusPartition.unexplainedDelta,0);
