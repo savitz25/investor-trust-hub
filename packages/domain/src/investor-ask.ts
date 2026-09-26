@@ -10,6 +10,7 @@ import { decideUsGeography, isNationwideScope } from './us-geography';
 import { MA_PUBLIC_SNAPSHOT } from './ma-public-snapshot';
 import { TN_PUBLIC_SNAPSHOT } from './tn-public-snapshot';
 import { NV_PUBLIC_SNAPSHOT } from './nv-public-snapshot';
+import { MN_PUBLIC_SNAPSHOT } from './mn-public-snapshot';
 export type { InvestorResearchIntent, InvestorCondition } from './investor-research-plan';
 
 export const INVESTOR_ASK_CONTRACT = 'investor-ask-v1' as const;
@@ -1177,6 +1178,99 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     const query = failClosed(
       `IAPD shows ${ia.approvedDistinctCrd} APPROVED Nevada state investment-adviser firm CRDs on the 2026-09-17 compilation (StateRgstn/Rgltr/@Cd=NV; Nevada law calls this licensing); ${ia.termrequestDistinctCrd} more have termination requested. That is not ERA (${NV_PUBLIC_SNAPSHOT.stateEra.activeDistinctCrd}), not SEC-registered notice filers (${NV_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd.toLocaleString('en-US')}), not principal-office firms (${NV_PUBLIC_SNAPSHOT.nationalOverlay.nvPrincipalOfficeSecIardFirms}), and not IAR people. Do not add the classes. Use /nevada.`,
       ['Nevada investor research page.', 'Find CRD 105958.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  // MN-INV-001: Minnesota lenses come from the IAPD compilations (STATE 2026-09-17, SEC 2026-09-18); enforcement is
+  // the Commerce CARDS Securities industry-type index. Exact CRD / SEC identifiers are resolved by the research plan
+  // before this core runs. Rochester is Minnesota only when Minnesota is named (Rochester, New York).
+  const mnNamed = /\bminnesota\b/i.test(q) || /\bMN\b/.test(q);
+  const mnOtherState = /\b(new york|georgia|kentucky|texas|tennessee|nevada|NY|GA|KY|TX|TN|NV)\b/.test(q) || /\b(new york|georgia|kentucky|texas|tennessee|nevada)\b/i.test(q);
+  const mnCity = /\b(minneapolis|st\.? paul|saint paul|duluth)\b/i.exec(q) ?? (mnNamed ? /\b(rochester)\b/i.exec(q) : null);
+  if (mnCity && !mnOtherState && /investment adviser|financial adviser|adviser|advisor|broker|\bria\b/i.test(q)) {
+    const po = MN_PUBLIC_SNAPSHOT.nationalOverlay.mnPrincipalOfficeSecIardFirms;
+    const query = failClosed(
+      `InvestorTrustHub does not publish Minneapolis, St. Paul, Rochester, Duluth, or other Minnesota city intelligence routes. A city is geography, not a separate securities regime, and a principal-office address is not Minnesota registration. Statewide, the SEC/IARD roster has ${po} firms with a Minnesota principal office; research them at /firms?state=MN. Statewide Minnesota research remains /minnesota.`,
+      ['Minnesota investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (mnNamed && /\b(?:enforcement|disciplin\w*|consent orders?|cease[- ]and[- ]desist|c&d|orders?|complaints?|sanctions?|fined?|penalt\w*|actions?)\b/i.test(q)) {
+    const e = MN_PUBLIC_SNAPSHOT.enforcement;
+    const complaintOnly = /\bcomplaints?\b/i.test(q) && !/\b(?:enforcement|disciplin\w*|orders?|cease|consent|actions?)\b/i.test(q);
+    const query = failClosed(
+      complaintOnly
+        ? 'The Minnesota Department of Commerce takes investor complaints; its complaint form lists Securities as a complaint type. No provider-level complaint dataset is published, so there is no complaint count, and complaint outcomes are not public in bulk. A complaint is not an order. Commerce securities actions are on /minnesota.'
+        : `The Minnesota Department of Commerce Securities Unit is the regulator (Minn. Stat. 80A.79 and 80A.81). Commerce's CARDS index lists ${e.rows} actions under the Securities industry type signed ${e.firstSignedDate} to ${e.lastSignedDate}; ${e.securitiesScopeRows} are securities matters (investment adviser, broker-dealer, agent, unregistered securities) and ${e.otherSecuritiesUnitProgramRows} belong to other programs such as subdivided land. Action types are kept as Commerce lists them, and a consent order is not by itself an adjudicated finding. A row is not a unique matter. ${e.MN_ENFORCEMENT_EXACT_CRD_LINKS} rows print a firm CRD that exactly matches an IAPD firm; nothing is attached to a firm or person by name. Complaints are separate from orders. Use /minnesota.`,
+      ['Minnesota investor research page.', 'Find CRD 105958.'],
+    );
+    push('Coverage', complaintOnly ? 'NOT_ACQUIRED' : 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (mnNamed && /\b(?:investment adviser representatives?|iars?|adviser representatives?)\b/i.test(q)) {
+    const query = failClosed(
+      'A Minnesota investment adviser representative is a person who registers with the Department of Commerce by filing Form U4 on CRD (Minn. Stat. 80A.58 and 80A.61), not a firm. Person CRD is not firm CRD. A Minnesota representative directory is not published, and representatives are never added to firm counts. Verify a person on IAPD. Use /minnesota.',
+      ['Minnesota investor research page.'],
+    );
+    push('Coverage', 'OPEN_SEARCH_ONLY');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (mnNamed && /\b(?:broker[- ]?dealers?|brokers?|securities agents?|agents?|sales representatives?|brokercheck|finra)\b/i.test(q)) {
+    const query = failClosed(
+      'Minnesota broker-dealers and agents must be registered or exempt (Minn. Stat. 80A.56 and 80A.57) and file through CRD; they are verified on BrokerCheck. The Department of Commerce is the regulator and FINRA operates the system. A Minnesota-only broker-dealer or agent bulk roster was not acquired. A broker-dealer is not an investment adviser, and an agent is a person, not a firm. Use /minnesota.',
+      ['Minnesota investor research page.'],
+    );
+    push('Coverage', 'OPEN_SEARCH_ONLY');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (mnNamed && /\b(?:era|exempt reporting advis[eo]rs?)\b/i.test(q)) {
+    const query = failClosed(
+      `IAPD lists ${MN_PUBLIC_SNAPSHOT.stateEra.activeDistinctCrd} exempt reporting advisers reporting to Minnesota (ERA/Rgltr/@Cd=MN, 2026-09-17 compilation). An ERA is not a Minnesota-registered adviser and not an SEC RIA. Use /minnesota.`,
+      ['Minnesota investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (mnNamed && /\b(?:notice[- ]fil\w*|federal[- ]covered|sec[- ]registered|sec advis[eo]rs?)\b/i.test(q)) {
+    const query = failClosed(
+      `IAPD lists ${MN_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd.toLocaleString('en-US')} SEC-registered advisers with a Minnesota notice filing (Minn. Stat. 80A.60; NoticeFiled/States/@RgltrCd=MN, FILED, 2026-09-18 compilation). A notice filing is not Minnesota state IA registration and not a Minnesota office. Use /minnesota.`,
+      ['Minnesota investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (mnNamed && /\b(?:headquarter\w*|principal office|main office|based in|located in)\b/i.test(q)) {
+    const query = failClosed(
+      `The SEC/IARD roster has ${MN_PUBLIC_SNAPSHOT.nationalOverlay.mnPrincipalOfficeSecIardFirms} firms with a Minnesota principal office (2026-08-27 roster geography). A principal office is not Minnesota state registration and not a notice filing. Research them at /firms?state=MN; statewide lenses are on /minnesota.`,
+      ['Minnesota investor research page.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (mnNamed && /\bis .+ registered in (?:minnesota|MN)\b/i.test(q)) {
+    const query = failClosed(
+      'Current Minnesota registration is verified on IAPD with an exact firm CRD or SEC file number. Name-only matching is unsafe. A Minnesota principal office is not Minnesota state registration. Use /minnesota.',
+      ['Minnesota investor research page.', 'Find CRD 105958.'],
+    );
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (mnNamed && /\b(?:offerings?|securities registrations?|crowdfunding|mnvest|franchises?|subdivided land|timeshares?)\b/i.test(q)) {
+    const query = failClosed(
+      'Minnesota securities offerings, MNvest crowdfunding, franchises, and subdivided land and timeshares are separate Securities Unit programs. They were not acquired as rosters and are never counted with advisers or broker-dealers. Use /minnesota for adviser lenses.',
+      ['Minnesota investor research page.'],
+    );
+    push('Coverage', 'NOT_ACQUIRED');
+    return { raw: q, query, interpretation: lines };
+  }
+  if (mnNamed && /\b(?:investment advis[eo]rs?|rias?|registered advis[eo]rs?|state[- ]registered|advis[eo]rs?|investment advisory firms?)\b/i.test(q)) {
+    const ia = MN_PUBLIC_SNAPSHOT.stateRia;
+    const query = failClosed(
+      `IAPD shows ${ia.approvedDistinctCrd} APPROVED Minnesota state investment-adviser firm CRDs on the 2026-09-17 compilation (StateRgstn/Rgltr/@Cd=MN; Minn. Stat. 80A.58); ${ia.termrequestDistinctCrd} more have termination requested. That is not ERA (${MN_PUBLIC_SNAPSHOT.stateEra.activeDistinctCrd}), not SEC-registered notice filers (${MN_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd.toLocaleString('en-US')}), not principal-office firms (${MN_PUBLIC_SNAPSHOT.nationalOverlay.mnPrincipalOfficeSecIardFirms}), and not IAR people. Do not add the classes. Use /minnesota.`,
+      ['Minnesota investor research page.', 'Find CRD 105958.'],
     );
     push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };

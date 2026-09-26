@@ -29,6 +29,7 @@ export function publicationMetricInputs() {
   const ma = JSON.parse(read("artifacts/ma-inv-001-public-snapshot.json"));
   const tn = JSON.parse(read("artifacts/tn-inv-001-public-snapshot.json"));
   const nv = JSON.parse(read("artifacts/nv-inv-001-public-snapshot.json"));
+  const mn = JSON.parse(read("artifacts/mn-inv-001-public-snapshot.json"));
 
   const stateBlock = routes.match(/export const STATE_DISCOVERY_ROUTES = \[([\s\S]*?)\] as const/)[1];
   const publishedStateIntelligencePaths = [...stateBlock.matchAll(/href: '(\/[^']+)'/g)].map((m) => m[1]);
@@ -123,5 +124,9 @@ export function publicationMetricInputs() {
     nvStateRiaApproved: nv.stateRia.approvedDistinctCrd,
     nvNoticeFiled: nv.federalNotice.noticeFiledDistinctCrd,
     nvRoute: nv.route,
+    mnPrincipalOfficeFirms: mn.nationalOverlay.mnPrincipalOfficeSecIardFirms,
+    mnStateRiaApproved: mn.stateRia.approvedDistinctCrd,
+    mnNoticeFiled: mn.federalNotice.noticeFiledDistinctCrd,
+    mnRoute: mn.route,
   };
 }

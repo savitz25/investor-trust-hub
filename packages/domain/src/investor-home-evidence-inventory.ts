@@ -5,6 +5,7 @@ import GA_PUBLIC_SNAPSHOT from '../../../artifacts/ga-inv-001-public-snapshot.js
 import MA_PUBLIC_SNAPSHOT from '../../../artifacts/ma-inv-001-public-snapshot.json';
 import TN_PUBLIC_SNAPSHOT from '../../../artifacts/tn-inv-001-public-snapshot.json';
 import NV_PUBLIC_SNAPSHOT from '../../../artifacts/nv-inv-001-public-snapshot.json';
+import MN_PUBLIC_SNAPSHOT from '../../../artifacts/mn-inv-001-public-snapshot.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -76,7 +77,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN';
   name: string;
   href: string;
   regulator: string;
@@ -817,6 +818,55 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
         sourceAsOf: NV_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
         retrievedAt: NV_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
         snapshotAsOf: null,
+        generatedAt: null,
+      },
+    ],
+  },
+  {
+    code: 'MN',
+    name: 'Minnesota',
+    href: MN_PUBLIC_SNAPSHOT.route,
+    regulator: 'Minnesota Department of Commerce Securities Unit',
+    principalOfficeFirms: MN_PUBLIC_SNAPSHOT.nationalOverlay.mnPrincipalOfficeSecIardFirms,
+    rosterStatus: `IAPD MN APPROVED state IA ${MN_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd.toLocaleString('en-US')} firm CRDs as of ${MN_PUBLIC_SNAPSHOT.stateRia.sourceAsOf}`,
+    evidence: [
+      'IAPD Minnesota state IA compilation',
+      'IAPD Minnesota state ERA reporting',
+      'federal-covered notice filings',
+      'Commerce CARDS securities actions (2022-2026)',
+      'Minn. Stat. ch. 80A Securities Unit framework',
+    ],
+    identityNote:
+      'IAPD jurisdiction=MN APPROVED is the state IA spine (Minn. Stat. 80A.58 registration). A Minnesota principal office is not registration. IAR and agent people are not firms. CARDS actions attach only through an exact firm CRD printed by Commerce.',
+    limitation:
+      'Do not add state IA+ERA+notice+principal office. State IA/ERA (2026-09-17) and notice (2026-09-18) are different source dates. CARDS actions keep their signed dates; order text was not read (scanned). Name-only enforcement attachment is unsafe.',
+    sourceClocks: [
+      {
+        label: 'IAPD state compilation',
+        sourceAsOf: MN_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+        retrievedAt: MN_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+        snapshotAsOf: MN_PUBLIC_SNAPSHOT.clocks.snapshotAsOf,
+        generatedAt: null,
+      },
+      {
+        label: 'IAPD SEC compilation (notice filings)',
+        sourceAsOf: MN_PUBLIC_SNAPSHOT.federalNotice.sourceAsOf,
+        retrievedAt: MN_PUBLIC_SNAPSHOT.federalNotice.retrievedAt,
+        snapshotAsOf: MN_PUBLIC_SNAPSHOT.clocks.snapshotAsOf,
+        generatedAt: null,
+      },
+      {
+        label: 'SEC/IARD principal-office overlay',
+        sourceAsOf: MN_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+        retrievedAt: MN_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+        snapshotAsOf: null,
+        generatedAt: null,
+      },
+      {
+        label: 'Commerce CARDS securities actions',
+        sourceAsOf: null,
+        retrievedAt: MN_PUBLIC_SNAPSHOT.enforcement.retrievedAt,
+        snapshotAsOf: MN_PUBLIC_SNAPSHOT.clocks.snapshotAsOf,
         generatedAt: null,
       },
     ],
@@ -1907,6 +1957,82 @@ export function buildInvestorHomepageEvidenceInventory(): InvestorHomepageEviden
       'PUBLIC',
       NV_PUBLIC_SNAPSHOT.federalNotice.sourceAsOf,
       NV_PUBLIC_SNAPSHOT.federalNotice.retrievedAt,
+    ),
+    stateMeasure(
+      'mn_hq_overlay',
+      'SEC/IARD firms with a Minnesota principal office',
+      MN_PUBLIC_SNAPSHOT.nationalOverlay.mnPrincipalOfficeSecIardFirms,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'SEC/IARD firm with MN principal office',
+      'Minnesota',
+      'SEC IAPD / IARD',
+      'artifacts/mn-inv-001-public-snapshot.json',
+      MN_PUBLIC_SNAPSHOT.clocks.snapshotAsOf,
+      'Federal roster firms reporting a MN principal office.',
+      'Minnesota state IA registration, notice filing, ERA, or Securities Unit authority.',
+      '/minnesota',
+      'PUBLIC',
+      MN_PUBLIC_SNAPSHOT.nationalOverlay.sourceAsOf,
+      MN_PUBLIC_SNAPSHOT.nationalOverlay.retrievedAt,
+    ),
+    stateMeasure(
+      'mn_state_roster',
+      'Minnesota IAPD state investment-adviser firms',
+      MN_PUBLIC_SNAPSHOT.stateRia.approvedDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'IAPD state-compilation APPROVED firm with jurisdiction MN',
+      'Minnesota',
+      'IAPD state compilation',
+      'artifacts/mn-inv-001-public-snapshot.json',
+      MN_PUBLIC_SNAPSHOT.clocks.snapshotAsOf,
+      'Approved Minnesota state-IA firms in IA_FIRM_STATE_Feed_09_17_2026.',
+      'TERMREQUEST rows, SEC principal-office overlay, federal notice filings, ERA reporting, or IAR people.',
+      '/minnesota',
+      'PUBLIC',
+      MN_PUBLIC_SNAPSHOT.stateRia.sourceAsOf,
+      MN_PUBLIC_SNAPSHOT.stateRia.retrievedAt,
+      'Exact firm CRD.',
+      'Filter is registration jurisdiction, not address.',
+    ),
+    stateMeasure(
+      'mn_notice_filed',
+      'SEC/IARD firms with a Minnesota notice filing',
+      MN_PUBLIC_SNAPSHOT.federalNotice.noticeFiledDistinctCrd,
+      'KNOWN',
+      'STATE_SECURITIES',
+      'NoticeFiled RgltrCd=MN FILED',
+      'Minnesota',
+      'SEC IAPD / IARD',
+      'artifacts/mn-inv-001-public-snapshot.json',
+      MN_PUBLIC_SNAPSHOT.clocks.snapshotAsOf,
+      'SEC/IARD firms with a Minnesota notice filing in the 2026-09-18 SEC compilation.',
+      'Minnesota state IA registration or the 293 principal-office overlay.',
+      '/minnesota',
+      'PUBLIC',
+      MN_PUBLIC_SNAPSHOT.federalNotice.sourceAsOf,
+      MN_PUBLIC_SNAPSHOT.federalNotice.retrievedAt,
+    ),
+    stateMeasure(
+      'mn_cards_securities_actions',
+      'Minnesota Commerce CARDS securities actions (2022-2026)',
+      MN_PUBLIC_SNAPSHOT.enforcement.securitiesScopeRows,
+      'PARTIAL',
+      'DISCLOSURE_REGULATORY',
+      'CARDS document row, industry type Securities, securities scope',
+      'Minnesota',
+      'Minnesota Department of Commerce CARDS',
+      'artifacts/mn-inv-001-public-snapshot.json',
+      MN_PUBLIC_SNAPSHOT.clocks.snapshotAsOf,
+      'Commerce CARDS Securities industry-type actions signed 2022-01-01 through retrieval, excluding subdivided-land, timeshare and lending rows.',
+      'Unique matters, findings beyond each order, attached profiles, or name-only matches.',
+      '/minnesota',
+      'PUBLIC',
+      null,
+      MN_PUBLIC_SNAPSHOT.enforcement.retrievedAt,
+      'Exact firm CRD links only; no name-only attachment.',
+      'A CARDS row is not a unique matter.',
     ),
     stateMeasure(
       'az_index_crd_mentions',

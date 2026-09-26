@@ -47,6 +47,7 @@
     "assert:ga-inv-001": "node scripts/assert-ga-inv-001.mjs && vitest run packages/domain/tests/ga-public-intel.test.ts apps/web/tests/ga-inv-001-publication.test.ts",
     "assert:ma-inv-001": "node scripts/assert-ma-inv-001.mjs && vitest run packages/domain/tests/ma-public-intel.test.ts apps/web/tests/ma-inv-001-publication.test.ts",
     "assert:tn-inv-001": "node scripts/assert-tn-inv-001.mjs && vitest run packages/domain/tests/tn-public-intel.test.ts apps/web/tests/tn-inv-001-publication.test.ts",
+    "assert:mn-inv-001": "node scripts/assert-mn-inv-001.mjs && vitest run packages/domain/tests/mn-public-intel.test.ts apps/web/tests/mn-inv-001-publication.test.ts",
     "assert:nv-inv-001": "node scripts/assert-nv-inv-001.mjs && vitest run packages/domain/tests/nv-public-intel.test.ts apps/web/tests/nv-inv-001-publication.test.ts",
     "build:network-metrics": "npx tsx scripts/build_network_metrics_v1.mjs",
     "check:th-search-r1-012": "vitest run apps/web/tests/r1-012.test.ts packages/domain/tests/investor-ask.test.ts packages/domain/tests/investor-specialist-execution-v2.test.ts apps/web/tests/th-search-001f.test.ts",

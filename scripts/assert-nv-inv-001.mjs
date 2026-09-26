@@ -17,7 +17,7 @@ assert.equal(snap.version, 'investor-nv-state-intel-v1');
 assert.equal(snap.route, '/nevada');
 assert.equal(snap.fingerprint, '951496e8f1ef02f7b2777455e965b0768c0a89c610dbe8d2a3b4ed192661f6f6');
 assert(pub.publishedStateIntelligencePaths.includes('/nevada'), 'catalog includes /nevada');
-assert.equal(pub.publishedStateIntelligencePaths.length, 17);
+assert.equal(pub.publishedStateIntelligencePaths.length, 18);
 assert.deepEqual(readdirSync(join(root, 'apps/web/src/app/nevada')), ['page.tsx'], 'no Nevada sub-routes');
 assert(routes.includes("href: '/nevada'"), 'STATE_DISCOVERY_ROUTES');
 assert.equal(snap.stateRia.approvedDistinctCrd, 271);

@@ -1,0 +1,106 @@
+{
+ "version": "investor-mn-80a-framework-v1",
+ "regulator": "Minnesota Department of Commerce, Securities Unit",
+ "administrator": "Commissioner of Commerce",
+ "statute": {
+  "name": "Minnesota Uniform Securities Act (Minn. Stat. ch. 80A)",
+  "url": "https://www.revisor.mn.gov/statutes/cite/80A",
+  "retrievedAt": "2026-09-26T15:19:35Z",
+  "sha256": "d6cab29ffb3ca2692153e6a238c4ff229cee616b1ca4a6832670f97c70a099d0"
+ },
+ "rules": {
+  "name": "Minnesota Rules chapter 2876",
+  "url": "https://www.revisor.mn.gov/rules/2876/"
+ },
+ "sections": [
+  {
+   "cite": "80A.41",
+   "heading": "Section 102; Definitions",
+   "use": "investment adviser and investment adviser representative definitions (subd. 16 and 17 per Commerce)"
+  },
+  {
+   "cite": "80A.49",
+   "heading": "Section 301; Securities registration requirement",
+   "use": "offerings (separate grain; deferred)"
+  },
+  {
+   "cite": "80A.56",
+   "heading": "Section 401; Broker-dealer registration requirement and exemptions",
+   "use": "broker-dealer firms"
+  },
+  {
+   "cite": "80A.57",
+   "heading": "Section 402; Agent registration requirement and exemptions",
+   "use": "agents (people)"
+  },
+  {
+   "cite": "80A.58",
+   "heading": "Section 403; Investment adviser registration requirement and exemptions",
+   "use": "state investment adviser and representative registration (Commerce cites 80A.58 and 80A.61)"
+  },
+  {
+   "cite": "80A.60",
+   "heading": "Section 405; Federal covered investment adviser notice filing requirement",
+   "use": "SEC-registered adviser notice filing (not state registration)"
+  },
+  {
+   "cite": "80A.61",
+   "heading": "Section 406; Registration by broker-dealer, agent, funding portal, investment adviser, and investment adviser representative",
+   "use": "registration procedure through CRD / IARD"
+  },
+  {
+   "cite": "80A.67",
+   "heading": "Section 412; Denial, revocation, suspension, withdrawal, restriction, condition, or limitation of registration",
+   "use": "registration actions"
+  },
+  {
+   "cite": "80A.68",
+   "heading": "Section 501; General fraud",
+   "use": "fraud"
+  },
+  {
+   "cite": "80A.79",
+   "heading": "Section 602; Investigations and subpoenas",
+   "use": "investigations"
+  },
+  {
+   "cite": "80A.81",
+   "heading": "Section 604; Administrative enforcement",
+   "use": "orders"
+  },
+  {
+   "cite": "80A.82",
+   "heading": "Section 605; Rules, forms, orders, interpretative opinions, and hearings",
+   "use": "orders and hearings"
+  }
+ ],
+ "commerceStatements": {
+  "checkedAt": "2026-09-26",
+  "access": "mn.gov answers a plain HTTP client with a ShieldSquare interstitial; the pages were read in a normal Chrome session with no challenge shown.",
+  "investmentAdvisers": {
+   "url": "https://mn.gov/commerce/money/investments/investment-advisers/",
+   "iaFiling": "Form ADV Parts 1 and 2 on the Investment Adviser Registration Depository (IARD)",
+   "iarFiling": "Form U4 on the Central Registration Depository (CRD)",
+   "iarFee": "$50 initial or renewal",
+   "infrastructureSupport": "Commerce lists FINRA as IARD System Support; FINRA operates the system and is not the Minnesota regulator",
+   "safeSeniors": "The page links Minnesota's Safe Senior Financial Protection Act as context"
+  },
+  "brokerDealers": {
+   "url": "https://mn.gov/commerce/licensing/list/securities/broker-dealer/",
+   "rule": "Minn. Stat. 80A.56 and 80A.57: unlawful to transact business in Minnesota as a broker-dealer or agent unless registered or exempt",
+   "filing": "Broker-dealer applications are filed electronically through CRD (Minn. Stat. 80A.61; Minn. R. 2876.4062)",
+   "agentFee": "$65 initial or renewal"
+  },
+  "complaints": {
+   "url": "https://mn.gov/commerce/consumer/file-a-complaint/other-complaints.jsp",
+   "intake": "The Commerce complaint form lists 'Securities' as a complaint type"
+  },
+  "otherSecuritiesUnitPrograms": [
+   "Securities offerings",
+   "Franchises",
+   "Subdivided land and timeshares",
+   "MNvest"
+  ],
+  "enforcementActions": "https://mn.gov/commerce/business/enforcement/actions/index.jsp redirects to CARDS"
+ }
+}
