@@ -54,6 +54,8 @@ export function MinnesotaStateIntelligence() {
   const years = Object.entries(e.securitiesScopeByYear)
     .map(([y, v]) => `${y}: ${v}`)
     .join(' · ');
+  const textLayerOrders = e.actions.filter((a) => a.orderDocumentTextLayer);
+  const textLayerDocument = textLayerOrders.length === 1 ? textLayerOrders[0]!.document : null;
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -171,7 +173,7 @@ export function MinnesotaStateIntelligence() {
                 sourceDate={notice.sourceAsOf}
                 coverage={notice.FEDERAL_COVERED_NOTICE_ROSTER}
                 grain={`${notice.filter} and status FILED`}
-                calculation={`${notice.noticeFiledDistinctCrd} distinct CRDs, all SEC-registered. ${notice.noticeFiledWithMnPrincipalOffice} notice filers list a Minnesota main office.`}
+                calculation={`${notice.noticeFiledDistinctCrd} distinct CRDs, all SEC-registered. ${notice.noticeFiledWithMnPrincipalOffice} notice filers list a Minnesota main office. Exact CRD intersection with APPROVED state IA = ${notice.overlapApprovedStateIa} (${notice.overlapApprovedStateIaCrds.join(', ')}). That intersection is a cross-clock comparison of ${ia.sourceAsOf} and ${notice.sourceAsOf}, not a combined total.`}
                 caveat={`${notice.caveat} ${notice.acceptedFeedNote}`}
               />
             </article>
@@ -179,6 +181,14 @@ export function MinnesotaStateIntelligence() {
           <p>
             This count comes from the {notice.sourceAsOf} SEC compilation ({notice.statute}); the state IA and ERA counts come
             from the {ia.sourceAsOf} state compilation. They are different source dates and are never added.
+          </p>
+          <p>
+            {notice.overlapApprovedStateIa} exact firm CRDs ({notice.overlapApprovedStateIaCrds.join(', ')}) appear in both
+            the {ia.sourceAsOf} Minnesota APPROVED state-IA set and the {notice.sourceAsOf} Minnesota FILED federal-notice
+            set. This is an exact CRD intersection and a cross-clock comparison. It is not a deduped Minnesota adviser total.
+            Do not add these {notice.overlapApprovedStateIa} CRDs to, or subtract them from, the{' '}
+            {ia.approvedDistinctCrd.toLocaleString('en-US')} or the {notice.noticeFiledDistinctCrd.toLocaleString('en-US')} to
+            manufacture another denominator.
           </p>
         </div>
       </section>
@@ -251,8 +261,10 @@ export function MinnesotaStateIntelligence() {
             are securities matters ({years}); {e.otherSecuritiesUnitProgramRows} belong to other Securities Unit programs
             (subdivided land, timeshares) or a lending licence and are labelled, not counted as securities. Action types are
             shown as Commerce lists them; a consent order is a settlement and is not by itself an adjudicated finding. Each
-            row is one Commerce document, not a unique matter. Linked order documents are scanned without a text layer, so CRD
-            numbers inside them were not read. {e.MN_ENFORCEMENT_EXACT_CRD_LINKS} rows print a firm CRD that matches an IAPD
+            row is one Commerce document, not a unique matter. {e.orderDocumentsWithoutTextLayer} of {e.rows} order PDFs have
+            no usable text layer. The remaining text-layer PDF{textLayerDocument ? ` (${textLayerDocument})` : ''} was not read.
+            OCR was not run, so identifiers inside the order documents were not acquired.{' '}
+            {e.MN_ENFORCEMENT_EXACT_CRD_LINKS} rows print a firm CRD that matches an IAPD
             firm; nothing is attached to a firm or person by name. Mortgage, insurance, banking, Attorney General, and court
             actions are not substituted.
           </p>
@@ -305,6 +317,10 @@ export function MinnesotaStateIntelligence() {
           <h2 id="mn-limits-title">Limitations</h2>
           <ul>
             <li>Do not add state IA + ERA + notice + principal office, or advisers + representatives + broker-dealers + agents.</li>
+            <li>
+              The {notice.overlapApprovedStateIa} exact-CRD cross-clock overlap is a relationship between the {ia.sourceAsOf}{' '}
+              state-IA lens and the {notice.sourceAsOf} notice lens. It is not another census.
+            </li>
             <li>There is no single Minnesota source date: state IA and ERA {ia.sourceAsOf}, notice {notice.sourceAsOf}, principal-office roster {snap.nationalOverlay.sourceAsOf}, Commerce actions by signed date.</li>
             <li>CARDS actions before 2022, order text, and other industry types were not acquired. Missing is not zero, and not a clean record.</li>
             <li>Minneapolis, St. Paul, Rochester, Duluth and other cities are geography, not InvestorTrustHub intelligence routes.</li>

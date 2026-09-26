@@ -113,6 +113,7 @@ export function planInvestorResearch(raw: string, o: InvestorAskOverrides, core:
     conditions: [],
     inputOverrides: o,
   };
+  let pinnedOffice: { city: string; state: string } | undefined;
   if (
     !text ||
     raw.length > 400 ||
@@ -208,10 +209,14 @@ export function planInvestorResearch(raw: string, o: InvestorAskOverrides, core:
     name = text.match(
       /^(?:find|research|check|verify)\s+(.+?\b(?:capital|advisors?|advisers?|llc|inc|group|management)\b.*?)[?.]?$/i,
     )?.[1];
+  // A capitalized city plus an explicit state ("Duluth GA investment adviser") is office
+  // geography. The firm-name heuristic must not swallow it.
+  const placeWithExplicitState = decideUsGeography(text).outcome === 'CITY' && foundStates(text).length > 0;
   if (
     !name &&
     !task &&
     !q.identifier &&
+    !placeWithExplicitState &&
     /^[A-Z][\w&'.-]*(?:\s+[\w&'.-]+){0,7}$/.test(text) &&
     (/\b(?:capital|advisors?|advisers?|llc|inc|group|management|partners|investments|financial)\.?$/i.test(text) || /^[A-Z][\w&'.-]*(?:\s+[A-Z][\w&'.-]*){0,2}$/.test(text)) &&
     !/^(?:explain|tell|describe|help|learn|calculate|can|does|who|where)\b/i.test(text) &&
@@ -389,6 +394,15 @@ export function planInvestorResearch(raw: string, o: InvestorAskOverrides, core:
     });
   if (!q.identifier) {
     const p = core(canonicalText, { ...o, state: undefined });
+    const pinned = p.query.geography;
+    if (
+      pinned?.type === 'principal_office_city' &&
+      pinned.state &&
+      pinned.value &&
+      !officeStates.some((code) => code !== pinned.state)
+    ) {
+      pinnedOffice = { city: pinned.value, state: pinned.state };
+    }
     q = { ...p.query, inputOverrides: o };
     if (name && p.query.mode !== 'fail_closed') {
       q = {
@@ -445,6 +459,45 @@ export function planInvestorResearch(raw: string, o: InvestorAskOverrides, core:
   if (o.compensationMethods?.length) {
     q.compensationMethods = o.compensationMethods;
     q.firmType = 'ria';
+  }
+  if (pinnedOffice) {
+    state = pinnedOffice.state;
+    city = pinnedOffice.city;
+    geoBroadenings = [];
+    for (const c of conditions) {
+      if (c.kind === 'office_city') {
+        c.requested = pinnedOffice.city;
+        c.effective = pinnedOffice.city;
+        c.outcome = 'APPLIED';
+        c.meaning = officeMeaning;
+      }
+      if (c.kind === 'office_state') {
+        c.requested = pinnedOffice.state;
+        c.effective = pinnedOffice.state;
+        c.outcome = 'APPLIED';
+        c.meaning = officeMeaning;
+      }
+    }
+    if (!conditions.some((c) => c.kind === 'office_city')) {
+      conditions.push({
+        kind: 'office_city',
+        requested: pinnedOffice.city,
+        effective: pinnedOffice.city,
+        outcome: 'APPLIED',
+        meaning: officeMeaning,
+        sourceField: 'branches.city (is_main_office)',
+      });
+    }
+    if (!conditions.some((c) => c.kind === 'office_state')) {
+      conditions.push({
+        kind: 'office_state',
+        requested: pinnedOffice.state,
+        effective: pinnedOffice.state,
+        outcome: 'APPLIED',
+        meaning: officeMeaning,
+        sourceField: 'branches.region (is_main_office)',
+      });
+    }
   }
   const geoMeaning = geoBroadenings.length ? `${officeMeaning}. ${geoBroadenings.join(' ')}` : officeMeaning;
   if (state)
