@@ -364,7 +364,13 @@ function isRecommendationQuery(q: string): boolean {
   return (
     /\b(best|safest|most trustworthy|trustworthiest|lowest fees?|cheapest|who should i hire|should i (hire|use)|best returns?|highest[- ]performing|highest (returns?|performance)|most profitable|make me the most money|most money|top[- ]rated|most trusted)\b/i.test(
       q,
-    ) || /\b(what stocks? should i buy|should i buy|move my ira|portfolio recommendation|pick (an? )?investments?)\b/i.test(q)
+    ) ||
+    /\b(what stocks? should i buy|should i buy|move my ira|portfolio recommendation|pick (an? )?investments?)\b/i.test(q) ||
+    /\b(?:recommended|recommendations?)\b/i.test(q) ||
+    /\b(?:paid|sponsored)\s+rankings?\b/i.test(q) ||
+    /\btrust\s+scores?\b/i.test(q) ||
+    /\baggregate\s*ratings?\b/i.test(q) ||
+    /\brank(?:ings?|ed)\b/i.test(q)
   );
 }
 
@@ -1186,15 +1192,26 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
   // MN-INV-001: Minnesota lenses come from the IAPD compilations (STATE 2026-09-17, SEC 2026-09-18); enforcement is
   // the Commerce CARDS Securities industry-type index. Exact CRD / SEC identifiers are resolved by the research plan
   // before this core runs. Rochester is Minnesota only when Minnesota is named (Rochester, New York).
+  // Duluth with no other named state is Minnesota context. The geography object is the pin the
+  // research plan must keep; the national gazetteer otherwise reads Duluth as Georgia.
   const mnNamed = /\bminnesota\b/i.test(q) || /\bMN\b/.test(q);
   const mnOtherState = /\b(new york|georgia|kentucky|texas|tennessee|nevada|NY|GA|KY|TX|TN|NV)\b/.test(q) || /\b(new york|georgia|kentucky|texas|tennessee|nevada)\b/i.test(q);
   const mnCity = /\b(minneapolis|st\.? paul|saint paul|duluth)\b/i.exec(q) ?? (mnNamed ? /\b(rochester)\b/i.exec(q) : null);
   if (mnCity && !mnOtherState && /investment adviser|financial adviser|adviser|advisor|broker|\bria\b/i.test(q)) {
     const po = MN_PUBLIC_SNAPSHOT.nationalOverlay.mnPrincipalOfficeSecIardFirms;
+    const cityToken = (mnCity[1] ?? '').toLowerCase().replace(/\./g, '').replace(/\s+/g, ' ');
+    const cityLabel =
+      cityToken === 'minneapolis' ? 'Minneapolis' : cityToken === 'duluth' ? 'Duluth' : cityToken === 'rochester' ? 'Rochester' : 'St. Paul';
     const query = failClosed(
       `InvestorTrustHub does not publish Minneapolis, St. Paul, Rochester, Duluth, or other Minnesota city intelligence routes. A city is geography, not a separate securities regime, and a principal-office address is not Minnesota registration. Statewide, the SEC/IARD roster has ${po} firms with a Minnesota principal office; research them at /firms?state=MN. Statewide Minnesota research remains /minnesota.`,
       ['Minnesota investor research page.'],
     );
+    query.geography = {
+      type: 'principal_office_city',
+      value: cityLabel,
+      state: 'MN',
+      meaning: 'Recorded principal office, not client geography, registration jurisdiction or service territory',
+    };
     push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };
   }
