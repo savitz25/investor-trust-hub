@@ -12,6 +12,7 @@ import { TN_PUBLIC_SNAPSHOT } from './tn-public-snapshot';
 import { NV_PUBLIC_SNAPSHOT } from './nv-public-snapshot';
 import { MN_PUBLIC_SNAPSHOT } from './mn-public-snapshot';
 import { MI_IAPD_LENSES, MI_SECURITIES_ORDERS } from './mi-public-intel';
+import { CT_REGISTRATION_LENSES, CT_SECURITIES_ORDERS } from './ct-public-intel';
 export type { InvestorResearchIntent, InvestorCondition } from './investor-research-plan';
 
 export const INVESTOR_ASK_CONTRACT = 'investor-ask-v1' as const;
@@ -371,6 +372,7 @@ function isRecommendationQuery(q: string): boolean {
     /\b(?:paid|sponsored)\s+rankings?\b/i.test(q) ||
     /\btrust\s+scores?\b/i.test(q) ||
     /\baggregate\s*ratings?\b/i.test(q) ||
+    /\bnumber one\b/i.test(q) ||
     /\bratingValue\b/i.test(q) ||
     /(?:^|\s)#1\b/i.test(q) ||
     /\brank(?:ings?|ed)\b/i.test(q)
@@ -538,6 +540,41 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     const query = failClosed('InvestorTrustHub Specialist Search is firm-focused. A person or IAR CRD must not be resolved as a firm CRD.', ['Find firm CRD 105958.', 'What is a CRD number?']);
     push('Mode', 'fail_closed');
     push('Identity class', 'Individual/IAR — outside the public firm search');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  // CT-INV-001: exact labeled firm identifiers above outrank geography and keywords.
+  const ctNamed = /\bconnecticut\b/i.test(q) || /\bCT\b/.test(q);
+  const ctCity = /\b(hartford|new haven|stamford|bridgeport)\b/i.exec(q);
+  if ((ctNamed || ctCity) && /\b(?:investment|advis[eo]r|ria|era|broker|securities|crd|sec|notice|disciplin|enforc|complaint|exam|principal office)\b/i.test(q)) {
+    const lenses = CT_REGISTRATION_LENSES.iapd;
+    const complaint = /\bcomplaints?\b/i.test(q);
+    const enforcement = /\b(?:disciplin\w*|enforc\w*|orders?|sanctions?)\b/i.test(q);
+    const exam = /\bexaminations?|exams?\b/i.test(q);
+    const bd = /\b(?:broker[- ]?dealers?|securities agents?|investment adviser representatives?|iars?)\b/i.test(q);
+    const notice = /\b(?:notice[- ]fil\w*|federal[- ]covered)\b/i.test(q);
+    const era = /\b(?:era|exempt reporting)\b/i.test(q);
+    const principal = /\b(?:principal office|headquarter\w*|based in|located in)\b/i.test(q);
+    const reason = ctCity
+      ? 'The named Connecticut city is geography only. InvestorTrustHub publishes no city securities route. A principal office does not establish Connecticut registration or notice filing. Use /connecticut for statewide lenses.'
+      : complaint
+        ? 'Connecticut DOB accepts securities complaints with a Connecticut nexus. Provider-level complaint records and outcomes were not acquired. A complaint is not a finding. Use /connecticut.'
+        : enforcement
+          ? `Connecticut DOB indexes ${CT_SECURITIES_ORDERS.rows.length} securities-order PDF links in 2022–2026. These are documents, not unique matters or final findings. ${CT_SECURITIES_ORDERS.exactFirmCrdCrosswalks} have exact firm-CRD crosswalks; no adverse evidence was attached to profiles. Use /connecticut.`
+          : exam
+            ? 'Connecticut DOB examines investment advisers and broker-dealers; provider-level outcomes were not acquired. Missing is not a clean examination history. Use /connecticut.'
+            : bd
+              ? 'Connecticut broker-dealers, securities agents and investment adviser representatives have separate firm/person grains. Connecticut-only bulk rosters were not acquired; verify through DOB, IAPD or BrokerCheck. Use /connecticut.'
+              : notice
+                ? `IAPD reports ${lenses.federalNotice.filedFirmCrds.toLocaleString('en-US')} Connecticut FILED federal notice firm CRDs (${lenses.sourceAsOf}). A notice is not state IA registration. Use /connecticut.`
+                : era
+                  ? `IAPD reports ${lenses.era.activeFirmCrds} Connecticut ACTIVE ERA firm CRDs (${lenses.sourceAsOf}). ERA is not an RIA. Use /connecticut.`
+                  : principal
+                    ? `The SEC compilation has ${lenses.principalOffice.firmCrds} firm CRDs with a Connecticut principal office (${lenses.sourceAsOf}). Office geography is not registration. Use /connecticut.`
+                    : `IAPD reports ${lenses.stateIa.approvedFirmCrds} Connecticut state IA firm CRDs with status APPROVED (${lenses.sourceAsOf}). ERA (${lenses.era.activeFirmCrds}), federal notice (${lenses.federalNotice.filedFirmCrds.toLocaleString('en-US')}) and principal-office (${lenses.principalOffice.firmCrds}) lenses are separate and must not be summed. DOB's three dated adviser lists are also available. Use /connecticut.`;
+    const query = failClosed(reason, ['Connecticut investor research page.', 'Find firm CRD 105958.']);
+    if (ctCity) query.geography = { type: 'principal_office_city', value: ctCity[1]!, state: 'CT', meaning: 'City context only; not Connecticut registration or service territory' };
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };
   }
 

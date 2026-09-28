@@ -43,3 +43,4 @@ export * from './tn-public-intel';
 export * from './nv-public-intel';
 export * from './mn-public-intel';
 export * from './mi-public-intel';
+export * from './ct-public-intel';

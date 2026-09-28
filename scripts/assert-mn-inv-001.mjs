@@ -17,7 +17,7 @@ assert.equal(snap.version, 'investor-mn-state-intel-v1');
 assert.equal(snap.route, '/minnesota');
 assert.equal(snap.fingerprint, '5e60cddd13ec5a9c2efc786f722ff8df4e5aa0bae5f83cf1adedf6f22f2ed3c3');
 assert(pub.publishedStateIntelligencePaths.includes('/minnesota'), 'catalog includes /nevada');
-assert.equal(pub.publishedStateIntelligencePaths.length, 19);
+assert.equal(pub.publishedStateIntelligencePaths.length, 20);
 assert.deepEqual(readdirSync(join(root, 'apps/web/src/app/minnesota')), ['page.tsx'], 'no Minnesota sub-routes');
 assert(routes.includes("href: '/minnesota'"), 'STATE_DISCOVERY_ROUTES');
 assert.equal(snap.stateRia.approvedDistinctCrd, 333);
