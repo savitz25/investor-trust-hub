@@ -11,6 +11,7 @@ import { MA_PUBLIC_SNAPSHOT } from './ma-public-snapshot';
 import { TN_PUBLIC_SNAPSHOT } from './tn-public-snapshot';
 import { NV_PUBLIC_SNAPSHOT } from './nv-public-snapshot';
 import { MN_PUBLIC_SNAPSHOT } from './mn-public-snapshot';
+import { MI_IAPD_LENSES, MI_SECURITIES_ORDERS } from './mi-public-intel';
 export type { InvestorResearchIntent, InvestorCondition } from './investor-research-plan';
 
 export const INVESTOR_ASK_CONTRACT = 'investor-ask-v1' as const;
@@ -362,7 +363,7 @@ function failClosed(reason: string, alternatives: string[]): InvestorResearchQue
 
 function isRecommendationQuery(q: string): boolean {
   return (
-    /\b(best|safest|most trustworthy|trustworthiest|lowest fees?|cheapest|who should i hire|should i (hire|use)|best returns?|highest[- ]performing|highest (returns?|performance)|most profitable|make me the most money|most money|top[- ]rated|most trusted)\b/i.test(
+    /\b(best|safest|most trustworthy|trustworthiest|lowest fees?|cheapest|who should i hire|should i (hire|use)|best returns?|highest[- ]performing|highest[- ]rated|highest (returns?|performance)|most profitable|make me the most money|most money|top[- ]rated|most trusted)\b/i.test(
       q,
     ) ||
     /\b(what stocks? should i buy|should i buy|move my ira|portfolio recommendation|pick (an? )?investments?)\b/i.test(q) ||
@@ -370,6 +371,8 @@ function isRecommendationQuery(q: string): boolean {
     /\b(?:paid|sponsored)\s+rankings?\b/i.test(q) ||
     /\btrust\s+scores?\b/i.test(q) ||
     /\baggregate\s*ratings?\b/i.test(q) ||
+    /\bratingValue\b/i.test(q) ||
+    /(?:^|\s)#1\b/i.test(q) ||
     /\brank(?:ings?|ed)\b/i.test(q)
   );
 }
@@ -419,7 +422,7 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     return { raw: q, query, interpretation: lines };
   }
 
-  if (isRecommendationQuery(q) && !/\bperformance-based fees?\b/i.test(q)) {
+  if (isRecommendationQuery(q)) {
     const query = failClosed(
       'InvestorTrustHub researches adviser regulatory records. It does not rank advisers, predict returns, price advice, or recommend investments or hiring decisions.',
       [
@@ -535,6 +538,45 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     const query = failClosed('InvestorTrustHub Specialist Search is firm-focused. A person or IAR CRD must not be resolved as a firm CRD.', ['Find firm CRD 105958.', 'What is a CRD number?']);
     push('Mode', 'fail_closed');
     push('Identity class', 'Individual/IAR — outside the public firm search');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  // MI-INV-001: regulator-specific lenses are public research, not national search filters.
+  // Labeled firm identifiers above remain stronger than state/name/geography routing.
+  const miNamed = /\bmichigan\b/i.test(q) || /\bMI\b/.test(q);
+  const miCity = /\b(detroit|grand rapids|lansing|ann arbor)\b/i.exec(q);
+  if ((miNamed || miCity) && /\b(?:investment|advis[eo]r|ria|era|broker|securities|crd|sec|notice|disciplin|enforc|complaint|exam|principal office)\b/i.test(q)) {
+    const ia = MI_IAPD_LENSES.stateIa;
+    const era = MI_IAPD_LENSES.era;
+    const notice = MI_IAPD_LENSES.federalNotice;
+    const principal = MI_IAPD_LENSES.principalOffice;
+    const complaint = /\bcomplaints?\b/i.test(q);
+    const enforcement = /\b(?:disciplin\w*|enforc\w*|orders?|sanctions?)\b/i.test(q);
+    const exam = /\bexaminations?|exams?\b/i.test(q);
+    const bd = /\b(?:broker[- ]?dealers?|securities agents?|investment adviser representatives?|iars?)\b/i.test(q);
+    const noticeAsked = /\b(?:notice[- ]fil\w*|federal[- ]covered)\b/i.test(q);
+    const eraAsked = /\b(?:era|exempt reporting)\b/i.test(q);
+    const principalAsked = /\b(?:principal office|headquarter\w*|based in|located in)\b/i.test(q);
+    const reason = miCity
+      ? `The named Michigan city is geography only. InvestorTrustHub publishes no city securities route. A principal office does not establish Michigan registration or notice filing. Use /michigan for statewide lenses; /firms?state=MI is the existing office-geography research path.`
+      : complaint
+        ? 'Michigan CSCL accepts securities complaints through MiCLEAR. Provider-level complaint cases and outcomes were not acquired; a complaint is not an order. Use /michigan.'
+        : enforcement
+          ? `Michigan CSCL publishes ${MI_SECURITIES_ORDERS.rows.length} MUSA-tagged documents in 2022–2026 order-index paths. These are documents, not unique matters or findings. ${MI_SECURITIES_ORDERS.exactFirmCrdCrosswalks} documents have a caption-printed firm CRD exactly overlapping an accepted IAPD firm lens; no adverse evidence was attached to profiles. Use /michigan.`
+          : exam
+            ? 'Michigan CSCL examines state investment advisers; provider-level examination outcomes were not acquired. Missing is not a clean examination history. Use /michigan.'
+            : bd
+              ? 'Michigan broker-dealers, securities agents and investment adviser representatives have separate firm/person grains. Michigan-only bulk rosters were not acquired; verify on MiCLEAR, IAPD or BrokerCheck. Use /michigan.'
+              : noticeAsked
+                ? `IAPD reports ${notice.filedDistinctFirmCrd.toLocaleString('en-US')} Michigan FILED federal notice firm CRDs (${notice.filter}, ${MI_IAPD_LENSES.secFeed.sourceAsOf}). Notice filing is not Michigan state IA registration. Use /michigan.`
+                : eraAsked
+                  ? `IAPD reports ${era.activeDistinctFirmCrd} Michigan ACTIVE ERA firm CRDs (${era.filter}, ${MI_IAPD_LENSES.stateFeed.sourceAsOf}). ERA is not an RIA. Use /michigan.`
+                  : principalAsked
+                    ? `The SEC compilation has ${principal.distinctFirmCrd} firm CRDs with a Michigan principal office (${MI_IAPD_LENSES.secFeed.sourceAsOf}). Office geography is not registration or notice filing. Use /michigan.`
+                    : `IAPD reports ${ia.approvedDistinctFirmCrd} Michigan state IA firm CRDs with status APPROVED (${ia.filter}, ${MI_IAPD_LENSES.stateFeed.sourceAsOf}). ERA (${era.activeDistinctFirmCrd}), federal notice (${notice.filedDistinctFirmCrd.toLocaleString('en-US')}) and principal-office (${principal.distinctFirmCrd}) lenses are separate and must not be summed. Michigan's CSCL bulk license spreadsheet is request-only. Use /michigan.`;
+    const query = failClosed(reason, ['Michigan investor research page.', 'Find firm CRD 105958.']);
+    if (miCity) query.geography = { type: 'principal_office_city', value: miCity[1]!, state: 'MI', meaning: 'City context only; not Michigan registration or service territory' };
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };
   }
 
