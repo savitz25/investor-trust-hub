@@ -9,6 +9,7 @@ export const PUBLISHED_STATEWIDE_SLUGS = [
   'massachusetts',
   'minnesota',
   'michigan',
+  'connecticut',
   'nevada',
   'new-jersey',
   'new-york',

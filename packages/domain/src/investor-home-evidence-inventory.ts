@@ -8,6 +8,8 @@ import NV_PUBLIC_SNAPSHOT from '../../../artifacts/nv-inv-001-public-snapshot.js
 import MN_PUBLIC_SNAPSHOT from '../../../artifacts/mn-inv-001-public-snapshot.json';
 import MI_IAPD_LENSES from '../../../data/michigan/mi-inv-001/iapd-mi-lenses.json';
 import MI_SECURITIES_ORDERS from '../../../data/michigan/mi-inv-001/securities-orders.json';
+import CT_REGISTRATION_LENSES from '../../../data/connecticut/ct-inv-001/registration-lenses.json';
+import CT_SECURITIES_ORDERS from '../../../data/connecticut/ct-inv-001/securities-orders.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -79,7 +81,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT';
   name: string;
   href: string;
   regulator: string;
@@ -887,6 +889,22 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
       { label: 'IAPD state compilation', sourceAsOf: MI_IAPD_LENSES.stateFeed.sourceAsOf, retrievedAt: MI_IAPD_LENSES.retrievedAt, snapshotAsOf: '2026-09-28', generatedAt: null },
       { label: 'IAPD SEC compilation', sourceAsOf: MI_IAPD_LENSES.secFeed.sourceAsOf, retrievedAt: MI_IAPD_LENSES.retrievedAt, snapshotAsOf: '2026-09-28', generatedAt: null },
       { label: 'CSCL published orders index', sourceAsOf: null, retrievedAt: MI_SECURITIES_ORDERS.retrievedAt, snapshotAsOf: '2026-09-28', generatedAt: null },
+    ],
+  },
+  {
+    code: 'CT',
+    name: 'Connecticut',
+    href: '/connecticut',
+    regulator: 'Connecticut Department of Banking, Securities and Business Investments Division',
+    principalOfficeFirms: CT_REGISTRATION_LENSES.iapd.principalOffice.firmCrds,
+    rosterStatus: `IAPD CT APPROVED state IA ${CT_REGISTRATION_LENSES.iapd.stateIa.approvedFirmCrds.toLocaleString('en-US')} firm CRDs as of ${CT_REGISTRATION_LENSES.iapd.sourceAsOf}`,
+    evidence: ['DOB statewide adviser lists', 'IAPD Connecticut registration and notice lenses', 'ERA reporting', 'securities administrative-order index'],
+    identityNote: 'Firm CRD is the identity key. State IA, ERA, federal notice and principal-office lenses are separate; agents and representatives are people, not firms.',
+    limitation: 'DOB workbooks are marked updated 2025-10-22. The 2022–2026 order index has document rows, not unique matters or confirmed findings. No profile adverse attachments or combined adviser total.',
+    sourceClocks: [
+      { label: 'DOB adviser workbooks', sourceAsOf: '2025-10-22', retrievedAt: CT_REGISTRATION_LENSES.regulatorLists.stateIa.retrievedAt, snapshotAsOf: '2026-09-28', generatedAt: null },
+      { label: 'IAPD STATE and SEC compilations', sourceAsOf: CT_REGISTRATION_LENSES.iapd.sourceAsOf, retrievedAt: null, snapshotAsOf: '2026-09-28', generatedAt: null },
+      { label: 'DOB securities-order index', sourceAsOf: null, retrievedAt: CT_SECURITIES_ORDERS.retrievedAt, snapshotAsOf: '2026-09-28', generatedAt: null },
     ],
   },
 ];
