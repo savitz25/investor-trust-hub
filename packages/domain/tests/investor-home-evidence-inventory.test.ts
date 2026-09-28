@@ -105,7 +105,7 @@ describe('INV-HOME-003 public evidence inventory', () => {
     ).toBe(true);
   });
 
-  it('derives exactly eleven state surfaces and never invents Florida', () => {
+  it('derives published state surfaces and never invents Florida', () => {
     expect(INVESTOR_HOMEPAGE_STATE_CARDS.map((state) => state.href)).toEqual([
       '/new-jersey',
       '/california',
@@ -125,6 +125,7 @@ describe('INV-HOME-003 public evidence inventory', () => {
       '/tennessee',
       '/nevada',
       '/minnesota',
+      '/michigan',
     ]);
     expect(get('published_state_pages').value).toBe(
       INVESTOR_HOMEPAGE_STATE_CARDS.length,

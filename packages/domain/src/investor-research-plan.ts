@@ -131,6 +131,9 @@ export function planInvestorResearch(raw: string, o: InvestorAskOverrides, core:
       'INVALID_INPUT',
     );
   const task = /\bhow many form adv observations\b/i.test(text) ? undefined : evidenceTask(text);
+  // A labeled identifier must not turn a ranking request into an identity lookup.
+  if (/\b(?:crd|sec(?:\s+file)?(?:\s+number)?)\b/i.test(text) && /\b(?:best|safest|recommended|most trustworthy|highest[- ]rated|top[- ]rated|trust score|aggregate\s*rating|ratingValue|paid ranking|sponsored ranking)\b|(?:^|\s)#1\b/i.test(text))
+    return stop(text, q, 'InvestorTrustHub researches adviser regulatory records. It does not rank advisers, predict returns, price advice, or recommend investments or hiring decisions.', 'UNSUPPORTED');
   // A labeled family span ends before another label/word; never strip digits from the whole sentence.
   const ids = [
     ...text.matchAll(/\b(?:crd\s*(?:number|id)?|sec(?:\s+file)?(?:\s+number)?|file)\s*#?\s*([0-9][0-9 \t-]*)/gi),

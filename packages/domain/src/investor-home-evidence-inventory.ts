@@ -6,6 +6,8 @@ import MA_PUBLIC_SNAPSHOT from '../../../artifacts/ma-inv-001-public-snapshot.js
 import TN_PUBLIC_SNAPSHOT from '../../../artifacts/tn-inv-001-public-snapshot.json';
 import NV_PUBLIC_SNAPSHOT from '../../../artifacts/nv-inv-001-public-snapshot.json';
 import MN_PUBLIC_SNAPSHOT from '../../../artifacts/mn-inv-001-public-snapshot.json';
+import MI_IAPD_LENSES from '../../../data/michigan/mi-inv-001/iapd-mi-lenses.json';
+import MI_SECURITIES_ORDERS from '../../../data/michigan/mi-inv-001/securities-orders.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -77,7 +79,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI';
   name: string;
   href: string;
   regulator: string;
@@ -869,6 +871,22 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
         snapshotAsOf: MN_PUBLIC_SNAPSHOT.clocks.snapshotAsOf,
         generatedAt: null,
       },
+    ],
+  },
+  {
+    code: 'MI',
+    name: 'Michigan',
+    href: '/michigan',
+    regulator: 'Michigan LARA CSCL Securities & Audit Division',
+    principalOfficeFirms: MI_IAPD_LENSES.principalOffice.distinctFirmCrd,
+    rosterStatus: `IAPD MI APPROVED state IA ${MI_IAPD_LENSES.stateIa.approvedDistinctFirmCrd.toLocaleString('en-US')} firm CRDs as of ${MI_IAPD_LENSES.stateFeed.sourceAsOf}`,
+    evidence: ['IAPD Michigan state IA registration', 'ERA reporting', 'federal-covered notices', 'CSCL MUSA-tagged enforcement orders'],
+    identityNote: 'Firm CRD is the identity key. State IA, ERA, federal notice and principal-office lenses are separate; agent and representative people are not firms.',
+    limitation: 'CSCL active-license spreadsheet is request-only. Published orders are document rows, not unique matters; two caption CRDs have exact IAPD firm-lens crosswalks, with no profile attachments. Do not sum the four lenses.',
+    sourceClocks: [
+      { label: 'IAPD state compilation', sourceAsOf: MI_IAPD_LENSES.stateFeed.sourceAsOf, retrievedAt: MI_IAPD_LENSES.retrievedAt, snapshotAsOf: '2026-09-28', generatedAt: null },
+      { label: 'IAPD SEC compilation', sourceAsOf: MI_IAPD_LENSES.secFeed.sourceAsOf, retrievedAt: MI_IAPD_LENSES.retrievedAt, snapshotAsOf: '2026-09-28', generatedAt: null },
+      { label: 'CSCL published orders index', sourceAsOf: null, retrievedAt: MI_SECURITIES_ORDERS.retrievedAt, snapshotAsOf: '2026-09-28', generatedAt: null },
     ],
   },
 ];
