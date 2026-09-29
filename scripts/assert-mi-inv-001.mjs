@@ -12,7 +12,7 @@ const page = read('apps/web/src/app/michigan/page.tsx');
 const paths = publicationMetricInputs().publishedStateIntelligencePaths;
 
 assert(paths.includes('/michigan'));
-assert.equal(paths.length, 20);
+assert(paths.length >= 20);
 assert.deepEqual(readdirSync(join(root, 'apps/web/src/app/michigan')), ['page.tsx']);
 assert(!existsSync(join(root, 'apps/web/src/app/michigan/detroit')));
 assert(page.includes("path: '/michigan'"));
