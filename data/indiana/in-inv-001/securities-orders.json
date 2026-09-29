@@ -1,0 +1,1651 @@
+{
+  "contract": "in-inv-001-securities-orders-v1",
+  "indexUrl": "https://lcm.securities.sos.in.gov/admin-actions-search",
+  "retrievedAt": "2026-09-29T19:05:36Z",
+  "indexRowsAtRetrieval": 1747,
+  "filter": "Division index rows dated 2022-01-01..2026-09-29 with entity type Securities/Investment, plus two Loan-Broker-tagged orders whose text cites only the Uniform Securities Act. Dates are the Division index dates.",
+  "rowCount": 65,
+  "entityTagCounts": {
+    "securities_investment": 63,
+    "loan_broker_iusa_cited": 2
+  },
+  "actionLabelCounts": {
+    "bar": 3,
+    "cease and desist": 15,
+    "consent agreement": 37,
+    "final order": 43,
+    "revocation order": 1
+  },
+  "byYear": {
+    "2022": 14,
+    "2023": 14,
+    "2024": 13,
+    "2025": 11,
+    "2026": 13
+  },
+  "rowsWithTextLayer": 24,
+  "scannedRowsIdentifiersNotAcquired": 41,
+  "rowsWithPrintedCrdCandidates": 16,
+  "rowsWithPrintedSecFileCandidates": 0,
+  "exactFirmCrdLinks": 5,
+  "exactSecFileLinks": 0,
+  "exactEnforcementAttachments": 0,
+  "nameOnlyAdverseJoins": 0,
+  "graphWrites": 0,
+  "rows": [
+    {
+      "indexId": "5f493572-7bac-4c0d-8eaf-cd65c0e86450",
+      "causeAsIndexed": "26-0007 CD",
+      "issuanceDate": "2026-09-21",
+      "respondentAsIndexed": "TERRY DUPONT, The Wealth Intelligence Office, DUPONT WEALTH MANAGEMENT, EQUITY ASSET ADVISORS, LLC",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "26-0007 CD Final Order.pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 2,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "5cf6fbe8-47c5-40f8-aac2-374bb2f87d82",
+      "causeAsIndexed": "26-0014 CA",
+      "issuanceDate": "2026-08-25",
+      "respondentAsIndexed": "Joel Richard Frank, Equilus Group, Inc. aka Equilus Financial",
+      "respondentGrain": "firm-linked caption",
+      "actionTypesAsIndexed": [
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "loan_broker"
+      ],
+      "statuteNote": "Index-tagged Loan Broker; order text cites only the Uniform Securities Act (IC 23-19)",
+      "documentTitles": [
+        "26-0014 CA - Final Order.pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 2,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [
+        "300142"
+      ],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [
+        "300142"
+      ],
+      "profileAttached": false
+    },
+    {
+      "indexId": "dab1296e-75c6-4be6-b991-7651c6f10e94",
+      "causeAsIndexed": "25-0023 AC",
+      "issuanceDate": "2026-07-24",
+      "respondentAsIndexed": "Jonathan Long",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "25-0023 AC -Order Adopting Consent Agreement.pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "f4f36d9a-3efb-4ce8-b7d0-476949dbdb88",
+      "causeAsIndexed": "26-0003 CD",
+      "issuanceDate": "2026-07-17",
+      "respondentAsIndexed": "VETTER INVESTMENTS LLC, BRIAN JOSEPH VETTER, VETTER CAPITAL LLC",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "26-0003 CD - Final Order.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "101e74a3-cf55-4a63-9e42-99c0a35ac29b",
+      "causeAsIndexed": "26-0008 CD-CD",
+      "issuanceDate": "2026-07-14",
+      "respondentAsIndexed": "James White, Ryan White Insurance LLC dba RWI Wealth Strategies and fka Goosehead Insurance",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "26-0008 CD - Final Order Adopting Consent Agreement (7.14.2026).pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 1,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "90c0b1f7-3341-4c64-84de-e9aed3ffab83",
+      "causeAsIndexed": "26-0011",
+      "issuanceDate": "2026-07-13",
+      "respondentAsIndexed": "Sabrina Marlowe, Watsans Exchange",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "cease and desist"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "26-0011 CD - Cease and Desist Order (7.13.2026).pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "64e0ee4e-52d7-4d44-ada8-2dc0d9d64bce",
+      "causeAsIndexed": "26-0007 CD",
+      "issuanceDate": "2026-06-01",
+      "respondentAsIndexed": "TERRY DUPONT, The Wealth Intelligence Office, DUPONT WEALTH MANAGEMENT, EQUITY ASSET ADVISORS, LLC",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "cease and desist"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "26-0007 CD - Cease and Desist Order (6.1.2026).pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "c45d0fee-b60b-4407-bc63-18c03e4b74a2",
+      "causeAsIndexed": "26-0008 CD-CD",
+      "issuanceDate": "2026-05-13",
+      "respondentAsIndexed": "Ryan White Insurance LLC dba RWI Wealth Strategies and fka Goosehead Insurance, James Ryan White",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "cease and desist"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "26-0008 CD - Final Order Adopting Consent Agreement (7.14.2026).pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 1,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "09a853b1-ce3a-479d-ac16-6f8f57da3eee",
+      "causeAsIndexed": "26-0004 CA",
+      "issuanceDate": "2026-05-12",
+      "respondentAsIndexed": "Andrew Geyer, OPTIMUMSQUARE, LLC",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "loan_broker"
+      ],
+      "statuteNote": "Index-tagged Loan Broker; order text cites only the Uniform Securities Act (IC 23-19)",
+      "documentTitles": [
+        "26-0004 CA - Final Order.pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 4,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "3983952f-6a95-4976-9edc-67e3cd9248fd",
+      "causeAsIndexed": "26-0005 CA",
+      "issuanceDate": "2026-04-30",
+      "respondentAsIndexed": "CWM WEALTH MANAGEMENT, LLC",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "26-0005 CA - FINAL ORDER.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "4ae1fcda-2c18-4293-b2bf-ac4c23b2016a",
+      "causeAsIndexed": "26-0003 CD",
+      "issuanceDate": "2026-04-17",
+      "respondentAsIndexed": "VETTER INVESTMENTS LLC, BRIAN JOSEPH VETTER, VETTER CAPITAL LLC",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "cease and desist"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "26-0003 CD - Cease and Desist Order 4.17.26.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "a14cb6c0-1a58-43d8-8e2d-50d2c5ea1996",
+      "causeAsIndexed": "25-0011 CA",
+      "issuanceDate": "2026-01-28",
+      "respondentAsIndexed": "LPL Financial LLC",
+      "respondentGrain": "firm-linked caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "25-0011 CA - FINAL ORDER ADOPTING CONSENT AGREEMENT.pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 1,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [
+        "6413"
+      ],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [
+        "6413"
+      ],
+      "profileAttached": false
+    },
+    {
+      "indexId": "8df8879b-960f-49df-b351-411c3fa2b2ca",
+      "causeAsIndexed": "25-0010 CA-CA",
+      "issuanceDate": "2026-01-28",
+      "respondentAsIndexed": "RBC Capital Markets, LLC",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "25-0010 CA - FINAL ORDER ADOPTING CONSENT AGREEMENT 1-28-2026.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "a2cc0068-5454-48af-88f0-4ad3b387fb34",
+      "causeAsIndexed": "24-0018 SB",
+      "issuanceDate": "2025-11-21",
+      "respondentAsIndexed": "James Johnson, SMC PORTFOLIO MANAGEMENT LLC",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "24-0018 SB - 11-21-2025 - FINAL ORDER ON HEARING.pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 1,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "302f8e41-faef-42c6-bbaa-396e29f1c845",
+      "causeAsIndexed": "25-0012 CA",
+      "issuanceDate": "2025-10-23",
+      "respondentAsIndexed": "STIFEL, NICOLAUS & COMPANY, INCORPORATED",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "25-0012 CA - FINAL ORDER ADOPTING CONSENT AGREEMENT.pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 1,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "6aa85c61-6632-4feb-85ac-e1b41c7c26fe",
+      "causeAsIndexed": "25-0009 CA",
+      "issuanceDate": "2025-10-14",
+      "respondentAsIndexed": "EDWARD D. JONES & CO., L.P.",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "25-0009 CA - FINAL ORDER ADOPTING CONSENT AGREEMENT 10.14.2025.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "98dacbb2-98fd-4d83-9b57-228534b69fe6",
+      "causeAsIndexed": "25-0008 CA",
+      "issuanceDate": "2025-09-30",
+      "respondentAsIndexed": "TD Ameritrade",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "25-0008 CA - FINAL ORDER ADOPTING CONSENT AGREEMENT 9-30-2025.pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 1,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "1e536b9d-1335-4108-abbe-f4ce63b74daf",
+      "causeAsIndexed": "25-0001 CD",
+      "issuanceDate": "2025-09-25",
+      "respondentAsIndexed": "Jack's Donuts of Indiana Commissary, LLC, KCL Group, Marcum Industries",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "25-0001 CD Final Order 9-29-2025.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "8e790ca8-a454-49be-a1fa-57fa2fdb2653",
+      "causeAsIndexed": "25-0006 CA",
+      "issuanceDate": "2025-08-01",
+      "respondentAsIndexed": "VANGUARD MARKETING CORPORATION, The Vanguard Group, Inc.",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "25-0006 CA - 8-1-2025 - FINAL ORDER ADOPTING CONSENT AGREEMENT.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "ee42a083-7802-4809-9527-1b9721bdb3d8",
+      "causeAsIndexed": "25-0015 CD",
+      "issuanceDate": "2025-07-31",
+      "respondentAsIndexed": "Ultimate Settlements Inc., C.J. Quest LLC, James L. Fersch Jr.",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "cease and desist"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "25-0015 CD - FINAL ORDER 9-30-2025.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "b3bd7ac1-67bb-4a39-abab-52fae011b269",
+      "causeAsIndexed": "25-0005 CA",
+      "issuanceDate": "2025-06-10",
+      "respondentAsIndexed": "CHRISTOPHER CONDLE, JONATHAN MCCARTY",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "25-0005 CA - FINAL ORDER ADOPTING CONSENT AGREEMENT.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "bf0779ea-c2ae-4539-8786-fa409fd9b6f4",
+      "causeAsIndexed": "25-0004 AC",
+      "issuanceDate": "2025-06-09",
+      "respondentAsIndexed": "Earl Miller, 5Star Holdings, LLC, 5Star Commercial, LLC, 5Star Portland Holdings, LLC, 5Star Investment Group V, LLC",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "cease and desist"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "25-0004-AC - Order on Administrative Complaint.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "99d8eedf-0edd-4b31-875d-1c6d379ef4cc",
+      "causeAsIndexed": "25-0002 CA",
+      "issuanceDate": "2025-05-12",
+      "respondentAsIndexed": "Bryan Wisda, Almega Wealth Management",
+      "respondentGrain": "firm-linked caption",
+      "actionTypesAsIndexed": [
+        "consent agreement"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "25-0002 CA - FINAL ORDER AND CONSENT AGREEMENT.pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 3,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [
+        "316840"
+      ],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [
+        "316840"
+      ],
+      "profileAttached": false
+    },
+    {
+      "indexId": "5d45f7c1-1078-4647-95a3-6f177a4692b3",
+      "causeAsIndexed": "25-0001 CD",
+      "issuanceDate": "2025-05-05",
+      "respondentAsIndexed": "Jack's Donuts of Indiana Commissary, LLC, KCL Group, Marcum Industries",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "cease and desist"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "25-0001 - Cease and Desist Order.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "6205dc77-93b0-4308-a931-0ffa225ecbfe",
+      "causeAsIndexed": "23-0017 CA",
+      "issuanceDate": "2024-12-20",
+      "respondentAsIndexed": "EDWARD D. JONES & CO., L.P.",
+      "respondentGrain": "firm-linked caption",
+      "actionTypesAsIndexed": [
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "23-0017 CA - 12-20-24 - FINAL ORDER AND CONSENT AGREEMENT.pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 1,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [
+        "250"
+      ],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [
+        "250"
+      ],
+      "profileAttached": false
+    },
+    {
+      "indexId": "5acc6b5e-16e4-4a51-985e-f1760117091f",
+      "causeAsIndexed": "24-0014 CD",
+      "issuanceDate": "2024-09-04",
+      "respondentAsIndexed": "Lord of the Shirts, LLC, Grey Shirt Guys LLC, Bob's T-Shirt Store, Bobs Work Shirts",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "cease and desist"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "24-0014 CD - Petition for C&D - 8-22-2024.pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "3bcf9600-6c09-4503-9fd5-2eec9a55e2a2",
+      "causeAsIndexed": "24-0013 CD",
+      "issuanceDate": "2024-08-22",
+      "respondentAsIndexed": "BLACKROCK, INC., BLACKROCK ADVISORS, LLC, BLACKROCK FUND ADVISORS, BLACKROCK FINANCIAL MANAGEMENT, INC, BLACKROCK CAPITAL MANAGEMENT, INC., BLACKROCK INVESTMENT MANAGEMENT, LLC, BLACKROCK INVESTMENTS, LLC",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "cease and desist"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "24-0013 CD - BlackRock Cease and Desist Order - 8-22-2024.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "7431e335-2aa3-4b26-a485-55d0cff91147",
+      "causeAsIndexed": "23-0018 CA",
+      "issuanceDate": "2024-07-12",
+      "respondentAsIndexed": "Andrew Schlag",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "Schlagg Order_CA.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "5d14b36f-b0f0-4e57-b0c1-ef019b12e76f",
+      "causeAsIndexed": "24-0007 CD",
+      "issuanceDate": "2024-06-17",
+      "respondentAsIndexed": "RUSSELL FORD, WAYFINDER FINANCIAL LLC",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "24-0007 CD - 6-17-24 Final Order Adopting Consent Agreement.pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 2,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "35848287-f5e0-4c82-add7-d3a90adcbc37",
+      "causeAsIndexed": "22-0019 CA",
+      "issuanceDate": "2024-05-14",
+      "respondentAsIndexed": "Herbert Hupp, Indiana Business Development Group LLC",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "22-0019 CA - 5-13-24 - Consent Agreement.pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "d7d2dc9f-6032-48ab-8611-70b48bd9a6ce",
+      "causeAsIndexed": "24-0002 CD",
+      "issuanceDate": "2024-05-09",
+      "respondentAsIndexed": "Joel Parady",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "24-0002 CD - 5-9-24 - PARADY CONSENT AGREEMENT.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "9daacc9f-5d41-43c3-a140-e4235f3ceed1",
+      "causeAsIndexed": "24-0008 CA",
+      "issuanceDate": "2024-05-02",
+      "respondentAsIndexed": "Antony Stureman, KROUSE STUREMAN & ASSOCIATES, INC.",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "24-0008 CA - Final Order Adopting Consent Agreement.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "7ccccd3c-3c32-4601-9e0e-0476cb742c33",
+      "causeAsIndexed": "24-0005 CD",
+      "issuanceDate": "2024-05-02",
+      "respondentAsIndexed": "JUSTIN HALL",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order",
+        "bar"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "24-0005 CD - 5-2-2024 - Hall CA and FINAL ORDER.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "ad2451a3-131d-4432-97c3-185fc35746a8",
+      "causeAsIndexed": "23-0009 CD",
+      "issuanceDate": "2024-02-13",
+      "respondentAsIndexed": "Steven Peabody, Mary Zappia, Scot Kane, Vocare, Inc.",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "cease and desist"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "PET AND ORDER UPLOAD FOR ADMIN ACTION.pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 3,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "b55be9ea-c44a-4c79-b3e7-abfdf6a0cd5f",
+      "causeAsIndexed": "24-0002 CD",
+      "issuanceDate": "2024-01-18",
+      "respondentAsIndexed": "ALEXANDER JOYCE, Joel Parady, ReJoyce Financial, REJOYCE WEALTH MANAGEMENT",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "cease and desist"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "COMBINED CD for UPLOAD.pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 5,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "442c3033-6192-4a24-88cd-9531dcba3386",
+      "causeAsIndexed": "23-0022 CD",
+      "issuanceDate": "2024-01-16",
+      "respondentAsIndexed": "BLAKE COLLINS, COLLINS CAPITAL LLC",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "23-0022 CD - FINAL Order and Consent Agreement.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "ca41a7a4-01ba-4a34-944b-f50f3cec2044",
+      "causeAsIndexed": "24-0001 CD",
+      "issuanceDate": "2024-01-12",
+      "respondentAsIndexed": "Rodney Grubbs, All About Pickleball, Pickleball Rocks",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "cease and desist"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "COMBINED CD AND ORDER FOR CD FOR CRM PUBLISHING.pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "f2fb4788-f156-4015-bc01-cc4c099096d2",
+      "causeAsIndexed": "23-0026 CA",
+      "issuanceDate": "2023-12-27",
+      "respondentAsIndexed": "Tradestation Crypto Inc.",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "INDIANA - 23-0026 - TRADESTATION - FINAL ORDER AND CA.pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "76562101-071c-43fc-95d6-7cf0e9d17cd5",
+      "causeAsIndexed": "23-0015 SB",
+      "issuanceDate": "2023-12-21",
+      "respondentAsIndexed": "Marc Jaffe, Jaffe Financial Services",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "final order",
+        "bar"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "23-0015 SB - 12-21-23 - Amended bar.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "614cbf42-5e5b-4323-86d5-946c8f868df6",
+      "causeAsIndexed": "23-0025 CA",
+      "issuanceDate": "2023-12-18",
+      "respondentAsIndexed": "GINERIS WEALTH MANAGEMENT LLC",
+      "respondentGrain": "firm-linked caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "23-0025 CA - CA AND FINAL ORDER.pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 4,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [
+        "295095"
+      ],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [
+        "295095"
+      ],
+      "profileAttached": false
+    },
+    {
+      "indexId": "0af18e68-f5e7-447a-93de-24e115007d31",
+      "causeAsIndexed": "23-0021 CD",
+      "issuanceDate": "2023-09-28",
+      "respondentAsIndexed": "Albion Global Marketing",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "cease and desist",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "23-0021 CD Final Order -Signed.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "0e22eb4f-0c6f-4e34-b9a0-311d837f66bc",
+      "causeAsIndexed": "23-0014 CA",
+      "issuanceDate": "2023-09-28",
+      "respondentAsIndexed": "Raymond James & Associates, Inc",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "23-0014CA Final Order.pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "3144683c-4a13-4e0e-bade-72d6dfa1994a",
+      "causeAsIndexed": "23-0020 SB",
+      "issuanceDate": "2023-09-19",
+      "respondentAsIndexed": "Andrea Friederike Wood",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "final order",
+        "bar"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "WOOD - Final Order.pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 1,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "c4c98e49-5e75-416f-8187-963d14474c7c",
+      "causeAsIndexed": "23-0013 CD",
+      "issuanceDate": "2023-08-16",
+      "respondentAsIndexed": "Listing Leaders",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "23-0013 LISTING LEADERS CA signed.pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "d02c5185-12b5-4d68-b3f5-cfa473912d71",
+      "causeAsIndexed": "21-0011 CA",
+      "issuanceDate": "2023-08-16",
+      "respondentAsIndexed": "Ashley Renee Wyrick",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "WYRICK Signed CA.pdf"
+      ],
+      "textLayer": true,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "11d059ea-729a-4e44-a817-0f33002ba238",
+      "causeAsIndexed": "23-0007 CD",
+      "issuanceDate": "2023-06-30",
+      "respondentAsIndexed": "PARKER, PATRICIA HEATON",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "Parker - CA and Final Order -  23-007 CD.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "f0983c0d-7eab-419b-ac12-2883e75785e7",
+      "causeAsIndexed": "23-0004 CD",
+      "issuanceDate": "2023-06-16",
+      "respondentAsIndexed": "Leviathan Financial Management Corp, 323 HOLDINGS LLC, Stanley Hall",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "cease and desist",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "23-0004 CD - FINAL ORDER.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "d70bd873-d2c1-4fb7-94e8-2bac11340564",
+      "causeAsIndexed": "23-0005 CA",
+      "issuanceDate": "2023-05-24",
+      "respondentAsIndexed": "ROBINHOOD ASSET MANAGEMENT, LLC",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "Robinhood -Order adopting CA.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "0f7ef84a-05a9-4a5b-af5a-f2e803aa5b34",
+      "causeAsIndexed": "22-0016 CD",
+      "issuanceDate": "2023-03-07",
+      "respondentAsIndexed": "Nexo Capital, Inc.",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "NEXO - Order adopting CA.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "f3b77ff5-a50c-4eb1-a31c-a6c979707e41",
+      "causeAsIndexed": "22-0018 CA",
+      "issuanceDate": "2023-02-08",
+      "respondentAsIndexed": "WEALTH PLANNING & MANAGEMENT, LLC",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "Order Adopting - CA w Wealth Planning &  Mgmt.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "0bb649e0-7516-44ab-9476-835f9975ad44",
+      "causeAsIndexed": "23-0002 RO",
+      "issuanceDate": "2023-02-03",
+      "respondentAsIndexed": "Center for Financial Design, Inc.",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "revocation order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "Center for Financial Design (Annette Tansey Moore) - Petition and Order Revoking.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "0f4d1c5a-b603-4886-a521-f896e9e094d3",
+      "causeAsIndexed": "22-0001 CA",
+      "issuanceDate": "2022-10-12",
+      "respondentAsIndexed": "MICHAEL EGAN",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "MICHAEL P. EGAN.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "30858833-31d4-4f81-ab25-e3e92999f529",
+      "causeAsIndexed": "22-0011 CA",
+      "issuanceDate": "2022-06-02",
+      "respondentAsIndexed": "MIDWEST WEALTH PLANNING INSTITUTE LLC",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "MIDWEST WEALTH PLANNING INSTITUTE LLC.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "0c402e6c-092a-4f51-b3dd-10bfe22e4f18",
+      "causeAsIndexed": "22-0012 CA",
+      "issuanceDate": "2022-05-24",
+      "respondentAsIndexed": "THOMAS JOHNSON, ANDREW JOHNSON, ROYAL CAPITAL WEALTH MANAGEMENT LLC",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "ROYAL CAPITAL WEALTH MANAGEMENT, LLC; THOMAS L. JOHNSON and ANDREW J. JOHNSON.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "97c460f9-e8ac-404a-8dec-5212715edc9b",
+      "causeAsIndexed": "22-0007 CA",
+      "issuanceDate": "2022-05-19",
+      "respondentAsIndexed": "GEORGE RUSSELL",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "GEORGE EDWARD dba RUSSELL AND COMPANY.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "ca97e3df-fe22-492a-af9d-77f15adfef12",
+      "causeAsIndexed": "22-0009 CA",
+      "issuanceDate": "2022-05-12",
+      "respondentAsIndexed": "NICHOLS WEALTH ADVISORS, LLC",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "NICHOLS WEALTH ADVISORS, LLC.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "2d1c51a6-8b18-4559-94aa-b41153418ec4",
+      "causeAsIndexed": "22-0010 CA",
+      "issuanceDate": "2022-05-04",
+      "respondentAsIndexed": "ICGVFO, INC",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "IMPACT CONNECTIONS GROUP, VFO.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "c2564ef2-1171-4861-91fd-9917d364894c",
+      "causeAsIndexed": "22-0006 CA",
+      "issuanceDate": "2022-05-04",
+      "respondentAsIndexed": "TRIVELLONI ASSET MANAGEMENT, LLC",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "TRIVELLONI ASSET MANAGEMENT.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "60b5644c-3f57-41de-9deb-5d7614692687",
+      "causeAsIndexed": "22-0003 AC",
+      "issuanceDate": "2022-04-05",
+      "respondentAsIndexed": "Jay Kothari",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "JAY B. KOTHARI.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "3dd2e529-b7b7-4e8f-ac6c-bf6f09938d9c",
+      "causeAsIndexed": "22-0005 CD-CD",
+      "issuanceDate": "2022-03-29",
+      "respondentAsIndexed": "Voyager Digital, LLC",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "cease and desist"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "CEASE AND DESIST ORDER.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "48d2dde7-f73e-4317-ad0e-b1c3049bc348",
+      "causeAsIndexed": "22-0004 CA",
+      "issuanceDate": "2022-03-15",
+      "respondentAsIndexed": "AFFINITY FINANCIAL - THE WALKER GROUP LLC",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "AFFINITY FINANCIAL - THE WALKER GROUP.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "0ae734e0-6c4d-47f0-8d7f-44edc0b830db",
+      "causeAsIndexed": "22-0002 CA",
+      "issuanceDate": "2022-03-10",
+      "respondentAsIndexed": "BlockFi Lending LLC",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "BLOCKFI LENDING LLC.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "1befcc35-9c0e-4454-b490-d23f541e2bee",
+      "causeAsIndexed": "21-0022 CA",
+      "issuanceDate": "2022-02-16",
+      "respondentAsIndexed": "Thomas M. Neeser",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "THOMAS M. NEESER.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "be1db428-7b58-4544-8aec-a9d70cfe476a",
+      "causeAsIndexed": "21-0016 CA",
+      "issuanceDate": "2022-01-27",
+      "respondentAsIndexed": "Kory Joseph Fay",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "consent agreement",
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "KORY J. FAY.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    },
+    {
+      "indexId": "90489771-61f2-4647-8986-bb8ac82a56eb",
+      "causeAsIndexed": "21-0006 CA",
+      "issuanceDate": "2022-01-27",
+      "respondentAsIndexed": "CENTER FOR FINANCIAL DESIGN, INC.",
+      "respondentGrain": "unresolved index caption",
+      "actionTypesAsIndexed": [
+        "final order"
+      ],
+      "entityTypeAsIndexed": [
+        "securities_investment"
+      ],
+      "statuteNote": null,
+      "documentTitles": [
+        "CENTER FOR FINANCIAL DESIGN, INC.pdf"
+      ],
+      "textLayer": false,
+      "printedCrdCandidateCount": 0,
+      "printedSecFileCandidateCount": 0,
+      "exactIapdFirmCrdLinks": [],
+      "exactIapdSecFileLinks": [],
+      "inAcceptedIndianaLens": [],
+      "profileAttached": false
+    }
+  ]
+}

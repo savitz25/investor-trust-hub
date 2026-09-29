@@ -16,6 +16,7 @@ import { CT_REGISTRATION_LENSES, CT_SECURITIES_ORDERS } from './ct-public-intel'
 import { MD_SECURITIES_ACTIONS } from './md-public-intel';
 import { MD_REGISTRATION_LENSES } from './md-public-intel';
 import { WI_REGISTRATION_LENSES, WI_SECURITIES_ORDERS } from './wi-public-intel';
+import { IN_IAPD_LENSES, IN_SECURITIES_ORDERS } from './in-public-intel';
 export type { InvestorResearchIntent, InvestorCondition } from './investor-research-plan';
 
 export const INVESTOR_ASK_CONTRACT = 'investor-ask-v1' as const;
@@ -502,6 +503,7 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     push('Identifier', `SEC file ${value} (labeled)`);
     push('Source', 'SEC/IARD Form ADV roster');
     if (/\bwisconsin\b/i.test(q)) push('Wisconsin context', 'InvestorTrustHub /wisconsin; SEC file identity alone does not establish Wisconsin registration.');
+    if (/\bindiana\b/i.test(q)) push('Indiana context', 'InvestorTrustHub Indiana (/indiana); SEC file identity alone does not establish Indiana registration or notice filing.');
     return { raw: q, query, interpretation: lines };
   }
 
@@ -528,6 +530,7 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     push('Identifier', `CRD ${value} (labeled)`);
     push('Source', 'SEC/IARD Form ADV roster');
     if (/\bwisconsin\b/i.test(q)) push('Wisconsin context', 'InvestorTrustHub /wisconsin; firm CRD identity alone does not establish Wisconsin registration.');
+    if (/\bindiana\b/i.test(q)) push('Indiana context', 'InvestorTrustHub Indiana (/indiana); firm CRD identity alone does not establish Indiana registration or notice filing.');
     return { raw: q, query, interpretation: lines };
   }
 
@@ -545,6 +548,33 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     const query = failClosed('InvestorTrustHub Specialist Search is firm-focused. A person or IAR CRD must not be resolved as a firm CRD.', ['Find firm CRD 105958.', 'What is a CRD number?']);
     push('Mode', 'fail_closed');
     push('Identity class', 'Individual/IAR — outside the public firm search');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  // IN-INV-001: labeled firm identifiers above outrank state and city words.
+  const inNamed = /\bindiana\b/i.test(q);
+  const inCity = /\b(indianapolis|fort wayne|evansville|south bend)\b/i.exec(q);
+  if ((inNamed || inCity) && /\b(?:investment|advis[eo]r|advisers|ria|era|broker|securities|crd|sec|notice|disciplin|enforc|complaint|exam|principal office|agent|representative|iar)\b/i.test(q)) {
+    const reason = inCity
+      ? 'The named Indiana city is geography only. InvestorTrustHub publishes no city securities route. A principal office does not establish Indiana registration or notice filing. Use /indiana.'
+      : /\bcomplaints?\b/i.test(q)
+        ? 'The Indiana Secretary of State, Securities Division accepts investor complaints. Provider-level complaint records and outcomes were not acquired; a complaint is not a finding. Use /indiana.'
+        : /\b(?:disciplin\w*|enforc\w*|orders?|sanctions?|administrative actions?)\b/i.test(q)
+          ? `The Indiana Securities Division index lists ${IN_SECURITIES_ORDERS.rowCount} securities administrative actions dated 2022–2026, with final, consent, cease-and-desist, bar and revocation labels kept distinct. ${IN_SECURITIES_ORDERS.exactFirmCrdLinks} carry an exact IAPD firm-CRD link; no adverse profile evidence was attached. Use /indiana.`
+          : /\b(?:examinations?|exams?)\b/i.test(q)
+            ? 'The Indiana Securities Division describes an investment-adviser examination program and an annual questionnaire for Indiana-domiciled advisers; provider-level outcomes were not acquired. Missing is not a clean examination history. Use /indiana.'
+            : /\b(?:broker[- ]?dealers?|securities agents?|agents?|investment adviser representatives?|iars?|representatives?)\b/i.test(q)
+              ? 'The Indiana Securities Division registers broker-dealers, broker-dealer agents and investment adviser representatives as separate firm and person grains. Indiana bulk rosters were not acquired; verify through BrokerCheck or IAPD. Use /indiana.'
+              : /\b(?:principal office|headquarter\w*|based in|located in)\b/i.test(q)
+                ? `The accepted 2026-09-17 SEC compilation reports ${IN_IAPD_LENSES.principalOffice.distinctFirmCrd} Indiana principal-office firm CRDs. Office geography is not Indiana registration or notice filing. Use /indiana.`
+                : /\b(?:era|exempt reporting)\b/i.test(q)
+                  ? `The accepted IAPD state compilation lists ${IN_IAPD_LENSES.era.activeDistinctFirmCrd} active Indiana exempt reporting adviser firm CRDs. ERA status is not state IA or SEC registration. Use /indiana.`
+                  : /\b(?:federal[- ]covered|notice[- ]filed|notice filing|notice)\b/i.test(q)
+                    ? `The accepted IAPD SEC compilation lists ${IN_IAPD_LENSES.federalNotice.filedDistinctFirmCrd} firms with a FILED Indiana notice. A notice filing is not Indiana state IA registration. Use /indiana.`
+                    : `The accepted IAPD state compilation lists ${IN_IAPD_LENSES.stateIa.approvedDistinctFirmCrd} Indiana state-registered IA firm CRDs (APPROVED). Federal notice (${IN_IAPD_LENSES.federalNotice.filedDistinctFirmCrd}), ERA (${IN_IAPD_LENSES.era.activeDistinctFirmCrd}) and principal-office (${IN_IAPD_LENSES.principalOffice.distinctFirmCrd}) lenses are separate and must not be added. Use /indiana.`;
+    const query = failClosed(reason, ['Indiana investor research page.', 'Find firm CRD 105958.']);
+    if (inCity) query.geography = { type: 'principal_office_city', value: inCity[1]!, state: 'IN', meaning: 'City context only; not Indiana registration or service territory' };
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };
   }
 

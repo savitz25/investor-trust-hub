@@ -14,6 +14,8 @@ import MD_REGISTRATION_LENSES from '../../../data/maryland/md-inv-001/registrati
 import MD_SECURITIES_ACTIONS from '../../../data/maryland/md-inv-001/securities-actions.json';
 import WI_REGISTRATION_LENSES from '../../../data/wisconsin/wi-inv-001/registration-lenses.json';
 import WI_SECURITIES_ORDERS from '../../../data/wisconsin/wi-inv-001/securities-orders.json';
+import IN_IAPD_LENSES from '../../../data/indiana/in-inv-001/iapd-in-lenses.json';
+import IN_SECURITIES_ORDERS from '../../../data/indiana/in-inv-001/securities-orders.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -85,7 +87,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN';
   name: string;
   href: string;
   regulator: string;
@@ -939,6 +941,21 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
     sourceClocks: [
       { label: 'Accepted national principal-office roster', sourceAsOf: WI_REGISTRATION_LENSES.principalOffice.sourceAsOf, retrievedAt: WI_REGISTRATION_LENSES.principalOffice.retrievedAt, snapshotAsOf: WI_REGISTRATION_LENSES.principalOffice.sourceAsOf, generatedAt: null },
       { label: 'Wisconsin administrative-order index', sourceAsOf: null, retrievedAt: WI_SECURITIES_ORDERS.retrievedAt, snapshotAsOf: '2026-09-29', generatedAt: null },
+    ],
+  },
+  {
+    code: 'IN',
+    name: 'Indiana',
+    href: '/indiana',
+    regulator: 'Indiana Secretary of State, Securities Division',
+    principalOfficeFirms: IN_IAPD_LENSES.principalOffice.distinctFirmCrd,
+    rosterStatus: 'Indiana-only bulk BD/agent/IAR rosters NOT_ACQUIRED; state IA, notice and ERA lenses from accepted IAPD',
+    evidence: ['Accepted IAPD state IA, federal notice, ERA and principal-office lenses', '2022–2026 administrative-action index', 'examination and complaint intake capability'],
+    identityNote: 'State IA, federal notice, ERA and principal-office firm-CRD sets are separate lenses; they are never added into one Indiana adviser total.',
+    limitation: 'Registration Search is not exhaustive and excludes BD/IA firms. Scanned orders were not OCR-parsed; only exact firm-CRD links are recorded, with no adverse profile attachments.',
+    sourceClocks: [
+      { label: 'Accepted IAPD STATE/SEC compilation', sourceAsOf: IN_IAPD_LENSES.stateFeed.sourceAsOf, retrievedAt: IN_IAPD_LENSES.retrievedAt, snapshotAsOf: IN_IAPD_LENSES.stateFeed.sourceAsOf, generatedAt: null },
+      { label: 'Indiana administrative-action index', sourceAsOf: null, retrievedAt: IN_SECURITIES_ORDERS.retrievedAt, snapshotAsOf: '2026-09-29', generatedAt: null },
     ],
   },
 ];
