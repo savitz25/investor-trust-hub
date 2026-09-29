@@ -13,7 +13,7 @@ export const SUPPORTING_MESSAGE =
   'Research investment professionals, firms, fees, and financial decisions using regulatory and public-source evidence.';
 
 export const INDEPENDENCE_LINE =
-  'Independent research. No paid rankings. No lead marketplace. No opaque trust score.';
+  'Independent research. No paid rankings. No lead marketplace. No opaque scores.';
 
 export const NOT_ADVICE_LINE =
   'InvestorTrustHub is a research and education platform. It is not a broker-dealer, investment adviser, robo-advisor, or rating service.';
