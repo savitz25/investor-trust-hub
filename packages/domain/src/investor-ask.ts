@@ -15,6 +15,7 @@ import { MI_IAPD_LENSES, MI_SECURITIES_ORDERS } from './mi-public-intel';
 import { CT_REGISTRATION_LENSES, CT_SECURITIES_ORDERS } from './ct-public-intel';
 import { MD_SECURITIES_ACTIONS } from './md-public-intel';
 import { MD_REGISTRATION_LENSES } from './md-public-intel';
+import { WI_REGISTRATION_LENSES, WI_SECURITIES_ORDERS } from './wi-public-intel';
 export type { InvestorResearchIntent, InvestorCondition } from './investor-research-plan';
 
 export const INVESTOR_ASK_CONTRACT = 'investor-ask-v1' as const;
@@ -500,6 +501,7 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     push('Mode', 'identifier');
     push('Identifier', `SEC file ${value} (labeled)`);
     push('Source', 'SEC/IARD Form ADV roster');
+    if (/\bwisconsin\b/i.test(q)) push('Wisconsin context', 'InvestorTrustHub /wisconsin; SEC file identity alone does not establish Wisconsin registration.');
     return { raw: q, query, interpretation: lines };
   }
 
@@ -525,6 +527,7 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     push('Mode', query.mode);
     push('Identifier', `CRD ${value} (labeled)`);
     push('Source', 'SEC/IARD Form ADV roster');
+    if (/\bwisconsin\b/i.test(q)) push('Wisconsin context', 'InvestorTrustHub /wisconsin; firm CRD identity alone does not establish Wisconsin registration.');
     return { raw: q, query, interpretation: lines };
   }
 
@@ -542,6 +545,29 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     const query = failClosed('InvestorTrustHub Specialist Search is firm-focused. A person or IAR CRD must not be resolved as a firm CRD.', ['Find firm CRD 105958.', 'What is a CRD number?']);
     push('Mode', 'fail_closed');
     push('Identity class', 'Individual/IAR — outside the public firm search');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  // WI-INV-001: labeled firm identifiers above outrank state and city words.
+  const wiNamed = /\bwisconsin\b/i.test(q) || /\bWI\b/.test(q);
+  const wiCity = /\b(milwaukee|madison|green bay|kenosha)\b/i.exec(q);
+  if ((wiNamed || wiCity) && /\b(?:investment|advis[eo]r|ria|era|broker|securities|crd|sec|notice|disciplin|enforc|complaint|exam|principal office)\b/i.test(q)) {
+    const reason = wiCity
+      ? 'The named Wisconsin city is geography only. InvestorTrustHub publishes no city securities route. A principal office does not establish Wisconsin registration or notice filing. Use /wisconsin.'
+      : /\bcomplaints?\b/i.test(q)
+        ? 'Wisconsin DFI accepts investor complaints. Provider-level complaint records and outcomes were not acquired; a complaint is not a finding. Use /wisconsin.'
+        : /\b(?:disciplin\w*|enforc\w*|orders?|sanctions?)\b/i.test(q)
+          ? `Wisconsin DFI indexes ${WI_SECURITIES_ORDERS.rowCount} dated administrative orders in 2022–2026. Summary, consent, final and settlement entries remain distinct. No adverse profile evidence was attached. Use /wisconsin.`
+          : /\b(?:examinations?|exams?)\b/i.test(q)
+            ? 'Wisconsin DFI describes an investment-adviser examination program; provider-level outcomes were not acquired. Missing is not a clean examination history. Use /wisconsin.'
+            : /\b(?:broker[- ]?dealers?|securities agents?|investment adviser representatives?|iars?)\b/i.test(q)
+              ? 'Wisconsin DFI verifies broker-dealers, agents and adviser representatives as separate firm and person grains. Bulk rosters were not acquired. Use /wisconsin.'
+              : /\b(?:principal office|headquarter\w*|based in|located in)\b/i.test(q)
+                ? `The accepted national SEC/IARD roster reports ${WI_REGISTRATION_LENSES.principalOffice.count} Wisconsin principal-office firm records as of ${WI_REGISTRATION_LENSES.principalOffice.sourceAsOf}. Office geography is not Wisconsin registration or notice filing. Use /wisconsin.`
+                : 'Wisconsin state IA, federal notice and ERA counts and exact CRD overlaps were not acquired; verify exact current status with DFI or IAPD. The older principal-office geography lens is separate. Use /wisconsin.';
+    const query = failClosed(reason, ['Wisconsin investor research page.', 'Find firm CRD 105958.']);
+    if (wiCity) query.geography = { type: 'principal_office_city', value: wiCity[1]!, state: 'WI', meaning: 'City context only; not Wisconsin registration or service territory' };
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };
   }
 

@@ -12,6 +12,8 @@ import CT_REGISTRATION_LENSES from '../../../data/connecticut/ct-inv-001/registr
 import CT_SECURITIES_ORDERS from '../../../data/connecticut/ct-inv-001/securities-orders.json';
 import MD_REGISTRATION_LENSES from '../../../data/maryland/md-inv-001/registration-lenses.json';
 import MD_SECURITIES_ACTIONS from '../../../data/maryland/md-inv-001/securities-actions.json';
+import WI_REGISTRATION_LENSES from '../../../data/wisconsin/wi-inv-001/registration-lenses.json';
+import WI_SECURITIES_ORDERS from '../../../data/wisconsin/wi-inv-001/securities-orders.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -83,7 +85,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI';
   name: string;
   href: string;
   regulator: string;
@@ -922,6 +924,21 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
     sourceClocks: [
       { label: 'Accepted national principal-office roster', sourceAsOf: MD_REGISTRATION_LENSES.principalOffice.sourceAsOf, retrievedAt: MD_REGISTRATION_LENSES.principalOffice.retrievedAt, snapshotAsOf: MD_REGISTRATION_LENSES.principalOffice.sourceAsOf, generatedAt: null },
       { label: 'Maryland administrative-action index', sourceAsOf: null, retrievedAt: MD_SECURITIES_ACTIONS.retrievedAt, snapshotAsOf: '2026-09-29', generatedAt: null },
+    ],
+  },
+  {
+    code: 'WI',
+    name: 'Wisconsin',
+    href: '/wisconsin',
+    regulator: 'Wisconsin Department of Financial Institutions, Division of Securities',
+    principalOfficeFirms: WI_REGISTRATION_LENSES.principalOffice.count,
+    rosterStatus: 'Wisconsin-only bulk adviser roster NOT_ACQUIRED',
+    evidence: ['Exact DFI registration verification', 'older accepted SEC/IARD principal-office lens', '2022–2026 administrative-order index', 'examination and complaint intake capability'],
+    identityNote: 'The 211 principal-office records are geography, not Wisconsin registration. State IA, federal notice, ERA and person classes remain separate.',
+    limitation: 'State IA, notice and ERA counts and exact overlaps were not acquired. Summary, consent, final and settlement orders retain their labels; no adverse profile attachments.',
+    sourceClocks: [
+      { label: 'Accepted national principal-office roster', sourceAsOf: WI_REGISTRATION_LENSES.principalOffice.sourceAsOf, retrievedAt: WI_REGISTRATION_LENSES.principalOffice.retrievedAt, snapshotAsOf: WI_REGISTRATION_LENSES.principalOffice.sourceAsOf, generatedAt: null },
+      { label: 'Wisconsin administrative-order index', sourceAsOf: null, retrievedAt: WI_SECURITIES_ORDERS.retrievedAt, snapshotAsOf: '2026-09-29', generatedAt: null },
     ],
   },
 ];

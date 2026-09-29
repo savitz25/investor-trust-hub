@@ -66,6 +66,8 @@ function finish(raw: string, q: InvestorResearchQuery): ParsedInvestorAsk {
       label: 'Identifier',
       value: `${q.identifier.type === 'crd' ? 'CRD' : 'SEC file'} ${q.identifier.value}`,
     });
+  if (q.identifier && /\bwisconsin\b/i.test(raw))
+    interpretation.push({ label: 'Wisconsin context', value: 'InvestorTrustHub /wisconsin; exact identity alone does not establish Wisconsin registration.' });
   if (q.nameQuery || q.originalName)
     interpretation.push({ label: 'Requested firm name', value: q.originalName ?? q.nameQuery! });
   if (q.firmType)
