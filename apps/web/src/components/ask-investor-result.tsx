@@ -34,6 +34,7 @@ export function AskInvestorResultView({ result }: { result: InvestorAskResult })
           ))}
         </dl>
         {q.identifier && /\bwisconsin\b/i.test(result.queryText) ? <p className="mt-3 text-sm"><Link href="/wisconsin" className="font-semibold text-teal-800 underline">Open InvestorTrustHub Wisconsin securities research</Link>. This identifier alone does not establish Wisconsin registration.</p> : null}
+        {q.identifier && /\bindiana\b/i.test(result.queryText) ? <p className="mt-3 text-sm"><Link href="/indiana" className="font-semibold text-teal-800 underline">Open InvestorTrustHub Indiana securities research</Link>. This identifier alone does not establish Indiana registration or notice filing.</p> : null}
         {result.parsed.geographyNote ? (
           <p className="mt-3 text-sm leading-relaxed text-[var(--ith-ink)]">{result.parsed.geographyNote}</p>
         ) : null}

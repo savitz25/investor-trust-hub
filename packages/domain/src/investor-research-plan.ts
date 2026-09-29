@@ -68,6 +68,8 @@ function finish(raw: string, q: InvestorResearchQuery): ParsedInvestorAsk {
     });
   if (q.identifier && /\bwisconsin\b/i.test(raw))
     interpretation.push({ label: 'Wisconsin context', value: 'InvestorTrustHub /wisconsin; exact identity alone does not establish Wisconsin registration.' });
+  if (q.identifier && /\bindiana\b/i.test(raw))
+    interpretation.push({ label: 'Indiana context', value: 'InvestorTrustHub Indiana (/indiana); exact identity alone does not establish Indiana registration or notice filing.' });
   if (q.nameQuery || q.originalName)
     interpretation.push({ label: 'Requested firm name', value: q.originalName ?? q.nameQuery! });
   if (q.firmType)
