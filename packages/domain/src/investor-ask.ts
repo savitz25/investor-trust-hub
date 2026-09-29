@@ -13,6 +13,7 @@ import { NV_PUBLIC_SNAPSHOT } from './nv-public-snapshot';
 import { MN_PUBLIC_SNAPSHOT } from './mn-public-snapshot';
 import { MI_IAPD_LENSES, MI_SECURITIES_ORDERS } from './mi-public-intel';
 import { CT_REGISTRATION_LENSES, CT_SECURITIES_ORDERS } from './ct-public-intel';
+import { MD_SECURITIES_ACTIONS } from './md-public-intel';
 export type { InvestorResearchIntent, InvestorCondition } from './investor-research-plan';
 
 export const INVESTOR_ASK_CONTRACT = 'investor-ask-v1' as const;
@@ -540,6 +541,27 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     const query = failClosed('InvestorTrustHub Specialist Search is firm-focused. A person or IAR CRD must not be resolved as a firm CRD.', ['Find firm CRD 105958.', 'What is a CRD number?']);
     push('Mode', 'fail_closed');
     push('Identity class', 'Individual/IAR — outside the public firm search');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  // MD-INV-001: labeled firm identifiers above outrank state and city words.
+  const mdNamed = /\bmaryland\b/i.test(q) || /\bMD\b/.test(q);
+  const mdCity = /\b(baltimore|annapolis|frederick|rockville)\b/i.exec(q);
+  if ((mdNamed || mdCity) && /\b(?:investment|advis[eo]r|ria|era|broker|securities|crd|sec|notice|disciplin|enforc|complaint|exam|principal office)\b/i.test(q)) {
+    const reason = mdCity
+      ? 'The named Maryland city is geography only. InvestorTrustHub publishes no city securities route. A principal office does not establish Maryland registration or notice filing. Use /maryland.'
+      : /\bcomplaints?\b/i.test(q)
+        ? 'Maryland Securities Division accepts investor complaints; public provider-level complaint records and outcomes were not acquired. A complaint is not a finding. Use /maryland.'
+        : /\b(?:disciplin\w*|enforc\w*|orders?|sanctions?)\b/i.test(q)
+          ? `Maryland Securities Division indexes ${MD_SECURITIES_ACTIONS.rows.length} dated action documents in 2022–2026. Show-cause, consent and final orders remain distinct. No adverse profile evidence was attached. Use /maryland.`
+          : /\b(?:examinations?|exams?)\b/i.test(q)
+            ? 'Maryland describes an investment-adviser examination program; provider-level outcomes were not acquired. Missing is not a clean examination history. Use /maryland.'
+            : /\b(?:broker[- ]?dealers?|securities agents?|investment adviser representatives?|iars?)\b/i.test(q)
+              ? 'Maryland broker-dealers, agents and adviser representatives have separate firm and person grains. Verify exact status with the Securities Division, IAPD or BrokerCheck. Bulk rosters were not acquired. Use /maryland.'
+              : 'Maryland state IA, federal notice, ERA and principal-office lenses are distinct. Maryland-specific counts and exact CRD overlaps were not acquired; verify exact current status with the Securities Division or IAPD. Use /maryland.';
+    const query = failClosed(reason, ['Maryland investor research page.', 'Find firm CRD 105958.']);
+    if (mdCity) query.geography = { type: 'principal_office_city', value: mdCity[1]!, state: 'MD', meaning: 'City context only; not Maryland registration or service territory' };
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };
   }
 
