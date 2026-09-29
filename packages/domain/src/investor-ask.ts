@@ -14,6 +14,7 @@ import { MN_PUBLIC_SNAPSHOT } from './mn-public-snapshot';
 import { MI_IAPD_LENSES, MI_SECURITIES_ORDERS } from './mi-public-intel';
 import { CT_REGISTRATION_LENSES, CT_SECURITIES_ORDERS } from './ct-public-intel';
 import { MD_SECURITIES_ACTIONS } from './md-public-intel';
+import { MD_REGISTRATION_LENSES } from './md-public-intel';
 export type { InvestorResearchIntent, InvestorCondition } from './investor-research-plan';
 
 export const INVESTOR_ASK_CONTRACT = 'investor-ask-v1' as const;
@@ -558,7 +559,9 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
             ? 'Maryland describes an investment-adviser examination program; provider-level outcomes were not acquired. Missing is not a clean examination history. Use /maryland.'
             : /\b(?:broker[- ]?dealers?|securities agents?|investment adviser representatives?|iars?)\b/i.test(q)
               ? 'Maryland broker-dealers, agents and adviser representatives have separate firm and person grains. Verify exact status with the Securities Division, IAPD or BrokerCheck. Bulk rosters were not acquired. Use /maryland.'
-              : 'Maryland state IA, federal notice, ERA and principal-office lenses are distinct. Maryland-specific counts and exact CRD overlaps were not acquired; verify exact current status with the Securities Division or IAPD. Use /maryland.';
+              : /\b(?:principal office|headquarter\w*|based in|located in)\b/i.test(q)
+                ? `The accepted national SEC/IARD roster reports ${MD_REGISTRATION_LENSES.principalOffice.count} Maryland principal-office firm records as of ${MD_REGISTRATION_LENSES.principalOffice.sourceAsOf}. Office geography is not Maryland registration or notice filing. Use /maryland.`
+                : 'Maryland state IA, federal notice and ERA counts and exact CRD overlaps were not acquired; verify exact current status with the Securities Division or IAPD. The older principal-office geography lens is separate. Use /maryland.';
     const query = failClosed(reason, ['Maryland investor research page.', 'Find firm CRD 105958.']);
     if (mdCity) query.geography = { type: 'principal_office_city', value: mdCity[1]!, state: 'MD', meaning: 'City context only; not Maryland registration or service territory' };
     push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');

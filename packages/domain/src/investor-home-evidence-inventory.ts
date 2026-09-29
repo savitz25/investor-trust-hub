@@ -10,6 +10,8 @@ import MI_IAPD_LENSES from '../../../data/michigan/mi-inv-001/iapd-mi-lenses.jso
 import MI_SECURITIES_ORDERS from '../../../data/michigan/mi-inv-001/securities-orders.json';
 import CT_REGISTRATION_LENSES from '../../../data/connecticut/ct-inv-001/registration-lenses.json';
 import CT_SECURITIES_ORDERS from '../../../data/connecticut/ct-inv-001/securities-orders.json';
+import MD_REGISTRATION_LENSES from '../../../data/maryland/md-inv-001/registration-lenses.json';
+import MD_SECURITIES_ACTIONS from '../../../data/maryland/md-inv-001/securities-actions.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -81,7 +83,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD';
   name: string;
   href: string;
   regulator: string;
@@ -905,6 +907,21 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
       { label: 'DOB adviser workbooks', sourceAsOf: '2025-10-22', retrievedAt: CT_REGISTRATION_LENSES.regulatorLists.stateIa.retrievedAt, snapshotAsOf: '2026-09-28', generatedAt: null },
       { label: 'IAPD STATE and SEC compilations', sourceAsOf: CT_REGISTRATION_LENSES.iapd.sourceAsOf, retrievedAt: null, snapshotAsOf: '2026-09-28', generatedAt: null },
       { label: 'DOB securities-order index', sourceAsOf: null, retrievedAt: CT_SECURITIES_ORDERS.retrievedAt, snapshotAsOf: '2026-09-28', generatedAt: null },
+    ],
+  },
+  {
+    code: 'MD',
+    name: 'Maryland',
+    href: '/maryland',
+    regulator: 'Maryland Office of the Attorney General, Securities Division',
+    principalOfficeFirms: MD_REGISTRATION_LENSES.principalOffice.count,
+    rosterStatus: 'Maryland-only bulk adviser roster NOT_ACQUIRED',
+    evidence: ['Exact Securities Division verification', 'older accepted SEC/IARD principal-office lens', '2022–2026 administrative-action index', 'examination and complaint intake capability'],
+    identityNote: 'The 263 principal-office records are geography, not Maryland registration. State IA, federal notice, ERA and person classes remain separate.',
+    limitation: 'State IA, notice and ERA counts and exact overlaps were not acquired. Action-index documents are not final-finding or unique-case counts; no adverse profile attachments.',
+    sourceClocks: [
+      { label: 'Accepted national principal-office roster', sourceAsOf: MD_REGISTRATION_LENSES.principalOffice.sourceAsOf, retrievedAt: MD_REGISTRATION_LENSES.principalOffice.retrievedAt, snapshotAsOf: MD_REGISTRATION_LENSES.principalOffice.sourceAsOf, generatedAt: null },
+      { label: 'Maryland administrative-action index', sourceAsOf: null, retrievedAt: MD_SECURITIES_ACTIONS.retrievedAt, snapshotAsOf: '2026-09-29', generatedAt: null },
     ],
   },
 ];

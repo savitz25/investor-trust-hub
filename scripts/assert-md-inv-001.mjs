@@ -14,10 +14,12 @@ assert(!existsSync(join(root, 'apps/web/src/app/maryland/baltimore')));
 assert(page.includes("path: '/maryland'"));
 assert(page.includes('Maryland Office of the Attorney General'));
 assert(!/AggregateRating|ratingValue|Trust Score|best adviser|safest adviser/i.test(page));
-for (const lens of ['stateIa', 'federalNotice', 'era', 'principalOffice']) {
+for (const lens of ['stateIa', 'federalNotice', 'era']) {
   assert.equal(registration[lens].status, 'NOT_ACQUIRED');
   assert.equal(registration[lens].count, null);
 }
+assert.equal(registration.principalOffice.count, 263);
+assert.equal(registration.principalOffice.sourceAsOf, '2026-08-27');
 assert.equal(actions.rows.length, 142);
 assert.equal(actions.exactEnforcementAttachments, 0);
 assert.equal(actions.nameOnlyAttachments, 0);
