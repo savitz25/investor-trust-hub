@@ -1,0 +1,46 @@
+{
+  "contract": "wi-inv-001-registration-v1",
+  "regulator": "Wisconsin Department of Financial Institutions, Division of Securities",
+  "dfiBulkRoster": "NOT_ACQUIRED",
+  "stateIa": {
+    "status": "NOT_ACQUIRED",
+    "count": null
+  },
+  "federalNotice": {
+    "status": "NOT_ACQUIRED",
+    "count": null
+  },
+  "era": {
+    "status": "NOT_ACQUIRED",
+    "count": null
+  },
+  "principalOffice": {
+    "status": "KNOWN",
+    "count": 211,
+    "source": "accepted national SEC/IARD principal-office roster, data/home/investor-network-metrics-v1.json",
+    "sourceAsOf": "2026-08-27",
+    "retrievedAt": "2026-08-28",
+    "grain": "SEC/IARD adviser-firm record with Wisconsin principal office; not a state-registration or notice-filing count"
+  },
+  "exactCrdIntersections": null,
+  "exactSecIntersections": null,
+  "acceptedIapdSourceDate": "2026-09-17",
+  "acceptedIapdFeedAccess": "403 on 2026-09-29; state and SEC compilation filters not rerun",
+  "dfiVerification": "KNOWN",
+  "brokerDealerVerification": "KNOWN",
+  "agentVerification": "KNOWN",
+  "iarVerification": "KNOWN",
+  "brokerDealerRoster": "NOT_ACQUIRED",
+  "agentRoster": "NOT_ACQUIRED",
+  "iarRoster": "NOT_ACQUIRED",
+  "examCapability": "KNOWN",
+  "providerExamRows": "NOT_ACQUIRED",
+  "complaintIntake": "KNOWN",
+  "providerComplaintRows": "NOT_ACQUIRED",
+  "complaintOutcomes": "REQUEST_ONLY / NOT_ACQUIRED",
+  "newCanonicalFirms": 0,
+  "graphWrites": 0,
+  "claimChanges": 0,
+  "retrievedAt": "2026-09-29",
+  "generatedAt": "2026-09-29"
+}

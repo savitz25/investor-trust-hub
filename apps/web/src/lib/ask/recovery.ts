@@ -21,6 +21,7 @@ export function researchRecovery(q: InvestorResearchQuery) {
     CA: '/california',
     WA: '/washington',
     AZ: '/arizona',
+    WI: '/wisconsin',
   };
   const state = q.registrationJurisdictions?.length === 1 ? q.registrationJurisdictions[0] : undefined;
   return state && routes[state]
