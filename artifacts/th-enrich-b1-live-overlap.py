@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import csv
+import argparse
 import json
 import os
 import sys
@@ -19,7 +20,12 @@ load_local_env(Path.home() / "investor-trust-hub")
 dsn = os.environ.get("INGESTION_DATABASE_URL") or os.environ.get("DATABASE_URL")
 if not dsn:
     raise SystemExit("No Investor database URL")
-source = ROOT / "data/reports/th-enrich-b1/iapd_approved_state_advisers.csv"
+parser = argparse.ArgumentParser()
+parser.add_argument("--source", type=Path, default=ROOT / "data/reports/th-enrich-b1/iapd_approved_state_advisers.csv")
+parser.add_argument("--out", type=Path, default=ROOT / "data/reports/th-enrich-b1")
+parser.add_argument("--report", type=Path, default=ROOT / "docs/TH-ENRICH-2026-09-30-B1-live-overlap.json")
+args = parser.parse_args()
+source = args.source
 rows = list(csv.DictReader(source.open(encoding="utf-8")))
 slice_crds = {row["firm_crd"] for row in rows}
 with psycopg.connect(dsn, connect_timeout=15) as conn:
@@ -70,7 +76,8 @@ result = {
     "ambiguous_crds": dict(collisions),
     "production_changed": False,
 }
-out = ROOT / "data/reports/th-enrich-b1"
+out = args.out
+out.mkdir(parents=True, exist_ok=True)
 new_firms = {}
 for row in rows:
     crd = row["firm_crd"]
@@ -87,6 +94,6 @@ with (out / "iapd_state_existing_firm_bridges.csv").open("w", newline="", encodi
     writer.writeheader()
     writer.writerows({"firm_crd": crd, "existing_firm_id": ids[0]} for crd, ids in sorted(owned.items())
                      if len(ids) == 1 and crd in slice_crds)
-path = ROOT / "docs/TH-ENRICH-2026-09-30-B1-live-overlap.json"
+path = args.report
 path.write_text(json.dumps(result, indent=2), encoding="utf-8")
 print(json.dumps({k: v for k, v in result.items() if k not in {"unlinked_crds", "ambiguous_crds"}}, indent=2))

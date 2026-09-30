@@ -1,0 +1,371 @@
+{
+  "prior_iapd": {
+    "file": "IA_FIRM_STATE_Feed_08_27_2026.xml.gz",
+    "sha256": "4dc5ec13827c2546213fba16d3397448ba5c08cb8c092f1135c405a7f8472eda",
+    "firm_rows": 21818,
+    "duplicate_state_crds": {}
+  },
+  "current_iapd": {
+    "file": "iapd_state_2026_09_30.xml.gz",
+    "sha256": "23cdfeba5d68d8dce93137ec76e91e26960abc2edaca1d57852373ef8e5f9a5c",
+    "firm_rows": 21905,
+    "duplicate_state_crds": {}
+  },
+  "states": {
+    "CA": {
+      "old_statuses": {
+        "APPROVED": 3341,
+        "TERMREQUEST": 40
+      },
+      "new_statuses": {
+        "APPROVED": 3336,
+        "TERMREQUEST": 32
+      },
+      "old_approved": 3341,
+      "new_approved": 3336,
+      "newly_approved_native_crds": 23,
+      "no_longer_approved_native_crds": 28,
+      "added_reason": {
+        "new_feed_crd": 23
+      },
+      "removed_reason": {
+        "status_APPROVED_to_TERMREQUEST": 27,
+        "missing_from_feed": 1
+      },
+      "added_crds": [
+        "123237",
+        "141440",
+        "153913",
+        "154656",
+        "316268",
+        "318880",
+        "328074",
+        "328329",
+        "331415",
+        "331585",
+        "332140",
+        "337883",
+        "340258",
+        "340567",
+        "340871",
+        "342716",
+        "342851",
+        "342859",
+        "343165",
+        "343209",
+        "343377",
+        "343560",
+        "343808"
+      ],
+      "removed_crds": [
+        "26193",
+        "105634",
+        "108456",
+        "110990",
+        "120587",
+        "143864",
+        "149154",
+        "149792",
+        "150923",
+        "154990",
+        "171082",
+        "175113",
+        "175321",
+        "282230",
+        "283318",
+        "298277",
+        "307522",
+        "309563",
+        "312361",
+        "315922",
+        "319100",
+        "325121",
+        "327527",
+        "329132",
+        "330795",
+        "331044",
+        "338952",
+        "340894"
+      ]
+    },
+    "TX": {
+      "old_statuses": {
+        "CONDREST": 2642,
+        "APPROVED": 1985,
+        "TERMREQUEST": 49,
+        "LIMITED": 5
+      },
+      "new_statuses": {
+        "CONDREST": 2655,
+        "APPROVED": 1992,
+        "TERMREQUEST": 38,
+        "LIMITED": 5
+      },
+      "old_approved": 1985,
+      "new_approved": 1992,
+      "newly_approved_native_crds": 21,
+      "no_longer_approved_native_crds": 14,
+      "added_reason": {
+        "new_feed_crd": 20,
+        "status_CONDREST_to_APPROVED": 1
+      },
+      "removed_reason": {
+        "status_APPROVED_to_TERMREQUEST": 5,
+        "missing_from_feed": 9
+      },
+      "added_crds": [
+        "144741",
+        "315858",
+        "331647",
+        "332751",
+        "333585",
+        "334123",
+        "340342",
+        "340391",
+        "341353",
+        "341491",
+        "341523",
+        "341589",
+        "342405",
+        "342542",
+        "342600",
+        "342706",
+        "342755",
+        "342840",
+        "342970",
+        "343109",
+        "343166"
+      ],
+      "removed_crds": [
+        "44971",
+        "110972",
+        "117075",
+        "140285",
+        "142783",
+        "143864",
+        "156216",
+        "167696",
+        "305278",
+        "317997",
+        "325474",
+        "330795",
+        "338278",
+        "340894"
+      ]
+    },
+    "AZ": {
+      "old_statuses": {
+        "APPROVED": 673,
+        "TERMREQUEST": 7
+      },
+      "new_statuses": {
+        "APPROVED": 674,
+        "TERMREQUEST": 10
+      },
+      "old_approved": 673,
+      "new_approved": 674,
+      "newly_approved_native_crds": 9,
+      "no_longer_approved_native_crds": 8,
+      "added_reason": {
+        "new_feed_crd": 9
+      },
+      "removed_reason": {
+        "status_APPROVED_to_TERMREQUEST": 7,
+        "missing_from_feed": 1
+      },
+      "added_crds": [
+        "287572",
+        "322647",
+        "329990",
+        "342921",
+        "343653",
+        "343678",
+        "343892",
+        "344050",
+        "344258"
+      ],
+      "removed_crds": [
+        "132373",
+        "139909",
+        "167696",
+        "189512",
+        "285911",
+        "309563",
+        "316840",
+        "338515"
+      ]
+    },
+    "WA": {
+      "old_statuses": {
+        "APPROVED": 600,
+        "SUSPENDED": 2,
+        "TERMREQUEST": 8
+      },
+      "new_statuses": {
+        "APPROVED": 600,
+        "SUSPENDED": 2,
+        "TERMREQUEST": 5
+      },
+      "old_approved": 600,
+      "new_approved": 600,
+      "newly_approved_native_crds": 5,
+      "no_longer_approved_native_crds": 5,
+      "added_reason": {
+        "new_feed_crd": 5
+      },
+      "removed_reason": {
+        "status_APPROVED_to_TERMREQUEST": 5
+      },
+      "added_crds": [
+        "313233",
+        "328209",
+        "331386",
+        "340983",
+        "343008"
+      ],
+      "removed_crds": [
+        "105634",
+        "154339",
+        "283318",
+        "307522",
+        "329520"
+      ]
+    }
+  },
+  "prior_ofr": {
+    "files": {
+      "Firms_Branches_AI_Monthly.zip": {
+        "sha256": "45fd2552c7adbdf4e6c2fedbbb23916b62310267ac81b63c8acbf865db908c20",
+        "rows": 5444
+      },
+      "Firms_Branches_JZ_Monthly.zip": {
+        "sha256": "81835bac972f6acb8138160cccef6e8565ded912b5037e7a744c71e5bbded011",
+        "rows": 6019
+      }
+    },
+    "unique_licenses": 11463,
+    "license_types": {
+      "IA": 9188,
+      "BD": 2275
+    }
+  },
+  "current_ofr": {
+    "files": {
+      "Firms_Branches_AI_Monthly.zip": {
+        "sha256": "306ab0605bfa2249c28ae9efa17f62faf5dfb3a3566fa7fb02fb3474ec9dcd04",
+        "rows": 5466
+      },
+      "Firms_Branches_JZ_Monthly.zip": {
+        "sha256": "c256776f6b32ef2304e99f2e625cd05669d70a86f3b632004e6b781872c47b63",
+        "rows": 6034
+      }
+    },
+    "unique_licenses": 11500,
+    "license_types": {
+      "IA": 9221,
+      "BD": 2279
+    }
+  },
+  "ofr_added_licenses": [
+    "BD1004872",
+    "BD1004873",
+    "BD1004874",
+    "BD1004875",
+    "BD1004876",
+    "BD1004877",
+    "IA9917878",
+    "IA9917879",
+    "IA9917880",
+    "IA9917881",
+    "IA9917882",
+    "IA9917883",
+    "IA9917884",
+    "IA9917885",
+    "IA9917886",
+    "IA9917887",
+    "IA9917888",
+    "IA9917889",
+    "IA9917890",
+    "IA9917891",
+    "IA9917892",
+    "IA9917893",
+    "IA9917894",
+    "IA9917895",
+    "IA9917896",
+    "IA9917897",
+    "IA9917898",
+    "IA9917899",
+    "IA9917900",
+    "IA9917901",
+    "IA9917902",
+    "IA9917903",
+    "IA9917904",
+    "IA9917905",
+    "IA9917906",
+    "IA9917907",
+    "IA9917908",
+    "IA9917909",
+    "IA9917910",
+    "IA9917911",
+    "IA9917912",
+    "IA9917913",
+    "IA9917914",
+    "IA9917915",
+    "IA9917916",
+    "IA9917917",
+    "IA9917918",
+    "IA9917919",
+    "IA9917920",
+    "IA9917921",
+    "IA9917922",
+    "IA9917923",
+    "IA9917924",
+    "IA9917925",
+    "IA9917926",
+    "IA9917927",
+    "IA9917928",
+    "IA9917929",
+    "IA9917930",
+    "IA9917931",
+    "IA9917932",
+    "IA9917933",
+    "IA9917935",
+    "IA9917936",
+    "IA9917937",
+    "IA9917938"
+  ],
+  "ofr_removed_licenses": [
+    "BD0903056",
+    "BD1004004",
+    "IA0901736",
+    "IA0901805",
+    "IA0902829",
+    "IA9905771",
+    "IA9906021",
+    "IA9906796",
+    "IA9907050",
+    "IA9907171",
+    "IA9908762",
+    "IA9908918",
+    "IA9909519",
+    "IA9909789",
+    "IA9910986",
+    "IA9912024",
+    "IA9912167",
+    "IA9913143",
+    "IA9913903",
+    "IA9914129",
+    "IA9914237",
+    "IA9914957",
+    "IA9915942",
+    "IA9915948",
+    "IA9916892",
+    "IA9917067",
+    "IA9917141",
+    "IA9917524",
+    "IA9917872"
+  ],
+  "ofr_stable_licenses": 11434,
+  "ofr_status_column_present": false,
+  "production_changed": false
+}
