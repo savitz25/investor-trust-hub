@@ -1,5 +1,7 @@
 # TH-ENRICH-2026-09-30-B1 — Investor publication packet
 
+**Superseded for release review:** this packet preserves the August 27 frozen candidate. Use the [September 30 Investor release candidate](TH-ENRICH-2026-09-30-B1-investor-release-candidate.md) and its PR migration for the current Founder gate.
+
 Production changed: **NO**. Official source snapshots and derived rows are in the [source manifest](TH-ENRICH-2026-09-30-B1-source-manifest.json); raw releases remain local. The four state lenses use the already-owned IAPD state compilation dated 2026-08-27. The Pennsylvania PDF is dated 2026-08-31.
 
 ## Source and identity decisions
