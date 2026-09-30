@@ -200,6 +200,29 @@ describe('R1-012 typed plan and production source predicates', () => {
         .every(([s]) => s.includes('crd.identifier_value =')),
     ).toBe(true);
   });
+  it('returns a source-bounded IAPD card for an exact published state firm CRD', async () => {
+    fixtureDb();
+    const base = db.query.getMockImplementation()!;
+    db.query.mockImplementation(async (sql, params) => {
+      if (sql.includes('FROM jurisdiction_registrations j') && sql.includes('j.effective_date')) {
+        expect(sql).toContain('j.publication_allowed = true');
+        expect(params).toEqual(['8250']);
+        return { rows: [{
+          id: 'state-firm-8250', slug: 'sec-crd-8250', display_name: 'NEWPORT SECURITIES CORPORATION',
+          legal_name: 'NEWPORT SECURITIES CORPORATION', crd: '8250', jurisdiction: 'CA',
+          effective_date: null, release_label: 'IA_FIRM_STATE_Feed_09_30_2026',
+          retrieved_at: '2026-09-30', created_by_batch: true,
+        }] };
+      }
+      return base(sql, params);
+    });
+    const result = await executeInvestorAsk('CRD 8250');
+    expect(result.terminalState).toBe('COMPLETE');
+    expect(result.results).toHaveLength(1);
+    expect(result.results[0]).toMatchObject({ crd: '8250', firmType: 'state_ia', href: '/firm/sec-crd-8250' });
+    expect(result.results[0]?.statusLabel).toContain('CA');
+    expect(result.results[0]?.principalOffice).toContain('Not provided');
+  });
   it.each(['CRD 105958abc', 'SEC 801-11953abc', 'CRD 105,958', 'CRD 105 and 958', 'CRD 105.958', 'CRD 1e5', 'CRD 105958 CRD 77'])(
     'does not invent an identifier: %s',
     (raw) => {
