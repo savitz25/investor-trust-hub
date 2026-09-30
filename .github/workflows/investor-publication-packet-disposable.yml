@@ -7,6 +7,7 @@ on:
       - 'artifacts/th-investor-2026-09-30-publication-rollback.sql'
       - 'apps/web/src/lib/firms/publication-count.ts'
       - 'artifacts/th-investor-r2-search-documents.sql'
+      - 'artifacts/th-investor-r2-search-documents-rollback.sql'
       - 'scripts/b1-r2-surface-check.mjs'
       - 'scripts/b1-public-count-check.mjs'
       - '.github/workflows/investor-publication-packet-disposable.yml'
@@ -57,7 +58,24 @@ jobs:
           SQL
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f database/migrations/0016_b1_state_adviser_registration_type.sql >/dev/null
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-enrich-b1-investor-execute.sql >/dev/null
-          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-investor-r2-search-documents.sql >/dev/null
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
+          INSERT INTO search_documents(entity_kind,entity_id,slug,display_name,identifiers,indexable)
+          SELECT 'firm',f.id,f.slug,f.display_name,ARRAY[crd.identifier_value],true
+          FROM firms f JOIN firm_identifiers crd ON crd.firm_id=f.id AND crd.identifier_type='crd'
+          WHERE NOT EXISTS (SELECT 1 FROM jurisdiction_registrations j
+            WHERE j.firm_id=f.id AND j.source_release_id='a89165b8-b60a-4b31-9009-8b2a0291f8f8'
+              AND j.raw->>'b1_created_firm'='true')
+          ORDER BY f.id LIMIT 1;
+          CREATE TABLE r2_legacy_snapshot AS SELECT * FROM search_documents;
+          DO $$ BEGIN
+            IF (SELECT count(*) FROM r2_legacy_snapshot)<>1
+              OR (SELECT count(*) FROM search_documents sd JOIN jurisdiction_registrations j
+                ON j.firm_id=sd.entity_id AND sd.entity_kind='firm'
+                WHERE j.source_release_id='a89165b8-b60a-4b31-9009-8b2a0291f8f8'
+                  AND j.raw->>'b1_created_firm'='true')<>0
+            THEN RAISE EXCEPTION 'OFF baseline projection was not empty'; END IF;
+          END $$;
+          SQL
           node --experimental-strip-types scripts/b1-public-count-check.mjs off > /tmp/b1-public-count.sql
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f /tmp/b1-public-count.sql
           node --experimental-strip-types scripts/b1-r2-surface-check.mjs off > /tmp/b1-r2-surface.sql
@@ -75,7 +93,7 @@ jobs:
             END IF;
           END $$;
           SQL
-      - name: Simulated verified verdict activates only batch and rollback restores flags
+      - name: Simulated verified verdict, two search-document and publication cycles
         run: |
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
           UPDATE source_releases
@@ -83,6 +101,35 @@ jobs:
             'evidence_postload_verdict','VERIFIED',
             'evidence_postload_receipt_url','https://example.invalid/disposable-only'))::text
           WHERE id='a89165b8-b60a-4b31-9009-8b2a0291f8f8';
+          SQL
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-investor-r2-search-documents.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
+          DO $$ BEGIN
+            IF (SELECT count(*) FROM search_documents sd JOIN jurisdiction_registrations j
+                ON j.firm_id=sd.entity_id AND sd.entity_kind='firm'
+                WHERE j.source_release_id='a89165b8-b60a-4b31-9009-8b2a0291f8f8'
+                  AND j.raw->>'b1_created_firm'='true')<>5993 THEN
+              RAISE EXCEPTION 'First search-document projection incomplete';
+            END IF;
+          END $$;
+          SQL
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
+          CREATE TABLE r2_first_snapshot AS SELECT DISTINCT sd.* FROM search_documents sd
+          JOIN jurisdiction_registrations j ON j.firm_id=sd.entity_id AND sd.entity_kind='firm'
+          WHERE j.source_release_id='a89165b8-b60a-4b31-9009-8b2a0291f8f8'
+            AND j.raw->>'b1_created_firm'='true';
+          SQL
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-investor-r2-search-documents.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
+          DO $$ BEGIN
+            IF EXISTS (SELECT * FROM r2_first_snapshot EXCEPT
+              SELECT sd.* FROM search_documents sd JOIN jurisdiction_registrations j
+              ON j.firm_id=sd.entity_id AND sd.entity_kind='firm'
+              WHERE j.source_release_id='a89165b8-b60a-4b31-9009-8b2a0291f8f8'
+                AND j.raw->>'b1_created_firm'='true')
+              OR (SELECT count(*) FROM r2_first_snapshot)<>5491
+            THEN RAISE EXCEPTION 'Identical rerun changed target rows'; END IF;
+          END $$;
           SQL
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-investor-2026-09-30-publication-activate.sql
           node --experimental-strip-types scripts/b1-public-count-check.mjs on > /tmp/b1-public-count.sql
@@ -100,6 +147,15 @@ jobs:
           END $$;
           SQL
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-investor-2026-09-30-publication-rollback.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-investor-r2-search-documents-rollback.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
+          DO $$ BEGIN
+            IF (SELECT count(*) FROM search_documents)<>1
+              OR EXISTS (SELECT * FROM r2_legacy_snapshot EXCEPT SELECT * FROM search_documents)
+              OR EXISTS (SELECT * FROM search_documents EXCEPT SELECT * FROM r2_legacy_snapshot)
+            THEN RAISE EXCEPTION 'Rollback changed legacy document or retained batch document'; END IF;
+          END $$;
+          SQL
           node --experimental-strip-types scripts/b1-public-count-check.mjs rollback > /tmp/b1-public-count.sql
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f /tmp/b1-public-count.sql
           node --experimental-strip-types scripts/b1-r2-surface-check.mjs rollback > /tmp/b1-r2-surface.sql
@@ -113,5 +169,44 @@ jobs:
                    WHERE id='a89165b8-b60a-4b31-9009-8b2a0291f8f8')<>1 THEN
               RAISE EXCEPTION 'Flag rollback deleted or changed canonical batch data';
             END IF;
+          END $$;
+          SQL
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-investor-r2-search-documents.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-investor-r2-search-documents.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-investor-2026-09-30-publication-activate.sql
+          node --experimental-strip-types scripts/b1-r2-surface-check.mjs on > /tmp/b1-r2-surface.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f /tmp/b1-r2-surface.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-investor-2026-09-30-publication-rollback.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-investor-r2-search-documents-rollback.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
+          DO $$ BEGIN
+            IF (SELECT count(*) FROM search_documents)<>1
+              OR EXISTS (SELECT * FROM r2_legacy_snapshot EXCEPT SELECT * FROM search_documents)
+              OR EXISTS (SELECT * FROM search_documents EXCEPT SELECT * FROM r2_legacy_snapshot)
+            THEN RAISE EXCEPTION 'Second rollback changed legacy document or retained batch document'; END IF;
+          END $$;
+          SQL
+          node --experimental-strip-types scripts/b1-r2-surface-check.mjs rollback > /tmp/b1-r2-surface.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f /tmp/b1-r2-surface.sql
+      - name: Conflicting target projection fails closed
+        run: |
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
+          INSERT INTO search_documents(entity_kind,entity_id,slug,display_name,identifiers,indexable)
+          SELECT 'firm',f.id,'r2-conflict',f.display_name,ARRAY[crd.identifier_value],true
+          FROM firms f JOIN firm_identifiers crd ON crd.firm_id=f.id AND crd.identifier_type='crd'
+          WHERE EXISTS (SELECT 1 FROM jurisdiction_registrations j
+            WHERE j.firm_id=f.id AND j.source_release_id='a89165b8-b60a-4b31-9009-8b2a0291f8f8'
+              AND j.raw->>'b1_created_firm'='true')
+          ORDER BY f.id LIMIT 1;
+          SQL
+          if psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-investor-r2-search-documents.sql; then
+            echo 'Conflicting target was incorrectly accepted'
+            exit 1
+          fi
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
+          DO $$ BEGIN
+            IF (SELECT count(*) FROM search_documents)<>2
+              OR (SELECT count(*) FROM search_documents WHERE slug='r2-conflict')<>1
+            THEN RAISE EXCEPTION 'Conflict attempt wrote unexpected documents'; END IF;
           END $$;
           SQL

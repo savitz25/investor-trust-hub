@@ -1,5 +1,5 @@
--- Stage the exact September 30 B1-created firm projection before publication activation.
--- Exact release membership and full projection equality bound reruns.
+-- Run only after the September 30 publication-flag rollback.
+-- Exact release membership plus full projection equality bounds deletion.
 BEGIN ISOLATION LEVEL SERIALIZABLE;
 SET LOCAL lock_timeout = '10s';
 SET LOCAL statement_timeout = '2min';
@@ -28,11 +28,11 @@ BEGIN
         AND checksum_sha256='23cdfeba5d68d8dce93137ec76e91e26960abc2edaca1d57852373ef8e5f9a5c')
      OR (SELECT count(*) FROM jurisdiction_registrations
          WHERE source_release_id='a89165b8-b60a-4b31-9009-8b2a0291f8f8'::uuid)<>6602
-     OR (SELECT count(DISTINCT firm_id) FROM jurisdiction_registrations
-         WHERE source_release_id='a89165b8-b60a-4b31-9009-8b2a0291f8f8'::uuid
-           AND raw->>'b1_created_firm'='true')<>5491
      OR (SELECT count(*) FROM r2_expected)<>5491
      OR (SELECT count(DISTINCT firm_id) FROM r2_expected)<>5491
+     OR EXISTS (SELECT 1 FROM jurisdiction_registrations
+         WHERE source_release_id='a89165b8-b60a-4b31-9009-8b2a0291f8f8'::uuid
+           AND publication_allowed)
      OR EXISTS (SELECT 1 FROM r2_expected e
          JOIN search_documents sd ON sd.entity_kind='firm' AND sd.entity_id=e.firm_id
          WHERE sd.slug IS DISTINCT FROM e.slug
@@ -42,24 +42,13 @@ BEGIN
             OR sd.registration_types IS DISTINCT FROM ARRAY['STATE_REGISTERED_IA']
             OR sd.city IS NOT NULL OR sd.region IS NOT NULL OR sd.postal_code IS NOT NULL
             OR sd.is_synthetic IS DISTINCT FROM false OR sd.indexable IS DISTINCT FROM true)
-  THEN RAISE EXCEPTION 'R2 search-document source or projection conflict'; END IF;
-  INSERT INTO search_documents (
-    entity_kind, entity_id, slug, display_name, search_document, identifiers,
-    registration_types, is_synthetic, indexable)
-  SELECT 'firm', e.firm_id, e.slug, e.display_name, e.search_document, e.identifiers,
-    ARRAY['STATE_REGISTERED_IA'], false, true FROM r2_expected e
-  ON CONFLICT (entity_kind, entity_id) DO NOTHING;
+  THEN RAISE EXCEPTION 'R2 search-document rollback source, publication, or projection conflict'; END IF;
+  DELETE FROM search_documents sd USING r2_expected e
+  WHERE sd.entity_kind='firm' AND sd.entity_id=e.firm_id;
   GET DIAGNOSTICS changed=ROW_COUNT;
-  IF (SELECT count(*) FROM r2_expected e
-      JOIN search_documents sd ON sd.entity_kind='firm' AND sd.entity_id=e.firm_id
-      WHERE sd.slug IS NOT DISTINCT FROM e.slug
-        AND sd.display_name IS NOT DISTINCT FROM e.display_name
-        AND sd.search_document IS NOT DISTINCT FROM e.search_document
-        AND sd.identifiers IS NOT DISTINCT FROM e.identifiers
-        AND sd.registration_types IS NOT DISTINCT FROM ARRAY['STATE_REGISTERED_IA']
-        AND sd.city IS NULL AND sd.region IS NULL AND sd.postal_code IS NULL
-        AND sd.is_synthetic=false AND sd.indexable=true)<>5491
-  THEN RAISE EXCEPTION 'R2 search-document projection changed during insert'; END IF;
-  RAISE NOTICE 'R2 search-document NEW_ROWS=%',changed;
+  IF EXISTS (SELECT 1 FROM r2_expected e JOIN search_documents sd
+      ON sd.entity_kind='firm' AND sd.entity_id=e.firm_id)
+  THEN RAISE EXCEPTION 'R2 search-document rollback incomplete'; END IF;
+  RAISE NOTICE 'R2 search-document REMOVED=%',changed;
 END $$;
 COMMIT;
