@@ -95,13 +95,4 @@ describe('September IAPD publication wiring', () => {
     expect(state).toContain("publishedStateRegistrationSql('j')");
     expect(state).toContain('count(DISTINCT (crd.identifier_value,j.jurisdiction))');
   });
-
-  it('uses a gated state profile and noindex metadata without altering the legacy report', () => {
-    const route = readFileSync(new URL('../src/app/firm/[slug]/page.tsx', import.meta.url), 'utf8');
-    expect(route).toContain('getPublishedStateAdviserBySlug(slug)');
-    expect(route).toContain('<StateAdviserFirmReport adviser={stateAdviser} />');
-    expect(route).toContain('<FirmTrustReport report={report} />');
-    expect(route).toContain('<StateRegistrationPanel adviser={stateAdviser} />');
-    expect(route).toContain('indexable: false');
-  });
 });

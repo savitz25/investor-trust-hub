@@ -254,16 +254,12 @@ export async function getFirmDirectoryMetrics(): Promise<FirmDirectoryMetrics> {
       (SELECT release_label FROM source_releases rel
         WHERE rel.id <> '${B1_STATE_RELEASE_ID}'::uuid OR EXISTS (
           SELECT 1 FROM jurisdiction_registrations j
-          JOIN firms f ON f.id=j.firm_id
-          WHERE j.source_release_id=rel.id AND ${publicFirmSql()}
-            AND ${publishedStateRegistrationSql('j')}
+          WHERE j.source_release_id=rel.id AND j.publication_allowed
         ) ORDER BY retrieved_at DESC NULLS LAST LIMIT 1) AS latest_release_label,
       (SELECT retrieved_at FROM source_releases rel
         WHERE rel.id <> '${B1_STATE_RELEASE_ID}'::uuid OR EXISTS (
           SELECT 1 FROM jurisdiction_registrations j
-          JOIN firms f ON f.id=j.firm_id
-          WHERE j.source_release_id=rel.id AND ${publicFirmSql()}
-            AND ${publishedStateRegistrationSql('j')}
+          WHERE j.source_release_id=rel.id AND j.publication_allowed
         ) ORDER BY retrieved_at DESC NULLS LAST LIMIT 1) AS latest_retrieved_at
   `);
   const row = result.rows[0];

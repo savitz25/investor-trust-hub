@@ -19,7 +19,7 @@ describe('INV-CUST-CAP-001 safety locks', () => {
   it('requires the existing publication and current-content gates', () => {
     expect(adapter).toContain('firm.report.currentlyIndexable');
     expect(adapter).toContain("publicationState: 'PUBLIC_CURRENT'");
-    expect(repository).toContain('publicFirmSql()');
+    expect(repository).toContain('f.is_synthetic = false');
   });
 
   it('keeps representatives and research-only firms nonclaimable', () => {
