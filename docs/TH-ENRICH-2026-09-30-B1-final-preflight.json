@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-30T16:00:36.473604+00:00",
+  "generated_at_utc": "2026-09-30T17:36:19.336482+00:00",
   "production_access": "read-only transaction; rolled back",
   "official_iapd_feed_sha256": "23cdfeba5d68d8dce93137ec76e91e26960abc2edaca1d57852373ef8e5f9a5c",
   "staged_csv_sha256_lf_normalized": "a558a5a08afec69008623772d7a2db0a977a0eef98b30ba0ed8a24996b5da48a",
@@ -55,11 +55,16 @@
   "conflicting_registration_keys": 0,
   "ambiguous_crd_bridges": {},
   "synthetic_crd_bridges": [],
-  "candidate_file_matches_live_absent": true,
+  "certified_candidate_file_contains_all_live_absent": true,
+  "certified_candidates_now_present": 0,
   "candidate_slug_conflicts": 0,
   "existing_crd_slug_matches": 451,
   "existing_iapd_state_registrations": 0,
   "existing_state_registrations_any_source": 0,
+  "state_registration_rows_absent_and_proposed": 6602,
+  "source_name_conflicts_across_states": 0,
+  "non_synthetic_firms_before": 25777,
+  "potential_firms_after": 31268,
   "principal_office_overlay_rows_observed_read_only": 4595,
   "production_mutations": false
 }

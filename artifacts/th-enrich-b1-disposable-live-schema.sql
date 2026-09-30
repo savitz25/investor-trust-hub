@@ -54,8 +54,17 @@ SELECT existing_firm_id,'sec-crd-'||firm_crd,'Existing CRD '||firm_crd,
 INSERT INTO firm_identifiers (firm_id,identifier_type,identifier_value,issuing_authority_id,is_primary)
 SELECT existing_firm_id,'crd',firm_crd,'sec',true FROM b1_existing_bridge;
 
+INSERT INTO jurisdiction_registrations (
+  subject_kind,firm_id,jurisdiction,registration_type,regulator_authority,
+  regulator_authority_id,status,source_dataset_id,source_record_id,identity_confidence
+)
+SELECT 'firm',id,'FL','FL_NOTICE_FILED_SEC_RIA','Disposable fixture',
+       'state_securities','APPROVED','iapd_state_compilation','fixture:FL','CONFIRMED'
+FROM firms LIMIT 1;
+
 DO $$ BEGIN
-  IF (SELECT count(*) FROM firms)<>451 OR (SELECT count(*) FROM firm_identifiers)<>451 THEN
+  IF (SELECT count(*) FROM firms)<>451 OR (SELECT count(*) FROM firm_identifiers)<>451
+     OR (SELECT count(*) FROM jurisdiction_registrations)<>1 THEN
     RAISE EXCEPTION 'disposable B1 fixture count failed';
   END IF;
 END $$;

@@ -64,7 +64,7 @@ jobs:
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-enrich-b1-investor-execute.sql
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
           DO $$ BEGIN
-            IF (SELECT count(*) FROM jurisdiction_registrations) <> 6602
+            IF (SELECT count(*) FROM jurisdiction_registrations) <> 6603
                OR (SELECT count(*) FROM firms) <> 5942
                OR (SELECT count(*) FROM source_releases WHERE source_dataset_id='iapd_state_compilation') <> 1 THEN
               RAISE EXCEPTION 'disposable full load count failed';
@@ -74,15 +74,61 @@ jobs:
             END IF;
           END $$;
           SQL
-      - name: Roll back data and migration; verify the original schema and 451 existing firms
+      - name: Prove rerun and uniqueness constraints
+        run: |
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-enrich-b1-investor-execute.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
+          DO $$ DECLARE f uuid; crd text; r jurisdiction_registrations%ROWTYPE; BEGIN
+            IF (SELECT count(*) FROM jurisdiction_registrations) <> 6603 OR
+               (SELECT count(*) FROM firms) <> 5942 THEN
+              RAISE EXCEPTION 'rerun changed row counts';
+            END IF;
+            SELECT firm_id,identifier_value INTO f,crd FROM firm_identifiers WHERE identifier_type='SEC_CRD' LIMIT 1;
+            BEGIN
+              INSERT INTO firm_identifiers(firm_id,identifier_type,identifier_value,issuing_authority_id)
+              VALUES (f,'crd',crd,'sec');
+              RAISE EXCEPTION 'duplicate CRD accepted';
+            EXCEPTION WHEN unique_violation THEN NULL; END;
+            SELECT * INTO r FROM jurisdiction_registrations WHERE source_record_id LIKE 'B1-IAPD:%' LIMIT 1;
+            BEGIN
+              INSERT INTO jurisdiction_registrations(subject_kind,firm_id,jurisdiction,registration_type,
+                regulator_authority,regulator_authority_id,status,source_dataset_id,source_record_id,identity_confidence)
+              VALUES (r.subject_kind,r.firm_id,r.jurisdiction,r.registration_type,
+                r.regulator_authority,r.regulator_authority_id,r.status,r.source_dataset_id,r.source_record_id,r.identity_confidence);
+              RAISE EXCEPTION 'duplicate registration key accepted';
+            EXCEPTION WHEN unique_violation THEN NULL; END;
+          END $$;
+          SQL
+      - name: Prove production ownership drift and bounded rollback
         run: |
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-enrich-b1-investor-rollback.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
+          INSERT INTO firms(slug,legal_name,display_name)
+          VALUES ('sec-crd-8250','Disposable preexisting CRD 8250','Disposable preexisting CRD 8250');
+          INSERT INTO firm_identifiers(firm_id,identifier_type,identifier_value,issuing_authority_id)
+          SELECT id,'crd','8250','sec' FROM firms WHERE slug='sec-crd-8250';
+          SQL
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-enrich-b1-investor-execute.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-enrich-b1-investor-execute.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
+          DO $$ BEGIN
+            IF (SELECT count(*) FROM firms) <> 5942 OR
+               (SELECT count(*) FROM jurisdiction_registrations) <> 6603 OR
+               (SELECT notes::jsonb->>'created_firms' FROM source_releases
+                WHERE source_dataset_id='iapd_state_compilation') <> '5490' THEN
+              RAISE EXCEPTION 'drift execution or rerun failed';
+            END IF;
+          END $$;
+          SQL
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-enrich-b1-investor-rollback.sql
+      - name: Roll back data and migration; verify the original schema and 451 existing firms
+        run: |
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f database/rollback/0016_b1_state_adviser_registration_type.sql
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
           DO $$ BEGIN
-            IF (SELECT count(*) FROM jurisdiction_registrations) <> 0
-               OR (SELECT count(*) FROM firms) <> 451
-               OR (SELECT count(*) FROM firm_identifiers) <> 451
+            IF (SELECT count(*) FROM jurisdiction_registrations) <> 1
+               OR (SELECT count(*) FROM firms) <> 452
+               OR (SELECT count(*) FROM firm_identifiers) <> 452
                OR (SELECT count(*) FROM source_releases WHERE source_dataset_id='iapd_state_compilation') <> 0 THEN
               RAISE EXCEPTION 'disposable rollback did not restore baseline';
             END IF;

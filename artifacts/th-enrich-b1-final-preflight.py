@@ -38,10 +38,12 @@ def main() -> dict:
     pairs = Counter((r["firm_crd"], r["registration_state"]) for r in rows)
     crds = {r["firm_crd"] for r in rows}
     by_pair = defaultdict(set)
+    names_by_crd = defaultdict(set)
     for r in rows:
         by_pair[(r["firm_crd"], r["registration_state"])].add(
             (r["registration_status"], r["registration_date"], r["business_name"], r["legal_name"])
         )
+        names_by_crd[r["firm_crd"]].add((r["business_name"], r["legal_name"]))
     assert len(rows) == 6602 and len(crds) == 5942
     assert all(r["registration_status"] == "APPROVED" for r in rows)
     assert set(r["registration_state"] for r in rows) == {"CA", "TX", "AZ", "WA"}
@@ -100,6 +102,7 @@ def main() -> dict:
         principal_overlays = conn.execute(
             "SELECT count(*) FROM search_documents WHERE entity_kind='firm' AND region IN ('CA','TX','AZ','WA')"
         ).fetchone()[0]
+        firms_before = conn.execute("SELECT count(*) FROM firms WHERE is_synthetic=false").fetchone()[0]
         conn.rollback()
     existing = {crd for crd, ids in owned.items() if len(ids) == 1}
     absent = crds - set(owned)
@@ -144,20 +147,26 @@ def main() -> dict:
         "conflicting_registration_keys": sum(len(values) > 1 for values in by_pair.values()),
         "ambiguous_crd_bridges": ambiguous,
         "synthetic_crd_bridges": sorted(synthetic),
-        "candidate_file_matches_live_absent": candidate_set == absent,
+        "certified_candidate_file_contains_all_live_absent": absent <= candidate_set,
+        "certified_candidates_now_present": len(candidate_set & existing),
         "candidate_slug_conflicts": len(slug_conflicts),
         "existing_crd_slug_matches": len(slug_rows) - len(slug_conflicts),
         "existing_iapd_state_registrations": existing_registrations,
         "existing_state_registrations_any_source": other_state_regs,
+        "state_registration_rows_absent_and_proposed": len(rows) - existing_registrations,
+        "source_name_conflicts_across_states": sum(len(values)>1 for values in names_by_crd.values()),
+        "non_synthetic_firms_before": firms_before,
+        "potential_firms_after": firms_before+len(absent),
         "principal_office_overlay_rows_observed_read_only": principal_overlays,
         "production_mutations": False,
     }
     assert compatible
     assert "UNIQUE INDEX" in report["live_firm_unique_index"]
-    assert len(existing) == 451 and len(absent) == 5491
-    assert new_registrations == 5993 and existing_firm_registrations == 609
+    assert len(existing)+len(absent) == 5942
+    assert new_registrations+existing_firm_registrations == 6602
     assert report["duplicate_crd_candidates"] == report["duplicate_crd_state_keys"] == report["conflicting_registration_keys"] == 0
-    assert not ambiguous and not synthetic and candidate_set == absent
+    assert not ambiguous and not synthetic and absent <= candidate_set
+    assert report["source_name_conflicts_across_states"] == 0
     assert not slug_conflicts and existing_registrations == other_state_regs == 0, (
         f"candidate slug conflicts={len(slug_conflicts)}, IAPD registrations={existing_registrations}, other state registrations={other_state_regs}"
     )

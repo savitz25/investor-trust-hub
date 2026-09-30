@@ -13,30 +13,39 @@ CREATE TEMP TABLE b1_new_firms (
 \copy b1_new_firms FROM 'artifacts/th-enrich-b1-current/iapd_state_new_firm_candidates.csv' CSV HEADER
 
 CREATE TEMP TABLE b1_target_firms ON COMMIT DROP AS
-SELECT f.id, n.firm_crd, n.business_name, n.legal_name
-FROM b1_new_firms n
-JOIN firms f ON f.slug::text='sec-crd-'||n.firm_crd
+SELECT DISTINCT f.id, n.firm_crd, n.business_name, n.legal_name
+FROM source_releases sr
+JOIN jurisdiction_registrations j ON j.source_release_id=sr.id
+JOIN b1_new_firms n ON n.firm_crd=j.raw->>'firm_crd'
+JOIN firms f ON f.id=j.firm_id AND f.slug::text='sec-crd-'||n.firm_crd
 JOIN firm_identifiers fi ON fi.firm_id=f.id
-                        AND fi.identifier_type='crd' AND fi.identifier_value=n.firm_crd;
+                        AND fi.identifier_type='crd' AND fi.identifier_value=n.firm_crd
+WHERE sr.source_dataset_id='iapd_state_compilation'
+  AND sr.release_label='IA_FIRM_STATE_Feed_09_30_2026'
+  AND sr.checksum_sha256='23cdfeba5d68d8dce93137ec76e91e26960abc2edaca1d57852373ef8e5f9a5c'
+  AND j.raw->>'b1_created_firm'='true';
 
 DO $$
-DECLARE release_id uuid; fk record; referenced boolean;
+DECLARE release_id uuid; created_count integer; created_registrations integer; fk record; referenced boolean;
 BEGIN
-  SELECT id INTO STRICT release_id FROM source_releases
+  SELECT id, (notes::jsonb->>'created_firms')::integer,
+         (notes::jsonb->>'created_firm_registrations')::integer
+  INTO STRICT release_id, created_count, created_registrations FROM source_releases
   WHERE source_dataset_id='iapd_state_compilation'
     AND release_label='IA_FIRM_STATE_Feed_09_30_2026'
     AND checksum_sha256='23cdfeba5d68d8dce93137ec76e91e26960abc2edaca1d57852373ef8e5f9a5c';
   IF (SELECT count(*) FROM b1_new_firms)<>5491
-     OR (SELECT count(*) FROM b1_target_firms)<>5491
-     OR (SELECT count(DISTINCT id) FROM b1_target_firms)<>5491
+     OR created_count IS NULL OR created_registrations IS NULL
+     OR (SELECT count(*) FROM b1_target_firms)<>created_count
+     OR (SELECT count(DISTINCT id) FROM b1_target_firms)<>created_count
      OR (SELECT count(*) FROM jurisdiction_registrations WHERE source_release_id=release_id)<>6602
      OR (SELECT count(*) FROM jurisdiction_registrations j JOIN b1_target_firms n ON j.firm_id=n.id
-          WHERE j.source_release_id=release_id)<>5993
+          WHERE j.source_release_id=release_id)<>created_registrations
      OR EXISTS (SELECT 1 FROM b1_target_firms n JOIN firms f ON f.id=n.id
                 WHERE f.legal_name<>n.legal_name OR f.display_name<>n.business_name OR f.is_synthetic)
      OR EXISTS (SELECT 1 FROM b1_target_firms n JOIN firm_identifiers fi ON fi.firm_id=n.id
                 WHERE fi.identifier_type<>'crd' OR fi.identifier_value<>n.firm_crd)
-     OR (SELECT count(*) FROM firm_identifiers fi JOIN b1_target_firms n ON fi.firm_id=n.id)<>5491
+     OR (SELECT count(*) FROM firm_identifiers fi JOIN b1_target_firms n ON fi.firm_id=n.id)<>created_count
      OR EXISTS (SELECT 1 FROM jurisdiction_registrations j JOIN b1_target_firms n ON j.firm_id=n.id
                 WHERE j.source_release_id IS DISTINCT FROM release_id)
      OR EXISTS (SELECT 1 FROM jurisdiction_registrations j WHERE j.source_release_id=release_id
