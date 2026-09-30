@@ -44,6 +44,7 @@ export interface FirmSearchHit {
   secFileNumber: string | null;
   city: string | null;
   region: string | null;
+  stateRegistrationState: string | null;
   postalCode: string | null;
   releaseLabel: string | null;
   retrievedAt: string | null;
