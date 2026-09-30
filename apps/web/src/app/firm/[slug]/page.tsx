@@ -5,8 +5,6 @@ import { FirmTrustReport } from "@/components/firm-trust-report";
 import { DatabaseUnavailableError, hasDatabaseUrl } from "@/lib/db";
 import { getCachedOfficialFirmBySlug } from "@/lib/firms/cached";
 import { getOfficialFirmIndexable } from "@/lib/firms/repository";
-import { getPublishedStateAdviserBySlug } from "@/lib/firms/state-advisers";
-import { StateAdviserFirmReport, StateRegistrationPanel } from "@/components/state-adviser-report";
 import { pageMetadata } from "@/lib/seo";
 import { shareRouteOgImage } from "@/lib/share-hub";
 import { InvestorCustomerLayer } from "@/components/investor-customer-layer";
@@ -32,15 +30,6 @@ export async function generateMetadata({
         getOfficialFirmIndexable(slug),
       ]);
       if (!report) {
-        const stateAdviser = await getPublishedStateAdviserBySlug(slug);
-        if (stateAdviser) {
-          return pageMetadata({
-            title: `${stateAdviser.displayName} — state adviser firm research`,
-            description: `IAPD state-registration observations for firm CRD ${stateAdviser.crd}.`,
-            path: `/firm/${slug}`,
-            indexable: false,
-          });
-        }
         return pageMetadata({
           title: "Firm not found",
           path: `/firm/${slug}`,
@@ -102,12 +91,7 @@ export default async function FirmPage({
     }
     try {
       const report = await getCachedOfficialFirmBySlug(slug);
-      if (!report) {
-        const stateAdviser = await getPublishedStateAdviserBySlug(slug);
-        if (!stateAdviser) notFound();
-        return <StateAdviserFirmReport adviser={stateAdviser} />;
-      }
-      const stateAdviser = await getPublishedStateAdviserBySlug(slug);
+      if (!report) notFound();
       const claim = claimRolloutActive()
         ? await claimProfile(slug).catch(() => null)
         : null;
@@ -118,7 +102,6 @@ export default async function FirmPage({
       return (
         <>
           <FirmTrustReport report={report} />
-          {stateAdviser ? <StateRegistrationPanel adviser={stateAdviser} /> : null}
           <InvestorCustomerLayer slug={slug} enabled={enabled} {...customer} />
         </>
       );

@@ -4,7 +4,6 @@ import { PageShell } from '@/components/page-shell';
 import { DatabaseUnavailableError, hasDatabaseUrl } from '@/lib/db';
 import { getCachedFirmDirectoryMetrics, getCachedOfficialFirmSearch } from '@/lib/firms/cached';
 import { pageMetadata } from '@/lib/seo';
-import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 300;
@@ -60,11 +59,6 @@ export default async function FirmsPage({
         lead="Search SEC/IARD adviser-firm records by firm name, CRD, SEC number, or location. We organize the official evidence. The consumer decides."
       >
         <FirmDirectoryMetricsPanel metrics={metrics} />
-        {metrics.stateRegistrationRows > 0 ? (
-          <p className="mt-4 text-sm">
-            <Link className="underline" href="/state-advisers">Explore published state adviser registrations</Link>
-          </p>
-        ) : null}
         <FirmSearchForm q={parsed.q} state={stateValue} />
         <FirmSearchResults
           hits={results.hits}

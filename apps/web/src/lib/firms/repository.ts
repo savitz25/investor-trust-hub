@@ -4,7 +4,6 @@ import type { ParsedFirmSearch } from "@ith/domain";
 import { query } from "../db";
 import { mapFirmReport, mapSearchHit } from "./map-report";
 import { loadFirmProfileIntelligence } from "./profile-intelligence";
-import { B1_STATE_RELEASE_ID, publicFirmSql, publishedStateRegistrationSql } from "./publication";
 import type {
   ClaimValidationFirm,
   FirmDirectoryMetrics,
@@ -49,10 +48,7 @@ const FIRM_SELECT = `
       WHERE s.subject_id = f.id AND s.subject_kind = 'firm'
     ) AS snapshot_count,
     obs.observed,
-    sd.indexable AS search_indexable,
-    state.jurisdiction AS state_registration_state,
-    state.release_label AS state_release_label,
-    state.retrieved_at AS state_retrieved_at
+    sd.indexable AS search_indexable
   FROM firms f
   LEFT JOIN firm_identifiers crd
     ON crd.firm_id = f.id AND crd.identifier_type = 'crd'
@@ -70,14 +66,6 @@ const FIRM_SELECT = `
     ON obs.firm_id = f.id AND obs.source_release_id = adv.source_release_id
   LEFT JOIN search_documents sd
     ON sd.entity_id = f.id AND sd.entity_kind = 'firm'
-  LEFT JOIN LATERAL (
-    SELECT j.jurisdiction, b1_rel.release_label, b1_rel.retrieved_at
-    FROM jurisdiction_registrations j
-    JOIN source_releases b1_rel ON b1_rel.id=j.source_release_id
-    WHERE ${publishedStateRegistrationSql('j')}
-    ORDER BY j.jurisdiction
-    LIMIT 1
-  ) state ON true
 `;
 
 export async function getOfficialFirmIndexable(slug: string): Promise<boolean> {
@@ -86,7 +74,7 @@ export async function getOfficialFirmIndexable(slug: string): Promise<boolean> {
     SELECT sd.indexable
     FROM firms f
     JOIN search_documents sd ON sd.entity_id = f.id AND sd.entity_kind = 'firm'
-    WHERE f.slug = $1 AND ${publicFirmSql()}
+    WHERE f.slug = $1 AND f.is_synthetic = false
     LIMIT 1
     `,
     [slug],
@@ -98,7 +86,7 @@ export async function getOfficialFirmBySlug(
   slug: string,
 ): Promise<FirmTrustReportModel | null> {
   const result = await query<FirmRecordRow>(
-    `${FIRM_SELECT} WHERE f.slug = $1 AND ${publicFirmSql()} LIMIT 1`,
+    `${FIRM_SELECT} WHERE f.slug = $1 AND f.is_synthetic = false LIMIT 1`,
     [slug],
   );
   const row = result.rows[0];
@@ -130,7 +118,7 @@ export async function getFirmForClaimValidation(
     `${FIRM_SELECT}
      WHERE f.id = $1::uuid
        AND crd.identifier_value = $2
-       AND ${publicFirmSql()}
+       AND f.is_synthetic = false
      LIMIT 1`,
     [nativeProfileId, firmCrd],
   );
@@ -144,7 +132,7 @@ export async function getOfficialFirmClaimProfile(
   slug: string,
 ): Promise<ClaimValidationFirm | null> {
   const result = await query<FirmRecordRow>(
-    `${FIRM_SELECT} WHERE f.slug = $1 AND ${publicFirmSql()} LIMIT 1`,
+    `${FIRM_SELECT} WHERE f.slug = $1 AND f.is_synthetic = false LIMIT 1`,
     [slug],
   );
   const row = result.rows[0];
@@ -172,7 +160,7 @@ export async function searchOfficialFirms(
     parsed.stateNone,
   ];
   const where = `
-    ${publicFirmSql()}
+    f.is_synthetic = false
     AND (
       $1::text = ''
       OR crd.identifier_value = $4::text
@@ -186,11 +174,7 @@ export async function searchOfficialFirms(
     AND (
       $6::text IS NULL AND $7::boolean = false
       OR ($7::boolean = true AND (b.region IS NULL OR btrim(b.region) = ''))
-      OR ($6::text IS NOT NULL AND (b.region = $6::text OR EXISTS (
-        SELECT 1 FROM jurisdiction_registrations state_filter
-        WHERE ${publishedStateRegistrationSql('state_filter')}
-          AND state_filter.jurisdiction = $6::text
-      )))
+      OR ($6::text IS NOT NULL AND b.region = $6::text)
     )
     AND length($3::text) >= 0
   `;
@@ -234,7 +218,6 @@ export async function searchOfficialFirms(
 export async function getFirmDirectoryMetrics(): Promise<FirmDirectoryMetrics> {
   const result = await query<{
     official_firms: number;
-    state_registration_rows: number;
     ria_registered: number;
     ria_pending: number;
     era_reporting: number;
@@ -242,10 +225,7 @@ export async function getFirmDirectoryMetrics(): Promise<FirmDirectoryMetrics> {
     latest_retrieved_at: Date | string | null;
   }>(`
     SELECT
-      (SELECT count(*)::int FROM firms f WHERE ${publicFirmSql()}) AS official_firms,
-      (SELECT count(*)::int FROM jurisdiction_registrations j
-        JOIN firms f ON f.id=j.firm_id
-        WHERE ${publicFirmSql()} AND ${publishedStateRegistrationSql('j')}) AS state_registration_rows,
+      (SELECT count(*)::int FROM firms WHERE is_synthetic = false) AS official_firms,
       (SELECT count(*)::int FROM registrations
         WHERE is_synthetic = false AND registration_type = 'registered_investment_adviser' AND status = 'registered')
         AS ria_registered,
@@ -255,22 +235,13 @@ export async function getFirmDirectoryMetrics(): Promise<FirmDirectoryMetrics> {
       (SELECT count(*)::int FROM registrations
         WHERE is_synthetic = false AND registration_type = 'exempt_reporting_adviser')
         AS era_reporting,
-      (SELECT release_label FROM source_releases rel
-        WHERE rel.id <> '${B1_STATE_RELEASE_ID}'::uuid OR EXISTS (
-          SELECT 1 FROM jurisdiction_registrations j
-          WHERE j.source_release_id=rel.id AND j.publication_allowed
-        ) ORDER BY retrieved_at DESC NULLS LAST LIMIT 1) AS latest_release_label,
-      (SELECT retrieved_at FROM source_releases rel
-        WHERE rel.id <> '${B1_STATE_RELEASE_ID}'::uuid OR EXISTS (
-          SELECT 1 FROM jurisdiction_registrations j
-          WHERE j.source_release_id=rel.id AND j.publication_allowed
-        ) ORDER BY retrieved_at DESC NULLS LAST LIMIT 1) AS latest_retrieved_at
+      (SELECT release_label FROM source_releases ORDER BY retrieved_at DESC NULLS LAST LIMIT 1) AS latest_release_label,
+      (SELECT retrieved_at FROM source_releases ORDER BY retrieved_at DESC NULLS LAST LIMIT 1) AS latest_retrieved_at
   `);
   const row = result.rows[0];
   const retrieved = row?.latest_retrieved_at;
   return {
     officialFirms: row?.official_firms ?? 0,
-    stateRegistrationRows: row?.state_registration_rows ?? 0,
     riaRegistered: row?.ria_registered ?? 0,
     riaPending: row?.ria_pending ?? 0,
     eraReporting: row?.era_reporting ?? 0,
@@ -293,7 +264,7 @@ export async function listIndexableFirmSlugs(
     SELECT f.slug
     FROM firms f
     JOIN search_documents sd ON sd.entity_id = f.id AND sd.entity_kind = 'firm'
-    WHERE ${publicFirmSql()} AND sd.indexable = true
+    WHERE f.is_synthetic = false AND sd.indexable = true
     ORDER BY f.slug
     LIMIT $1 OFFSET $2
     `,
@@ -307,7 +278,7 @@ export async function countIndexableFirms(): Promise<number> {
     SELECT count(*)::int AS n
     FROM firms f
     JOIN search_documents sd ON sd.entity_id = f.id AND sd.entity_kind = 'firm'
-    WHERE ${publicFirmSql()} AND sd.indexable = true
+    WHERE f.is_synthetic = false AND sd.indexable = true
   `);
   return result.rows[0]?.n ?? 0;
 }
