@@ -54,8 +54,8 @@ export async function getPublishedStateAdviserBySlug(slug: string): Promise<Publ
     ORDER BY j.jurisdiction
   `, [slug]);
   const rows = result.rows;
-  if (!rows.length) return null;
   const first = rows[0];
+  if (!first) return null;
   return {
     slug: first.slug,
     displayName: first.display_name,
