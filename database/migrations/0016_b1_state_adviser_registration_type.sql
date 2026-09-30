@@ -23,3 +23,7 @@ BEGIN
       ));
   END IF;
 END $$;
+
+INSERT INTO schema_migrations (filename)
+VALUES ('0016_b1_state_adviser_registration_type.sql')
+ON CONFLICT (filename) DO NOTHING;
