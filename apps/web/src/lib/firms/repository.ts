@@ -4,6 +4,7 @@ import type { ParsedFirmSearch } from "@ith/domain";
 import { query } from "../db";
 import { mapFirmReport, mapSearchHit } from "./map-report";
 import { loadFirmProfileIntelligence } from "./profile-intelligence";
+import { publicFirmCountWhere, publicReleaseWhere } from "./publication-count";
 import type {
   ClaimValidationFirm,
   FirmDirectoryMetrics,
@@ -160,7 +161,7 @@ export async function searchOfficialFirms(
     parsed.stateNone,
   ];
   const where = `
-    f.is_synthetic = false
+    ${publicFirmCountWhere()}
     AND (
       $1::text = ''
       OR crd.identifier_value = $4::text
@@ -225,7 +226,7 @@ export async function getFirmDirectoryMetrics(): Promise<FirmDirectoryMetrics> {
     latest_retrieved_at: Date | string | null;
   }>(`
     SELECT
-      (SELECT count(*)::int FROM firms WHERE is_synthetic = false) AS official_firms,
+      (SELECT count(*)::int FROM firms f WHERE ${publicFirmCountWhere()}) AS official_firms,
       (SELECT count(*)::int FROM registrations
         WHERE is_synthetic = false AND registration_type = 'registered_investment_adviser' AND status = 'registered')
         AS ria_registered,
@@ -235,8 +236,10 @@ export async function getFirmDirectoryMetrics(): Promise<FirmDirectoryMetrics> {
       (SELECT count(*)::int FROM registrations
         WHERE is_synthetic = false AND registration_type = 'exempt_reporting_adviser')
         AS era_reporting,
-      (SELECT release_label FROM source_releases ORDER BY retrieved_at DESC NULLS LAST LIMIT 1) AS latest_release_label,
-      (SELECT retrieved_at FROM source_releases ORDER BY retrieved_at DESC NULLS LAST LIMIT 1) AS latest_retrieved_at
+      (SELECT release_label FROM source_releases rel WHERE ${publicReleaseWhere()}
+        ORDER BY retrieved_at DESC NULLS LAST LIMIT 1) AS latest_release_label,
+      (SELECT retrieved_at FROM source_releases rel WHERE ${publicReleaseWhere()}
+        ORDER BY retrieved_at DESC NULLS LAST LIMIT 1) AS latest_retrieved_at
   `);
   const row = result.rows[0];
   const retrieved = row?.latest_retrieved_at;

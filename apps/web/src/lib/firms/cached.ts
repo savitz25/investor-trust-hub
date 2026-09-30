@@ -14,7 +14,7 @@ export const getCachedOfficialFirmBySlug = unstable_cache(
 
 export const getCachedFirmDirectoryMetrics = unstable_cache(
   async () => getFirmDirectoryMetrics(),
-  ['firm-directory-metrics'],
+  ['firm-directory-metrics-b1-count-gate'],
   { revalidate: METRICS_REVALIDATE_SECONDS, tags: ['official-firms'] },
 );
 
@@ -23,6 +23,6 @@ export const getCachedOfficialFirmSearch = unstable_cache(
     const parsed = JSON.parse(serialized) as ParsedFirmSearch;
     return searchOfficialFirms(parsed);
   },
-  ['official-firm-search'],
+  ['official-firm-search-b1-count-gate'],
   { revalidate: SEARCH_REVALIDATE_SECONDS, tags: ['official-firms'] },
 );
