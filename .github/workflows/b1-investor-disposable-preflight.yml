@@ -1,0 +1,80 @@
+name: B1 Investor disposable migration preflight
+
+on:
+  pull_request:
+    paths:
+      - 'database/migrations/0016_b1_state_adviser_registration_type.sql'
+      - 'database/rollback/0016_b1_state_adviser_registration_type.sql'
+      - 'artifacts/th-enrich-b1-investor-execute.sql'
+      - 'artifacts/th-enrich-b1-investor-rollback.sql'
+      - 'artifacts/th-enrich-b1-disposable-live-schema.sql'
+      - '.github/workflows/b1-investor-disposable-preflight.yml'
+
+jobs:
+  migration-rollback:
+    if: github.event.pull_request.number == 66
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: b1_disposable
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/b1_disposable
+    steps:
+      - uses: actions/checkout@v5
+      - name: Build disposable base schema and recreate inspected live registration table
+        run: |
+          for file in database/migrations/*.sql; do
+            case "$file" in *0016_b1_state_adviser_registration_type.sql) break;; esac
+            psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f "$file" >/dev/null
+          done
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f database/seed/0001_source_registry.sql >/dev/null
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-enrich-b1-disposable-live-schema.sql >/dev/null
+      - name: Apply exact migration and 6,602-row execution packet
+        run: |
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f database/migrations/0016_b1_state_adviser_registration_type.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-enrich-b1-investor-execute.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
+          DO $$ BEGIN
+            IF (SELECT count(*) FROM jurisdiction_registrations) <> 6602
+               OR (SELECT count(*) FROM firms) <> 5942
+               OR (SELECT count(*) FROM source_releases WHERE source_dataset_id='iapd_state_compilation') <> 1 THEN
+              RAISE EXCEPTION 'disposable full load count failed';
+            END IF;
+            IF NOT EXISTS (SELECT 1 FROM schema_migrations WHERE filename='0016_b1_state_adviser_registration_type.sql') THEN
+              RAISE EXCEPTION 'migration not recorded';
+            END IF;
+          END $$;
+          SQL
+      - name: Roll back data and migration; verify the original schema and 451 existing firms
+        run: |
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-enrich-b1-investor-rollback.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f database/rollback/0016_b1_state_adviser_registration_type.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
+          DO $$ BEGIN
+            IF (SELECT count(*) FROM jurisdiction_registrations) <> 0
+               OR (SELECT count(*) FROM firms) <> 451
+               OR (SELECT count(*) FROM firm_identifiers) <> 451
+               OR (SELECT count(*) FROM source_releases WHERE source_dataset_id='iapd_state_compilation') <> 0 THEN
+              RAISE EXCEPTION 'disposable rollback did not restore baseline';
+            END IF;
+            IF EXISTS (SELECT 1 FROM schema_migrations WHERE filename='0016_b1_state_adviser_registration_type.sql') THEN
+              RAISE EXCEPTION 'rollback ledger still contains migration';
+            END IF;
+            IF EXISTS (
+              SELECT 1 FROM pg_constraint
+              WHERE conname='jurisdiction_registrations_registration_type_check'
+              AND pg_get_constraintdef(oid) LIKE '%''STATE_REGISTERED_IA''::text%'
+            ) THEN RAISE EXCEPTION 'new type still allowed'; END IF;
+          END $$;
+          SQL
