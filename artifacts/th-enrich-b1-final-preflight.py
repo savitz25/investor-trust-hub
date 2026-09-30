@@ -5,6 +5,7 @@ import csv
 import hashlib
 import json
 import os
+import re
 import sys
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
@@ -113,7 +114,9 @@ def main() -> dict:
                         "identity_confidence", "match_basis", "is_current", "publication_allowed", "raw"}
     actual_columns = {c[0] for c in columns}
     check = constraints.get("jurisdiction_registrations_registration_type_check", "")
-    compatible = (expected_columns <= actual_columns and all(f"'{t}'::text" in check for t in EXPECTED_TYPES)
+    live_allowed_types = re.findall(r"'([^']+)'::text", check)
+    compatible = (expected_columns <= actual_columns and len(live_allowed_types) == 6
+                  and set(live_allowed_types) == EXPECTED_TYPES
                   and "'STATE_REGISTERED_IA'::text" not in check and dataset and authority and not migration_applied)
     report = {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
@@ -124,6 +127,7 @@ def main() -> dict:
         "live_schema_compatible": compatible,
         "live_registration_columns": [c[0] for c in columns],
         "live_registration_type_check": check,
+        "live_allowed_registration_types": sorted(live_allowed_types),
         "live_subject_check": constraints.get("jurisdiction_registrations_subject_chk"),
         "live_firm_unique_index": indexes.get("jurisdiction_registrations_firm_uniq"),
         "source_dataset_present": dataset,

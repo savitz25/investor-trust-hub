@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-30T15:56:58.807010+00:00",
+  "generated_at_utc": "2026-09-30T16:00:36.473604+00:00",
   "production_access": "read-only transaction; rolled back",
   "official_iapd_feed_sha256": "23cdfeba5d68d8dce93137ec76e91e26960abc2edaca1d57852373ef8e5f9a5c",
   "staged_csv_sha256_lf_normalized": "a558a5a08afec69008623772d7a2db0a977a0eef98b30ba0ed8a24996b5da48a",
@@ -31,6 +31,14 @@
     "updated_at"
   ],
   "live_registration_type_check": "CHECK ((registration_type = ANY (ARRAY['FL_NOTICE_FILED_SEC_RIA'::text, 'FL_STATE_REGISTERED_IA'::text, 'FL_STATE_ERA_REPORTING'::text, 'investment_adviser_representative'::text, 'FL_CURRENT_IAR'::text, 'FL_APP_PEND_IARCE'::text])))",
+  "live_allowed_registration_types": [
+    "FL_APP_PEND_IARCE",
+    "FL_CURRENT_IAR",
+    "FL_NOTICE_FILED_SEC_RIA",
+    "FL_STATE_ERA_REPORTING",
+    "FL_STATE_REGISTERED_IA",
+    "investment_adviser_representative"
+  ],
   "live_subject_check": "CHECK ((((subject_kind = 'person'::text) AND (person_id IS NOT NULL)) OR ((subject_kind = 'firm'::text) AND (firm_id IS NOT NULL))))",
   "live_firm_unique_index": "CREATE UNIQUE INDEX jurisdiction_registrations_firm_uniq ON public.jurisdiction_registrations USING btree (firm_id, jurisdiction, registration_type, source_dataset_id, source_record_id) WHERE (subject_kind = 'firm'::text)",
   "source_dataset_present": true,
