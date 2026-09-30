@@ -186,7 +186,11 @@ export async function searchOfficialFirms(
     AND (
       $6::text IS NULL AND $7::boolean = false
       OR ($7::boolean = true AND (b.region IS NULL OR btrim(b.region) = ''))
-      OR ($6::text IS NOT NULL AND b.region = $6::text)
+      OR ($6::text IS NOT NULL AND (b.region = $6::text OR EXISTS (
+        SELECT 1 FROM jurisdiction_registrations state_filter
+        WHERE ${publishedStateRegistrationSql('state_filter')}
+          AND state_filter.jurisdiction = $6::text
+      )))
     )
     AND length($3::text) >= 0
   `;

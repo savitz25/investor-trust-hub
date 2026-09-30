@@ -27,7 +27,7 @@ export function FirmSearchForm({
         </div>
         <div>
           <label htmlFor="firm-state" className="text-sm font-medium text-[var(--ith-navy)]">
-            Principal office state
+            State
           </label>
           <select
             id="firm-state"
@@ -35,7 +35,7 @@ export function FirmSearchForm({
             defaultValue={state}
             className="th-select mt-2"
           >
-            <option value="">Any principal office state</option>
+            <option value="">Any sourced state</option>
             {US_STATE_CODES.map((code) => (
               <option key={code} value={code}>
                 {code}
@@ -105,9 +105,6 @@ export function FirmSearchResults({
                   ? [hit.city, hit.region].filter(Boolean).join(', ')
                   : 'Principal state not provided in this source record'}
               </p>
-              {hit.stateRegistrationState ? (
-                <p className="mt-1 text-sm text-slate-700">State registration: {hit.stateRegistrationState}</p>
-              ) : null}
               <p className="mt-2 text-xs text-slate-600">
                 Source release {formatReleaseLabel(hit.releaseLabel) ?? 'not identified'}
                 {hit.retrievedAt ? ` · retrieved ${formatDisplayDate(hit.retrievedAt)}` : ''}
