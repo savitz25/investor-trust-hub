@@ -16,6 +16,7 @@ import {
   type TrustReportV2Snapshot,
 } from '@ith/domain';
 import { getPool } from '../db';
+import { publicFirmSql } from './publication';
 
 function isoDate(value: Date | string | null | undefined): string | null {
   if (!value) return null;
@@ -93,7 +94,7 @@ export async function loadFirmProfileIntelligence(input: {
              r.is_current, f.date_submitted, f.filing_id, f.dataset_kind
       FROM form_adv_filings f
       JOIN form_adv_related_person_rows r ON r.filing_uuid = f.id
-      LEFT JOIN firms rf ON rf.id = r.related_firm_id AND rf.is_synthetic = false
+      LEFT JOIN firms rf ON rf.id = r.related_firm_id AND ${publicFirmSql('rf')}
       WHERE f.firm_id = $1 AND f.is_current AND r.is_current
         AND r.identity_confidence = 'CONFIRMED'
         AND r.related_crd IS NOT NULL AND btrim(r.related_crd) <> ''
@@ -181,7 +182,7 @@ export async function loadFirmProfileIntelligence(input: {
              r.is_current, f.date_submitted
       FROM form_adv_filings f
       JOIN form_adv_relying_adviser_rows r ON r.filing_uuid = f.id
-      LEFT JOIN firms rf ON rf.id = r.relying_firm_id AND rf.is_synthetic = false
+      LEFT JOIN firms rf ON rf.id = r.relying_firm_id AND ${publicFirmSql('rf')}
       WHERE f.firm_id = $1 AND f.is_current AND r.is_current
         AND r.identity_confidence = 'CONFIRMED'
         AND r.relying_crd IS NOT NULL AND btrim(r.relying_crd) <> ''

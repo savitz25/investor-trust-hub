@@ -20,6 +20,7 @@ import {
 } from '@ith/domain';
 import { query } from '../db';
 import { overrideEntries } from './request';
+import { publicFirmSql } from '../firms/publication';
 
 type FirmSourceRelease = { dataset: string | null; releaseLabel: string | null; officialAsOf: string | null; retrievedAt: string | null; sha256: string | null };
 function firmSource(row: FirmRow): FirmSourceRelease {
@@ -177,7 +178,7 @@ function orderSql(sort: InvestorAskSort | undefined): string {
 }
 
 function filtersSql(q: InvestorResearchQuery, params: unknown[]): { where: string } {
-  const clauses = ['f.is_synthetic = false'];
+  const clauses = [publicFirmSql()];
   if (q.registrationJurisdictions?.length || (q.registrationType && q.registrationType !== 'sec_ria')) throw new Error('Unsupported registration jurisdiction reached roster execution');
   if (q.firmType === 'ria') clauses.push(`adv.dataset_kind = 'ria'`);
   if (q.firmType === 'era') clauses.push(`adv.dataset_kind = 'era'`);

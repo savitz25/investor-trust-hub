@@ -93,7 +93,9 @@ export function mapFirmReport(row: FirmRecordRow): FirmTrustReportModel | null {
 }
 
 export function mapSearchHit(row: FirmRecordRow): FirmSearchHit | null {
-  const classification = mapClassification(row);
+  const classification = mapClassification(row) ?? (row.state_registration_state
+    ? { headline: 'Reported as state-registered' }
+    : null);
   if (!classification) return null;
   return {
     slug: row.slug,
@@ -103,9 +105,9 @@ export function mapSearchHit(row: FirmRecordRow): FirmSearchHit | null {
     crd: row.crd,
     secFileNumber: row.sec_file_number,
     city: row.city,
-    region: row.region,
+    region: row.region ?? row.state_registration_state,
     postalCode: row.postal_code,
-    releaseLabel: row.release_label,
-    retrievedAt: asIsoDate(row.retrieved_at),
+    releaseLabel: row.release_label ?? row.state_release_label,
+    retrievedAt: asIsoDate(row.retrieved_at ?? row.state_retrieved_at),
   };
 }
