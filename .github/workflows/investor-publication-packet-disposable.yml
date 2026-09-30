@@ -1,0 +1,97 @@
+name: Investor publication packet disposable guards
+
+on:
+  pull_request:
+    paths:
+      - 'artifacts/th-investor-2026-09-30-publication-activate.sql'
+      - 'artifacts/th-investor-2026-09-30-publication-rollback.sql'
+      - '.github/workflows/investor-publication-packet-disposable.yml'
+
+jobs:
+  publication-packet:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: publication_disposable
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/publication_disposable
+    steps:
+      - uses: actions/checkout@v5
+      - name: Recreate inspected schema and exact B1 load
+        run: |
+          for file in database/migrations/*.sql; do
+            case "$file" in *0016_b1_state_adviser_registration_type.sql) break;; esac
+            psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f "$file" >/dev/null
+          done
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f database/seed/0001_source_registry.sql >/dev/null
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-enrich-b1-disposable-live-schema.sql >/dev/null
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
+          CREATE FUNCTION fixed_b1_release_id() RETURNS trigger LANGUAGE plpgsql AS $$
+          BEGIN
+            IF NEW.source_dataset_id='iapd_state_compilation'
+               AND NEW.release_label='IA_FIRM_STATE_Feed_09_30_2026' THEN
+              NEW.id='a89165b8-b60a-4b31-9009-8b2a0291f8f8'::uuid;
+            END IF;
+            RETURN NEW;
+          END $$;
+          CREATE TRIGGER fixed_b1_release_id BEFORE INSERT ON source_releases
+          FOR EACH ROW EXECUTE FUNCTION fixed_b1_release_id();
+          SQL
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f database/migrations/0016_b1_state_adviser_registration_type.sql >/dev/null
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-enrich-b1-investor-execute.sql >/dev/null
+      - name: Pending verdict blocks activation
+        run: |
+          if psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-investor-2026-09-30-publication-activate.sql; then
+            echo 'Activation unexpectedly succeeded without Evidence verdict'
+            exit 1
+          fi
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
+          DO $$ BEGIN
+            IF (SELECT count(*) FROM jurisdiction_registrations WHERE publication_allowed)<>0 THEN
+              RAISE EXCEPTION 'Pending-verdict attempt changed publication state';
+            END IF;
+          END $$;
+          SQL
+      - name: Simulated verified verdict activates only batch and rollback restores flags
+        run: |
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
+          UPDATE source_releases
+          SET notes=(notes::jsonb || jsonb_build_object(
+            'evidence_postload_verdict','VERIFIED',
+            'evidence_postload_receipt_url','https://example.invalid/disposable-only'))::text
+          WHERE id='a89165b8-b60a-4b31-9009-8b2a0291f8f8';
+          SQL
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-investor-2026-09-30-publication-activate.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
+          DO $$ BEGIN
+            IF (SELECT count(*) FROM jurisdiction_registrations WHERE publication_allowed)<>6602
+               OR (SELECT count(*) FROM jurisdiction_registrations
+                   WHERE publication_allowed AND source_release_id='a89165b8-b60a-4b31-9009-8b2a0291f8f8')<>6602
+               OR (SELECT count(*) FROM firms)<>5942 THEN
+              RAISE EXCEPTION 'Activation scope failed';
+            END IF;
+          END $$;
+          SQL
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-investor-2026-09-30-publication-rollback.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
+          DO $$ BEGIN
+            IF (SELECT count(*) FROM jurisdiction_registrations WHERE publication_allowed)<>0
+               OR (SELECT count(*) FROM jurisdiction_registrations)<>6603
+               OR (SELECT count(*) FROM firms)<>5942
+               OR (SELECT count(*) FROM source_releases
+                   WHERE id='a89165b8-b60a-4b31-9009-8b2a0291f8f8')<>1 THEN
+              RAISE EXCEPTION 'Flag rollback deleted or changed canonical batch data';
+            END IF;
+          END $$;
+          SQL
