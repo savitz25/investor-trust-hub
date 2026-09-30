@@ -1,8 +1,9 @@
 {
-  "generated_at_utc": "2026-09-30T15:38:37.348624+00:00",
+  "generated_at_utc": "2026-09-30T15:56:58.807010+00:00",
   "production_access": "read-only transaction; rolled back",
   "official_iapd_feed_sha256": "23cdfeba5d68d8dce93137ec76e91e26960abc2edaca1d57852373ef8e5f9a5c",
-  "staged_csv_sha256": "5556f854e9b8460b4df4d6b77f70e0e42873f868130052ef26f4e93ccda1c9a1",
+  "staged_csv_sha256_lf_normalized": "a558a5a08afec69008623772d7a2db0a977a0eef98b30ba0ed8a24996b5da48a",
+  "new_firm_csv_sha256_lf_normalized": "2b8c728e0b50c009e31c2a6a57887695090b948d5c4839bf78c8e12168bf6698",
   "live_schema_compatible": true,
   "live_registration_columns": [
     "id",

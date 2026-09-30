@@ -1,5 +1,7 @@
 # TH-ENRICH-B1 Investor release candidate — 2026-09-30 source
 
+**Final technical gate:** [live schema, exact ownership, disposable load/rollback, and Founder execution packet](TH-ENRICH-2026-09-30-B1-final-preflight.md). The September 30 official feed and the 5,491-CRD candidate set are authoritative; Scout's approximate historical baseline is unavailable.
+
 Production changed: **NO**. The August 27 IAPD slice is retained as a frozen historical candidate. This packet uses the official September 30 IAPD compilation, SHA-256 `23cdfeba5d68d8dce93137ec76e91e26960abc2edaca1d57852373ef8e5f9a5c`, retrieved 2026-09-30 14:30:43 UTC. [Official compilation](https://adviserinfo.sec.gov/compilation).
 
 ## Scout and B1 reconciliation

@@ -20,6 +20,8 @@ SOURCE = ROOT / "artifacts/th-enrich-b1-current/iapd_approved_state_advisers.csv
 FIRMS = ROOT / "artifacts/th-enrich-b1-current/iapd_state_new_firm_candidates.csv"
 REPORT = ROOT / "docs/TH-ENRICH-2026-09-30-B1-final-preflight.json"
 EXPECTED_SOURCE_SHA = "23cdfeba5d68d8dce93137ec76e91e26960abc2edaca1d57852373ef8e5f9a5c"
+EXPECTED_STAGE_SHA = "a558a5a08afec69008623772d7a2db0a977a0eef98b30ba0ed8a24996b5da48a"
+EXPECTED_CANDIDATE_SHA = "2b8c728e0b50c009e31c2a6a57887695090b948d5c4839bf78c8e12168bf6698"
 EXPECTED_TYPES = {
     "FL_NOTICE_FILED_SEC_RIA", "FL_STATE_REGISTERED_IA", "FL_STATE_ERA_REPORTING",
     "investment_adviser_representative", "FL_CURRENT_IAR", "FL_APP_PEND_IARCE",
@@ -29,6 +31,9 @@ EXPECTED_TYPES = {
 def main() -> dict:
     rows = list(csv.DictReader(SOURCE.open(encoding="utf-8")))
     candidates = list(csv.DictReader(FIRMS.open(encoding="utf-8")))
+    stage_sha = hashlib.sha256(SOURCE.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+    candidate_sha = hashlib.sha256(FIRMS.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+    assert stage_sha == EXPECTED_STAGE_SHA and candidate_sha == EXPECTED_CANDIDATE_SHA
     pairs = Counter((r["firm_crd"], r["registration_state"]) for r in rows)
     crds = {r["firm_crd"] for r in rows}
     by_pair = defaultdict(set)
@@ -114,7 +119,8 @@ def main() -> dict:
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "production_access": "read-only transaction; rolled back",
         "official_iapd_feed_sha256": EXPECTED_SOURCE_SHA,
-        "staged_csv_sha256": hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
+        "staged_csv_sha256_lf_normalized": stage_sha,
+        "new_firm_csv_sha256_lf_normalized": candidate_sha,
         "live_schema_compatible": compatible,
         "live_registration_columns": [c[0] for c in columns],
         "live_registration_type_check": check,
