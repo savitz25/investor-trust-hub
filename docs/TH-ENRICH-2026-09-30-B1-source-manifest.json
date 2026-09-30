@@ -1,0 +1,11 @@
+{
+  "ticket": "TH-ENRICH-2026-09-30-B1",
+  "immutable_snapshot_manifest": true,
+  "sources": [
+    {"authority":"Florida OFR Division of Securities","official_url":"https://real.flofr.com/Public/SECURITY/Firms_Branches_AI_Monthly.zip","retrieved_at":"2026-08-28","file":"Firms_Branches_AI_Monthly.zip","sha256":"45fd2552c7adbdf4e6c2fedbbb23916b62310267ac81b63c8acbf865db908c20","row_count":5444,"grain":"OFR firm/location license","identity_key":"LICENSE NUMBER","target":"Investor firm regulatory spine","existing_owned":true},
+    {"authority":"Florida OFR Division of Securities","official_url":"https://real.flofr.com/Public/SECURITY/Firms_Branches_JZ_Monthly.zip","retrieved_at":"2026-08-28","file":"Firms_Branches_JZ_Monthly.zip","sha256":"81835bac972f6acb8138160cccef6e8565ded912b5037e7a744c71e5bbded011","row_count":6019,"grain":"OFR firm/location license","identity_key":"LICENSE NUMBER","target":"Investor firm regulatory spine","existing_owned":true},
+    {"authority":"Florida OFR Division of Securities","official_url":"https://real.flofr.com/Public/SECURITY/Associated_Persons_Monthly.zip","retrieved_at":"2026-08-28","file":"Associated_Persons_Monthly.zip","sha256":"c30f1c54db812c1ea25d065458ee9493eb01be48cd52ffd28a58578011523738","row_count":0,"grain":"associated person","identity_key":"none, header only","target":"Investor person","existing_owned":true},
+    {"authority":"IAPD","official_url":"https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_08_27_2026.xml.gz","retrieved_at":"2026-08-28","file":"IA_FIRM_STATE_Feed_08_27_2026.xml.gz","sha256":"4dc5ec13827c2546213fba16d3397448ba5c08cb8c092f1135c405a7f8472eda","row_count":21818,"grain":"firm CRD with state registration observations","identity_key":"FirmCrdNb","target":"CA/TX/AZ/WA adviser lens","existing_owned":true},
+    {"authority":"Pennsylvania Department of Banking and Securities","official_url":"https://www.pa.gov/content/dam/copapwp-pagov/en/dobs/documents/securities/registered%20securities.pdf","retrieved_at":"2026-09-30T13:20:12Z","file":"registered-securities.pdf","sha256":"4d416979d2c628193da972ef0dded8d0a2be005316d603ceb9af9fe1249a76e6","row_count":73,"grain":"registered offering/issuer evidence","identity_key":"no native issuer ID; deterministic source record hash only","target":"Investor issuer evidence","existing_owned":false}
+  ]
+}

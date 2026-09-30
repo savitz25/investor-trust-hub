@@ -1,0 +1,40 @@
+{
+  "retrieved_at": "2026-09-30T13:16:30.663705+00:00",
+  "source_file": "IA_FIRM_STATE_Feed_08_27_2026.xml.gz",
+  "source_sha256": "4dc5ec13827c2546213fba16d3397448ba5c08cb8c092f1135c405a7f8472eda",
+  "source_grain": "IAPD firm CRD with state registration observations",
+  "output_grain": "one approved state registration per state and firm CRD",
+  "firm_records_read": 21818,
+  "approved_rows": {
+    "AZ": 673,
+    "CA": 3341,
+    "TX": 1985,
+    "WA": 600
+  },
+  "status_distribution": {
+    "CA": {
+      "APPROVED": 3341,
+      "TERMREQUEST": 40
+    },
+    "TX": {
+      "CONDREST": 2642,
+      "APPROVED": 1985,
+      "TERMREQUEST": 49,
+      "LIMITED": 5
+    },
+    "AZ": {
+      "APPROVED": 673,
+      "TERMREQUEST": 7
+    },
+    "WA": {
+      "APPROVED": 600,
+      "SUSPENDED": 2,
+      "TERMREQUEST": 8
+    }
+  },
+  "duplicate_state_crd_keys": 0,
+  "distinct_firm_crds_across_slices": 5939,
+  "new_firm_identities": 0,
+  "reason": "Existing national IAPD firm CRD is retained; this is a derived lens only.",
+  "production_changed": false
+}

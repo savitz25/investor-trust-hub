@@ -1,0 +1,22 @@
+{
+  "official_source": "Pennsylvania Department of Banking and Securities",
+  "retrieved_at": "2026-09-30T13:35:22.873415+00:00",
+  "source_file": "registered-securities.pdf",
+  "source_sha256": "4d416979d2c628193da972ef0dded8d0a2be005316d603ceb9af9fe1249a76e6",
+  "pages": 9,
+  "raw_registration_lines": 73,
+  "parsed_rows": 73,
+  "unique_source_record_keys": 73,
+  "duplicate_keys": 0,
+  "sections": {
+    "REGISTERED BY COORDINATION": 20,
+    "REGISTERED BY QUALIFICATION": 53
+  },
+  "parse_failures": [],
+  "native_issuer_id_present": false,
+  "firm_bridges": 0,
+  "new_adviser_identities": 0,
+  "target_class": "issuer/offering evidence",
+  "adviser_denominator_delta": 0,
+  "production_changed": false
+}
