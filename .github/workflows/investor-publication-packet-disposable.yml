@@ -209,4 +209,11 @@ jobs:
               OR (SELECT count(*) FROM search_documents WHERE slug='r2-conflict')<>1
             THEN RAISE EXCEPTION 'Conflict attempt wrote unexpected documents'; END IF;
           END $$;
+          DELETE FROM search_documents WHERE slug='r2-conflict';
+          DO $$ BEGIN
+            IF (SELECT count(*) FROM search_documents)<>1
+              OR EXISTS (SELECT * FROM r2_legacy_snapshot EXCEPT SELECT * FROM search_documents)
+              OR EXISTS (SELECT * FROM search_documents EXCEPT SELECT * FROM r2_legacy_snapshot)
+            THEN RAISE EXCEPTION 'Final OFF state differs from legacy baseline'; END IF;
+          END $$;
           SQL
