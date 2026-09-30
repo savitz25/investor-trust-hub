@@ -30,7 +30,7 @@ export default async function StateAdvisersPage({
   const page = Number.isSafeInteger(parsedPage) && parsedPage > 0 ? Math.min(parsedPage, 1000) : 1;
   if (!hasDatabaseUrl()) {
     return <PageShell eyebrow="State adviser firms" title="State adviser registrations"
-      lead="The official registration data is unavailable in this environment."><p>Registration data unavailable.</p></PageShell>;
+      lead="The official registration data is unavailable in this environment." />;
   }
   try {
     const result = await listPublishedStateAdvisers(state, page);
@@ -65,7 +65,7 @@ export default async function StateAdvisersPage({
   } catch (error) {
     if (error instanceof DatabaseUnavailableError) {
       return <PageShell eyebrow="State adviser firms" title="State adviser registrations"
-        lead="The official registration data is temporarily unavailable."><p>Registration data unavailable.</p></PageShell>;
+        lead="The official registration data is temporarily unavailable." />;
     }
     throw error;
   }

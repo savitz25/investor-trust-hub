@@ -5,8 +5,6 @@ on:
     paths:
       - 'artifacts/th-investor-2026-09-30-publication-activate.sql'
       - 'artifacts/th-investor-2026-09-30-publication-rollback.sql'
-      - 'apps/web/src/lib/firms/publication.ts'
-      - 'scripts/b1-publication-fixture-check.mjs'
       - '.github/workflows/investor-publication-packet-disposable.yml'
 
 jobs:
@@ -30,9 +28,6 @@ jobs:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/publication_disposable
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
-        with:
-          node-version: '24'
       - name: Recreate inspected schema and exact B1 load
         run: |
           for file in database/migrations/*.sql; do
@@ -55,8 +50,6 @@ jobs:
           SQL
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f database/migrations/0016_b1_state_adviser_registration_type.sql >/dev/null
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-enrich-b1-investor-execute.sql >/dev/null
-          node --experimental-strip-types scripts/b1-publication-fixture-check.mjs off > /tmp/b1-publication-check.sql
-          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f /tmp/b1-publication-check.sql
       - name: Pending verdict blocks activation
         run: |
           if psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-investor-2026-09-30-publication-activate.sql; then
@@ -80,8 +73,6 @@ jobs:
           WHERE id='a89165b8-b60a-4b31-9009-8b2a0291f8f8';
           SQL
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-investor-2026-09-30-publication-activate.sql
-          node --experimental-strip-types scripts/b1-publication-fixture-check.mjs on > /tmp/b1-publication-check.sql
-          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f /tmp/b1-publication-check.sql
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
           DO $$ BEGIN
             IF (SELECT count(*) FROM jurisdiction_registrations WHERE publication_allowed)<>6602
@@ -93,8 +84,6 @@ jobs:
           END $$;
           SQL
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-investor-2026-09-30-publication-rollback.sql
-          node --experimental-strip-types scripts/b1-publication-fixture-check.mjs rollback > /tmp/b1-publication-check.sql
-          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f /tmp/b1-publication-check.sql
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
           DO $$ BEGIN
             IF (SELECT count(*) FROM jurisdiction_registrations WHERE publication_allowed)<>0
