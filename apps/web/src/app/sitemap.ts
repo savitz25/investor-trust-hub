@@ -13,7 +13,7 @@ function staticEntries(base: string): MetadataRoute.Sitemap {
   }));
 }
 
-/** Single /sitemap.xml urlset. Wave 1 (~1,000 firms + shell) fits one file. */
+/** Single /sitemap.xml urlset, including bounded published state-firm profiles. */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const host = await readRequestHost();
   if (!isHostLaunchIndexable(host)) {
@@ -25,7 +25,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return entries;
   }
   try {
-    const slugs = await listIndexableFirmSlugs(5_000, 0);
+    const slugs = await listIndexableFirmSlugs(10_000, 0);
     return [
       ...entries,
       ...slugs.map((slug) => ({

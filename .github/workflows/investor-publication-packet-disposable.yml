@@ -6,6 +6,8 @@ on:
       - 'artifacts/th-investor-2026-09-30-publication-activate.sql'
       - 'artifacts/th-investor-2026-09-30-publication-rollback.sql'
       - 'apps/web/src/lib/firms/publication-count.ts'
+      - 'artifacts/th-investor-r2-search-documents.sql'
+      - 'scripts/b1-r2-surface-check.mjs'
       - 'scripts/b1-public-count-check.mjs'
       - '.github/workflows/investor-publication-packet-disposable.yml'
 
@@ -55,8 +57,11 @@ jobs:
           SQL
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f database/migrations/0016_b1_state_adviser_registration_type.sql >/dev/null
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-enrich-b1-investor-execute.sql >/dev/null
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-investor-r2-search-documents.sql >/dev/null
           node --experimental-strip-types scripts/b1-public-count-check.mjs off > /tmp/b1-public-count.sql
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f /tmp/b1-public-count.sql
+          node --experimental-strip-types scripts/b1-r2-surface-check.mjs off > /tmp/b1-r2-surface.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f /tmp/b1-r2-surface.sql
       - name: Pending verdict blocks activation
         run: |
           if psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-investor-2026-09-30-publication-activate.sql; then
@@ -82,6 +87,8 @@ jobs:
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-investor-2026-09-30-publication-activate.sql
           node --experimental-strip-types scripts/b1-public-count-check.mjs on > /tmp/b1-public-count.sql
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f /tmp/b1-public-count.sql
+          node --experimental-strip-types scripts/b1-r2-surface-check.mjs on > /tmp/b1-r2-surface.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f /tmp/b1-r2-surface.sql
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
           DO $$ BEGIN
             IF (SELECT count(*) FROM jurisdiction_registrations WHERE publication_allowed)<>6602
@@ -95,6 +102,8 @@ jobs:
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f artifacts/th-investor-2026-09-30-publication-rollback.sql
           node --experimental-strip-types scripts/b1-public-count-check.mjs rollback > /tmp/b1-public-count.sql
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f /tmp/b1-public-count.sql
+          node --experimental-strip-types scripts/b1-r2-surface-check.mjs rollback > /tmp/b1-r2-surface.sql
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f /tmp/b1-r2-surface.sql
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 <<'SQL'
           DO $$ BEGIN
             IF (SELECT count(*) FROM jurisdiction_registrations WHERE publication_allowed)<>0

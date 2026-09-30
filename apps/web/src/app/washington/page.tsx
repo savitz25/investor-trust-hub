@@ -1,4 +1,5 @@
 import { WashingtonStateIntelligence } from '@/components/wa-state-intel';
+import { StateAdviserStatePanel } from '@/components/state-adviser-state-panel';
 import { pageMetadata } from '@/lib/seo';
 import { readRequestHost } from '@/lib/request-host';
 import '../home-intel.css';
@@ -17,5 +18,5 @@ export async function generateMetadata() {
 }
 
 export default function WashingtonPage() {
-  return <WashingtonStateIntelligence />;
+  return <><WashingtonStateIntelligence /><StateAdviserStatePanel state="WA" /></>;
 }

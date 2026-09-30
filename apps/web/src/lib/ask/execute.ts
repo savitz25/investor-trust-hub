@@ -19,6 +19,7 @@ import {
   type ParsedInvestorAsk,
 } from '@ith/domain';
 import { query } from '../db';
+import { getPublishedStateAdviserByCrd } from '../firms/state-advisers';
 import { overrideEntries } from './request';
 
 type FirmSourceRelease = { dataset: string | null; releaseLabel: string | null; officialAsOf: string | null; retrievedAt: string | null; sha256: string | null };
@@ -34,7 +35,7 @@ export type AskFirmCard = {
   displayName: string;
   legalName: string;
   crd: string;
-  firmType: 'ria' | 'era';
+  firmType: 'ria' | 'era' | 'state_ia';
   firmTypeLabel: string;
   statusLabel: string;
   principalOffice: string;
@@ -670,7 +671,57 @@ export async function executeParsedInvestorAsk(parsed: ParsedInvestorAsk, pageSi
 }
 
 export async function executeInvestorAsk(raw: string, overrides: InvestorAskOverrides = {}): Promise<InvestorAskResult> {
-  return executeParsedInvestorAsk(interpretInvestorAskQuery(raw, overrides));
+  const result = await executeParsedInvestorAsk(interpretInvestorAskQuery(raw, overrides));
+  const identifier = result.parsed.query.identifier;
+  if (result.terminalState !== 'NO_MATCH' || identifier?.type !== 'crd') return result;
+  const adviser = await getPublishedStateAdviserByCrd(identifier.value);
+  if (!adviser) return result;
+  const first = adviser.registrations[0];
+  const states = adviser.registrations.map((registration) => registration.state).join(', ');
+  const card: AskFirmCard = {
+    firmId: adviser.firmId,
+    slug: adviser.slug,
+    displayName: adviser.displayName,
+    legalName: adviser.legalName,
+    crd: adviser.crd,
+    firmType: 'state_ia',
+    firmTypeLabel: 'State-registered investment adviser firm (IAPD)',
+    statusLabel: `Reported APPROVED in ${states}`,
+    principalOffice: 'Not provided by this firm-state source',
+    raum: null,
+    compensation: [],
+    filingDate: null,
+    officialAsOf: null,
+    sourceRelease: {
+      dataset: 'iapd_state_compilation',
+      releaseLabel: first?.sourceLabel ?? null,
+      officialAsOf: null,
+      retrievedAt: first?.retrievedAt ?? null,
+      sha256: '23cdfeba5d68d8dce93137ec76e91e26960abc2edaca1d57852373ef8e5f9a5c',
+    },
+    href: `/firm/${adviser.slug}`,
+    currentlyIndexable: false,
+    publicationNote: 'Source-limited IAPD state-registration profile; principal office and Form ADV facts are not established by these rows.',
+    whyMatched: `Exact firm CRD ${adviser.crd}; approved state-registration observations: ${states}.`,
+  };
+  return {
+    ...result,
+    terminalState: 'COMPLETE',
+    results: [card],
+    counts: [{ label: 'Matching state-adviser firms', value: 1, grain: 'distinct firm CRD' }],
+    pagination: { page: 1, pageSize: 1, total: 1, hasMore: false },
+    provenance: {
+      ...result.provenance,
+      sourceFamily: 'SEC IAPD firm-state compilation',
+      dataset: 'iapd_state_compilation',
+      officialAsOf: 'Not established in this source row',
+      retrievedAt: first?.retrievedAt ?? 'Not established',
+      sourceReleases: [card.sourceRelease!],
+      metric: 'exact firm CRD with published approved state registrations',
+      geographyMeaning: 'Issuing state registration, not principal office',
+    },
+    limitations: [...result.limitations, 'State registration is not SEC registration or an endorsement.'],
+  };
 }
 
 export function publicAskPayload(result: InvestorAskResult) {

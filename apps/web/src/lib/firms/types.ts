@@ -30,17 +30,21 @@ export interface FirmRecordRow {
   snapshot_count: number | string;
   observed: boolean | null;
   search_indexable: boolean | null;
+  state_registration_state: string | null;
+  state_release_label: string | null;
+  state_retrieved_at: Date | string | null;
 }
 
 export interface FirmSearchHit {
   slug: string;
   displayName: string;
   legalName: string;
-  classification: ConsumerClassification;
+  classification: Pick<ConsumerClassification, 'headline'>;
   crd: string | null;
   secFileNumber: string | null;
   city: string | null;
   region: string | null;
+  stateRegistrationState: string | null;
   postalCode: string | null;
   releaseLabel: string | null;
   retrievedAt: string | null;
@@ -48,6 +52,7 @@ export interface FirmSearchHit {
 
 export interface FirmDirectoryMetrics {
   officialFirms: number;
+  stateRegistrationRows: number;
   riaRegistered: number;
   riaPending: number;
   eraReporting: number;

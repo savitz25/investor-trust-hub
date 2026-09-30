@@ -1,0 +1,15 @@
+# September 30 Investor publication R2
+
+Production rollback: the reviewed flag-only rollback ran against release `a89165b8-b60a-4b31-9009-8b2a0291f8f8`. Read-only verification returned 31,268 canonical firms, 25,777 public-eligible firms, zero batch-public firms, and zero batch-public registrations. No canonical firm or registration was deleted. This branch must not be deployed or reactivated under this ticket.
+
+## Root cause and branch repair
+
+The first activation changed `publication_allowed`, so the shared count/search predicate admitted 5,491 new firm CRDs. The search result mapper required a legacy `registrations` classification; it discarded the state-only rows after the SQL count. The legacy profile mapper also required that classification and returned null. Ask read only `form_adv_firm_facts`; the new firm CRDs have none. State research pages used principal-office snapshots and never queried the new state registration table. Sitemap required `search_documents.indexable`, and the new firms had no search documents.
+
+R2 reads the exact release, dataset, approved/current firm-grain status, publication flag, source checksum and exact CRD bridge directly from `jurisdiction_registrations`. Search cards label state registration as such and do not infer a principal office. A minimal firm profile cites the official IAPD feed and shows its state evidence; legacy SEC RIA/ERA profiles retain their original path and gain a separate state-evidence panel when an exact CRD registration is published. The CA/TX/AZ/WA pages link to a separately labeled IAPD state-adviser lens only when rows are published. Ask resolves exact CRD queries against published state registrations only when its existing Form ADV lookup returns no firm.
+
+`search_documents.indexable` remains the explicit sitemap/content gate. The branch-only [search-document packet](../artifacts/th-investor-r2-search-documents.sql) stages exactly 5,491 publication-metadata rows for B1-created firms on a disposable database. It does not insert legacy registrations, Form ADV facts, or duplicate canonical firms. The public flag still gates sitemap visibility, so a flag-only rollback hides the batch even if these metadata rows later exist. A future production execution would require a separate Founder gate for these metadata rows and the reviewed web code; neither is authorized here.
+
+## Test contract
+
+The disposable PostgreSQL workflow loads the exact certified source fixture, stages the search documents, and asserts OFF → ON → OFF. Its source-derived public counts are 451 → 5,942 → 451 because the fixture has only 451 pre-existing firms; the same predicate computes 25,777 OFF and 31,268 ON against the full production population. It checks 0 → 6,602 → 0 published registrations, CA/TX/AZ/WA counts of 3,336/1,992/674/600 when ON, samples CRD 8250 CA, 13037 TX, 19537 AZ, and 25706 WA, sitemap eligibility, and zero duplicate `(CRD,state)` keys. Web unit checks cover the state search card and the direct profile/Ask/state-lens wiring.

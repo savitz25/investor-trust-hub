@@ -1,4 +1,5 @@
 import { CaliforniaStateIntelligence } from '@/components/ca-state-intel';
+import { StateAdviserStatePanel } from '@/components/state-adviser-state-panel';
 import { pageMetadata } from '@/lib/seo';
 import { readRequestHost } from '@/lib/request-host';
 import '../home-intel.css';
@@ -17,5 +18,5 @@ export async function generateMetadata() {
 }
 
 export default function CaliforniaPage() {
-  return <CaliforniaStateIntelligence />;
+  return <><CaliforniaStateIntelligence /><StateAdviserStatePanel state="CA" /></>;
 }
