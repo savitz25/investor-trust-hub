@@ -58,6 +58,13 @@ async function getPublishedStateAdviser(where: string, value: string): Promise<P
   const rows = result.rows;
   const first = rows[0];
   if (!first) return null;
+  // Keep mocked/partial reads and malformed source rows from becoming identities.
+  if (first.release_label !== 'IA_FIRM_STATE_Feed_09_30_2026'
+      || first.slug !== `sec-crd-${first.crd}`
+      || !rows.every((row) => row.crd === first.crd
+        && row.release_label === first.release_label
+        && ['CA', 'TX', 'AZ', 'WA'].includes(row.jurisdiction))
+      || (where === 'crd.identifier_value' && first.crd !== value)) return null;
   return {
     firmId: first.id,
     slug: first.slug,
