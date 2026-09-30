@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest';
 const root = join(import.meta.dirname, '..');
 const adapter = readFileSync(join(root, 'src/lib/customer-claim-validation/v1.ts'), 'utf8');
 const repository = readFileSync(join(root, 'src/lib/firms/repository.ts'), 'utf8');
+const publication = readFileSync(join(root, 'src/lib/firms/publication-count.ts'), 'utf8');
 const route = readFileSync(join(root, 'src/app/api/customer-claim-validation/v1/route.ts'), 'utf8');
 const sitemap = readFileSync(join(root, 'src/app/sitemap.ts'), 'utf8');
 
@@ -19,7 +20,8 @@ describe('INV-CUST-CAP-001 safety locks', () => {
   it('requires the existing publication and current-content gates', () => {
     expect(adapter).toContain('firm.report.currentlyIndexable');
     expect(adapter).toContain("publicationState: 'PUBLIC_CURRENT'");
-    expect(repository).toContain('f.is_synthetic = false');
+    expect(repository).toContain('publicFirmCountWhere()');
+    expect(publication).toContain('${firm}.is_synthetic = false');
   });
 
   it('keeps representatives and research-only firms nonclaimable', () => {
