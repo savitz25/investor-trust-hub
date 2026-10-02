@@ -180,6 +180,9 @@ export function InvestorHomeIntelligence({
     if (!item) throw new Error(`Missing homepage evidence measure: ${key}`);
     return item;
   };
+  // Cards are listed in publication order, so the newest state pages are last.
+  const stateCount = INVESTOR_HOMEPAGE_STATE_CARDS.length;
+  const newestStates = [...INVESTOR_HOMEPAGE_STATE_CARDS].slice(-6).reverse();
   return (
     <main className="ith-home">
       <section className="ith-section ith-hero" aria-labelledby="home-title">
@@ -262,6 +265,59 @@ export function InvestorHomeIntelligence({
             <p className="mt-4"><Link href="/firms">Advanced firm lookup by name, CRD or SEC file number →</Link></p>
           </div>
           <InvestorSpecialistSearchShell compact />
+        </div>
+      </section>
+
+      <section
+        id="footprint"
+        className="ith-section ith-dark"
+        aria-labelledby="footprint-title"
+      >
+        <div className="ith-shell">
+          <p className="ith-eyebrow">Research footprint</p>
+          <h2 id="footprint-title">
+            {stateCount} states with published securities intelligence
+          </h2>
+          <div className="ith-scale-band">
+            <div>
+              <strong>{stateCount}</strong>
+              <span>Published state intelligence pages</span>
+              <small>published state page</small>
+            </div>
+            {['sec_iard_roster', 'form_adv_filings', 'ownership_control'].map(
+              (key) => {
+                const item = metric(key);
+                return (
+                  <div key={key}>
+                    <strong>{item.display}</strong>
+                    <span>{item.label}</span>
+                    <small>{item.grain}</small>
+                  </div>
+                );
+              },
+            )}
+          </div>
+          <p className="ith-dark-note">
+            These are different kinds of records and are never added into one
+            total. Newest state pages:{' '}
+            {newestStates.map((state, index) => (
+              <span key={state.code}>
+                {index > 0 ? ' · ' : ''}
+                <Link href={state.href} style={{ textDecoration: 'underline' }}>
+                  {state.name}
+                </Link>
+              </span>
+            ))}
+            .
+          </p>
+          <div className="ith-actions">
+            <a className="ith-button" href="#states">
+              Explore all {stateCount} states
+            </a>
+            <a className="ith-button ith-button--secondary" href="#inventory">
+              See the evidence inventory
+            </a>
+          </div>
         </div>
       </section>
 
@@ -382,6 +438,7 @@ export function InvestorHomeIntelligence({
       </section>
 
       <section
+        id="inventory"
         className="ith-section ith-tint"
         aria-labelledby="inventory-title"
       >
@@ -522,7 +579,8 @@ export function InvestorHomeIntelligence({
       >
         <div className="ith-shell">
           <p className="ith-eyebrow">
-            Eight published state intelligence surfaces
+            {INVESTOR_HOMEPAGE_STATE_CARDS.length} published state intelligence
+            pages
           </p>
           <h2 id="states-title">
             Federal identity plus state regulatory context
