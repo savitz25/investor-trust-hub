@@ -246,7 +246,7 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       publicationStatus: 'PUBLIC',
       trace: commonTrace(
         'One current form_adv_firm_facts row per CRD in the monthly RIA+ERA pair.',
-        `Not ${extra} extra canonical firms without ADV facts. Not Form ADV filings. Not attribute rows. Not CRD identifiers as additional firms.`,
+        `Not ${extra} canonical identities outside the roster (no current ADV fact row, including state-registered adviser firms). Not Form ADV filings. Not attribute rows. Not CRD identifiers as additional firms.`,
         ['iapd_sec_compilation', 'form_adv_firm_facts'],
         'National SEC IARD roster; principal office is not service territory',
         `${input.releaseLabel} published ${input.publishedAt}; retrieved ${input.retrievedAt}`,
@@ -1068,7 +1068,7 @@ export function computeInvestorNetworkMetrics(input: InvestorNetworkMetricsInput
       },
       {
         total: `${input.canonicalFirms} canonical firms as the public roster`,
-        reason: `${extra} extra identities lack ADV facts and are excluded from the SEC/IARD roster headline.`,
+        reason: `${extra} identities have no current ADV fact row (earlier non-roster identities and state-registered adviser firms) and are excluded from the SEC/IARD roster headline.`,
       },
       {
         total: 'National summed RAUM / AUM dollar total',

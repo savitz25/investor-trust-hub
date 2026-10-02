@@ -344,8 +344,8 @@ export const V1_HOMEPAGE_TOOLS: HomepageToolState[] = [
 
 export const V1_LOCKED_LIMITATIONS: readonly string[] = [
   'ERA is not an RIA. Do not combine registration classes into a single “advisers” total.',
-  'The V1 national firm universe is the SEC IARD monthly roster (23,622), not all canonical firms (25,777).',
-  'The extra 2,155 canonical firms lack form_adv_firm_facts / firm_kinds and must not be mixed into RIA+ERA totals.',
+  `The V1 national firm universe is the SEC IARD monthly roster (23,622), not all canonical firms (${V1_SEC_ROSTER.allCanonicalFirms.toLocaleString('en-US')}).`,
+  `The other ${V1_SEC_ROSTER.extraFirmsWithoutAdvFacts.toLocaleString('en-US')} canonical firms (${V1_SEC_ROSTER.earlierIdentitiesWithoutAdvFacts.toLocaleString('en-US')} earlier identities and ${V1_SEC_ROSTER.stateRegisteredAdviserFirmsWithoutAdvFacts.toLocaleString('en-US')} state-registered adviser firms) lack form_adv_firm_facts / firm_kinds and must not be mixed into RIA+ERA totals.`,
   'Reported RAUM is filer-supplied Form ADV Item 5F(2)(c). It is not performance, quality, or popularity.',
   'A RAUM value of zero is a reported value, not missing data. Null and zero remain distinct.',
   'Principal-office state is not service territory and is not state registration authority.',
@@ -447,11 +447,11 @@ function buildSnapshot() {
       cohortDefinition:
         'Current monthly SEC IARD registered-investment-adviser plus exempt-reporting-adviser firm facts.',
       exclusions: [
-        `${fmt(V1_SEC_ROSTER.extraFirmsWithoutAdvFacts)} canonical firms without ADV facts`,
+        `${fmt(V1_SEC_ROSTER.extraFirmsWithoutAdvFacts)} canonical firms outside the roster (no current ADV fact row, including state-registered adviser firms)`,
         'people / IAR rows',
         'internal products',
       ],
-      limitation: 'This is the V1 homepage universe. It is not all canonical firm identities (25,777).',
+      limitation: `This is the V1 homepage universe. It is not all canonical firm identities (${fmt(V1_SEC_ROSTER.allCanonicalFirms)}).`,
       grain: 'firm-level form_adv_firm_facts rows (one current roster row per CRD in the extract)',
       method: 'COUNT of form_adv_firm_facts = COUNT of firm registrations = 17,018 RIA + 6,604 ERA',
       payloadKey: 'snapshot.rosterUniverse',
@@ -541,7 +541,7 @@ function buildFindings(): FeaturedFinding[] {
       sourceIds: [V1_SOURCE.dataset],
       officialAsOf: V1_SOURCE.publishedAt,
       retrievedAt: V1_SOURCE.retrievedAt,
-      limitation: 'Extra 2,155 canonical firms without ADV facts are excluded from this denominator.',
+      limitation: `${fmt(V1_SEC_ROSTER.extraFirmsWithoutAdvFacts)} canonical firms outside the roster are excluded from this denominator.`,
       confidence: 'high',
       readyForV1: true,
     },

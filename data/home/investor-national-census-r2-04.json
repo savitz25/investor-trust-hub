@@ -2,7 +2,15 @@
   "provenance": {
     "acceptedRelease": "INV-HOME-001 / INV-HOME-002",
     "source": "packages/domain/src/investor-home-intel.ts at 08db4a98c11ea364e39be9397936cddef2135fb6",
-    "note": "Preserved accepted census; not a new acquisition or fresh database recount."
+    "note": "Preserved accepted census; not a new acquisition or fresh database recount.",
+    "canonicalIdentityRebaseline": {
+      "ticket": "TH-INV-HOME-METRICS-REBASELINE-001",
+      "priorCanonicalFirms": 25777,
+      "addedCanonicalFirms": 5491,
+      "addedFrom": "IAPD state compilation published 2026-09-30, release a89165b8-b60a-4b31-9009-8b2a0291f8f8: APPROVED CA/TX/AZ/WA state-registered adviser firm CRDs absent from the prior spine. One firm and one CRD identifier per new CRD.",
+      "evidence": "docs/TH-ENRICH-2026-09-30-B1-final-preflight.json; docs/TH-INVESTOR-2026-09-30-PUBLICATION-R2.md; docs/TH-INV-HOME-METRICS-REBASELINE-001.md",
+      "note": "Recorded from the certified production receipts, not a fresh database recount. SEC/IARD roster, filings, attributes and SEC-file counts are unchanged."
+    }
   },
   "counts": {
     "rosterFirms": 23622,
@@ -11,9 +19,9 @@
     "riaRegistered": 16783,
     "riaPending": 235,
     "eraReporting": 6604,
-    "canonicalFirms": 25777,
-    "crdIdentifiers": 25777,
-    "crdDistinctFirms": 25777,
+    "canonicalFirms": 31268,
+    "crdIdentifiers": 31268,
+    "crdDistinctFirms": 31268,
     "secFileIdentifiers": 23621,
     "secFileDistinctFirms": 23621,
     "formAdvFilings": 635269,

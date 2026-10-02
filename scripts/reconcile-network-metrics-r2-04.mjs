@@ -13,6 +13,8 @@ export function validateInvestor(sources,census,home) {
  assert.equal(n.canonicalFirms,n.rosterFirms+r.extraFirmsWithoutAdvFacts);
  assert.equal(n.rosterFirms,n.riaFacts+n.eraFacts);
  assert.equal(n.canonicalFirms,r.allCanonicalFirms);
+ assert.equal(r.extraFirmsWithoutAdvFacts,r.earlierIdentitiesWithoutAdvFacts+r.stateRegisteredAdviserFirmsWithoutAdvFacts);
+ assert.equal(n.crdDistinctFirms,n.canonicalFirms);
  assert.equal(n.rosterFirms,r.totalFacts);
  assert.equal(n.riaFacts,r.riaFacts);
  assert.equal(n.eraFacts,r.eraFacts);

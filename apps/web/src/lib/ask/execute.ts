@@ -116,7 +116,7 @@ function provenance(parsed: ParsedInvestorAsk, metric: string, rows?: FirmRow[])
     exclusions: [
       'Do not add RIA + ERA into one adviser quality total.',
       'Do not treat principal office as service territory.',
-      '2,155 canonical firms without ADV facts are outside the roster universe.',
+      'Canonical firms without a current ADV fact row, including state-registered adviser firms, are outside the roster universe.',
     ],
     identifierMethod: q.identifier ? `Exact labeled ${q.identifier.type === 'crd' ? 'firm CRD' : 'SEC file number'} ${q.identifier.value}` : 'Not an identifier query',
   };
