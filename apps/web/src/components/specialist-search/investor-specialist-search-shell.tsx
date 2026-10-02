@@ -3,7 +3,7 @@ import { REGION_NAMES, type InvestorAskOverrides } from '@ith/domain';
 import { overrideEntries } from '@/lib/ask/request';
 import { SearchShellAnalytics } from './search-shell-analytics';
 
-const EXAMPLES = ['CRD 105958', 'SEC-registered RIAs in Florida', 'RIAs between $1 billion and $10 billion RAUM', 'What does RAUM mean?'];
+const EXAMPLES = ['CRD 105958', 'Investment advisers in Indiana', 'SEC-registered RIAs in Texas', 'SEC-registered RIAs in Florida', 'RIAs between $1 billion and $10 billion RAUM', 'What does RAUM mean?'];
 
 export function InvestorSpecialistSearchShell({ query = '', compact = false, overrides = {} }: { query?: string; compact?: boolean; overrides?: InvestorAskOverrides }) {
   const selected=Object.fromEntries(overrideEntries(overrides));
