@@ -3,7 +3,7 @@
   "generatedAt": "2026-09-29T20:22:23.260Z",
   "newestDocumentedSourceAsOf": "2026-09-18",
   "newestDocumentedSourceAsOfNote": "Newest explicitly named sourceAsOf/sourceDate in accepted inputs; snapshot, retrieval and build dates excluded. Not a network-wide freshness guarantee.",
-  "sourceFingerprint": "aa6cc228eddc65d6b72abdef699b4f141540fbe70e6090ba156427a1e18544cc",
+  "sourceFingerprint": "a262db460cbd11bceb6287722874b8111ecc537bc605d5e7f765f26ba3e69cd1",
   "source": {
     "dataset": "iapd_sec_compilation",
     "releaseLabel": "IA_FIRM_SEC_Feed_08_27_2026",
@@ -17,10 +17,10 @@
     "riaRegistered": 16783,
     "riaPending": 235,
     "eraReporting": 6604,
-    "canonicalFirms": 25777,
-    "extraFirmsWithoutAdvFacts": 2155,
-    "crdIdentifiers": 25777,
-    "crdDistinctFirms": 25777,
+    "canonicalFirms": 31268,
+    "extraFirmsWithoutAdvFacts": 7646,
+    "crdIdentifiers": 31268,
+    "crdDistinctFirms": 31268,
     "secFileIdentifiers": 23621,
     "secFileDistinctFirms": 23621,
     "partitionRule": "form_adv_firm_facts.dataset_kind is mutually exclusive: ria XOR era. COUNT(ria)+COUNT(era)=COUNT(roster). This is a filing-class partition of the monthly SEC IARD roster, not a second identity spine.",
@@ -193,8 +193,8 @@
       "reason": "Item observations are not firms, filings, accounts, or clients."
     },
     {
-      "total": "25777 canonical firms as the public roster",
-      "reason": "2155 extra identities lack ADV facts and are excluded from the SEC/IARD roster headline."
+      "total": "31268 canonical firms as the public roster",
+      "reason": "7646 extra identities lack ADV facts and are excluded from the SEC/IARD roster headline."
     },
     {
       "total": "National summed RAUM / AUM dollar total",
@@ -237,7 +237,7 @@
       "publicationStatus": "PUBLIC",
       "trace": {
         "counts": "One current form_adv_firm_facts row per CRD in the monthly RIA+ERA pair.",
-        "doesNotCount": "Not 2155 extra canonical firms without ADV facts. Not Form ADV filings. Not attribute rows. Not CRD identifiers as additional firms.",
+        "doesNotCount": "Not 7646 extra canonical firms without ADV facts. Not Form ADV filings. Not attribute rows. Not CRD identifiers as additional firms.",
         "contributingSourceSystems": [
           "iapd_sec_compilation",
           "form_adv_firm_facts"
@@ -1025,7 +1025,7 @@
     "provenance": {
       "acceptedRelease": "INV-HOME-001 / INV-HOME-002",
       "source": "packages/domain/src/investor-home-intel.ts at 08db4a98c11ea364e39be9397936cddef2135fb6",
-      "note": "Preserved accepted census; not a new acquisition or fresh database recount."
+      "note": "RIA/ERA roster grains preserved. Canonical firm and CRD spine reuses the verified publication-aware count 31268 already driving the public directory. Not a new acquisition or fresh database recount."
     },
     "source": {
       "dataset": "iapd_sec_compilation",
@@ -1043,8 +1043,8 @@
       "riaPending": 235,
       "eraReporting": 6604,
       "indexableTrustReports": 1000,
-      "extraFirmsWithoutAdvFacts": 2155,
-      "allCanonicalFirms": 25777,
+      "extraFirmsWithoutAdvFacts": 7646,
+      "allCanonicalFirms": 31268,
       "mainOfficeBranches": 23622,
       "rosterPrincipalOfficeWithRegion": 17997,
       "rosterPrincipalOfficeNullRegion": 5625,
@@ -13595,9 +13595,9 @@
       }
     ],
     "identity": {
-      "canonicalFirms": 25777,
+      "canonicalFirms": 31268,
       "rosterFirms": 23622,
-      "withoutCurrentAdvFacts": 2155,
+      "withoutCurrentAdvFacts": 7646,
       "deltaFromStateRegistrations": 0,
       "deltaFromPrincipalOffice": 0,
       "deltaFromRegulatoryEvidence": 0,
@@ -13606,8 +13606,8 @@
     "aggregationPolicy": "Never sum state IA, ERA, notice filings, principal office or activity into firms. Exact CRD bridges are relationships, not additional firms."
   },
   "acceptedInputHashes": {
-    "data/home/investor-national-census-r2-04.json": "7d30d0ae8b3b3547a7fd913345722aa1515d8a23b1cd5d4fc5b84d5b98eee740",
-    "data/home/investor-home-census-r2-04.json": "87cd71e94ad64c031f3f8f08691e04f17bbbf6a0a023d590139302c127f74041",
+    "data/home/investor-national-census-r2-04.json": "e5e8a31bcecff6da81437580acecf07fa157387c5ac752fd90ed29f93a9a5a5b",
+    "data/home/investor-home-census-r2-04.json": "2de38d6e51786f2c9e6f41a4ede93ffd55a16f6ce353db172339ede3252ce12c",
     "artifacts/nj-inv-003-public-snapshot.json": "c59b91ecd3228084d0a3d34a3e9f5769c2cff438be33ac3d11a7df91dfe6c8fe",
     "artifacts/ca-inv-001-public-snapshot.json": "b825ac1ee68ac3f0b33b1b236bca3ab5bf0a6c42d883abb4d98eb1503a9582f5",
     "artifacts/tx-inv-001-public-snapshot.json": "4983aa85afb933fb12d843160c619aac7ba914118b633099f021c283bad0db39",

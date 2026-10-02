@@ -8,8 +8,10 @@ const sources=Object.fromEntries(['CO','VA','NY','IL','OR','PA','NC','OH','MA','
 const clone=x=>structuredClone(x);
 test('canonical firm spine reconciles; registrations, office overlays and evidence cannot inflate it',()=>{
  validateInvestor(sources,census,home);
- assert.equal(m.identity.canonicalFirms,25777);assert.equal(m.identity.rosterFirms,23622);
- assert.equal(m.reconciliation.identity.withoutCurrentAdvFacts,2155);assert.equal(m.reconciliation.identity.unexplainedDelta,0);
+ assert.equal(m.identity.canonicalFirms,31268);assert.equal(m.identity.rosterFirms,23622);
+ assert.equal(m.identity.crdDistinctFirms,31268);assert.equal(m.identity.crdIdentifiers,31268);
+ assert.equal(m.reconciliation.identity.canonicalFirms,31268);
+ assert.equal(m.reconciliation.identity.withoutCurrentAdvFacts,7646);assert.equal(m.reconciliation.identity.unexplainedDelta,0);
  const bad=clone(census);bad.counts.canonicalFirms+=sources.CO.stateEra.activeDistinctCrd;assert.throws(()=>validateInvestor(sources,bad,home));
  const changed=clone(sources);changed.IL.expansionLedger.NET_NEW_CANONICAL_ORGANIZATIONS=1;assert.throws(()=>validateInvestor(changed,census,home));
 });
