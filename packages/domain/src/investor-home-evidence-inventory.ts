@@ -1066,12 +1066,12 @@ export function buildInvestorHomepageEvidenceInventory(): InvestorHomepageEviden
     ),
     national(
       'extra_without_adv',
-      'Canonical identities without ADV facts',
+      'Canonical identities outside the SEC/IARD roster',
       metrics.identity.extraFirmsWithoutAdvFacts,
       'FIRM_IDENTITY_REGISTRATION',
       'canonical identity without current ADV fact',
-      'Accepted identities outside the current ADV fact roster.',
-      'Additional current roster firms or lower-quality firms.',
+      'Accepted identities with no current SEC/IARD roster fact row here: earlier non-roster identities plus state-registered adviser firms from the IAPD state compilation.',
+      'Additional current roster firms, firms that never filed Form ADV, or lower-quality firms.',
     ),
     national(
       'crd_linked_firms',

@@ -47,7 +47,14 @@ describe('INV-HOME-001 locked census', () => {
   it('does not treat extra canonical firms as the SEC roster', () => {
     expect(census.counts.firms_official).toBe(25777);
     expect(census.counts.firms_official - census.counts.form_adv_firm_facts).toBe(
-      V1_SEC_ROSTER.extraFirmsWithoutAdvFacts,
+      V1_SEC_ROSTER.earlierIdentitiesWithoutAdvFacts,
+    );
+    expect(
+      V1_SEC_ROSTER.earlierIdentitiesWithoutAdvFacts +
+        V1_SEC_ROSTER.stateRegisteredAdviserFirmsWithoutAdvFacts,
+    ).toBe(V1_SEC_ROSTER.extraFirmsWithoutAdvFacts);
+    expect(V1_SEC_ROSTER.totalFacts + V1_SEC_ROSTER.extraFirmsWithoutAdvFacts).toBe(
+      V1_SEC_ROSTER.allCanonicalFirms,
     );
   });
 
