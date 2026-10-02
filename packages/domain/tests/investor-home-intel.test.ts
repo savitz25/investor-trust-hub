@@ -46,9 +46,11 @@ describe('INV-HOME-001 locked census', () => {
 
   it('does not treat extra canonical firms as the SEC roster', () => {
     expect(census.counts.firms_official).toBe(25777);
-    expect(census.counts.firms_official - census.counts.form_adv_firm_facts).toBe(
+    expect(V1_SEC_ROSTER.allCanonicalFirms).toBe(31268);
+    expect(V1_SEC_ROSTER.allCanonicalFirms - V1_SEC_ROSTER.totalFacts).toBe(
       V1_SEC_ROSTER.extraFirmsWithoutAdvFacts,
     );
+    expect(V1_SEC_ROSTER.totalFacts).not.toBe(V1_SEC_ROSTER.allCanonicalFirms);
   });
 
   it('locks Wave-1 indexable Trust Reports at 1,000', () => {

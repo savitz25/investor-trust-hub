@@ -2,7 +2,7 @@
   "provenance": {
     "acceptedRelease": "INV-HOME-001 / INV-HOME-002",
     "source": "packages/domain/src/investor-home-intel.ts at 08db4a98c11ea364e39be9397936cddef2135fb6",
-    "note": "Preserved accepted census; not a new acquisition or fresh database recount."
+    "note": "RIA/ERA roster grains preserved. Canonical firm and CRD spine reuses the verified publication-aware count 31268 already driving the public directory. Not a new acquisition or fresh database recount."
   },
   "counts": {
     "rosterFirms": 23622,
@@ -11,9 +11,9 @@
     "riaRegistered": 16783,
     "riaPending": 235,
     "eraReporting": 6604,
-    "canonicalFirms": 25777,
-    "crdIdentifiers": 25777,
-    "crdDistinctFirms": 25777,
+    "canonicalFirms": 31268,
+    "crdIdentifiers": 31268,
+    "crdDistinctFirms": 31268,
     "secFileIdentifiers": 23621,
     "secFileDistinctFirms": 23621,
     "formAdvFilings": 635269,

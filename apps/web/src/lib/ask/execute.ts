@@ -8,6 +8,7 @@ import {
   INVESTOR_ASK_CONTRACT,
   INVESTOR_ASK_PAGE_SIZE,
   REGION_NAMES,
+  V1_SEC_ROSTER,
   V1_SOURCE,
   formatRaum,
   interpretInvestorAskQuery,
@@ -116,7 +117,7 @@ function provenance(parsed: ParsedInvestorAsk, metric: string, rows?: FirmRow[])
     exclusions: [
       'Do not add RIA + ERA into one adviser quality total.',
       'Do not treat principal office as service territory.',
-      '2,155 canonical firms without ADV facts are outside the roster universe.',
+      `${V1_SEC_ROSTER.extraFirmsWithoutAdvFacts.toLocaleString('en-US')} canonical firms without ADV facts are outside the roster universe.`,
     ],
     identifierMethod: q.identifier ? `Exact labeled ${q.identifier.type === 'crd' ? 'firm CRD' : 'SEC file number'} ${q.identifier.value}` : 'Not an identifier query',
   };
