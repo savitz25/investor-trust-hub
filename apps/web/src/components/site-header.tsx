@@ -6,6 +6,7 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { PRIMARY_ROUTES } from '@ith/config';
 import { BrandLogo } from '@/components/brand-logo';
 import { SwitchHubMenu } from '@/components/switch-hub-menu';
+import { MyTrustHubAccountEntry } from '@/components/my-investor/my-trusthub-account-entry';
 
 const NAV = PRIMARY_ROUTES.filter((route) => route.href !== '/');
 
@@ -80,6 +81,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="th-header-actions">
+          <MyTrustHubAccountEntry />
           <SwitchHubMenu />
         </div>
 
@@ -124,6 +126,9 @@ export function SiteHeader() {
                   {item.label}
                 </Link>
               ))}
+              <div className="mt-4 flex flex-col border-t border-[#E2E8F0] pt-4">
+                <MyTrustHubAccountEntry variant="drawer" onNavigate={() => setOpen(false)} />
+              </div>
               <div className="mt-4 border-t border-[#E2E8F0] pt-4">
                 <SwitchHubMenu variant="embedded" />
               </div>
