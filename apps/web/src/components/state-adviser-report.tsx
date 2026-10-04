@@ -1,4 +1,5 @@
 import type { PublishedStateAdviser } from '@/lib/firms/state-advisers';
+import { SaveFirmButton } from './my-investor/save-firm-button';
 
 const OFFICIAL_FEED = 'https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_09_30_2026.xml.gz';
 
@@ -43,6 +44,7 @@ export function StateAdviserFirmReport({ adviser }: { adviser: PublishedStateAdv
           This profile contains the cited IAPD state-registration observations. SEC registration,
           Form ADV details, disclosures, and principal office are not established by these rows.
         </p>
+        <SaveFirmButton slug={adviser.slug} name={adviser.displayName} crd={adviser.crd} kind="state_adviser_firm" />
       </header>
       <StateRegistrationPanel adviser={adviser} />
     </article>

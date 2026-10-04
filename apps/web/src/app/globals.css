@@ -258,6 +258,16 @@ summary:focus-visible {
   outline-offset: 2px;
 }
 
+/* Secondary header link: shown only where the 1200px shell has room for it. */
+.th-nav-link.th-nav-link-wide {
+  display: none;
+}
+@media (min-width: 1200px) {
+  .th-nav-link.th-nav-link-wide {
+    display: inline-flex;
+  }
+}
+
 .th-header-actions {
   display: none;
   flex-shrink: 0;

@@ -20,6 +20,7 @@ import type { CanonicalIdentifier } from '@ith/domain';
 import { Breadcrumb } from './breadcrumb';
 import { FirmProfileIntelligence } from './firm-profile-intelligence';
 import { NjFirmEvidenceModule } from './nj-firm-evidence';
+import { SaveFirmButton } from './my-investor/save-firm-button';
 import type { FirmTrustReportModel } from '@/lib/firms/types';
 import { formatDisplayDate, formatReleaseLabel } from '@/lib/dates';
 
@@ -77,6 +78,7 @@ export function FirmTrustReport({ report }: { report: FirmTrustReportModel }) {
           <span className="text-sm text-slate-700">{report.classification.headline}</span>
         </div>
         <p className="mt-4 text-sm leading-relaxed">{report.classification.supportingCopy}</p>
+        <SaveFirmButton slug={report.slug} name={report.displayName} crd={report.crd} kind="official_firm" parentHandoff />
       </header>
 
       <dl className="mt-8 grid gap-4 rounded-2xl border border-[var(--ith-border)] bg-white p-5 sm:grid-cols-2">
