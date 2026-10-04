@@ -10,8 +10,7 @@ import { INVESTOR_ORIGIN, PARENT_API_PATH, PARENT_ORIGIN, SOURCE_PATH, investorM
 import { deviceFirstProfileSave, deviceFirstProfileUnsave, listPendingParentOps, PRODUCTION_PARENT_SYNC } from '@/lib/my-investor/parent-adapter';
 import { assessOfficialFirm, investorPublication, type FirmPublicationPort, type PublishedFirmRow } from '@/lib/my-investor/publication';
 import {
-  INVESTOR_CANARIES, INVESTOR_CANARY_ACTIVE, INVESTOR_PARENT_SYNC_BROAD,
-  productionHandoffDeps, productionParentGate, stageParentHandoff, type ParentResponse,
+  INVESTOR_CANARIES, canaryAllows, productionHandoffDeps, productionParentGate, releaseAdmits, stageParentHandoff, type ParentResponse,
 } from '@/lib/my-investor/signed-handoff';
 import { handleInvestorSource } from '@/lib/my-investor/source-callback';
 import { SAVED_FIRMS_KEY, isFirmSaved, listSavedFirms } from '@/lib/my-investor/storage';
@@ -22,7 +21,15 @@ const source = (path: string) => readFileSync(join(SRC, path), 'utf8');
 const CANARY = INVESTOR_CANARIES[0];
 const FIRM = { slug: CANARY.slug, name: CANARY.name, crd: CANARY.crd, kind: 'official_firm' as const };
 const STATE_ONLY = { slug: 'sec-crd-7770001', name: 'Fixture State Adviser LLC', crd: '7770001', kind: 'state_adviser_firm' as const };
-const gate = { broad: false, canary: true };
+const CANARY_ENV = {
+  NEXT_PUBLIC_INVESTOR_PARENT_SAVE_ENABLED: '1',
+  MTH_INVESTOR_PARENT_SAVE_MODE: 'production',
+  NEXT_PUBLIC_INVESTOR_PARENT_SAVE_CANARY_SLUGS: 'sec-crd-106176,sec-crd-104571,sec-crd-110441',
+};
+const BROAD_ENV = { ...CANARY_ENV, NEXT_PUBLIC_INVESTOR_PARENT_SAVE_CANARY_SLUGS: '' };
+const OFF = { enabled: false, parentSync: 'off', canary: false, broad: false, slugs: [] };
+/** The gate an operator would produce with the three-slug canary configuration. */
+const gate = productionParentGate(CANARY_ENV);
 const browser = 'b'.repeat(43);
 
 /** Fixture publication source: the rows a production read would return per CRD. */
@@ -183,14 +190,86 @@ describe('publication eligibility', () => {
   });
 });
 
+describe('production release gate (environment driven)', () => {
+  it('all flags absent, or any one missing, is OFF', () => {
+    expect(productionParentGate({})).toEqual(OFF);
+    for (const missing of Object.keys(CANARY_ENV)) {
+      const env: Record<string, string | undefined> = { ...CANARY_ENV, [missing]: undefined };
+      const release = productionParentGate(env);
+      if (missing === 'NEXT_PUBLIC_INVESTOR_PARENT_SAVE_CANARY_SLUGS') continue; // absent list is the broad form, proven below
+      expect(release, missing).toEqual(OFF);
+      for (const canary of INVESTOR_CANARIES) expect(releaseAdmits(canary.slug, release)).toBe(false);
+    }
+  });
+
+  it('the exact three-slug list is canary mode: each canary admitted, an unrelated firm denied', () => {
+    const release = productionParentGate(CANARY_ENV);
+    expect(release).toEqual({ enabled: true, parentSync: 'production', canary: true, broad: false, slugs: ['sec-crd-106176', 'sec-crd-104571', 'sec-crd-110441'] });
+    expect(release.slugs).toEqual(INVESTOR_CANARIES.map((item) => item.slug));
+    for (const canary of INVESTOR_CANARIES) expect(releaseAdmits(canary.slug, release), canary.slug).toBe(true);
+    for (const other of ['sec-crd-105958', 'sec-crd-1061760', 'sec-crd-10617', 'SEC-CRD-106176', 'sec-crd-106176 ', 'northbridge-ledger-advisors', '106176', 'crd-106176', '']) {
+      expect(releaseAdmits(other, release), other).toBe(false);
+    }
+    expect(productionParentGate({ ...CANARY_ENV, NEXT_PUBLIC_INVESTOR_PARENT_SAVE_CANARY_SLUGS: ' sec-crd-106176 , sec-crd-104571 ' }).slugs).toEqual(['sec-crd-106176', 'sec-crd-104571']);
+  });
+
+  it('an empty list with production enabled is broad mode; only official firm slugs are ever released', () => {
+    for (const env of [BROAD_ENV, { ...BROAD_ENV, NEXT_PUBLIC_INVESTOR_PARENT_SAVE_CANARY_SLUGS: undefined }, { ...BROAD_ENV, NEXT_PUBLIC_INVESTOR_PARENT_SAVE_CANARY_SLUGS: '  ' }]) {
+      const release = productionParentGate(env);
+      expect(release).toEqual({ enabled: true, parentSync: 'production', canary: false, broad: true, slugs: [] });
+      expect(releaseAdmits('sec-crd-105958', release)).toBe(true);
+      expect(releaseAdmits('sec-crd-106176', release)).toBe(true);
+      for (const never of ['northbridge-ledger-advisors', 'jordan-p-elmwood', '', '../sec-crd-106176']) expect(releaseAdmits(never, release)).toBe(false);
+    }
+    expect(canaryAllows('sec-crd-106176', { broad: true, canary: true })).toBe(false); // contradictory gate is closed
+  });
+
+  it('malformed configuration fails closed', () => {
+    const cases: Array<Record<string, string | undefined>> = [
+      { ...CANARY_ENV, MTH_INVESTOR_PARENT_SAVE_MODE: 'preview' },
+      { ...CANARY_ENV, MTH_INVESTOR_PARENT_SAVE_MODE: 'Production' },
+      { ...CANARY_ENV, MTH_INVESTOR_PARENT_SAVE_MODE: ' production' },
+      { ...CANARY_ENV, MTH_INVESTOR_PARENT_SAVE_MODE: 'isolated' },
+      { ...CANARY_ENV, NEXT_PUBLIC_INVESTOR_PARENT_SAVE_ENABLED: 'true' },
+      { ...CANARY_ENV, NEXT_PUBLIC_INVESTOR_PARENT_SAVE_ENABLED: '0' },
+      { ...CANARY_ENV, NEXT_PUBLIC_INVESTOR_PARENT_SAVE_ENABLED: ' 1' },
+      { ...CANARY_ENV, NEXT_PUBLIC_INVESTOR_PARENT_SAVE_CANARY_SLUGS: 'Weinberger Asset Management' },
+      { ...CANARY_ENV, NEXT_PUBLIC_INVESTOR_PARENT_SAVE_CANARY_SLUGS: 'sec-crd-106176,sec-crd-106176' },
+      { ...CANARY_ENV, NEXT_PUBLIC_INVESTOR_PARENT_SAVE_CANARY_SLUGS: 'sec-crd-106176,,sec-crd-104571' },
+      { ...CANARY_ENV, NEXT_PUBLIC_INVESTOR_PARENT_SAVE_CANARY_SLUGS: 'sec-crd-106176,' },
+      { ...CANARY_ENV, NEXT_PUBLIC_INVESTOR_PARENT_SAVE_CANARY_SLUGS: '../sec-crd-106176' },
+      { ...CANARY_ENV, NEXT_PUBLIC_INVESTOR_PARENT_SAVE_CANARY_SLUGS: 'sec-crd-0106176' },
+      { ...CANARY_ENV, NEXT_PUBLIC_INVESTOR_PARENT_SAVE_CANARY_SLUGS: '106176' },
+      { ...CANARY_ENV, NEXT_PUBLIC_INVESTOR_PARENT_SAVE_CANARY_SLUGS: 'crd-106176' },
+      { ...CANARY_ENV, NEXT_PUBLIC_INVESTOR_PARENT_SAVE_CANARY_SLUGS: 'sec-crd-106176;sec-crd-104571' },
+      { ...CANARY_ENV, NEXT_PUBLIC_INVESTOR_PARENT_SAVE_CANARY_SLUGS: '*' },
+    ];
+    for (const env of cases) {
+      const release = productionParentGate(env);
+      expect(release, JSON.stringify(env)).toEqual(OFF);
+      expect(releaseAdmits('sec-crd-106176', release)).toBe(false);
+    }
+  });
+
+  it('the profile control asks the server decision and never decides admission itself', () => {
+    const button = source('components/my-investor/save-firm-button.tsx');
+    expect(button).toContain("process.env.NEXT_PUBLIC_INVESTOR_PARENT_SAVE_ENABLED === '1'");
+    expect(button).toContain('if (!parentHandoff || !PARENT_SAVE_ENABLED) return;');
+    expect(button).toContain('if (!parentHandoff || !releaseAdmitted || !store || pageHidden()) return false;');
+    expect(button).not.toMatch(/CANARY_SLUGS|PARENT_SAVE_MODE/);
+    const lib = source('lib/my-investor/signed-handoff.ts');
+    expect(lib).not.toMatch(/INVESTOR_PARENT_SYNC_BROAD|INVESTOR_CANARY_ACTIVE/);
+  });
+});
+
 describe('signed handoff staging', () => {
-  it('production gate is closed: nothing is read, signed or sent', async () => {
-    expect([INVESTOR_PARENT_SYNC_BROAD, INVESTOR_CANARY_ACTIVE]).toEqual([false, false]);
-    expect(productionParentGate()).toEqual({ broad: false, canary: false });
+  it('with no release configuration the gate is closed: nothing is read, signed or sent', async () => {
+    expect(productionParentGate({})).toEqual(OFF);
+    expect(productionParentGate()).toEqual(OFF); // this process has none of the three variables
     const port = publication();
     const key = keys('investor-test');
     const parent = parentMock(Date.now(), key.publicKey);
-    const result = await stageParentHandoff({ slug: CANARY.slug, intent: 'save', pageOpen: true, signedIn: true, gate: productionParentGate() },
+    const result = await stageParentHandoff({ slug: CANARY.slug, intent: 'save', pageOpen: true, signedIn: true, gate: productionParentGate({}) },
       { publication: port, key: key.privateKey, parent: parent.parent });
     expect(result).toEqual({ state: 'local_only', reason: 'sync_off', watchCreated: false, parentSync: 'off' });
     expect(port.reads).toHaveLength(0);
@@ -200,7 +279,8 @@ describe('signed handoff staging', () => {
     expect(productionHandoffDeps({ MY_TRUSTHUB_V23_INVESTOR_KEY_ID: 'k', MY_TRUSTHUB_V23_INVESTOR_SIGNING_PRIVATE_KEY_PEM: key.privateKey.pem, MY_TRUSTHUB_V23_PARENT_ORIGIN: 'https://evil.example' } as unknown as NodeJS.ProcessEnv)).toEqual({});
     const route = source('app/api/my-investor/profile-save/route.ts');
     expect(route).toContain('const gate = productionParentGate();');
-    expect(route).not.toMatch(/canary:\s*true|process\.env/);
+    expect(route).toContain('if (releaseAdmits(slug, gate)) Object.assign(deps, productionHandoffDeps());');
+    expect(route).not.toMatch(/canary:\s*true|broad:\s*true|process\.env/);
   });
 
   it('E/J: an exact supported firm stages a server-derived, Ed25519-signed manifest', async () => {
@@ -257,6 +337,8 @@ describe('signed handoff staging', () => {
     const key = keys('investor-test');
     const cases: Array<[Record<string, unknown>, string]> = [
       [{ slug: 'sec-crd-9999999' }, 'sync_off'], // not a canary: closed before any read
+      [{ slug: 'northbridge-ledger-advisors' }, 'sync_off'], // synthetic firm
+      [{ slug: 'sec-crd-7770001' }, 'sync_off'], // state-adviser-only profile outside the canary
       [{ slug: CANARY.slug, profileClass: 'representative' }, 'wrong_class'],
       [{ slug: CANARY.slug, claimedCrd: '104571' }, 'tampered_crd'],
       [{ slug: CANARY.slug, claimedReturnPath: '/firm/sec-crd-104571' }, 'tampered_return'],
@@ -284,6 +366,22 @@ describe('signed handoff staging', () => {
       expect(result, reason).toMatchObject({ state: 'local_only', reason });
       expect(parent.calls).toHaveLength(0);
     }
+    // Broad mode still admits nothing that is not one published official firm for its exact CRD.
+    const broad = productionParentGate(BROAD_ENV);
+    for (const [slug, reason] of [['northbridge-ledger-advisors', 'sync_off'], ['sec-crd-7770001', 'unsupported_class'], ['sec-crd-7770002', 'ambiguous'], ['sec-crd-7770003', 'noncanonical'], ['sec-crd-9999999', 'unpublished']] as const) {
+      const parent = parentMock(now, key.publicKey);
+      const result = await stageParentHandoff({ slug, intent: 'save', pageOpen: true, signedIn: true, gate: broad },
+        { publication: publication(), key: key.privateKey, parent: parent.parent, now: () => now, browserBinding: browser });
+      expect(result, slug).toMatchObject({ state: 'local_only', reason, parentSync: 'off' });
+      expect(parent.calls, slug).toHaveLength(0);
+    }
+    // A failed production read is not a publication: the device Save stands, staging is refused.
+    const down: FirmPublicationPort = { byCrd: async () => { throw new Error('database unavailable'); } };
+    const downParent = parentMock(now, key.publicKey);
+    expect(await stageParentHandoff({ slug: CANARY.slug, intent: 'save', pageOpen: true, signedIn: true, gate },
+      { publication: down, key: key.privateKey, parent: downParent.parent, now: () => now })).toMatchObject({ state: 'local_only', reason: 'unavailable' });
+    expect(downParent.calls).toHaveLength(0);
+    expect(deviceFirstProfileSave(FIRM).device.ok).toBe(true);
     // No key, a parent that answers for another manifest, or an expired stage: device-only.
     expect(await stageParentHandoff({ slug: CANARY.slug, intent: 'save', pageOpen: true, signedIn: true, gate }, { publication: publication() }))
       .toMatchObject({ state: 'local_only', reason: 'unsigned' });
@@ -384,11 +482,31 @@ describe('Ask -> Investor source channel', () => {
     const acknowledged = await handleInvestorSource(call(ask.privateKey, ack, 'source:ack', now), options);
     expect(acknowledged.status).toBe(200);
     expect(await acknowledged.json()).toEqual({ ok: true, result: { watchCreated: false } });
+    // Unsave acknowledgement uses the same signed receipt with outcome local_only.
+    const unsaveAck = { ...ack, receipts: [{ ...receipt, parent: { outcome: 'local_only' } }] };
+    expect((await handleInvestorSource(call(ask.privateKey, unsaveAck, 'source:ack', now), options)).status).toBe(200);
     expect((await handleInvestorSource(call(ask.privateKey, ack, 'source:read', now), options)).status).toBe(403); // wrong scope
     expect((await handleInvestorSource(call(ask.privateKey, { ...ack, receipts: [{ ...receipt, watch: { id: 'w' } }] }, 'source:ack', now), options)).status).toBe(403);
     expect((await handleInvestorSource(call(ask.privateKey, { ...ack, receipts: [{ ...receipt, requestKey: 'x'.repeat(43) + ':1' }] }, 'source:ack', now), options)).status).toBe(403);
     expect((await handleInvestorSource(call(ask.privateKey, { ...ack, receipts: [{ ...receipt, parent: { outcome: 'failed' } }] }, 'source:ack', now), options)).status).toBe(403);
     expect((await handleInvestorSource(call(ask.privateKey, { ...ack, receipts: [{ ...receipt, item: { ...receipt.item, profile: { ...profile, nativeId: 'crd-7770001' } } }] }, 'source:ack', now), options)).status).toBe(403);
+  });
+});
+
+describe('shared v2-3 transport convention', () => {
+  it('uses the same wire constants as Move and Lender; only the hub name differs', () => {
+    const assertion = source('lib/my-investor/investor-assertion.ts');
+    expect(assertion).toContain("ASSERTION_HEADER = 'x-trusthub-v23-assertion'");
+    expect(assertion).toContain('ASSERTION_TTL_SECONDS = 30');
+    expect(assertion).toContain("typ: 'trusthub-v23+jws'");
+    expect(assertion).toContain("'ask_origin,aud,body_sha256,browser,exp,grant,iat,investor_origin,iss,jti,method,path,scope,session,sub,v'");
+    expect(assertion).toContain('jti: randomBytes(32).toString(\'base64url\')');
+    const manifest = source('lib/my-investor/manifest.ts');
+    for (const wire of ["'v2-3/selected-profiles/3'", "'v2-3/parent-runtime/1'", "'https://www.asktrusthub.com'", "'https://www.investortrusthub.com'", "'/api/my-trusthub/profile-save'", "'/my/profile-save'"]) expect(manifest).toContain(wire);
+    const stage = source('lib/my-investor/signed-handoff.ts');
+    for (const name of ['MY_TRUSTHUB_V23_INVESTOR_KEY_ID', 'MY_TRUSTHUB_V23_INVESTOR_SIGNING_PRIVATE_KEY_PEM', 'MY_TRUSTHUB_V23_PARENT_ORIGIN', 'prepareGuestProfileTransfer', 'prepareProfileSaveContinuation']) expect(stage).toContain(name);
+    const route = source('app/api/my-trusthub/profile-save/source/route.ts');
+    for (const name of ['MY_TRUSTHUB_V23_ASK_KEY_ID', 'MY_TRUSTHUB_V23_ASK_VERIFY_PUBLIC_KEY_PEM']) expect(route).toContain(name);
   });
 });
 

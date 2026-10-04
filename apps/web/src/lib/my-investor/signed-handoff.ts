@@ -4,8 +4,14 @@
  * Ed25519 service assertion and stages the transfer with Ask; the browser only
  * ever carries an opaque continuation reference to a top-level form POST.
  *
- * Production broad sync and the three-profile canary are both off. A test may
- * pass canary: true to prove the path. The route must not.
+ * Release exposure comes from the production environment, not a compiled flag:
+ *   NEXT_PUBLIC_INVESTOR_PARENT_SAVE_ENABLED      master switch, exactly "1"
+ *   MTH_INVESTOR_PARENT_SAVE_MODE                 exactly "production"
+ *   NEXT_PUBLIC_INVESTOR_PARENT_SAVE_CANARY_SLUGS exact profile slugs, comma separated
+ * Off unless all agree. A non-empty slug list is the canary; an empty list is
+ * broad. Anything malformed is off. The NEXT_PUBLIC_ values are bundled at
+ * build, so Investor must redeploy when the switch or the list changes.
+ * The slug list only limits exposure. Identity is always the exact firm CRD.
  */
 import { randomBytes } from 'node:crypto';
 import { INVESTOR_PROFILE_CLASS } from './identity';
@@ -22,9 +28,6 @@ import {
 import { assessOfficialFirm, type FirmPublicationPort } from './publication';
 import type { HandoffIntent } from './handoff-form';
 
-export const INVESTOR_PARENT_SYNC_BROAD = false;
-export const INVESTOR_CANARY_ACTIVE = false;
-
 /** Ordinary SEC/IARD firm profiles chosen for the first parent canary. */
 export const INVESTOR_CANARIES = [
   { slug: 'sec-crd-106176', crd: '106176', name: 'WEINBERGER ASSET MANAGEMENT, INC' },
@@ -32,15 +35,53 @@ export const INVESTOR_CANARIES = [
   { slug: 'sec-crd-110441', crd: '110441', name: 'WESTERN ASSET MANAGEMENT COMPANY, LLC' },
 ] as const;
 
-export type OneClickGate = { broad: boolean; canary: boolean };
+/** Only an official firm profile slug can ever be released. */
+const RELEASE_SLUG = /^sec-crd-[1-9][0-9]{0,9}$/;
 
-export function productionParentGate(): { broad: false; canary: false } {
-  return { broad: false, canary: false };
+export type ParentRelease = {
+  enabled: boolean;
+  parentSync: 'off' | 'production';
+  canary: boolean;
+  broad: boolean;
+  slugs: readonly string[];
+};
+
+export type OneClickGate = { broad: boolean; canary: boolean; slugs?: readonly string[] };
+
+/** Empty or absent is an empty list. Any item that is not an exact official slug, or a repeat, is malformed. */
+function canarySlugList(raw: string | undefined): readonly string[] | null {
+  if (raw === undefined || raw.trim() === '') return [];
+  const slugs: string[] = [];
+  for (const part of raw.split(',')) {
+    const slug = part.trim();
+    if (!RELEASE_SLUG.test(slug) || slugs.includes(slug)) return null;
+    slugs.push(slug);
+  }
+  return slugs;
+}
+
+const RELEASE_OFF: ParentRelease = { enabled: false, parentSync: 'off', canary: false, broad: false, slugs: [] };
+
+/** Master off, or any malformed mode or slug list, stays off. */
+export function productionParentGate(env: Record<string, string | undefined> = process.env): ParentRelease {
+  const slugs = canarySlugList(env.NEXT_PUBLIC_INVESTOR_PARENT_SAVE_CANARY_SLUGS);
+  const enabled = env.NEXT_PUBLIC_INVESTOR_PARENT_SAVE_ENABLED === '1';
+  if (slugs === null || !enabled || env.MTH_INVESTOR_PARENT_SAVE_MODE !== 'production') return RELEASE_OFF;
+  if (slugs.length === 0) return { enabled: true, parentSync: 'production', canary: false, broad: true, slugs };
+  return { enabled: true, parentSync: 'production', canary: true, broad: false, slugs };
 }
 
 export function canaryAllows(slug: string, gate: OneClickGate): boolean {
-  if (gate.broad || !gate.canary) return false;
-  return INVESTOR_CANARIES.some((item) => item.slug === slug);
+  if (gate.broad && gate.canary) return false;
+  if (!RELEASE_SLUG.test(slug)) return false;
+  if (gate.broad) return true;
+  if (!gate.canary) return false;
+  return (gate.slugs ?? INVESTOR_CANARIES.map((item) => item.slug)).includes(slug);
+}
+
+/** Release exposure for one profile. Publication and CRD checks stay separate. */
+export function releaseAdmits(slug: string, gate: ParentRelease): boolean {
+  return gate.parentSync === 'production' && canaryAllows(slug, gate);
 }
 
 export type StageRequest = {

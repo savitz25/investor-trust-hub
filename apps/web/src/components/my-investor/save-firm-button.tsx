@@ -25,6 +25,9 @@ function pageHidden(): boolean {
   return document.visibilityState === 'hidden';
 }
 
+/** Bundled master switch. While it is off the control never asks the server. */
+const PARENT_SAVE_ENABLED = process.env.NEXT_PUBLIC_INVESTOR_PARENT_SAVE_ENABLED === '1';
+
 function tickets(): Storage | null {
   try { return sessionStorage; } catch { return null; }
 }
@@ -48,6 +51,7 @@ export function SaveFirmButton({ slug, name, crd, kind, parentHandoff = false }:
   const [note, setNote] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [keepOpen, setKeepOpen] = useState(false);
+  const [releaseAdmitted, setReleaseAdmitted] = useState(false);
   const accountEntry = investorMyTrustHubAccountEntryEnabled();
 
   const sync = useCallback(() => {
@@ -85,15 +89,33 @@ export function SaveFirmButton({ slug, name, crd, kind, parentHandoff = false }:
     };
   }, [sync]);
 
+  // The server decides release exposure for this profile; the control only asks.
+  useEffect(() => {
+    if (!parentHandoff || !PARENT_SAVE_ENABLED) return;
+    let cancelled = false;
+    setReleaseAdmitted(false);
+    void fetch('/api/my-investor/profile-save?slug=' + encodeURIComponent(slug))
+      .then((response) => (response.ok ? response.json() : null))
+      .then((body: { admitted?: boolean } | null) => {
+        if (!cancelled) setReleaseAdmitted(body?.admitted === true);
+      })
+      .catch(() => {
+        if (!cancelled) setReleaseAdmitted(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [parentHandoff, slug]);
+
   // Abandoned handoff recovery: a staged ticket that never left is sent once
   // the page is visible again. A sent ticket is never sent twice.
   useEffect(() => {
-    if (!parentHandoff) return;
+    if (!parentHandoff || !releaseAdmitted) return;
     const store = tickets();
     if (!store) return;
     const ticket = readHandoff(store, slug, Date.now());
     if (resumeDecision(ticket, document.visibilityState) === 'submit' && ticket) submitTicket(ticket);
-  }, [parentHandoff, slug, submitTicket]);
+  }, [parentHandoff, releaseAdmitted, slug, submitTicket]);
 
   function showNote(message: string) {
     setNote(message);
@@ -102,7 +124,7 @@ export function SaveFirmButton({ slug, name, crd, kind, parentHandoff = false }:
 
   async function beginHandoff(intent: HandoffIntent): Promise<boolean> {
     const store = tickets();
-    if (!parentHandoff || !store || pageHidden()) return false;
+    if (!parentHandoff || !releaseAdmitted || !store || pageHidden()) return false;
     setKeepOpen(true);
     try {
       const response = await fetch('/api/my-investor/profile-save', {
@@ -167,7 +189,7 @@ export function SaveFirmButton({ slug, name, crd, kind, parentHandoff = false }:
         <Link href={MY_INVESTOR_WORKSPACE_HREF} className="text-sm font-semibold text-[var(--ith-navy)] underline">
           {MY_INVESTOR_WORKSPACE_LABEL}
         </Link>
-        {parentHandoff && accountEntry ? (
+        {parentHandoff && releaseAdmitted && accountEntry ? (
           <a
             href={MY_TRUSTHUB_ACCOUNT_ENTRY_HREF}
             className="text-sm font-semibold text-[var(--ith-navy)] underline"
