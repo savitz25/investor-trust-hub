@@ -22,6 +22,7 @@ import AL_REGISTRATION_LENSES from '../../../data/alabama/al-inv-001/registratio
 import AL_SECURITIES_ORDERS from '../../../data/alabama/al-inv-001/securities-orders.json';
 import SC_REGISTRATION_LENSES from '../../../data/south-carolina/sc-inv-001/registration-lenses.json';
 import SC_SECURITIES_ORDERS from '../../../data/south-carolina/sc-inv-001/securities-orders.json';
+import MS_REGISTRATION_LENSES from '../../../data/mississippi/ms-inv-001/registration-lenses.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -93,7 +94,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS';
   name: string;
   href: string;
   regulator: string;
@@ -1024,6 +1025,21 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
       { label: 'Accepted national principal-office roster', sourceAsOf: SC_REGISTRATION_LENSES.principalOffice.sourceAsOf, retrievedAt: SC_REGISTRATION_LENSES.principalOffice.retrievedAt, snapshotAsOf: SC_REGISTRATION_LENSES.principalOffice.sourceAsOf, generatedAt: null },
       { label: 'IAPD STATE and SEC compilations', sourceAsOf: SC_REGISTRATION_LENSES.acceptedIapdSourceDate, retrievedAt: SC_REGISTRATION_LENSES.retrievedAt, snapshotAsOf: SC_REGISTRATION_LENSES.acceptedIapdSourceDate, generatedAt: null },
       { label: 'Attorney General 2025–2026 notices-and-orders index', sourceAsOf: null, retrievedAt: SC_SECURITIES_ORDERS.retrievedAt, snapshotAsOf: '2026-10-05', generatedAt: null },
+    ],
+  },
+  {
+    code: 'MS',
+    name: 'Mississippi',
+    href: '/mississippi',
+    regulator: 'Mississippi Secretary of State, Securities Division',
+    principalOfficeFirms: MS_REGISTRATION_LENSES.principalOffice.count,
+    rosterStatus: `IAPD MS APPROVED state IA ${MS_REGISTRATION_LENSES.stateIa.count.toLocaleString('en-US')} firm CRDs as of ${MS_REGISTRATION_LENSES.acceptedIapdSourceDate}`,
+    evidence: ['IAPD Mississippi state IA, federal notice and ERA jurisdiction lenses', 'accepted SEC/IARD principal-office overlay'],
+    identityNote: 'The 35 principal-office records are geography, not Mississippi registration. State IA, federal notice, ERA and person classes remain separate.',
+    limitation: 'The securities-order corpus was not acquired. Grains are not added into one adviser total. No adverse profile attachments.',
+    sourceClocks: [
+      { label: 'Accepted national principal-office roster', sourceAsOf: MS_REGISTRATION_LENSES.principalOffice.sourceAsOf, retrievedAt: MS_REGISTRATION_LENSES.principalOffice.retrievedAt, snapshotAsOf: MS_REGISTRATION_LENSES.principalOffice.sourceAsOf, generatedAt: null },
+      { label: 'IAPD STATE and SEC compilations', sourceAsOf: MS_REGISTRATION_LENSES.acceptedIapdSourceDate, retrievedAt: MS_REGISTRATION_LENSES.retrievedAt, snapshotAsOf: MS_REGISTRATION_LENSES.acceptedIapdSourceDate, generatedAt: null },
     ],
   },
 ];

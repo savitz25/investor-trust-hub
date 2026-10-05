@@ -21,6 +21,7 @@ import { LA_REGISTRATION_LENSES } from './la-public-intel';
 import { KY_DFI_2025_SECURITIES, KY_REGISTRATION_LENSES } from './ky-public-intel';
 import { AL_REGISTRATION_LENSES, AL_SECURITIES_ORDERS } from './al-public-intel';
 import { SC_REGISTRATION_LENSES, SC_SECURITIES_ORDERS } from './sc-public-intel';
+import { MS_REGISTRATION_LENSES } from './ms-public-intel';
 export type { InvestorResearchIntent, InvestorCondition } from './investor-research-plan';
 
 export const INVESTOR_ASK_CONTRACT = 'investor-ask-v1' as const;
@@ -512,6 +513,7 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     if (/\bkentucky\b/i.test(q)) push('Kentucky context', 'InvestorTrustHub /kentucky; SEC file identity alone does not establish Kentucky registration or notice filing.');
     if (/\balabama\b/i.test(q)) push('Alabama context', 'InvestorTrustHub /alabama; SEC file identity alone does not establish Alabama registration or notice filing.');
     if (/\bsouth carolina\b/i.test(q)) push('South Carolina context', 'InvestorTrustHub /south-carolina; SEC file identity alone does not establish South Carolina registration or notice filing.');
+    if (/\bmississippi\b/i.test(q)) push('Mississippi context', 'InvestorTrustHub /mississippi; SEC file identity alone does not establish Mississippi registration or notice filing.');
     return { raw: q, query, interpretation: lines };
   }
 
@@ -543,6 +545,7 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     if (/\bkentucky\b/i.test(q)) push('Kentucky context', 'InvestorTrustHub /kentucky; firm CRD identity alone does not establish Kentucky registration or notice filing.');
     if (/\balabama\b/i.test(q)) push('Alabama context', 'InvestorTrustHub /alabama; firm CRD identity alone does not establish Alabama registration or notice filing.');
     if (/\bsouth carolina\b/i.test(q)) push('South Carolina context', 'InvestorTrustHub /south-carolina; firm CRD identity alone does not establish South Carolina registration or notice filing.');
+    if (/\bmississippi\b/i.test(q)) push('Mississippi context', 'InvestorTrustHub /mississippi; firm CRD identity alone does not establish Mississippi registration or notice filing.');
     return { raw: q, query, interpretation: lines };
   }
 
@@ -566,7 +569,7 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
   // KY-INV-001: labeled firm identifiers above outrank state and city words.
   const kyNamed = /\bkentucky\b/i.test(q);
   const kyCity = /\b(louisville|lexington)\b/i.exec(q);
-  const kyBlockedByOtherState = !kyNamed && /\b(alabama|louisiana|indiana|wisconsin|tennessee|ohio|georgia|pennsylvania|north carolina|texas|nevada|minnesota|michigan|maryland|connecticut|virginia|colorado|illinois|oregon|california|washington|arizona|new york|new jersey|massachusetts)\b/i.test(q);
+  const kyBlockedByOtherState = !kyNamed && /\b(alabama|mississippi|louisiana|indiana|wisconsin|tennessee|ohio|georgia|pennsylvania|north carolina|texas|nevada|minnesota|michigan|maryland|connecticut|virginia|colorado|illinois|oregon|california|washington|arizona|new york|new jersey|massachusetts)\b/i.test(q);
   if ((kyNamed || (kyCity && !kyBlockedByOtherState)) && /\b(?:investment|advis[eo]rs?|ria|eras?|broker|securities|crd|sec|notice|disciplin|enforc|complaint|exams?|principal office|agents?|representatives?|iars?|total|combined|how many)\b/i.test(q)) {
     const ky = KY_REGISTRATION_LENSES;
     const report = KY_DFI_2025_SECURITIES;
@@ -693,6 +696,38 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
                         : `The accepted IAPD state compilation lists ${sc.stateIa.count} South Carolina state-registered IA firm CRDs (APPROVED). Federal notice (${sc.federalNotice.count.toLocaleString('en-US')}), ERA (${sc.era.count}) and principal-office (${sc.principalOffice.count}) lenses are separate and must not be added. Use /south-carolina.`;
     const query = failClosed(reason, ['South Carolina investor research page.', 'Find firm CRD 105958.']);
     if (scCity) query.geography = { type: 'principal_office_city', value: scCity[1]!, state: 'SC', meaning: 'City context only; not South Carolina registration or service territory' };
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  // MS-INV-001: bare Jackson, Gulfport, and Biloxi are not Mississippi triggers.
+  const msNamed = /\bmississippi\b/i.test(q) || (/\bin ms\b/i.test(q) && !/\bmissouri\b/i.test(q));
+  const msCity = msNamed ? /\b(jackson|gulfport|biloxi)\b/i.exec(q) : null;
+  if (msNamed && /\b(?:investment|advis[eo]rs?|ria|eras?|broker|securities|crd|sec|notice|disciplin|enforc|complaint|exams?|principal office|agents?|representatives?|iars?|total|combined|how many)\b/i.test(q)) {
+    const ms = MS_REGISTRATION_LENSES;
+    const reason = msCity
+      ? 'The named Mississippi city is geography only. InvestorTrustHub publishes no city securities route and no county route. A principal office does not establish Mississippi registration or notice filing. Use /mississippi.'
+      : /\bcomplaints?\b/i.test(q)
+        ? 'The Mississippi Secretary of State Securities Division publishes a complaint form. Provider-level complaint records and outcomes were not acquired; a complaint is not a finding. Use /mississippi.'
+        : /\b(?:disciplin\w*|enforc\w*|orders?|sanctions?)\b/i.test(q)
+          ? 'A Mississippi securities order roster was NOT_ACQUIRED. The public enforcement search is not a census. A cease-and-desist is not a final adjudication. Exact CRD attachments: 0. Use /mississippi.'
+          : /\b(?:examinations?|exams?)\b/i.test(q)
+            ? 'Provider-level Mississippi examination outcomes were NOT_ACQUIRED. Missing is not a clean examination history. Use /mississippi.'
+            : /\b(?:investment adviser representatives?|iars?)\b/i.test(q)
+              ? 'Mississippi investment adviser representatives are persons, not firms. The IAR bulk roster was not acquired. A person CRD is not a firm CRD. Use /mississippi.'
+              : /\b(?:broker[- ]?dealers?|securities agents?|agents?)\b/i.test(q)
+                ? 'The Mississippi Secretary of State registers broker-dealers, agents and adviser representatives as separate firm and person grains. Bulk rosters were not acquired. Use /mississippi.'
+                : /\b(?:principal office|headquarter\w*|based in|located in)\b/i.test(q)
+                  ? `The accepted national SEC/IARD roster reports ${ms.principalOffice.count} Mississippi principal-office firm records as of ${ms.principalOffice.sourceAsOf}. Office geography is not Mississippi registration or notice filing. Use /mississippi.`
+                  : /\b(?:era|exempt reporting)\b/i.test(q)
+                    ? `The accepted IAPD state compilation lists ${ms.era.count} active Mississippi exempt reporting adviser firm CRDs. ERA status is not state IA or SEC registration. Use /mississippi.`
+                    : /\b(?:federal[- ]covered|notice[- ]filed|notice filing|notice)\b/i.test(q)
+                      ? `The accepted IAPD SEC compilation lists ${ms.federalNotice.count.toLocaleString('en-US')} firms with a FILED Mississippi notice. A notice filing is not Mississippi state IA registration. Use /mississippi.`
+                      : /\b(?:total|combined|how many|all)\b/i.test(q) && !/\b(?:state[- ]registered|notice|era|exempt|principal|broker|agent|representative|federal)\b/i.test(q)
+                        ? `Mississippi state IA (${ms.stateIa.count}), federal notice (${ms.federalNotice.count.toLocaleString('en-US')}), ERA (${ms.era.count}) and principal-office (${ms.principalOffice.count}) lenses cannot be combined into one adviser total. Use /mississippi.`
+                        : `The accepted IAPD state compilation lists ${ms.stateIa.count} Mississippi state-registered IA firm CRDs (APPROVED). Federal notice (${ms.federalNotice.count.toLocaleString('en-US')}), ERA (${ms.era.count}) and principal-office (${ms.principalOffice.count}) lenses are separate and must not be added. Use /mississippi.`;
+    const query = failClosed(reason, ['Mississippi investor research page.', 'Find firm CRD 105958.']);
+    if (msCity) query.geography = { type: 'principal_office_city', value: msCity[1]!, state: 'MS', meaning: 'City context only; not Mississippi registration or service territory' };
     push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };
   }
