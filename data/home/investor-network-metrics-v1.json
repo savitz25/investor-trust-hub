@@ -156,7 +156,7 @@
     "noticeFiledFirms": 2075
   },
   "network": {
-    "publishedStateIntelligencePages": 23,
+    "publishedStateIntelligencePages": 24,
     "publishedStateIntelligencePaths": [
       "/new-jersey",
       "/california",
@@ -180,7 +180,8 @@
       "/connecticut",
       "/maryland",
       "/wisconsin",
-      "/indiana"
+      "/indiana",
+      "/louisiana"
     ]
   },
   "rejectedTotals": [
@@ -995,12 +996,12 @@
       "unit": "count",
       "key": "published_state_intelligence_pages",
       "label": "Published state investment-intelligence pages",
-      "value": 23,
+      "value": 24,
       "valueState": "KNOWN",
       "grain": "published_state_intelligence_page",
       "denominator": "Indexable specialist state intelligence routes currently published",
       "description": "Published specialist state intelligence pages including Ohio. Not a count of advisers.",
-      "coverage": "/new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, /georgia, /massachusetts, /tennessee, /nevada, /minnesota, /michigan, /connecticut, /maryland, /wisconsin, /indiana",
+      "coverage": "/new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, /georgia, /massachusetts, /tennessee, /nevada, /minnesota, /michigan, /connecticut, /maryland, /wisconsin, /indiana, /louisiana",
       "contributingSourceSystems": [
         "investor-state-intel"
       ],
@@ -1013,7 +1014,7 @@
         "contributingSourceSystems": [
           "investor-state-intel"
         ],
-        "geographicCoverage": "/new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, /georgia, /massachusetts, /tennessee, /nevada, /minnesota, /michigan, /connecticut, /maryland, /wisconsin, /indiana",
+        "geographicCoverage": "/new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, /georgia, /massachusetts, /tennessee, /nevada, /minnesota, /michigan, /connecticut, /maryland, /wisconsin, /indiana, /louisiana",
         "sourceDates": "Publication gates in specialist catalogs",
         "generationDate": "2026-10-02"
       },

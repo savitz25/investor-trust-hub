@@ -130,6 +130,7 @@ describe('INV-HOME-003 public evidence inventory', () => {
       '/maryland',
       '/wisconsin',
       '/indiana',
+      '/louisiana',
     ]);
     expect(get('published_state_pages').value).toBe(
       INVESTOR_HOMEPAGE_STATE_CARDS.length,

@@ -17,6 +17,7 @@ import { MD_SECURITIES_ACTIONS } from './md-public-intel';
 import { MD_REGISTRATION_LENSES } from './md-public-intel';
 import { WI_REGISTRATION_LENSES, WI_SECURITIES_ORDERS } from './wi-public-intel';
 import { IN_IAPD_LENSES, IN_SECURITIES_ORDERS } from './in-public-intel';
+import { LA_REGISTRATION_LENSES } from './la-public-intel';
 export type { InvestorResearchIntent, InvestorCondition } from './investor-research-plan';
 
 export const INVESTOR_ASK_CONTRACT = 'investor-ask-v1' as const;
@@ -504,6 +505,7 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     push('Source', 'SEC/IARD Form ADV roster');
     if (/\bwisconsin\b/i.test(q)) push('Wisconsin context', 'InvestorTrustHub /wisconsin; SEC file identity alone does not establish Wisconsin registration.');
     if (/\bindiana\b/i.test(q)) push('Indiana context', 'InvestorTrustHub Indiana (/indiana); SEC file identity alone does not establish Indiana registration or notice filing.');
+    if (/\blouisiana\b/i.test(q)) push('Louisiana context', 'InvestorTrustHub /louisiana; SEC file identity alone does not establish Louisiana registration or notice filing.');
     return { raw: q, query, interpretation: lines };
   }
 
@@ -531,6 +533,7 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     push('Source', 'SEC/IARD Form ADV roster');
     if (/\bwisconsin\b/i.test(q)) push('Wisconsin context', 'InvestorTrustHub /wisconsin; firm CRD identity alone does not establish Wisconsin registration.');
     if (/\bindiana\b/i.test(q)) push('Indiana context', 'InvestorTrustHub Indiana (/indiana); firm CRD identity alone does not establish Indiana registration or notice filing.');
+    if (/\blouisiana\b/i.test(q)) push('Louisiana context', 'InvestorTrustHub /louisiana; firm CRD identity alone does not establish Louisiana registration or notice filing.');
     return { raw: q, query, interpretation: lines };
   }
 
@@ -548,6 +551,38 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     const query = failClosed('InvestorTrustHub Specialist Search is firm-focused. A person or IAR CRD must not be resolved as a firm CRD.', ['Find firm CRD 105958.', 'What is a CRD number?']);
     push('Mode', 'fail_closed');
     push('Identity class', 'Individual/IAR — outside the public firm search');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  // LA-INV-001: labeled firm identifiers above outrank state and city words.
+  const laNamed = /\blouisiana\b/i.test(q);
+  const laCity = /\b(new orleans|baton rouge|shreveport|lafayette)\b/i.exec(q);
+  if ((laNamed || laCity) && /\b(?:investment|advis[eo]rs?|ria|eras?|broker|securities|crd|sec|notice|disciplin|enforc|complaint|exams?|principal office|agents?|representatives?|iars?|total|combined|how many)\b/i.test(q)) {
+    const la = LA_REGISTRATION_LENSES;
+    const reason = laCity
+      ? 'The named Louisiana city is geography only. InvestorTrustHub publishes no city securities route and no parish route. A principal office does not establish Louisiana registration or notice filing. Use /louisiana.'
+      : /\bcomplaints?\b/i.test(q)
+        ? 'The Louisiana Office of Financial Institutions, Securities Division accepts written investor complaints. Provider-level complaint records and outcomes were not acquired; a complaint is not a finding. Use /louisiana.'
+        : /\b(?:disciplin\w*|enforc\w*|orders?|sanctions?)\b/i.test(q)
+          ? 'A public OFI securities administrative-order index was not acquired. Criminal-prosecution headlines were not counted as orders and were not attached to CRDs. A cease-and-desist is not a final finding. Exact CRD attachments: 0. Use /louisiana.'
+          : /\b(?:examinations?|exams?)\b/i.test(q)
+            ? 'OFI publishes an examination policy for broker-dealers and state-registered investment advisers; provider-level outcomes were not acquired. Missing is not a clean examination history. Use /louisiana.'
+            : /\b(?:investment adviser representatives?|iars?)\b/i.test(q)
+              ? 'Louisiana investment adviser representatives are persons, not firms. The IAR bulk roster was not acquired. A person CRD is not a firm CRD. Use /louisiana.'
+              : /\b(?:broker[- ]?dealers?|securities agents?|agents?)\b/i.test(q)
+                ? 'OFI registers broker-dealers, agents and adviser representatives as separate firm and person grains. Bulk rosters were not acquired. Use /louisiana.'
+                : /\b(?:principal office|headquarter\w*|based in|located in)\b/i.test(q)
+                  ? `The accepted national SEC/IARD roster reports ${la.principalOffice.count} Louisiana principal-office firm records as of ${la.principalOffice.sourceAsOf}. Office geography is not Louisiana registration or notice filing. Use /louisiana.`
+                  : /\b(?:era|exempt reporting)\b/i.test(q)
+                    ? `The accepted IAPD state compilation lists ${la.era.count} active Louisiana exempt reporting adviser firm CRDs. ERA status is not state IA or SEC registration. Use /louisiana.`
+                    : /\b(?:federal[- ]covered|notice[- ]filed|notice filing|notice)\b/i.test(q)
+                      ? `The accepted IAPD SEC compilation lists ${la.federalNotice.count.toLocaleString('en-US')} firms with a FILED Louisiana notice. A notice filing is not Louisiana state IA registration. Use /louisiana.`
+                      : /\b(?:total|combined|how many|all)\b/i.test(q) && !/\b(?:state[- ]registered|notice|era|exempt|principal|broker|agent|representative|federal)\b/i.test(q)
+                        ? `Louisiana state IA (${la.stateIa.count}), federal notice (${la.federalNotice.count.toLocaleString('en-US')}), ERA (${la.era.count}) and principal-office (${la.principalOffice.count}) lenses cannot be combined into one adviser total. Use /louisiana.`
+                        : `The accepted IAPD state compilation lists ${la.stateIa.count} Louisiana state-registered IA firm CRDs (APPROVED). Federal notice (${la.federalNotice.count.toLocaleString('en-US')}), ERA (${la.era.count}) and principal-office (${la.principalOffice.count}) lenses are separate and must not be added. Use /louisiana.`;
+    const query = failClosed(reason, ['Louisiana investor research page.', 'Find firm CRD 105958.']);
+    if (laCity) query.geography = { type: 'principal_office_city', value: laCity[1]!, state: 'LA', meaning: 'City context only; not Louisiana registration or service territory' };
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };
   }
 
