@@ -1,0 +1,292 @@
+{
+  "contract": "sc-inv-001-securities-orders-v1",
+  "status": "BOUNDED_INDEX",
+  "regulator": "South Carolina Attorney General, Securities Division",
+  "indexUrl": "https://www.scag.gov/inside-the-office/legal-services-division/securities/enforcement/notices-and-orders/",
+  "pagesRead": [
+    "https://www.scag.gov/inside-the-office/legal-services-division/securities/enforcement/notices-and-orders/2025-notices-and-orders/",
+    "https://www.scag.gov/inside-the-office/legal-services-division/securities/enforcement/notices-and-orders/2026-notices-and-orders/"
+  ],
+  "window": "2025 and 2026 notices-and-orders pages",
+  "olderYearPages": "NOT_ACQUIRED",
+  "pdfsDownloaded": false,
+  "rowCount": 25,
+  "yearCounts": {
+    "2025": 16,
+    "2026": 9
+  },
+  "captionsPrintingCrd": 6,
+  "rowsWithCrdColumn": 0,
+  "actionTagRows": [
+    {
+      "tag": "Administrative order: revocation of broker-dealer registration",
+      "rows": 1
+    },
+    {
+      "tag": "Consent order",
+      "rows": 10
+    },
+    {
+      "tag": "Consent order as to named respondents",
+      "rows": 1
+    },
+    {
+      "tag": "Final judgment ordering restitution and a civil monetary penalty",
+      "rows": 1
+    },
+    {
+      "tag": "Investment adviser representative continuing-education requirement order",
+      "rows": 1
+    },
+    {
+      "tag": "Joint stipulation to dismiss and vacate",
+      "rows": 1
+    },
+    {
+      "tag": "Order to cease and desist",
+      "rows": 8
+    },
+    {
+      "tag": "Order to vacate a prior consent order",
+      "rows": 1
+    },
+    {
+      "tag": "Summons and complaint",
+      "rows": 1
+    }
+  ],
+  "rows": [
+    {
+      "documentId": "31jf0d5a",
+      "yearFolder": "2025",
+      "dateText": "11/4/2025",
+      "actionTags": "Investment adviser representative continuing-education requirement order",
+      "sourcePdf": "https://www.scag.gov/media/31jf0d5a/order-25002-iarce.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "q2adzrjt",
+      "yearFolder": "2025",
+      "dateText": "3/27/2025",
+      "actionTags": "Joint stipulation to dismiss and vacate",
+      "sourcePdf": "https://www.scag.gov/media/q2adzrjt/joint-stipulation-to-dismiss-matter-no-20225292.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "efpbogse",
+      "yearFolder": "2025",
+      "dateText": "4/15/2025",
+      "actionTags": "Order to cease and desist",
+      "sourcePdf": "https://www.scag.gov/media/efpbogse/2025-04-15-in-re-restrepo-et-al-order-to-cease-and-desist-matter-no-20235298-executed.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "a02jfgjj",
+      "yearFolder": "2025",
+      "dateText": "4/22/2025",
+      "actionTags": "Consent order",
+      "sourcePdf": "https://www.scag.gov/media/a02jfgjj/2025-04-21-charles-oliver-et-al-fip-consent-order-executed.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "fqikghvb",
+      "yearFolder": "2025",
+      "dateText": "5/13/2025",
+      "actionTags": "Order to cease and desist",
+      "sourcePdf": "https://www.scag.gov/media/fqikghvb/2025-05-13-emerson-eec-algebra-victory-order-to-cease-and-desist.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "nhcn2sdg",
+      "yearFolder": "2025",
+      "dateText": "5/22/2025",
+      "actionTags": "Order to cease and desist",
+      "sourcePdf": "https://www.scag.gov/media/nhcn2sdg/novatech-petion-cease-and-desist-order-final-published.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "rqcc5xxe",
+      "yearFolder": "2025",
+      "dateText": "5/22/2025",
+      "actionTags": "Order to cease and desist",
+      "sourcePdf": "https://www.scag.gov/media/rqcc5xxe/larry-cowan-imeritus-spx-cease-and-desist-order-final-signed-published.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "0g2fwjx0",
+      "yearFolder": "2025",
+      "dateText": "6/18/2025",
+      "actionTags": "Order to cease and desist",
+      "sourcePdf": "https://www.scag.gov/media/0g2fwjx0/order-to-cease-and-desist-michael-j-french-mjf-holdings-et-al-final.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "q1rhpfaj",
+      "yearFolder": "2025",
+      "dateText": "6/19/2025",
+      "actionTags": "Order to vacate a prior consent order",
+      "sourcePdf": "https://www.scag.gov/media/q1rhpfaj/20250620100207.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "cwrdzxky",
+      "yearFolder": "2025",
+      "dateText": "6/25/2025",
+      "actionTags": "Order to cease and desist",
+      "sourcePdf": "https://www.scag.gov/media/cwrdzxky/montgomery-alice-marie-inv-club-cease-and-desist-order-final.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "u2odwme3",
+      "yearFolder": "2025",
+      "dateText": "7/22/2025",
+      "actionTags": "Consent order as to named respondents",
+      "sourcePdf": "https://www.scag.gov/media/u2odwme3/consent-order-for-website.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "m44mnxgd",
+      "yearFolder": "2025",
+      "dateText": "8/4/2025",
+      "actionTags": "Consent order",
+      "sourcePdf": "https://www.scag.gov/media/m44mnxgd/2025-08-04-executed-consent-order-in-the-matter-of-vanguard-marketing-corporation-et-al-matter-no-20224600.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "hk1jaczx",
+      "yearFolder": "2025",
+      "dateText": "8/4/2025",
+      "actionTags": "Consent order",
+      "sourcePdf": "https://www.scag.gov/media/hk1jaczx/2025-08-04-executed-consent-order-in-the-matter-of-educator-of-truth-et-al-matter-no-20232116.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "h2iejnp3",
+      "yearFolder": "2025",
+      "dateText": "9/30/2025",
+      "actionTags": "Final judgment ordering restitution and a civil monetary penalty",
+      "sourcePdf": "https://www.scag.gov/media/h2iejnp3/240-judgment.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "s40fjqko",
+      "yearFolder": "2025",
+      "dateText": "12/29/2025",
+      "actionTags": "Consent order",
+      "sourcePdf": "https://www.scag.gov/media/s40fjqko/2025-12-29-carlton-scott-phillips-et-al-consent-order-final.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "onljsfeu",
+      "yearFolder": "2025",
+      "dateText": "12/17/2025",
+      "actionTags": "Summons and complaint",
+      "sourcePdf": "https://www.scag.gov/media/onljsfeu/file-stamped-summons-and-complaint.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "dtypd5oq",
+      "yearFolder": "2026",
+      "dateText": "01/05/2026",
+      "actionTags": "Consent order",
+      "sourcePdf": "https://www.scag.gov/media/dtypd5oq/for-website-2026-01-05-south-carolina-consent-order-in-the-matter-of-stifel-nicolaus-and-company-inc-matter-no-20252030.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "rwcauyuz",
+      "yearFolder": "2026",
+      "dateText": "02/04/2026",
+      "actionTags": "Consent order",
+      "sourcePdf": "https://www.scag.gov/media/rwcauyuz/sc-td-ameritrade-multistate-consent-order-executed-2026-02-04.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "yjrpjcqv",
+      "yearFolder": "2026",
+      "dateText": "02/13/2026",
+      "actionTags": "Order to cease and desist",
+      "sourcePdf": "https://www.scag.gov/media/yjrpjcqv/in-the-matter-of-declan-whitmyer-scag-matter-no-20203064-order-to-cease-and-desist-feb-13-2026-final.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "hqiplcao",
+      "yearFolder": "2026",
+      "dateText": "02/25/2026",
+      "actionTags": "Consent order",
+      "sourcePdf": "https://www.scag.gov/media/hqiplcao/edward-jones-minimum-fee-consent-order-sc-final-executed.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "bhuh4npu",
+      "yearFolder": "2026",
+      "dateText": "3/2/2026",
+      "actionTags": "Consent order",
+      "sourcePdf": "https://www.scag.gov/media/bhuh4npu/montgomery-alice-marie-inv-club-consent-order-final-order.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "uqznd5nz",
+      "yearFolder": "2026",
+      "dateText": "04/23/2026",
+      "actionTags": "Consent order",
+      "sourcePdf": "https://www.scag.gov/media/uqznd5nz/2026-04-23-in-the-matter-of-lpl-financial-20252028-consent-order-executed.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "xjvkg5pu",
+      "yearFolder": "2026",
+      "dateText": "06/01/2026",
+      "actionTags": "Administrative order: revocation of broker-dealer registration",
+      "sourcePdf": "https://www.scag.gov/media/xjvkg5pu/2026-06-01-in-re-mercury-capital-adv-crd-152338-administrative-order-final.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "n4vnakvg",
+      "yearFolder": "2026",
+      "dateText": "06/01/2026",
+      "actionTags": "Order to cease and desist",
+      "sourcePdf": "https://www.scag.gov/media/n4vnakvg/2026-06-01-in-re-turner-development-llc-tracy-turner-cease-and-desist-order-matter-no-20251983-final.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "uxmhn4nx",
+      "yearFolder": "2026",
+      "dateText": "9/14/2026",
+      "actionTags": "Consent order",
+      "sourcePdf": "https://www.scag.gov/media/uxmhn4nx/rbc-capital-markets-llc-consent-order-scag-matter-no-20252092.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    }
+  ],
+  "exactEnforcementAttachments": 0,
+  "nameOnlyAdverseJoins": 0,
+  "graphWrites": 0,
+  "ceaseAndDesistIsFinalAdjudication": false,
+  "respondentNamesStored": false,
+  "retrievedAt": "2026-10-05",
+  "note": "Each row is one linked document on the printed year page. A caption is not a finding. A cease-and-desist is not a final adjudication. A consent order keeps that label. A summons and complaint is not an order. A posted final judgment is not a state administrative order. Captions that print a CRD were counted and the numbers were not copied or joined. Respondent names were not stored. Older year pages were not acquired, and that is not zero documents."
+}

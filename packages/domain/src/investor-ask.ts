@@ -20,6 +20,7 @@ import { IN_IAPD_LENSES, IN_SECURITIES_ORDERS } from './in-public-intel';
 import { LA_REGISTRATION_LENSES } from './la-public-intel';
 import { KY_DFI_2025_SECURITIES, KY_REGISTRATION_LENSES } from './ky-public-intel';
 import { AL_REGISTRATION_LENSES, AL_SECURITIES_ORDERS } from './al-public-intel';
+import { SC_REGISTRATION_LENSES, SC_SECURITIES_ORDERS } from './sc-public-intel';
 export type { InvestorResearchIntent, InvestorCondition } from './investor-research-plan';
 
 export const INVESTOR_ASK_CONTRACT = 'investor-ask-v1' as const;
@@ -510,6 +511,7 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     if (/\blouisiana\b/i.test(q)) push('Louisiana context', 'InvestorTrustHub /louisiana; SEC file identity alone does not establish Louisiana registration or notice filing.');
     if (/\bkentucky\b/i.test(q)) push('Kentucky context', 'InvestorTrustHub /kentucky; SEC file identity alone does not establish Kentucky registration or notice filing.');
     if (/\balabama\b/i.test(q)) push('Alabama context', 'InvestorTrustHub /alabama; SEC file identity alone does not establish Alabama registration or notice filing.');
+    if (/\bsouth carolina\b/i.test(q)) push('South Carolina context', 'InvestorTrustHub /south-carolina; SEC file identity alone does not establish South Carolina registration or notice filing.');
     return { raw: q, query, interpretation: lines };
   }
 
@@ -540,6 +542,7 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     if (/\blouisiana\b/i.test(q)) push('Louisiana context', 'InvestorTrustHub /louisiana; firm CRD identity alone does not establish Louisiana registration or notice filing.');
     if (/\bkentucky\b/i.test(q)) push('Kentucky context', 'InvestorTrustHub /kentucky; firm CRD identity alone does not establish Kentucky registration or notice filing.');
     if (/\balabama\b/i.test(q)) push('Alabama context', 'InvestorTrustHub /alabama; firm CRD identity alone does not establish Alabama registration or notice filing.');
+    if (/\bsouth carolina\b/i.test(q)) push('South Carolina context', 'InvestorTrustHub /south-carolina; firm CRD identity alone does not establish South Carolina registration or notice filing.');
     return { raw: q, query, interpretation: lines };
   }
 
@@ -657,6 +660,39 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
                         : `The accepted IAPD state compilation lists ${al.stateIa.count} Alabama state-registered IA firm CRDs (APPROVED). Federal notice (${al.federalNotice.count.toLocaleString('en-US')}), ERA (${al.era.count}) and principal-office (${al.principalOffice.count}) lenses are separate and must not be added. Use /alabama.`;
     const query = failClosed(reason, ['Alabama investor research page.', 'Find firm CRD 105958.']);
     if (cityLabel) query.geography = { type: 'principal_office_city', value: cityLabel, state: 'AL', meaning: 'City context only; not Alabama registration or service territory' };
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  // SC-INV-001: full state name or "in sc". Bare "sc" is not South Carolina.
+  // Charleston, Columbia and Greenville are geography only when the state is also named.
+  const scNamed = /\bsouth carolina\b|\bin sc\b/i.test(q);
+  const scCity = scNamed && /\b(charleston|columbia|greenville)\b/i.exec(q);
+  if (scNamed && /\b(?:investment|advis[eo]rs?|ria|eras?|broker|securities|crd|sec|notice|disciplin|enforc|complaint|exams?|principal office|agents?|representatives?|iars?|total|combined|how many)\b/i.test(q)) {
+    const sc = SC_REGISTRATION_LENSES;
+    const reason = scCity
+      ? 'The named South Carolina city is geography only. InvestorTrustHub publishes no city securities route and no county route. A principal office does not establish South Carolina registration or notice filing. Use /south-carolina.'
+      : /\bcomplaints?\b/i.test(q)
+        ? 'Provider-level South Carolina securities complaint records were not acquired. A complaint is not a finding. Use /south-carolina.'
+        : /\b(?:disciplin\w*|enforc\w*|orders?|sanctions?)\b/i.test(q)
+          ? `The South Carolina Attorney General notices-and-orders index lists ${SC_SECURITIES_ORDERS.yearCounts['2025']} documents on the 2025 page and ${SC_SECURITIES_ORDERS.yearCounts['2026']} on the 2026 page. Those ${SC_SECURITIES_ORDERS.rowCount} index rows keep their printed dispositions. A cease-and-desist is not a final adjudication. A consent order stays a consent order. A summons and complaint is not an order. Older year pages were not acquired. Captions that print a CRD were not copied and were not joined. Exact CRD attachments: 0. Use /south-carolina.`
+          : /\b(?:examinations?|exams?)\b/i.test(q)
+            ? 'Provider-level South Carolina securities examination rows were not acquired. An examination is not a violation. Missing rows are not a clean examination history. Use /south-carolina.'
+            : /\b(?:investment adviser representatives?|iars?)\b/i.test(q)
+              ? 'South Carolina investment adviser representatives are persons, not firms. The IAR bulk roster was not acquired. A person CRD is not a firm CRD. Use /south-carolina.'
+              : /\b(?:broker[- ]?dealers?|securities agents?|agents?)\b/i.test(q)
+                ? 'The South Carolina Securities Act treats broker-dealers, agents and adviser representatives as separate firm and person grains. Bulk rosters were not acquired. Use /south-carolina.'
+                : /\b(?:principal office|headquarter\w*|based in|located in)\b/i.test(q)
+                  ? `The accepted national SEC/IARD roster reports ${sc.principalOffice.count} South Carolina principal-office firm records as of ${sc.principalOffice.sourceAsOf}. Office geography is not South Carolina registration or notice filing. Use /south-carolina.`
+                  : /\b(?:era|exempt reporting)\b/i.test(q)
+                    ? `The accepted IAPD state compilation lists ${sc.era.count} active South Carolina exempt reporting adviser firm CRDs. ERA status is not state IA or SEC registration. Use /south-carolina.`
+                    : /\b(?:federal[- ]covered|notice[- ]filed|notice filing|notice)\b/i.test(q)
+                      ? `The accepted IAPD SEC compilation lists ${sc.federalNotice.count.toLocaleString('en-US')} firms with a FILED South Carolina notice. A notice filing is not South Carolina state IA registration. Use /south-carolina.`
+                      : /\b(?:total|combined|how many|all)\b/i.test(q) && !/\b(?:state[- ]registered|notice|era|exempt|principal|broker|agent|representative|federal)\b/i.test(q)
+                        ? `South Carolina state IA (${sc.stateIa.count}), federal notice (${sc.federalNotice.count.toLocaleString('en-US')}), ERA (${sc.era.count}) and principal-office (${sc.principalOffice.count}) lenses cannot be combined into one adviser total. Use /south-carolina.`
+                        : `The accepted IAPD state compilation lists ${sc.stateIa.count} South Carolina state-registered IA firm CRDs (APPROVED). Federal notice (${sc.federalNotice.count.toLocaleString('en-US')}), ERA (${sc.era.count}) and principal-office (${sc.principalOffice.count}) lenses are separate and must not be added. Use /south-carolina.`;
+    const query = failClosed(reason, ['South Carolina investor research page.', 'Find firm CRD 105958.']);
+    if (scCity) query.geography = { type: 'principal_office_city', value: scCity[1]!, state: 'SC', meaning: 'City context only; not South Carolina registration or service territory' };
     push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };
   }

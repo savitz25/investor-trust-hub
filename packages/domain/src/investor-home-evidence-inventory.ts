@@ -20,6 +20,8 @@ import LA_REGISTRATION_LENSES from '../../../data/louisiana/la-inv-001/registrat
 import KY_REGISTRATION_LENSES from '../../../data/kentucky/ky-inv-001/registration-lenses.json';
 import AL_REGISTRATION_LENSES from '../../../data/alabama/al-inv-001/registration-lenses.json';
 import AL_SECURITIES_ORDERS from '../../../data/alabama/al-inv-001/securities-orders.json';
+import SC_REGISTRATION_LENSES from '../../../data/south-carolina/sc-inv-001/registration-lenses.json';
+import SC_SECURITIES_ORDERS from '../../../data/south-carolina/sc-inv-001/securities-orders.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -91,7 +93,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC';
   name: string;
   href: string;
   regulator: string;
@@ -1006,6 +1008,22 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
       { label: 'Accepted national principal-office roster', sourceAsOf: AL_REGISTRATION_LENSES.principalOffice.sourceAsOf, retrievedAt: AL_REGISTRATION_LENSES.principalOffice.retrievedAt, snapshotAsOf: AL_REGISTRATION_LENSES.principalOffice.sourceAsOf, generatedAt: null },
       { label: 'IAPD STATE and SEC compilations', sourceAsOf: AL_REGISTRATION_LENSES.acceptedIapdSourceDate, retrievedAt: AL_REGISTRATION_LENSES.retrievedAt, snapshotAsOf: AL_REGISTRATION_LENSES.acceptedIapdSourceDate, generatedAt: null },
       { label: 'ASC 2025–2026 administrative-action index', sourceAsOf: null, retrievedAt: AL_SECURITIES_ORDERS.retrievedAt, snapshotAsOf: '2026-10-05', generatedAt: null },
+    ],
+  },
+  {
+    code: 'SC',
+    name: 'South Carolina',
+    href: '/south-carolina',
+    regulator: 'South Carolina Attorney General, Securities Division',
+    principalOfficeFirms: SC_REGISTRATION_LENSES.principalOffice.count,
+    rosterStatus: `IAPD SC APPROVED state IA ${SC_REGISTRATION_LENSES.stateIa.count.toLocaleString('en-US')} firm CRDs as of ${SC_REGISTRATION_LENSES.acceptedIapdSourceDate}`,
+    evidence: ['IAPD South Carolina state IA, federal notice and ERA jurisdiction lenses', 'accepted SEC/IARD principal-office overlay', '2025–2026 Attorney General notices-and-orders index'],
+    identityNote: 'The 122 principal-office records are geography, not South Carolina registration. State IA, federal notice, ERA and person classes remain separate.',
+    limitation: 'The 2025–2026 order index is documents, not findings or unique matters. Older year pages were not acquired. Grains are not added into one adviser total. No adverse profile attachments.',
+    sourceClocks: [
+      { label: 'Accepted national principal-office roster', sourceAsOf: SC_REGISTRATION_LENSES.principalOffice.sourceAsOf, retrievedAt: SC_REGISTRATION_LENSES.principalOffice.retrievedAt, snapshotAsOf: SC_REGISTRATION_LENSES.principalOffice.sourceAsOf, generatedAt: null },
+      { label: 'IAPD STATE and SEC compilations', sourceAsOf: SC_REGISTRATION_LENSES.acceptedIapdSourceDate, retrievedAt: SC_REGISTRATION_LENSES.retrievedAt, snapshotAsOf: SC_REGISTRATION_LENSES.acceptedIapdSourceDate, generatedAt: null },
+      { label: 'Attorney General 2025–2026 notices-and-orders index', sourceAsOf: null, retrievedAt: SC_SECURITIES_ORDERS.retrievedAt, snapshotAsOf: '2026-10-05', generatedAt: null },
     ],
   },
 ];

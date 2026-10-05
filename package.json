@@ -55,6 +55,7 @@
     "assert:la-inv-001": "node scripts/assert-la-inv-001.mjs && vitest run packages/domain/tests/la-public-intel.test.ts",
     "assert:ky-inv-001": "node scripts/assert-ky-inv-001.mjs && vitest run packages/domain/tests/ky-public-intel.test.ts",
     "assert:al-inv-001": "node scripts/assert-al-inv-001.mjs && vitest run packages/domain/tests/al-public-intel.test.ts",
+    "assert:sc-inv-001": "node scripts/assert-sc-inv-001.mjs && vitest run packages/domain/tests/sc-public-intel.test.ts",
     "assert:in-inv-001": "node scripts/assert-in-inv-001.mjs && vitest run packages/domain/tests/in-public-intel.test.ts",
     "assert:nv-inv-001": "node scripts/assert-nv-inv-001.mjs && vitest run packages/domain/tests/nv-public-intel.test.ts apps/web/tests/nv-inv-001-publication.test.ts",
     "build:network-metrics": "npx tsx scripts/build_network_metrics_v1.mjs",
