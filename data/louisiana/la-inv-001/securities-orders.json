@@ -1,0 +1,18 @@
+{
+  "contract": "la-inv-001-securities-orders-v1",
+  "status": "NOT_ACQUIRED",
+  "regulator": "Louisiana Office of Financial Institutions, Securities Division",
+  "indexUrl": null,
+  "reviewedUrls": [
+    "https://ofi.la.gov/securities/",
+    "https://ofi.la.gov/securities/criminal-prosecutions-2/"
+  ],
+  "reason": "No public OFI securities administrative-order index was identified. The criminal-prosecutions page is a news list of sentences and pleas, not an order index. Those headlines were not counted as orders and were not parsed onto CRDs. A cease-and-desist is not a final finding. Missing is not zero.",
+  "rowCount": null,
+  "rows": [],
+  "rowsWithCrdColumn": 0,
+  "exactEnforcementAttachments": 0,
+  "nameOnlyAdverseJoins": 0,
+  "graphWrites": 0,
+  "retrievedAt": "2026-10-05"
+}

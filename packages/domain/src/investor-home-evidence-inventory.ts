@@ -16,6 +16,7 @@ import WI_REGISTRATION_LENSES from '../../../data/wisconsin/wi-inv-001/registrat
 import WI_SECURITIES_ORDERS from '../../../data/wisconsin/wi-inv-001/securities-orders.json';
 import IN_IAPD_LENSES from '../../../data/indiana/in-inv-001/iapd-in-lenses.json';
 import IN_SECURITIES_ORDERS from '../../../data/indiana/in-inv-001/securities-orders.json';
+import LA_REGISTRATION_LENSES from '../../../data/louisiana/la-inv-001/registration-lenses.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -87,7 +88,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA';
   name: string;
   href: string;
   regulator: string;
@@ -956,6 +957,21 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
     sourceClocks: [
       { label: 'Accepted IAPD STATE/SEC compilation', sourceAsOf: IN_IAPD_LENSES.stateFeed.sourceAsOf, retrievedAt: IN_IAPD_LENSES.retrievedAt, snapshotAsOf: IN_IAPD_LENSES.stateFeed.sourceAsOf, generatedAt: null },
       { label: 'Indiana administrative-action index', sourceAsOf: null, retrievedAt: IN_SECURITIES_ORDERS.retrievedAt, snapshotAsOf: '2026-09-29', generatedAt: null },
+    ],
+  },
+  {
+    code: 'LA',
+    name: 'Louisiana',
+    href: '/louisiana',
+    regulator: 'Louisiana Office of Financial Institutions, Securities Division',
+    principalOfficeFirms: LA_REGISTRATION_LENSES.principalOffice.count,
+    rosterStatus: `IAPD LA APPROVED state IA ${LA_REGISTRATION_LENSES.stateIa.count.toLocaleString('en-US')} firm CRDs as of ${LA_REGISTRATION_LENSES.acceptedIapdSourceDate}`,
+    evidence: ['IAPD Louisiana state IA, federal notice and ERA jurisdiction lenses', 'accepted SEC/IARD principal-office overlay', 'OFI examination and complaint intake capability'],
+    identityNote: 'The 84 principal-office records are geography, not Louisiana registration. State IA, federal notice, ERA and person classes remain separate.',
+    limitation: 'No public OFI administrative-order index was acquired. Grains are not added into one adviser total. No adverse profile attachments.',
+    sourceClocks: [
+      { label: 'Accepted national principal-office roster', sourceAsOf: LA_REGISTRATION_LENSES.principalOffice.sourceAsOf, retrievedAt: LA_REGISTRATION_LENSES.principalOffice.retrievedAt, snapshotAsOf: LA_REGISTRATION_LENSES.principalOffice.sourceAsOf, generatedAt: null },
+      { label: 'IAPD STATE and SEC compilations', sourceAsOf: LA_REGISTRATION_LENSES.acceptedIapdSourceDate, retrievedAt: LA_REGISTRATION_LENSES.retrievedAt, snapshotAsOf: LA_REGISTRATION_LENSES.acceptedIapdSourceDate, generatedAt: null },
     ],
   },
 ];
