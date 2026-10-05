@@ -48,3 +48,4 @@ export * from './md-public-intel';
 export * from './wi-public-intel';
 export * from './in-public-intel';
 export * from './la-public-intel';
+export * from './al-public-intel';

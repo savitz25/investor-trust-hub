@@ -3,7 +3,7 @@
   "generatedAt": "2026-10-05T13:32:00.228Z",
   "newestDocumentedSourceAsOf": "2026-09-18",
   "newestDocumentedSourceAsOfNote": "Newest explicitly named sourceAsOf/sourceDate in accepted inputs; snapshot, retrieval and build dates excluded. Not a network-wide freshness guarantee.",
-  "sourceFingerprint": "3e1f02ec926a849dfbde8e2f39fee4ef86a5bbf73182215163d41c3ed25ec8ea",
+  "sourceFingerprint": "663499564bd282d385bc08347a530b44761ea0d33b20559cd284d8f43e04d349",
   "source": {
     "dataset": "iapd_sec_compilation",
     "releaseLabel": "IA_FIRM_SEC_Feed_08_27_2026",
@@ -156,7 +156,7 @@
     "noticeFiledFirms": 2075
   },
   "network": {
-    "publishedStateIntelligencePages": 24,
+    "publishedStateIntelligencePages": 25,
     "publishedStateIntelligencePaths": [
       "/new-jersey",
       "/california",
@@ -181,7 +181,8 @@
       "/maryland",
       "/wisconsin",
       "/indiana",
-      "/louisiana"
+      "/louisiana",
+      "/alabama"
     ]
   },
   "rejectedTotals": [
@@ -996,12 +997,12 @@
       "unit": "count",
       "key": "published_state_intelligence_pages",
       "label": "Published state investment-intelligence pages",
-      "value": 24,
+      "value": 25,
       "valueState": "KNOWN",
       "grain": "published_state_intelligence_page",
       "denominator": "Indexable specialist state intelligence routes currently published",
       "description": "Published specialist state intelligence pages including Ohio. Not a count of advisers.",
-      "coverage": "/new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, /georgia, /massachusetts, /tennessee, /nevada, /minnesota, /michigan, /connecticut, /maryland, /wisconsin, /indiana, /louisiana",
+      "coverage": "/new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, /georgia, /massachusetts, /tennessee, /nevada, /minnesota, /michigan, /connecticut, /maryland, /wisconsin, /indiana, /louisiana, /alabama",
       "contributingSourceSystems": [
         "investor-state-intel"
       ],
@@ -1014,7 +1015,7 @@
         "contributingSourceSystems": [
           "investor-state-intel"
         ],
-        "geographicCoverage": "/new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, /georgia, /massachusetts, /tennessee, /nevada, /minnesota, /michigan, /connecticut, /maryland, /wisconsin, /indiana, /louisiana",
+        "geographicCoverage": "/new-jersey, /california, /texas, /washington, /arizona, /colorado, /virginia, /new-york, /illinois, /oregon, /pennsylvania, /north-carolina, /ohio, /georgia, /massachusetts, /tennessee, /nevada, /minnesota, /michigan, /connecticut, /maryland, /wisconsin, /indiana, /louisiana, /alabama",
         "sourceDates": "Publication gates in specialist catalogs",
         "generationDate": "2026-10-05"
       },
@@ -13628,7 +13629,7 @@
     "artifacts/tn-inv-001-public-snapshot.json": "965684b92d186656d085626d541d85fc02ff06b8d9129e30b38613686421e4c8",
     "artifacts/nv-inv-001-public-snapshot.json": "37ecd696c5e1e61c3b14696ab4c9a6f3f1f2970c3bba4feea07f281c162369ec",
     "artifacts/mn-inv-001-public-snapshot.json": "2048f2cf979d5a0ad5a7d748fb3bbc04d8a46806e2c80778abce270fdef26511",
-    "packages/config/src/routes.ts": "d5f2e30daf6acfa29b8fa081e7142eeaa910ee0c32e099b5bf04f21917dabe83",
+    "packages/config/src/routes.ts": "eeb57b54bd732838d9fc85d639c1d0a294abd067e80309371cdc3351a3403198",
     "scripts/publication_metric_inputs.mjs": "531a9e259afd10736eeddbd908351c5913429fe38eeee192bdb707402505298a",
     "scripts/build_network_metrics_v1.mjs": "b31e671e3e89299a0e938e78cb594b15f8eb49366e0927739cba63ef1c148340",
     "scripts/reconcile-network-metrics-r2-04.mjs": "a80918ebb6ebd29f1da8988b9e903fbb8f4f26ff3ecce96dd120c61c43d81841"

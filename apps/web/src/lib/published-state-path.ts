@@ -1,5 +1,6 @@
 /** PA-REL-001: normalize mixed-case published statewide intelligence paths. */
 export const PUBLISHED_STATEWIDE_SLUGS = [
+  'alabama',
   'arizona',
   'california',
   'colorado',

@@ -18,6 +18,7 @@ import { MD_REGISTRATION_LENSES } from './md-public-intel';
 import { WI_REGISTRATION_LENSES, WI_SECURITIES_ORDERS } from './wi-public-intel';
 import { IN_IAPD_LENSES, IN_SECURITIES_ORDERS } from './in-public-intel';
 import { LA_REGISTRATION_LENSES } from './la-public-intel';
+import { AL_REGISTRATION_LENSES, AL_SECURITIES_ORDERS } from './al-public-intel';
 export type { InvestorResearchIntent, InvestorCondition } from './investor-research-plan';
 
 export const INVESTOR_ASK_CONTRACT = 'investor-ask-v1' as const;
@@ -506,6 +507,7 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     if (/\bwisconsin\b/i.test(q)) push('Wisconsin context', 'InvestorTrustHub /wisconsin; SEC file identity alone does not establish Wisconsin registration.');
     if (/\bindiana\b/i.test(q)) push('Indiana context', 'InvestorTrustHub Indiana (/indiana); SEC file identity alone does not establish Indiana registration or notice filing.');
     if (/\blouisiana\b/i.test(q)) push('Louisiana context', 'InvestorTrustHub /louisiana; SEC file identity alone does not establish Louisiana registration or notice filing.');
+    if (/\balabama\b/i.test(q)) push('Alabama context', 'InvestorTrustHub /alabama; SEC file identity alone does not establish Alabama registration or notice filing.');
     return { raw: q, query, interpretation: lines };
   }
 
@@ -534,6 +536,7 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     if (/\bwisconsin\b/i.test(q)) push('Wisconsin context', 'InvestorTrustHub /wisconsin; firm CRD identity alone does not establish Wisconsin registration.');
     if (/\bindiana\b/i.test(q)) push('Indiana context', 'InvestorTrustHub Indiana (/indiana); firm CRD identity alone does not establish Indiana registration or notice filing.');
     if (/\blouisiana\b/i.test(q)) push('Louisiana context', 'InvestorTrustHub /louisiana; firm CRD identity alone does not establish Louisiana registration or notice filing.');
+    if (/\balabama\b/i.test(q)) push('Alabama context', 'InvestorTrustHub /alabama; firm CRD identity alone does not establish Alabama registration or notice filing.');
     return { raw: q, query, interpretation: lines };
   }
 
@@ -582,6 +585,41 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
                         : `The accepted IAPD state compilation lists ${la.stateIa.count} Louisiana state-registered IA firm CRDs (APPROVED). Federal notice (${la.federalNotice.count.toLocaleString('en-US')}), ERA (${la.era.count}) and principal-office (${la.principalOffice.count}) lenses are separate and must not be added. Use /louisiana.`;
     const query = failClosed(reason, ['Louisiana investor research page.', 'Find firm CRD 105958.']);
     if (laCity) query.geography = { type: 'principal_office_city', value: laCity[1]!, state: 'LA', meaning: 'City context only; not Louisiana registration or service territory' };
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  // AL-INV-001: labeled firm identifiers above outrank state and city words.
+  // Bare "mobile" is an ordinary word and is not an Alabama city trigger.
+  const alNamed = /\balabama\b/i.test(q);
+  const alCity = /\b(birmingham|montgomery|huntsville|tuscaloosa)\b/i.exec(q);
+  const mobileAlabama = /\bmobile,?\s+alabama\b/i.test(q);
+  if ((alNamed || alCity || mobileAlabama) && /\b(?:investment|advis[eo]rs?|ria|eras?|broker|securities|crd|sec|notice|disciplin|enforc|complaint|exams?|principal office|agents?|representatives?|iars?|total|combined|how many)\b/i.test(q)) {
+    const al = AL_REGISTRATION_LENSES;
+    const cityLabel = mobileAlabama ? 'Mobile' : alCity?.[1];
+    const reason = cityLabel && !(/\balabama\b/i.test(q) && !mobileAlabama && !alCity)
+      ? 'The named Alabama city is geography only. InvestorTrustHub publishes no city securities route and no county route. A principal office does not establish Alabama registration or notice filing. Use /alabama.'
+      : /\bcomplaints?\b/i.test(q)
+        ? 'The Alabama Securities Commission publishes a complaint procedure. Provider-level complaint records and outcomes were not acquired; a complaint is not a finding. Use /alabama.'
+        : /\b(?:disciplin\w*|enforc\w*|orders?|sanctions?)\b/i.test(q)
+          ? `The ASC administrative-action index lists ${AL_SECURITIES_ORDERS.rowCount} documents in the 2025 and 2026 folders (${AL_SECURITIES_ORDERS.yearCounts['2026']} in 2026 and ${AL_SECURITIES_ORDERS.yearCounts['2025']} in 2025). Source action tags stay separate. A cease-and-desist is not a final adjudication. Older year folders were not acquired. Exact CRD attachments: 0. Use /alabama.`
+          : /\b(?:examinations?|exams?)\b/i.test(q)
+            ? 'The Alabama Securities Commission publishes an Auditing Division page; provider-level outcomes were not acquired. Missing is not a clean examination history. Use /alabama.'
+            : /\b(?:investment adviser representatives?|iars?)\b/i.test(q)
+              ? 'Alabama investment adviser representatives are persons, not firms. The IAR bulk roster was not acquired. A person CRD is not a firm CRD. Use /alabama.'
+              : /\b(?:broker[- ]?dealers?|securities agents?|agents?)\b/i.test(q)
+                ? 'The Alabama Securities Commission registers broker-dealers, broker-dealer agents and adviser representatives as separate firm and person grains. Bulk rosters were not acquired. Use /alabama.'
+                : /\b(?:principal office|headquarter\w*|based in|located in)\b/i.test(q)
+                  ? `The accepted national SEC/IARD roster reports ${al.principalOffice.count} Alabama principal-office firm records as of ${al.principalOffice.sourceAsOf}. Office geography is not Alabama registration or notice filing. Use /alabama.`
+                  : /\b(?:era|exempt reporting)\b/i.test(q)
+                    ? `The accepted IAPD state compilation lists ${al.era.count} active Alabama exempt reporting adviser firm CRDs. ERA status is not state IA or SEC registration. Use /alabama.`
+                    : /\b(?:federal[- ]covered|notice[- ]filed|notice filing|notice)\b/i.test(q)
+                      ? `The accepted IAPD SEC compilation lists ${al.federalNotice.count.toLocaleString('en-US')} firms with a FILED Alabama notice. A notice filing is not Alabama state IA registration. Use /alabama.`
+                      : /\b(?:total|combined|how many|all)\b/i.test(q) && !/\b(?:state[- ]registered|notice|era|exempt|principal|broker|agent|representative|federal)\b/i.test(q)
+                        ? `Alabama state IA (${al.stateIa.count}), federal notice (${al.federalNotice.count.toLocaleString('en-US')}), ERA (${al.era.count}) and principal-office (${al.principalOffice.count}) lenses cannot be combined into one adviser total. Use /alabama.`
+                        : `The accepted IAPD state compilation lists ${al.stateIa.count} Alabama state-registered IA firm CRDs (APPROVED). Federal notice (${al.federalNotice.count.toLocaleString('en-US')}), ERA (${al.era.count}) and principal-office (${al.principalOffice.count}) lenses are separate and must not be added. Use /alabama.`;
+    const query = failClosed(reason, ['Alabama investor research page.', 'Find firm CRD 105958.']);
+    if (cityLabel) query.geography = { type: 'principal_office_city', value: cityLabel, state: 'AL', meaning: 'City context only; not Alabama registration or service territory' };
     push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };
   }
