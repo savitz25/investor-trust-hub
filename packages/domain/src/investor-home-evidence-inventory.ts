@@ -17,6 +17,7 @@ import WI_SECURITIES_ORDERS from '../../../data/wisconsin/wi-inv-001/securities-
 import IN_IAPD_LENSES from '../../../data/indiana/in-inv-001/iapd-in-lenses.json';
 import IN_SECURITIES_ORDERS from '../../../data/indiana/in-inv-001/securities-orders.json';
 import LA_REGISTRATION_LENSES from '../../../data/louisiana/la-inv-001/registration-lenses.json';
+import KY_REGISTRATION_LENSES from '../../../data/kentucky/ky-inv-001/registration-lenses.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -88,7 +89,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY';
   name: string;
   href: string;
   regulator: string;
@@ -972,6 +973,21 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
     sourceClocks: [
       { label: 'Accepted national principal-office roster', sourceAsOf: LA_REGISTRATION_LENSES.principalOffice.sourceAsOf, retrievedAt: LA_REGISTRATION_LENSES.principalOffice.retrievedAt, snapshotAsOf: LA_REGISTRATION_LENSES.principalOffice.sourceAsOf, generatedAt: null },
       { label: 'IAPD STATE and SEC compilations', sourceAsOf: LA_REGISTRATION_LENSES.acceptedIapdSourceDate, retrievedAt: LA_REGISTRATION_LENSES.retrievedAt, snapshotAsOf: LA_REGISTRATION_LENSES.acceptedIapdSourceDate, generatedAt: null },
+    ],
+  },
+  {
+    code: 'KY',
+    name: 'Kentucky',
+    href: '/kentucky',
+    regulator: 'Kentucky Department of Financial Institutions, Securities Division',
+    principalOfficeFirms: KY_REGISTRATION_LENSES.principalOffice.count,
+    rosterStatus: `IAPD KY APPROVED state IA ${KY_REGISTRATION_LENSES.stateIa.count.toLocaleString('en-US')} firm CRDs as of ${KY_REGISTRATION_LENSES.acceptedIapdSourceDate}`,
+    evidence: ['IAPD Kentucky state IA, federal notice and ERA jurisdiction lenses', 'accepted SEC/IARD principal-office overlay', 'DFI 2025 year-end registration, examination and enforcement totals'],
+    identityNote: 'The 89 principal-office records are geography, not Kentucky registration. State IA, federal notice, ERA, DFI year-end counts and person classes remain separate.',
+    limitation: 'The securities-order index was not parsed into rows. DFI December 31, 2025 totals are not the September 17, 2026 IAPD counts. No adverse profile attachments.',
+    sourceClocks: [
+      { label: 'Accepted national principal-office roster', sourceAsOf: KY_REGISTRATION_LENSES.principalOffice.sourceAsOf, retrievedAt: KY_REGISTRATION_LENSES.principalOffice.retrievedAt, snapshotAsOf: KY_REGISTRATION_LENSES.principalOffice.sourceAsOf, generatedAt: null },
+      { label: 'IAPD STATE and SEC compilations', sourceAsOf: KY_REGISTRATION_LENSES.acceptedIapdSourceDate, retrievedAt: KY_REGISTRATION_LENSES.retrievedAt, snapshotAsOf: KY_REGISTRATION_LENSES.acceptedIapdSourceDate, generatedAt: null },
     ],
   },
 ];

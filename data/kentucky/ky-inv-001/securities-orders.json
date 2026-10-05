@@ -1,0 +1,19 @@
+{
+  "contract": "ky-inv-001-securities-orders-v1",
+  "status": "NOT_ACQUIRED",
+  "regulator": "Kentucky Department of Financial Institutions, Securities Division",
+  "indexUrl": "https://kfi.ky.gov/new_bulletin.aspx?bullid=3",
+  "reviewedUrls": [
+    "https://kfi.ky.gov/newstatic_info.aspx?static_id=377&menuid=67",
+    "https://kfi.ky.gov/new_bulletin.aspx?bullid=3",
+    "https://kfi.ky.gov/Documents/2025%20Annual%20Report.pdf"
+  ],
+  "reason": "The Securities Enforcement Actions index is public. Individual order documents were not parsed into rows and were not attached to CRDs. The 2025 annual-report enforcement totals are a separate grain. An index link is not a finding. A consent or agreed order is not a final finding unless the document says so. Missing rows are not zero orders.",
+  "rowCount": null,
+  "rows": [],
+  "rowsWithCrdColumn": 0,
+  "exactEnforcementAttachments": 0,
+  "nameOnlyAdverseJoins": 0,
+  "graphWrites": 0,
+  "retrievedAt": "2026-10-05"
+}

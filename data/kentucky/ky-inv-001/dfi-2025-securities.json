@@ -1,0 +1,117 @@
+{
+  "contract": "ky-inv-001-dfi-2025-securities-v1",
+  "regulator": "Kentucky Department of Financial Institutions, Securities Division",
+  "sourceUrl": "https://kfi.ky.gov/Documents/2025%20Annual%20Report.pdf",
+  "sha256": "363f98955759406ba34f83ee0323d7cae5792330e30c91c969ca6e9231fa5b84",
+  "bytes": 8203666,
+  "clock": "2025-12-31",
+  "priorClock": "2024-12-31",
+  "retrievedAt": "2026-10-05",
+  "glance": {
+    "brokerDealerFirms": 1382,
+    "stateRegisteredInvestmentAdviserFirms": 159,
+    "securitiesProfessionals": 182894
+  },
+  "yearEnd": {
+    "brokerDealers": {
+      "renewed": 1390,
+      "approved": 52,
+      "withdrawalsFromBdw": 60,
+      "totalRegistered": 1382,
+      "priorYearTotal": 1399
+    },
+    "brokerDealerAgents": {
+      "renewed": 173323,
+      "approved": 38944,
+      "terminated": 29373,
+      "totalRegistered": 182894,
+      "priorYearTotal": 174634,
+      "grain": "Person registrations. The at-a-glance label Securities Professionals prints this same 182,894. Not firms."
+    },
+    "issuerAgents": {
+      "renewed": 2,
+      "approved": 0,
+      "terminated": 0,
+      "totalRegistered": 2,
+      "priorYearTotal": 2,
+      "printedZero": "Approved and terminated print 0."
+    },
+    "stateRegisteredInvestmentAdvisers": {
+      "renewed": 153,
+      "approved": 19,
+      "terminated": 13,
+      "totalRegistered": 159,
+      "priorYearTotal": 164
+    }
+  },
+  "federalCoveredNoticeFilings": {
+    "renewed": 1394,
+    "priorYearRenewed": 1361,
+    "totalEffectiveYearEnd": 1430,
+    "priorYearTotal": 1398,
+    "newWithdrawnFailedTerminated": null,
+    "footnote": "The difference between renewals and the year-end total is attributed to new, withdrawn, failed-to-renew, and terminated individuals and entities. Those components are not printed."
+  },
+  "investmentAdviserRepresentatives": {
+    "renewed": 6806,
+    "priorYearRenewed": 6573,
+    "totalStateAndFederalYearEnd": 7359,
+    "priorYearTotal": 7214,
+    "stateOnly": null,
+    "federalOnly": null,
+    "grain": "Persons. The printed total combines state and federal IARs and does not split them. Not firms and not broker-dealer agents."
+  },
+  "headquarteredNameLists": {
+    "brokerDealerPrintedRows": 9,
+    "investmentAdviserPrintedRows": 90,
+    "crdColumn": false,
+    "exactCrdAttachments": 0,
+    "namesPublished": false,
+    "grain": "Printed name-and-city rows. Not the year-end registration totals and not the accepted IAPD principal-office roster."
+  },
+  "examinations": {
+    "brokerDealer": 2,
+    "investmentAdvisory": 46,
+    "total": 48,
+    "priorYearTotal": 45,
+    "ordersOrAgreementsEnteredFromExamination": 3,
+    "priorYearOrdersOrAgreements": 2,
+    "findings": null,
+    "examIsViolation": false,
+    "examIsAdministrativeOrder": false
+  },
+  "enforcement": {
+    "referralsOrAssistanceToOutsideAgencies": 43,
+    "referralsFromOutsideAgencies": 39,
+    "investigationsOpened": 167,
+    "investigationsClosed": 149,
+    "investigationsPending": 128,
+    "administrativeOrders": 11,
+    "civilOrders": 0,
+    "finesUsd": 39000,
+    "restitutionOrderedUsd": 15000,
+    "vanguardNationwideRestitutionUsd": 146410000,
+    "vanguardOrderDate": "2025-06-17",
+    "kentuckyVanguardAllocationUsd": null,
+    "criminalReferrals": 6,
+    "criminalIndictments": 0,
+    "investigationsWithFederalStateLaw": 3,
+    "investigationsWithFederalStateLawLabel": "Investigations with Federal/State Law"
+  },
+  "corporationFinanceFilings": {
+    "privatePlacementSecuritiesOfferings": 56,
+    "investmentCompaniesNew": 164,
+    "investmentCompaniesRenewals": 3387,
+    "unitInvestmentTrusts": 976,
+    "regulationDRule506Offerings": 1043,
+    "claimsOfExemptionRequested": 47,
+    "regulationATier2Offerings": 64,
+    "printedTotal": 5737,
+    "priorYearPrintedTotal": 5818,
+    "grain": "Filings. Not companies, firms, or licensed people."
+  },
+  "sameClockAsIapd": false,
+  "graphWrites": 0,
+  "nameOnlyAdverseJoins": 0,
+  "exactCrdAttachments": 0
+}
