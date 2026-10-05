@@ -24,6 +24,7 @@ export function researchRecovery(q: InvestorResearchQuery) {
     WI: '/wisconsin',
     IN: '/indiana',
     LA: '/louisiana',
+    KY: '/kentucky',
     AL: '/alabama',
   };
   const state = q.registrationJurisdictions?.length === 1 ? q.registrationJurisdictions[0] : undefined;

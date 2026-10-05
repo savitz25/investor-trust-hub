@@ -131,6 +131,7 @@ describe('INV-HOME-003 public evidence inventory', () => {
       '/wisconsin',
       '/indiana',
       '/louisiana',
+      '/kentucky',
       '/alabama',
     ]);
     expect(get('published_state_pages').value).toBe(

@@ -57,6 +57,7 @@ describe('CO-INV-001 Colorado publication', () => {
       '/wisconsin',
       '/indiana',
       '/louisiana',
+      '/kentucky',
       '/alabama',
     ]);
     expect(existsSync(join(webRoot, 'src/app/arizona/page.tsx'))).toBe(true);

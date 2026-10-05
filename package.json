@@ -53,6 +53,7 @@
     "assert:md-inv-001": "node scripts/assert-md-inv-001.mjs && vitest run packages/domain/tests/md-public-intel.test.ts",
     "assert:wi-inv-001": "node scripts/assert-wi-inv-001.mjs && vitest run packages/domain/tests/wi-public-intel.test.ts",
     "assert:la-inv-001": "node scripts/assert-la-inv-001.mjs && vitest run packages/domain/tests/la-public-intel.test.ts",
+    "assert:ky-inv-001": "node scripts/assert-ky-inv-001.mjs && vitest run packages/domain/tests/ky-public-intel.test.ts",
     "assert:al-inv-001": "node scripts/assert-al-inv-001.mjs && vitest run packages/domain/tests/al-public-intel.test.ts",
     "assert:in-inv-001": "node scripts/assert-in-inv-001.mjs && vitest run packages/domain/tests/in-public-intel.test.ts",
     "assert:nv-inv-001": "node scripts/assert-nv-inv-001.mjs && vitest run packages/domain/tests/nv-public-intel.test.ts apps/web/tests/nv-inv-001-publication.test.ts",

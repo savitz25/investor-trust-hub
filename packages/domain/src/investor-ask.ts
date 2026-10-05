@@ -18,6 +18,7 @@ import { MD_REGISTRATION_LENSES } from './md-public-intel';
 import { WI_REGISTRATION_LENSES, WI_SECURITIES_ORDERS } from './wi-public-intel';
 import { IN_IAPD_LENSES, IN_SECURITIES_ORDERS } from './in-public-intel';
 import { LA_REGISTRATION_LENSES } from './la-public-intel';
+import { KY_DFI_2025_SECURITIES, KY_REGISTRATION_LENSES } from './ky-public-intel';
 import { AL_REGISTRATION_LENSES, AL_SECURITIES_ORDERS } from './al-public-intel';
 export type { InvestorResearchIntent, InvestorCondition } from './investor-research-plan';
 
@@ -507,6 +508,7 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     if (/\bwisconsin\b/i.test(q)) push('Wisconsin context', 'InvestorTrustHub /wisconsin; SEC file identity alone does not establish Wisconsin registration.');
     if (/\bindiana\b/i.test(q)) push('Indiana context', 'InvestorTrustHub Indiana (/indiana); SEC file identity alone does not establish Indiana registration or notice filing.');
     if (/\blouisiana\b/i.test(q)) push('Louisiana context', 'InvestorTrustHub /louisiana; SEC file identity alone does not establish Louisiana registration or notice filing.');
+    if (/\bkentucky\b/i.test(q)) push('Kentucky context', 'InvestorTrustHub /kentucky; SEC file identity alone does not establish Kentucky registration or notice filing.');
     if (/\balabama\b/i.test(q)) push('Alabama context', 'InvestorTrustHub /alabama; SEC file identity alone does not establish Alabama registration or notice filing.');
     return { raw: q, query, interpretation: lines };
   }
@@ -536,6 +538,7 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     if (/\bwisconsin\b/i.test(q)) push('Wisconsin context', 'InvestorTrustHub /wisconsin; firm CRD identity alone does not establish Wisconsin registration.');
     if (/\bindiana\b/i.test(q)) push('Indiana context', 'InvestorTrustHub Indiana (/indiana); firm CRD identity alone does not establish Indiana registration or notice filing.');
     if (/\blouisiana\b/i.test(q)) push('Louisiana context', 'InvestorTrustHub /louisiana; firm CRD identity alone does not establish Louisiana registration or notice filing.');
+    if (/\bkentucky\b/i.test(q)) push('Kentucky context', 'InvestorTrustHub /kentucky; firm CRD identity alone does not establish Kentucky registration or notice filing.');
     if (/\balabama\b/i.test(q)) push('Alabama context', 'InvestorTrustHub /alabama; firm CRD identity alone does not establish Alabama registration or notice filing.');
     return { raw: q, query, interpretation: lines };
   }
@@ -554,6 +557,40 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
     const query = failClosed('InvestorTrustHub Specialist Search is firm-focused. A person or IAR CRD must not be resolved as a firm CRD.', ['Find firm CRD 105958.', 'What is a CRD number?']);
     push('Mode', 'fail_closed');
     push('Identity class', 'Individual/IAR — outside the public firm search');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  // KY-INV-001: labeled firm identifiers above outrank state and city words.
+  const kyNamed = /\bkentucky\b/i.test(q);
+  const kyCity = /\b(louisville|lexington)\b/i.exec(q);
+  const kyBlockedByOtherState = !kyNamed && /\b(alabama|louisiana|indiana|wisconsin|tennessee|ohio|georgia|pennsylvania|north carolina|texas|nevada|minnesota|michigan|maryland|connecticut|virginia|colorado|illinois|oregon|california|washington|arizona|new york|new jersey|massachusetts)\b/i.test(q);
+  if ((kyNamed || (kyCity && !kyBlockedByOtherState)) && /\b(?:investment|advis[eo]rs?|ria|eras?|broker|securities|crd|sec|notice|disciplin|enforc|complaint|exams?|principal office|agents?|representatives?|iars?|total|combined|how many)\b/i.test(q)) {
+    const ky = KY_REGISTRATION_LENSES;
+    const report = KY_DFI_2025_SECURITIES;
+    const reason = kyCity && !kyNamed
+      ? 'The named Kentucky city is geography only. InvestorTrustHub publishes no Louisville or Lexington securities route. A principal office does not establish Kentucky registration or notice filing. Use /kentucky.'
+      : /\bcomplaints?\b/i.test(q)
+        ? 'The Kentucky Department of Financial Institutions, Securities Division investigates complaints. Provider-level complaint records and outcomes were not acquired. A complaint is not a finding. Use /kentucky.'
+        : /\b(?:disciplin\w*|enforc\w*|orders?|sanctions?)\b/i.test(q)
+          ? `The 2025 DFI annual report, as of December 31, 2025, prints ${report.enforcement.administrativeOrders} securities administrative orders and ${report.enforcement.civilOrders} civil orders. The Securities Enforcement Actions index was not parsed into rows. Exact CRD attachments: 0. An annual-report total is not an order document. Use /kentucky.`
+          : /\b(?:examinations?|exams?)\b/i.test(q)
+            ? `DFI's 2025 Compliance Branch table prints ${report.examinations.brokerDealer} broker-dealer examinations, ${report.examinations.investmentAdvisory} investment-advisory examinations, and ${report.examinations.total} total. An examination is not a violation, and the ${report.examinations.ordersOrAgreementsEnteredFromExamination} orders or agreements entered from examinations are not the ${report.enforcement.administrativeOrders} administrative orders. Use /kentucky.`
+            : /\b(?:investment adviser representatives?|iars?)\b/i.test(q)
+              ? `DFI's year-end 2025 table prints ${report.investmentAdviserRepresentatives.totalStateAndFederalYearEnd.toLocaleString('en-US')} state and federal investment adviser representatives. That is a person grain, not split into state versus federal, and not the ${report.glance.securitiesProfessionals.toLocaleString('en-US')} broker-dealer agent registrations. A person CRD is not a firm CRD. Use /kentucky.`
+              : /\b(?:broker[- ]?dealers?|securities agents?|agents?)\b/i.test(q)
+                ? `DFI's year-end 2025 table prints ${report.yearEnd.brokerDealers.totalRegistered.toLocaleString('en-US')} broker-dealer firms and ${report.yearEnd.brokerDealerAgents.totalRegistered.toLocaleString('en-US')} broker-dealer agent registrations. Issuer agents are a separate printed ${report.yearEnd.issuerAgents.totalRegistered}. These are not investment-adviser firms and not a CRD roster. Use /kentucky.`
+                : /\b(?:principal office|headquarter\w*|based in|located in)\b/i.test(q)
+                  ? `The accepted national SEC/IARD roster reports ${ky.principalOffice.count} Kentucky principal-office firm records as of ${ky.principalOffice.sourceAsOf}. Office geography is not Kentucky registration or notice filing. DFI's printed headquarters name list is a different grain. Use /kentucky.`
+                  : /\b(?:era|exempt reporting)\b/i.test(q)
+                    ? `The accepted IAPD state compilation lists ${ky.era.count} active Kentucky exempt reporting adviser firm CRDs. ERA status is not state IA or SEC registration. Use /kentucky.`
+                    : /\b(?:federal[- ]covered|notice[- ]filed|notice filing|notice)\b/i.test(q)
+                      ? `The accepted IAPD SEC compilation lists ${ky.federalNotice.count.toLocaleString('en-US')} firms with a FILED Kentucky notice as of ${ky.acceptedIapdSourceDate}. DFI's December 31, 2025 effective notice filings are ${report.federalCoveredNoticeFilings.totalEffectiveYearEnd.toLocaleString('en-US')}. A notice filing is not Kentucky state IA registration, and the two clocks are not the same count. Use /kentucky.`
+                      : /\b(?:total|combined|how many|all)\b/i.test(q) && !/\b(?:state[- ]registered|notice|era|exempt|principal|broker|agent|representative|federal)\b/i.test(q)
+                        ? `Kentucky IAPD state IA (${ky.stateIa.count}), federal notice (${ky.federalNotice.count.toLocaleString('en-US')}), ERA (${ky.era.count}) and principal-office (${ky.principalOffice.count}) lenses cannot be combined. DFI's December 31, 2025 state-registered IA total (${report.yearEnd.stateRegisteredInvestmentAdvisers.totalRegistered}) is a separate clock. Use /kentucky.`
+                        : `The accepted IAPD state compilation lists ${ky.stateIa.count} Kentucky state-registered IA firm CRDs (APPROVED) as of ${ky.acceptedIapdSourceDate}. DFI's December 31, 2025 year-end state-registered IA total is ${report.yearEnd.stateRegisteredInvestmentAdvisers.totalRegistered}. Those clocks are not added. Federal notice, ERA and principal office stay separate. Use /kentucky.`;
+    const query = failClosed(reason, ['Kentucky investor research page.', 'Find firm CRD 105958.']);
+    if (kyCity && !kyNamed) query.geography = { type: 'principal_office_city', value: kyCity[1]!, state: 'KY', meaning: 'City context only; not Kentucky registration or service territory' };
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };
   }
 
