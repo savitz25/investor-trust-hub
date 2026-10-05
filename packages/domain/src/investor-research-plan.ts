@@ -78,6 +78,8 @@ function finish(raw: string, q: InvestorResearchQuery): ParsedInvestorAsk {
     interpretation.push({ label: 'Alabama context', value: 'InvestorTrustHub /alabama; exact identity alone does not establish Alabama registration or notice filing.' });
   if (q.identifier && /\bsouth carolina\b/i.test(raw))
     interpretation.push({ label: 'South Carolina context', value: 'InvestorTrustHub /south-carolina; exact identity alone does not establish South Carolina registration or notice filing.' });
+  if (q.identifier && /\bmississippi\b/i.test(raw))
+    interpretation.push({ label: 'Mississippi context', value: 'InvestorTrustHub /mississippi; exact identity alone does not establish Mississippi registration or notice filing.' });
   if (q.nameQuery || q.originalName)
     interpretation.push({ label: 'Requested firm name', value: q.originalName ?? q.nameQuery! });
   if (q.firmType)

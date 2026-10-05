@@ -27,6 +27,7 @@ export function researchRecovery(q: InvestorResearchQuery) {
     KY: '/kentucky',
     AL: '/alabama',
     SC: '/south-carolina',
+    MS: '/mississippi',
   };
   const state = q.registrationJurisdictions?.length === 1 ? q.registrationJurisdictions[0] : undefined;
   return state && routes[state]

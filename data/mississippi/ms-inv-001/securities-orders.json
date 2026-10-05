@@ -1,0 +1,17 @@
+{
+  "contract": "ms-inv-001-securities-orders-v1",
+  "status": "NOT_ACQUIRED",
+  "regulator": "Mississippi Secretary of State, Securities Division",
+  "indexUrl": "https://www.sos.ms.gov/content/enforcementsearch/?page=securities",
+  "complaintUrl": "https://www.sos.ms.gov/securities/information-investors/file-complaint",
+  "reviewedAt": "2026-10-05",
+  "reason": "The Secretary of State enforcement search is public and can be filtered toward securities. The first result page is not a census, and the on-screen total was not captured as a securities-only order count. Individual orders were not downloaded and were not attached to CRDs. A cease-and-desist is not a final adjudication. A complaint form is intake, not a finding. Missing rows are not zero orders.",
+  "rowCount": null,
+  "rows": [],
+  "rowsWithCrdColumn": 0,
+  "exactEnforcementAttachments": 0,
+  "nameOnlyAdverseJoins": 0,
+  "ceaseAndDesistIsFinalAdjudication": false,
+  "graphWrites": 0,
+  "retrievedAt": "2026-10-05"
+}

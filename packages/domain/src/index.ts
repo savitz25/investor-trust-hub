@@ -51,3 +51,4 @@ export * from './la-public-intel';
 export * from './ky-public-intel';
 export * from './al-public-intel';
 export * from './sc-public-intel';
+export * from './ms-public-intel';
