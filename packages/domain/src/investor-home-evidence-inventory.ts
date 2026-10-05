@@ -18,6 +18,8 @@ import IN_IAPD_LENSES from '../../../data/indiana/in-inv-001/iapd-in-lenses.json
 import IN_SECURITIES_ORDERS from '../../../data/indiana/in-inv-001/securities-orders.json';
 import LA_REGISTRATION_LENSES from '../../../data/louisiana/la-inv-001/registration-lenses.json';
 import KY_REGISTRATION_LENSES from '../../../data/kentucky/ky-inv-001/registration-lenses.json';
+import AL_REGISTRATION_LENSES from '../../../data/alabama/al-inv-001/registration-lenses.json';
+import AL_SECURITIES_ORDERS from '../../../data/alabama/al-inv-001/securities-orders.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -89,7 +91,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL';
   name: string;
   href: string;
   regulator: string;
@@ -988,6 +990,22 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
     sourceClocks: [
       { label: 'Accepted national principal-office roster', sourceAsOf: KY_REGISTRATION_LENSES.principalOffice.sourceAsOf, retrievedAt: KY_REGISTRATION_LENSES.principalOffice.retrievedAt, snapshotAsOf: KY_REGISTRATION_LENSES.principalOffice.sourceAsOf, generatedAt: null },
       { label: 'IAPD STATE and SEC compilations', sourceAsOf: KY_REGISTRATION_LENSES.acceptedIapdSourceDate, retrievedAt: KY_REGISTRATION_LENSES.retrievedAt, snapshotAsOf: KY_REGISTRATION_LENSES.acceptedIapdSourceDate, generatedAt: null },
+    ],
+  },
+  {
+    code: 'AL',
+    name: 'Alabama',
+    href: '/alabama',
+    regulator: 'Alabama Securities Commission',
+    principalOfficeFirms: AL_REGISTRATION_LENSES.principalOffice.count,
+    rosterStatus: `IAPD AL APPROVED state IA ${AL_REGISTRATION_LENSES.stateIa.count.toLocaleString('en-US')} firm CRDs as of ${AL_REGISTRATION_LENSES.acceptedIapdSourceDate}`,
+    evidence: ['IAPD Alabama state IA, federal notice and ERA jurisdiction lenses', 'accepted SEC/IARD principal-office overlay', '2025–2026 ASC administrative-action index'],
+    identityNote: 'The 98 principal-office records are geography, not Alabama registration. State IA, federal notice, ERA and person classes remain separate.',
+    limitation: 'The 2025–2026 order index is documents, not findings or unique matters. Older year folders were not acquired. Grains are not added into one adviser total. No adverse profile attachments.',
+    sourceClocks: [
+      { label: 'Accepted national principal-office roster', sourceAsOf: AL_REGISTRATION_LENSES.principalOffice.sourceAsOf, retrievedAt: AL_REGISTRATION_LENSES.principalOffice.retrievedAt, snapshotAsOf: AL_REGISTRATION_LENSES.principalOffice.sourceAsOf, generatedAt: null },
+      { label: 'IAPD STATE and SEC compilations', sourceAsOf: AL_REGISTRATION_LENSES.acceptedIapdSourceDate, retrievedAt: AL_REGISTRATION_LENSES.retrievedAt, snapshotAsOf: AL_REGISTRATION_LENSES.acceptedIapdSourceDate, generatedAt: null },
+      { label: 'ASC 2025–2026 administrative-action index', sourceAsOf: null, retrievedAt: AL_SECURITIES_ORDERS.retrievedAt, snapshotAsOf: '2026-10-05', generatedAt: null },
     ],
   },
 ];

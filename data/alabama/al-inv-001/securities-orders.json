@@ -1,0 +1,429 @@
+{
+  "contract": "al-inv-001-securities-orders-v1",
+  "status": "BOUNDED_INDEX",
+  "regulator": "Alabama Securities Commission",
+  "indexUrl": "https://asc.alabama.gov/for-industry/enforcement/administrative-actions/",
+  "window": "Admin Actions 2025 and Admin Actions 2026 folders",
+  "olderYearFolders": "NOT_ACQUIRED",
+  "rowCount": 33,
+  "yearCounts": {
+    "2025": 29,
+    "2026": 4
+  },
+  "actionTagRows": [
+    {
+      "tag": "Cease & Desist",
+      "rows": 9
+    },
+    {
+      "tag": "Cease & Desist, Cryptocurrency",
+      "rows": 7
+    },
+    {
+      "tag": "Consent Order",
+      "rows": 7
+    },
+    {
+      "tag": "Broker-Dealer, Consent Order, Investment Advisor, Stock",
+      "rows": 3
+    },
+    {
+      "tag": "Cease & Desist, Cryptocurrency, Pig Butchering",
+      "rows": 2
+    },
+    {
+      "tag": "Cease & Desist, Cryptocurrency, Imposter Scam",
+      "rows": 1
+    },
+    {
+      "tag": "Cease & Desist, Pig Butchering",
+      "rows": 1
+    },
+    {
+      "tag": "Consent Order, Investment Advisor",
+      "rows": 1
+    },
+    {
+      "tag": "Consent Order, Mutual Funds",
+      "rows": 1
+    },
+    {
+      "tag": "Consent Order, Promissory Notes",
+      "rows": 1
+    }
+  ],
+  "rows": [
+    {
+      "documentId": "20601",
+      "yearFolder": "2026",
+      "orderNumber": "CD-2026-0004",
+      "caseNumber": "S24-0067",
+      "dateText": "October 2, 2026",
+      "actionTags": "Cease & Desist",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2026/10/CD-2026-0004-VOLATILE-ANALYSIS-CORPORATION-1.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "20249",
+      "yearFolder": "2026",
+      "orderNumber": "CD-2026-0003",
+      "caseNumber": "S24-0262",
+      "dateText": "August 31, 2026",
+      "actionTags": "Cease & Desist",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2026/08/CD-2026-0003.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "19786",
+      "yearFolder": "2026",
+      "orderNumber": "CO-2026-0002",
+      "caseNumber": "S24-0244",
+      "dateText": "March 17, 2026",
+      "actionTags": "Consent Order",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2026/03/CO-2026-0002.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "19572",
+      "yearFolder": "2026",
+      "orderNumber": "CO-2026-0001",
+      "caseNumber": "S20-0187",
+      "dateText": "January 20, 2026",
+      "actionTags": "Consent Order",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2026/01/CO-2026-0001.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "19520",
+      "yearFolder": "2025",
+      "orderNumber": "CO-2025-0033",
+      "caseNumber": "S23-0056",
+      "dateText": "December 18, 2025",
+      "actionTags": "Consent Order",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/12/CO-2025-0033.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "19517",
+      "yearFolder": "2025",
+      "orderNumber": "CO-2025-0032",
+      "caseNumber": "S23-0056",
+      "dateText": "December 8, 2025",
+      "actionTags": "Broker-Dealer, Consent Order, Investment Advisor, Stock",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/12/CO-2025-0032.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "19500",
+      "yearFolder": "2025",
+      "orderNumber": "CD-2025-0030",
+      "caseNumber": "S25-0046",
+      "dateText": "November 18, 2025",
+      "actionTags": "Cease & Desist",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/11/CD-2025-0030.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "19494",
+      "yearFolder": "2025",
+      "orderNumber": "CO-2025-0029",
+      "caseNumber": "S23-0056",
+      "dateText": "November 17, 2025",
+      "actionTags": "Consent Order",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/11/CO-2025-0029.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "19487",
+      "yearFolder": "2025",
+      "orderNumber": "CO-2025-0028",
+      "caseNumber": "S23-0056",
+      "dateText": "November 10, 2025",
+      "actionTags": "Broker-Dealer, Consent Order, Investment Advisor, Stock",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/11/CO-2025-0028.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "19456",
+      "yearFolder": "2025",
+      "orderNumber": "CO-2025-0027",
+      "caseNumber": "S23-0056",
+      "dateText": "October 30, 2025",
+      "actionTags": "Broker-Dealer, Consent Order, Investment Advisor, Stock",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/10/CO-2025-0027.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "19349",
+      "yearFolder": "2025",
+      "orderNumber": "CO-2025-0026",
+      "caseNumber": "S20-0187",
+      "dateText": "October 3, 2025",
+      "actionTags": "Consent Order, Promissory Notes",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/10/CO-2025-0026.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "19309",
+      "yearFolder": "2025",
+      "orderNumber": "CD-2025-0024",
+      "caseNumber": "S24-0298",
+      "dateText": "August 18, 2025",
+      "actionTags": "Cease & Desist, Pig Butchering",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/08/CD-2025-0024.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "19290",
+      "yearFolder": "2025",
+      "orderNumber": "CO-2025-0017",
+      "caseNumber": "S23-0056",
+      "dateText": "August 13, 2025",
+      "actionTags": "Consent Order",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/08/CO-2025-0017.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "19285",
+      "yearFolder": "2025",
+      "orderNumber": "CD-2025-0023",
+      "caseNumber": "S24-0244",
+      "dateText": "August 1, 2025",
+      "actionTags": "Cease & Desist",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/08/CD-2025-0023.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "19281",
+      "yearFolder": "2025",
+      "orderNumber": "CD-2025-0022",
+      "caseNumber": "S24-0144",
+      "dateText": "July 29, 2025",
+      "actionTags": "Cease & Desist",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/07/CD-2025-0022.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "19090",
+      "yearFolder": "2025",
+      "orderNumber": "CO-2025-0021",
+      "caseNumber": "S22-0143",
+      "dateText": "June 10, 2025",
+      "actionTags": "Consent Order, Mutual Funds",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/06/CO-2025-0021.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "19082",
+      "yearFolder": "2025",
+      "orderNumber": "CD-2025-0020",
+      "caseNumber": "S25-0081",
+      "dateText": "June 17, 2025",
+      "actionTags": "Cease & Desist, Cryptocurrency",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/06/CD-2025-0020.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "19052",
+      "yearFolder": "2025",
+      "orderNumber": "CD-2025-0016",
+      "caseNumber": "S23-0047",
+      "dateText": "May 15, 2025",
+      "actionTags": "Cease & Desist",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/05/CD-2025-0016.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "19047",
+      "yearFolder": "2025",
+      "orderNumber": "CD-2025-0015",
+      "caseNumber": "S23-0099",
+      "dateText": "May 15, 2025",
+      "actionTags": "Cease & Desist",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/05/CD-2025-0015.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "19007",
+      "yearFolder": "2025",
+      "orderNumber": "CO-2025-0014",
+      "caseNumber": "S25-0188",
+      "dateText": "May 7, 2025",
+      "actionTags": "Consent Order, Investment Advisor",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/05/CO-2025-0014.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "18997",
+      "yearFolder": "2025",
+      "orderNumber": "CD-2025-0013",
+      "caseNumber": "S23-0073",
+      "dateText": "April 19, 2025",
+      "actionTags": "Cease & Desist, Cryptocurrency",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/04/CD2025-0013.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "18994",
+      "yearFolder": "2025",
+      "orderNumber": "CD-2025-0012",
+      "caseNumber": "S24-0528",
+      "dateText": "April 19, 2025",
+      "actionTags": "Cease & Desist, Cryptocurrency",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/04/CD-2025-0012.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "18992",
+      "yearFolder": "2025",
+      "orderNumber": "CD-2025-0011",
+      "caseNumber": "S25-0082",
+      "dateText": "April 19, 2025",
+      "actionTags": "Cease & Desist, Cryptocurrency",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/04/CD-2025-0011.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "18990",
+      "yearFolder": "2025",
+      "orderNumber": "CD-2025-0010",
+      "caseNumber": "S25-0138",
+      "dateText": "April 19, 2025",
+      "actionTags": "Cease & Desist, Cryptocurrency, Pig Butchering",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/04/CD-2025-0010.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "18983",
+      "yearFolder": "2025",
+      "orderNumber": "CD-2025-0009",
+      "caseNumber": "S23-0136",
+      "dateText": "April 7, 2025",
+      "actionTags": "Cease & Desist",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/04/S23-0136.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "18978",
+      "yearFolder": "2025",
+      "orderNumber": "CD-2025-0008",
+      "caseNumber": "S24-0349",
+      "dateText": "March 30, 2025",
+      "actionTags": "Cease & Desist, Cryptocurrency, Pig Butchering",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/03/CD-2025-0008.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "18974",
+      "yearFolder": "2025",
+      "orderNumber": "CD-2025-0007",
+      "caseNumber": "S24-0145",
+      "dateText": "March 30, 2025",
+      "actionTags": "Cease & Desist, Cryptocurrency",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/03/CD-2025-0007.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "18976",
+      "yearFolder": "2025",
+      "orderNumber": "CD-2025-0006",
+      "caseNumber": "S24-0453",
+      "dateText": "March 30, 2025",
+      "actionTags": "Cease & Desist, Cryptocurrency, Imposter Scam",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/03/CD-2025-0006.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "18970",
+      "yearFolder": "2025",
+      "orderNumber": "CD-2025-0005",
+      "caseNumber": "S24-0515",
+      "dateText": "March 30, 2025",
+      "actionTags": "Cease & Desist, Cryptocurrency",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/03/CD-2025-0005.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "18972",
+      "yearFolder": "2025",
+      "orderNumber": "CD-2025-0004",
+      "caseNumber": "S24-0418",
+      "dateText": "March 30, 2025",
+      "actionTags": "Cease & Desist, Cryptocurrency",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/03/CD-2025-0004.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "18968",
+      "yearFolder": "2025",
+      "orderNumber": "CO-2025-0003",
+      "caseNumber": "S21-0132",
+      "dateText": "March 30, 2025",
+      "actionTags": "Consent Order",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/03/CO-2025-0003.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "18918",
+      "yearFolder": "2025",
+      "orderNumber": "CD-2025-0002",
+      "caseNumber": "S24-0162",
+      "dateText": "January 30, 2025",
+      "actionTags": "Cease & Desist",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/01/CD-2025-0002.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    },
+    {
+      "documentId": "18904",
+      "yearFolder": "2025",
+      "orderNumber": "CO-2025-0001",
+      "caseNumber": "S25-0021",
+      "dateText": "January 15, 2025",
+      "actionTags": "Consent Order",
+      "sourcePdf": "https://asc.alabama.gov/wp-content/uploads/2025/01/CO-2025-0001.pdf",
+      "firmCrd": null,
+      "finalAdjudication": false
+    }
+  ],
+  "rowsWithCrdColumn": 0,
+  "exactEnforcementAttachments": 0,
+  "nameOnlyAdverseJoins": 0,
+  "ceaseAndDesistIsFinalAdjudication": false,
+  "respondentNamesStored": false,
+  "pdfsDownloaded": 0,
+  "graphWrites": 0,
+  "retrievedAt": "2026-10-05",
+  "reason": "The ASC administrative-actions page lists year folders. The 2025 and 2026 folders were read as a bounded current index. Older year folders on the same page were not opened. Index rows are documents. A cease-and-desist is not a final adjudication. Respondent text was not stored and was not joined to a firm or person. A missing older year is not zero orders."
+}
