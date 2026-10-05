@@ -50,3 +50,4 @@ export * from './in-public-intel';
 export * from './la-public-intel';
 export * from './ky-public-intel';
 export * from './al-public-intel';
+export * from './sc-public-intel';

@@ -38,6 +38,7 @@ export function AskInvestorResultView({ result }: { result: InvestorAskResult })
         {q.identifier && /\blouisiana\b/i.test(result.queryText) ? <p className="mt-3 text-sm"><Link href="/louisiana" className="font-semibold text-teal-800 underline">Open InvestorTrustHub Louisiana securities research</Link>. This identifier alone does not establish Louisiana registration or notice filing.</p> : null}
         {q.identifier && /\bkentucky\b/i.test(result.queryText) ? <p className="mt-3 text-sm"><Link href="/kentucky" className="font-semibold text-teal-800 underline">Open InvestorTrustHub Kentucky securities research</Link>. This identifier alone does not establish Kentucky registration or notice filing.</p> : null}
         {q.identifier && /\balabama\b/i.test(result.queryText) ? <p className="mt-3 text-sm"><Link href="/alabama" className="font-semibold text-teal-800 underline">Open InvestorTrustHub Alabama securities research</Link>. This identifier alone does not establish Alabama registration or notice filing.</p> : null}
+        {q.identifier && /\bsouth carolina\b/i.test(result.queryText) ? <p className="mt-3 text-sm"><Link href="/south-carolina" className="font-semibold text-teal-800 underline">Open InvestorTrustHub South Carolina securities research</Link>. This identifier alone does not establish South Carolina registration or notice filing.</p> : null}
         {result.parsed.geographyNote ? (
           <p className="mt-3 text-sm leading-relaxed text-[var(--ith-ink)]">{result.parsed.geographyNote}</p>
         ) : null}
