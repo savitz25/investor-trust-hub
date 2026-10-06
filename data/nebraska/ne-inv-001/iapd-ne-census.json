@@ -1,0 +1,142 @@
+{
+  "contract": "investor-ne-iapd-census-v1",
+  "safeAsCurrentNebraskaBulkStateLayer": true,
+  "filterLogic": "Nebraska selected by IAPD registration jurisdiction fields: StateRgstn/Rgltr/@Cd=NE, ERA/Rgltr/@Cd=NE, and NoticeFiled/States/@RgltrCd=NE. MainAddr/@State=NE is office geography and is not the regulatory denominator. Regulator code NV is not Nebraska.",
+  "state": {
+    "filename": "IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "authority": "IAPD (FINRA-held state compilation)",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "sourceAsOf": "2026-09-17",
+    "publishedAt": "2026-09-17",
+    "retainedFileExaminedAt": "2026-10-06",
+    "bytes": 5080393,
+    "sha256": "5fa17c38ae2e812dbd4d58c359c4d624a54417e3f794a3287c3414ccfdaa6a02",
+    "grain": "Firm CRD; StateRgstn/Rgltr/@Cd=jurisdiction; @St=status; ERA/Rgltr/@Cd=jurisdiction. Not MainAddr/@State.",
+    "filter": "Rgltr/@Cd=NE (registration jurisdiction). Address is recorded only for overlap diagnostics.",
+    "firms_in_feed": 21861,
+    "ne_state_ia_registration_rows": 124,
+    "ne_state_ia_distinct_crd": 124,
+    "ne_state_ia_approved_distinct_crd": 122,
+    "ne_state_ia_current_distinct_crd": 123,
+    "ne_state_ia_termrequest_distinct_crd": 1,
+    "ne_state_era_registration_rows": 15,
+    "ne_state_era_distinct_crd": 15,
+    "ne_state_era_active_distinct_crd": 15,
+    "ia_era_overlap_distinct_crd": 0,
+    "status_ia": [
+      [
+        "APPROVED",
+        122
+      ],
+      [
+        "TERMREQUEST",
+        1
+      ],
+      [
+        "CONDREST",
+        1
+      ]
+    ],
+    "status_era": [
+      [
+        "ACTIVE",
+        15
+      ]
+    ],
+    "principal_office_ne_among_state_ia": 39,
+    "principal_office_not_ne_among_state_ia": 85,
+    "address_ne_without_ne_jurisdiction": 0
+  },
+  "sec": {
+    "filename": "IA_FIRM_SEC_Feed_09_17_2026.xml.gz",
+    "authority": "SEC / IAPD",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_SEC_Feed_09_17_2026.xml.gz",
+    "sourceAsOf": "2026-09-17",
+    "publishedAt": "2026-09-17",
+    "retainedFileExaminedAt": "2026-10-06",
+    "bytes": 7301907,
+    "sha256": "f01d6b17a7ed631125e76d3c1e5965f178235273eea6699c15400473cb2f1f22",
+    "grain": "Firm CRD; NoticeFiled/States/@RgltrCd=jurisdiction; MainAddr/@State=principal office (separate overlay).",
+    "firms_in_feed": 23911,
+    "firm_types": [
+      [
+        "Registered",
+        17206
+      ],
+      [
+        "ERA",
+        6705
+      ]
+    ],
+    "ne_notice_rows": 2239,
+    "ne_notice_any_status_distinct_crd": 2239,
+    "ne_notice_filed_distinct_crd": 2239,
+    "ne_notice_era_any_status": 0,
+    "ne_notice_filed_firm_type": {
+      "Registered": 2239,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          2239
+        ]
+      ]
+    },
+    "notice_status": [
+      [
+        "FILED",
+        2239
+      ]
+    ],
+    "ne_principal_office_distinct_crd": 71,
+    "principal_and_notice_filed": 70,
+    "notice_filed_not_principal": 2169,
+    "principal_not_notice_filed": 1
+  },
+  "overlaps": {
+    "state_ia_and_principal_office": 0,
+    "state_ia_approved_and_principal_office": 0,
+    "state_ia_and_notice_filed": 0,
+    "state_ia_approved_and_notice_filed": 0,
+    "state_era_and_principal_office": 0,
+    "state_era_and_notice_filed": 0,
+    "state_ia_and_state_era": 0,
+    "notice_filed_and_principal_office": 70,
+    "approved_state_ia_not_in_sec_principal_or_notice": 122,
+    "state_ia_approved_and_notice_filed_joinMethod": "exact firm CRD set intersection of APPROVED StateRgstn/Rgltr/@Cd=NE and NoticeFiled/States/@RgltrCd=NE St=FILED"
+  },
+  "semanticGrainRules": {
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_SEC_RIA": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_NOTICE_FILING": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_STATE_ERA": true,
+    "PRINCIPAL_OFFICE_IS_NOT_REGISTRATION": true,
+    "REGISTRATION_ROW_IS_DISTINCT_GRAIN_FROM_DISTINCT_FIRM_CRD": true,
+    "note": "These are contract/credential rules. They do not assert that CRD sets are disjoint or that counts are numerically unequal."
+  },
+  "computedDiagnostics": {
+    "state_ia_registration_rows": 124,
+    "state_ia_distinct_crd": 124,
+    "state_ia_approved_distinct_crd": 122,
+    "state_ia_termrequest_distinct_crd": 1,
+    "state_era_registration_rows": 15,
+    "state_era_distinct_crd": 15,
+    "state_ia_and_state_era_overlap_distinct_crd": 0,
+    "state_ia_approved_and_notice_filed_overlap_distinct_crd": 0,
+    "notice_filed_distinct_crd": 2239,
+    "notice_filed_firm_type": {
+      "Registered": 2239,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          2239
+        ]
+      ]
+    },
+    "registration_rows_equal_distinct_crd": true
+  }
+}

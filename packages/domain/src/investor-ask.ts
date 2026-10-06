@@ -23,6 +23,7 @@ import { AL_REGISTRATION_LENSES, AL_SECURITIES_ORDERS } from './al-public-intel'
 import { SC_REGISTRATION_LENSES, SC_SECURITIES_ORDERS } from './sc-public-intel';
 import { MS_REGISTRATION_LENSES } from './ms-public-intel';
 import AR_IAPD_CENSUS from '../../../data/arkansas/ar-inv-001/iapd-ar-census.json';
+import NE_IAPD_CENSUS from '../../../data/nebraska/ne-inv-001/iapd-ne-census.json';
 export type { InvestorResearchIntent, InvestorCondition } from './investor-research-plan';
 
 export const INVESTOR_ASK_CONTRACT = 'investor-ask-v1' as const;
@@ -763,6 +764,37 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
                         : `The IAPD state compilation lists ${arState.ar_state_ia_approved_distinct_crd} Arkansas state-registered IA firm CRDs (APPROVED). Federal notice (${arSec.ar_notice_filed_distinct_crd.toLocaleString('en-US')}), ERA (${arState.ar_state_era_active_distinct_crd}) and principal-office (${arSec.ar_principal_office_distinct_crd}) lenses are separate and must not be added. Use /arkansas.`;
     const query = failClosed(reason, ['Arkansas investor research page.', 'Find firm CRD 105958.']);
     if (arCity) query.geography = { type: 'principal_office_city', value: arCity[1]!, state: 'AR', meaning: 'City context only; not Arkansas registration or service territory' };
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  // NE-INV-001: "in ne" does not match Nevada. Omaha and Lincoln are not triggers.
+  const neNamed = (/\bnebraska\b/i.test(q) || /\bin ne\b/i.test(q)) && !/\bnevada\b/i.test(q);
+  const neCity = neNamed ? /\b(omaha|lincoln)\b/i.exec(q) : null;
+  if (neNamed && /\b(?:investment|advis[eo]rs?|ria|eras?|broker|securities|crd|sec|notice|disciplin|enforc|complaint|exams?|principal office|agents?|representatives?|iars?|total|combined|how many|registration)\b/i.test(q)) {
+    const neState = NE_IAPD_CENSUS.state;
+    const neSec = NE_IAPD_CENSUS.sec;
+    const reason = neCity
+      ? 'The named Nebraska city is geography only. InvestorTrustHub publishes no city securities route and no county route. A principal office does not establish Nebraska registration or notice filing. Use /nebraska.'
+      : /\bcomplaints?\b/i.test(q)
+        ? 'Provider-level Nebraska securities complaint records were NOT_ACQUIRED. A complaint is not a finding. Use /nebraska.'
+        : /\b(?:disciplin\w*|enforc\w*|orders?|sanctions?)\b/i.test(q)
+          ? 'A Nebraska securities order corpus was NOT_ACQUIRED. No order was attached by name. Use /nebraska.'
+          : /\b(?:investment adviser representatives?|iars?)\b/i.test(q)
+            ? 'The 2024 annual report prints 4,891 investment adviser representatives registered as of June 30, 2024, and 1,197 new representative registrations in that same dated table. New registrations are not the stock. A person-level roster was NOT_ACQUIRED. A person is not a firm. Use /nebraska.'
+            : /\b(?:broker[- ]?dealers?|agents?)\b/i.test(q)
+              ? 'The 2024 annual report prints 1,336 broker-dealers and 144,170 agents of broker-dealers registered as of June 30, 2024. New registrations in that year were 64 broker-dealers and 33,285 agents. Those new rows are not the stock. IAPD firm feeds are not this broker-dealer roster. Use /nebraska.'
+              : /\b(?:principal office|headquarter\w*|based in|located in)\b/i.test(q)
+                ? `The SEC IAPD compilation lists ${neSec.ne_principal_office_distinct_crd} Nebraska principal-office firm CRDs as of ${neSec.sourceAsOf}. The state compilation lists ${neState.principal_office_ne_among_state_ia} of ${neState.ne_state_ia_distinct_crd} state IA CRDs with a Nebraska office. Office geography is not registration. Use /nebraska.`
+                : /\b(?:era|exempt reporting)\b/i.test(q)
+                  ? `The IAPD state compilation lists ${neState.ne_state_era_active_distinct_crd} active Nebraska exempt reporting adviser firm CRDs. ERA status is not state IA or SEC registration. Use /nebraska.`
+                  : /\b(?:federal[- ]covered|notice[- ]filed|notice filing|notice)\b/i.test(q)
+                    ? `The IAPD SEC compilation lists ${neSec.ne_notice_filed_distinct_crd.toLocaleString('en-US')} firms with a FILED Nebraska notice as of ${neSec.sourceAsOf}. The June 30, 2024 annual report printed 2,004 federal covered advisers. Those clocks are not added. A notice filing is not Nebraska state IA registration. Use /nebraska.`
+                    : /\b(?:total|combined|how many|all)\b/i.test(q) && !/\b(?:state[- ]registered|notice|era|exempt|principal|broker|agent|representative|federal)\b/i.test(q)
+                      ? `Nebraska state IA APPROVED (${neState.ne_state_ia_approved_distinct_crd}), federal notice (${neSec.ne_notice_filed_distinct_crd.toLocaleString('en-US')}), ERA (${neState.ne_state_era_active_distinct_crd}) and principal-office (${neSec.ne_principal_office_distinct_crd}) lenses cannot be combined into one adviser total. Use /nebraska.`
+                      : `The IAPD state compilation lists ${neState.ne_state_ia_distinct_crd} Nebraska state IA firm CRDs as of ${neState.sourceAsOf}: ${neState.ne_state_ia_approved_distinct_crd} APPROVED, 1 CONDREST, and 1 TERMREQUEST. Federal notice (${neSec.ne_notice_filed_distinct_crd.toLocaleString('en-US')}), ERA (${neState.ne_state_era_active_distinct_crd}) and SEC principal-office (${neSec.ne_principal_office_distinct_crd}) lenses are separate and must not be added. Use /nebraska.`;
+    const query = failClosed(reason, ['Nebraska investor research page.', 'Open IAPD for a named firm CRD.']);
+    if (neCity) query.geography = { type: 'principal_office_city', value: neCity[1]!, state: 'NE', meaning: 'City context only; not Nebraska registration or service territory' };
     push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };
   }

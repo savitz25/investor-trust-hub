@@ -28,6 +28,7 @@ import OK_IAPD_CENSUS from '../../../data/oklahoma/ok-inv-001/iapd-ok-census.jso
 import AR_IAPD_CENSUS from '../../../data/arkansas/ar-inv-001/iapd-ar-census.json';
 import UT_IAPD_CENSUS from '../../../data/utah/ut-inv-001/iapd-ut-census.json';
 import NM_IAPD_CENSUS from '../../../data/new-mexico/nm-inv-001/iapd-nm-census.json';
+import NE_IAPD_CENSUS from '../../../data/nebraska/ne-inv-001/iapd-ne-census.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -99,7 +100,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK' | 'AR' | 'UT' | 'NM';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK' | 'AR' | 'UT' | 'NM' | 'NE';
   name: string;
   href: string;
   regulator: string;
@@ -1115,6 +1116,20 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
     limitation: 'Broker-dealer, agent and IAR state rosters, examinations, and the complete orders corpus were not acquired. No adverse profile attachments.',
     sourceClocks: [
       { label: 'IAPD STATE and SEC compilations', sourceAsOf: NM_IAPD_CENSUS.state.sourceAsOf, retrievedAt: NM_IAPD_CENSUS.state.retainedFileExaminedAt, snapshotAsOf: NM_IAPD_CENSUS.state.sourceAsOf, generatedAt: null },
+    ],
+  },
+  {
+    code: 'NE',
+    name: 'Nebraska',
+    href: '/nebraska',
+    regulator: 'Nebraska Department of Banking and Finance, Securities Bureau',
+    principalOfficeFirms: NE_IAPD_CENSUS.sec.ne_principal_office_distinct_crd,
+    rosterStatus: `IAPD NE APPROVED state IA ${NE_IAPD_CENSUS.state.ne_state_ia_approved_distinct_crd.toLocaleString('en-US')} firm CRDs as of ${NE_IAPD_CENSUS.state.sourceAsOf}`,
+    evidence: ['IAPD Nebraska state IA, federal notice and ERA jurisdiction lenses', 'SEC/IAPD principal-office geography overlay'],
+    identityNote: 'The principal-office overlay is geography only, not Nebraska registration. State IA, federal notice, ERA and person classes remain separate.',
+    limitation: 'Broker-dealer and agent rows are a June 30, 2024 annual-report clock, not the IAPD firm feed. Person rosters and the orders corpus were not acquired.',
+    sourceClocks: [
+      { label: 'IAPD STATE and SEC compilations', sourceAsOf: NE_IAPD_CENSUS.state.sourceAsOf, retrievedAt: NE_IAPD_CENSUS.state.retainedFileExaminedAt, snapshotAsOf: NE_IAPD_CENSUS.state.sourceAsOf, generatedAt: null },
     ],
   },
 ];
