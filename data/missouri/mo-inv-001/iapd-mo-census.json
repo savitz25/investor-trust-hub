@@ -1,0 +1,166 @@
+{
+  "contract": "investor-mo-iapd-census-v1",
+  "safeAsCurrentMissouriBulkStateLayer": true,
+  "filterLogic": "Missouri selected by IAPD registration/notice jurisdiction fields (StateRgstn/Rgltr/@Cd, ERA/Rgltr/@Cd, NoticeFiled/States/@RgltrCd). Principal-office MainAddr/@State=MO is a separate national overlay and is not the state-RIA denominator.",
+  "state": {
+    "filename": "IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "authority": "IAPD (FINRA-held state compilation)",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "sourceAsOf": "2026-09-17",
+    "publishedAt": "2026-09-17",
+    "retainedFileExaminedAt": "2026-10-06",
+    "bytes": 5080393,
+    "sha256": "5fa17c38ae2e812dbd4d58c359c4d624a54417e3f794a3287c3414ccfdaa6a02",
+    "grain": "Firm CRD; StateRgstn/Rgltr/@Cd=jurisdiction; @St=status; ERA/Rgltr/@Cd=jurisdiction. Not MainAddr/@State.",
+    "filter": "Rgltr/@Cd=MO (registration jurisdiction). Address is recorded only for overlap diagnostics.",
+    "firms_in_feed": 21861,
+    "mo_state_ia_registration_rows": 354,
+    "mo_state_ia_distinct_crd": 354,
+    "mo_state_ia_approved_distinct_crd": 354,
+    "mo_state_ia_current_distinct_crd": 354,
+    "mo_state_ia_termrequest_distinct_crd": 0,
+    "mo_state_era_registration_rows": 49,
+    "mo_state_era_distinct_crd": 49,
+    "mo_state_era_active_distinct_crd": 49,
+    "ia_era_overlap_distinct_crd": 0,
+    "status_ia": [
+      [
+        "APPROVED",
+        354
+      ]
+    ],
+    "status_era": [
+      [
+        "ACTIVE",
+        49
+      ]
+    ],
+    "principal_office_mo_among_state_ia": 120,
+    "principal_office_not_mo_among_state_ia": 234,
+    "address_mo_without_mo_jurisdiction": 1
+  },
+  "sec": {
+    "filename": "IA_FIRM_SEC_Feed_09_17_2026.xml.gz",
+    "authority": "SEC / IAPD",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_SEC_Feed_09_17_2026.xml.gz",
+    "sourceAsOf": "2026-09-17",
+    "publishedAt": "2026-09-17",
+    "retainedFileExaminedAt": "2026-10-06",
+    "bytes": 7301907,
+    "sha256": "f01d6b17a7ed631125e76d3c1e5965f178235273eea6699c15400473cb2f1f22",
+    "grain": "Firm CRD; NoticeFiled/States/@RgltrCd=jurisdiction; MainAddr/@State=principal office (separate overlay).",
+    "firms_in_feed": 23911,
+    "firm_types": [
+      [
+        "Registered",
+        17206
+      ],
+      [
+        "ERA",
+        6705
+      ]
+    ],
+    "mo_notice_rows": 1999,
+    "mo_notice_any_status_distinct_crd": 1999,
+    "mo_notice_filed_distinct_crd": 1999,
+    "mo_notice_era_any_status": 0,
+    "mo_notice_filed_firm_type": {
+      "Registered": 1999,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          1999
+        ]
+      ]
+    },
+    "notice_status": [
+      [
+        "FILED",
+        1999
+      ]
+    ],
+    "mo_principal_office_distinct_crd": 218,
+    "principal_and_notice_filed": 195,
+    "notice_filed_not_principal": 1804,
+    "principal_not_notice_filed": 23
+  },
+  "overlaps": {
+    "state_ia_and_principal_office": 0,
+    "state_ia_approved_and_principal_office": 0,
+    "state_ia_and_notice_filed": 1,
+    "state_ia_approved_and_notice_filed": 1,
+    "state_era_and_principal_office": 11,
+    "state_era_and_notice_filed": 0,
+    "state_ia_and_state_era": 0,
+    "notice_filed_and_principal_office": 195,
+    "approved_state_ia_not_in_sec_principal_or_notice": 353,
+    "state_ia_approved_and_notice_filed_crds": [
+      "293532"
+    ],
+    "state_ia_approved_and_notice_filed_joinMethod": "exact firm CRD set intersection of APPROVED StateRgstn/Rgltr/@Cd=MO and NoticeFiled/States/@RgltrCd=MO St=FILED",
+    "state_ia_approved_and_notice_filed_records": [
+      {
+        "crd": "293532",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "MO",
+          "filter": "StateRgstn/Rgltr/@Cd=MO",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2024-05-10"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=MO",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2025-04-08",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2025-04-08"
+          },
+          "secFileNumber": "801-132212"
+        },
+        "reading": "Both official 2026-09-17 compilations carry this exact firm CRD: APPROVED Missouri StateRgstn and FILED Missouri NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      }
+    ]
+  },
+  "semanticGrainRules": {
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_SEC_RIA": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_NOTICE_FILING": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_STATE_ERA": true,
+    "PRINCIPAL_OFFICE_IS_NOT_REGISTRATION": true,
+    "REGISTRATION_ROW_IS_DISTINCT_GRAIN_FROM_DISTINCT_FIRM_CRD": true,
+    "note": "These are contract/credential rules. They do not assert that CRD sets are disjoint or that counts are numerically unequal."
+  },
+  "computedDiagnostics": {
+    "state_ia_registration_rows": 354,
+    "state_ia_distinct_crd": 354,
+    "state_ia_approved_distinct_crd": 354,
+    "state_ia_termrequest_distinct_crd": 0,
+    "state_era_registration_rows": 49,
+    "state_era_distinct_crd": 49,
+    "state_ia_and_state_era_overlap_distinct_crd": 0,
+    "state_ia_approved_and_notice_filed_overlap_distinct_crd": 1,
+    "notice_filed_distinct_crd": 1999,
+    "notice_filed_firm_type": {
+      "Registered": 1999,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          1999
+        ]
+      ]
+    },
+    "registration_rows_equal_distinct_crd": true
+  }
+}
