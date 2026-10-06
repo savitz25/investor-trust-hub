@@ -23,6 +23,7 @@ import AL_SECURITIES_ORDERS from '../../../data/alabama/al-inv-001/securities-or
 import SC_REGISTRATION_LENSES from '../../../data/south-carolina/sc-inv-001/registration-lenses.json';
 import SC_SECURITIES_ORDERS from '../../../data/south-carolina/sc-inv-001/securities-orders.json';
 import MS_REGISTRATION_LENSES from '../../../data/mississippi/ms-inv-001/registration-lenses.json';
+import MO_IAPD_CENSUS from '../../../data/missouri/mo-inv-001/iapd-mo-census.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -94,7 +95,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO';
   name: string;
   href: string;
   regulator: string;
@@ -1040,6 +1041,20 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
     sourceClocks: [
       { label: 'Accepted national principal-office roster', sourceAsOf: MS_REGISTRATION_LENSES.principalOffice.sourceAsOf, retrievedAt: MS_REGISTRATION_LENSES.principalOffice.retrievedAt, snapshotAsOf: MS_REGISTRATION_LENSES.principalOffice.sourceAsOf, generatedAt: null },
       { label: 'IAPD STATE and SEC compilations', sourceAsOf: MS_REGISTRATION_LENSES.acceptedIapdSourceDate, retrievedAt: MS_REGISTRATION_LENSES.retrievedAt, snapshotAsOf: MS_REGISTRATION_LENSES.acceptedIapdSourceDate, generatedAt: null },
+    ],
+  },
+  {
+    code: 'MO',
+    name: 'Missouri',
+    href: '/missouri',
+    regulator: 'Missouri Secretary of State, Securities Division',
+    principalOfficeFirms: MO_IAPD_CENSUS.sec.mo_principal_office_distinct_crd,
+    rosterStatus: `IAPD MO APPROVED state IA ${MO_IAPD_CENSUS.state.mo_state_ia_approved_distinct_crd.toLocaleString('en-US')} firm CRDs as of ${MO_IAPD_CENSUS.state.sourceAsOf}`,
+    evidence: ['IAPD Missouri state IA, federal notice and ERA jurisdiction lenses', 'SEC/IAPD principal-office geography'],
+    identityNote: 'Principal-office geography is not Missouri registration. State IA, federal notice, ERA and person classes remain separate.',
+    limitation: 'Broker-dealer, agent and IAR state rosters and the complete orders corpus were not acquired. No adverse profile attachments.',
+    sourceClocks: [
+      { label: 'IAPD STATE and SEC compilations', sourceAsOf: MO_IAPD_CENSUS.state.sourceAsOf, retrievedAt: MO_IAPD_CENSUS.state.retainedFileExaminedAt, snapshotAsOf: MO_IAPD_CENSUS.state.sourceAsOf, generatedAt: null },
     ],
   },
 ];
