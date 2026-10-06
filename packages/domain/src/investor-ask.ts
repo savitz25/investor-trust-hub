@@ -24,6 +24,7 @@ import { SC_REGISTRATION_LENSES, SC_SECURITIES_ORDERS } from './sc-public-intel'
 import { MS_REGISTRATION_LENSES } from './ms-public-intel';
 import AR_IAPD_CENSUS from '../../../data/arkansas/ar-inv-001/iapd-ar-census.json';
 import NE_IAPD_CENSUS from '../../../data/nebraska/ne-inv-001/iapd-ne-census.json';
+import ID_IAPD_CENSUS from '../../../data/idaho/id-inv-001/iapd-id-census.json';
 export type { InvestorResearchIntent, InvestorCondition } from './investor-research-plan';
 
 export const INVESTOR_ASK_CONTRACT = 'investor-ask-v1' as const;
@@ -795,6 +796,39 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
                       : `The IAPD state compilation lists ${neState.ne_state_ia_distinct_crd} Nebraska state IA firm CRDs as of ${neState.sourceAsOf}: ${neState.ne_state_ia_approved_distinct_crd} APPROVED, 1 CONDREST, and 1 TERMREQUEST. Federal notice (${neSec.ne_notice_filed_distinct_crd.toLocaleString('en-US')}), ERA (${neState.ne_state_era_active_distinct_crd}) and SEC principal-office (${neSec.ne_principal_office_distinct_crd}) lenses are separate and must not be added. Use /nebraska.`;
     const query = failClosed(reason, ['Nebraska investor research page.', 'Open IAPD for a named firm CRD.']);
     if (neCity) query.geography = { type: 'principal_office_city', value: neCity[1]!, state: 'NE', meaning: 'City context only; not Nebraska registration or service territory' };
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  // ID-INV-001: full name or "in id". A bare id token is not Idaho. Boise is not a trigger by itself.
+  const idNamed = /\bidaho\b/i.test(q) || /\bin id\b/i.test(q);
+  const idCity = idNamed ? /\b(boise|meridian|nampa|pocatello|idaho falls|twin falls|coeur d'alene)\b/i.exec(q) : null;
+  if (idNamed && /\b(?:investment|advis[eo]rs?|ria|eras?|broker|securities|crd|sec|notice|disciplin|enforc|complaint|exams?|principal office|agents?|representatives?|iars?|total|combined|how many|registration|best|rank|recommend)\b/i.test(q)) {
+    const idState = ID_IAPD_CENSUS.state;
+    const idSec = ID_IAPD_CENSUS.sec;
+    const reason = /\b(?:best|rank|recommend|trust score|aggregaterating)\b/i.test(q)
+      ? 'InvestorTrustHub does not rank Idaho advisers and does not publish a Trust Score. Use /idaho.'
+      : idCity
+        ? 'The named Idaho city is geography only. InvestorTrustHub publishes no city securities route and no county route. A principal office does not establish Idaho registration or notice filing. Use /idaho.'
+        : /\bcomplaints?\b/i.test(q)
+          ? 'Provider-level Idaho securities complaint records were NOT_ACQUIRED. A complaint is not a finding. Use /idaho.'
+          : /\b(?:disciplin\w*|enforc\w*|orders?|sanctions?|examinations?|exams?)\b/i.test(q)
+            ? 'Idaho securities examinations and the order corpus were NOT_ACQUIRED. No order was attached by name. Use /idaho.'
+            : /\b(?:investment adviser representatives?|iars?|representatives?)\b/i.test(q)
+              ? 'Idaho investment adviser representatives are persons, not firms. The IAR roster was NOT_ACQUIRED. A person is not a firm. Use /idaho.'
+              : /\b(?:broker[- ]?dealers?|agents?)\b/i.test(q)
+                ? 'Idaho broker-dealers and securities salespersons were NOT_ACQUIRED. Those grains are not the IAPD firm feeds. Use /idaho.'
+                : /\b(?:principal office|headquarter\w*|based in|located in)\b/i.test(q)
+                  ? `The SEC IAPD compilation lists ${idSec.id_principal_office_distinct_crd} Idaho principal-office firm CRDs as of ${idSec.sourceAsOf}. Office geography is not Idaho registration. Use /idaho.`
+                  : /\b(?:era|exempt reporting)\b/i.test(q)
+                    ? `The IAPD state compilation lists ${idState.id_state_era_active_distinct_crd} active Idaho exempt reporting adviser firm CRDs. ERA status is not state IA or SEC registration. Use /idaho.`
+                    : /\b(?:federal[- ]covered|notice[- ]filed|notice filing|notice)\b/i.test(q)
+                      ? `The IAPD SEC compilation lists ${idSec.id_notice_filed_distinct_crd.toLocaleString('en-US')} firms with a FILED Idaho notice. A notice filing is not Idaho state IA registration. Use /idaho.`
+                      : /\b(?:total|combined|how many|all)\b/i.test(q) && !/\b(?:state[- ]registered|notice|era|exempt|principal|broker|agent|representative|federal)\b/i.test(q)
+                        ? `Idaho APPROVED state IA (${idState.id_state_ia_approved_distinct_crd}), federal notice (${idSec.id_notice_filed_distinct_crd.toLocaleString('en-US')}), ERA (${idState.id_state_era_active_distinct_crd}) and principal-office (${idSec.id_principal_office_distinct_crd}) lenses cannot be combined into one adviser total. Use /idaho.`
+                        : `The IAPD state compilation lists ${idState.id_state_ia_approved_distinct_crd} Idaho state-registered IA firm CRDs (APPROVED) as of ${idState.sourceAsOf}. One TERMREQUEST firm is not added. Federal notice (${idSec.id_notice_filed_distinct_crd.toLocaleString('en-US')}), ERA (${idState.id_state_era_active_distinct_crd}) and principal-office (${idSec.id_principal_office_distinct_crd}) lenses are separate and must not be added. Use /idaho.`;
+    const query = failClosed(reason, ['Idaho investor research page.', 'Open IAPD for a named firm CRD.']);
+    if (idCity) query.geography = { type: 'principal_office_city', value: idCity[1]!, state: 'ID', meaning: 'City context only; not Idaho registration or service territory' };
     push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };
   }

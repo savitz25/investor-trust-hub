@@ -1,0 +1,63 @@
+{
+  "contract": "investor-id-iapd-census-v1",
+  "ticket": "ID-INV-001",
+  "regulator": "Idaho Department of Finance, Securities Bureau",
+  "filterLogic": "Idaho selected by IAPD registration and notice jurisdiction fields. Principal-office MainAddr state ID is a separate geography overlay and is not the state-RIA denominator.",
+  "state": {
+    "filename": "IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "sourceAsOf": "2026-09-17",
+    "retainedFileExaminedAt": "2026-10-06",
+    "bytes": 5080393,
+    "sha256": "5fa17c38ae2e812dbd4d58c359c4d624a54417e3f794a3287c3414ccfdaa6a02",
+    "firms_in_feed": 21861,
+    "id_state_ia_registration_rows": 200,
+    "id_state_ia_distinct_crd": 200,
+    "id_state_ia_approved_distinct_crd": 199,
+    "id_state_ia_termrequest_distinct_crd": 1,
+    "id_state_era_registration_rows": 23,
+    "id_state_era_distinct_crd": 23,
+    "id_state_era_active_distinct_crd": 23,
+    "principal_office_id_among_state_ia": 50,
+    "principal_office_not_id_among_state_ia": 150,
+    "address_id_without_id_jurisdiction": 1
+  },
+  "sec": {
+    "filename": "IA_FIRM_SEC_Feed_09_17_2026.xml.gz",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_SEC_Feed_09_17_2026.xml.gz",
+    "sourceAsOf": "2026-09-17",
+    "retainedFileExaminedAt": "2026-10-06",
+    "bytes": 7301907,
+    "sha256": "f01d6b17a7ed631125e76d3c1e5965f178235273eea6699c15400473cb2f1f22",
+    "firms_in_feed": 23911,
+    "id_notice_rows": 1595,
+    "id_notice_filed_distinct_crd": 1595,
+    "id_notice_era": 0,
+    "id_principal_office_distinct_crd": 57,
+    "principal_and_notice_filed": 50,
+    "notice_filed_not_principal": 1545,
+    "principal_not_notice_filed": 7
+  },
+  "overlaps": {
+    "state_ia_and_principal_office": 0,
+    "state_ia_approved_and_principal_office": 0,
+    "state_ia_and_notice_filed": 1,
+    "state_ia_approved_and_notice_filed": 0,
+    "state_era_and_principal_office": 1,
+    "state_era_and_notice_filed": 0,
+    "state_ia_and_state_era": 0,
+    "notice_filed_and_principal_office": 50,
+    "approved_state_ia_not_in_sec_principal_or_notice": 199
+  },
+  "notAcquired": {
+    "iarPersons": "NOT_ACQUIRED",
+    "brokerDealers": "NOT_ACQUIRED",
+    "agents": "NOT_ACQUIRED",
+    "examinations": "NOT_ACQUIRED",
+    "orders": "NOT_ACQUIRED"
+  },
+  "newCanonicalFirms": 0,
+  "evidenceAttachments": 0,
+  "graphWrites": 0,
+  "nameOnlyAdverseJoins": 0
+}
