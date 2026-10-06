@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { INDEXABLE_PATHS, STATE_DISCOVERY_ROUTES, shouldNoIndex } from '@ith/config';
+import { normalizedPublishedStatePath } from '../src/lib/published-state-path';
 import {
   CO_PUBLIC_SNAPSHOT,
   coPrincipalOfficeCountFromNationalRoster,
@@ -76,6 +77,10 @@ describe('CO-INV-001 Colorado publication', () => {
     expect(INDEXABLE_PATHS).toContain('/utah');
     expect(existsSync(join(webRoot, 'src/app/new-mexico/page.tsx'))).toBe(true);
     expect(INDEXABLE_PATHS).toContain('/new-mexico');
+    expect(normalizedPublishedStatePath('/Idaho')).toBe('/idaho');
+    expect(normalizedPublishedStatePath('/idaho')).toBeNull();
+    expect(normalizedPublishedStatePath('/idaho/boise')).toBeNull();
+    expect(normalizedPublishedStatePath('/Kansas')).toBe('/kansas');
   });
 
   it('does not treat 589 principal-office firms as the state-RIA denominator', () => {
