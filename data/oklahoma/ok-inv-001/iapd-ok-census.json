@@ -1,0 +1,166 @@
+{
+  "contract": "investor-mo-iapd-census-v1",
+  "safeAsCurrentOklahomaBulkStateLayer": true,
+  "filterLogic": "Oklahoma selected by IAPD registration/notice jurisdiction fields (StateRgstn/Rgltr/@Cd, ERA/Rgltr/@Cd, NoticeFiled/States/@RgltrCd). Principal-office MainAddr/@State=OK is a separate national overlay and is not the state-RIA denominator.",
+  "state": {
+    "filename": "IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "authority": "IAPD (FINRA-held state compilation)",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "sourceAsOf": "2026-09-17",
+    "publishedAt": "2026-09-17",
+    "retainedFileExaminedAt": "2026-10-06",
+    "bytes": 5080393,
+    "sha256": "5fa17c38ae2e812dbd4d58c359c4d624a54417e3f794a3287c3414ccfdaa6a02",
+    "grain": "Firm CRD; StateRgstn/Rgltr/@Cd=jurisdiction; @St=status; ERA/Rgltr/@Cd=jurisdiction. Not MainAddr/@State.",
+    "filter": "Rgltr/@Cd=OK (registration jurisdiction). Address is recorded only for overlap diagnostics.",
+    "firms_in_feed": 21861,
+    "ok_state_ia_registration_rows": 157,
+    "ok_state_ia_distinct_crd": 157,
+    "ok_state_ia_approved_distinct_crd": 157,
+    "ok_state_ia_current_distinct_crd": 157,
+    "ok_state_ia_termrequest_distinct_crd": 0,
+    "ok_state_era_registration_rows": 34,
+    "ok_state_era_distinct_crd": 34,
+    "ok_state_era_active_distinct_crd": 34,
+    "ia_era_overlap_distinct_crd": 0,
+    "status_ia": [
+      [
+        "APPROVED",
+        157
+      ]
+    ],
+    "status_era": [
+      [
+        "ACTIVE",
+        34
+      ]
+    ],
+    "principal_office_ok_among_state_ia": 71,
+    "principal_office_not_ok_among_state_ia": 86,
+    "address_ok_without_ok_jurisdiction": 1
+  },
+  "sec": {
+    "filename": "IA_FIRM_SEC_Feed_09_17_2026.xml.gz",
+    "authority": "SEC / IAPD",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_SEC_Feed_09_17_2026.xml.gz",
+    "sourceAsOf": "2026-09-17",
+    "publishedAt": "2026-09-17",
+    "retainedFileExaminedAt": "2026-10-06",
+    "bytes": 7301907,
+    "sha256": "f01d6b17a7ed631125e76d3c1e5965f178235273eea6699c15400473cb2f1f22",
+    "grain": "Firm CRD; NoticeFiled/States/@RgltrCd=jurisdiction; MainAddr/@State=principal office (separate overlay).",
+    "firms_in_feed": 23911,
+    "firm_types": [
+      [
+        "Registered",
+        17206
+      ],
+      [
+        "ERA",
+        6705
+      ]
+    ],
+    "ok_notice_rows": 1478,
+    "ok_notice_any_status_distinct_crd": 1478,
+    "ok_notice_filed_distinct_crd": 1478,
+    "ok_notice_era_any_status": 0,
+    "ok_notice_filed_firm_type": {
+      "Registered": 1478,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          1478
+        ]
+      ]
+    },
+    "notice_status": [
+      [
+        "FILED",
+        1478
+      ]
+    ],
+    "ok_principal_office_distinct_crd": 91,
+    "principal_and_notice_filed": 84,
+    "notice_filed_not_principal": 1394,
+    "principal_not_notice_filed": 7
+  },
+  "overlaps": {
+    "state_ia_and_principal_office": 1,
+    "state_ia_approved_and_principal_office": 1,
+    "state_ia_and_notice_filed": 1,
+    "state_ia_approved_and_notice_filed": 1,
+    "state_era_and_principal_office": 5,
+    "state_era_and_notice_filed": 0,
+    "state_ia_and_state_era": 0,
+    "notice_filed_and_principal_office": 84,
+    "approved_state_ia_not_in_sec_principal_or_notice": 156,
+    "state_ia_approved_and_notice_filed_crds": [
+      "126193"
+    ],
+    "state_ia_approved_and_notice_filed_joinMethod": "exact firm CRD set intersection of APPROVED StateRgstn/Rgltr/@Cd=OK and NoticeFiled/States/@RgltrCd=OK St=FILED",
+    "state_ia_approved_and_notice_filed_records": [
+      {
+        "crd": "126193",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "OK",
+          "filter": "StateRgstn/Rgltr/@Cd=OK",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2012-06-27"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=OK",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2021-04-30",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2021-04-30"
+          },
+          "secFileNumber": "801-121112"
+        },
+        "reading": "Both official 2026-09-17 compilations carry this exact firm CRD: APPROVED Oklahoma StateRgstn and FILED Oklahoma NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      }
+    ]
+  },
+  "semanticGrainRules": {
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_SEC_RIA": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_NOTICE_FILING": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_STATE_ERA": true,
+    "PRINCIPAL_OFFICE_IS_NOT_REGISTRATION": true,
+    "REGISTRATION_ROW_IS_DISTINCT_GRAIN_FROM_DISTINCT_FIRM_CRD": true,
+    "note": "These are contract/credential rules. They do not assert that CRD sets are disjoint or that counts are numerically unequal."
+  },
+  "computedDiagnostics": {
+    "state_ia_registration_rows": 157,
+    "state_ia_distinct_crd": 157,
+    "state_ia_approved_distinct_crd": 157,
+    "state_ia_termrequest_distinct_crd": 0,
+    "state_era_registration_rows": 34,
+    "state_era_distinct_crd": 34,
+    "state_ia_and_state_era_overlap_distinct_crd": 0,
+    "state_ia_approved_and_notice_filed_overlap_distinct_crd": 1,
+    "notice_filed_distinct_crd": 1478,
+    "notice_filed_firm_type": {
+      "Registered": 1478,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          1478
+        ]
+      ]
+    },
+    "registration_rows_equal_distinct_crd": true
+  }
+}
