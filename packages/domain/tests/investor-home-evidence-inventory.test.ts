@@ -142,6 +142,7 @@ describe('INV-HOME-003 public evidence inventory', () => {
       '/new-mexico',
       '/nebraska',
       '/kansas',
+      '/idaho',
     ]);
     expect(get('published_state_pages').value).toBe(
       INVESTOR_HOMEPAGE_STATE_CARDS.length,

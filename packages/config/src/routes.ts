@@ -60,6 +60,7 @@ export const STATE_DISCOVERY_ROUTES = [
   { href: '/new-mexico', label: 'New Mexico' },
   { href: '/nebraska', label: 'Nebraska' },
   { href: '/kansas', label: 'Kansas' },
+  { href: '/idaho', label: 'Idaho' },
 ] as const;
 
 export const INDEXABLE_PATHS = [
@@ -105,6 +106,7 @@ export const INDEXABLE_PATHS = [
   '/new-mexico',
   '/nebraska',
   '/kansas',
+  '/idaho',
   '/disclaimer',
   '/privacy',
   '/terms',
