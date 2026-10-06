@@ -1,0 +1,194 @@
+{
+  "contract": "investor-mo-iapd-census-v1",
+  "safeAsCurrentNew MexicoBulkStateLayer": true,
+  "filterLogic": "New Mexico selected by IAPD registration/notice jurisdiction fields (StateRgstn/Rgltr/@Cd, ERA/Rgltr/@Cd, NoticeFiled/States/@RgltrCd). Principal-office MainAddr/@State=NM is a separate national overlay and is not the state-RIA denominator.",
+  "state": {
+    "filename": "IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "authority": "IAPD (FINRA-held state compilation)",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "sourceAsOf": "2026-09-17",
+    "publishedAt": "2026-09-17",
+    "retainedFileExaminedAt": "2026-10-06",
+    "bytes": 5080393,
+    "sha256": "5fa17c38ae2e812dbd4d58c359c4d624a54417e3f794a3287c3414ccfdaa6a02",
+    "grain": "Firm CRD; StateRgstn/Rgltr/@Cd=jurisdiction; @St=status; ERA/Rgltr/@Cd=jurisdiction. Not MainAddr/@State.",
+    "filter": "Rgltr/@Cd=NM (registration jurisdiction). Address is recorded only for overlap diagnostics.",
+    "firms_in_feed": 21861,
+    "nm_state_ia_registration_rows": 81,
+    "nm_state_ia_distinct_crd": 81,
+    "nm_state_ia_approved_distinct_crd": 81,
+    "nm_state_ia_current_distinct_crd": 81,
+    "nm_state_ia_termrequest_distinct_crd": 0,
+    "nm_state_era_registration_rows": 17,
+    "nm_state_era_distinct_crd": 17,
+    "nm_state_era_active_distinct_crd": 17,
+    "ia_era_overlap_distinct_crd": 0,
+    "status_ia": [
+      [
+        "APPROVED",
+        81
+      ]
+    ],
+    "status_era": [
+      [
+        "ACTIVE",
+        17
+      ]
+    ],
+    "principal_office_ok_among_state_ia": 21,
+    "principal_office_not_ok_among_state_ia": 60,
+    "address_ok_without_ok_jurisdiction": 0
+  },
+  "sec": {
+    "filename": "IA_FIRM_SEC_Feed_09_17_2026.xml.gz",
+    "authority": "SEC / IAPD",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_SEC_Feed_09_17_2026.xml.gz",
+    "sourceAsOf": "2026-09-17",
+    "publishedAt": "2026-09-17",
+    "retainedFileExaminedAt": "2026-10-06",
+    "bytes": 7301907,
+    "sha256": "f01d6b17a7ed631125e76d3c1e5965f178235273eea6699c15400473cb2f1f22",
+    "grain": "Firm CRD; NoticeFiled/States/@RgltrCd=jurisdiction; MainAddr/@State=principal office (separate overlay).",
+    "firms_in_feed": 23911,
+    "firm_types": [
+      [
+        "Registered",
+        17206
+      ],
+      [
+        "ERA",
+        6705
+      ]
+    ],
+    "nm_notice_rows": 1394,
+    "nm_notice_any_status_distinct_crd": 1394,
+    "nm_notice_filed_distinct_crd": 1394,
+    "nm_notice_era_any_status": 0,
+    "nm_notice_filed_firm_type": {
+      "Registered": 1394,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          1394
+        ]
+      ]
+    },
+    "notice_status": [
+      [
+        "FILED",
+        1394
+      ]
+    ],
+    "nm_principal_office_distinct_crd": 27,
+    "principal_and_notice_filed": 25,
+    "notice_filed_not_principal": 1369,
+    "principal_not_notice_filed": 2
+  },
+  "overlaps": {
+    "state_ia_and_principal_office": 1,
+    "state_ia_approved_and_principal_office": 1,
+    "state_ia_and_notice_filed": 2,
+    "state_ia_approved_and_notice_filed": 2,
+    "state_era_and_principal_office": 1,
+    "state_era_and_notice_filed": 0,
+    "state_ia_and_state_era": 0,
+    "notice_filed_and_principal_office": 25,
+    "approved_state_ia_not_in_sec_principal_or_notice": 79,
+    "state_ia_approved_and_notice_filed_crds": [
+      "13478",
+      "170872"
+    ],
+    "state_ia_approved_and_notice_filed_joinMethod": "exact firm CRD set intersection of APPROVED StateRgstn/Rgltr/@Cd=NM and NoticeFiled/States/@RgltrCd=NM St=FILED",
+    "state_ia_approved_and_notice_filed_records": [
+      {
+        "crd": "13478",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NM",
+          "filter": "StateRgstn/Rgltr/@Cd=NM",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2025-10-16"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NM",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2026-04-22",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2026-04-22"
+          },
+          "secFileNumber": "801-135680"
+        },
+        "reading": "Both official 2026-09-17 compilations carry this exact firm CRD: APPROVED New Mexico StateRgstn and FILED New Mexico NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      },
+      {
+        "crd": "170872",
+        "joinMethod": "exact firm CRD set intersection",
+        "stateCompilation": {
+          "jurisdiction": "NM",
+          "filter": "StateRgstn/Rgltr/@Cd=NM",
+          "statuses": [
+            "APPROVED"
+          ],
+          "dates": [
+            "2014-04-11"
+          ]
+        },
+        "secCompilation": {
+          "filter": "NoticeFiled/States/@RgltrCd=NM",
+          "firmType": "Registered",
+          "noticeStatus": "FILED",
+          "noticeDate": "2018-07-27",
+          "rgstn": {
+            "FirmType": "Registered",
+            "St": "APPROVED",
+            "Dt": "2018-07-27"
+          },
+          "secFileNumber": "801-113760"
+        },
+        "reading": "Both official 2026-09-17 compilations carry this exact firm CRD: APPROVED New Mexico StateRgstn and FILED New Mexico NoticeFiled. Credential classes remain separate. Populations are not required to be disjoint."
+      }
+    ]
+  },
+  "semanticGrainRules": {
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_SEC_RIA": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_NOTICE_FILING": true,
+    "STATE_RIA_IS_DISTINCT_CREDENTIAL_FROM_STATE_ERA": true,
+    "PRINCIPAL_OFFICE_IS_NOT_REGISTRATION": true,
+    "REGISTRATION_ROW_IS_DISTINCT_GRAIN_FROM_DISTINCT_FIRM_CRD": true,
+    "note": "These are contract/credential rules. They do not assert that CRD sets are disjoint or that counts are numerically unequal."
+  },
+  "computedDiagnostics": {
+    "state_ia_registration_rows": 81,
+    "state_ia_distinct_crd": 81,
+    "state_ia_approved_distinct_crd": 81,
+    "state_ia_termrequest_distinct_crd": 0,
+    "state_era_registration_rows": 17,
+    "state_era_distinct_crd": 17,
+    "state_ia_and_state_era_overlap_distinct_crd": 0,
+    "state_ia_approved_and_notice_filed_overlap_distinct_crd": 2,
+    "notice_filed_distinct_crd": 1394,
+    "notice_filed_firm_type": {
+      "Registered": 1394,
+      "ERA": 0,
+      "other": 0,
+      "blank": 0,
+      "raw": [
+        [
+          "Registered",
+          1394
+        ]
+      ]
+    },
+    "registration_rows_equal_distinct_crd": true
+  }
+}
