@@ -134,7 +134,7 @@ assert(v1.minnesota.noticeFiledFirms === pub.mnNoticeFiled, "MN notice filed");
 assert(byKey.mn_state_ria_roster.grain === "mn_state_ria_roster", "MN state RIA grain key");
 assert(byKey.mn_state_ria_roster.value === 333, "MN state RIA metric");
 assert(byKey.mn_state_ria_roster.value !== pub.mnNoticeFiled && byKey.mn_state_ria_roster.value !== pub.mnPrincipalOfficeFirms, "MN lenses stay distinct");
-assert(byKey.published_state_intelligence_pages.value === 28, "state pages 28");
+assert(byKey.published_state_intelligence_pages.value === pub.publishedStateIntelligencePaths.length, "state pages match publication catalog");
 assert(v1.florida.stateIntelligencePage === false, "no invented Florida page");
 assert(!pub.publishedStateIntelligencePaths.includes("/florida"), "no Florida route");
 assert(byKey.investment_advisory_firms.label === "Investment advisory firms", "consumer firm label");
