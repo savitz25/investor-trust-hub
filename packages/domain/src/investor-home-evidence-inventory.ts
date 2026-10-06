@@ -27,6 +27,7 @@ import MO_IAPD_CENSUS from '../../../data/missouri/mo-inv-001/iapd-mo-census.jso
 import OK_IAPD_CENSUS from '../../../data/oklahoma/ok-inv-001/iapd-ok-census.json';
 import AR_IAPD_CENSUS from '../../../data/arkansas/ar-inv-001/iapd-ar-census.json';
 import UT_IAPD_CENSUS from '../../../data/utah/ut-inv-001/iapd-ut-census.json';
+import NM_IAPD_CENSUS from '../../../data/new-mexico/nm-inv-001/iapd-nm-census.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -98,7 +99,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK' | 'AR' | 'UT';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK' | 'AR' | 'UT' | 'NM';
   name: string;
   href: string;
   regulator: string;
@@ -1100,6 +1101,20 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
     limitation: 'Broker-dealer, agent and IAR state rosters and the complete orders corpus were not acquired. No adverse profile attachments.',
     sourceClocks: [
       { label: 'IAPD STATE and SEC compilations', sourceAsOf: UT_IAPD_CENSUS.state.sourceAsOf, retrievedAt: UT_IAPD_CENSUS.state.retainedFileExaminedAt, snapshotAsOf: UT_IAPD_CENSUS.state.sourceAsOf, generatedAt: null },
+    ],
+  },
+  {
+    code: 'NM',
+    name: 'New Mexico',
+    href: '/new-mexico',
+    regulator: 'New Mexico Regulation and Licensing Department, Securities Division',
+    principalOfficeFirms: NM_IAPD_CENSUS.sec.nm_principal_office_distinct_crd,
+    rosterStatus: `IAPD NM APPROVED state IA ${NM_IAPD_CENSUS.state.nm_state_ia_approved_distinct_crd.toLocaleString('en-US')} firm CRDs as of ${NM_IAPD_CENSUS.state.sourceAsOf}`,
+    evidence: ['IAPD New Mexico state IA, federal notice and ERA jurisdiction lenses', 'SEC/IAPD principal-office geography'],
+    identityNote: 'Principal-office geography is not New Mexico registration. State IA, federal notice, ERA and person classes remain separate.',
+    limitation: 'Broker-dealer, agent and IAR state rosters, examinations, and the complete orders corpus were not acquired. No adverse profile attachments.',
+    sourceClocks: [
+      { label: 'IAPD STATE and SEC compilations', sourceAsOf: NM_IAPD_CENSUS.state.sourceAsOf, retrievedAt: NM_IAPD_CENSUS.state.retainedFileExaminedAt, snapshotAsOf: NM_IAPD_CENSUS.state.sourceAsOf, generatedAt: null },
     ],
   },
 ];
