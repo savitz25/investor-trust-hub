@@ -1,0 +1,55 @@
+{
+  "contract": "investor-ut-iapd-census-v1",
+  "safeAsCurrentUtahBulkStateLayer": true,
+  "filterLogic": "Utah selected by IAPD registration jurisdiction fields: StateRgstn/Rgltr/@Cd=UT for state IA, ERA/Rgltr/@Cd=UT for ERA, and NoticeFiled/States/@RgltrCd=UT for SEC notice filings. MainAddr/@State=UT is office geography and is not used as a regulatory denominator.",
+  "state": {
+    "filename": "IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "authority": "IAPD state compilation",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "sourceAsOf": "2026-09-17",
+    "retainedFileExaminedAt": "2026-10-06",
+    "bytes": 5080393,
+    "sha256": "5fa17c38ae2e812dbd4d58c359c4d624a54417e3f794a3287c3414ccfdaa6a02",
+    "grain": "Firm CRD; StateRgstn/Rgltr/@Cd jurisdiction and @St status; ERA/Rgltr/@Cd jurisdiction. Not MainAddr/@State.",
+    "state_ia_registration_rows": 247,
+    "state_ia_distinct_crd": 247,
+    "state_ia_status": {"APPROVED": 242, "CONDREST": 5},
+    "state_era_registration_rows": 90,
+    "state_era_distinct_crd": 90,
+    "state_era_status": {"ACTIVE": 90},
+    "state_ia_era_exact_crd_overlap": 0
+  },
+  "sec": {
+    "filename": "IA_FIRM_SEC_Feed_09_17_2026.xml.gz",
+    "authority": "SEC IAPD compilation",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_SEC_Feed_09_17_2026.xml.gz",
+    "sourceAsOf": "2026-09-17",
+    "retainedFileExaminedAt": "2026-10-06",
+    "bytes": 7301907,
+    "sha256": "f01d6b17a7ed631125e76d3c1e5965f178235273eea6699c15400473cb2f1f22",
+    "grain": "Firm CRD; NoticeFiled/States/@RgltrCd=UT and St=FILED. Not office geography.",
+    "ut_notice_filed_rows": 1740,
+    "ut_notice_filed_distinct_crd": 1740,
+    "notice_status": "FILED",
+    "source_firm_type": "Registered"
+  },
+  "principalOfficeOverlay": {
+    "ut_principal_office_distinct_crd": 198,
+    "definition": "MainAddr/@State=UT in the SEC compilation; office geography only and not a Utah regulatory jurisdiction population."
+  },
+  "overlaps": {
+    "state_ia_approved_and_notice_filed_exact_crd": 1,
+    "state_era_and_notice_filed_exact_crd": 0,
+    "state_ia_and_era_exact_crd": 0,
+    "method": "Exact CRD set intersection; populations retain their separate credential/source observations and are not added."
+  },
+  "notAcquired": ["Utah IAR person roster", "Utah broker-dealer firm roster", "Utah broker-dealer agent roster", "Utah Division of Securities enforcement/order corpus", "Utah DFI lender and DRE mortgage licensing data (outside this securities census)"],
+  "sources": [
+    "https://securities.utah.gov/",
+    "https://adviserinfo.sec.gov/",
+    "https://brokercheck.finra.org/",
+    "https://dfi.utah.gov/",
+    "https://realestate.utah.gov/",
+    "https://mortgage.nationwidelicensingsystem.org/"
+  ]
+}

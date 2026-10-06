@@ -64,9 +64,12 @@ describe('CO-INV-001 Colorado publication', () => {
       '/missouri',
       '/oklahoma',
       '/arkansas',
+      '/utah',
     ]);
     expect(existsSync(join(webRoot, 'src/app/arizona/page.tsx'))).toBe(true);
     expect(existsSync(join(webRoot, 'src/app/florida'))).toBe(false);
+    expect(existsSync(join(webRoot, 'src/app/utah/page.tsx'))).toBe(true);
+    expect(INDEXABLE_PATHS).toContain('/utah');
   });
 
   it('does not treat 589 principal-office firms as the state-RIA denominator', () => {
