@@ -25,6 +25,7 @@ import { MS_REGISTRATION_LENSES } from './ms-public-intel';
 import AR_IAPD_CENSUS from '../../../data/arkansas/ar-inv-001/iapd-ar-census.json';
 import NE_IAPD_CENSUS from '../../../data/nebraska/ne-inv-001/iapd-ne-census.json';
 import ID_IAPD_CENSUS from '../../../data/idaho/id-inv-001/iapd-id-census.json';
+import WV_IAPD_CENSUS from '../../../data/west-virginia/wv-inv-001/iapd-wv-census.json';
 export type { InvestorResearchIntent, InvestorCondition } from './investor-research-plan';
 
 export const INVESTOR_ASK_CONTRACT = 'investor-ask-v1' as const;
@@ -796,6 +797,41 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
                       : `The IAPD state compilation lists ${neState.ne_state_ia_distinct_crd} Nebraska state IA firm CRDs as of ${neState.sourceAsOf}: ${neState.ne_state_ia_approved_distinct_crd} APPROVED, 1 CONDREST, and 1 TERMREQUEST. Federal notice (${neSec.ne_notice_filed_distinct_crd.toLocaleString('en-US')}), ERA (${neState.ne_state_era_active_distinct_crd}) and SEC principal-office (${neSec.ne_principal_office_distinct_crd}) lenses are separate and must not be added. Use /nebraska.`;
     const query = failClosed(reason, ['Nebraska investor research page.', 'Open IAPD for a named firm CRD.']);
     if (neCity) query.geography = { type: 'principal_office_city', value: neCity[1]!, state: 'NE', meaning: 'City context only; not Nebraska registration or service territory' };
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  // WV-INV-001: full name or "in wv". A bare wv token is not West Virginia. "west virginia" is stripped before any Virginia check.
+  const wvNamed = /\bwest virginia\b/i.test(q) || /\bin wv\b/i.test(q);
+  const wvRemainder = q.replace(/\bwest virginia\b/gi, ' ').replace(/\bin wv\b/gi, ' ');
+  const wvOther = /\b(alabama|alaska|arizona|arkansas|california|colorado|connecticut|delaware|florida|georgia|hawaii|idaho|illinois|indiana|iowa|kansas|kentucky|louisiana|maine|maryland|massachusetts|michigan|minnesota|mississippi|missouri|montana|nebraska|nevada|new hampshire|new jersey|new mexico|new york|north carolina|north dakota|ohio|oklahoma|oregon|pennsylvania|rhode island|south carolina|south dakota|tennessee|texas|utah|vermont|virginia|washington|wisconsin|wyoming)\b/i.test(wvRemainder);
+  const wvCity = wvNamed ? /\b(charleston|morgantown|huntington)\b/i.exec(q) : null;
+  if (wvNamed && !wvOther && /\b(?:investment|advis[eo]rs?|ria|eras?|broker|securities|crd|sec|notice|disciplin|enforc|complaint|exams?|principal office|agents?|representatives?|iars?|total|combined|how many|registration|best|rank|recommend)\b/i.test(q)) {
+    const wvState = WV_IAPD_CENSUS.state;
+    const wvSec = WV_IAPD_CENSUS.sec;
+    const reason = /\b(?:best|rank|recommend|trust score|aggregaterating)\b/i.test(q)
+      ? 'InvestorTrustHub does not rank West Virginia advisers. Use /west-virginia.'
+      : wvCity
+        ? 'The named West Virginia city is geography only. InvestorTrustHub publishes no city securities route and no county route. A principal office does not establish West Virginia registration or notice filing. Use /west-virginia.'
+        : /\bcomplaints?\b/i.test(q)
+          ? 'Provider-level West Virginia securities complaint records were NOT_ACQUIRED. A complaint is not a finding. Use /west-virginia.'
+          : /\b(?:disciplin\w*|enforc\w*|orders?|sanctions?|examinations?|exams?)\b/i.test(q)
+            ? 'West Virginia securities examinations and the order corpus were NOT_ACQUIRED. No order was attached by name. Use /west-virginia.'
+            : /\b(?:investment adviser representatives?|iars?|representatives?)\b/i.test(q)
+              ? 'West Virginia investment adviser representatives are persons, not firms. The IAR roster was NOT_ACQUIRED. A person is not a firm. Use /west-virginia.'
+              : /\b(?:broker[- ]?dealers?|agents?)\b/i.test(q)
+                ? 'West Virginia broker-dealers and agents were NOT_ACQUIRED. Those grains are not the IAPD firm feeds. Use /west-virginia.'
+                : /\b(?:principal office|headquarter\w*|based in|located in)\b/i.test(q)
+                  ? `The SEC IAPD compilation lists ${wvSec.wv_principal_office_distinct_crd} West Virginia principal-office firm CRDs as of ${wvSec.sourceAsOf}. Office geography is not West Virginia registration. Use /west-virginia.`
+                  : /\b(?:era|exempt reporting)\b/i.test(q)
+                    ? `The IAPD state compilation returned ${wvState.wv_state_era_registration_rows} West Virginia ERA jurisdiction rows. That zero is the filter result. ERA status is not state IA or SEC registration. Use /west-virginia.`
+                    : /\b(?:federal[- ]covered|notice[- ]filed|notice filing|notice)\b/i.test(q)
+                      ? `The IAPD SEC compilation lists ${wvSec.wv_notice_filed_distinct_crd.toLocaleString('en-US')} firms with a FILED West Virginia notice. A notice filing is not West Virginia state IA registration. Use /west-virginia.`
+                      : /\b(?:total|combined|how many|all)\b/i.test(q) && !/\b(?:state[- ]registered|notice|era|exempt|principal|broker|agent|representative|federal)\b/i.test(q)
+                        ? `West Virginia state IA (${wvState.wv_state_ia_distinct_crd} firm CRDs: ${wvState.wv_state_ia_approved_distinct_crd} APPROVED and ${wvState.wv_state_ia_condrest_distinct_crd} CONDREST), federal notice (${wvSec.wv_notice_filed_distinct_crd.toLocaleString('en-US')}), ERA (${wvState.wv_state_era_registration_rows}) and principal-office (${wvSec.wv_principal_office_distinct_crd}) lenses cannot be combined into one adviser total. Use /west-virginia.`
+                        : `The IAPD state compilation lists ${wvState.wv_state_ia_distinct_crd} West Virginia state IA firm CRDs as of ${wvState.sourceAsOf}: ${wvState.wv_state_ia_approved_distinct_crd} APPROVED and ${wvState.wv_state_ia_condrest_distinct_crd} CONDREST. Federal notice (${wvSec.wv_notice_filed_distinct_crd.toLocaleString('en-US')}), ERA (${wvState.wv_state_era_registration_rows}) and SEC principal-office (${wvSec.wv_principal_office_distinct_crd}) lenses are separate and must not be added. Use /west-virginia.`;
+    const query = failClosed(reason, ['West Virginia investor research page.', 'Open IAPD for a named firm CRD.']);
+    if (wvCity) query.geography = { type: 'principal_office_city', value: wvCity[1]!, state: 'WV', meaning: 'City context only; not West Virginia registration or service territory' };
     push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };
   }

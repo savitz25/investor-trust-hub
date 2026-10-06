@@ -30,6 +30,7 @@ import UT_IAPD_CENSUS from '../../../data/utah/ut-inv-001/iapd-ut-census.json';
 import NM_IAPD_CENSUS from '../../../data/new-mexico/nm-inv-001/iapd-nm-census.json';
 import NE_IAPD_CENSUS from '../../../data/nebraska/ne-inv-001/iapd-ne-census.json';
 import ID_IAPD_CENSUS from '../../../data/idaho/id-inv-001/iapd-id-census.json';
+import WV_IAPD_CENSUS from '../../../data/west-virginia/wv-inv-001/iapd-wv-census.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -101,7 +102,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK' | 'AR' | 'UT' | 'NM' | 'NE' | 'KS' | 'ID';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK' | 'AR' | 'UT' | 'NM' | 'NE' | 'KS' | 'ID' | 'WV';
   name: string;
   href: string;
   regulator: string;
@@ -1159,6 +1160,20 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
     limitation: 'Broker-dealer, salesperson and IAR rosters, examinations, and the orders corpus were not acquired. No adverse profile attachments.',
     sourceClocks: [
       { label: 'IAPD STATE and SEC compilations', sourceAsOf: ID_IAPD_CENSUS.state.sourceAsOf, retrievedAt: ID_IAPD_CENSUS.state.retainedFileExaminedAt, snapshotAsOf: ID_IAPD_CENSUS.state.sourceAsOf, generatedAt: null },
+    ],
+  },
+  {
+    code: 'WV',
+    name: 'West Virginia',
+    href: '/west-virginia',
+    regulator: 'West Virginia State Auditor, Securities Commission',
+    principalOfficeFirms: WV_IAPD_CENSUS.sec.wv_principal_office_distinct_crd,
+    rosterStatus: `IAPD WV state IA ${WV_IAPD_CENSUS.state.wv_state_ia_distinct_crd.toLocaleString('en-US')} firm CRDs as of ${WV_IAPD_CENSUS.state.sourceAsOf}: ${WV_IAPD_CENSUS.state.wv_state_ia_approved_distinct_crd} APPROVED and ${WV_IAPD_CENSUS.state.wv_state_ia_condrest_distinct_crd} CONDREST`,
+    evidence: ['IAPD West Virginia state IA, federal notice and ERA jurisdiction lenses', 'SEC/IAPD principal-office geography'],
+    identityNote: 'Principal-office geography is not West Virginia registration. State IA, federal notice, ERA and person classes remain separate.',
+    limitation: 'Broker-dealer, agent and IAR rosters, examinations, the orders corpus, and a State Auditor annual-report stock were not acquired. No adverse profile attachments.',
+    sourceClocks: [
+      { label: 'IAPD STATE and SEC compilations', sourceAsOf: WV_IAPD_CENSUS.state.sourceAsOf, retrievedAt: WV_IAPD_CENSUS.state.retainedFileExaminedAt, snapshotAsOf: WV_IAPD_CENSUS.state.sourceAsOf, generatedAt: null },
     ],
   },
 ];

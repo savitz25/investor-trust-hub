@@ -1,0 +1,89 @@
+{
+  "contract": "investor-wv-iapd-census-v1",
+  "ticket": "WV-INV-001",
+  "regulator": "West Virginia State Auditor, Securities Commission",
+  "filterLogic": "West Virginia selected by IAPD registration jurisdiction fields: StateRgstn/Rgltr/@Cd=WV, ERA/Rgltr/@Cd=WV, and NoticeFiled/States/@RgltrCd=WV. MainAddr/@State=WV is office geography and is not the regulatory denominator. Regulator code VA is not West Virginia.",
+  "state": {
+    "filename": "IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "authority": "IAPD (FINRA-held state compilation)",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_09_17_2026.xml.gz",
+    "sourceAsOf": "2026-09-17",
+    "publishedAt": "2026-09-17",
+    "retainedFileExaminedAt": "2026-10-06",
+    "bytes": 5080393,
+    "sha256": "5fa17c38ae2e812dbd4d58c359c4d624a54417e3f794a3287c3414ccfdaa6a02",
+    "grain": "Firm CRD; StateRgstn/Rgltr/@Cd=jurisdiction; @St=status; ERA/Rgltr/@Cd=jurisdiction. Not MainAddr/@State.",
+    "filter": "Rgltr/@Cd=WV (registration jurisdiction). Address is recorded only for overlap diagnostics.",
+    "firms_in_feed": 21861,
+    "wv_state_ia_registration_rows": 41,
+    "wv_state_ia_distinct_crd": 41,
+    "wv_state_ia_approved_distinct_crd": 40,
+    "wv_state_ia_condrest_distinct_crd": 1,
+    "wv_state_ia_termrequest_distinct_crd": 0,
+    "wv_state_ia_current_distinct_crd": 41,
+    "wv_state_era_registration_rows": 0,
+    "wv_state_era_distinct_crd": 0,
+    "wv_state_era_active_distinct_crd": 0,
+    "status_ia": [
+      [
+        "APPROVED",
+        40
+      ],
+      [
+        "CONDREST",
+        1
+      ]
+    ],
+    "status_era": [],
+    "principal_office_wv_among_state_ia": 18,
+    "principal_office_not_wv_among_state_ia": 23,
+    "address_wv_without_wv_jurisdiction": 0
+  },
+  "sec": {
+    "filename": "IA_FIRM_SEC_Feed_09_17_2026.xml.gz",
+    "authority": "SEC / IAPD",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_SEC_Feed_09_17_2026.xml.gz",
+    "sourceAsOf": "2026-09-17",
+    "publishedAt": "2026-09-17",
+    "retainedFileExaminedAt": "2026-10-06",
+    "bytes": 7301907,
+    "sha256": "f01d6b17a7ed631125e76d3c1e5965f178235273eea6699c15400473cb2f1f22",
+    "grain": "Firm CRD; NoticeFiled/States/@RgltrCd=jurisdiction; MainAddr/@State=principal office (separate overlay).",
+    "firms_in_feed": 23911,
+    "wv_notice_rows": 1085,
+    "wv_notice_any_status_distinct_crd": 1085,
+    "wv_notice_filed_distinct_crd": 1085,
+    "wv_notice_era_any_status": 0,
+    "wv_notice_filed_firm_type": "Registered",
+    "notice_status": "FILED",
+    "wv_principal_office_distinct_crd": 12,
+    "principal_and_notice_filed": 12,
+    "notice_filed_not_principal": 1073,
+    "principal_not_notice_filed": 0
+  },
+  "overlaps": {
+    "state_ia_and_principal_office": 0,
+    "state_ia_approved_and_principal_office": 0,
+    "state_ia_and_notice_filed": 0,
+    "state_ia_approved_and_notice_filed": 0,
+    "state_era_and_principal_office": 0,
+    "state_era_and_notice_filed": 0,
+    "state_ia_and_state_era": 0,
+    "notice_filed_and_principal_office": 12,
+    "approved_state_ia_not_in_sec_principal_or_notice": 40,
+    "state_ia_approved_and_notice_filed_joinMethod": "exact firm CRD set intersection of APPROVED StateRgstn/Rgltr/@Cd=WV and NoticeFiled/States/@RgltrCd=WV St=FILED"
+  },
+  "notAcquired": {
+    "iarPersons": "NOT_ACQUIRED",
+    "brokerDealerRoster": "NOT_ACQUIRED",
+    "agentRoster": "NOT_ACQUIRED",
+    "examinations": "NOT_ACQUIRED",
+    "ordersCorpus": "NOT_ACQUIRED",
+    "auditorAnnualReportStock": "NOT_ACQUIRED"
+  },
+  "populationsAreAdded": false,
+  "newCanonicalFirms": 0,
+  "evidenceAttachments": 0,
+  "graphWrites": 0,
+  "nameOnlyAdverseJoins": 0
+}
