@@ -131,7 +131,7 @@ function StateCard({
         </div>
         <div>
           <strong>{state.rosterStatus}</strong>
-          <span>Complete state-RIA roster</span>
+          <span>State RIA roster status</span>
         </div>
       </div>
       <ul>
