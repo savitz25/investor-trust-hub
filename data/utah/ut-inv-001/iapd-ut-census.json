@@ -33,6 +33,10 @@
     "notice_status": "FILED",
     "source_firm_type": "Registered"
   },
+  "principalOfficeOverlay": {
+    "ut_principal_office_distinct_crd": 198,
+    "definition": "MainAddr/@State=UT in the SEC compilation; office geography only and not a Utah regulatory jurisdiction population."
+  },
   "overlaps": {
     "state_ia_approved_and_notice_filed_exact_crd": 1,
     "state_era_and_notice_filed_exact_crd": 0,

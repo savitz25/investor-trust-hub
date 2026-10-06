@@ -26,6 +26,7 @@ import MS_REGISTRATION_LENSES from '../../../data/mississippi/ms-inv-001/registr
 import MO_IAPD_CENSUS from '../../../data/missouri/mo-inv-001/iapd-mo-census.json';
 import OK_IAPD_CENSUS from '../../../data/oklahoma/ok-inv-001/iapd-ok-census.json';
 import AR_IAPD_CENSUS from '../../../data/arkansas/ar-inv-001/iapd-ar-census.json';
+import UT_IAPD_CENSUS from '../../../data/utah/ut-inv-001/iapd-ut-census.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -97,7 +98,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK' | 'AR';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK' | 'AR' | 'UT';
   name: string;
   href: string;
   regulator: string;
@@ -1085,6 +1086,20 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
     limitation: 'Broker-dealer, agent and IAR state rosters and the complete orders corpus were not acquired. No adverse profile attachments.',
     sourceClocks: [
       { label: 'IAPD STATE and SEC compilations', sourceAsOf: AR_IAPD_CENSUS.state.sourceAsOf, retrievedAt: AR_IAPD_CENSUS.state.retainedFileExaminedAt, snapshotAsOf: AR_IAPD_CENSUS.state.sourceAsOf, generatedAt: null },
+    ],
+  },
+  {
+    code: 'UT',
+    name: 'Utah',
+    href: '/utah',
+    regulator: 'Utah Division of Securities',
+    principalOfficeFirms: UT_IAPD_CENSUS.principalOfficeOverlay.ut_principal_office_distinct_crd,
+    rosterStatus: `IAPD UT APPROVED state IA ${UT_IAPD_CENSUS.state.state_ia_status.APPROVED.toLocaleString('en-US')} firm CRDs as of ${UT_IAPD_CENSUS.state.sourceAsOf}`,
+    evidence: ['IAPD Utah state IA, federal notice and ERA jurisdiction lenses', 'SEC/IAPD principal-office geography overlay'],
+    identityNote: 'The principal-office overlay is geography only, not Utah registration. State IA, federal notice, ERA and person classes remain separate.',
+    limitation: 'Broker-dealer, agent and IAR state rosters and the complete orders corpus were not acquired. No adverse profile attachments.',
+    sourceClocks: [
+      { label: 'IAPD STATE and SEC compilations', sourceAsOf: UT_IAPD_CENSUS.state.sourceAsOf, retrievedAt: UT_IAPD_CENSUS.state.retainedFileExaminedAt, snapshotAsOf: UT_IAPD_CENSUS.state.sourceAsOf, generatedAt: null },
     ],
   },
 ];
