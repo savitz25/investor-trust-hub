@@ -25,6 +25,7 @@ import SC_SECURITIES_ORDERS from '../../../data/south-carolina/sc-inv-001/securi
 import MS_REGISTRATION_LENSES from '../../../data/mississippi/ms-inv-001/registration-lenses.json';
 import MO_IAPD_CENSUS from '../../../data/missouri/mo-inv-001/iapd-mo-census.json';
 import OK_IAPD_CENSUS from '../../../data/oklahoma/ok-inv-001/iapd-ok-census.json';
+import AR_IAPD_CENSUS from '../../../data/arkansas/ar-inv-001/iapd-ar-census.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -96,7 +97,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK' | 'AR';
   name: string;
   href: string;
   regulator: string;
@@ -1070,6 +1071,20 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
     limitation: 'Broker-dealer, agent and IAR state rosters and the complete orders corpus were not acquired. No adverse profile attachments.',
     sourceClocks: [
       { label: 'IAPD STATE and SEC compilations', sourceAsOf: OK_IAPD_CENSUS.state.sourceAsOf, retrievedAt: OK_IAPD_CENSUS.state.retainedFileExaminedAt, snapshotAsOf: OK_IAPD_CENSUS.state.sourceAsOf, generatedAt: null },
+    ],
+  },
+  {
+    code: 'AR',
+    name: 'Arkansas',
+    href: '/arkansas',
+    regulator: 'Arkansas Securities Department',
+    principalOfficeFirms: AR_IAPD_CENSUS.sec.ar_principal_office_distinct_crd,
+    rosterStatus: `IAPD AR APPROVED state IA ${AR_IAPD_CENSUS.state.ar_state_ia_approved_distinct_crd.toLocaleString('en-US')} firm CRDs as of ${AR_IAPD_CENSUS.state.sourceAsOf}`,
+    evidence: ['IAPD Arkansas state IA, federal notice and ERA jurisdiction lenses', 'SEC/IAPD principal-office geography'],
+    identityNote: 'Principal-office geography is not Arkansas registration. State IA, federal notice, ERA and person classes remain separate.',
+    limitation: 'Broker-dealer, agent and IAR state rosters and the complete orders corpus were not acquired. No adverse profile attachments.',
+    sourceClocks: [
+      { label: 'IAPD STATE and SEC compilations', sourceAsOf: AR_IAPD_CENSUS.state.sourceAsOf, retrievedAt: AR_IAPD_CENSUS.state.retainedFileExaminedAt, snapshotAsOf: AR_IAPD_CENSUS.state.sourceAsOf, generatedAt: null },
     ],
   },
 ];
