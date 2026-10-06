@@ -126,7 +126,7 @@ function StateCard({
       <p>{state.regulator}</p>
       <div className="ith-state-pair">
         <div>
-          <strong>{state.principalOfficeFirms.toLocaleString('en-US')}</strong>
+          <strong>{state.principalOfficeFirms?.toLocaleString('en-US') ?? 'Not acquired'}</strong>
           <span>SEC/IARD firms reporting a principal office here</span>
         </div>
         <div>

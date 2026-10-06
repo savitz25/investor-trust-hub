@@ -100,11 +100,11 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK' | 'AR' | 'UT' | 'NM' | 'NE';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK' | 'AR' | 'UT' | 'NM' | 'NE' | 'KS';
   name: string;
   href: string;
   regulator: string;
-  principalOfficeFirms: number;
+  principalOfficeFirms: number | null;
   rosterStatus: string;
   evidence: string[];
   identityNote: string;
@@ -1130,6 +1130,20 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
     limitation: 'Broker-dealer and agent rows are a June 30, 2024 annual-report clock, not the IAPD firm feed. Person rosters and the orders corpus were not acquired.',
     sourceClocks: [
       { label: 'IAPD STATE and SEC compilations', sourceAsOf: NE_IAPD_CENSUS.state.sourceAsOf, retrievedAt: NE_IAPD_CENSUS.state.retainedFileExaminedAt, snapshotAsOf: NE_IAPD_CENSUS.state.sourceAsOf, generatedAt: null },
+    ],
+  },
+  {
+    code: 'KS',
+    name: 'Kansas',
+    href: '/kansas',
+    regulator: 'Office of the Kansas Securities Commissioner',
+    principalOfficeFirms: null,
+    rosterStatus: 'IAPD Kansas jurisdiction-filtered registration lenses',
+    evidence: ['IAPD Kansas state IA, federal notice and ERA jurisdiction lenses', 'CRD-linked IAR person observations'],
+    identityNote: 'IAPD regulator jurisdiction, CRD firm identity and person registration are kept separate. Principal-office geography does not establish Kansas registration.',
+    limitation: 'Broker-dealer, agent, complete IAR licensing, examinations and disposition-level enforcement records were not acquired. Proceedings index references are not findings and are not attached to firms.',
+    sourceClocks: [
+      { label: 'IAPD STATE and SEC jurisdiction feeds', sourceAsOf: '2026-10-06', retrievedAt: '2026-10-06', snapshotAsOf: '2026-10-06', generatedAt: null },
     ],
   },
 ];
