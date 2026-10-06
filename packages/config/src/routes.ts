@@ -54,6 +54,7 @@ export const STATE_DISCOVERY_ROUTES = [
   { href: '/south-carolina', label: 'South Carolina' },
   { href: '/mississippi', label: 'Mississippi' },
   { href: '/missouri', label: 'Missouri' },
+  { href: '/oklahoma', label: 'Oklahoma' },
   { href: '/arkansas', label: 'Arkansas' },
 ] as const;
 
@@ -94,6 +95,7 @@ export const INDEXABLE_PATHS = [
   '/south-carolina',
   '/mississippi',
   '/missouri',
+  '/oklahoma',
   '/arkansas',
   '/disclaimer',
   '/privacy',
