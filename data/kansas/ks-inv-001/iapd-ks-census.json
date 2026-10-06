@@ -1,0 +1,51 @@
+{
+  "state": {
+    "sourceAsOf": "2026-10-06",
+    "retainedFileExaminedAt": "2026-10-06",
+    "feedName": "IA_FIRM_STATE_Feed_10_06_2026.xml.gz",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/",
+    "sha256": "7556b41d7eee8047d6137fc9c82983b709ce3dcd6cdae348b6facda04696abf0",
+    "ks_state_ia_approved_distinct_crd": 224,
+    "ks_state_era_active_distinct_crd": 16
+  },
+  "sec": {
+    "sourceAsOf": "2026-10-06",
+    "retainedFileExaminedAt": "2026-10-06",
+    "feedName": "IA_FIRM_SEC_Feed_10_06_2026.xml.gz",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/",
+    "sha256": "819d160fbaf8c2de317205f42d0feda4480eec17121e991a4a63e73b08421919",
+    "ks_notice_filed_distinct_crd": 1514
+  },
+  "iar": {
+    "sourceAsOf": "2026-10-06",
+    "retainedFileExaminedAt": "2026-10-06",
+    "feedName": "IA_INDVL_Feed_10_06_2026.xml.zip",
+    "url": "https://reports.adviserinfo.sec.gov/reports/CompilationReports/",
+    "sha256": "542d369a27795223568b61636e294890cc8853cb1cb8628c4f1e4dfaaafc8b1d",
+    "filter": "regAuth=KS, regCat=RA, st=APPROVED",
+    "registration_observations": 7442,
+    "distinct_iar_person_ids": 7353,
+    "distinct_current_employer_firm_crds": 723
+  },
+  "overlaps": {
+    "approved_state_ia_and_sec_notice_filed": 1,
+    "approved_state_ia_and_active_era": 0,
+    "active_era_and_sec_notice_filed": 0,
+    "shared_state_ia_notice_crd": "149017"
+  },
+  "proceedingsIndex": {
+    "url": "https://www.insurance.kansas.gov/legal-issues/securities-legal-proceedings",
+    "sourceAsOf": "FY2023 and FY2024 index observed 2026-10-06",
+    "listed_proceeding_observations": 17,
+    "observations_printing_crd": 8,
+    "distinct_printed_crds": 5,
+    "status": "INDEX_ONLY_NO_CASE_OUTCOME_OR_CANONICAL_JOIN"
+  },
+  "canonicalFirmNamesPublished": false,
+  "newCanonicalFirms": 0,
+  "evidenceAttachments": 0,
+  "graphWrites": 0,
+  "personIdsOrNamesPublished": false,
+  "brokerDealerAndAgentRosters": "NOT_ACQUIRED",
+  "examinationsAndOrdersCorpus": "NOT_ACQUIRED"
+}
