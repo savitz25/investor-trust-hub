@@ -136,6 +136,7 @@ describe('INV-HOME-003 public evidence inventory', () => {
       '/south-carolina',
       '/mississippi',
       '/missouri',
+      '/arkansas',
     ]);
     expect(get('published_state_pages').value).toBe(
       INVESTOR_HOMEPAGE_STATE_CARDS.length,

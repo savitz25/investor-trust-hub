@@ -22,6 +22,7 @@ import { KY_DFI_2025_SECURITIES, KY_REGISTRATION_LENSES } from './ky-public-inte
 import { AL_REGISTRATION_LENSES, AL_SECURITIES_ORDERS } from './al-public-intel';
 import { SC_REGISTRATION_LENSES, SC_SECURITIES_ORDERS } from './sc-public-intel';
 import { MS_REGISTRATION_LENSES } from './ms-public-intel';
+import AR_IAPD_CENSUS from '../../../data/arkansas/ar-inv-001/iapd-ar-census.json';
 export type { InvestorResearchIntent, InvestorCondition } from './investor-research-plan';
 
 export const INVESTOR_ASK_CONTRACT = 'investor-ask-v1' as const;
@@ -728,6 +729,40 @@ function interpretInvestorAskQueryCore(raw: string, overrides: InvestorAskOverri
                         : `The accepted IAPD state compilation lists ${ms.stateIa.count} Mississippi state-registered IA firm CRDs (APPROVED). Federal notice (${ms.federalNotice.count.toLocaleString('en-US')}), ERA (${ms.era.count}) and principal-office (${ms.principalOffice.count}) lenses are separate and must not be added. Use /mississippi.`;
     const query = failClosed(reason, ['Mississippi investor research page.', 'Find firm CRD 105958.']);
     if (msCity) query.geography = { type: 'principal_office_city', value: msCity[1]!, state: 'MS', meaning: 'City context only; not Mississippi registration or service territory' };
+    push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
+    return { raw: q, query, interpretation: lines };
+  }
+
+  // AR-INV-001: full state name, uppercase AR, or "in ar". "in arizona" is not Arkansas.
+  // Little Rock, Fayetteville, and Fort Smith are geography only when Arkansas is named.
+  const arNamed = (/\barkansas\b/i.test(q) || /\bAR\b/.test(q) || /(?:\bin\s+|,\s*)ar\b/i.test(q)) && !/\barizona\b/i.test(q);
+  const arCity = arNamed ? /\b(little rock|fayetteville|fort smith)\b/i.exec(q) : null;
+  if (arNamed && /\b(?:investment|advis[eo]rs?|ria|eras?|broker|securities|crd|sec|notice|disciplin|enforc|complaint|exams?|principal office|agents?|representatives?|iars?|total|combined|how many)\b/i.test(q)) {
+    const arState = AR_IAPD_CENSUS.state;
+    const arSec = AR_IAPD_CENSUS.sec;
+    const reason = arCity
+      ? 'The named Arkansas city is geography only. InvestorTrustHub publishes no city securities route and no county route. A principal office does not establish Arkansas registration or notice filing. Use /arkansas.'
+      : /\bcomplaints?\b/i.test(q)
+        ? 'Provider-level Arkansas securities complaint records were NOT_ACQUIRED. A complaint is not a finding. Use /arkansas.'
+        : /\b(?:disciplin\w*|enforc\w*|orders?|sanctions?)\b/i.test(q)
+          ? 'An Arkansas Securities Department order corpus was NOT_ACQUIRED. No order was attached by name. Exact CRD attachments: 0. Use /arkansas.'
+          : /\b(?:examinations?|exams?)\b/i.test(q)
+            ? 'Provider-level Arkansas examination outcomes were NOT_ACQUIRED. Missing is not a clean examination history. Use /arkansas.'
+            : /\b(?:investment adviser representatives?|iars?)\b/i.test(q)
+              ? 'Arkansas investment adviser representatives are persons, not firms. The IAR bulk roster was not acquired. A person CRD is not a firm CRD. Use /arkansas.'
+              : /\b(?:broker[- ]?dealers?|securities agents?|agents?)\b/i.test(q)
+                ? 'Broker-dealers, agents and adviser representatives are separate firm and person grains. Arkansas bulk rosters were not acquired. Use /arkansas.'
+                : /\b(?:principal office|headquarter\w*|based in|located in)\b/i.test(q)
+                  ? `The SEC IAPD compilation lists ${arSec.ar_principal_office_distinct_crd} Arkansas principal-office firm CRDs as of ${arSec.sourceAsOf}. Office geography is not Arkansas registration or notice filing. Use /arkansas.`
+                  : /\b(?:era|exempt reporting)\b/i.test(q)
+                    ? `The IAPD state compilation lists ${arState.ar_state_era_active_distinct_crd} active Arkansas exempt reporting adviser firm CRDs. ERA status is not state IA or SEC registration. Use /arkansas.`
+                    : /\b(?:federal[- ]covered|notice[- ]filed|notice filing|notice)\b/i.test(q)
+                      ? `The IAPD SEC compilation lists ${arSec.ar_notice_filed_distinct_crd.toLocaleString('en-US')} firms with a FILED Arkansas notice. A notice filing is not Arkansas state IA registration. Use /arkansas.`
+                      : /\b(?:total|combined|how many|all)\b/i.test(q) && !/\b(?:state[- ]registered|notice|era|exempt|principal|broker|agent|representative|federal)\b/i.test(q)
+                        ? `Arkansas state IA (${arState.ar_state_ia_approved_distinct_crd}), federal notice (${arSec.ar_notice_filed_distinct_crd.toLocaleString('en-US')}), ERA (${arState.ar_state_era_active_distinct_crd}) and principal-office (${arSec.ar_principal_office_distinct_crd}) lenses cannot be combined into one adviser total. Use /arkansas.`
+                        : `The IAPD state compilation lists ${arState.ar_state_ia_approved_distinct_crd} Arkansas state-registered IA firm CRDs (APPROVED). Federal notice (${arSec.ar_notice_filed_distinct_crd.toLocaleString('en-US')}), ERA (${arState.ar_state_era_active_distinct_crd}) and principal-office (${arSec.ar_principal_office_distinct_crd}) lenses are separate and must not be added. Use /arkansas.`;
+    const query = failClosed(reason, ['Arkansas investor research page.', 'Find firm CRD 105958.']);
+    if (arCity) query.geography = { type: 'principal_office_city', value: arCity[1]!, state: 'AR', meaning: 'City context only; not Arkansas registration or service territory' };
     push('Coverage', 'STATE_PAGE_NOT_SEARCH_V1');
     return { raw: q, query, interpretation: lines };
   }
