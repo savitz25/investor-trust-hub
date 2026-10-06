@@ -95,7 +95,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO';
   name: string;
   href: string;
   regulator: string;
