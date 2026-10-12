@@ -941,8 +941,8 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
     identityNote: 'Firm CRD is the identity key. State IA, federal notice, ERA and principal-office lenses are separate; IARs and sales agents are people, not firms.',
     limitation: 'IAPD feed date is 2026-10-06. DBR provider-level IAR, broker-dealer and sales-agent bulk rosters were not acquired. Orders remain document observations; no name-only joins or combined adviser total.',
     sourceClocks: [
-      { label: 'IAPD STATE and SEC compilations', sourceAsOf: RI_REGISTRATION_LENSES.sourceAsOf, retrievedAt: RI_REGISTRATION_LENSES.retrievedAt, snapshotAsOf: null, generatedAt: RI_REGISTRATION_LENSES.generatedAt },
-      { label: 'DBR Securities Division action index', sourceAsOf: null, retrievedAt: RI_SECURITIES_ORDERS.source.retrievedAt, snapshotAsOf: null, generatedAt: RI_SECURITIES_ORDERS.generatedAt },
+      { label: 'IAPD STATE and SEC compilations', sourceAsOf: RI_REGISTRATION_LENSES.sourceAsOf, retrievedAt: RI_REGISTRATION_LENSES.retrievedAt, snapshotAsOf: RI_REGISTRATION_LENSES.retrievedAt.slice(0, 10), generatedAt: null },
+      { label: 'DBR Securities Division action index', sourceAsOf: null, retrievedAt: RI_SECURITIES_ORDERS.source.retrievedAt, snapshotAsOf: RI_SECURITIES_ORDERS.source.retrievedAt.slice(0, 10), generatedAt: null },
     ],
   },
   {
