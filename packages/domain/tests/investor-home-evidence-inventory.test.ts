@@ -127,6 +127,7 @@ describe('INV-HOME-003 public evidence inventory', () => {
       '/minnesota',
       '/michigan',
       '/connecticut',
+      '/rhode-island',
       '/maryland',
       '/wisconsin',
       '/indiana',

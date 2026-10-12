@@ -32,6 +32,7 @@ describe('CO-INV-001 Colorado publication', () => {
     expect(INDEXABLE_PATHS).toContain('/texas');
     expect(INDEXABLE_PATHS).toContain('/washington');
     expect(INDEXABLE_PATHS).toContain('/arizona');
+    expect(INDEXABLE_PATHS).toContain('/rhode-island');
     expect(INDEXABLE_PATHS).not.toContain('/florida');
     expect(STATE_DISCOVERY_ROUTES.map((row) => row.href)).toEqual([
       '/new-jersey',
@@ -54,6 +55,7 @@ describe('CO-INV-001 Colorado publication', () => {
       '/minnesota',
       '/michigan',
       '/connecticut',
+      '/rhode-island',
       '/maryland',
       '/wisconsin',
       '/indiana',

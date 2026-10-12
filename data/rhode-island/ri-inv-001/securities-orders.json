@@ -1,0 +1,700 @@
+{
+  "contract": "ri-inv-001-orders-v1",
+  "generatedAt": "2026-10-12T16:05:58+00:00",
+  "source": {
+    "authority": "Rhode Island DBR Securities Division",
+    "url": "https://dbr.ri.gov/banking-securities-and-charitable-organizations/securities-and-charities/securities-enforcement",
+    "retrievedAt": "2026-10-12T16:05:58+00:00",
+    "sha256": "31e2e218766c5cb2282172db1f6591d3d3fc1b66910196e08eda7f90e708f597"
+  },
+  "documentRows": 98,
+  "rows": [
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF JED LAWRENCE DEFALCO (CRD #5231484)",
+      "dateAsIndexed": "Adopted 07/01/26",
+      "sourceDocument": "https://dbr.ri.gov/media/36636/download",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF STRATEGIC FINANCIAL LLC (CRD #122437)",
+      "dateAsIndexed": "Adopted 10/30/25",
+      "sourceDocument": "https://dbr.ri.gov/media/32431/download",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF THOMAS A. VIGIL (CRD #3269058)",
+      "dateAsIndexed": "Adopted 10/20/25",
+      "sourceDocument": "https://dbr.ri.gov/media/32386/download",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Administrative Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF VANGUARD MARKETING CORPORATION (CRD #7452) AND THE VANGUARD GROUP, INC. (CRD#105958)",
+      "dateAsIndexed": "Adopted 04/10/25",
+      "sourceDocument": "https://dbr.ri.gov/media/31351/download",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF Edward D. Jones & Co., L.P.",
+      "dateAsIndexed": "Adopted 12/20/24",
+      "sourceDocument": "https://dbr.ri.gov/media/30331/download",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF TradeStation Crypto, Inc.",
+      "dateAsIndexed": "Adopted 04/23/24",
+      "sourceDocument": "https://dbr.ri.gov/media/28466/download",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Administrative Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF Raymond James & Associates, Inc. and Raymond James Financial Services, Inc.",
+      "dateAsIndexed": "Adopted 03/06/24",
+      "sourceDocument": "https://dbr.ri.gov/sites/g/files/xkgbur696/files/2024-03/SEC_ConsentOrder_2023-SC-004_RaymondJames_ConsentOrder_3-6-2024.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Administrative Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF Robinhood Financial",
+      "dateAsIndexed": "Adopted 11/01/23",
+      "sourceDocument": "https://dbr.ri.gov/media/27181/download",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF Nexo Capital Inc.",
+      "dateAsIndexed": "Adopted 10/20/23",
+      "sourceDocument": "https://dbr.ri.gov/media/27136/download",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF BlockFi Lending, LLC",
+      "dateAsIndexed": "Adopted 03/24/22",
+      "sourceDocument": "https://dbr.ri.gov/media/22411/download",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF Solium Financial Services, LLC",
+      "dateAsIndexed": "Adopted 09/08/20",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/ACO_Solium_Financial.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF LPL FINANCIAL, LLC",
+      "dateAsIndexed": "Adopted 02/18/19",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SEC-Consent_Order_LPL_Financing.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF CARNEY CAPITAL MANAGEMENT COMPANY AND STEPHEN T CARNEY",
+      "dateAsIndexed": "Adopted 03/28/19",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SEC_ConsentAgreement_Carney.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Order of Dismissal",
+      "respondentAsIndexed": "IN THE MATTER OF CLEARPATH WEALTH MANAGEMENT, LLC AND PATRICK CHURCHVILLE, PRESIDENT",
+      "dateAsIndexed": "Adopted 01/22/19",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SEC_OrderOfDismissal-Clearpath.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Decision",
+      "respondentAsIndexed": "IN THE MATTER OF BETSY SACHS AND BROOKE SACHS",
+      "dateAsIndexed": "Adopted 12/28/18",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SEC_Decision-Sachs.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF MORGAN STANLEY SMITH BARNEY LLC",
+      "dateAsIndexed": "Adopted 08/29/18",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SEC_Consent-Agreement_Morgan-Stanley.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF KAREN M. EMMA",
+      "dateAsIndexed": "Adopted 07/05/18",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SEC_ConsentAgreement_Emma.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF KEVIN K. HANDLEY",
+      "dateAsIndexed": "Adopted 04/09/18",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/Consent-Agreement_Handley.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF THEODORE E. MARANDA",
+      "dateAsIndexed": "Adopted 08/01/17",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SEC_ConsentAgreement_Maranda.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF CHRISTOPHER F. VEALE",
+      "dateAsIndexed": "Adopted 05/22/17",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent-Agreement-Veale.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Order of Revocation",
+      "respondentAsIndexed": "IN THE MATTER OF BROOKVILLE CAPITAL PARTNERS LLC, AND ALI HABIB MAYAR",
+      "dateAsIndexed": "Adopted 03/02/17",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD_OrderOfRevocation-BrookvilleCapitalPartners.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Emergency Order to Cease and Desist",
+      "respondentAsIndexed": "IN THE MATTER OF VENTRUM ENERGY CORP., VENTRUM LOUSISIANA, LLP., VENTRUM LOUSISIANA, LLP., PHASE 2, ANDREW VANSLEE MANAGING PARTNER AND AARON BERGMAN REPRESENTATITVE, INDIVIDUALLY",
+      "dateAsIndexed": "Adopted 10/14/16",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SEC_EmergencyOrder_Cease_Desist_VentrumEnergy.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF ALI HABIB MAYAR",
+      "dateAsIndexed": "Adopted 02/23/16",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent-Order-BrookvilleCapitalPartnersLLC.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF ANTONIO P. DOSSANTOS",
+      "dateAsIndexed": "Adopted 01/28/16",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SEC_ConsentAgreement-AntonioDosSantos.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Emergency Order to Cease and Desist",
+      "respondentAsIndexed": "IN THE MATTER OF ANTONIO P. DOS SANTOS",
+      "dateAsIndexed": "Adopted 10/5/15",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SEC_EmergencyOrder-AntonioDosSantos.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Emergency Order to Cease and Desist",
+      "respondentAsIndexed": "IN THE MATTER OF T&T TAX ADVISORY GROUP,INC., T&T RETIREMENT SPECIALIST, UNIQUE FINANCIAL SERVICES, TIMOTHY M. KELLY, THEODORE E. MARANDA, AND GETEASY GROUP",
+      "dateAsIndexed": "Adopted 09/16/15",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SEC_EmergencyOrder-T&TTax Advisory.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Administrative Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF CITIGROUP GLOBAL MARKETS, INC.",
+      "dateAsIndexed": "Adopted 07/22/15",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SEC_AdministrativeConsentOrder-CitigroupGlobalMarkets.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Request For Leave To Amend Order To Show Cause",
+      "respondentAsIndexed": "IN THE MATTER OF CLEARPATH WEALTH MANAGEMENT, LLC",
+      "dateAsIndexed": "Adopted 06/10/15",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SEC_AmendedOrderToShowCause-ClearpathWealthMgmt.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order Making Findings and Imposing Remedial Sanctions",
+      "respondentAsIndexed": "IN THE MATTER OF BARRET & CO.",
+      "dateAsIndexed": "Adopted 04/13/15",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SEC_ConsentOrder-Barrett&Co.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF BAILEY WEALTH ADVISORS, INC.",
+      "dateAsIndexed": "Adopted 12/16/14",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SEC-ConsentAgreement-BaileyWealthAdvisors.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF M.W. ARAGAO INVESTMENT ADVISORS LLC",
+      "dateAsIndexed": "Adopted 12/03/14",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SEC_ConsentAgremeent-Aragao.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Order Requiring Surety Bond",
+      "respondentAsIndexed": "IN THE MATTER OF GRAND STREET INVESTORS, LLC",
+      "dateAsIndexed": "Adopted 11/18/14",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SEC_Order-GrandStreet.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF GRAND STREET INVESTORS, LLC",
+      "dateAsIndexed": "Adopted 11/18/14",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SEC_ConsentAgremeent-GrandStreet.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF MAUCH INVESTMENT SERVICES",
+      "dateAsIndexed": "Adopted 11/18/14",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SEC_ConsentAgremeent-Mauch.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF LPL FINANCIAL LLC",
+      "dateAsIndexed": "Adopted 08/29/14",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-LPL_Financial_Consent_Agreement.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF J.P. MORGAN SECURITIES, LLC.",
+      "dateAsIndexed": "Adopted 06/02/14",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent-Order-JP_Morgan_Securities,_LLC.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF UBS FINANCIAL SERVICES, INC.",
+      "dateAsIndexed": "Adopted 11/18/13",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-UBS-1.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF RBC CAPITAL MARKETS, LLC",
+      "dateAsIndexed": "Adopted 11/05/13",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-RBC-2.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF LEE KRASNER GROUP, LTD",
+      "dateAsIndexed": "Adopted 04/24/13",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Agreement-LKG.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF STEPHEN E. GAGNON",
+      "dateAsIndexed": "Adopted 03/25/13",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-Gagnon.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF LELAND ENERGY INC.,LELAND KENTUCKY HOLDINGS, INC., STEPHEN THOMPSON, PRESIDENT, AND KIRTAN KHALSA REPRESENTATIVE INDIVIDUALLY",
+      "dateAsIndexed": "Adopted 01/11/13",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-Leland.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order Making Findings and Imposing Remedial Sanctions",
+      "respondentAsIndexed": "IN THE MATTER OF MML INVESTORS SERVICES, LLC",
+      "dateAsIndexed": "Adopted 12/06/12",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-MML.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF BRIAN R. MCKENNA",
+      "dateAsIndexed": "Adopted 11/14/12",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-McKenna.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF KLR INVESTMENT ADVISORS, LLC",
+      "dateAsIndexed": "Adopted 11/13/12",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Agreement-KLR.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF UVEST FINANCIAL SERVICES GROUP, INC.",
+      "dateAsIndexed": "Adopted 10/15/12",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-UVEST.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF COASTAL MANAGEMENT GROUP, LLC - MICHAEL G. RILEY",
+      "dateAsIndexed": "Adopted 09/11/12",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Agreement-Coastal_Management.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF BANKERS LIFE AND CASUALTY COMPANY and BLC FINANCIAL SERVICES, INC.",
+      "dateAsIndexed": "Adopted 06/19/12",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-Bankers_Life.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Final Order of Dismissal",
+      "respondentAsIndexed": "IN THE MATTER OF FALCON LTD., ROCCO P. DESIMONE, AND GAIL M. DESIMONE",
+      "dateAsIndexed": "Adopted 04/23/12",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Final_Order-Falcon_Ltd.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Emergency Order to Cease and Desist",
+      "respondentAsIndexed": "- IN THE MATTER OF LELAND ENERGY, INC., LELAND KENTUCKY HOLDINGS, INC., STEPHEN THOMPSON, PRESIDENT AND KIRTAN KHALSA, REPRESENTATIVE INDIVIDUALLY",
+      "dateAsIndexed": "Adopted 03/05/12",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Emergency_Order_to_Cease_and_Desist-Leland.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF LEONARD MARTIN & ASSOCIATES, INC.",
+      "dateAsIndexed": "Adopted 11/09/11",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Agreement-Martin.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF LAURIE MARIE TURCHETTI",
+      "dateAsIndexed": "Adopted 11/01/11",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-Turchetti.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF LEONARD MARTIN & ASSOCIATES, INC.",
+      "dateAsIndexed": "Adopted 09/13/11",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Agreement-Leonard_Martin.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF RAYMOND JAMES & ASSOCIATES, INC., AND RAYMOND JAMES FINANCIAL SERVICES, INC.",
+      "dateAsIndexed": "Adopted 08/26/11",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-Raymond_James.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Final Order of Dismissal",
+      "respondentAsIndexed": "IN THE MATTER OF ROBERTA NARRIN",
+      "dateAsIndexed": "Adopted 07/14/11",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Final_Order-Narrin.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Decision and Final Order",
+      "respondentAsIndexed": "IN THE MATTER OF MARTIN BENJAMIN FEIBISH",
+      "dateAsIndexed": "Adopted 06/20/11",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Decision_Final-Order-Feibish.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF BANCO ESPÍRITO SANTOS S.A.",
+      "dateAsIndexed": "Adopted 03/04/11",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-Banco_Santo.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF GEA SPHERE, LLC",
+      "dateAsIndexed": "Adopted 12/14/10",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Agreement-GEA_Sphere.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF MORGAN KEEGAN & CO., INC.",
+      "dateAsIndexed": "Adopted 11/30/10",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Agreement-Morgan_Keegan.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF CBG FINANCIAL GROUP, INC.",
+      "dateAsIndexed": "Adopted 11/16/10",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Agreement-CBG.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF WELLS FARGO INVESTMENTS, LLC",
+      "dateAsIndexed": "Adopted 08/25/10",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-Wells_Fargo.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF STIFEL, NICOLAUS & COMPANY, INCORPORATED (CRD #793)",
+      "dateAsIndexed": "Adopted 08/10/10",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-Stifel.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF HOLD BROTHERS ONLINE INVESTMENT SERVICES LLC",
+      "dateAsIndexed": "Adopted 08/10/10",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Agreement-Hold_Brothers.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF UBS SECURITIES, LLC AND UBS FINANCIAL SERVICES, INC.",
+      "dateAsIndexed": "Adopted 05/25/10",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-UBS.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF GOLDMAN, SACHS & CO.",
+      "dateAsIndexed": "Adopted 04/30/10",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Agreement-Goldman_Sachs.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Cease and Desist Order",
+      "respondentAsIndexed": "IN THE MATTER OF M & M IRON WORKS, LLC. MARIO M. PERRETTA, AND SEAN M. BOYLE",
+      "dateAsIndexed": "Adopted 03/30/10",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Cease_and_Desist-M&M.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Final Order",
+      "respondentAsIndexed": "IN THE MATTER OF KIM BO",
+      "dateAsIndexed": "Adopted 12/04/09",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Final_Order-Kim_Bo.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF MORGAN STANLEY & CO. INCORPORATED (CRD #8209)",
+      "dateAsIndexed": "Adopted 11/30/09",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-Morgan_Stanley1.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF CREDIT SUISSE SECURITIES (USA) LLC.",
+      "dateAsIndexed": "Adopted 11/27/09",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-Credit_Suisse.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Final Order",
+      "respondentAsIndexed": "IN THE MATTER OF GREGG T. RENNIE",
+      "dateAsIndexed": "Adopted 09/02/09",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Final_Order-Rennie.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF RBC CAPITAL MARKETS CORPORATION",
+      "dateAsIndexed": "Adopted 08/04/09",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-RBC.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF JPMORGAN CHASE & CO.",
+      "dateAsIndexed": "Adopted 08/04/09",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-JPMorgan.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF AMERIPRISE ADVISOR SERVICES, INC. (formerly) H&R BLOCK FINANCIAL ADVISORS, INC. and DEAN J. CANNING, Sr.",
+      "dateAsIndexed": "Adopted 07/24/09",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-Ameriprise.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF BANC OF AMERICA LLC and BANC OF AMERICA INVESTMENT SERVICES, INC.",
+      "dateAsIndexed": "Adopted 07/14/09",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-Wachovia.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF CITIGROUP GLOBAL MARKETS INC.",
+      "dateAsIndexed": "Adopted 04/30/09",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-Citigroup_Global.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF WACHOVIA SECURITIES, LLC and WACHOVIA CAPITAL MARKETS, LLC",
+      "dateAsIndexed": "Adopted 04/28/09",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-Banc_of_America.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF STRATEGIC POINT INVESTMENT ADVISORS, LLC and PROGESSIVE FINANCIAL STRATEGIES. LLC",
+      "dateAsIndexed": "Adopted 02/12/09",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Agreement-Strategic_Point.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF CHRISTOPHER NOWAK",
+      "dateAsIndexed": "Adopted 02/03/09",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-Nowak.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF DAVID J. REINDEL",
+      "dateAsIndexed": "Adopted 01/21/09",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-David_Reindel.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF BTS SECURITIES CORPORATION",
+      "dateAsIndexed": "Adopted 09/22/08",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Agreement-BTS.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF THURSTON SPRINGER MILLER HERD & TITAK",
+      "dateAsIndexed": "Adopted 09/22/08",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Agreement-Thurston.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF MORGAN STANLEY & CO. INCORPORATED",
+      "dateAsIndexed": "Adopted 06/18/08",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-Morgan_Stanley.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Emergency Order",
+      "respondentAsIndexed": "IN THE MATTER OF SOUNDBOX CORPORATION - THOMAS CARLEY, PRESIDENT",
+      "dateAsIndexed": "Adopted 01/28/08",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Emergency_Order-Soundbox_Corp.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF DAVID L. ULLOM",
+      "dateAsIndexed": "Adopted 11/26/07",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Order-David_L._Ullom.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF KLR INVESTMENT ADVISORS, LLC",
+      "dateAsIndexed": "Adopted 09/16/07",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent_Agreement-KLR_Investment_Advisors,LLC.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF MORGAN STANLEY & CO. INCORPORATED",
+      "dateAsIndexed": "Adopted 07/03/07",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-Consent-Order-Morgan_Stanley.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF PICCERELLI, GILSTEIN WEALTH SERVICES, LLC",
+      "dateAsIndexed": "Adopted 05/22/07",
+      "sourceDocument": "https://dbr.ri.gov/documents/rules/hearing_notices/Consent_Agreement-Piccerelli_Gilstein_Wealth_Services,LLC.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF ABNER, HERRMAN & BROCK, LLC",
+      "dateAsIndexed": "Adopted 05/11/07",
+      "sourceDocument": "https://dbr.ri.gov/documents/rules/hearing_notices/Consent_Order-Abner_Herrman_Brock,LLC.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF LINCOLN FINANCIAL ADVISORS CORP.",
+      "dateAsIndexed": "Adopted 03/16/07",
+      "sourceDocument": "https://dbr.ri.gov/documents/rules/hearing_notices/Consent_Agreement-Lincoln_Financial.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF MANARIN SECURITIES CORPORATION.",
+      "dateAsIndexed": "Adopted 03/07/07",
+      "sourceDocument": "https://dbr.ri.gov/documents/rules/hearing_notices/Consent_Agreement-Manarin_Securities.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF WACHOVIA CAPITAL MARKETS, LLC.",
+      "dateAsIndexed": "Adopted 01/16/07",
+      "sourceDocument": "https://dbr.ri.gov/documents/rules/hearing_notices/Consent_Order-Wachovia_Capital_Market,LLC.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF POND EQUITIES CORP.",
+      "dateAsIndexed": "Adopted 01/02/07",
+      "sourceDocument": "https://dbr.ri.gov/documents/rules/hearing_notices/Consent_Order-Pond_Equities.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF JANNEY MONTGOMERY SCOTT LLC.",
+      "dateAsIndexed": "Adopted 12/21/06",
+      "sourceDocument": "https://dbr.ri.gov/documents/rules/hearing_notices/Consent_Agreement-Janney.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF SHAREHOLDERS SERVICE GROUP, INC.",
+      "dateAsIndexed": "Adopted 09/28/06",
+      "sourceDocument": "https://dbr.ri.gov/documents/rules/hearing_notices/Consent_Agreement-Shareholders.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order",
+      "respondentAsIndexed": "IN THE MATTER OF: MICHAEL J. PALAZZO Respondent.",
+      "dateAsIndexed": "Adopted 09/18/06",
+      "sourceDocument": "https://dbr.ri.gov/documents/rules/hearing_notices/Consent_Order-Palazzo.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order Making Findings and Imposing Remedial Sanctions",
+      "respondentAsIndexed": "IN THE MATTER OF Young Oil Corporation. Anthony Young, and Steve Garmon Individually",
+      "dateAsIndexed": "Adopted 09/06/06",
+      "sourceDocument": "https://dbr.ri.gov/documents/rules/hearing_notices/Consent_Order-Young-Oil.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Agreement",
+      "respondentAsIndexed": "IN THE MATTER OF MAUCH INVESTMENT SERVICES",
+      "dateAsIndexed": "Adopted 08/21/06",
+      "sourceDocument": "https://dbr.ri.gov/documents/rules/hearing_notices/Consent_Agreement-Mauch.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Consent Order Making Findings and Imposing Remedial Sanctions",
+      "respondentAsIndexed": "IN THE MATTER OF FIG Partners, LLC",
+      "dateAsIndexed": "Adopted 08/16/06",
+      "sourceDocument": "https://dbr.ri.gov/documents/rules/hearing_notices/Consent_Order-FIG.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    },
+    {
+      "actionType": "Emergency Cease and Desist Order",
+      "respondentAsIndexed": "IN THE MATTER OF WILLIAM G. STANLEY, STONEWOOD TRUST",
+      "dateAsIndexed": "Adopted 05-25-05",
+      "sourceDocument": "https://dbr.ri.gov/documents/decisions/SD-C&D-William_Stanley.pdf",
+      "grain": "regulator action document; respondent identity and disposition require document-level review"
+    }
+  ],
+  "identityPolicy": "No name-only joins. Order rows are not provider violations, unique entities, or a complete adverse-history census."
+}

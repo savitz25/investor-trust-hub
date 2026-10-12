@@ -10,6 +10,8 @@ import MI_IAPD_LENSES from '../../../data/michigan/mi-inv-001/iapd-mi-lenses.jso
 import MI_SECURITIES_ORDERS from '../../../data/michigan/mi-inv-001/securities-orders.json';
 import CT_REGISTRATION_LENSES from '../../../data/connecticut/ct-inv-001/registration-lenses.json';
 import CT_SECURITIES_ORDERS from '../../../data/connecticut/ct-inv-001/securities-orders.json';
+import RI_REGISTRATION_LENSES from '../../../data/rhode-island/ri-inv-001/registration-lenses.json';
+import RI_SECURITIES_ORDERS from '../../../data/rhode-island/ri-inv-001/securities-orders.json';
 import MD_REGISTRATION_LENSES from '../../../data/maryland/md-inv-001/registration-lenses.json';
 import MD_SECURITIES_ACTIONS from '../../../data/maryland/md-inv-001/securities-actions.json';
 import WI_REGISTRATION_LENSES from '../../../data/wisconsin/wi-inv-001/registration-lenses.json';
@@ -102,7 +104,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK' | 'AR' | 'UT' | 'NM' | 'NE' | 'KS' | 'ID' | 'WV';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'RI' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK' | 'AR' | 'UT' | 'NM' | 'NE' | 'KS' | 'ID' | 'WV';
   name: string;
   href: string;
   regulator: string;
@@ -926,6 +928,21 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
       { label: 'DOB adviser workbooks', sourceAsOf: '2025-10-22', retrievedAt: CT_REGISTRATION_LENSES.regulatorLists.stateIa.retrievedAt, snapshotAsOf: '2026-09-28', generatedAt: null },
       { label: 'IAPD STATE and SEC compilations', sourceAsOf: CT_REGISTRATION_LENSES.iapd.sourceAsOf, retrievedAt: null, snapshotAsOf: '2026-09-28', generatedAt: null },
       { label: 'DOB securities-order index', sourceAsOf: null, retrievedAt: CT_SECURITIES_ORDERS.retrievedAt, snapshotAsOf: '2026-09-28', generatedAt: null },
+    ],
+  },
+  {
+    code: 'RI',
+    name: 'Rhode Island',
+    href: '/rhode-island',
+    regulator: 'Rhode Island Department of Business Regulation Securities Division',
+    principalOfficeFirms: RI_REGISTRATION_LENSES.principalOffice.distinctFirmCrds,
+    rosterStatus: `IAPD RI APPROVED state IA ${RI_REGISTRATION_LENSES.stateIa.approvedFirmCrds.toLocaleString('en-US')} firm CRDs as of ${RI_REGISTRATION_LENSES.sourceAsOf}; DBR provider rosters NOT_ACQUIRED`,
+    evidence: ['IAPD state IA, federal notice, ERA and principal-office lenses', `${RI_SECURITIES_ORDERS.documentRows} DBR securities action document rows`, 'DBR live verification and eLicensing lookup paths'],
+    identityNote: 'Firm CRD is the identity key. State IA, federal notice, ERA and principal-office lenses are separate; IARs and sales agents are people, not firms.',
+    limitation: 'IAPD feed date is 2026-10-06. DBR provider-level IAR, broker-dealer and sales-agent bulk rosters were not acquired. Orders remain document observations; no name-only joins or combined adviser total.',
+    sourceClocks: [
+      { label: 'IAPD STATE and SEC compilations', sourceAsOf: RI_REGISTRATION_LENSES.sourceAsOf, retrievedAt: RI_REGISTRATION_LENSES.retrievedAt, snapshotAsOf: RI_REGISTRATION_LENSES.retrievedAt.slice(0, 10), generatedAt: null },
+      { label: 'DBR Securities Division action index', sourceAsOf: null, retrievedAt: RI_SECURITIES_ORDERS.source.retrievedAt, snapshotAsOf: RI_SECURITIES_ORDERS.source.retrievedAt.slice(0, 10), generatedAt: null },
     ],
   },
   {
