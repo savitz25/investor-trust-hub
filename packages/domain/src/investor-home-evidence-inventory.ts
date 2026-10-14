@@ -104,7 +104,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'RI' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK' | 'AR' | 'UT' | 'NM' | 'NE' | 'KS' | 'ID' | 'WV' | 'HI';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'RI' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK' | 'AR' | 'UT' | 'NM' | 'NE' | 'KS' | 'ID' | 'WV' | 'HI' | 'MT';
   name: string;
   href: string;
   regulator: string;
@@ -1203,6 +1203,21 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
     limitation: 'Broker-dealer, agent and IAR rosters, examinations, the orders corpus, and a State Auditor annual-report stock were not acquired. No adverse profile attachments.',
     sourceClocks: [
       { label: 'IAPD STATE and SEC compilations', sourceAsOf: WV_IAPD_CENSUS.state.sourceAsOf, retrievedAt: WV_IAPD_CENSUS.state.retainedFileExaminedAt, snapshotAsOf: WV_IAPD_CENSUS.state.sourceAsOf, generatedAt: null },
+    ],
+  },
+  {
+    code: 'MT',
+    name: 'Montana',
+    href: '/montana',
+    regulator: 'Montana Commissioner of Securities and Insurance',
+    principalOfficeFirms: null,
+    rosterStatus: 'IAPD Montana APPROVED state IA 101 firm CRDs; 1,270 FILED notice firm CRDs; 15 ACTIVE ERA firm CRDs',
+    evidence: ['IAPD Montana state IA, federal notice, and ERA jurisdiction feeds', 'IAPD current Montana IAR person registrations'],
+    identityNote: 'Montana regulator-jurisdiction fields establish these registration lenses; principal-office geography is not registration. IAR persons are separate from firm CRDs.',
+    limitation: 'Broker-dealer and agent row-level rosters and Montana securities orders are NOT_ACQUIRED. The 1,229 broker-dealer figure is a dated summary metric, not a current row-level roster.',
+    sourceClocks: [
+      { label: 'IAPD firm state, SEC, and individual feeds', sourceAsOf: '2026-10-14', retrievedAt: '2026-10-14', snapshotAsOf: '2026-10-14', generatedAt: null },
+      { label: 'CSI broker-dealer summary metric', sourceAsOf: '2026-06-30', retrievedAt: '2026-10-14', snapshotAsOf: null, generatedAt: null },
     ],
   },
 ];
