@@ -35,6 +35,7 @@ describe('CO-INV-001 Colorado publication', () => {
     expect(INDEXABLE_PATHS).toContain('/rhode-island');
     expect(INDEXABLE_PATHS).not.toContain('/florida');
     expect(STATE_DISCOVERY_ROUTES.map((row) => row.href)).toEqual([
+      '/hawaii',
       '/new-jersey',
       '/california',
       '/texas',

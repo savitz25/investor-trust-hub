@@ -107,6 +107,7 @@ describe('INV-HOME-003 public evidence inventory', () => {
 
   it('derives published state surfaces and never invents Florida', () => {
     expect(INVESTOR_HOMEPAGE_STATE_CARDS.map((state) => state.href)).toEqual([
+      '/hawaii',
       '/new-jersey',
       '/california',
       '/texas',
