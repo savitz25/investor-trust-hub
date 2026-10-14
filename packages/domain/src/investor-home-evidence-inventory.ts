@@ -104,7 +104,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'RI' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK' | 'AR' | 'UT' | 'NM' | 'NE' | 'KS' | 'ID' | 'WV';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'RI' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK' | 'AR' | 'UT' | 'NM' | 'NE' | 'KS' | 'ID' | 'WV' | 'HI';
   name: string;
   href: string;
   regulator: string;
@@ -219,6 +219,18 @@ const national = (
   });
 
 export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
+  {
+    code: 'HI',
+    name: 'Hawaii',
+    href: '/hawaii',
+    regulator: 'Hawaii DCCA Securities Compliance Branch',
+    principalOfficeFirms: null,
+    rosterStatus: 'Hawaii jurisdiction populations NOT_ACQUIRED',
+    evidence: ['DCCA IARD registration process', 'IAPD and CRD verification', 'DCCA examinations and enforcement orders'],
+    identityNote: 'State registration, federal notice, ERA, people, broker-dealers, and principal-office geography are separate lenses.',
+    limitation: 'Current Hawaii jurisdiction rosters and exact CRD reconciliation are NOT_ACQUIRED; no principal-office inference or name-only adverse join.',
+    sourceClocks: [{ label: 'DCCA source review', sourceAsOf: null, retrievedAt: '2026-10-14', snapshotAsOf: null, generatedAt: null }],
+  },
   {
     code: 'NJ',
     name: 'New Jersey',
