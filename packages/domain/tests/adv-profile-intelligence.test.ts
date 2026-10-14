@@ -183,6 +183,148 @@ describe('ownership and control snapshot', () => {
   });
 });
 
+describe('EA-INV-002 activation gaps', () => {
+  it('does not inflate current counts when one filing repeats a disclosure row', () => {
+    const result = snapshot({
+      owners: [
+        {
+          schedule: 'A',
+          ownerKind: 'PERSON',
+          fullLegalName: 'REPEATED OWNER',
+          ownerId: '5',
+          titleOrStatus: null,
+          ownershipCode: 'B',
+          controlPerson: 'N',
+          identityConfidence: 'HIGH_CONFIDENCE',
+          isCurrent: true,
+          dateSubmitted: '2026-07-31',
+          filingId: '100',
+          datasetKind: 'ria',
+        },
+        {
+          schedule: 'A',
+          ownerKind: 'PERSON',
+          fullLegalName: 'REPEATED OWNER',
+          ownerId: '5',
+          titleOrStatus: null,
+          ownershipCode: 'B',
+          controlPerson: 'N',
+          identityConfidence: 'HIGH_CONFIDENCE',
+          isCurrent: true,
+          dateSubmitted: '2026-07-31',
+          filingId: '100',
+          datasetKind: 'ria',
+        },
+      ],
+    });
+    expect(result.current.directOwners).toHaveLength(1);
+    expect(result.current.counts.directOwners).toBe(1);
+  });
+
+  it('reports a true total independent of the display cap', () => {
+    const owners = Array.from({ length: 12 }, (_, i) => ({
+      schedule: 'A',
+      ownerKind: 'PERSON' as const,
+      fullLegalName: `OWNER ${i}`,
+      ownerId: String(i),
+      titleOrStatus: null,
+      ownershipCode: 'A',
+      controlPerson: 'N',
+      identityConfidence: 'HIGH_CONFIDENCE',
+      isCurrent: true,
+      dateSubmitted: '2026-07-31',
+      filingId: '100',
+      datasetKind: 'ria',
+    }));
+    const result = snapshot({ owners });
+    expect(result.current.directOwners).toHaveLength(8);
+    expect(result.current.counts.directOwners).toBe(12);
+  });
+
+  it('never rewrites an executive/control relationship as ownership', () => {
+    const result = snapshot({
+      owners: [
+        {
+          schedule: 'A',
+          ownerKind: 'PERSON',
+          fullLegalName: 'PURE EXECUTIVE',
+          ownerId: '7',
+          titleOrStatus: 'Chief Compliance Officer',
+          ownershipCode: null,
+          controlPerson: 'Y',
+          identityConfidence: 'HIGH_CONFIDENCE',
+          isCurrent: true,
+          dateSubmitted: '2026-07-31',
+          filingId: '100',
+          datasetKind: 'ria',
+        },
+      ],
+    });
+    expect(result.current.executives.map((r) => r.displayName)).toEqual(['PURE EXECUTIVE']);
+    expect(result.current.directOwners).toHaveLength(0);
+    expect(result.current.indirectOwners).toHaveLength(0);
+  });
+
+  it('preserves PERSON vs ORGANIZATION grain and never collapses to UNKNOWN when reported', () => {
+    const result = snapshot({
+      owners: [
+        {
+          schedule: 'A',
+          ownerKind: 'PERSON',
+          fullLegalName: 'A PERSON',
+          ownerId: '1',
+          titleOrStatus: null,
+          ownershipCode: 'A',
+          controlPerson: 'N',
+          identityConfidence: 'HIGH_CONFIDENCE',
+          isCurrent: true,
+          dateSubmitted: '2026-07-31',
+          filingId: '100',
+          datasetKind: 'ria',
+        },
+        {
+          schedule: 'B',
+          ownerKind: 'ORGANIZATION',
+          fullLegalName: 'AN ORG LLC',
+          ownerId: '2',
+          titleOrStatus: null,
+          ownershipCode: 'A',
+          controlPerson: 'N',
+          identityConfidence: 'HIGH_CONFIDENCE',
+          isCurrent: true,
+          dateSubmitted: '2026-07-31',
+          filingId: '100',
+          datasetKind: 'ria',
+        },
+      ],
+    });
+    expect(result.current.directOwners[0]?.kind).toBe('PERSON');
+    expect(result.current.indirectOwners[0]?.kind).toBe('ORGANIZATION');
+  });
+
+  it('hides UNRESOLVED owner rows in the built snapshot, not only in the gate function', () => {
+    const result = snapshot({
+      owners: [
+        {
+          schedule: 'A',
+          ownerKind: 'PERSON',
+          fullLegalName: 'UNRESOLVED ROW',
+          ownerId: null,
+          titleOrStatus: null,
+          ownershipCode: 'A',
+          controlPerson: 'N',
+          identityConfidence: 'UNRESOLVED',
+          isCurrent: true,
+          dateSubmitted: '2026-07-31',
+          filingId: '100',
+          datasetKind: 'ria',
+        },
+      ],
+    });
+    expect(result.current.directOwners).toHaveLength(0);
+  });
+});
+
 describe('private funds and providers', () => {
   it('shows current named 805- funds and hides historical, name-only, and aggregate-only rows', () => {
     const result = snapshot({
