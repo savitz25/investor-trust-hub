@@ -1,11 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from "vitest";
 import {
   INVESTOR_EVIDENCE_FAMILY_LABELS,
   INVESTOR_HOMEPAGE_STATE_CARDS,
   assertInvestorHomepageEvidenceInventory,
   buildInvestorHomepageEvidenceInventory,
   projectNationalPublicationStatus,
-} from '../src/investor-home-evidence-inventory';
+} from "../src/investor-home-evidence-inventory";
 
 const inventory = buildInvestorHomepageEvidenceInventory();
 const get = (key: string) => {
@@ -14,15 +14,15 @@ const get = (key: string) => {
   return item;
 };
 
-describe('INV-HOME-003 public evidence inventory', () => {
-  it('publishes only explicitly allowed measures with complete trace fields', () => {
+describe("INV-HOME-003 public evidence inventory", () => {
+  it("publishes only explicitly allowed measures with complete trace fields", () => {
     expect(() =>
       assertInvestorHomepageEvidenceInventory(inventory),
     ).not.toThrow();
     expect(inventory.length).toBeGreaterThanOrEqual(35);
     expect(Object.keys(INVESTOR_EVIDENCE_FAMILY_LABELS)).toHaveLength(8);
     for (const item of inventory) {
-      expect(['PUBLIC', 'PUBLIC_PARTIAL', 'PUBLIC_UNKNOWN']).toContain(
+      expect(["PUBLIC", "PUBLIC_PARTIAL", "PUBLIC_UNKNOWN"]).toContain(
         item.publicationStatus,
       );
       expect(item.grain).toBeTruthy();
@@ -33,40 +33,40 @@ describe('INV-HOME-003 public evidence inventory', () => {
       expect(item.doesNotCount).toBeTruthy();
     }
     expect(inventory.map((item) => item.key)).not.toContain(
-      'disclosure_events',
+      "disclosure_events",
     );
     expect(() =>
       assertInvestorHomepageEvidenceInventory([
         ...inventory,
         {
           ...inventory[0]!,
-          key: 'private_probe',
-          publicationStatus: 'INTERNAL' as never,
+          key: "private_probe",
+          publicationStatus: "INTERNAL" as never,
         },
       ]),
     ).toThrow(/non-public publication status/);
-    expect(() => projectNationalPublicationStatus('INTERNAL')).toThrow(
+    expect(() => projectNationalPublicationStatus("INTERNAL")).toThrow(
       /cannot publish upstream status INTERNAL/,
     );
-    expect(() => projectNationalPublicationStatus('REJECTED')).toThrow(
+    expect(() => projectNationalPublicationStatus("REJECTED")).toThrow(
       /cannot publish upstream status REJECTED/,
     );
-    expect(projectNationalPublicationStatus('PUBLIC')).toBe('PUBLIC');
-    expect(projectNationalPublicationStatus('PUBLIC_PARTIAL')).toBe(
-      'PUBLIC_PARTIAL',
+    expect(projectNationalPublicationStatus("PUBLIC")).toBe("PUBLIC");
+    expect(projectNationalPublicationStatus("PUBLIC_PARTIAL")).toBe(
+      "PUBLIC_PARTIAL",
     );
-    expect(projectNationalPublicationStatus('PUBLIC_UNKNOWN')).toBe(
-      'PUBLIC_UNKNOWN',
+    expect(projectNationalPublicationStatus("PUBLIC_UNKNOWN")).toBe(
+      "PUBLIC_UNKNOWN",
     );
   });
 
-  it('preserves the RIA and ERA roster partition without inventing a cross-grain total', () => {
-    expect(get('ria_facts').value! + get('era_facts').value!).toBe(
-      get('sec_iard_roster').value,
+  it("preserves the RIA and ERA roster partition without inventing a cross-grain total", () => {
+    expect(get("ria_facts").value! + get("era_facts").value!).toBe(
+      get("sec_iard_roster").value,
     );
-    expect(get('form_adv_filings').grain).toBe('Form ADV filing');
-    expect(get('form_adv_attributes').doesNotCount).toMatch(/Firms/);
-    expect(get('ownership_control').doesNotCount).toMatch(/Advisory firms/);
+    expect(get("form_adv_filings").grain).toBe("Form ADV filing");
+    expect(get("form_adv_attributes").doesNotCount).toMatch(/Firms/);
+    expect(get("ownership_control").doesNotCount).toMatch(/Advisory firms/);
     expect(
       inventory.some((item) =>
         /grand total|investment records/i.test(item.label),
@@ -74,125 +74,126 @@ describe('INV-HOME-003 public evidence inventory', () => {
     ).toBe(false);
   });
 
-  it('keeps RAUM and Item 11 source-native and non-evaluative', () => {
-    expect(get('ria_raum_observations').doesNotCount).toMatch(/performance/);
-    expect(get('ria_zero_raum').doesNotCount).toMatch(/Missing RAUM/);
+  it("keeps RAUM and Item 11 source-native and non-evaluative", () => {
+    expect(get("ria_raum_observations").doesNotCount).toMatch(/performance/);
+    expect(get("ria_zero_raum").doesNotCount).toMatch(/Missing RAUM/);
     expect(
       inventory.some((item) =>
         /national.*(?:RAUM|AUM).*total/i.test(item.label),
       ),
     ).toBe(false);
-    expect(get('item11_yes').doesNotCount).toMatch(/wrongdoing/);
-    expect(get('item11_yes').doesNotCount).toMatch(/risk score/);
+    expect(get("item11_yes").doesNotCount).toMatch(/wrongdoing/);
+    expect(get("item11_yes").doesNotCount).toMatch(/risk score/);
   });
 
-  it('labels the compensation umbrella as an eligible firm denominator', () => {
-    const umbrella = get('compensation_methods');
+  it("labels the compensation umbrella as an eligible firm denominator", () => {
+    const umbrella = get("compensation_methods");
     expect(umbrella.label).toMatch(/firms evaluated/i);
     expect(umbrella.label).not.toMatch(/observations/i);
     expect(umbrella.grain).toMatch(/RIA firm fact eligible/i);
     const methods = inventory.filter(
       (item) =>
-        item.key.startsWith('compensation_') &&
-        item.key !== 'compensation_methods',
+        item.key.startsWith("compensation_") &&
+        item.key !== "compensation_methods",
     );
     expect(methods).toHaveLength(7);
-    expect(methods.every((item) => item.grain.endsWith('YES response'))).toBe(
+    expect(methods.every((item) => item.grain.endsWith("YES response"))).toBe(
       true,
     );
     expect(
-      methods.every((item) => item.identityRule?.includes('independent')),
+      methods.every((item) => item.identityRule?.includes("independent")),
     ).toBe(true);
   });
 
-  it('derives published state surfaces and never invents Florida', () => {
+  it("derives published state surfaces and never invents Florida", () => {
     expect(INVESTOR_HOMEPAGE_STATE_CARDS.map((state) => state.href)).toEqual([
-      '/new-jersey',
-      '/california',
-      '/texas',
-      '/washington',
-      '/arizona',
-      '/colorado',
-      '/virginia',
-      '/new-york',
-      '/illinois',
-      '/oregon',
-      '/pennsylvania',
-      '/north-carolina',
-      '/ohio',
-      '/georgia',
-      '/massachusetts',
-      '/tennessee',
-      '/nevada',
-      '/minnesota',
-      '/michigan',
-      '/connecticut',
-      '/rhode-island',
-      '/maryland',
-      '/wisconsin',
-      '/indiana',
-      '/louisiana',
-      '/kentucky',
-      '/alabama',
-      '/south-carolina',
-      '/mississippi',
-      '/missouri',
-      '/oklahoma',
-      '/arkansas',
-      '/utah',
-      '/new-mexico',
-      '/nebraska',
-      '/kansas',
-      '/idaho',
-      '/west-virginia',
+      "/hawaii",
+      "/new-jersey",
+      "/california",
+      "/texas",
+      "/washington",
+      "/arizona",
+      "/colorado",
+      "/virginia",
+      "/new-york",
+      "/illinois",
+      "/oregon",
+      "/pennsylvania",
+      "/north-carolina",
+      "/ohio",
+      "/georgia",
+      "/massachusetts",
+      "/tennessee",
+      "/nevada",
+      "/minnesota",
+      "/michigan",
+      "/connecticut",
+      "/rhode-island",
+      "/maryland",
+      "/wisconsin",
+      "/indiana",
+      "/louisiana",
+      "/kentucky",
+      "/alabama",
+      "/south-carolina",
+      "/mississippi",
+      "/missouri",
+      "/oklahoma",
+      "/arkansas",
+      "/utah",
+      "/new-mexico",
+      "/nebraska",
+      "/kansas",
+      "/idaho",
+      "/west-virginia",
     ]);
-    expect(get('published_state_pages').value).toBe(
+    expect(get("published_state_pages").value).toBe(
       INVESTOR_HOMEPAGE_STATE_CARDS.length,
     );
-    expect(get('fl_state_page_limitation').value).toBeNull();
-    expect(get('fl_state_page_limitation').valueState).toBe('NOT_PUBLISHED');
-    expect(get('fl_state_page_limitation').display).toBe('Not published');
-    expect(get('fl_state_page_limitation').researchDestination).toBe(
-      '/firms?state=FL',
+    expect(get("fl_state_page_limitation").value).toBeNull();
+    expect(get("fl_state_page_limitation").valueState).toBe("NOT_PUBLISHED");
+    expect(get("fl_state_page_limitation").display).toBe("Not published");
+    expect(get("fl_state_page_limitation").researchDestination).toBe(
+      "/firms?state=FL",
     );
   });
 
-  it('keeps state-roster unknowns distinct from principal-office overlays', () => {
-    for (const code of ['nj', 'ca', 'tx', 'wa', 'az']) {
+  it("keeps state-roster unknowns distinct from principal-office overlays", () => {
+    for (const code of ["nj", "ca", "tx", "wa", "az"]) {
       expect(get(`${code}_state_roster`).value).toBeNull();
       expect(get(`${code}_state_roster`).doesNotCount).toMatch(/Zero/);
       expect(get(`${code}_overlay`).grain).toMatch(/principal office/);
     }
-    expect(get('nj_state_roster').valueState).toBe('REQUEST_ONLY');
-    expect(get('az_state_roster').valueState).toBe('REQUEST_ONLY');
-    expect(get('ca_state_roster').valueState).toBe('NOT_ACQUIRED');
-    expect(get('tx_state_roster').valueState).toBe('NOT_ACQUIRED');
-    expect(get('wa_state_roster').valueState).toBe('NOT_ACQUIRED');
-    expect(get('co_state_roster').value).toBe(740);
-    expect(get('co_state_roster').valueState).toBe('KNOWN');
-    expect(get('co_overlay').value).toBe(589);
-    expect(get('co_overlay').grain).toMatch(/principal office/i);
-    expect(get('co_state_roster').grain).toMatch(/jurisdiction CO/i);
-    expect(get('co_notice_filed').value).toBe(3673);
-    expect(get('il_state_roster').value).toBe(855);
-    expect(get('il_state_roster').valueState).toBe('KNOWN');
-    expect(get('il_overlay').value).toBe(793);
-    expect(get('il_notice_filed').value).toBe(3560);
+    expect(get("nj_state_roster").valueState).toBe("REQUEST_ONLY");
+    expect(get("az_state_roster").valueState).toBe("REQUEST_ONLY");
+    expect(get("ca_state_roster").valueState).toBe("NOT_ACQUIRED");
+    expect(get("tx_state_roster").valueState).toBe("NOT_ACQUIRED");
+    expect(get("wa_state_roster").valueState).toBe("NOT_ACQUIRED");
+    expect(get("co_state_roster").value).toBe(740);
+    expect(get("co_state_roster").valueState).toBe("KNOWN");
+    expect(get("co_overlay").value).toBe(589);
+    expect(get("co_overlay").grain).toMatch(/principal office/i);
+    expect(get("co_state_roster").grain).toMatch(/jurisdiction CO/i);
+    expect(get("co_notice_filed").value).toBe(3673);
+    expect(get("il_state_roster").value).toBe(855);
+    expect(get("il_state_roster").valueState).toBe("KNOWN");
+    expect(get("il_overlay").value).toBe(793);
+    expect(get("il_notice_filed").value).toBe(3560);
   });
 
-  it('preserves Arizona enforcement index and attribution grains', () => {
-    expect(get('az_enforcement_index').value).toBe(205);
-    expect(get('az_index_crd_mentions').value).toBe(87);
-    expect(get('az_index_name_only').value).toBe(118);
-    expect(get('az_enforcement_index').doesNotCount).toMatch(/Violations/);
-    expect(get('az_index_name_only').identityRule).toMatch(/unsafe/);
+  it("preserves Arizona enforcement index and attribution grains", () => {
+    expect(get("az_enforcement_index").value).toBe(205);
+    expect(get("az_index_crd_mentions").value).toBe(87);
+    expect(get("az_index_name_only").value).toBe(118);
+    expect(get("az_enforcement_index").doesNotCount).toMatch(/Violations/);
+    expect(get("az_index_name_only").identityRule).toMatch(/unsafe/);
   });
 
-  it('keeps source, retrieval, and generation clocks separate', () => {
-    expect(get('sec_iard_roster').sourceAsOf).toBe('2026-08-27');
-    expect(get('sec_iard_roster').retrievedAt).toBe('2026-08-28');
-    expect(get('sec_iard_roster').generatedAt).not.toBe(
-      get('sec_iard_roster').retrievedAt,
+  it("keeps source, retrieval, and generation clocks separate", () => {
+    expect(get("sec_iard_roster").sourceAsOf).toBe("2026-08-27");
+    expect(get("sec_iard_roster").retrievedAt).toBe("2026-08-28");
+    expect(get("sec_iard_roster").generatedAt).not.toBe(
+      get("sec_iard_roster").retrievedAt,
     );
     for (const state of INVESTOR_HOMEPAGE_STATE_CARDS) {
       expect(state.sourceClocks.length).toBeGreaterThan(0);
@@ -207,23 +208,35 @@ describe('INV-HOME-003 public evidence inventory', () => {
       ).toBe(true);
     }
     const stateMeasures = inventory.filter((item) =>
-      ['New Jersey', 'California', 'Texas', 'Washington', 'Arizona', 'Colorado'].includes(
-        item.geography,
-      ),
+      [
+        "New Jersey",
+        "California",
+        "Texas",
+        "Washington",
+        "Arizona",
+        "Colorado",
+      ].includes(item.geography),
     );
     expect(stateMeasures.every((item) => item.generatedAt === null)).toBe(true);
     expect(stateMeasures.some((item) => item.snapshotAsOf !== null)).toBe(true);
   });
 });
 
-import network from '../../../data/home/investor-network-metrics-v1.json';
-it('R2-04 changing state measures project from the generated specialist contract', () => {
+import network from "../../../data/home/investor-network-metrics-v1.json";
+it("R2-04 changing state measures project from the generated specialist contract", () => {
   for (const m of network.reconciliation.measures) {
-    if (['stateRia.approvedDistinctCrd', 'federalNotice.noticeFiledDistinctCrd'].includes(m.sourceField) || m.sourceField.startsWith('nationalOverlay.')) continue;
+    if (
+      [
+        "stateRia.approvedDistinctCrd",
+        "federalNotice.noticeFiledDistinctCrd",
+      ].includes(m.sourceField) ||
+      m.sourceField.startsWith("nationalOverlay.")
+    )
+      continue;
     const row = get(m.key);
     expect(row.value).toBe(m.value);
     expect(row.grain).toBe(m.grain);
     expect(row.retrievedAt).toBe(m.retrievedAt);
-    if (m.value === null) expect(row.display).not.toBe('0');
+    if (m.value === null) expect(row.display).not.toBe("0");
   }
 });
