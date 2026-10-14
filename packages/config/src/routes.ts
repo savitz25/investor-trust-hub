@@ -64,6 +64,7 @@ export const STATE_DISCOVERY_ROUTES = [
   { href: '/kansas', label: 'Kansas' },
   { href: '/idaho', label: 'Idaho' },
   { href: '/west-virginia', label: 'West Virginia' },
+  { href: '/montana', label: 'Montana' },
 ] as const;
 
 export const INDEXABLE_PATHS = [
@@ -113,6 +114,7 @@ export const INDEXABLE_PATHS = [
   '/kansas',
   '/idaho',
   '/west-virginia',
+  '/montana',
   '/disclaimer',
   '/privacy',
   '/terms',
