@@ -1,0 +1,56 @@
+{
+  "sourceDate": "2026-10-14",
+  "retrievedAt": "2026-10-14",
+  "jurisdiction": "MT",
+  "stateFeed": {
+    "file": "IA_FIRM_STATE_Feed_10_14_2026.xml.gz",
+    "sha256": "3B0D6FC23CB8A1C0077F8FACEAD179114E245F10F73E15AEA68FE314D6B46954",
+    "bytes": 5092710,
+    "filter": "StateRgstn/Rgltr/@Cd=MT",
+    "registrationRows": 102,
+    "distinctFirmCrdAnyStatus": 102,
+    "approvedDistinctFirmCrd": 101,
+    "statusRows": {
+      "APPROVED": 101,
+      "TERMREQUEST": 1
+    }
+  },
+  "era": {
+    "filter": "ERA/Rgltr/@Cd=MT",
+    "registrationRows": 15,
+    "distinctFirmCrdAnyStatus": 15,
+    "activeDistinctFirmCrd": 15,
+    "statusRows": {
+      "ACTIVE": 15
+    }
+  },
+  "secFeed": {
+    "file": "IA_FIRM_SEC_Feed_10_14_2026.xml.gz",
+    "sha256": "90B88F8713D471F759FFC2663031FB476A0FD263B9004CC04E647E0A9ED4404F",
+    "bytes": 7318035,
+    "filter": "NoticeFiled/States/@RgltrCd=MT",
+    "noticeRows": 1270,
+    "distinctFirmCrdAnyStatus": 1270,
+    "filedDistinctFirmCrd": 1270,
+    "statusRows": {
+      "FILED": 1270
+    }
+  },
+  "exactFirmCrdIntersections": {
+    "approvedStateIaAndFiledNotice": 0,
+    "activeEraAndFiledNotice": 0,
+    "activeStateIaAndActiveEra": 0
+  },
+  "iarFeed": {
+    "file": "IA_INDVL_Feed_10_14_2026.xml.zip",
+    "sha256": "6E272CF6425143B4856730D4BFEDEE37134F3596555EB387B3892E4C45C0C4EA",
+    "bytes": 177584598,
+    "personRowsWithMontanaCurrentRegistration": 2884,
+    "distinctPersonCrdWithApprovedMontanaRegistration": 2857,
+    "statusRows": {
+      "APPROVED": 2884
+    },
+    "filter": "Indvl/CrntEmps/CrntEmp/CrntRgstns/CrntRgstn/@regAuth=MT and @st=APPROVED"
+  },
+  "grain": "Firm CRD for IA/notice/ERA; person CRD for IAR. Jurisdiction fields only; no address inference."
+}
