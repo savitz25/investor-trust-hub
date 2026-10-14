@@ -33,6 +33,7 @@ import NM_IAPD_CENSUS from '../../../data/new-mexico/nm-inv-001/iapd-nm-census.j
 import NE_IAPD_CENSUS from '../../../data/nebraska/ne-inv-001/iapd-ne-census.json';
 import ID_IAPD_CENSUS from '../../../data/idaho/id-inv-001/iapd-id-census.json';
 import WV_IAPD_CENSUS from '../../../data/west-virginia/wv-inv-001/iapd-wv-census.json';
+import ND_IAPD_SUMMARY from '../../../data/north-dakota-inv-001/iapd-north-dakota-summary.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -104,7 +105,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'RI' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK' | 'AR' | 'UT' | 'NM' | 'NE' | 'KS' | 'ID' | 'WV' | 'HI' | 'MT';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'RI' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK' | 'AR' | 'UT' | 'NM' | 'NE' | 'KS' | 'ID' | 'WV' | 'HI' | 'MT' | 'ND';
   name: string;
   href: string;
   regulator: string;
@@ -1218,6 +1219,20 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
     sourceClocks: [
       { label: 'IAPD firm state, SEC, and individual feeds', sourceAsOf: '2026-10-14', retrievedAt: '2026-10-14', snapshotAsOf: '2026-10-14', generatedAt: null },
       { label: 'CSI broker-dealer summary metric', sourceAsOf: '2026-06-30', retrievedAt: '2026-10-14', snapshotAsOf: null, generatedAt: null },
+    ],
+  },
+  {
+    code: 'ND',
+    name: 'North Dakota',
+    href: '/north-dakota',
+    regulator: 'North Dakota Insurance and Securities Department',
+    principalOfficeFirms: null,
+    rosterStatus: `IAPD ND APPROVED state IA ${ND_IAPD_SUMMARY.stateFeed.approvedDistinctFirmCrd} firm CRDs; ${ND_IAPD_SUMMARY.secFeed.filedDistinctFirmCrd} FILED notice firm CRDs; ${ND_IAPD_SUMMARY.era.activeDistinctFirmCrd} ACTIVE ERA firm CRDs`,
+    evidence: ['IAPD North Dakota state IA, federal notice, and ERA jurisdiction feeds', 'IAPD current North Dakota IAR person registrations'],
+    identityNote: 'North Dakota regulator-jurisdiction fields establish these registration lenses; principal-office geography is not registration. IAR persons are separate from firm CRDs.',
+    limitation: 'Broker-dealer and agent row-level rosters and North Dakota securities orders are NOT_ACQUIRED. No principal-office inference or name-only adverse joins.',
+    sourceClocks: [
+      { label: 'IAPD firm state, SEC, and individual feeds', sourceAsOf: ND_IAPD_SUMMARY.sourceDate, retrievedAt: ND_IAPD_SUMMARY.retrievedAt, snapshotAsOf: ND_IAPD_SUMMARY.sourceDate, generatedAt: null },
     ],
   },
 ];
