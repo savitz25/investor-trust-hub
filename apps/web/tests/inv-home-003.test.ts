@@ -64,5 +64,8 @@ describe('INV-HOME-003 chrome honesty', () => {
     );
     expect(component).toContain('Florida firm research is national');
     expect(component).not.toMatch(/href=["']\/florida["']/);
+    expect(component).toContain("grain === 'state_ia_registration_row'");
+    expect(component).toContain('Review the published evidence');
+    expect(component).not.toContain('Newest state pages');
   });
 });
