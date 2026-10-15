@@ -34,6 +34,7 @@ import NE_IAPD_CENSUS from '../../../data/nebraska/ne-inv-001/iapd-ne-census.jso
 import ID_IAPD_CENSUS from '../../../data/idaho/id-inv-001/iapd-id-census.json';
 import WV_IAPD_CENSUS from '../../../data/west-virginia/wv-inv-001/iapd-wv-census.json';
 import ND_IAPD_SUMMARY from '../../../data/north-dakota-inv-001/iapd-north-dakota-summary.json';
+import IA_IAPD_CENSUS from '../../../data/iowa/ia-inv-001/iapd-ia-census.json';
 const AZ_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.AZ;
 const CA_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CA;
 const CO_PUBLIC_SNAPSHOT = networkMetrics.acceptedStateSnapshots.CO;
@@ -105,7 +106,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'RI' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK' | 'AR' | 'UT' | 'NM' | 'NE' | 'KS' | 'ID' | 'WV' | 'HI' | 'MT' | 'ND' | 'SD';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'RI' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK' | 'AR' | 'UT' | 'NM' | 'NE' | 'KS' | 'ID' | 'WV' | 'HI' | 'MT' | 'ND' | 'SD' | 'AK' | 'DE' | 'IA' | 'ME' | 'NH' | 'VT' | 'WY';
   name: string;
   href: string;
   regulator: string;
@@ -1246,6 +1247,90 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
     identityNote: 'State registration, federal notice, ERA, IAR persons, broker-dealers, agents, and franchise filings are separate lenses.',
     limitation: 'Current South Dakota jurisdiction rosters are NOT_ACQUIRED. Principal-office geography does not establish registration. No name-only adverse joins.',
     sourceClocks: [{ label: 'Division of Insurance securities pages', sourceAsOf: null, retrievedAt: '2026-10-14', snapshotAsOf: '2026-10-14', generatedAt: null }],
+  },
+  {
+    code: 'AK',
+    name: 'Alaska',
+    href: '/alaska',
+    regulator: 'Alaska Division of Banking and Securities',
+    principalOfficeFirms: null,
+    rosterStatus: 'Alaska jurisdiction populations NOT_ACQUIRED',
+    evidence: ['Division securities and IARD registration guidance', 'IAPD and CRD lookup', 'Division enforcement orders'],
+    identityNote: 'State registration, federal notice, ERA, IAR persons, broker-dealers, and agents are separate lenses.',
+    limitation: 'A current dated Alaska-jurisdiction roster was not acquired. NOT_ACQUIRED is not zero and does not imply no registrants. No principal-office inference or name-only adverse join.',
+    sourceClocks: [{ label: 'Division securities pages', sourceAsOf: null, retrievedAt: '2026-10-14', snapshotAsOf: '2026-10-14', generatedAt: null }],
+  },
+  {
+    code: 'DE',
+    name: 'Delaware',
+    href: '/delaware',
+    regulator: 'Delaware Department of Justice Securities Division',
+    principalOfficeFirms: null,
+    rosterStatus: 'Delaware jurisdiction populations NOT_ACQUIRED',
+    evidence: ['Investor Protection Unit registration guidance', 'Delaware Securities Act filing classes', 'IAPD and BrokerCheck lookup'],
+    identityNote: 'Adviser, federal covered adviser, broker-dealer, agent, and representative classes stay separate.',
+    limitation: 'Current dated Delaware-jurisdiction rows were not acquired. NOT_ACQUIRED is not zero. No name-only adverse join.',
+    sourceClocks: [{ label: 'Securities Division source map', sourceAsOf: null, retrievedAt: '2026-10-12', snapshotAsOf: '2026-10-12', generatedAt: null }],
+  },
+  {
+    code: 'IA',
+    name: 'Iowa',
+    href: '/iowa',
+    regulator: 'Iowa Insurance Division',
+    principalOfficeFirms: IA_IAPD_CENSUS.sec.ia_principal_office_distinct_crd,
+    rosterStatus: `IAPD IA APPROVED state IA ${IA_IAPD_CENSUS.state.ia_state_ia_approved_distinct_crd} firm CRDs; ${IA_IAPD_CENSUS.sec.ia_notice_filed_distinct_crd} FILED notice firm CRDs; ${IA_IAPD_CENSUS.state.ia_state_era_active_distinct_crd} ACTIVE ERA firm CRDs`,
+    evidence: ['IAPD Iowa jurisdiction state-IA, notice, and ERA feeds', 'Iowa Insurance Division adviser filing rules'],
+    identityNote: 'Iowa jurisdiction fields select the filing classes. Principal-office geography is not Iowa registration. The classes can overlap and are not added.',
+    limitation: 'Iowa IAR persons, broker-dealers, agents, orders, and complaint outcomes are NOT_ACQUIRED. No name-only adverse joins.',
+    sourceClocks: [{ label: 'IAPD state and SEC compilations', sourceAsOf: IA_IAPD_CENSUS.state.sourceAsOf, retrievedAt: IA_IAPD_CENSUS.state.retainedFileExaminedAt, snapshotAsOf: IA_IAPD_CENSUS.state.sourceAsOf, generatedAt: null }],
+  },
+  {
+    code: 'ME',
+    name: 'Maine',
+    href: '/maine',
+    regulator: 'Maine Office of Securities',
+    principalOfficeFirms: null,
+    rosterStatus: 'Maine jurisdiction populations NOT_ACQUIRED',
+    evidence: ['Office of Securities licensing instructions', 'License check', 'Enforcement actions and administrative orders'],
+    identityNote: 'State advisers, federal covered advisers, IAR persons, broker-dealers, agents, and branch offices stay separate. No combined count.',
+    limitation: 'Current dated Maine-jurisdiction rows were not acquired. NOT_ACQUIRED is not zero. No name-only adverse join.',
+    sourceClocks: [{ label: 'Office of Securities source map', sourceAsOf: null, retrievedAt: '2026-10-12', snapshotAsOf: '2026-10-12', generatedAt: null }],
+  },
+  {
+    code: 'NH',
+    name: 'New Hampshire',
+    href: '/new-hampshire',
+    regulator: 'New Hampshire Bureau of Securities Regulation',
+    principalOfficeFirms: null,
+    rosterStatus: 'New Hampshire jurisdiction populations NOT_ACQUIRED',
+    evidence: ['Bureau firm and professional registration guidance', 'State and federal adviser paths', 'Bureau enforcement actions'],
+    identityNote: 'State advisers, federal notice, ERA, IAR persons, broker-dealers, agents, and branches stay separate.',
+    limitation: 'Current dated New Hampshire-jurisdiction rows were not acquired. NOT_ACQUIRED is not zero. No name-only adverse join.',
+    sourceClocks: [{ label: 'Bureau of Securities source map', sourceAsOf: null, retrievedAt: '2026-10-12', snapshotAsOf: '2026-10-12', generatedAt: null }],
+  },
+  {
+    code: 'VT',
+    name: 'Vermont',
+    href: '/vermont',
+    regulator: 'Vermont DFR Securities Division',
+    principalOfficeFirms: null,
+    rosterStatus: 'Vermont jurisdiction populations NOT_ACQUIRED',
+    evidence: ['DFR investment adviser registration', 'Agent and representative guidance', 'DFR license verification'],
+    identityNote: 'State registration, federal notice, ERA, IAR persons, broker-dealers, and agents are separate lenses.',
+    limitation: 'No dated bulk Vermont-jurisdiction extract was acquired. NOT_ACQUIRED is not zero. No principal-office inference or name-only adverse join.',
+    sourceClocks: [{ label: 'DFR securities pages', sourceAsOf: null, retrievedAt: '2026-10-14', snapshotAsOf: '2026-10-14', generatedAt: null }],
+  },
+  {
+    code: 'WY',
+    name: 'Wyoming',
+    href: '/wyoming',
+    regulator: 'Wyoming Secretary of State Compliance Division',
+    principalOfficeFirms: null,
+    rosterStatus: 'Wyoming jurisdiction populations NOT_ACQUIRED',
+    evidence: ['Secretary of State investment adviser guidance', 'Broker-dealer and agent guidance', 'IAPD and BrokerCheck lookup'],
+    identityNote: 'State advisers, federal notice, ERA, IAR persons, broker-dealers, and agents stay separate.',
+    limitation: 'No dated Wyoming-jurisdiction roster extract was acquired. NOT_ACQUIRED is not zero. No principal-office inference or name-only adverse join.',
+    sourceClocks: [{ label: 'Compliance Division securities pages', sourceAsOf: null, retrievedAt: '2026-10-14', snapshotAsOf: '2026-10-14', generatedAt: null }],
   },
 ];
 

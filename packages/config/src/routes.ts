@@ -67,6 +67,13 @@ export const STATE_DISCOVERY_ROUTES = [
   { href: '/montana', label: 'Montana' },
   { href: '/north-dakota', label: 'North Dakota' },
   { href: '/south-dakota', label: 'South Dakota' },
+  { href: '/alaska', label: 'Alaska' },
+  { href: '/delaware', label: 'Delaware' },
+  { href: '/iowa', label: 'Iowa' },
+  { href: '/maine', label: 'Maine' },
+  { href: '/new-hampshire', label: 'New Hampshire' },
+  { href: '/vermont', label: 'Vermont' },
+  { href: '/wyoming', label: 'Wyoming' },
 ] as const;
 
 export const INDEXABLE_PATHS = [
@@ -119,6 +126,13 @@ export const INDEXABLE_PATHS = [
   '/montana',
   '/north-dakota',
   '/south-dakota',
+  '/alaska',
+  '/delaware',
+  '/iowa',
+  '/maine',
+  '/new-hampshire',
+  '/vermont',
+  '/wyoming',
   '/disclaimer',
   '/privacy',
   '/terms',
