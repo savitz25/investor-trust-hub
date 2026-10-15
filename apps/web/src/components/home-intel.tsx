@@ -616,7 +616,8 @@ export function InvestorHomeIntelligence({
           <p className="ith-section-lede">
             Each card distinguishes the SEC/IARD principal-office overlay from
             the complete state-RIA roster. Cards explain coverage; they are not
-            ratings.
+            ratings. A card that says not acquired is a published research
+            destination, not a license count.
           </p>
           <div className="ith-state-grid">
             {INVESTOR_HOMEPAGE_STATE_CARDS.map((state) => (
