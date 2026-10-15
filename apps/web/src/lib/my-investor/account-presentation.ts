@@ -10,7 +10,7 @@ export const MY_INVESTOR_WORKSPACE_LABEL = 'My Investor';
 export const MY_INVESTOR_WORKSPACE_HREF = '/my-investor-trust-hub';
 
 /** Account authority on Ask. */
-export const MY_TRUSTHUB_ACCOUNT_ENTRY_HREF = 'https://www.asktrusthub.com/my';
+export const MY_TRUSTHUB_ACCOUNT_ENTRY_HREF = 'https://www.asktrusthub.com/my/sign-in';
 
 export const PROFILE_SAVE_LABEL = '♡ Save';
 export const PROFILE_SAVED_LABEL = '♥ Saved';

@@ -1,6 +1,9 @@
 import { generateKeyPairSync } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { MyTrustHubAccountEntry } from '@/components/my-investor/my-trusthub-account-entry';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { profileSaveLabel, MY_TRUSTHUB_ACCOUNT_ENTRY_HREF, investorMyTrustHubAccountEntryEnabled } from '@/lib/my-investor/account-presentation';
 import { handoffForm, markHandoffSent, readHandoff, rememberHandoff, resumeDecision, type StoredHandoff } from '@/lib/my-investor/handoff-form';
@@ -511,8 +514,19 @@ describe('shared v2-3 transport convention', () => {
 });
 
 describe('one-account presentation and existing behaviour', () => {
+  it.each(['header', 'drawer'] as const)('%s renders one canonical sign-in link and preserves My Investor', (variant) => {
+    const markup = renderToStaticMarkup(createElement(MyTrustHubAccountEntry, { variant }));
+    expect(markup.match(/href="https:\/\/www\.asktrusthub\.com\/my\/sign-in"/g)).toHaveLength(1);
+    expect(markup).toContain('My TrustHub</a>');
+    expect(markup).toContain('href="/my-investor-trust-hub"');
+    vi.stubEnv('NEXT_PUBLIC_INVESTOR_MY_TRUSTHUB_ACCOUNT_ENTRY', '0');
+    const hidden = renderToStaticMarkup(createElement(MyTrustHubAccountEntry, { variant }));
+    expect(hidden).not.toContain('asktrusthub.com');
+    expect(hidden).toContain('href="/my-investor-trust-hub"');
+  });
+
   it('My TrustHub entry is a plain Ask link, hideable by flag; Save and Watch stay separate', () => {
-    expect(MY_TRUSTHUB_ACCOUNT_ENTRY_HREF).toBe('https://www.asktrusthub.com/my');
+    expect(MY_TRUSTHUB_ACCOUNT_ENTRY_HREF).toBe('https://www.asktrusthub.com/my/sign-in');
     expect(investorMyTrustHubAccountEntryEnabled()).toBe(true);
     vi.stubEnv('NEXT_PUBLIC_INVESTOR_MY_TRUSTHUB_ACCOUNT_ENTRY', '0');
     expect(investorMyTrustHubAccountEntryEnabled()).toBe(false);
