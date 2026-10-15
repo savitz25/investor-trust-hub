@@ -180,9 +180,25 @@ export function InvestorHomeIntelligence({
     if (!item) throw new Error(`Missing homepage evidence measure: ${key}`);
     return item;
   };
-  // Cards are listed in publication order, so the newest state pages are last.
   const stateCount = INVESTOR_HOMEPAGE_STATE_CARDS.length;
-  const newestStates = [...INVESTOR_HOMEPAGE_STATE_CARDS].slice(-6).reverse();
+  const featuredDestinations = new Set<string>();
+  const featuredRegistrations: InvestorHomepageEvidenceMeasure[] = [];
+  for (const item of inventory
+    .filter(
+      (entry) =>
+        entry.family === 'STATE_SECURITIES' &&
+        entry.publicationStatus === 'PUBLIC' &&
+        typeof entry.value === 'number' &&
+        entry.grain === 'state_ia_registration_row' &&
+        entry.researchDestination.startsWith('/') &&
+        entry.researchDestination.split('/').length === 2,
+    )
+    .sort((a, b) => (b.value ?? 0) - (a.value ?? 0))) {
+    if (featuredDestinations.has(item.researchDestination)) continue;
+    featuredDestinations.add(item.researchDestination);
+    featuredRegistrations.push(item);
+    if (featuredRegistrations.length === 4) break;
+  }
   return (
     <main className="ith-home">
       <section className="ith-section ith-hero" aria-labelledby="home-title">
@@ -299,17 +315,29 @@ export function InvestorHomeIntelligence({
           </div>
           <p className="ith-dark-note">
             These are different kinds of records and are never added into one
-            total. Newest state pages:{' '}
-            {newestStates.map((state, index) => (
-              <span key={state.code}>
-                {index > 0 ? ' · ' : ''}
-                <Link href={state.href} style={{ textDecoration: 'underline' }}>
-                  {state.name}
-                </Link>
-              </span>
-            ))}
-            .
+            total. Featured state IA registration rows include every source
+            status in that state file. They are not distinct firms, not federal
+            notice filings, and they are not added to the SEC roster. States
+            without a published roster stay disclosed and are not shown as zero.
           </p>
+          <div className="ith-scale-band">
+            {featuredRegistrations.map((item) => (
+              <div key={item.key}>
+                <strong>{item.display}</strong>
+                <span>{item.label}</span>
+                <small>{item.grain.replaceAll('_', ' ')}</small>
+                <p>
+                  {item.sourceAsOf
+                    ? `Source as of ${item.sourceAsOf}`
+                    : 'Source date not reported'}
+                </p>
+                <p>Does not count: {item.doesNotCount}</p>
+                <Link href={item.researchDestination}>
+                  Review the published evidence
+                </Link>
+              </div>
+            ))}
+          </div>
           <div className="ith-actions">
             <a className="ith-button" href="#states">
               Explore all {stateCount} states
