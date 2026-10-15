@@ -148,6 +148,7 @@ describe('INV-HOME-003 public evidence inventory', () => {
       '/west-virginia',
       '/montana',
       '/north-dakota',
+      '/south-dakota',
     ]);
     expect(get('published_state_pages').value).toBe(
       INVESTOR_HOMEPAGE_STATE_CARDS.length,

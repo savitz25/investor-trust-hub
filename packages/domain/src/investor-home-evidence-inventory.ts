@@ -105,7 +105,7 @@ export type InvestorHomepageEvidenceMeasure = {
 };
 
 export type InvestorHomepageStateCard = {
-  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'RI' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK' | 'AR' | 'UT' | 'NM' | 'NE' | 'KS' | 'ID' | 'WV' | 'HI' | 'MT' | 'ND';
+  code: 'NJ' | 'CA' | 'TX' | 'WA' | 'AZ' | 'CO' | 'VA' | 'NY' | 'IL' | 'OR' | 'PA' | 'NC' | 'OH' | 'GA' | 'MA' | 'TN' | 'NV' | 'MN' | 'MI' | 'CT' | 'RI' | 'MD' | 'WI' | 'IN' | 'LA' | 'KY' | 'AL' | 'SC' | 'MS' | 'MO' | 'OK' | 'AR' | 'UT' | 'NM' | 'NE' | 'KS' | 'ID' | 'WV' | 'HI' | 'MT' | 'ND' | 'SD';
   name: string;
   href: string;
   regulator: string;
@@ -1234,6 +1234,18 @@ export const INVESTOR_HOMEPAGE_STATE_CARDS: InvestorHomepageStateCard[] = [
     sourceClocks: [
       { label: 'IAPD firm state, SEC, and individual feeds', sourceAsOf: ND_IAPD_SUMMARY.sourceDate, retrievedAt: ND_IAPD_SUMMARY.retrievedAt, snapshotAsOf: ND_IAPD_SUMMARY.sourceDate, generatedAt: null },
     ],
+  },
+  {
+    code: 'SD',
+    name: 'South Dakota',
+    href: '/south-dakota',
+    regulator: 'South Dakota Division of Insurance - Securities Regulation',
+    principalOfficeFirms: null,
+    rosterStatus: 'South Dakota jurisdiction populations NOT_ACQUIRED',
+    evidence: ['IARD state adviser registration', 'Notice filings under ARSD 20:08:07', 'Enforcement and complaint program'],
+    identityNote: 'State registration, federal notice, ERA, IAR persons, broker-dealers, agents, and franchise filings are separate lenses.',
+    limitation: 'Current South Dakota jurisdiction rosters are NOT_ACQUIRED. Principal-office geography does not establish registration. No name-only adverse joins.',
+    sourceClocks: [{ label: 'Division of Insurance securities pages', sourceAsOf: null, retrievedAt: '2026-10-14', snapshotAsOf: '2026-10-14', generatedAt: null }],
   },
 ];
 
