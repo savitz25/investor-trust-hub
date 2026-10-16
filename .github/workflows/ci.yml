@@ -81,6 +81,11 @@ jobs:
         run: python services/ingestion/scripts/apply_migrations.py --check-only
       - name: Apply migrations
         run: python services/ingestion/scripts/apply_migrations.py
+        env:
+          # Explicit CI-only opt-in. The runner sets mth.rls_fail_closed_ci only when
+          # current_database() is also investor_trust_hub. Any other database still
+          # executes the production guards, which refuse without their own target setting.
+          MTH_RLS_FAIL_CLOSED_CI: investor_trust_hub
       - name: Apply seed
         run: |
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f database/seed/0001_source_registry.sql

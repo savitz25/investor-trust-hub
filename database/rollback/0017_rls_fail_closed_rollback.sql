@@ -8,6 +8,9 @@
 --   SET mth.rls_fail_closed_target = 'ghjhcxfirxnszfnymdxb';  -- production
 -- NOTE: system_identifier 7666007964130682852 is NOT unique on its own (care and investor share it);
 --       the guard also requires a project-specific table fingerprint.
+-- CI only: grants are skipped when mth.rls_fail_closed_ci = 'investor_trust_hub' AND
+-- current_database() is investor_trust_hub AND the production system_identifier is absent.
+-- Without that setting the guards below are unchanged and still refuse.
 -- =============================================================================
 -- WARNING: RE-OPENS the exposure (anon read/write/TRUNCATE on all 55 tables). Outage recovery only.
 -- Restores captured state: RLS off, FORCE off, ACL {postgres=arwdDxtm/postgres,anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres,service_role=arwdDxtm/postgres}, 0 policies, 0 column grants.
@@ -88,6 +91,19 @@ DECLARE
   v_prod_sysid constant bigint := 7666007964130682852;  -- ghjhcxfirxnszfnymdxb, captured 2026-10-13
   v_missing int; v_bad text;
 BEGIN
+  -- Explicit CI ephemeral opt-in only. A real database without this setting still refuses below.
+  IF current_setting('mth.rls_fail_closed_ci', true) = 'investor_trust_hub' THEN
+    IF current_database() <> 'investor_trust_hub' THEN
+      RAISE EXCEPTION 'guard: CI setting mth.rls_fail_closed_ci is present but database is %', current_database();
+    END IF;
+    SELECT system_identifier INTO v_sysid FROM pg_control_system();
+    IF v_sysid = v_prod_sysid THEN
+      RAISE EXCEPTION 'guard: CI skip refused on production system_identifier';
+    END IF;
+    PERFORM set_config('mth.rls_fail_closed_skip', '1', true);
+    RAISE NOTICE 'rollback: skipped on explicit CI ephemeral database';
+    RETURN;
+  END IF;
   IF current_user <> 'postgres' THEN RAISE EXCEPTION 'guard: must run as postgres (got %)', current_user; END IF;
   IF current_database() <> 'postgres' THEN RAISE EXCEPTION 'guard: unexpected database %', current_database(); END IF;
   IF current_setting('server_version_num')::int < 170000 THEN RAISE EXCEPTION 'guard: expected PostgreSQL 17+'; END IF;
@@ -132,65 +148,131 @@ BEGIN
 END
 $guard$;
 
-GRANT ALL ON TABLE public.branches TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.disclosure_events TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.evidence_records TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.field_provenance TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.firm_identifiers TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.firm_source_observations TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.firms TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.form_adv_documents TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.form_adv_filings TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.form_adv_firm_facts TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.form_adv_fund_service_provider_rows TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.form_adv_historical_firm_candidates TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.form_adv_other_office_rows TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.form_adv_owner_entities TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.form_adv_private_fund_rows TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.form_adv_related_person_rows TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.form_adv_relying_adviser_rows TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.form_adv_reported_attributes TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.form_adv_schedule_ab_rows TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.form_adv_successor_links TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.form_adv_withdrawals TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.ingestion_quarantine TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.ingestion_run_events TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.ingestion_runs TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.issuer_identifiers TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.issuers TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.jurisdiction_registrations TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.people TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.person_firm_associations TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.person_identifiers TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.product_identifiers TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.products TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.registration_status_history TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.registrations TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.regulatory_action_documents TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.regulatory_actions TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.regulatory_filings TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.schema_migrations TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.search_documents TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.source_authorities TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.source_datasets TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.source_releases TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.source_snapshots TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.source_systems TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.stg_adv_ab TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.stg_adv_docs TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.stg_adv_filing_lookup TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.stg_adv_filings TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.stg_adv_funds TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.stg_adv_offices TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.stg_adv_rel TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.stg_adv_relying TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.stg_adv_sp TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.stg_adv_w TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-GRANT ALL ON TABLE public.stg_sec_adv_rows TO anon, authenticated;  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
-
+DO $grant$
+BEGIN
+  IF current_setting('mth.rls_fail_closed_skip', true) = '1' THEN
+    RAISE NOTICE 'rollback: grants skipped on explicit CI ephemeral database';
+    RETURN;
+  END IF;
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.branches TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.disclosure_events TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.evidence_records TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.field_provenance TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.firm_identifiers TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.firm_source_observations TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.firms TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.form_adv_documents TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.form_adv_filings TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.form_adv_firm_facts TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.form_adv_fund_service_provider_rows TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.form_adv_historical_firm_candidates TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.form_adv_other_office_rows TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.form_adv_owner_entities TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.form_adv_private_fund_rows TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.form_adv_related_person_rows TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.form_adv_relying_adviser_rows TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.form_adv_reported_attributes TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.form_adv_schedule_ab_rows TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.form_adv_successor_links TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.form_adv_withdrawals TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.ingestion_quarantine TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.ingestion_run_events TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.ingestion_runs TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.issuer_identifiers TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.issuers TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.jurisdiction_registrations TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.people TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.person_firm_associations TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.person_identifiers TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.product_identifiers TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.products TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.registration_status_history TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.registrations TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.regulatory_action_documents TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.regulatory_actions TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.regulatory_filings TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.schema_migrations TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.search_documents TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.source_authorities TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.source_datasets TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.source_releases TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.source_snapshots TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.source_systems TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.stg_adv_ab TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.stg_adv_docs TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.stg_adv_filing_lookup TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.stg_adv_filings TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.stg_adv_funds TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.stg_adv_offices TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.stg_adv_rel TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.stg_adv_relying TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.stg_adv_sp TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.stg_adv_w TO anon, authenticated';
+  -- restores anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres
+  EXECUTE 'GRANT ALL ON TABLE public.stg_sec_adv_rows TO anon, authenticated';
+END
+$grant$;
 DO $rls$
 DECLARE r record;
 BEGIN
+  IF current_setting('mth.rls_fail_closed_skip', true) = '1' THEN
+    RAISE NOTICE 'rollback: RLS restore skipped on explicit CI ephemeral database';
+    RETURN;
+  END IF;
   FOR r IN SELECT relname FROM _mth_rls_capture ORDER BY relname LOOP
     EXECUTE format('ALTER TABLE public.%I DISABLE ROW LEVEL SECURITY', r.relname);
   END LOOP;
@@ -200,6 +282,10 @@ $rls$;
 DO $post$
 DECLARE v_bad text;
 BEGIN
+  IF current_setting('mth.rls_fail_closed_skip', true) = '1' THEN
+    RAISE NOTICE 'rollback: post-checks skipped on explicit CI ephemeral database';
+    RETURN;
+  END IF;
   SELECT string_agg(c.relname || ' [' || coalesce(k.relacl::text,'NULL') || ']', '; ') INTO v_bad
   FROM _mth_rls_capture c JOIN pg_class k ON k.relname = c.relname AND k.relnamespace = 'public'::regnamespace
   WHERE k.relrowsecurity OR k.relforcerowsecurity
@@ -208,5 +294,8 @@ BEGIN
   RAISE NOTICE 'rollback: 55 tables restored to captured pre-fix state';
 END
 $post$;
+
+DELETE FROM schema_migrations
+WHERE filename = '0017_rls_fail_closed.sql';
 
 COMMIT;

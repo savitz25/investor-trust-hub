@@ -118,11 +118,60 @@ HOLD_UNTIL_EXPLICIT = {
     "0013_adv_relational_graph.sql": "APPLY_MIGRATION_0013",
 }
 
+# Explicit opt-in for the ephemeral CI database only. Production apply never sets this.
+RLS_CI_ENV = "MTH_RLS_FAIL_CLOSED_CI"
+RLS_CI_DATABASE = "investor_trust_hub"
+RLS_CI_FILES = {
+    "0017_rls_fail_closed.sql",
+    "0018_security_followups.sql",
+}
+RLS_CI_SET = "SET mth.rls_fail_closed_ci = 'investor_trust_hub'"
+
+
+def _current_database(database_url: str) -> str:
+    try:
+        import psycopg
+    except ImportError:
+        psycopg = None
+    if psycopg is not None:
+        with psycopg.connect(database_url, connect_timeout=30) as conn:
+            row = conn.execute("SELECT current_database()").fetchone()
+        return str(row[0])
+    import shutil
+    import subprocess
+
+    if shutil.which("psql") is None:
+        raise SystemExit("cannot confirm current_database (psycopg and psql are unavailable)")
+    completed = subprocess.run(
+        ["psql", database_url, "-v", "ON_ERROR_STOP=1", "-t", "-A", "-c", "SELECT current_database()"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if completed.returncode != 0:
+        raise SystemExit(completed.stderr or "current_database query failed")
+    return completed.stdout.strip()
+
+
+def _rls_ci_prelude(database_url: str, filename: str, cache: dict[str, str]) -> list[str]:
+    """Session SET for the CI skip. Empty unless the explicit CI setting matches this database.
+
+    Any other database, including production, gets no SET. The SQL guards then refuse to run.
+    """
+    if filename not in RLS_CI_FILES or os.environ.get(RLS_CI_ENV) != RLS_CI_DATABASE:
+        return []
+    if "current_database" not in cache:
+        cache["current_database"] = _current_database(database_url)
+    if cache["current_database"] != RLS_CI_DATABASE:
+        return []
+    return [RLS_CI_SET]
+
 
 def apply_with_psycopg(root: Path, database_url: str) -> list[str]:
     import psycopg
 
     applied_now: list[str] = []
+    rls_ci_cache: dict[str, str] = {}
     with psycopg.connect(database_url, connect_timeout=30, keepalives=1, keepalives_idle=30) as conn:
         conn.execute("SET statement_timeout = 0")
         already = set(_applied_filenames(conn))
@@ -135,6 +184,14 @@ def apply_with_psycopg(root: Path, database_url: str) -> list[str]:
                 print(f"skip {path.name} (already in schema_migrations)", flush=True)
                 continue
             print(f"apply {path.name}", flush=True)
+            prelude = _rls_ci_prelude(database_url, path.name, rls_ci_cache)
+            if prelude:
+                print(
+                    f"ci ephemeral opt-in for {path.name}: set mth.rls_fail_closed_ci on {RLS_CI_DATABASE}",
+                    flush=True,
+                )
+            for statement in prelude:
+                conn.execute(statement)
             for statement in _split_sql(path.read_text(encoding="utf-8")):
                 conn.execute(statement)
             applied_now.append(path.name)
@@ -203,11 +260,19 @@ def apply_with_psql(root: Path, database_url: str) -> None:
     if shutil.which("psql") is None:
         apply_with_psycopg(root, database_url)
         return
+    rls_ci_cache: dict[str, str] = {}
     for path in migration_files(root):
-        completed = subprocess.run(
-            ["psql", database_url, "-v", "ON_ERROR_STOP=1", "-f", str(path)],
-            check=False,
-        )
+        prelude = _rls_ci_prelude(database_url, path.name, rls_ci_cache)
+        if prelude:
+            print(
+                f"ci ephemeral opt-in for {path.name}: set mth.rls_fail_closed_ci on {RLS_CI_DATABASE}",
+                flush=True,
+            )
+        command = ["psql", database_url, "-v", "ON_ERROR_STOP=1"]
+        for statement in prelude:
+            command.extend(["-c", statement])
+        command.extend(["-f", str(path)])
+        completed = subprocess.run(command, check=False)
         if completed.returncode != 0:
             raise SystemExit(f"migration failed: {path.name}")
 

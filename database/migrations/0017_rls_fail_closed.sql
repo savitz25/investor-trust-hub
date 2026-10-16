@@ -8,6 +8,9 @@
 --   SET mth.rls_fail_closed_target = 'ghjhcxfirxnszfnymdxb';  -- production
 -- NOTE: system_identifier 7666007964130682852 is NOT unique on its own (care and investor share it);
 --       the guard also requires a project-specific table fingerprint.
+-- CI only: the migration runner sets mth.rls_fail_closed_ci = 'investor_trust_hub' in the same
+-- session when MTH_RLS_FAIL_CLOSED_CI is exactly that value AND current_database() is
+-- investor_trust_hub. Without that setting the guards below are unchanged and still refuse.
 -- =============================================================================
 -- What it does (all-or-nothing, idempotent):
 --   * ENABLE ROW LEVEL SECURITY on all 55 tables (no FORCE: owner postgres pg-Pool/psycopg paths keep bypass).
@@ -92,6 +95,19 @@ DECLARE
   v_prod_sysid constant bigint := 7666007964130682852;  -- ghjhcxfirxnszfnymdxb, captured 2026-10-13
   v_missing int; v_bad text;
 BEGIN
+  -- Explicit CI ephemeral opt-in only. A real database without this setting still refuses below.
+  IF current_setting('mth.rls_fail_closed_ci', true) = 'investor_trust_hub' THEN
+    IF current_database() <> 'investor_trust_hub' THEN
+      RAISE EXCEPTION 'guard: CI setting mth.rls_fail_closed_ci is present but database is %', current_database();
+    END IF;
+    SELECT system_identifier INTO v_sysid FROM pg_control_system();
+    IF v_sysid = v_prod_sysid THEN
+      RAISE EXCEPTION 'guard: CI skip refused on production system_identifier';
+    END IF;
+    PERFORM set_config('mth.rls_fail_closed_skip', '1', true);
+    RAISE NOTICE 'investor_rls_fail_closed: skipped on explicit CI ephemeral database';
+    RETURN;
+  END IF;
   IF current_user <> 'postgres' THEN RAISE EXCEPTION 'guard: must run as postgres (got %)', current_user; END IF;
   IF current_database() <> 'postgres' THEN RAISE EXCEPTION 'guard: unexpected database %', current_database(); END IF;
   IF current_setting('server_version_num')::int < 170000 THEN RAISE EXCEPTION 'guard: expected PostgreSQL 17+'; END IF;
@@ -139,6 +155,10 @@ $guard$;
 DO $fix$
 DECLARE r record;
 BEGIN
+  IF current_setting('mth.rls_fail_closed_skip', true) = '1' THEN
+    RAISE NOTICE 'investor_rls_fail_closed: privilege changes skipped on explicit CI ephemeral database';
+    RETURN;
+  END IF;
   FOR r IN SELECT relname FROM _mth_rls_capture ORDER BY relname LOOP
     EXECUTE format('ALTER TABLE public.%I ENABLE ROW LEVEL SECURITY', r.relname);
     EXECUTE format('REVOKE ALL ON TABLE public.%I FROM anon, authenticated, PUBLIC', r.relname);
@@ -150,6 +170,10 @@ DO $post$
 DECLARE r record; p text;
   privs constant text[] := ARRAY['SELECT','INSERT','UPDATE','DELETE','TRUNCATE','REFERENCES','TRIGGER','MAINTAIN'];
 BEGIN
+  IF current_setting('mth.rls_fail_closed_skip', true) = '1' THEN
+    RAISE NOTICE 'investor_rls_fail_closed: post-checks skipped on explicit CI ephemeral database';
+    RETURN;
+  END IF;
   FOR r IN SELECT k.oid, k.relname, k.relrowsecurity, k.relforcerowsecurity, k.relacl
            FROM _mth_rls_capture cap JOIN pg_class k ON k.relname = cap.relname AND k.relnamespace = 'public'::regnamespace LOOP
     IF NOT r.relrowsecurity THEN RAISE EXCEPTION 'post: RLS not enabled on %', r.relname; END IF;
@@ -171,5 +195,9 @@ BEGIN
   RAISE NOTICE 'investor_rls_fail_closed: post-checks passed for 55 tables';
 END
 $post$;
+
+INSERT INTO schema_migrations (filename)
+VALUES ('0017_rls_fail_closed.sql')
+ON CONFLICT (filename) DO NOTHING;
 
 COMMIT;
