@@ -15,7 +15,7 @@ import {
   type AdvWithdrawalRow,
   type TrustReportV2Snapshot,
 } from '@ith/domain';
-import { getPool } from '../db';
+import { withClient } from '../db';
 
 function isoDate(value: Date | string | null | undefined): string | null {
   if (!value) return null;
@@ -33,8 +33,7 @@ export async function loadFirmProfileIntelligence(input: {
   disclosureIndicator: string | null;
 }): Promise<TrustReportV2Snapshot> {
   const firmId = input.firmId;
-  const client = await getPool().connect();
-  try {
+  return withClient(async (client) => {
     const attributes = await client.query<{
       field_name: string;
       reported_yn: string | null;
@@ -367,7 +366,5 @@ export async function loadFirmProfileIntelligence(input: {
       part2aCount: part2a.rows[0]?.n ?? 0,
       hiddenReviewRequired: { owners: 0, related: 0, funds: 0, serviceProviders: 0 },
     });
-  } finally {
-    client.release();
-  }
+  });
 }
