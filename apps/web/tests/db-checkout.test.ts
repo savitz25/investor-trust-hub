@@ -8,6 +8,7 @@ const state = vi.hoisted(() => ({
   releases: 0,
   connects: 0,
   attempts: 0,
+  poolConfig: undefined as { max?: number; idleTimeoutMillis?: number; connectionTimeoutMillis?: number } | undefined,
 }));
 
 vi.mock('server-only', () => ({}));
@@ -76,6 +77,10 @@ vi.mock('pg', () => {
   }
 
   class Pool {
+    constructor(config: { max?: number; idleTimeoutMillis?: number; connectionTimeoutMillis?: number }) {
+      state.poolConfig = config;
+    }
+
     async query(text: string) {
       state.attempts += 1;
       state.inFlight += 1;
@@ -111,9 +116,9 @@ vi.mock('pg', () => {
 
 process.env.DATABASE_URL = 'postgres://example.invalid/investor_research';
 
-import { parseFirmSearchInput } from '@ith/domain';
+import { parseFirmSearchInput, SPECIALIST_EXECUTION_TIMEOUT_MS } from '@ith/domain';
 import { executeInvestorAsk } from '../src/lib/ask/execute';
-import { DatabaseUnavailableError, query, withClient } from '../src/lib/db';
+import { CHECKOUT_QUEUE_WAIT_MS, DatabaseUnavailableError, getPool, query, withClient } from '../src/lib/db';
 import { getOfficialFirmBySlug, searchOfficialFirms, getFirmDirectoryMetrics } from '../src/lib/firms/repository';
 
 afterEach(() => {
@@ -209,6 +214,156 @@ describe('research checkout lane', () => {
     const parsed = parseFirmSearchInput({ q: '105958' });
     await expect(searchOfficialFirms(parsed)).rejects.toBeInstanceOf(DatabaseUnavailableError);
     await expect(getOfficialFirmBySlug('sec-crd-105958')).rejects.toBeInstanceOf(DatabaseUnavailableError);
+  });
+
+  it('uses the research execution window and leaves the pool settings unchanged', () => {
+    expect(CHECKOUT_QUEUE_WAIT_MS).toBe(SPECIALIST_EXECUTION_TIMEOUT_MS);
+    expect(CHECKOUT_QUEUE_WAIT_MS).toBe(12_000);
+    getPool();
+    expect(state.poolConfig).toMatchObject({
+      max: 1,
+      idleTimeoutMillis: 5_000,
+      connectionTimeoutMillis: 10_000,
+    });
+  });
+
+  it('fails a queued research call at the request budget and does not run it later', async () => {
+    vi.useFakeTimers();
+    let releaseHolder: () => void = () => undefined;
+    const holderGate = new Promise<void>((resolve) => {
+      releaseHolder = resolve;
+    });
+    const holder = withClient(async () => {
+      await holderGate;
+      return 'held';
+    });
+    try {
+      await vi.advanceTimersByTimeAsync(0);
+      expect(state.connects).toBe(1);
+      expect(state.inFlight).toBe(1);
+      expect(state.releases).toBe(0);
+
+      const waiter = query('select 1 as waiting').then(
+        () => 'rows' as const,
+        (error: unknown) => error,
+      );
+      await vi.advanceTimersByTimeAsync(CHECKOUT_QUEUE_WAIT_MS);
+      const waiterResult = await waiter;
+      expect(waiterResult).toBeInstanceOf(DatabaseUnavailableError);
+      expect(state.attempts).toBe(0);
+      expect(state.inFlight).toBe(1);
+      expect(state.releases).toBe(0);
+
+      const ask = executeInvestorAsk('CRD 105958').then(
+        (result) => result.terminalState,
+        (error: unknown) => error,
+      );
+      await vi.advanceTimersByTimeAsync(CHECKOUT_QUEUE_WAIT_MS);
+      const askResult = await ask;
+      expect(askResult).toBeInstanceOf(DatabaseUnavailableError);
+      expect(askResult).not.toBe('NO_MATCH');
+      expect(state.attempts).toBe(0);
+      expect(state.releases).toBe(0);
+
+      releaseHolder();
+      await vi.advanceTimersByTimeAsync(0);
+      await expect(holder).resolves.toBe('held');
+      expect(state.attempts).toBe(0);
+      expect(state.releases).toBe(1);
+      expect(state.inFlight).toBe(0);
+
+      const recovered = query('select 1 as recovered');
+      await vi.advanceTimersByTimeAsync(25);
+      await expect(recovered).resolves.toMatchObject({ rows: [{ ok: true }] });
+      expect(state.attempts).toBe(1);
+      expect(state.maxInFlight).toBe(1);
+    } finally {
+      releaseHolder();
+      await vi.advanceTimersByTimeAsync(0);
+      await holder.catch(() => undefined);
+      vi.useRealTimers();
+    }
+  });
+
+  it('does not run an expired waiter after the held checkout fails', async () => {
+    vi.useFakeTimers();
+    let failHolder: (error: Error) => void = () => undefined;
+    const holderGate = new Promise<void>((_, reject) => {
+      failHolder = reject;
+    });
+    holderGate.catch(() => undefined);
+    const holder = withClient(async () => {
+      await holderGate;
+    });
+    try {
+      await vi.advanceTimersByTimeAsync(0);
+      expect(state.inFlight).toBe(1);
+      expect(state.releases).toBe(0);
+
+      const waiter = query('select 1 as waiting').then(
+        () => 'rows' as const,
+        (error: unknown) => error,
+      );
+      await vi.advanceTimersByTimeAsync(CHECKOUT_QUEUE_WAIT_MS);
+      expect(await waiter).toBeInstanceOf(DatabaseUnavailableError);
+      expect(state.attempts).toBe(0);
+      expect(state.releases).toBe(0);
+      expect(state.inFlight).toBe(1);
+
+      const holderFailed = expect(holder).rejects.toThrow('holder failed');
+      failHolder(new Error('holder failed'));
+      await vi.advanceTimersByTimeAsync(0);
+      await holderFailed;
+      expect(state.attempts).toBe(0);
+      expect(state.releases).toBe(1);
+      expect(state.inFlight).toBe(0);
+
+      const recovered = query('select 1 as recovered');
+      await vi.advanceTimersByTimeAsync(25);
+      await expect(recovered).resolves.toMatchObject({ rows: [{ ok: true }] });
+      expect(state.attempts).toBe(1);
+      expect(state.maxInFlight).toBe(1);
+    } finally {
+      const done = holder.catch(() => undefined);
+      failHolder(new Error('holder failed'));
+      await vi.advanceTimersByTimeAsync(0);
+      await done;
+      vi.useRealTimers();
+    }
+  });
+
+  it('still runs a queued query that gets the checkout inside the request budget', async () => {
+    vi.useFakeTimers();
+    let releaseHolder: () => void = () => undefined;
+    const holderGate = new Promise<void>((resolve) => {
+      releaseHolder = resolve;
+    });
+    const holder = withClient(async () => {
+      await holderGate;
+      return 'held';
+    });
+    try {
+      await vi.advanceTimersByTimeAsync(0);
+      const waiter = query('select 1 as waiting');
+      await vi.advanceTimersByTimeAsync(CHECKOUT_QUEUE_WAIT_MS - 1);
+      expect(state.attempts).toBe(0);
+      expect(state.inFlight).toBe(1);
+      expect(state.releases).toBe(0);
+
+      releaseHolder();
+      await vi.advanceTimersByTimeAsync(0);
+      await expect(holder).resolves.toBe('held');
+      await vi.advanceTimersByTimeAsync(25);
+      await expect(waiter).resolves.toMatchObject({ rows: [{ ok: true }] });
+      expect(state.attempts).toBe(1);
+      expect(state.maxInFlight).toBe(1);
+      expect(state.releases).toBe(1);
+    } finally {
+      releaseHolder();
+      await vi.advanceTimersByTimeAsync(0);
+      await holder.catch(() => undefined);
+      vi.useRealTimers();
+    }
   });
 
   it('keeps the public service-failure copy distinct from an empty result', () => {

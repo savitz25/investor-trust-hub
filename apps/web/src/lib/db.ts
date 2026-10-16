@@ -2,27 +2,67 @@ import 'server-only';
 
 import { Pool, type PoolClient, type QueryResult, type QueryResultRow } from 'pg';
 
-let pool: Pool | undefined;
-
-// pg-pool applies connectionTimeoutMillis to callers waiting for a checked-out
-// client, and this pool keeps max at 1. One in-flight checkout per instance
-// keeps that wait from being reported as a failed connection.
-let checkout: Promise<void> = Promise.resolve();
-
-function withCheckout<T>(task: () => Promise<T>): Promise<T> {
-  const run = checkout.then(task, task);
-  checkout = run.then(
-    () => undefined,
-    () => undefined,
-  );
-  return run;
-}
-
 export class DatabaseUnavailableError extends Error {
   constructor(message = 'The research database is temporarily unavailable.') {
     super(message);
     this.name = 'DatabaseUnavailableError';
   }
+}
+
+let pool: Pool | undefined;
+
+// pg-pool applies connectionTimeoutMillis to callers waiting for a checked-out
+// client, and this pool keeps max at 1. One in-flight checkout per instance
+// keeps that wait from being reported as a failed connection.
+//
+// The queue wait uses the same 12s research execution window as
+// SPECIALIST_EXECUTION_TIMEOUT_MS. Only the wait is bounded. A checkout that
+// has started keeps its client until that operation settles.
+export const CHECKOUT_QUEUE_WAIT_MS = 12_000;
+
+let checkout: Promise<void> = Promise.resolve();
+
+function withCheckout<T>(task: () => Promise<T>): Promise<T> {
+  const previous = checkout;
+  let started = false;
+  let expired = false;
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  let releaseLane: () => void = () => undefined;
+  const lane = new Promise<void>((resolve) => {
+    releaseLane = resolve;
+  });
+  checkout = lane;
+
+  return new Promise<T>((resolve, reject) => {
+    timer = setTimeout(() => {
+      if (started) return;
+      expired = true;
+      reject(new DatabaseUnavailableError());
+    }, CHECKOUT_QUEUE_WAIT_MS);
+
+    void previous.then(start, start);
+
+    function start() {
+      if (timer !== undefined) clearTimeout(timer);
+      if (expired) {
+        releaseLane();
+        return;
+      }
+      started = true;
+      void Promise.resolve()
+        .then(task)
+        .then(
+          (value) => {
+            releaseLane();
+            resolve(value);
+          },
+          (error: unknown) => {
+            releaseLane();
+            reject(error);
+          },
+        );
+    }
+  });
 }
 
 export function hasDatabaseUrl(): boolean {
