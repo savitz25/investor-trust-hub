@@ -4,6 +4,20 @@ import { Pool, type PoolClient, type QueryResult, type QueryResultRow } from 'pg
 
 let pool: Pool | undefined;
 
+// pg-pool applies connectionTimeoutMillis to callers waiting for a checked-out
+// client, and this pool keeps max at 1. One in-flight checkout per instance
+// keeps that wait from being reported as a failed connection.
+let checkout: Promise<void> = Promise.resolve();
+
+function withCheckout<T>(task: () => Promise<T>): Promise<T> {
+  const run = checkout.then(task, task);
+  checkout = run.then(
+    () => undefined,
+    () => undefined,
+  );
+  return run;
+}
+
 export class DatabaseUnavailableError extends Error {
   constructor(message = 'The research database is temporarily unavailable.') {
     super(message);
@@ -64,7 +78,7 @@ export async function query<T extends QueryResultRow = QueryResultRow>(
   let lastError: unknown;
   for (let attempt = 0; attempt < 3; attempt += 1) {
     try {
-      return await getPool().query<T>(text, params);
+      return await withCheckout(() => getPool().query<T>(text, params));
     } catch (error) {
       if (error instanceof DatabaseUnavailableError) {
         throw error;
@@ -81,10 +95,12 @@ export async function query<T extends QueryResultRow = QueryResultRow>(
 }
 
 export async function withClient<T>(fn: (client: PoolClient) => Promise<T>): Promise<T> {
-  const client = await getPool().connect();
-  try {
-    return await fn(client);
-  } finally {
-    client.release();
-  }
+  return withCheckout(async () => {
+    const client = await getPool().connect();
+    try {
+      return await fn(client);
+    } finally {
+      client.release();
+    }
+  });
 }
