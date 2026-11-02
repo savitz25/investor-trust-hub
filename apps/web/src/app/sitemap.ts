@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { INDEXABLE_PATHS, isHostLaunchIndexable } from '@ith/config';
-import { listIndexableFirmSlugs } from '@/lib/firms/repository';
+import { listIndexableFirmsForSitemap } from '@/lib/firms/repository';
+import { sourceDateForSitemap } from '@/lib/sitemap-last-modified';
 import { hasDatabaseUrl } from '@/lib/db';
 import { getSiteEnv } from '@/lib/site';
 import { readRequestHost } from '@/lib/request-host';
@@ -25,14 +26,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return entries;
   }
   try {
-    const slugs = await listIndexableFirmSlugs(10_000, 0);
+    const firms = await listIndexableFirmsForSitemap(10_000, 0);
     return [
       ...entries,
-      ...slugs.map((slug) => ({
-        url: new URL(`/firm/${slug}`, NEXT_PUBLIC_SITE_URL).toString(),
-        changeFrequency: 'monthly' as const,
-        priority: 0.5,
-      })),
+      ...firms.map(({ slug, sourceLastModified }) => {
+        const lastModified = sourceDateForSitemap(sourceLastModified);
+        return {
+          url: new URL(`/firm/${slug}`, NEXT_PUBLIC_SITE_URL).toString(),
+          changeFrequency: 'monthly' as const,
+          priority: 0.5,
+          ...(lastModified ? { lastModified } : {}),
+        };
+      }),
     ];
   } catch {
     return entries;

@@ -108,7 +108,7 @@ describe('September IAPD publication wiring', () => {
     const sitemap = readFileSync(new URL('../src/app/sitemap.ts', import.meta.url), 'utf8');
     const page = readFileSync(new URL('../src/app/california/page.tsx', import.meta.url), 'utf8');
     const stage = readFileSync(new URL('../../../artifacts/th-investor-r2-search-documents.sql', import.meta.url), 'utf8');
-    expect(sitemap).toContain('listIndexableFirmSlugs(10_000, 0)');
+    expect(sitemap).toContain('listIndexableFirmsForSitemap(10_000, 0)');
     expect(page).toContain('<StateAdviserStatePanel state="CA" />');
     expect(stage).toContain('indexable');
     expect(stage).toContain("j.raw->>'firm_crd'=crd.identifier_value");

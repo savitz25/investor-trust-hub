@@ -274,13 +274,16 @@ export async function getFirmDirectoryMetrics(): Promise<FirmDirectoryMetrics> {
   };
 }
 
-export async function listIndexableFirmSlugs(
+export async function listIndexableFirmsForSitemap(
   limit = 10_000,
   offset = 0,
-): Promise<string[]> {
-  const result = await query<{ slug: string }>(
+): Promise<Array<{ slug: string; sourceLastModified: Date | string | null }>> {
+  const result = await query<{ slug: string; source_last_modified: Date | string | null }>(
     `
-    SELECT f.slug
+    SELECT f.slug,
+      (SELECT max(filing.date_submitted)
+       FROM form_adv_filings filing
+       WHERE filing.firm_id = f.id) AS source_last_modified
     FROM firms f
     JOIN search_documents sd ON sd.entity_id = f.id AND sd.entity_kind = 'firm'
     WHERE ${publicFirmCountWhere()} AND sd.indexable = true
@@ -289,7 +292,10 @@ export async function listIndexableFirmSlugs(
     `,
     [limit, offset],
   );
-  return result.rows.map((row) => row.slug);
+  return result.rows.map((row) => ({
+    slug: row.slug,
+    sourceLastModified: row.source_last_modified,
+  }));
 }
 
 export async function countIndexableFirms(): Promise<number> {
