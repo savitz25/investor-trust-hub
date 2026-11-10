@@ -35,11 +35,41 @@ export function posthogDebugEnabled(input: NodeJS.ProcessEnv = process.env): boo
   return raw === '1' || raw === 'true' || raw === 'yes';
 }
 
-/** Missing key, or development without the debug flag, is a no-op. Never throws. */
-export function shouldEnablePosthog(input: NodeJS.ProcessEnv = process.env): boolean {
+export type BrowserSignals = {
+  webdriver?: boolean;
+  userAgent?: string | null;
+};
+
+/**
+ * Playwright sets navigator.webdriver. Headless Chrome and crawlers identify
+ * themselves in the user agent. Same skip as Contractor #194 and Insurance #129.
+ */
+const AUTOMATED_BROWSER_UA =
+  /bot|crawl|spider|slurp|headless|phantom|selenium|puppeteer|playwright|lighthouse|wget|curl\/|python-requests|go-http-client|bytespider|gptbot|claudebot|ahrefs|semrush|pingdom|facebookexternalhit/i;
+
+export function isAutomatedBrowser(signals?: BrowserSignals): boolean {
+  try {
+    const webdriver =
+      signals?.webdriver ?? (typeof navigator !== 'undefined' && navigator.webdriver === true);
+    if (webdriver) return true;
+    const userAgent =
+      signals && 'userAgent' in signals
+        ? signals.userAgent || ''
+        : typeof navigator !== 'undefined'
+          ? navigator.userAgent || ''
+          : '';
+    return AUTOMATED_BROWSER_UA.test(userAgent);
+  } catch {
+    return false;
+  }
+}
+
+/** Missing key, development without the debug flag, or an automated browser is a no-op. Never throws. */
+export function shouldEnablePosthog(input: NodeJS.ProcessEnv = process.env, signals?: BrowserSignals): boolean {
   try {
     if (!posthogKey(input)) return false;
     if (analyticsEnvironment(input) === 'development' && !posthogDebugEnabled(input)) return false;
+    if (isAutomatedBrowser(signals)) return false;
     return true;
   } catch {
     return false;

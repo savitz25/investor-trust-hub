@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { shouldEnablePosthog } from '@/lib/analytics/environment';
+import { isAutomatedBrowser, shouldEnablePosthog } from '@/lib/analytics/environment';
 import {
   sanitizeAnalyticsUrl,
   sanitizeCaptureResult,
@@ -100,27 +100,56 @@ describe('analytics URL sanitizer', () => {
   });
 });
 
+const ENABLED = { NEXT_PUBLIC_POSTHOG_KEY: 'phc_test', VERCEL_ENV: 'preview' } as const;
+const HUMAN = {
+  webdriver: false,
+  userAgent:
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+};
+
 describe('PostHog enablement', () => {
   it('is a no-op without a key, including production', () => {
-    expect(shouldEnablePosthog({ VERCEL_ENV: 'production' })).toBe(false);
-    expect(shouldEnablePosthog({ NEXT_PUBLIC_VERCEL_ENV: 'preview' })).toBe(false);
-    expect(() => shouldEnablePosthog({})).not.toThrow();
+    expect(shouldEnablePosthog({ VERCEL_ENV: 'production' }, HUMAN)).toBe(false);
+    expect(shouldEnablePosthog({ NEXT_PUBLIC_VERCEL_ENV: 'preview' }, HUMAN)).toBe(false);
+    expect(() => shouldEnablePosthog({}, HUMAN)).not.toThrow();
   });
 
   it('stays off in development unless the debug flag is set', () => {
-    expect(shouldEnablePosthog({ NEXT_PUBLIC_POSTHOG_KEY: 'phc_test', VERCEL_ENV: 'development' })).toBe(false);
-    expect(shouldEnablePosthog({ NEXT_PUBLIC_POSTHOG_KEY: 'phc_test' })).toBe(false);
+    expect(shouldEnablePosthog({ NEXT_PUBLIC_POSTHOG_KEY: 'phc_test', VERCEL_ENV: 'development' }, HUMAN)).toBe(false);
+    expect(shouldEnablePosthog({ NEXT_PUBLIC_POSTHOG_KEY: 'phc_test' }, HUMAN)).toBe(false);
     expect(
-      shouldEnablePosthog({
-        NEXT_PUBLIC_POSTHOG_KEY: 'phc_test',
-        VERCEL_ENV: 'development',
-        NEXT_PUBLIC_POSTHOG_DEBUG: '1',
-      }),
+      shouldEnablePosthog(
+        {
+          NEXT_PUBLIC_POSTHOG_KEY: 'phc_test',
+          VERCEL_ENV: 'development',
+          NEXT_PUBLIC_POSTHOG_DEBUG: '1',
+        },
+        HUMAN,
+      ),
     ).toBe(true);
   });
 
   it('sends from preview and production when the key is present', () => {
-    expect(shouldEnablePosthog({ NEXT_PUBLIC_POSTHOG_KEY: 'phc_test', VERCEL_ENV: 'preview' })).toBe(true);
-    expect(shouldEnablePosthog({ NEXT_PUBLIC_POSTHOG_KEY: 'phc_test', NEXT_PUBLIC_VERCEL_ENV: 'production' })).toBe(true);
+    expect(shouldEnablePosthog({ NEXT_PUBLIC_POSTHOG_KEY: 'phc_test', VERCEL_ENV: 'preview' }, HUMAN)).toBe(true);
+    expect(shouldEnablePosthog({ NEXT_PUBLIC_POSTHOG_KEY: 'phc_test', NEXT_PUBLIC_VERCEL_ENV: 'production' }, HUMAN)).toBe(
+      true,
+    );
+  });
+
+  it('skips init and capture for webdriver and common bot user agents', () => {
+    expect(isAutomatedBrowser({ webdriver: true, userAgent: HUMAN.userAgent })).toBe(true);
+    expect(shouldEnablePosthog(ENABLED, { webdriver: true, userAgent: HUMAN.userAgent })).toBe(false);
+    for (const userAgent of [
+      'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/120.0.0.0 Safari/537.36',
+      'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
+      'Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)',
+      'Playwright/1.49.0',
+      'curl/8.6.0',
+    ]) {
+      expect(isAutomatedBrowser({ webdriver: false, userAgent }), userAgent).toBe(true);
+      expect(shouldEnablePosthog(ENABLED, { webdriver: false, userAgent }), userAgent).toBe(false);
+    }
+    expect(isAutomatedBrowser(HUMAN)).toBe(false);
+    expect(() => isAutomatedBrowser({ webdriver: false, userAgent: '' })).not.toThrow();
   });
 });
