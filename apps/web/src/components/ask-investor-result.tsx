@@ -6,6 +6,10 @@ import type { InvestorAskOverrides } from '@ith/domain';
 import type { InvestorAskResult } from '@/lib/ask/execute';
 import { SearchAnalytics } from '@/components/specialist-search/search-analytics';
 
+function searchSucceeded(terminalState: string | undefined): boolean {
+  return terminalState === 'COMPLETE' || terminalState === 'NO_MATCH' || terminalState === undefined;
+}
+
 function askHref(q: string, page?: number, overrides?:InvestorAskOverrides) {
   const params = new URLSearchParams({ q });
   for(const[k,v]of overrideEntries(overrides))params.set(k,v);
@@ -20,7 +24,7 @@ export function AskInvestorResultView({ result }: { result: InvestorAskResult })
 
   return (
     <div className="min-w-0 space-y-8 [overflow-wrap:anywhere]" data-specialist-results>
-      <SearchAnalytics resultCount={result.results.length} dimensions={{ hub: 'investor', intent: q.mode, firmClass: q.firmType ?? 'unspecified', state: q.geography?.type === 'principal_office_state' ? q.geography.value : 'none', hasIdentifier: Boolean(q.identifier), identifierType: q.identifier?.type === 'crd' ? 'firm_crd' : q.identifier?.type ?? 'none', raumBand: q.raum?.bandId ?? (q.raum ? 'custom' : 'none'), compensationMethod: q.compensationMethods?.join('+') ?? 'none', affiliation: q.affiliationField ?? 'none', evidenceFamily: q.evidenceFamilies?.join('+') ?? 'none', coverageState: q.mode === 'fail_closed' ? 'UNSUPPORTED' : 'KNOWN' }} />
+      <SearchAnalytics resultCount={result.results.length} outcome={{ resultCount: result.pagination.total, success: searchSucceeded(result.terminalState), capabilityState: result.terminalState ?? (q.mode === 'fail_closed' ? 'UNSUPPORTED' : 'KNOWN') }} dimensions={{ hub: 'investor', intent: q.mode, firmClass: q.firmType ?? 'unspecified', state: q.geography?.type === 'principal_office_state' ? q.geography.value : 'none', hasIdentifier: Boolean(q.identifier), identifierType: q.identifier?.type === 'crd' ? 'firm_crd' : q.identifier?.type ?? 'none', raumBand: q.raum?.bandId ?? (q.raum ? 'custom' : 'none'), compensationMethod: q.compensationMethods?.join('+') ?? 'none', affiliation: q.affiliationField ?? 'none', evidenceFamily: q.evidenceFamilies?.join('+') ?? 'none', coverageState: q.mode === 'fail_closed' ? 'UNSUPPORTED' : 'KNOWN' }} />
       <section className="rounded-2xl border border-[var(--ith-border)] bg-white p-5 sm:p-6">
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-teal-800">
           We interpreted your question as
@@ -55,6 +59,8 @@ export function AskInvestorResultView({ result }: { result: InvestorAskResult })
             id="ask-edit"
             name="q"
             defaultValue={result.queryText}
+            data-ph-mask
+            data-ph-no-capture
             className="min-h-11 min-w-0 flex-1 rounded-xl border border-[var(--ith-border)] px-3 text-sm text-[var(--ith-navy)]"
           />
           <button type="submit" data-specialist-event="refine" className="th-btn-primary min-h-11 px-4 text-sm">
@@ -91,7 +97,7 @@ export function AskInvestorResultView({ result }: { result: InvestorAskResult })
       ) : null}
 
       {q.mode==='fail_closed' && ['FORM_ADV_RESEARCH','DISCLOSURE_RESEARCH'].includes(q.intent??'') && !q.nameQuery && !q.identifier ? <form action="/ask" className="rounded-xl border p-5 grid gap-3">
-        <input type="hidden" name="q" value={result.queryText}/>{overrideEntries(q.inputOverrides,false).map(([k,v])=><input key={k} type="hidden" name={k} value={v}/>)}<label htmlFor="firm-identity">Firm name</label><input id="firm-identity" name="identity" maxLength={120} required className="min-h-11 min-w-0 border rounded-lg p-3"/><button className="th-btn-primary min-h-11">Find firm candidates</button>
+        <input type="hidden" name="q" value={result.queryText}/>{overrideEntries(q.inputOverrides,false).map(([k,v])=><input key={k} type="hidden" name={k} value={v}/>)}<label htmlFor="firm-identity">Firm name</label><input id="firm-identity" name="identity" maxLength={120} required data-ph-mask data-ph-no-capture className="min-h-11 min-w-0 border rounded-lg p-3"/><button className="th-btn-primary min-h-11">Find firm candidates</button>
         <p className="text-sm">Or edit the question to include a labeled firm CRD or SEC file number.</p>
       </form>:null}
       {q.geography?.type==='principal_office_city' && !q.geography.state ? <form action="/ask" className="rounded-xl border p-5 grid gap-3"><input type="hidden" name="q" value={result.queryText}/>{overrideEntries(q.inputOverrides).filter(([k])=>k!=='state'&&k!=='broaden').map(([k,v])=><input key={k} type="hidden" name={k} value={v}/>)}<label htmlFor="office-state-choice">State for {q.geography.value}</label><select id="office-state-choice" name="state" required className="min-h-11 border rounded-lg p-3"><option value="">Choose state</option>{Object.entries(REGION_NAMES).map(([c,n])=><option key={c} value={c}>{n}</option>)}</select><button className="th-btn-primary min-h-11">Apply city and state</button></form>:null}

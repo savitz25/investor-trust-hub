@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { AskInvestorResultView } from '@/components/ask-investor-result';
+import { SearchResultsBeacon } from '@/components/analytics/search-results-beacon';
 import { InvestorSpecialistSearchShell } from '@/components/specialist-search/investor-specialist-search-shell';
 import { executeInvestorAsk } from '@/lib/ask/execute';
 import { DatabaseUnavailableError } from '@/lib/db';
@@ -52,10 +53,18 @@ export default async function AskPage({
     <div className="th-shell py-10 sm:py-14">
       <h1 className="sr-only">InvestorTrustHub specialist search</h1>
       <InvestorSpecialistSearchShell query={rawQuery} overrides={input?.overrides} />
-      {invalid ? <p role="alert" className="mt-8 rounded-xl border p-4">{invalid}</p> : dbError ? (
-        <p className="mt-8 rounded-xl border border-[var(--ith-border)] p-4 text-sm">
-          The research database is temporarily unavailable. Try again shortly.
-        </p>
+      {invalid ? (
+        <>
+          <p role="alert" className="mt-8 rounded-xl border p-4">{invalid}</p>
+          <SearchResultsBeacon success={false} capabilityState="INVALID_INPUT" />
+        </>
+      ) : dbError ? (
+        <>
+          <p className="mt-8 rounded-xl border border-[var(--ith-border)] p-4 text-sm">
+            The research database is temporarily unavailable. Try again shortly.
+          </p>
+          <SearchResultsBeacon success={false} capabilityState="unavailable" />
+        </>
       ) : result ? (
         <div className="mt-10">
           <AskInvestorResultView result={result} />

@@ -22,6 +22,8 @@ export function FirmSearchForm({
             name="q"
             defaultValue={q}
             placeholder="Example: Vanguard, 105958, or 801-11953"
+            data-ph-mask
+            data-ph-no-capture
             className="th-input mt-2"
           />
         </div>
@@ -79,7 +81,7 @@ export function FirmSearchResults({
   const pageSize = 20;
   const pages = Math.max(1, Math.ceil(total / pageSize));
   return (
-    <div className="mt-8">
+    <div className="mt-8" data-firm-results>
       <p className="text-sm text-slate-700">
         {total.toLocaleString('en-US')} sourced {total === 1 ? 'firm' : 'firms'}
         {elapsedMs ? ` · query ${elapsedMs} ms` : ''}
@@ -92,7 +94,7 @@ export function FirmSearchResults({
                 {hit.classification.headline}
               </p>
               <h2 className="mt-2 min-w-0 break-words font-serif text-2xl text-[var(--ith-navy)] [overflow-wrap:anywhere]">
-                <Link href={`/firm/${hit.slug}`} className="underline-offset-2 hover:underline">
+                <Link href={`/firm/${hit.slug}`} data-search-result="" className="underline-offset-2 hover:underline">
                   {hit.displayName}
                 </Link>
               </h2>

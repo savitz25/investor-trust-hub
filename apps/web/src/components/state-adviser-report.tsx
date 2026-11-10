@@ -1,4 +1,6 @@
 import type { PublishedStateAdviser } from '@/lib/firms/state-advisers';
+import { isUsStateCode } from '@ith/domain';
+import { ProfileViewed } from './analytics/profile-viewed';
 import { SaveFirmButton } from './my-investor/save-firm-button';
 
 const OFFICIAL_FEED = 'https://reports.adviserinfo.sec.gov/reports/CompilationReports/IA_FIRM_STATE_Feed_09_30_2026.xml.gz';
@@ -33,8 +35,14 @@ export function StateRegistrationPanel({ adviser }: { adviser: PublishedStateAdv
 }
 
 export function StateAdviserFirmReport({ adviser }: { adviser: PublishedStateAdviser }) {
+  const onlyState = adviser.registrations.length === 1 ? adviser.registrations[0]?.state : undefined;
   return (
     <article>
+      <ProfileViewed
+        surface="firm_profile"
+        profileClass="state_adviser_firm"
+        state={onlyState && isUsStateCode(onlyState) ? onlyState : undefined}
+      />
       <header className="th-shell pt-10">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal-800">State adviser firm research</p>
         <h1 className="mt-3 font-serif text-3xl text-[var(--ith-navy)]">{adviser.displayName}</h1>

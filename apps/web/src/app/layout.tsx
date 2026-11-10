@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import type { Metadata, Viewport } from 'next';
 import { Inter, Source_Serif_4 } from 'next/font/google';
+import { PosthogRoot } from '@/components/analytics/posthog-root';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 import { BRAND, isHostLaunchIndexable } from '@ith/config';
@@ -80,6 +81,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         data-network-standard={ASK_NETWORK_CONTRACT_VERSION}
         data-th-chassis={TH_CHASSIS_VERSION}
       >
+        <PosthogRoot />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
