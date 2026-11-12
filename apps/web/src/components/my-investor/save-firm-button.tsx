@@ -20,6 +20,8 @@ import {
 } from '@/lib/my-investor/handoff-form';
 import { deviceFirstProfileSave, deviceFirstProfileUnsave } from '@/lib/my-investor/parent-adapter';
 import { STORE_EVENT, isFirmSaved, type SavedFirmKind } from '@/lib/my-investor/storage';
+import { captureTrustEvent } from '@/lib/analytics/trusthub';
+import { TRUSTHUB_EVENTS } from '@/lib/analytics/trusthub-events';
 
 function pageHidden(): boolean {
   return document.visibilityState === 'hidden';
@@ -159,18 +161,35 @@ export function SaveFirmButton({ slug, name, crd, kind, parentHandoff = false }:
     const result = deviceFirstProfileSave({ slug, name, crd, kind });
     if (!result.device.ok) {
       setError(result.device.error);
+      captureTrustEvent(TRUSTHUB_EVENTS.PROFILE_SAVE_FAILED, {
+        surface: 'firm_profile',
+        success: false,
+        profile_class: kind,
+      });
       return;
     }
     sync();
     showNote('Saved on this device.');
+    captureTrustEvent(TRUSTHUB_EVENTS.PROFILE_SAVED, {
+      surface: 'firm_profile',
+      success: true,
+      profile_class: kind,
+    });
     if (parentHandoff) void beginHandoff('save');
   }
 
   function onUnsave() {
     setError(null);
-    deviceFirstProfileUnsave({ slug, crd, kind });
+    const result = deviceFirstProfileUnsave({ slug, crd, kind });
     sync();
     showNote('Removed on this device.');
+    if (result.removed) {
+      captureTrustEvent(TRUSTHUB_EVENTS.PROFILE_UNSAVED, {
+        surface: 'firm_profile',
+        success: true,
+        profile_class: kind,
+      });
+    }
     if (parentHandoff) void beginHandoff('unsave');
   }
 

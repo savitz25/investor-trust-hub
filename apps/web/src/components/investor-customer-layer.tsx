@@ -1,4 +1,5 @@
 import { safeWebsite } from "@/lib/customer-integration/core";
+import { ClaimProfileLink } from "@/components/analytics/claim-profile-link";
 import type {
   BusinessProfile,
   Replies,
@@ -52,15 +53,13 @@ export function InvestorCustomerLayer({
       <aside className="rounded-2xl border p-5">
         <h2>{profile ? "Managed by the business" : "Is this your firm?"}</h2>
         {enabled ? (
-          <a
-            href={
-              profile
-                ? "https://www.asktrusthub.com/manage"
-                : `/api/claim/handoff/${encodeURIComponent(slug)}`
-            }
-          >
-            {profile ? "Manage on AskTrustHub" : "Claim this profile"}
-          </a>
+          profile ? (
+            <a href="https://www.asktrusthub.com/manage">Manage on AskTrustHub</a>
+          ) : (
+            <ClaimProfileLink href={`/api/claim/handoff/${encodeURIComponent(slug)}`}>
+              Claim this profile
+            </ClaimProfileLink>
+          )
         ) : null}
         <p>
           {enabled

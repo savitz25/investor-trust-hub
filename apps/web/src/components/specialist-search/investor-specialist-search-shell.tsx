@@ -15,7 +15,7 @@ export function InvestorSpecialistSearchShell({ query = '', compact = false, ove
     <form action="/ask" method="get" role="search" aria-label="Research investment adviser firms and Form ADV evidence" className="mt-5" data-specialist-search>
       <div className="flex flex-col gap-3 md:flex-row">
         <label className="sr-only" htmlFor={`${id}-q`}>Question, adviser firm, CRD, SEC file number, state, or Form ADV topic</label>
-        <input id={`${id}-q`} name="q" type="search" maxLength={400} defaultValue={query} required placeholder="Ask a question, enter a firm, CRD, SEC file number, state or Form ADV topic..." className="min-h-12 min-w-0 flex-1 rounded-xl border border-[var(--ith-border)] px-4 text-base text-[var(--ith-navy)] outline-none focus-visible:ring-2 focus-visible:ring-teal-700" />
+        <input id={`${id}-q`} name="q" type="search" maxLength={400} defaultValue={query} required placeholder="Ask a question, enter a firm, CRD, SEC file number, state or Form ADV topic..." data-ph-mask data-ph-no-capture className="min-h-12 min-w-0 flex-1 rounded-xl border border-[var(--ith-border)] px-4 text-base text-[var(--ith-navy)] outline-none focus-visible:ring-2 focus-visible:ring-teal-700" />
         <button type="submit" className="th-btn-primary min-h-12 px-7">Research</button>
       </div>
       <details className="mt-4 rounded-xl border border-[var(--ith-border)] bg-[var(--ith-canvas)] p-3">

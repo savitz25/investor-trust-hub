@@ -1,4 +1,5 @@
 import { parseFirmSearchInput } from '@ith/domain';
+import { FirmDirectoryAnalytics } from '@/components/analytics/firm-directory-analytics';
 import { FirmDirectoryMetricsPanel, FirmSearchForm, FirmSearchResults } from '@/components/firm-search';
 import { PageShell } from '@/components/page-shell';
 import { DatabaseUnavailableError, hasDatabaseUrl } from '@/lib/db';
@@ -33,6 +34,8 @@ export default async function FirmsPage({
   const params = await searchParams;
   const parsed = parseFirmSearchInput(params);
   const stateValue = parsed.stateNone ? '_none' : parsed.state ?? '';
+  const searched = Boolean(parsed.q || parsed.state || parsed.stateNone);
+  const analyticsState = parsed.stateNone ? '_none' : parsed.state ?? undefined;
 
   if (!hasDatabaseUrl()) {
     return (
@@ -42,6 +45,7 @@ export default async function FirmsPage({
         lead="Search SEC/IARD adviser-firm records by firm name, CRD, SEC number, or location. The official directory is unavailable in this environment."
       >
         <FirmSearchForm q={parsed.q} state={stateValue} />
+        <FirmDirectoryAnalytics searched={searched} success={false} capabilityState={searched ? 'unavailable' : undefined} state={analyticsState} />
         <p className="mt-8 text-sm">The production research database is not configured here.</p>
       </PageShell>
     );
@@ -60,6 +64,13 @@ export default async function FirmsPage({
       >
         <FirmDirectoryMetricsPanel metrics={metrics} />
         <FirmSearchForm q={parsed.q} state={stateValue} />
+        <FirmDirectoryAnalytics
+          searched={searched}
+          resultCount={searched ? results.total : undefined}
+          success
+          capabilityState={searched ? 'KNOWN' : undefined}
+          state={analyticsState}
+        />
         <FirmSearchResults
           hits={results.hits}
           total={results.total}
@@ -79,6 +90,7 @@ export default async function FirmsPage({
           lead="Research data temporarily unavailable. This is a service error, not a finding about any firm."
         >
           <FirmSearchForm q={parsed.q} state={stateValue} />
+          <FirmDirectoryAnalytics searched={searched} success={false} capabilityState={searched ? 'unavailable' : undefined} state={analyticsState} />
         </PageShell>
       );
     }

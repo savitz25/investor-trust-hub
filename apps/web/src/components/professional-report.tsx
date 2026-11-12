@@ -21,6 +21,7 @@ import {
   SyntheticBanner,
 } from '@ith/ui';
 import { Breadcrumb } from './breadcrumb';
+import { ProfileViewed } from './analytics/profile-viewed';
 
 export function ProfessionalReport({ person }: { person: Person }) {
   const registrations = registrationsForPerson(person.id);
@@ -29,6 +30,7 @@ export function ProfessionalReport({ person }: { person: Person }) {
 
   return (
     <article className="th-shell py-10">
+      <ProfileViewed surface="professional_profile" profileClass="synthetic_professional" />
       <Breadcrumb
         items={[
           { href: '/', label: 'Home' },

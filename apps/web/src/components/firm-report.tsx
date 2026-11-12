@@ -21,6 +21,7 @@ import {
 } from '@ith/ui';
 import Link from 'next/link';
 import { Breadcrumb } from './breadcrumb';
+import { ProfileViewed } from './analytics/profile-viewed';
 
 export function FirmReport({ firm }: { firm: Firm }) {
   const registrations = registrationsForFirm(firm.id);
@@ -30,6 +31,7 @@ export function FirmReport({ firm }: { firm: Firm }) {
 
   return (
     <article className="th-shell py-10">
+      <ProfileViewed surface="firm_profile" profileClass="synthetic_firm" />
       <Breadcrumb
         items={[
           { href: '/', label: 'Home' },

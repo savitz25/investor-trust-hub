@@ -17,6 +17,11 @@ function hostRedirects() {
 }
 
 const nextConfig: NextConfig = {
+  // VERCEL_ENV is a system variable. Copy it so the browser can set the
+  // analytics `environment` super property without a dashboard env change.
+  env: {
+    NEXT_PUBLIC_VERCEL_ENV: process.env.VERCEL_ENV || process.env.NEXT_PUBLIC_VERCEL_ENV || '',
+  },
   reactStrictMode: true,
   poweredByHeader: false,
   serverExternalPackages: ['pg'],

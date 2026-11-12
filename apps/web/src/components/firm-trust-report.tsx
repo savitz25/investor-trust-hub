@@ -21,6 +21,7 @@ import { Breadcrumb } from './breadcrumb';
 import { FirmProfileIntelligence } from './firm-profile-intelligence';
 import { NjFirmEvidenceModule } from './nj-firm-evidence';
 import { SaveFirmButton } from './my-investor/save-firm-button';
+import { ProfileViewed } from './analytics/profile-viewed';
 import type { FirmTrustReportModel } from '@/lib/firms/types';
 import { formatDisplayDate, formatReleaseLabel } from '@/lib/dates';
 
@@ -63,6 +64,11 @@ export function FirmTrustReport({ report }: { report: FirmTrustReportModel }) {
   return (
     <article className="th-shell py-8 sm:py-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <ProfileViewed
+        surface="firm_profile"
+        profileClass="official_firm"
+        state={report.office.region && isUsStateCode(report.office.region) ? report.office.region : undefined}
+      />
       <Breadcrumb items={crumbs} />
 
       <header className="mt-6 max-w-3xl">
