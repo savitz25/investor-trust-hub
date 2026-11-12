@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { isAutomatedBrowser, shouldEnablePosthog } from '@/lib/analytics/environment';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { isAutomatedBrowser, posthogKey, publicAnalyticsEnv, shouldEnablePosthog } from '@/lib/analytics/environment';
 import {
+  isReplayEvent,
+  stripElementsChainText,
   sanitizeAnalyticsUrl,
   sanitizeCaptureResult,
   sanitizePathname,
@@ -151,5 +155,78 @@ describe('PostHog enablement', () => {
     }
     expect(isAutomatedBrowser(HUMAN)).toBe(false);
     expect(() => isAutomatedBrowser({ webdriver: false, userAgent: '' })).not.toThrow();
+  });
+});
+
+const ANALYTICS_DIR = path.resolve(__dirname, '../src/lib/analytics');
+
+describe('PostHog key is statically inlined for the browser (Vercel Agent P1)', () => {
+  it('reads every NEXT_PUBLIC analytics value as a literal process.env member expression', () => {
+    const source = readFileSync(path.join(ANALYTICS_DIR, 'environment.ts'), 'utf8');
+    for (const name of ['NEXT_PUBLIC_POSTHOG_KEY', 'NEXT_PUBLIC_POSTHOG_HOST', 'NEXT_PUBLIC_POSTHOG_DEBUG', 'NEXT_PUBLIC_VERCEL_ENV']) {
+      expect(source).toContain(`${name}: process.env.${name}`);
+    }
+    expect(source).not.toMatch(/=\s*process\.env\s*[),]/);
+  });
+
+  it('uses the literal snapshot by default and still accepts an explicit env bag', () => {
+    const before = process.env.NEXT_PUBLIC_POSTHOG_KEY;
+    process.env.NEXT_PUBLIC_POSTHOG_KEY = ' phc_inline_test ';
+    try {
+      expect(publicAnalyticsEnv().NEXT_PUBLIC_POSTHOG_KEY).toBe(' phc_inline_test ');
+      expect(posthogKey()).toBe('phc_inline_test');
+    } finally {
+      if (before === undefined) delete process.env.NEXT_PUBLIC_POSTHOG_KEY;
+      else process.env.NEXT_PUBLIC_POSTHOG_KEY = before;
+    }
+    expect(posthogKey({ NEXT_PUBLIC_POSTHOG_KEY: 'phc_explicit' })).toBe('phc_explicit');
+    expect(posthogKey({})).toBe('');
+  });
+});
+
+describe('autocapture and replay privacy', () => {
+  const RAW = 'is my advisor Bernie Madoff';
+
+  it('drops element text and query-bearing attributes from autocapture', () => {
+    const event = sanitizeCaptureResult({
+      event: '$autocapture',
+      properties: {
+        token: 'phc_test_token',
+        $current_url: `https://www.investortrusthub.com/ask?q=${encodeURIComponent(RAW)}&state=FL`,
+        $el_text: RAW,
+        $elements_chain: `button.chip:text="${RAW}"nth-child="1";a:attr__href="/ask?q=${encodeURIComponent(RAW)}"attr__title="${RAW}"nth-child="2"`,
+        $elements: [
+          { tag_name: 'button', $el_text: RAW, text: RAW, 'attr__aria-label': RAW, attr__class: 'chip' },
+          { tag_name: 'a', attr__href: `/ask?q=${encodeURIComponent(RAW)}&state=FL`, href: `/ask?q=${encodeURIComponent(RAW)}` },
+        ],
+      },
+    });
+    expect(event?.properties?.$el_text).toBeUndefined();
+    const serialized = JSON.stringify(event);
+    expect(serialized).not.toMatch(/Madoff|Bernie|advisor/i);
+    expect(String(event?.properties?.$elements_chain)).toMatch(/^button\.chip:nth-child="1"/);
+  });
+
+  it('strips chain text with escaped quotes', () => {
+    expect(stripElementsChainText('a.x:attr__href="/f"text="a \\"b\\""nth-child="2";p:text="s"')).toBe('a.x:attr__href="/f"nth-child="2";p:');
+  });
+
+  it('custom search events carry no raw search text', () => {
+    const event = sanitizeCaptureResult({
+      event: 'search_results_returned',
+      properties: { token: 'phc_test_token', hub: 'investor', surface: 'ask', result_count: 3, q: RAW, query: RAW, search: RAW },
+    });
+    expect(JSON.stringify(event)).not.toMatch(/Madoff/);
+    expect(event?.properties?.result_count).toBe(3);
+  });
+
+  it('recognizes replay payloads and the browser client disables replay', () => {
+    expect(isReplayEvent('$snapshot')).toBe(true);
+    expect(isReplayEvent('$pageview')).toBe(false);
+    const source = readFileSync(path.join(ANALYTICS_DIR, 'posthog-browser.ts'), 'utf8');
+    expect(source).toMatch(/disable_session_recording:\s*true/);
+    expect(source).toMatch(/mask_all_text:\s*true/);
+    expect(source).toMatch(/maskAllInputs:\s*true/);
+    expect(source).toMatch(/isReplayEvent\(event\.event\)\) return null/);
   });
 });
