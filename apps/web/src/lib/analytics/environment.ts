@@ -2,22 +2,42 @@ export type AnalyticsEnvironment = 'production' | 'preview' | 'development';
 
 export const DEFAULT_POSTHOG_HOST = 'https://us.i.posthog.com';
 
+/** Plain env bag. Tests pass their own; the app uses the statically inlined defaults below. */
+export type AnalyticsEnvInput = Readonly<Record<string, string | undefined>>;
+
+/**
+ * Next.js only inlines NEXT_PUBLIC_* values into the client bundle when the code
+ * reads them as literal `process.env.NEXT_PUBLIC_X` member expressions. Reading
+ * them through an alias (`input = process.env; input.NEXT_PUBLIC_X`) leaves the
+ * browser with an empty process.env, so the key would never reach the client.
+ * Every analytics env read therefore goes through this literal snapshot.
+ */
+export function publicAnalyticsEnv(): AnalyticsEnvInput {
+  return {
+    NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
+    NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    NEXT_PUBLIC_POSTHOG_DEBUG: process.env.NEXT_PUBLIC_POSTHOG_DEBUG,
+    NEXT_PUBLIC_VERCEL_ENV: process.env.NEXT_PUBLIC_VERCEL_ENV,
+    VERCEL_ENV: process.env.VERCEL_ENV,
+  };
+}
+
 /**
  * Vercel sets VERCEL_ENV at build and runtime. The client bundle only inlines
  * NEXT_PUBLIC_* values, so next.config copies VERCEL_ENV onto
  * NEXT_PUBLIC_VERCEL_ENV at build time. No dashboard env change is required.
  */
-export function analyticsEnvironment(input: NodeJS.ProcessEnv = process.env): AnalyticsEnvironment {
+export function analyticsEnvironment(input: AnalyticsEnvInput = publicAnalyticsEnv()): AnalyticsEnvironment {
   const vercel = (input.NEXT_PUBLIC_VERCEL_ENV || input.VERCEL_ENV || '').trim().toLowerCase();
   if (vercel === 'production' || vercel === 'preview' || vercel === 'development') return vercel;
   return 'development';
 }
 
-export function posthogKey(input: NodeJS.ProcessEnv = process.env): string {
+export function posthogKey(input: AnalyticsEnvInput = publicAnalyticsEnv()): string {
   return (input.NEXT_PUBLIC_POSTHOG_KEY || '').trim();
 }
 
-export function posthogHost(input: NodeJS.ProcessEnv = process.env): string {
+export function posthogHost(input: AnalyticsEnvInput = publicAnalyticsEnv()): string {
   const raw = (input.NEXT_PUBLIC_POSTHOG_HOST || '').trim();
   if (!raw) return DEFAULT_POSTHOG_HOST;
   try {
@@ -30,7 +50,7 @@ export function posthogHost(input: NodeJS.ProcessEnv = process.env): string {
 }
 
 /** Development stays quiet unless this public flag is set. Preview and production do not need it. */
-export function posthogDebugEnabled(input: NodeJS.ProcessEnv = process.env): boolean {
+export function posthogDebugEnabled(input: AnalyticsEnvInput = publicAnalyticsEnv()): boolean {
   const raw = (input.NEXT_PUBLIC_POSTHOG_DEBUG || '').trim().toLowerCase();
   return raw === '1' || raw === 'true' || raw === 'yes';
 }
@@ -64,12 +84,28 @@ export function isAutomatedBrowser(signals?: BrowserSignals): boolean {
   }
 }
 
+/** Browser Do Not Track, or cookies turned off, opts out of product analytics. */
+/** Do Not Track, Global Privacy Control, or cookies turned off opts out of product analytics. */
+export function analyticsBrowserOptOut(): boolean {
+  try {
+    if (typeof navigator === 'undefined') return false;
+    const dnt = navigator.doNotTrack;
+    if (dnt === '1' || dnt === 'yes') return true;
+    const gpc = (navigator as Navigator & { globalPrivacyControl?: boolean }).globalPrivacyControl;
+    if (gpc === true) return true;
+    return navigator.cookieEnabled === false;
+  } catch {
+    return false;
+  }
+}
+
 /** Missing key, development without the debug flag, or an automated browser is a no-op. Never throws. */
-export function shouldEnablePosthog(input: NodeJS.ProcessEnv = process.env, signals?: BrowserSignals): boolean {
+export function shouldEnablePosthog(input: AnalyticsEnvInput = publicAnalyticsEnv(), signals?: BrowserSignals): boolean {
   try {
     if (!posthogKey(input)) return false;
     if (analyticsEnvironment(input) === 'development' && !posthogDebugEnabled(input)) return false;
     if (isAutomatedBrowser(signals)) return false;
+    if (analyticsBrowserOptOut()) return false;
     return true;
   } catch {
     return false;
