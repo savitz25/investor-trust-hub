@@ -27,6 +27,12 @@ export default function PrivacyPage() {
           Server credentials stay on the server. Public environment variables never include
           service-role keys or database URLs.
         </p>
+        <h2 className="text-base font-semibold text-foreground">Analytics and cookies</h2>
+        <p>
+          We use PostHog for product analytics. It collects pages viewed, clicks, and device and
+          browser info. No email addresses and no search text are sent. You can opt out with the
+          browser Do Not Track setting, or by blocking cookies.
+        </p>
       </div>
     </PageShell>
   );

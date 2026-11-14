@@ -84,12 +84,25 @@ export function isAutomatedBrowser(signals?: BrowserSignals): boolean {
   }
 }
 
+/** Browser Do Not Track, or cookies turned off, opts out of product analytics. */
+export function analyticsBrowserOptOut(): boolean {
+  try {
+    if (typeof navigator === 'undefined') return false;
+    const dnt = navigator.doNotTrack;
+    if (dnt === '1' || dnt === 'yes') return true;
+    return navigator.cookieEnabled === false;
+  } catch {
+    return false;
+  }
+}
+
 /** Missing key, development without the debug flag, or an automated browser is a no-op. Never throws. */
 export function shouldEnablePosthog(input: AnalyticsEnvInput = publicAnalyticsEnv(), signals?: BrowserSignals): boolean {
   try {
     if (!posthogKey(input)) return false;
     if (analyticsEnvironment(input) === 'development' && !posthogDebugEnabled(input)) return false;
     if (isAutomatedBrowser(signals)) return false;
+    if (analyticsBrowserOptOut()) return false;
     return true;
   } catch {
     return false;

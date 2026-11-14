@@ -3,7 +3,12 @@
 import type { CaptureResult, PostHog } from 'posthog-js';
 import { analyticsEnvironment, posthogHost, posthogKey, shouldEnablePosthog } from './environment';
 import { createPosthogClientGate } from './posthog-gate';
-import { isReplayEvent, sanitizeCaptureResult, sanitizeCapturedNetworkRequest } from './privacy';
+import {
+  isReplayEvent,
+  sanitizeCaptureResult,
+  sanitizeCapturedNetworkRequest,
+  suppressExceptionCapture,
+} from './privacy';
 import { TRUSTHUB_HUB } from './trusthub-events';
 
 const FREE_TEXT_URL_KEYS = [
@@ -29,16 +34,18 @@ const FREE_TEXT_URL_KEYS = [
 function sanitizeEvent(event: CaptureResult): CaptureResult | null {
   // Replay is disabled; drop any replay payload outright as defense in depth.
   if (event && isReplayEvent(event.event)) return null;
+  const kept = suppressExceptionCapture(event);
+  if (!kept) return null;
   try {
-    sanitizeCaptureResult(event as CaptureResult & { properties?: Record<string, unknown> });
-    return event;
+    sanitizeCaptureResult(kept as CaptureResult & { properties?: Record<string, unknown> });
+    return kept;
   } catch {
     try {
       const properties = event.properties;
       for (const key of ['$current_url', '$session_entry_url', '$referrer', '$pathname']) {
         if (typeof properties[key] === 'string') properties[key] = String(properties[key]).split('?')[0];
       }
-      return event;
+      return kept;
     } catch {
       return null;
     }
@@ -53,6 +60,8 @@ async function loadPosthog(): Promise<PostHog | null> {
     person_profiles: 'identified_only',
     capture_pageview: false,
     capture_pageleave: true,
+    capture_exceptions: false,
+    respect_dnt: true,
     persistence: 'localStorage+cookie',
     // Privacy: replay DOM snapshots can carry search text echoed into Ask results,
     // page titles and query-bearing links, so session replay is off for this hub

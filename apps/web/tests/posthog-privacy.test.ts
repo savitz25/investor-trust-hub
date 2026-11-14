@@ -1,7 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
-import { isAutomatedBrowser, posthogKey, publicAnalyticsEnv, shouldEnablePosthog } from '@/lib/analytics/environment';
+import {
+  analyticsBrowserOptOut,
+  isAutomatedBrowser,
+  posthogKey,
+  publicAnalyticsEnv,
+  shouldEnablePosthog,
+} from '@/lib/analytics/environment';
 import {
   isReplayEvent,
   stripElementsChainText,
@@ -9,6 +15,7 @@ import {
   sanitizeCaptureResult,
   sanitizePathname,
   stripForbiddenProperties,
+  suppressExceptionCapture,
 } from '@/lib/analytics/privacy';
 
 describe('analytics URL sanitizer', () => {
@@ -228,5 +235,51 @@ describe('autocapture and replay privacy', () => {
     expect(source).toMatch(/mask_all_text:\s*true/);
     expect(source).toMatch(/maskAllInputs:\s*true/);
     expect(source).toMatch(/isReplayEvent\(event\.event\)\) return null/);
+  });
+
+  it('sends no $exception events', () => {
+    const dropped = suppressExceptionCapture({
+      event: '$exception',
+      properties: {
+        $exception_list: [{ type: 'Error', value: 'who should I hire' }],
+        $exception_message: 'who should I hire',
+      },
+    });
+    expect(dropped).toBeNull();
+
+    const pageview = suppressExceptionCapture({
+      event: '$pageview',
+      properties: { $pathname: '/privacy', $exception_list: [{ type: 'Error' }] },
+    });
+    expect(pageview?.event).toBe('$pageview');
+    expect(pageview?.properties && '$exception_list' in pageview.properties).toBe(false);
+
+    const source = readFileSync(path.join(ANALYTICS_DIR, 'posthog-browser.ts'), 'utf8');
+    expect(source).toMatch(/capture_exceptions:\s*false/);
+    expect(source).toMatch(/suppressExceptionCapture\(event\)/);
+    expect(source).toMatch(/respect_dnt:\s*true/);
+  });
+
+  it('opts out for Do Not Track or blocked cookies', () => {
+    const previous = globalThis.navigator;
+    try {
+      Object.defineProperty(globalThis, 'navigator', {
+        configurable: true,
+        value: { doNotTrack: '1', cookieEnabled: true },
+      });
+      expect(analyticsBrowserOptOut()).toBe(true);
+      Object.defineProperty(globalThis, 'navigator', {
+        configurable: true,
+        value: { doNotTrack: '0', cookieEnabled: false },
+      });
+      expect(analyticsBrowserOptOut()).toBe(true);
+      Object.defineProperty(globalThis, 'navigator', {
+        configurable: true,
+        value: { doNotTrack: '0', cookieEnabled: true },
+      });
+      expect(analyticsBrowserOptOut()).toBe(false);
+    } finally {
+      Object.defineProperty(globalThis, 'navigator', { configurable: true, value: previous });
+    }
   });
 });
