@@ -13,13 +13,18 @@ export type AnalyticsEnvInput = Readonly<Record<string, string | undefined>>;
  * Every analytics env read therefore goes through this literal snapshot.
  */
 export function publicAnalyticsEnv(): AnalyticsEnvInput {
-  return {
-    NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
-    NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-    NEXT_PUBLIC_POSTHOG_DEBUG: process.env.NEXT_PUBLIC_POSTHOG_DEBUG,
-    NEXT_PUBLIC_VERCEL_ENV: process.env.NEXT_PUBLIC_VERCEL_ENV,
-    VERCEL_ENV: process.env.VERCEL_ENV,
-  };
+  try {
+    return {
+      NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
+      NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+      NEXT_PUBLIC_POSTHOG_DEBUG: process.env.NEXT_PUBLIC_POSTHOG_DEBUG,
+      NEXT_PUBLIC_POSTHOG_ACTIVATION: process.env.NEXT_PUBLIC_POSTHOG_ACTIVATION,
+      NEXT_PUBLIC_VERCEL_ENV: process.env.NEXT_PUBLIC_VERCEL_ENV,
+      VERCEL_ENV: process.env.VERCEL_ENV,
+    };
+  } catch {
+    return {};
+  }
 }
 
 /**
@@ -106,6 +111,7 @@ export function shouldEnablePosthog(input: AnalyticsEnvInput = publicAnalyticsEn
     if (analyticsEnvironment(input) === 'development' && !posthogDebugEnabled(input)) return false;
     if (isAutomatedBrowser(signals)) return false;
     if (analyticsBrowserOptOut()) return false;
+    if ((input.NEXT_PUBLIC_POSTHOG_ACTIVATION || '').trim() !== 'enabled') return false;
     return true;
   } catch {
     return false;

@@ -7,6 +7,7 @@ import {
   isReplayEvent,
   sanitizeCaptureResult,
   sanitizeCapturedNetworkRequest,
+  installAnalyticsTransportGuard,
   suppressExceptionCapture,
 } from './privacy';
 import { TRUSTHUB_HUB } from './trusthub-events';
@@ -54,6 +55,7 @@ function sanitizeEvent(event: CaptureResult): CaptureResult | null {
 
 async function loadPosthog(): Promise<PostHog | null> {
   if (!shouldEnablePosthog()) return null;
+  installAnalyticsTransportGuard();
   const posthog = (await import('posthog-js')).default;
   posthog.init(posthogKey(), {
     api_host: posthogHost(),

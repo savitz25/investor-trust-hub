@@ -111,7 +111,11 @@ describe('analytics URL sanitizer', () => {
   });
 });
 
-const ENABLED = { NEXT_PUBLIC_POSTHOG_KEY: 'phc_test', VERCEL_ENV: 'preview' } as const;
+const ENABLED = {
+  NEXT_PUBLIC_POSTHOG_KEY: 'phc_test',
+  VERCEL_ENV: 'preview',
+  NEXT_PUBLIC_POSTHOG_ACTIVATION: 'enabled',
+} as const;
 const HUMAN = {
   webdriver: false,
   userAgent:
@@ -137,14 +141,44 @@ describe('PostHog enablement', () => {
         },
         HUMAN,
       ),
+    ).toBe(false);
+    expect(
+      shouldEnablePosthog(
+        {
+          NEXT_PUBLIC_POSTHOG_KEY: 'phc_test',
+          VERCEL_ENV: 'development',
+          NEXT_PUBLIC_POSTHOG_DEBUG: '1',
+          NEXT_PUBLIC_POSTHOG_ACTIVATION: 'enabled',
+        },
+        HUMAN,
+      ),
     ).toBe(true);
   });
 
-  it('sends from preview and production when the key is present', () => {
-    expect(shouldEnablePosthog({ NEXT_PUBLIC_POSTHOG_KEY: 'phc_test', VERCEL_ENV: 'preview' }, HUMAN)).toBe(true);
+  it('does not send when only a project key is present', () => {
+    expect(shouldEnablePosthog({ NEXT_PUBLIC_POSTHOG_KEY: 'phc_test', VERCEL_ENV: 'preview' }, HUMAN)).toBe(false);
     expect(shouldEnablePosthog({ NEXT_PUBLIC_POSTHOG_KEY: 'phc_test', NEXT_PUBLIC_VERCEL_ENV: 'production' }, HUMAN)).toBe(
-      true,
+      false,
     );
+  });
+
+  it('sends from preview and production when activation is explicit', () => {
+    expect(
+      shouldEnablePosthog(
+        { NEXT_PUBLIC_POSTHOG_KEY: 'phc_test', VERCEL_ENV: 'preview', NEXT_PUBLIC_POSTHOG_ACTIVATION: 'enabled' },
+        HUMAN,
+      ),
+    ).toBe(true);
+    expect(
+      shouldEnablePosthog(
+        {
+          NEXT_PUBLIC_POSTHOG_KEY: 'phc_test',
+          NEXT_PUBLIC_VERCEL_ENV: 'production',
+          NEXT_PUBLIC_POSTHOG_ACTIVATION: 'enabled',
+        },
+        HUMAN,
+      ),
+    ).toBe(true);
   });
 
   it('skips init and capture for webdriver and common bot user agents', () => {
@@ -170,7 +204,7 @@ const ANALYTICS_DIR = path.resolve(__dirname, '../src/lib/analytics');
 describe('PostHog key is statically inlined for the browser (Vercel Agent P1)', () => {
   it('reads every NEXT_PUBLIC analytics value as a literal process.env member expression', () => {
     const source = readFileSync(path.join(ANALYTICS_DIR, 'environment.ts'), 'utf8');
-    for (const name of ['NEXT_PUBLIC_POSTHOG_KEY', 'NEXT_PUBLIC_POSTHOG_HOST', 'NEXT_PUBLIC_POSTHOG_DEBUG', 'NEXT_PUBLIC_VERCEL_ENV']) {
+    for (const name of ['NEXT_PUBLIC_POSTHOG_KEY', 'NEXT_PUBLIC_POSTHOG_HOST', 'NEXT_PUBLIC_POSTHOG_DEBUG', 'NEXT_PUBLIC_POSTHOG_ACTIVATION', 'NEXT_PUBLIC_VERCEL_ENV']) {
       expect(source).toContain(`${name}: process.env.${name}`);
     }
     expect(source).not.toMatch(/=\s*process\.env\s*[),]/);
@@ -359,3 +393,39 @@ describe('autocapture and replay privacy', () => {
     expect(customJson.includes('hunter2-secret')).toBe(false);
   });
 });
+
+describe('sdk privacy 002', () => {
+  it('strips auth properties, adversarial urls, and private attributes', () => {
+    const urls = [
+      'https://qa.invalid/?state=qa%40example.invalid',
+      'https://qa.invalid/?state=qa%2540example.invalid',
+      'https://qa.invalid/?custom=%E0%A4%A',
+      'https://qa.invalid/?custom=qa%40example.invalid',
+      'https://qa.invalid/?auth_code=123456',
+      'https://qa.invalid/?redirect_uri=https%3A%2F%2Ftarget.invalid%2F%3Fcode%3D123456',
+      'https://qa.invalid/search/qa%40example.invalid',
+    ];
+    for (const input of urls) {
+      const output = sanitizeAnalyticsUrl(input) || '';
+      expect(decodeURIComponent(output)).not.toContain('qa@example');
+      expect(decodeURIComponent(output)).not.toContain('123456');
+    }
+    const event = sanitizeCaptureResult({
+      event: '$autocapture',
+      properties: {
+        code: '123456',
+        auth_code: '654321',
+        stateCode: 'FL',
+        $elements_chain: 'button:attr__data-note="PRIVATE_NOTE"attr__id="safe"attr_id="safe"',
+        $elements: [{ tag_name: 'button', 'attr__data-note': 'PRIVATE_NOTE', attr__id: 'safe', attr_id: 'safe' }],
+      },
+    });
+    const json = JSON.stringify(event);
+    expect(json).not.toContain('123456');
+    expect(json).not.toContain('654321');
+    expect(json).not.toContain('PRIVATE_');
+    expect(event?.properties?.stateCode).toBe('FL');
+    expect(event?.properties?.$geoip_disable).toBe(true);
+  });
+});
+
