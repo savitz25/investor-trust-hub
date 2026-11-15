@@ -1,10 +1,22 @@
 import { describe, expect, it } from 'vitest';
-import { isAutomatedBrowser, shouldEnablePosthog } from '@/lib/analytics/environment';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
 import {
+  analyticsBrowserOptOut,
+  isAutomatedBrowser,
+  posthogKey,
+  publicAnalyticsEnv,
+  shouldEnablePosthog,
+} from '@/lib/analytics/environment';
+import {
+  isReplayEvent,
+  stripElementsChainText,
+  sanitizeAnalyticsRequestBody,
   sanitizeAnalyticsUrl,
   sanitizeCaptureResult,
   sanitizePathname,
   stripForbiddenProperties,
+  suppressExceptionCapture,
 } from '@/lib/analytics/privacy';
 
 describe('analytics URL sanitizer', () => {
@@ -100,7 +112,11 @@ describe('analytics URL sanitizer', () => {
   });
 });
 
-const ENABLED = { NEXT_PUBLIC_POSTHOG_KEY: 'phc_test', VERCEL_ENV: 'preview' } as const;
+const ENABLED = {
+  NEXT_PUBLIC_POSTHOG_KEY: 'phc_test',
+  VERCEL_ENV: 'preview',
+  NEXT_PUBLIC_POSTHOG_ACTIVATION: 'enabled',
+} as const;
 const HUMAN = {
   webdriver: false,
   userAgent:
@@ -126,14 +142,55 @@ describe('PostHog enablement', () => {
         },
         HUMAN,
       ),
+    ).toBe(false);
+    expect(
+      shouldEnablePosthog(
+        {
+          NEXT_PUBLIC_POSTHOG_KEY: 'phc_test',
+          VERCEL_ENV: 'development',
+          NEXT_PUBLIC_POSTHOG_DEBUG: '1',
+          NEXT_PUBLIC_POSTHOG_ACTIVATION: 'enabled',
+        },
+        HUMAN,
+      ),
     ).toBe(true);
   });
 
-  it('sends from preview and production when the key is present', () => {
-    expect(shouldEnablePosthog({ NEXT_PUBLIC_POSTHOG_KEY: 'phc_test', VERCEL_ENV: 'preview' }, HUMAN)).toBe(true);
+  it('does not send when only a project key is present', () => {
+    expect(shouldEnablePosthog({ NEXT_PUBLIC_POSTHOG_KEY: 'phc_test', VERCEL_ENV: 'preview' }, HUMAN)).toBe(false);
     expect(shouldEnablePosthog({ NEXT_PUBLIC_POSTHOG_KEY: 'phc_test', NEXT_PUBLIC_VERCEL_ENV: 'production' }, HUMAN)).toBe(
-      true,
+      false,
     );
+  });
+
+  it('rejects padded, cased, and missing activation values', () => {
+    for (const activation of [' enabled', 'enabled ', '\tenabled\n', 'ENABLED', 'Enabled', 'true', '1', '']) {
+      expect(
+        shouldEnablePosthog(
+          { NEXT_PUBLIC_POSTHOG_KEY: 'phc_test', VERCEL_ENV: 'production', NEXT_PUBLIC_POSTHOG_ACTIVATION: activation },
+          HUMAN,
+        ),
+      ).toBe(false);
+    }
+  });
+
+  it('sends from preview and production when activation is explicit', () => {
+    expect(
+      shouldEnablePosthog(
+        { NEXT_PUBLIC_POSTHOG_KEY: 'phc_test', VERCEL_ENV: 'preview', NEXT_PUBLIC_POSTHOG_ACTIVATION: 'enabled' },
+        HUMAN,
+      ),
+    ).toBe(true);
+    expect(
+      shouldEnablePosthog(
+        {
+          NEXT_PUBLIC_POSTHOG_KEY: 'phc_test',
+          NEXT_PUBLIC_VERCEL_ENV: 'production',
+          NEXT_PUBLIC_POSTHOG_ACTIVATION: 'enabled',
+        },
+        HUMAN,
+      ),
+    ).toBe(true);
   });
 
   it('skips init and capture for webdriver and common bot user agents', () => {
@@ -153,3 +210,272 @@ describe('PostHog enablement', () => {
     expect(() => isAutomatedBrowser({ webdriver: false, userAgent: '' })).not.toThrow();
   });
 });
+
+const ANALYTICS_DIR = path.resolve(__dirname, '../src/lib/analytics');
+
+describe('PostHog key is statically inlined for the browser (Vercel Agent P1)', () => {
+  it('reads every NEXT_PUBLIC analytics value as a literal process.env member expression', () => {
+    const source = readFileSync(path.join(ANALYTICS_DIR, 'environment.ts'), 'utf8');
+    for (const name of ['NEXT_PUBLIC_POSTHOG_KEY', 'NEXT_PUBLIC_POSTHOG_HOST', 'NEXT_PUBLIC_POSTHOG_DEBUG', 'NEXT_PUBLIC_POSTHOG_ACTIVATION', 'NEXT_PUBLIC_VERCEL_ENV']) {
+      expect(source).toContain(`${name}: process.env.${name}`);
+    }
+    expect(source).not.toMatch(/=\s*process\.env\s*[),]/);
+  });
+
+  it('uses the literal snapshot by default and still accepts an explicit env bag', () => {
+    const before = process.env.NEXT_PUBLIC_POSTHOG_KEY;
+    process.env.NEXT_PUBLIC_POSTHOG_KEY = ' phc_inline_test ';
+    try {
+      expect(publicAnalyticsEnv().NEXT_PUBLIC_POSTHOG_KEY).toBe(' phc_inline_test ');
+      expect(posthogKey()).toBe('phc_inline_test');
+    } finally {
+      if (before === undefined) delete process.env.NEXT_PUBLIC_POSTHOG_KEY;
+      else process.env.NEXT_PUBLIC_POSTHOG_KEY = before;
+    }
+    expect(posthogKey({ NEXT_PUBLIC_POSTHOG_KEY: 'phc_explicit' })).toBe('phc_explicit');
+    expect(posthogKey({})).toBe('');
+  });
+});
+
+describe('autocapture and replay privacy', () => {
+  const RAW = 'is my advisor Bernie Madoff';
+
+  it('drops element text and query-bearing attributes from autocapture', () => {
+    const event = sanitizeCaptureResult({
+      event: '$autocapture',
+      properties: {
+        token: 'phc_test_token',
+        $current_url: `https://www.investortrusthub.com/ask?q=${encodeURIComponent(RAW)}&state=FL`,
+        $el_text: RAW,
+        $elements_chain: `button.chip:text="${RAW}"nth-child="1";a:attr__href="/ask?q=${encodeURIComponent(RAW)}"attr__title="${RAW}"nth-child="2"`,
+        $elements: [
+          { tag_name: 'button', $el_text: RAW, text: RAW, 'attr__aria-label': RAW, attr__class: 'chip' },
+          { tag_name: 'a', attr__href: `/ask?q=${encodeURIComponent(RAW)}&state=FL`, href: `/ask?q=${encodeURIComponent(RAW)}` },
+        ],
+      },
+    });
+    expect(event?.properties?.$el_text).toBeUndefined();
+    const serialized = JSON.stringify(event);
+    expect(serialized).not.toMatch(/Madoff|Bernie|advisor/i);
+    expect(String(event?.properties?.$elements_chain)).toMatch(/^button\.chip:nth-child="1"/);
+  });
+
+  it('strips chain text with escaped quotes', () => {
+    expect(stripElementsChainText('a.x:attr__href="/f"text="a \\"b\\""nth-child="2";p:text="s"')).toBe('a.x:attr__href="/f"nth-child="2";p:');
+  });
+
+  it('custom search events carry no raw search text', () => {
+    const event = sanitizeCaptureResult({
+      event: 'search_results_returned',
+      properties: { token: 'phc_test_token', hub: 'investor', surface: 'ask', result_count: 3, q: RAW, query: RAW, search: RAW },
+    });
+    expect(JSON.stringify(event)).not.toMatch(/Madoff/);
+    expect(event?.properties?.result_count).toBe(3);
+  });
+
+  it('recognizes replay payloads and the browser client disables replay', () => {
+    expect(isReplayEvent('$snapshot')).toBe(true);
+    expect(isReplayEvent('$pageview')).toBe(false);
+    const source = readFileSync(path.join(ANALYTICS_DIR, 'posthog-browser.ts'), 'utf8');
+    expect(source).toMatch(/disable_session_recording:\s*true/);
+    expect(source).toMatch(/mask_all_text:\s*true/);
+    expect(source).toMatch(/maskAllInputs:\s*true/);
+    expect(source).toMatch(/isReplayEvent\(event\.event\)\) return null/);
+  });
+
+  it('sends no $exception events', () => {
+    const dropped = suppressExceptionCapture({
+      event: '$exception',
+      properties: {
+        $exception_list: [{ type: 'Error', value: 'who should I hire' }],
+        $exception_message: 'who should I hire',
+      },
+    });
+    expect(dropped).toBeNull();
+
+    const pageview = suppressExceptionCapture({
+      event: '$pageview',
+      properties: { $pathname: '/privacy', $exception_list: [{ type: 'Error' }] },
+    });
+    expect(pageview?.event).toBe('$pageview');
+    expect(pageview?.properties && '$exception_list' in pageview.properties).toBe(false);
+
+    const source = readFileSync(path.join(ANALYTICS_DIR, 'posthog-browser.ts'), 'utf8');
+    expect(source).toMatch(/capture_exceptions:\s*false/);
+    expect(source).toMatch(/suppressExceptionCapture\(event\)/);
+    expect(source).toMatch(/respect_dnt:\s*true/);
+    expect(source).toMatch(/capture_copied_text:\s*false/);
+    expect(source).toMatch(/capture_value_css_selector_allowlist:\s*\[\]/);
+    expect(source).toMatch(/disable_session_recording:\s*true/);
+  });
+
+  it('opts out for Do Not Track or blocked cookies', () => {
+    const previous = globalThis.navigator;
+    try {
+      Object.defineProperty(globalThis, 'navigator', {
+        configurable: true,
+        value: { doNotTrack: '1', cookieEnabled: true },
+      });
+      expect(analyticsBrowserOptOut()).toBe(true);
+      Object.defineProperty(globalThis, 'navigator', {
+        configurable: true,
+        value: { doNotTrack: '0', cookieEnabled: false },
+      });
+      expect(analyticsBrowserOptOut()).toBe(true);
+      Object.defineProperty(globalThis, 'navigator', {
+        configurable: true,
+        value: { doNotTrack: '0', cookieEnabled: true },
+      });
+      expect(analyticsBrowserOptOut()).toBe(false);
+      Object.defineProperty(globalThis, 'navigator', {
+        configurable: true,
+        value: { doNotTrack: '0', cookieEnabled: true, globalPrivacyControl: true },
+      });
+      expect(analyticsBrowserOptOut()).toBe(true);
+    } finally {
+      Object.defineProperty(globalThis, 'navigator', { configurable: true, value: previous });
+    }
+  });
+
+  it('drops email, search, and auth fields from identify, pageview, and custom events', () => {
+    const secret = 'who should I hire';
+    const email = 'person@example.com';
+    const identify = sanitizeCaptureResult({
+      event: '$identify',
+      properties: {
+        distinct_id: email,
+        email,
+        $email: email,
+        password: 'hunter2-secret',
+        access_token: 'auth-secret-value',
+        otp: '998877',
+        q: secret,
+        search: secret,
+        $ip: '203.0.113.10',
+        $current_url: `https://www.investortrusthub.com/ask?q=${encodeURIComponent(secret)}&access_token=abc&email=${encodeURIComponent(email)}&state=FL`,
+        $set: { email, name: 'Pat Example', search: secret },
+      },
+      $set: { email, password: 'hunter2-secret', search: secret },
+    });
+    const identifyJson = JSON.stringify(identify);
+    expect(identifyJson.includes(email)).toBe(false);
+    expect(identifyJson.includes(secret)).toBe(false);
+    expect(identifyJson.includes('hunter2-secret')).toBe(false);
+    expect(identifyJson.includes('auth-secret-value')).toBe(false);
+    expect(identifyJson.includes('998877')).toBe(false);
+    expect(identifyJson.includes('203.0.113.10')).toBe(false);
+    expect(identify?.properties?.$geoip_disable).toBe(true);
+    expect(identify?.properties?.$ip).toBeUndefined();
+    expect(String(identify?.properties?.$current_url)).toMatch(/state=FL/);
+    expect(String(identify?.properties?.$current_url).includes('q=')).toBe(false);
+
+    const pageview = sanitizeCaptureResult(
+      suppressExceptionCapture({
+        event: '$pageview',
+        properties: {
+          $current_url: `https://www.investortrusthub.com/search?q=${encodeURIComponent(secret)}&email=${encodeURIComponent(email)}&state=FL`,
+          $exception_message: secret,
+          $exception_list: [{ type: 'Error', value: secret }],
+        },
+      }),
+    );
+    const pageJson = JSON.stringify(pageview);
+    expect(pageview?.event).toBe('$pageview');
+    expect(pageJson.includes(secret)).toBe(false);
+    expect(pageJson.includes(email)).toBe(false);
+    expect(pageview?.properties?.$geoip_disable).toBe(true);
+
+    const custom = sanitizeCaptureResult({
+      event: 'search_submitted',
+      properties: {
+        surface: 'ask_form',
+        success: true,
+        stateCode: 'FL',
+        query: secret,
+        email,
+        password: 'hunter2-secret',
+      },
+    });
+    expect(custom?.properties?.surface).toBe('ask_form');
+    expect(custom?.properties?.success).toBe(true);
+    expect(custom?.properties?.stateCode).toBe('FL');
+    const customJson = JSON.stringify(custom);
+    expect(customJson.includes(secret)).toBe(false);
+    expect(customJson.includes(email)).toBe(false);
+    expect(customJson.includes('hunter2-secret')).toBe(false);
+  });
+});
+
+describe('sdk privacy 002', () => {
+  it('strips auth properties, adversarial urls, and private attributes', () => {
+    const urls = [
+      'https://qa.invalid/?state=qa%40example.invalid',
+      'https://qa.invalid/?state=qa%2540example.invalid',
+      'https://qa.invalid/?custom=%E0%A4%A',
+      'https://qa.invalid/?custom=qa%40example.invalid',
+      'https://qa.invalid/?auth_code=123456',
+      'https://qa.invalid/?redirect_uri=https%3A%2F%2Ftarget.invalid%2F%3Fcode%3D123456',
+      'https://qa.invalid/search/qa%40example.invalid',
+    ];
+    for (const input of urls) {
+      const output = sanitizeAnalyticsUrl(input) || '';
+      expect(decodeURIComponent(output)).not.toContain('qa@example');
+      expect(decodeURIComponent(output)).not.toContain('123456');
+    }
+    const event = sanitizeCaptureResult({
+      event: '$autocapture',
+      properties: {
+        code: '123456',
+        auth_code: '654321',
+        stateCode: 'FL',
+        $elements_chain: 'button:attr__data-note="PRIVATE_NOTE"attr__id="safe"attr_id="safe"',
+        $elements: [{ tag_name: 'button', 'attr__data-note': 'PRIVATE_NOTE', attr__id: 'safe', attr_id: 'safe' }],
+      },
+    });
+    const json = JSON.stringify(event);
+    expect(json).not.toContain('123456');
+    expect(json).not.toContain('654321');
+    expect(json).not.toContain('PRIVATE_');
+    expect(event?.properties?.stateCode).toBe('FL');
+    expect(event?.properties?.$geoip_disable).toBe(true);
+  });
+});
+
+describe('sdk privacy 003', () => {
+  it('strips encoded urls, fragments, and nested flag fields', () => {
+    const urls = [
+      'https://qa.invalid/search?%2571=eldercare-sensitive-query',
+      'https://qa.invalid/search?redirect_uri=https%3A%2F%2Ftarget.invalid%2F%3FauthCode%3DAuthZ9x7',
+      'https://qa.invalid/search?%2570assword=PwdZ9x7',
+      'https://qa.invalid/search?searchTerm=eldercare-sensitive-query',
+      'https://qa.invalid/search#access_token=AuthZ9x7',
+    ];
+    for (const input of urls) {
+      const output = sanitizeAnalyticsUrl(input) || '';
+      expect(output).not.toMatch(/eldercare-sensitive-query|AuthZ9x7|PwdZ9x7/);
+    }
+    expect(sanitizeAnalyticsUrl('https://qa.invalid/auth/callback?code=ab&state=FL') || '').toMatch(/state=FL/);
+    const body = sanitizeAnalyticsRequestBody(
+      JSON.stringify({
+        token: 'phc_test',
+        distinct_id: 'visitor',
+        person_properties: {
+          query: 'eldercare-sensitive-query',
+          question: 'family-sensitive-question',
+          search: 'treatment-sensitive-search',
+          token: 'AuthZ9x7',
+          password: 'PwdZ9x7',
+          email: 'alex@example.invalid',
+          $lib: 'web',
+        },
+      }),
+    );
+    expect(body).toBeTruthy();
+    expect(body).toContain('phc_test');
+    expect(body).toContain('"$lib":"web"');
+    expect(body).not.toMatch(
+      /eldercare-sensitive-query|family-sensitive-question|treatment-sensitive-search|AuthZ9x7|PwdZ9x7|alex@/,
+    );
+  });
+});
+
