@@ -11,6 +11,7 @@ import {
 import {
   isReplayEvent,
   stripElementsChainText,
+  sanitizeAnalyticsRequestBody,
   sanitizeAnalyticsUrl,
   sanitizeCaptureResult,
   sanitizePathname,
@@ -160,6 +161,17 @@ describe('PostHog enablement', () => {
     expect(shouldEnablePosthog({ NEXT_PUBLIC_POSTHOG_KEY: 'phc_test', NEXT_PUBLIC_VERCEL_ENV: 'production' }, HUMAN)).toBe(
       false,
     );
+  });
+
+  it('rejects padded, cased, and missing activation values', () => {
+    for (const activation of [' enabled', 'enabled ', '\tenabled\n', 'ENABLED', 'Enabled', 'true', '1', '']) {
+      expect(
+        shouldEnablePosthog(
+          { NEXT_PUBLIC_POSTHOG_KEY: 'phc_test', VERCEL_ENV: 'production', NEXT_PUBLIC_POSTHOG_ACTIVATION: activation },
+          HUMAN,
+        ),
+      ).toBe(false);
+    }
   });
 
   it('sends from preview and production when activation is explicit', () => {
@@ -426,6 +438,44 @@ describe('sdk privacy 002', () => {
     expect(json).not.toContain('PRIVATE_');
     expect(event?.properties?.stateCode).toBe('FL');
     expect(event?.properties?.$geoip_disable).toBe(true);
+  });
+});
+
+describe('sdk privacy 003', () => {
+  it('strips encoded urls, fragments, and nested flag fields', () => {
+    const urls = [
+      'https://qa.invalid/search?%2571=eldercare-sensitive-query',
+      'https://qa.invalid/search?redirect_uri=https%3A%2F%2Ftarget.invalid%2F%3FauthCode%3DAuthZ9x7',
+      'https://qa.invalid/search?%2570assword=PwdZ9x7',
+      'https://qa.invalid/search?searchTerm=eldercare-sensitive-query',
+      'https://qa.invalid/search#access_token=AuthZ9x7',
+    ];
+    for (const input of urls) {
+      const output = sanitizeAnalyticsUrl(input) || '';
+      expect(output).not.toMatch(/eldercare-sensitive-query|AuthZ9x7|PwdZ9x7/);
+    }
+    expect(sanitizeAnalyticsUrl('https://qa.invalid/auth/callback?code=ab&state=FL') || '').toMatch(/state=FL/);
+    const body = sanitizeAnalyticsRequestBody(
+      JSON.stringify({
+        token: 'phc_test',
+        distinct_id: 'visitor',
+        person_properties: {
+          query: 'eldercare-sensitive-query',
+          question: 'family-sensitive-question',
+          search: 'treatment-sensitive-search',
+          token: 'AuthZ9x7',
+          password: 'PwdZ9x7',
+          email: 'alex@example.invalid',
+          $lib: 'web',
+        },
+      }),
+    );
+    expect(body).toBeTruthy();
+    expect(body).toContain('phc_test');
+    expect(body).toContain('"$lib":"web"');
+    expect(body).not.toMatch(
+      /eldercare-sensitive-query|family-sensitive-question|treatment-sensitive-search|AuthZ9x7|PwdZ9x7|alex@/,
+    );
   });
 });
 

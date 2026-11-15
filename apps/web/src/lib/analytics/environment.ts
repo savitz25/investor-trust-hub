@@ -111,7 +111,7 @@ export function shouldEnablePosthog(input: AnalyticsEnvInput = publicAnalyticsEn
     if (analyticsEnvironment(input) === 'development' && !posthogDebugEnabled(input)) return false;
     if (isAutomatedBrowser(signals)) return false;
     if (analyticsBrowserOptOut()) return false;
-    if ((input.NEXT_PUBLIC_POSTHOG_ACTIVATION || '').trim() !== 'enabled') return false;
+    if (input.NEXT_PUBLIC_POSTHOG_ACTIVATION !== 'enabled') return false;
     return true;
   } catch {
     return false;
