@@ -27,6 +27,11 @@ describe('myTrustHubSignInHref', () => {
     expect(myTrustHubSignInHref(`${origin}/firms/a\\b`)).toBe(MY_TRUSTHUB_SIGN_IN_HREF);
     expect(myTrustHubSignInHref(`${origin}/firms/\u0001`)).toBe(MY_TRUSTHUB_SIGN_IN_HREF);
     expect(myTrustHubSignInHref(`${origin}/firms/%2e%2e/admin`)).toBe(MY_TRUSTHUB_SIGN_IN_HREF);
+    expect(myTrustHubSignInHref(`${origin}/firms/%252e%252e/admin`)).toBe(MY_TRUSTHUB_SIGN_IN_HREF);
+    expect(myTrustHubSignInHref(`${origin}/firms/%5cadmin`)).toBe(MY_TRUSTHUB_SIGN_IN_HREF);
+    expect(myTrustHubSignInHref(`${origin}/firms/.%2e/admin`)).toBe(MY_TRUSTHUB_SIGN_IN_HREF);
+    expect(myTrustHubSignInHref(`${origin}/firms/%2e./admin`)).toBe(MY_TRUSTHUB_SIGN_IN_HREF);
+    expect(myTrustHubSignInHref(`${origin}/firms/.%2E/admin`)).toBe(MY_TRUSTHUB_SIGN_IN_HREF);
     expect(myTrustHubSignInHref(`${origin}/firms/%2f%2fexample`)).toBe(MY_TRUSTHUB_SIGN_IN_HREF);
     expect(myTrustHubSignInHref(`${origin}/firms/../secret`)).toBe(MY_TRUSTHUB_SIGN_IN_HREF);
     expect(myTrustHubSignInHref('javascript:alert(1)')).toBe(MY_TRUSTHUB_SIGN_IN_HREF);

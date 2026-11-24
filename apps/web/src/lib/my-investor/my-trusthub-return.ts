@@ -12,6 +12,52 @@ function matchesPrefix(pathname: string): boolean {
   return INVESTOR_RETURN_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
 }
 
+/** A segment that is `.`, `..`, or the same written with `%2e`. Matches Ask. */
+const DOT_SEGMENT = /^(\.|%2e){1,2}$/i;
+
+function rawPath(currentUrl: string, url: URL): string {
+  const rest = currentUrl.slice(url.origin.length);
+  const cut = rest.search(/[?#]/);
+  return cut === -1 ? rest : rest.slice(0, cut);
+}
+
+function hasBackslash(value: string): boolean {
+  return value.includes('\\') || /%5c/i.test(value);
+}
+
+function badSegment(path: string): boolean {
+  return path.split('/').some((segment) => segment === '.' || segment === '..' || DOT_SEGMENT.test(segment));
+}
+
+/** Percent-decode until stable, at most 3 rounds. Still-encoded input is hostile. */
+function fullyDecode(path: string): { value: string; stillEncoded: boolean } {
+  let current = path;
+  for (let round = 0; round < 3; round += 1) {
+    if (!/%[0-9a-fA-F]{2}/.test(current)) return { value: current, stillEncoded: false };
+    let next: string;
+    try {
+      next = decodeURIComponent(current);
+    } catch {
+      return { value: current, stillEncoded: true };
+    }
+    if (next === current) return { value: current, stillEncoded: false };
+    current = next;
+  }
+  if (!/%[0-9a-fA-F]{2}/.test(current)) return { value: current, stillEncoded: false };
+  try {
+    return { value: current, stillEncoded: decodeURIComponent(current) !== current };
+  } catch {
+    return { value: current, stillEncoded: true };
+  }
+}
+
+function hostilePath(path: string): boolean {
+  if (hasBackslash(path) || path.includes('//') || badSegment(path)) return true;
+  const decoded = fullyDecode(path);
+  if (decoded.stillEncoded) return true;
+  return hasBackslash(decoded.value) || decoded.value.includes('//') || decoded.value.includes('..') || badSegment(decoded.value);
+}
+
 function hostile(currentUrl: string, url: URL): boolean {
   if (url.username || url.password) return true;
   if (url.protocol !== 'https:' && url.protocol !== 'http:') return true;
@@ -19,7 +65,7 @@ function hostile(currentUrl: string, url: URL): boolean {
   if (/[\u0000-\u001F\u007F\\]/.test(currentUrl)) return true;
   if (rest.includes('..') || rest.includes('//')) return true;
   if (/%2e%2e|%2f%2f/i.test(rest)) return true;
-  return false;
+  return hostilePath(rawPath(currentUrl, url)) || hostilePath(url.pathname);
 }
 
 /** Sign-in href. `return` is omitted when the path is outside the registry or the URL is hostile or longer than 512 characters. */
