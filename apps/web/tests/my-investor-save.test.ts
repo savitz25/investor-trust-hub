@@ -5,7 +5,7 @@ import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { MyTrustHubAccountEntry } from '@/components/my-investor/my-trusthub-account-entry';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { profileSaveLabel, MY_TRUSTHUB_ACCOUNT_ENTRY_HREF, investorMyTrustHubAccountEntryEnabled } from '@/lib/my-investor/account-presentation';
+import { profileSaveLabel, MY_TRUSTHUB_ACCOUNT_ENTRY_HREF, DEVICE_SAVE_INVITE_NOTE, MY_TRUSTHUB_INVITE_TITLE } from '@/lib/my-investor/account-presentation';
 import { handoffForm, markHandoffSent, readHandoff, rememberHandoff, resumeDecision, type StoredHandoff } from '@/lib/my-investor/handoff-form';
 import { investorNativeId, resolveOfficialFirmIdentity } from '@/lib/my-investor/identity';
 import { ASSERTION_HEADER, signInvestorAssertion, verifyInvestorAssertion } from '@/lib/my-investor/investor-assertion';
@@ -514,22 +514,22 @@ describe('shared v2-3 transport convention', () => {
 });
 
 describe('one-account presentation and existing behaviour', () => {
-  it.each(['header', 'drawer'] as const)('%s renders one canonical sign-in link and preserves My Investor', (variant) => {
-    const markup = renderToStaticMarkup(createElement(MyTrustHubAccountEntry, { variant }));
-    expect(markup.match(/href="https:\/\/www\.asktrusthub\.com\/my\/sign-in"/g)).toHaveLength(1);
-    expect(markup).toContain('My TrustHub</a>');
-    expect(markup).toContain('href="/my-investor-trust-hub"');
-    vi.stubEnv('NEXT_PUBLIC_INVESTOR_MY_TRUSTHUB_ACCOUNT_ENTRY', '0');
-    const hidden = renderToStaticMarkup(createElement(MyTrustHubAccountEntry, { variant }));
-    expect(hidden).not.toContain('asktrusthub.com');
-    expect(hidden).toContain('href="/my-investor-trust-hub"');
+  it.each(['desktop', 'drawer'] as const)('%s renders one My TrustHub sign-in link', (variant) => {
+    const markup = renderToStaticMarkup(createElement(MyTrustHubAccountEntry, { variant, currentUrl: 'https://www.investortrusthub.com/firms/example' }));
+    expect(markup.match(/asktrusthub\.com\/my\/sign-in/g)).toHaveLength(1);
+    expect(markup).toContain('next=/my');
+    expect(markup).toContain('return=');
+    expect(markup).toContain(`title="${MY_TRUSTHUB_INVITE_TITLE}"`);
+    expect(markup).toContain('My TrustHub');
+    expect(markup).not.toContain('href="/my-investor-trust-hub"');
   });
 
-  it('My TrustHub entry is a plain Ask link, hideable by flag; Save and Watch stay separate', () => {
-    expect(MY_TRUSTHUB_ACCOUNT_ENTRY_HREF).toBe('https://www.asktrusthub.com/my/sign-in');
-    expect(investorMyTrustHubAccountEntryEnabled()).toBe(true);
-    vi.stubEnv('NEXT_PUBLIC_INVESTOR_MY_TRUSTHUB_ACCOUNT_ENTRY', '0');
-    expect(investorMyTrustHubAccountEntryEnabled()).toBe(false);
+  it('My TrustHub entry stays visible and Save and Watch stay separate', () => {
+    expect(MY_TRUSTHUB_ACCOUNT_ENTRY_HREF).toBe('https://www.asktrusthub.com/my/sign-in?next=/my');
+    expect(source('components/site-header.tsx')).toContain('MY_INVESTOR_WORKSPACE_LABEL');
+    expect(source('components/my-investor/save-firm-button.tsx')).toContain('DEVICE_SAVE_INVITE_NOTE');
+    expect(source('lib/my-investor/account-presentation.ts')).toContain(DEVICE_SAVE_INVITE_NOTE);
+    expect(source('lib/my-investor/account-presentation.ts')).not.toContain('NEXT_PUBLIC_INVESTOR_MY_TRUSTHUB_ACCOUNT_ENTRY');
     const button = source('components/my-investor/save-firm-button.tsx');
     expect(button).toContain('onClick={saved ? onUnsave : onSave}');
     expect(button.match(/<button/g)).toHaveLength(1); // one toggle, no separate Unsave / Keep / Confirm control

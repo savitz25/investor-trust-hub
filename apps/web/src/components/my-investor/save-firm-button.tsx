@@ -5,8 +5,8 @@ import { useCallback, useEffect, useState } from 'react';
 import {
   MY_INVESTOR_WORKSPACE_HREF,
   MY_INVESTOR_WORKSPACE_LABEL,
+  DEVICE_SAVE_INVITE_NOTE,
   MY_TRUSTHUB_ACCOUNT_ENTRY_HREF,
-  investorMyTrustHubAccountEntryEnabled,
   profileSaveLabel,
 } from '@/lib/my-investor/account-presentation';
 import {
@@ -54,7 +54,6 @@ export function SaveFirmButton({ slug, name, crd, kind, parentHandoff = false }:
   const [error, setError] = useState<string | null>(null);
   const [keepOpen, setKeepOpen] = useState(false);
   const [releaseAdmitted, setReleaseAdmitted] = useState(false);
-  const accountEntry = investorMyTrustHubAccountEntryEnabled();
 
   const sync = useCallback(() => {
     setSaved(isFirmSaved(slug));
@@ -169,7 +168,7 @@ export function SaveFirmButton({ slug, name, crd, kind, parentHandoff = false }:
       return;
     }
     sync();
-    showNote('Saved on this device.');
+    showNote(DEVICE_SAVE_INVITE_NOTE);
     captureTrustEvent(TRUSTHUB_EVENTS.PROFILE_SAVED, {
       surface: 'firm_profile',
       success: true,
@@ -208,7 +207,7 @@ export function SaveFirmButton({ slug, name, crd, kind, parentHandoff = false }:
         <Link href={MY_INVESTOR_WORKSPACE_HREF} className="text-sm font-semibold text-[var(--ith-navy)] underline">
           {MY_INVESTOR_WORKSPACE_LABEL}
         </Link>
-        {parentHandoff && releaseAdmitted && accountEntry ? (
+        {parentHandoff && releaseAdmitted ? (
           <a
             href={MY_TRUSTHUB_ACCOUNT_ENTRY_HREF}
             className="text-sm font-semibold text-[var(--ith-navy)] underline"

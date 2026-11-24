@@ -7,6 +7,7 @@ import { PRIMARY_ROUTES } from '@ith/config';
 import { BrandLogo } from '@/components/brand-logo';
 import { SwitchHubMenu } from '@/components/switch-hub-menu';
 import { MyTrustHubAccountEntry } from '@/components/my-investor/my-trusthub-account-entry';
+import { MY_INVESTOR_WORKSPACE_HREF, MY_INVESTOR_WORKSPACE_LABEL } from '@/lib/my-investor/account-presentation';
 
 const NAV = PRIMARY_ROUTES.filter((route) => route.href !== '/');
 
@@ -34,12 +35,14 @@ function MenuIcon({ open }: { open: boolean }) {
  */
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [currentUrl, setCurrentUrl] = useState<string | undefined>(undefined);
   const pathname = usePathname() || '/';
   const drawerId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     setOpen(false);
+    setCurrentUrl(window.location.href);
   }, [pathname]);
 
   useEffect(() => {
@@ -81,11 +84,15 @@ export function SiteHeader() {
         </nav>
 
         <div className="th-header-actions">
-          <MyTrustHubAccountEntry />
+          <Link href={MY_INVESTOR_WORKSPACE_HREF} className="th-nav-link th-nav-link-wide">
+            {MY_INVESTOR_WORKSPACE_LABEL}
+          </Link>
           <SwitchHubMenu />
+          <MyTrustHubAccountEntry currentUrl={currentUrl} />
         </div>
 
         <div className="th-header-mobile-actions">
+          <MyTrustHubAccountEntry variant="icon" currentUrl={currentUrl} />
           <button
             ref={closeRef}
             type="button"
@@ -127,7 +134,10 @@ export function SiteHeader() {
                 </Link>
               ))}
               <div className="mt-4 flex flex-col border-t border-[#E2E8F0] pt-4">
-                <MyTrustHubAccountEntry variant="drawer" onNavigate={() => setOpen(false)} />
+                <Link href={MY_INVESTOR_WORKSPACE_HREF} className="th-drawer-link" onClick={() => setOpen(false)}>
+                  {MY_INVESTOR_WORKSPACE_LABEL}
+                </Link>
+                <MyTrustHubAccountEntry variant="drawer" currentUrl={currentUrl} onNavigate={() => setOpen(false)} />
               </div>
               <div className="mt-4 border-t border-[#E2E8F0] pt-4">
                 <SwitchHubMenu variant="embedded" />

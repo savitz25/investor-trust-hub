@@ -9,22 +9,18 @@ export const MY_TRUSTHUB_ACCOUNT_LABEL = 'My TrustHub';
 export const MY_INVESTOR_WORKSPACE_LABEL = 'My Investor';
 export const MY_INVESTOR_WORKSPACE_HREF = '/my-investor-trust-hub';
 
-/** Account authority on Ask. */
-export const MY_TRUSTHUB_ACCOUNT_ENTRY_HREF = 'https://www.asktrusthub.com/my/sign-in';
+/** Account authority on Ask. Return is added only for registered paths. */
+export const MY_TRUSTHUB_ACCOUNT_ENTRY_HREF = 'https://www.asktrusthub.com/my/sign-in?next=/my';
+
+export const MY_TRUSTHUB_INVITE_TITLE = 'My TrustHub accounts are invitation-only.';
+
+export const DEVICE_SAVE_INVITE_NOTE = 'Saved on this device. My TrustHub accounts are invitation-only for now.';
 
 export const PROFILE_SAVE_LABEL = '♡ Save';
 export const PROFILE_SAVED_LABEL = '♥ Saved';
 
 export function profileSaveLabel(saved: boolean): typeof PROFILE_SAVE_LABEL | typeof PROFILE_SAVED_LABEL {
   return saved ? PROFILE_SAVED_LABEL : PROFILE_SAVE_LABEL;
-}
-
-/**
- * Shown by default. Set NEXT_PUBLIC_INVESTOR_MY_TRUSTHUB_ACCOUNT_ENTRY=0 to
- * hide the My TrustHub entry. This flag does not turn on parent sync.
- */
-export function investorMyTrustHubAccountEntryEnabled(): boolean {
-  return process.env.NEXT_PUBLIC_INVESTOR_MY_TRUSTHUB_ACCOUNT_ENTRY !== '0';
 }
 
 export const ONE_ACCOUNT_COPY =

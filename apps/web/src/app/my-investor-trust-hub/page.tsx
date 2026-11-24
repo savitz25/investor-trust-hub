@@ -4,8 +4,8 @@ import { SavedFirms } from '@/components/my-investor/saved-firms';
 import {
   MY_TRUSTHUB_ACCOUNT_ENTRY_HREF,
   MY_TRUSTHUB_ACCOUNT_LABEL,
+  MY_TRUSTHUB_INVITE_TITLE,
   ONE_ACCOUNT_COPY,
-  investorMyTrustHubAccountEntryEnabled,
 } from '@/lib/my-investor/account-presentation';
 import { pageMetadata } from '@/lib/seo';
 
@@ -15,7 +15,6 @@ export const metadata = pageMetadata({
 });
 
 export default function MyHubPage() {
-  const accountEntry = investorMyTrustHubAccountEntryEnabled();
   return (
     <PageShell
       eyebrow="Specialist workspace"
@@ -32,15 +31,13 @@ export default function MyHubPage() {
         </div>
       </section>
 
-      {accountEntry ? (
-        <section aria-labelledby="one-account" className="mt-10 rounded-2xl border border-[var(--ith-border)] bg-white p-5">
-          <h2 id="one-account" className="font-serif text-xl text-[var(--ith-navy)]">One account: {MY_TRUSTHUB_ACCOUNT_LABEL}</h2>
-          <p className="mt-2 text-sm leading-relaxed">{ONE_ACCOUNT_COPY}</p>
-          <a href={MY_TRUSTHUB_ACCOUNT_ENTRY_HREF} className="th-btn-secondary mt-4">
-            Open {MY_TRUSTHUB_ACCOUNT_LABEL}
-          </a>
-        </section>
-      ) : null}
+      <section aria-labelledby="one-account" className="mt-10 rounded-2xl border border-[var(--ith-border)] bg-white p-5">
+        <h2 id="one-account" className="font-serif text-xl text-[var(--ith-navy)]">One account: {MY_TRUSTHUB_ACCOUNT_LABEL}</h2>
+        <p className="mt-2 text-sm leading-relaxed">{ONE_ACCOUNT_COPY}</p>
+        <a href={MY_TRUSTHUB_ACCOUNT_ENTRY_HREF} className="th-btn-secondary mt-4" title={MY_TRUSTHUB_INVITE_TITLE}>
+          Open {MY_TRUSTHUB_ACCOUNT_LABEL}
+        </a>
+      </section>
 
       <div className="mt-10">
         <ComingSoon title="Not available yet">
