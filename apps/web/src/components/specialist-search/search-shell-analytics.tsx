@@ -1,6 +1,5 @@
 'use client';
 import { useEffect } from 'react';
-import { track } from '@vercel/analytics';
 import { boundedStateToken } from '@/lib/analytics/privacy';
 import { captureTrustEvent } from '@/lib/analytics/trusthub';
 import { TRUSTHUB_EVENTS } from '@/lib/analytics/trusthub-events';
@@ -13,9 +12,6 @@ export function SearchShellAnalytics() {
     ]);
     const submit = (event: Event) => {
       const form = event.currentTarget;
-      if (form instanceof HTMLFormElement && form.hasAttribute('data-specialist-search')) {
-        track('specialist_search_submit', { hub: 'investor' });
-      }
       captureTrustEvent(
         TRUSTHUB_EVENTS.SEARCH_SUBMITTED,
         {
